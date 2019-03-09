@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CDAF13FD222CF357005CDC3C /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDAF13FC222CF357005CDC3C /* State.swift */; };
+		CDAF1401222E6512005CDC3C /* Analysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDAF1400222E6512005CDC3C /* Analysis.swift */; };
+		CDAF14272230FB72005CDC3C /* Variable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDAF14262230FB72005CDC3C /* Variable.swift */; };
 		CDD5049622252AF900B29751 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD5049522252AF900B29751 /* AppDelegate.swift */; };
 		CDD5049822252AFA00B29751 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD5049722252AFA00B29751 /* ViewController.swift */; };
 		CDD5049A22252AFA00B29751 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD5049922252AFA00B29751 /* Document.swift */; };
@@ -16,6 +19,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CDAF13FC222CF357005CDC3C /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
+		CDAF1400222E6512005CDC3C /* Analysis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analysis.swift; sourceTree = "<group>"; };
+		CDAF14262230FB72005CDC3C /* Variable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Variable.swift; sourceTree = "<group>"; };
 		CDD5049222252AF900B29751 /* Treviz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Treviz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDD5049522252AF900B29751 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CDD5049722252AFA00B29751 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -58,7 +64,10 @@
 			isa = PBXGroup;
 			children = (
 				CDD5049522252AF900B29751 /* AppDelegate.swift */,
+				CDAF13FC222CF357005CDC3C /* State.swift */,
+				CDAF14262230FB72005CDC3C /* Variable.swift */,
 				CDD5049722252AFA00B29751 /* ViewController.swift */,
+				CDAF1400222E6512005CDC3C /* Analysis.swift */,
 				CDD5049922252AFA00B29751 /* Document.swift */,
 				CDD5049E22252AFD00B29751 /* Assets.xcassets */,
 				CDD504A022252AFD00B29751 /* Main.storyboard */,
@@ -139,9 +148,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDAF14272230FB72005CDC3C /* Variable.swift in Sources */,
 				CDD5049D22252AFA00B29751 /* Document.xcdatamodeld in Sources */,
 				CDD5049822252AFA00B29751 /* ViewController.swift in Sources */,
+				CDAF1401222E6512005CDC3C /* Analysis.swift in Sources */,
 				CDD5049622252AF900B29751 /* AppDelegate.swift in Sources */,
+				CDAF13FD222CF357005CDC3C /* State.swift in Sources */,
 				CDD5049A22252AFA00B29751 /* Document.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
