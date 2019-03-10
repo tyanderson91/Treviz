@@ -723,19 +723,19 @@
                         </connections>
                     </window>
                     <connections>
-                        <segue destination="5gI-5U-AMq" kind="relationship" relationship="window.shadowedContentViewController" id="nsd-lR-9xd"/>
+                        <segue destination="cNr-ot-ed2" kind="relationship" relationship="window.shadowedContentViewController" id="YLv-kt-Lzp"/>
                     </connections>
                 </windowController>
                 <customObject id="6f7-a7-6o1" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="158.5" y="250"/>
+            <point key="canvasLocation" x="241" y="248"/>
         </scene>
-        <!--View Controller-->
+        <!--Inputs View Controller-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
-                <viewController id="5gI-5U-AMq" customClass="ViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="5gI-5U-AMq" customClass="InputsViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="ERx-hH-rdd">
-                        <rect key="frame" x="0.0" y="0.0" width="608" height="270"/>
+                        <rect key="frame" x="0.0" y="0.0" width="406" height="270"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R0l-xV-qqd">
@@ -939,7 +939,7 @@
                                 </customSpacing>
                             </stackView>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IYg-GL-eRW">
-                                <rect key="frame" x="415" y="205" width="64" height="32"/>
+                                <rect key="frame" x="272" y="232" width="64" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="Run" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="p6q-TT-Cyc">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -949,8 +949,79 @@
                                     <action selector="runAnalysisPushed:" target="5gI-5U-AMq" id="lkL-Bf-j2a"/>
                                 </connections>
                             </button>
-                            <gridView focusRingType="exterior" xPlacement="trailing" yPlacement="fill" rowAlignment="firstBaseline" rowSpacing="5" columnSpacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="8A6-vJ-6fd">
-                                <rect key="frame" x="405" y="135" width="105" height="39"/>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="R0l-xV-qqd" firstAttribute="top" secondItem="A8O-0q-6zA" secondAttribute="bottom" constant="8" id="5u8-Zc-8U9"/>
+                            <constraint firstItem="A8O-0q-6zA" firstAttribute="top" secondItem="ERx-hH-rdd" secondAttribute="top" constant="12" id="Cs4-HC-SRA"/>
+                            <constraint firstItem="R0l-xV-qqd" firstAttribute="leading" secondItem="ERx-hH-rdd" secondAttribute="leading" id="IwI-6v-avw"/>
+                            <constraint firstItem="XwD-gt-aOz" firstAttribute="trailing" secondItem="R0l-xV-qqd" secondAttribute="trailing" id="Qm0-NQ-Cb9"/>
+                            <constraint firstAttribute="bottom" secondItem="R0l-xV-qqd" secondAttribute="bottom" id="Tzo-Mi-25l"/>
+                            <constraint firstItem="R0l-xV-qqd" firstAttribute="top" secondItem="XwD-gt-aOz" secondAttribute="bottom" constant="7" id="ce6-Ai-AhK"/>
+                            <constraint firstItem="A8O-0q-6zA" firstAttribute="leading" secondItem="ERx-hH-rdd" secondAttribute="leading" constant="20" id="dNV-ir-TCI"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="F86-Fb-UnZ" id="BZH-zV-5yl"/>
+                    </connections>
+                </viewController>
+                <customObject id="2Tp-Fl-jBw" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="857" y="790"/>
+        </scene>
+        <!--Output Setup View Controller-->
+        <scene sceneID="epC-UD-8LH">
+            <objects>
+                <viewController id="pL6-Se-ra9" customClass="OutputSetupViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="Shp-bJ-0UB">
+                        <rect key="frame" x="0.0" y="0.0" width="313" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                </viewController>
+                <customObject id="KcT-4s-F8w" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="748" y="1246"/>
+        </scene>
+        <!--Main Split View Controller-->
+        <scene sceneID="fLq-qX-0gB">
+            <objects>
+                <splitViewController id="cNr-ot-ed2" customClass="MainSplitViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
+                    <splitViewItems>
+                        <splitViewItem id="zMw-zL-1tD" userLabel="Inputs Split View Item"/>
+                        <splitViewItem id="zXn-Jm-981" userLabel="Outputs Split View Item"/>
+                        <splitViewItem id="GDE-8S-YIa" userLabel="Output Setup Split View Item"/>
+                    </splitViewItems>
+                    <splitView key="splitView" dividerStyle="thin" vertical="YES" id="Bmt-by-9O5">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <connections>
+                            <outlet property="delegate" destination="cNr-ot-ed2" id="k8f-ze-e9u"/>
+                        </connections>
+                    </splitView>
+                    <connections>
+                        <outlet property="inputsSplitViewItem" destination="zMw-zL-1tD" id="NXn-kh-ouK"/>
+                        <outlet property="outputSetupSplitViewItem" destination="GDE-8S-YIa" id="TU3-87-I5t"/>
+                        <outlet property="outputsSplitViewItem" destination="zXn-Jm-981" id="3kP-L2-Rj5"/>
+                        <outlet property="splitView" destination="Bmt-by-9O5" id="iN4-tG-8uS"/>
+                        <segue destination="5gI-5U-AMq" kind="relationship" relationship="splitItems" id="hxi-kz-yYF"/>
+                        <segue destination="i9B-l3-zwM" kind="relationship" relationship="splitItems" id="ibf-NR-UAl"/>
+                        <segue destination="pL6-Se-ra9" kind="relationship" relationship="splitItems" id="Obi-Ow-oJr"/>
+                    </connections>
+                </splitViewController>
+                <customObject id="WEA-Dx-jp5" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="260" y="619"/>
+        </scene>
+        <!--Outputs View Controller-->
+        <scene sceneID="Wzb-yo-ICh">
+            <objects>
+                <viewController storyboardIdentifier="outputViewControllerk" id="i9B-l3-zwM" customClass="OutputsViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="rTW-eE-Wbd">
+                        <rect key="frame" x="0.0" y="0.0" width="256" height="303"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <gridView focusRingType="exterior" fixedFrame="YES" xPlacement="trailing" yPlacement="fill" rowAlignment="firstBaseline" rowSpacing="5" columnSpacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="8A6-vJ-6fd">
+                                <rect key="frame" x="20" y="132" width="105" height="39"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <rows>
                                     <gridRow id="AiA-Ak-FAn"/>
                                     <gridRow id="W7l-Be-6wP"/>
@@ -1003,27 +1074,15 @@
                                 </gridCells>
                             </gridView>
                         </subviews>
-                        <constraints>
-                            <constraint firstItem="R0l-xV-qqd" firstAttribute="top" secondItem="A8O-0q-6zA" secondAttribute="bottom" constant="8" id="5u8-Zc-8U9"/>
-                            <constraint firstItem="A8O-0q-6zA" firstAttribute="top" secondItem="ERx-hH-rdd" secondAttribute="top" constant="12" id="Cs4-HC-SRA"/>
-                            <constraint firstItem="R0l-xV-qqd" firstAttribute="leading" secondItem="ERx-hH-rdd" secondAttribute="leading" id="IwI-6v-avw"/>
-                            <constraint firstItem="XwD-gt-aOz" firstAttribute="trailing" secondItem="R0l-xV-qqd" secondAttribute="trailing" id="Qm0-NQ-Cb9"/>
-                            <constraint firstAttribute="bottom" secondItem="R0l-xV-qqd" secondAttribute="bottom" id="Tzo-Mi-25l"/>
-                            <constraint firstItem="8A6-vJ-6fd" firstAttribute="leading" secondItem="R0l-xV-qqd" secondAttribute="trailing" constant="19" id="WNw-wo-74e"/>
-                            <constraint firstItem="R0l-xV-qqd" firstAttribute="top" secondItem="XwD-gt-aOz" secondAttribute="bottom" constant="7" id="ce6-Ai-AhK"/>
-                            <constraint firstItem="A8O-0q-6zA" firstAttribute="leading" secondItem="ERx-hH-rdd" secondAttribute="leading" constant="20" id="dNV-ir-TCI"/>
-                            <constraint firstItem="8A6-vJ-6fd" firstAttribute="top" secondItem="ERx-hH-rdd" secondAttribute="top" constant="96" id="zr4-0N-JbH"/>
-                        </constraints>
                     </view>
                     <connections>
-                        <outlet property="outletLabel1" destination="LYT-6R-lAN" id="UVV-87-VSB"/>
-                        <outlet property="outletLabel2" destination="uLv-rp-mAe" id="Nsc-sg-XmQ"/>
-                        <outlet property="tableView" destination="F86-Fb-UnZ" id="BZH-zV-5yl"/>
+                        <outlet property="outletLabel1" destination="LYT-6R-lAN" id="h9s-Dd-MG0"/>
+                        <outlet property="outletLabel2" destination="uLv-rp-mAe" id="ozo-GY-9p3"/>
                     </connections>
                 </viewController>
-                <customObject id="2Tp-Fl-jBw" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <customObject id="Q6v-7a-UZc" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="158" y="661"/>
+            <point key="canvasLocation" x="782" y="431.5"/>
         </scene>
     </scenes>
     <resources>

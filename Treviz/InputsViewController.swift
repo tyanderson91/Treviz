@@ -8,14 +8,13 @@
 
 import Cocoa
 
-class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSToolbarDelegate {
+class InputsViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSToolbarDelegate {
     
     var initState = State()
-
-    @IBOutlet weak var tableView: NSTableView!
+    var parentSplitViewController : MainSplitViewController? = nil
     
-    @IBOutlet weak var outletLabel1: NSTextField!
-    @IBOutlet weak var outletLabel2: NSTextField!
+    @IBOutlet weak var tableView: NSTableView!
+
     
     @IBAction func runAnalysisPushed(_ sender: Any) {
         let curAnalysis = Analysis()
@@ -25,8 +24,8 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         let y_end = curAnalysis.trajectory.last![2]
         let x_end = curAnalysis.trajectory.last![1]
         
-    outletLabel1.stringValue = "\(y_end)"
-    outletLabel2.stringValue = "\(x_end)"
+    self.parentSplitViewController?.outputsViewController?.outletLabel1.stringValue = "\(y_end)"
+    self.parentSplitViewController?.outputsViewController?.outletLabel2.stringValue = "\(x_end)"
 
     }
     

@@ -1,0 +1,32 @@
+//
+//  MainSplitViewController.swift
+//  Treviz
+//
+//  Created by Tyler Anderson on 3/9/19.
+//  Copyright © 2019 Tyler Anderson. All rights reserved.
+//
+
+import Cocoa
+
+class MainSplitViewController: NSSplitViewController {
+
+    @IBOutlet weak var inputsSplitViewItem: NSSplitViewItem!
+    @IBOutlet weak var outputsSplitViewItem: NSSplitViewItem!
+    @IBOutlet weak var outputSetupSplitViewItem: NSSplitViewItem!
+    var inputsViewController : InputsViewController? = nil
+    var outputsViewController : OutputsViewController? = nil
+    var outputSetupViewController : OutputSetupViewController? = nil
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        inputsViewController = inputsSplitViewItem?.viewController as? InputsViewController
+        outputsViewController = outputsSplitViewItem?.viewController as? OutputsViewController
+        outputSetupViewController = outputSetupSplitViewItem?.viewController as? OutputSetupViewController
+
+        inputsViewController!.parentSplitViewController = self
+        outputsViewController!.parentSplitViewController = self
+        //outputSetupViewController.parentSplitViewController = self
+        // Do view setup here.
+    }
+    
+}
