@@ -8,58 +8,24 @@
 
 import Cocoa
 
-class terminalCondition {
- //   var previousState = VehicleState() //TODO: make this value only apply to ALL terminal conditions
-    var varID : VariableID //statePosition : Int = 99 //Max number of terminal conditions
-    var value : Double = 0.0
-    var direction = -1
-    
-    init(varID: VariableID, crossing value: Double, inDirection: Int){
-        self.varID = varID
-        self.value = value
-        self.direction = inDirection
-    }
-    
-    func checkConditions(prevState: [Double], curState : [Double]) -> Int {
-        let prevStateValue = prevState[State.stateVarPositions[self.varID]!]
-        let curStateValue = curState[State.stateVarPositions[self.varID]!]
-        var returnCode = -1
-        let statePos = State.stateVarPositions[varID]!
-        
-        if direction == -1{//Negative crossing TODO: combine into one statement
-            returnCode = (curStateValue <= value && prevStateValue > value) ? statePos : -1
-            //return returnCode
-        }
-        else if direction == 1{//Positive crossing
-            returnCode = (curStateValue >= value && prevStateValue < value) ? statePos : -1
-            //return returnCode
-        }
-        else if direction == 0{//Either crossing
-            returnCode = (curStateValue-value).sign != (prevStateValue-value).sign ? statePos : -1
-        }
-        else{returnCode = -1
-            //return -1
-        }
-        
-        return returnCode
-    }
-}
-
 class Analysis: NSObject {
     var initialState = State()
-    var terminalConditions : [terminalCondition] = []
+    var terminalConditions = TerminalConditionSet([])
     var returnCodes : [Int] = []
     var trajectory : [[Double]] = [] //TODO : allow multiple variable types
+    var progressBar : NSProgressIndicator!
+    var outputsVC : OutputsViewController!
     //Set up terminal conditions
     
     func runAnalysis() -> [Int] {
-        let termCond1 = terminalCondition(varID: "t", crossing: 100, inDirection: 1) //TODO: make max time a required terminal condition
-        let termCond2 = terminalCondition(varID: "y", crossing: 0, inDirection: 0)
-        terminalConditions = [termCond1,termCond2]
-        
         var currentState = initialState.toArray()
         let dt : Double = 0.1
         
+        let termCond1 = TerminalCondition(varID: "t", crossing: 100, inDirection: 1) //TODO: make max time a required terminal condition
+        let termCond2 = TerminalCondition(varID: "x", crossing: 40, inDirection: 1)
+        terminalConditions = TerminalConditionSet([termCond1,termCond2])
+        terminalConditions.initState = currentState
+
         //let newState = VehicleState()
         var trajIndex = 1
         var analysisEnded = false
@@ -87,19 +53,11 @@ class Analysis: NSObject {
             newState[state["m"]!] = m
             trajectory.append(newState)
             
-            var returnCodes : [Int] = []
-            var i = 0
-            for termCond in terminalConditions{
-                let curCode = termCond.checkConditions(prevState: currentState, curState: newState)
-                returnCodes.insert(curCode, at:i)
-                if curCode != -1{
-                    analysisEnded = true
-                    print("Analysis ended with return code \(curCode)")
-                }
-                i+=1
-            }
+            var pctComplete = 0.0
+            (returnCodes,analysisEnded,pctComplete) = terminalConditions.checkAllConditions(prevState: currentState, curState: newState)
+            
             currentState = newState
-            trajIndex+=1
+            progressBar.doubleValue = pctComplete*100
         }
         return returnCodes
     }

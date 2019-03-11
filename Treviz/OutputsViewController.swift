@@ -11,10 +11,11 @@ import Cocoa
 class OutputsViewController: NSViewController {
     @IBOutlet weak var outletLabel1: NSTextField!
     @IBOutlet weak var outletLabel2: NSTextField!
-    var parentSplitViewController : NSSplitViewController? = nil
-
+    var parentSplitViewController: MainSplitViewController!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        //analysisProgressBar. = NSControlTint.blueControlTint
         // Do view setup here.
     }
     

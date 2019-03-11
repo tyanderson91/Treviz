@@ -19,6 +19,9 @@ class InputsViewController: NSViewController, NSTableViewDataSource, NSTableView
     @IBAction func runAnalysisPushed(_ sender: Any) {
         let curAnalysis = Analysis()
         curAnalysis.initialState = initState
+        let parentSplitView = self.parent as! MainSplitViewController
+        let mainView = parentSplitView.parent as! MainViewController
+        curAnalysis.progressBar = mainView.analysisProgressBar
         let returnCode = curAnalysis.runAnalysis()
         
         let y_end = curAnalysis.trajectory.last![2]

@@ -10,9 +10,18 @@ import Cocoa
 
 class OutputSetupViewController: NSViewController {
 
+
+    //@IBOutlet weak var singleOutputSetupTableView: NSTableView!
+    @IBOutlet weak var outputSummaryTableView: NSTableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
+    }
+    
+    @IBAction func singleOutputSetupDisclosureClicked(_ sender: Any) {
+        //singleOutputSetupTableView.isHidden = false
+        print("disclosed!")
     }
     
 }

@@ -13,6 +13,8 @@
 		CDC1F5372233978500D1BB25 /* OutputsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC1F5352233978500D1BB25 /* OutputsViewController.swift */; };
 		CDC1F53A2233983E00D1BB25 /* OutputSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC1F5392233983E00D1BB25 /* OutputSetupViewController.swift */; };
 		CDC1F53C2234874000D1BB25 /* MainSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC1F53B2234874000D1BB25 /* MainSplitViewController.swift */; };
+		CDC1F53E2234970F00D1BB25 /* TerminalCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC1F53D2234970F00D1BB25 /* TerminalCondition.swift */; };
+		CDC1F54022363DDB00D1BB25 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC1F53F22363DDB00D1BB25 /* MainViewController.swift */; };
 		CDD5049622252AF900B29751 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD5049522252AF900B29751 /* AppDelegate.swift */; };
 		CDD5049822252AFA00B29751 /* InputsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD5049722252AFA00B29751 /* InputsViewController.swift */; };
 		CDD5049A22252AFA00B29751 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD5049922252AFA00B29751 /* Document.swift */; };
@@ -28,6 +30,8 @@
 		CDC1F5352233978500D1BB25 /* OutputsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputsViewController.swift; sourceTree = "<group>"; };
 		CDC1F5392233983E00D1BB25 /* OutputSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputSetupViewController.swift; sourceTree = "<group>"; };
 		CDC1F53B2234874000D1BB25 /* MainSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSplitViewController.swift; sourceTree = "<group>"; };
+		CDC1F53D2234970F00D1BB25 /* TerminalCondition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalCondition.swift; sourceTree = "<group>"; };
+		CDC1F53F22363DDB00D1BB25 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		CDD5049222252AF900B29751 /* Treviz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Treviz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDD5049522252AF900B29751 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CDD5049722252AFA00B29751 /* InputsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputsViewController.swift; sourceTree = "<group>"; };
@@ -69,6 +73,7 @@
 		CDD5049422252AF900B29751 /* Treviz */ = {
 			isa = PBXGroup;
 			children = (
+				CDC1F53F22363DDB00D1BB25 /* MainViewController.swift */,
 				CDC1F53B2234874000D1BB25 /* MainSplitViewController.swift */,
 				CDC1F5392233983E00D1BB25 /* OutputSetupViewController.swift */,
 				CDC1F5352233978500D1BB25 /* OutputsViewController.swift */,
@@ -77,6 +82,7 @@
 				CDAF14262230FB72005CDC3C /* Variable.swift */,
 				CDD5049722252AFA00B29751 /* InputsViewController.swift */,
 				CDAF1400222E6512005CDC3C /* Analysis.swift */,
+				CDC1F53D2234970F00D1BB25 /* TerminalCondition.swift */,
 				CDD5049922252AFA00B29751 /* Document.swift */,
 				CDD5049E22252AFD00B29751 /* Assets.xcassets */,
 				CDD504A022252AFD00B29751 /* Main.storyboard */,
@@ -160,6 +166,8 @@
 				CDAF14272230FB72005CDC3C /* Variable.swift in Sources */,
 				CDC1F53A2233983E00D1BB25 /* OutputSetupViewController.swift in Sources */,
 				CDC1F53C2234874000D1BB25 /* MainSplitViewController.swift in Sources */,
+				CDC1F54022363DDB00D1BB25 /* MainViewController.swift in Sources */,
+				CDC1F53E2234970F00D1BB25 /* TerminalCondition.swift in Sources */,
 				CDC1F5372233978500D1BB25 /* OutputsViewController.swift in Sources */,
 				CDD5049D22252AFA00B29751 /* Document.xcdatamodeld in Sources */,
 				CDD5049822252AFA00B29751 /* InputsViewController.swift in Sources */,
