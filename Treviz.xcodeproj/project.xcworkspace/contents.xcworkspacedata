@@ -1,7 +1,117 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Workspace
    version = "1.0">
+   <Group
+      location = "group:/Users/TylerAnderson/Coding/Swift/Treviz/Treviz/InfoBarStackView"
+      name = "InfoBarStackView">
+      <FileRef
+         location = "group:ViewController.swift">
+      </FileRef>
+      <Group
+         location = "group:en.lproj"
+         name = "en.lproj">
+         <FileRef
+            location = "group:Localizable.strings">
+         </FileRef>
+         <FileRef
+            location = "group:InfoPlist.strings">
+         </FileRef>
+         <FileRef
+            location = "group:Credits.rtf">
+         </FileRef>
+      </Group>
+      <FileRef
+         location = "group:BaseViewController.swift">
+      </FileRef>
+      <FileRef
+         location = "group:StackView.swift">
+      </FileRef>
+      <FileRef
+         location = "group:ThreeAxisOutputSetupViewController.swift">
+      </FileRef>
+      <Group
+         location = "group:Assets.xcassets"
+         name = "Assets.xcassets">
+         <Group
+            location = "group:scene1.imageset"
+            name = "scene1.imageset">
+            <FileRef
+               location = "group:scene1.jpg">
+            </FileRef>
+            <FileRef
+               location = "group:Contents.json">
+            </FileRef>
+         </Group>
+         <Group
+            location = "group:AppIcon.appiconset"
+            name = "AppIcon.appiconset">
+            <FileRef
+               location = "group:Contents.json">
+            </FileRef>
+         </Group>
+         <FileRef
+            location = "group:Contents.json">
+         </FileRef>
+         <Group
+            location = "group:scene2.imageset"
+            name = "scene2.imageset">
+            <FileRef
+               location = "group:scene2.jpg">
+            </FileRef>
+            <FileRef
+               location = "group:Contents.json">
+            </FileRef>
+         </Group>
+         <Group
+            location = "group:scene3.imageset"
+            name = "scene3.imageset">
+            <FileRef
+               location = "group:scene3.jpg">
+            </FileRef>
+            <FileRef
+               location = "group:Contents.json">
+            </FileRef>
+         </Group>
+      </Group>
+      <Group
+         location = "group:Base.lproj"
+         name = "Base.lproj">
+         <FileRef
+            location = "group:StackItems.storyboard">
+         </FileRef>
+         <FileRef
+            location = "group:HeaderViewController.storyboard">
+         </FileRef>
+         <FileRef
+            location = "group:Main.storyboard">
+         </FileRef>
+      </Group>
+      <FileRef
+         location = "group:ReadMe.md">
+      </FileRef>
+      <FileRef
+         location = "group:TwoAxisOutputSetupViewController.swift">
+      </FileRef>
+      <FileRef
+         location = "group:MonteCarloOutputSetupViewController.swift">
+      </FileRef>
+      <FileRef
+         location = "group:HeaderViewController.swift">
+      </FileRef>
+      <FileRef
+         location = "group:AppDelegate.swift">
+      </FileRef>
+      <FileRef
+         location = "group:LICENSE.txt">
+      </FileRef>
+      <FileRef
+         location = "group:SingleAxisOutputSetupViewController.swift">
+      </FileRef>
+      <FileRef
+         location = "group:Info.plist">
+      </FileRef>
+   </Group>
    <FileRef
-      location = "self:Treviz.xcodeproj">
+      location = "self:">
    </FileRef>
 </Workspace>

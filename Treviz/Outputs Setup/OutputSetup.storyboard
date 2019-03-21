@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="FMf-NL-ufc">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Output Setup View Controller-->
+        <scene sceneID="pk8-NG-Akl">
+            <objects>
+                <viewController storyboardIdentifier="outputSetup" id="FMf-NL-ufc" customClass="OutputSetupViewController" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="fmw-WQ-uxs">
+                        <rect key="frame" x="0.0" y="0.0" width="243" height="473"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X3z-Eb-GAM">
+                                <rect key="frame" x="0.0" y="0.0" width="243" height="473"/>
+                                <clipView key="contentView" id="iZT-XH-WJ0">
+                                    <rect key="frame" x="1" y="1" width="241" height="471"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="1" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gfp-GI-MP9" customClass="CustomStackView" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="471" width="241" height="0.0"/>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="Gfp-GI-MP9" secondAttribute="trailing" id="JuM-0E-9Gt"/>
+                                        <constraint firstItem="Gfp-GI-MP9" firstAttribute="top" secondItem="iZT-XH-WJ0" secondAttribute="top" id="f3R-wa-FoY"/>
+                                        <constraint firstItem="Gfp-GI-MP9" firstAttribute="leading" secondItem="iZT-XH-WJ0" secondAttribute="leading" id="zlE-3X-SIZ"/>
+                                    </constraints>
+                                </clipView>
+                                <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="kBx-UO-78b">
+                                    <rect key="frame" x="1" y="456" width="241" height="16"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                                <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="39l-sD-gFI">
+                                    <rect key="frame" x="226" y="1" width="16" height="471"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                            </scrollView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="X3z-Eb-GAM" secondAttribute="trailing" id="LUd-Vn-qs5"/>
+                            <constraint firstItem="X3z-Eb-GAM" firstAttribute="top" secondItem="fmw-WQ-uxs" secondAttribute="top" id="doA-i0-9bf"/>
+                            <constraint firstAttribute="bottom" secondItem="X3z-Eb-GAM" secondAttribute="bottom" id="ndx-Xq-qfY"/>
+                            <constraint firstItem="X3z-Eb-GAM" firstAttribute="leading" secondItem="fmw-WQ-uxs" secondAttribute="leading" id="ygV-rX-6oW"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="stack" destination="Gfp-GI-MP9" id="DTY-Kq-eYx"/>
+                    </connections>
+                </viewController>
+                <customObject id="DhO-km-sdV" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-105.5" y="898.5"/>
+        </scene>
+    </scenes>
+</document>

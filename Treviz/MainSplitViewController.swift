@@ -15,16 +15,16 @@ class MainSplitViewController: NSSplitViewController {
     @IBOutlet weak var outputSetupSplitViewItem: NSSplitViewItem!
     var inputsViewController : InputsViewController? = nil
     var outputsViewController : OutputsViewController? = nil
-    var outputSetupViewController : OutputSetupViewController? = nil
+    //var outputSetupViewController : OutputSetupViewController? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
         inputsViewController = inputsSplitViewItem?.viewController as? InputsViewController
         outputsViewController = outputsSplitViewItem?.viewController as? OutputsViewController
-        outputSetupViewController = outputSetupSplitViewItem?.viewController as? OutputSetupViewController
+        //outputSetupViewController = outputSetupSplitViewItem?.viewController as? OutputSetupViewController
 
-        inputsViewController!.parentSplitViewController = self
-        outputsViewController!.parentSplitViewController = self
+        //inputsViewController!.parentSplitViewController = self
+        //outputsViewController!.parentSplitViewController = self
         //outputSetupViewController.parentSplitViewController = self
         // Do view setup here.
     }

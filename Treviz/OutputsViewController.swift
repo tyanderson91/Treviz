@@ -11,7 +11,6 @@ import Cocoa
 class OutputsViewController: NSViewController {
     @IBOutlet weak var outletLabel1: NSTextField!
     @IBOutlet weak var outletLabel2: NSTextField!
-    var parentSplitViewController: MainSplitViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()

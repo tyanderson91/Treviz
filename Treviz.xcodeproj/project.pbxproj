@@ -7,11 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CD2D0DB12243836F0012978E /* OutputSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2D0D8F224382F70012978E /* OutputSetupViewController.swift */; };
+		CD2D0DB22243836F0012978E /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2D0D94224382F70012978E /* BaseViewController.swift */; };
+		CD2D0DB32243836F0012978E /* StackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2D0D95224382F70012978E /* StackView.swift */; };
+		CD2D0DB42243836F0012978E /* ThreeAxisOutputSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2D0D96224382F70012978E /* ThreeAxisOutputSetupViewController.swift */; };
+		CD2D0DB52243836F0012978E /* TwoAxisOutputSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2D0DA9224382F70012978E /* TwoAxisOutputSetupViewController.swift */; };
+		CD2D0DB62243836F0012978E /* MonteCarloOutputSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2D0DAA224382F70012978E /* MonteCarloOutputSetupViewController.swift */; };
+		CD2D0DB72243836F0012978E /* HeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2D0DAB224382F70012978E /* HeaderViewController.swift */; };
+		CD2D0DB82243836F0012978E /* SingleAxisOutputSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2D0DAE224382F70012978E /* SingleAxisOutputSetupViewController.swift */; };
+		CD2D0DB92243837F0012978E /* StackItems.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD2D0DA4224382F70012978E /* StackItems.storyboard */; };
+		CD2D0DBA2243837F0012978E /* HeaderViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD2D0DA5224382F70012978E /* HeaderViewController.storyboard */; };
+		CD2D0DBB224385580012978E /* OutputSetup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD2D0DA6224382F70012978E /* OutputSetup.storyboard */; };
+		CD9F2044223B7CF8005BFDCB /* Inputs.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD9F2042223B7CF8005BFDCB /* Inputs.storyboard */; };
 		CDAF13FD222CF357005CDC3C /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDAF13FC222CF357005CDC3C /* State.swift */; };
 		CDAF1401222E6512005CDC3C /* Analysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDAF1400222E6512005CDC3C /* Analysis.swift */; };
 		CDAF14272230FB72005CDC3C /* Variable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDAF14262230FB72005CDC3C /* Variable.swift */; };
 		CDC1F5372233978500D1BB25 /* OutputsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC1F5352233978500D1BB25 /* OutputsViewController.swift */; };
-		CDC1F53A2233983E00D1BB25 /* OutputSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC1F5392233983E00D1BB25 /* OutputSetupViewController.swift */; };
 		CDC1F53C2234874000D1BB25 /* MainSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC1F53B2234874000D1BB25 /* MainSplitViewController.swift */; };
 		CDC1F53E2234970F00D1BB25 /* TerminalCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC1F53D2234970F00D1BB25 /* TerminalCondition.swift */; };
 		CDC1F54022363DDB00D1BB25 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC1F53F22363DDB00D1BB25 /* MainViewController.swift */; };
@@ -21,14 +32,29 @@
 		CDD5049D22252AFA00B29751 /* Document.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CDD5049B22252AFA00B29751 /* Document.xcdatamodeld */; };
 		CDD5049F22252AFD00B29751 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDD5049E22252AFD00B29751 /* Assets.xcassets */; };
 		CDD504A222252AFD00B29751 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDD504A022252AFD00B29751 /* Main.storyboard */; };
+		CDF1670C2237A10400CD9590 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF1670B2237A10400CD9590 /* MainWindowController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CD2D0D8F224382F70012978E /* OutputSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputSetupViewController.swift; sourceTree = "<group>"; };
+		CD2D0D94224382F70012978E /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		CD2D0D95224382F70012978E /* StackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackView.swift; sourceTree = "<group>"; };
+		CD2D0D96224382F70012978E /* ThreeAxisOutputSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeAxisOutputSetupViewController.swift; sourceTree = "<group>"; };
+		CD2D0DA4224382F70012978E /* StackItems.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StackItems.storyboard; sourceTree = "<group>"; };
+		CD2D0DA5224382F70012978E /* HeaderViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HeaderViewController.storyboard; sourceTree = "<group>"; };
+		CD2D0DA6224382F70012978E /* OutputSetup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OutputSetup.storyboard; sourceTree = "<group>"; };
+		CD2D0DA8224382F70012978E /* ReadMe.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = ReadMe.md; sourceTree = "<group>"; };
+		CD2D0DA9224382F70012978E /* TwoAxisOutputSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoAxisOutputSetupViewController.swift; sourceTree = "<group>"; };
+		CD2D0DAA224382F70012978E /* MonteCarloOutputSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonteCarloOutputSetupViewController.swift; sourceTree = "<group>"; };
+		CD2D0DAB224382F70012978E /* HeaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderViewController.swift; sourceTree = "<group>"; };
+		CD2D0DAD224382F70012978E /* LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+		CD2D0DAE224382F70012978E /* SingleAxisOutputSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleAxisOutputSetupViewController.swift; sourceTree = "<group>"; };
+		CD2D0DAF224382F70012978E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CD9F2043223B7CF8005BFDCB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Treviz/Base.lproj/Inputs.storyboard; sourceTree = "<group>"; };
 		CDAF13FC222CF357005CDC3C /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		CDAF1400222E6512005CDC3C /* Analysis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analysis.swift; sourceTree = "<group>"; };
 		CDAF14262230FB72005CDC3C /* Variable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Variable.swift; sourceTree = "<group>"; };
 		CDC1F5352233978500D1BB25 /* OutputsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputsViewController.swift; sourceTree = "<group>"; };
-		CDC1F5392233983E00D1BB25 /* OutputSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputSetupViewController.swift; sourceTree = "<group>"; };
 		CDC1F53B2234874000D1BB25 /* MainSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSplitViewController.swift; sourceTree = "<group>"; };
 		CDC1F53D2234970F00D1BB25 /* TerminalCondition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalCondition.swift; sourceTree = "<group>"; };
 		CDC1F53F22363DDB00D1BB25 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -41,6 +67,7 @@
 		CDD504A122252AFD00B29751 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CDD504A322252AFD00B29751 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CDD504A422252AFD00B29751 /* Treviz.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Treviz.entitlements; sourceTree = "<group>"; };
+		CDF1670B2237A10400CD9590 /* MainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +81,53 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CD2D0DA7224382F70012978E /* Base.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				CD2D0DA4224382F70012978E /* StackItems.storyboard */,
+				CD2D0DA5224382F70012978E /* HeaderViewController.storyboard */,
+			);
+			path = Base.lproj;
+			sourceTree = "<group>";
+		};
+		CD2D0DB0224382F70012978E /* InfoBarStackView */ = {
+			isa = PBXGroup;
+			children = (
+				CD2D0D8F224382F70012978E /* OutputSetupViewController.swift */,
+				CD2D0D94224382F70012978E /* BaseViewController.swift */,
+				CD2D0D95224382F70012978E /* StackView.swift */,
+				CD2D0D96224382F70012978E /* ThreeAxisOutputSetupViewController.swift */,
+				CD2D0DA7224382F70012978E /* Base.lproj */,
+				CD2D0DA8224382F70012978E /* ReadMe.md */,
+				CD2D0DA9224382F70012978E /* TwoAxisOutputSetupViewController.swift */,
+				CD2D0DAA224382F70012978E /* MonteCarloOutputSetupViewController.swift */,
+				CD2D0DAB224382F70012978E /* HeaderViewController.swift */,
+				CD2D0DAD224382F70012978E /* LICENSE.txt */,
+				CD2D0DAE224382F70012978E /* SingleAxisOutputSetupViewController.swift */,
+				CD2D0DAF224382F70012978E /* Info.plist */,
+			);
+			name = InfoBarStackView;
+			path = /Users/TylerAnderson/Coding/Swift/Treviz/Treviz/InfoBarStackView;
+			sourceTree = "<absolute>";
+		};
+		CD9F2040223B7C95005BFDCB /* Outputs Setup */ = {
+			isa = PBXGroup;
+			children = (
+				CD2D0DA6224382F70012978E /* OutputSetup.storyboard */,
+			);
+			path = "Outputs Setup";
+			sourceTree = "<group>";
+		};
+		CD9F2041223B7CBF005BFDCB /* Inputs Setup */ = {
+			isa = PBXGroup;
+			children = (
+				CDD5049722252AFA00B29751 /* InputsViewController.swift */,
+				CDC1F53D2234970F00D1BB25 /* TerminalCondition.swift */,
+				CD9F2042223B7CF8005BFDCB /* Inputs.storyboard */,
+			);
+			path = "Inputs Setup";
+			sourceTree = "<group>";
+		};
 		CDD5048922252AF900B29751 = {
 			isa = PBXGroup;
 			children = (
@@ -73,16 +147,17 @@
 		CDD5049422252AF900B29751 /* Treviz */ = {
 			isa = PBXGroup;
 			children = (
+				CD2D0DB0224382F70012978E /* InfoBarStackView */,
+				CD9F2041223B7CBF005BFDCB /* Inputs Setup */,
+				CD9F2040223B7C95005BFDCB /* Outputs Setup */,
 				CDC1F53F22363DDB00D1BB25 /* MainViewController.swift */,
 				CDC1F53B2234874000D1BB25 /* MainSplitViewController.swift */,
-				CDC1F5392233983E00D1BB25 /* OutputSetupViewController.swift */,
 				CDC1F5352233978500D1BB25 /* OutputsViewController.swift */,
 				CDD5049522252AF900B29751 /* AppDelegate.swift */,
+				CDF1670B2237A10400CD9590 /* MainWindowController.swift */,
 				CDAF13FC222CF357005CDC3C /* State.swift */,
 				CDAF14262230FB72005CDC3C /* Variable.swift */,
-				CDD5049722252AFA00B29751 /* InputsViewController.swift */,
 				CDAF1400222E6512005CDC3C /* Analysis.swift */,
-				CDC1F53D2234970F00D1BB25 /* TerminalCondition.swift */,
 				CDD5049922252AFA00B29751 /* Document.swift */,
 				CDD5049E22252AFD00B29751 /* Assets.xcassets */,
 				CDD504A022252AFD00B29751 /* Main.storyboard */,
@@ -151,8 +226,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD2D0DB92243837F0012978E /* StackItems.storyboard in Resources */,
+				CD2D0DBA2243837F0012978E /* HeaderViewController.storyboard in Resources */,
 				CDD5049F22252AFD00B29751 /* Assets.xcassets in Resources */,
 				CDD504A222252AFD00B29751 /* Main.storyboard in Resources */,
+				CD9F2044223B7CF8005BFDCB /* Inputs.storyboard in Resources */,
+				CD2D0DBB224385580012978E /* OutputSetup.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -163,8 +242,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD2D0DB12243836F0012978E /* OutputSetupViewController.swift in Sources */,
+				CD2D0DB22243836F0012978E /* BaseViewController.swift in Sources */,
+				CD2D0DB32243836F0012978E /* StackView.swift in Sources */,
+				CD2D0DB42243836F0012978E /* ThreeAxisOutputSetupViewController.swift in Sources */,
+				CD2D0DB52243836F0012978E /* TwoAxisOutputSetupViewController.swift in Sources */,
+				CD2D0DB62243836F0012978E /* MonteCarloOutputSetupViewController.swift in Sources */,
+				CD2D0DB72243836F0012978E /* HeaderViewController.swift in Sources */,
+				CD2D0DB82243836F0012978E /* SingleAxisOutputSetupViewController.swift in Sources */,
 				CDAF14272230FB72005CDC3C /* Variable.swift in Sources */,
-				CDC1F53A2233983E00D1BB25 /* OutputSetupViewController.swift in Sources */,
+				CDF1670C2237A10400CD9590 /* MainWindowController.swift in Sources */,
 				CDC1F53C2234874000D1BB25 /* MainSplitViewController.swift in Sources */,
 				CDC1F54022363DDB00D1BB25 /* MainViewController.swift in Sources */,
 				CDC1F53E2234970F00D1BB25 /* TerminalCondition.swift in Sources */,
@@ -181,6 +268,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		CD9F2042223B7CF8005BFDCB /* Inputs.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CD9F2043223B7CF8005BFDCB /* Base */,
+			);
+			name = Inputs.storyboard;
+			sourceTree = "<group>";
+		};
 		CDD504A022252AFD00B29751 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -322,6 +417,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.TylerAnderson.Treviz;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG DisclosureTriangleAppearance";
 				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
@@ -341,6 +437,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.TylerAnderson.Treviz;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DisclosureTriangleAppearance;
 				SWIFT_VERSION = 4.2;
 			};
 			name = Release;

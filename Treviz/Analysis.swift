@@ -27,7 +27,7 @@ class Analysis: NSObject {
         terminalConditions.initState = currentState
 
         //let newState = VehicleState()
-        var trajIndex = 1
+        //var trajIndex = 1
         var analysisEnded = false
         let state = State.stateVarPositions //map of identifiers to positions
         

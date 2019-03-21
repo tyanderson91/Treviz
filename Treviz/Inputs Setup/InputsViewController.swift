@@ -11,7 +11,7 @@ import Cocoa
 class InputsViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSToolbarDelegate {
     
     var initState = State()
-    var parentSplitViewController : MainSplitViewController? = nil
+    //var parentSplitViewController : MainSplitViewController? = nil
     
     @IBOutlet weak var tableView: NSTableView!
 
@@ -19,16 +19,17 @@ class InputsViewController: NSViewController, NSTableViewDataSource, NSTableView
     @IBAction func runAnalysisPushed(_ sender: Any) {
         let curAnalysis = Analysis()
         curAnalysis.initialState = initState
-        let parentSplitView = self.parent as! MainSplitViewController
-        let mainView = parentSplitView.parent as! MainViewController
+        let parentSplitViewController = self.parent as! MainSplitViewController
+        let mainView = parentSplitViewController.parent as! MainViewController
         curAnalysis.progressBar = mainView.analysisProgressBar
         let returnCode = curAnalysis.runAnalysis()
+        print(returnCode)
         
         let y_end = curAnalysis.trajectory.last![2]
         let x_end = curAnalysis.trajectory.last![1]
         
-    self.parentSplitViewController?.outputsViewController?.outletLabel1.stringValue = "\(y_end)"
-    self.parentSplitViewController?.outputsViewController?.outletLabel2.stringValue = "\(x_end)"
+        parentSplitViewController.outputsViewController?.outletLabel1.stringValue = "\(y_end)"
+        parentSplitViewController.outputsViewController?.outletLabel2.stringValue = "\(x_end)"
 
     }
     
@@ -83,7 +84,7 @@ class InputsViewController: NSViewController, NSTableViewDataSource, NSTableView
         
     }
     
-    
+
     override var representedObject: Any? {
         didSet {
         // Update the view, if already loaded.
