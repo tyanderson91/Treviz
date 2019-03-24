@@ -22,6 +22,7 @@
 		CDAF13FD222CF357005CDC3C /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDAF13FC222CF357005CDC3C /* State.swift */; };
 		CDAF1401222E6512005CDC3C /* Analysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDAF1400222E6512005CDC3C /* Analysis.swift */; };
 		CDAF14272230FB72005CDC3C /* Variable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDAF14262230FB72005CDC3C /* Variable.swift */; };
+		CDBEA0A622447A9C00D3159C /* TextOutputsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBEA0A522447A9C00D3159C /* TextOutputsViewController.swift */; };
 		CDC1F5372233978500D1BB25 /* OutputsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC1F5352233978500D1BB25 /* OutputsViewController.swift */; };
 		CDC1F53C2234874000D1BB25 /* MainSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC1F53B2234874000D1BB25 /* MainSplitViewController.swift */; };
 		CDC1F53E2234970F00D1BB25 /* TerminalCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC1F53D2234970F00D1BB25 /* TerminalCondition.swift */; };
@@ -36,7 +37,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		CD2D0D8F224382F70012978E /* OutputSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputSetupViewController.swift; sourceTree = "<group>"; };
+		CD2D0D8F224382F70012978E /* OutputSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OutputSetupViewController.swift; path = ../InfoBarStackView/OutputSetupViewController.swift; sourceTree = "<group>"; };
 		CD2D0D94224382F70012978E /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		CD2D0D95224382F70012978E /* StackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackView.swift; sourceTree = "<group>"; };
 		CD2D0D96224382F70012978E /* ThreeAxisOutputSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeAxisOutputSetupViewController.swift; sourceTree = "<group>"; };
@@ -54,6 +55,7 @@
 		CDAF13FC222CF357005CDC3C /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		CDAF1400222E6512005CDC3C /* Analysis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analysis.swift; sourceTree = "<group>"; };
 		CDAF14262230FB72005CDC3C /* Variable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Variable.swift; sourceTree = "<group>"; };
+		CDBEA0A522447A9C00D3159C /* TextOutputsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextOutputsViewController.swift; sourceTree = "<group>"; };
 		CDC1F5352233978500D1BB25 /* OutputsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputsViewController.swift; sourceTree = "<group>"; };
 		CDC1F53B2234874000D1BB25 /* MainSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSplitViewController.swift; sourceTree = "<group>"; };
 		CDC1F53D2234970F00D1BB25 /* TerminalCondition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalCondition.swift; sourceTree = "<group>"; };
@@ -93,7 +95,6 @@
 		CD2D0DB0224382F70012978E /* InfoBarStackView */ = {
 			isa = PBXGroup;
 			children = (
-				CD2D0D8F224382F70012978E /* OutputSetupViewController.swift */,
 				CD2D0D94224382F70012978E /* BaseViewController.swift */,
 				CD2D0D95224382F70012978E /* StackView.swift */,
 				CD2D0D96224382F70012978E /* ThreeAxisOutputSetupViewController.swift */,
@@ -113,6 +114,7 @@
 		CD9F2040223B7C95005BFDCB /* Outputs Setup */ = {
 			isa = PBXGroup;
 			children = (
+				CD2D0D8F224382F70012978E /* OutputSetupViewController.swift */,
 				CD2D0DA6224382F70012978E /* OutputSetup.storyboard */,
 			);
 			path = "Outputs Setup";
@@ -153,6 +155,7 @@
 				CDC1F53F22363DDB00D1BB25 /* MainViewController.swift */,
 				CDC1F53B2234874000D1BB25 /* MainSplitViewController.swift */,
 				CDC1F5352233978500D1BB25 /* OutputsViewController.swift */,
+				CDBEA0A522447A9C00D3159C /* TextOutputsViewController.swift */,
 				CDD5049522252AF900B29751 /* AppDelegate.swift */,
 				CDF1670B2237A10400CD9590 /* MainWindowController.swift */,
 				CDAF13FC222CF357005CDC3C /* State.swift */,
@@ -259,6 +262,7 @@
 				CDD5049D22252AFA00B29751 /* Document.xcdatamodeld in Sources */,
 				CDD5049822252AFA00B29751 /* InputsViewController.swift in Sources */,
 				CDAF1401222E6512005CDC3C /* Analysis.swift in Sources */,
+				CDBEA0A622447A9C00D3159C /* TextOutputsViewController.swift in Sources */,
 				CDD5049622252AF900B29751 /* AppDelegate.swift in Sources */,
 				CDAF13FD222CF357005CDC3C /* State.swift in Sources */,
 				CDD5049A22252AFA00B29751 /* Document.swift in Sources */,

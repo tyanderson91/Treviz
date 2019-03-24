@@ -8,12 +8,12 @@
 
 import Cocoa
 
-class InputsViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSToolbarDelegate {
+class InputsViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate  {
     
     var initState = State()
     //var parentSplitViewController : MainSplitViewController? = nil
     
-    @IBOutlet weak var tableView: NSTableView!
+    @IBOutlet weak var tableView: NSTableView! 
 
     
     @IBAction func runAnalysisPushed(_ sender: Any) {
@@ -28,15 +28,24 @@ class InputsViewController: NSViewController, NSTableViewDataSource, NSTableView
         let y_end = curAnalysis.trajectory.last![2]
         let x_end = curAnalysis.trajectory.last![1]
         
-        parentSplitViewController.outputsViewController?.outletLabel1.stringValue = "\(y_end)"
-        parentSplitViewController.outputsViewController?.outletLabel2.stringValue = "\(x_end)"
+        let outputSplitViewController = parentSplitViewController.outputsViewController?.outputSplitViewController
+        let textOutputSplitViewItem = outputSplitViewController?.textOutputSplitViewItem
+        let textOutputViewController = textOutputSplitViewItem?.viewController as! TextOutputsViewController
+        let textOutputView = textOutputViewController.textView
+        textOutputView?.string.append("Y end:\t\(y_end)\n")
+        textOutputView?.string.append("X end:\t\(x_end)\n")
 
+        
+        //let outputTextView = textViewController.textView!
+        //outputTextView.string.append("results!")
+        
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.view.setFrameSize(NSSize.init(width: 200, height: 700))
         let t0 = Variable("t",named: "time",symbol:"t",units:"s",value:0)
         let x0 = Variable("x",named:"X pos",symbol:"x",units:"m",value:0)
         let y0 = Variable("y",named:"Y pos",symbol: "y",units:"m",value:0)
@@ -49,10 +58,6 @@ class InputsViewController: NSViewController, NSTableViewDataSource, NSTableView
         //tableView.reloadData()
         }
     
-    @IBAction func buttonAddStatePressed(_ sender: Any) {
-    }
-    @IBAction func buttonRemoveStatePressed(_ sender: Any) {
-    }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
         return initState.variables.count
@@ -83,6 +88,7 @@ class InputsViewController: NSViewController, NSTableViewDataSource, NSTableView
         return nil
         
     }
+
     
 
     override var representedObject: Any? {

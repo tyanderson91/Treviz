@@ -9,11 +9,37 @@
 import Cocoa
 
 class OutputsViewController: NSViewController {
-    @IBOutlet weak var outletLabel1: NSTextField!
-    @IBOutlet weak var outletLabel2: NSTextField!
+        
+    @IBOutlet weak var outputsSplitView: NSView!
+    var outputSplitViewController: OutputsSplitViewController? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //analysisProgressBar. = NSControlTint.blueControlTint
+        // Do view setup here.
+    }
+    
+    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
+        if segue.identifier == "outputSplitViewSegue"{
+            self.outputSplitViewController =  segue.destinationController as? OutputsSplitViewController
+        }
+    }
+    
+}
+
+
+
+class OutputsSplitViewController: NSSplitViewController {
+    
+    @IBOutlet weak var textOutputSplitViewItem: NSSplitViewItem!
+    //let textOutputView: NSTextView
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        //let textOutputViewController = textOutputSplitViewItem.viewController as? TextOutputsViewController
+        //let textOutputView = textOutputViewController?.textView
+        //textOutputView?.string.append("dsfgeaef")
         //analysisProgressBar. = NSControlTint.blueControlTint
         // Do view setup here.
     }

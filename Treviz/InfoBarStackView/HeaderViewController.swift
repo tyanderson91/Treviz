@@ -27,7 +27,7 @@ class HeaderViewController : NSViewController, StackItemHeader {
         view.wantsLayer = true
         view.layer?.backgroundColor = NSColor.windowBackgroundColor.cgColor
 
-#if !DisclosureTriangleAppearance
+//#if !DisclosureTriangleAppearance
         // Track the mouse movement so we can show/hide the disclosure button.
         let trackingArea = NSTrackingArea(rect: self.view.bounds,
                                           options: [NSTrackingArea.Options.mouseEnteredAndExited,
@@ -38,7 +38,7 @@ class HeaderViewController : NSViewController, StackItemHeader {
     
         // For the non-triangle disclosure button header, we want the button to auto hide/show on mouse tracking.
         view.addTrackingArea(trackingArea)
-#endif
+//#endif
     }
     
     // MARK: - Actions
@@ -46,6 +46,7 @@ class HeaderViewController : NSViewController, StackItemHeader {
     @IBAction func showHidePressed(_ sender: AnyObject) {
         disclose?()
     }
+    
     
     // MARK: - Mouse tracking
     
