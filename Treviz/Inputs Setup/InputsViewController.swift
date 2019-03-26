@@ -14,7 +14,8 @@ class InputsViewController: NSViewController, NSTableViewDataSource, NSTableView
     //var parentSplitViewController : MainSplitViewController? = nil
     
     @IBOutlet weak var tableView: NSTableView! 
-
+    @IBOutlet weak var stack: CustomStackView!
+    
     
     @IBAction func runAnalysisPushed(_ sender: Any) {
         let curAnalysis = Analysis()
@@ -44,6 +45,14 @@ class InputsViewController: NSViewController, NSTableViewDataSource, NSTableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        stack.setHuggingPriority(NSLayoutConstraint.Priority.defaultHigh, for: .horizontal)
+        
+        //TODO: Fix stack loading issues
+        // Load and install all the view controllers from our storyboard in the following order.
+        //stack.addViewController(fromStoryboardId: "Inputs", withIdentifier: "SettingsViewController")
+        //stack.addViewController(fromStoryboardId: "Inputs", withIdentifier: "EnvironmentViewController")
+        //stack.addViewController(fromStoryboardId: "Inputs", withIdentifier: "InitStateViewController")
         
         self.view.setFrameSize(NSSize.init(width: 200, height: 700))
         let t0 = Variable("t",named: "time",symbol:"t",units:"s",value:0)
