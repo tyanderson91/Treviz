@@ -13,11 +13,11 @@ class InputsViewController: NSViewController, NSTableViewDataSource, NSTableView
     var initState = State()
     //var parentSplitViewController : MainSplitViewController? = nil
     
-    @IBOutlet weak var tableView: NSTableView! 
+    //@IBOutlet weak var tableView: NSTableView!    
     @IBOutlet weak var stack: CustomStackView!
     
-    
     @IBAction func runAnalysisPushed(_ sender: Any) {
+        
         let curAnalysis = Analysis()
         curAnalysis.initialState = initState
         let parentSplitViewController = self.parent as! MainSplitViewController
@@ -50,11 +50,14 @@ class InputsViewController: NSViewController, NSTableViewDataSource, NSTableView
         
         //TODO: Fix stack loading issues
         // Load and install all the view controllers from our storyboard in the following order.
-        //stack.addViewController(fromStoryboardId: "Inputs", withIdentifier: "SettingsViewController")
-        //stack.addViewController(fromStoryboardId: "Inputs", withIdentifier: "EnvironmentViewController")
-        //stack.addViewController(fromStoryboardId: "Inputs", withIdentifier: "InitStateViewController")
+        stack.addViewController(fromStoryboardId: "Inputs", withIdentifier: "SettingsViewController")
+        stack.addViewController(fromStoryboardId: "Inputs", withIdentifier: "EnvironmentViewController")
+        stack.addViewController(fromStoryboardId: "Inputs", withIdentifier: "InitStateViewController")
         
-        self.view.setFrameSize(NSSize.init(width: 200, height: 700))
+
+        let inputStateView = stack.arrangedSubviews[0]
+        
+        //self.view.setFrameSize(NSSize.init(width: 200, height: 700))
         let t0 = Variable("t",named: "time",symbol:"t",units:"s",value:0)
         let x0 = Variable("x",named:"X pos",symbol:"x",units:"m",value:0)
         let y0 = Variable("y",named:"Y pos",symbol: "y",units:"m",value:0)

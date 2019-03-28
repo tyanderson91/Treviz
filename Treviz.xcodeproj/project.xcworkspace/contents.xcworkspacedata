@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:/Users/TylerAnderson/Coding/Swift/Treviz/Treviz/InfoBarStackView/Base.lproj/Input1.storyboard">
+   </FileRef>
+   <FileRef
       location = "self:">
    </FileRef>
 </Workspace>
