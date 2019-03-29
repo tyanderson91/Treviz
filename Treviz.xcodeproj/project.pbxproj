@@ -16,7 +16,6 @@
 		CD2D0DB62243836F0012978E /* MonteCarloOutputSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2D0DAA224382F70012978E /* MonteCarloOutputSetupViewController.swift */; };
 		CD2D0DB72243836F0012978E /* HeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2D0DAB224382F70012978E /* HeaderViewController.swift */; };
 		CD2D0DB82243836F0012978E /* SingleAxisOutputSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2D0DAE224382F70012978E /* SingleAxisOutputSetupViewController.swift */; };
-		CD2D0DB92243837F0012978E /* OutputSetupStackItems.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD2D0DA4224382F70012978E /* OutputSetupStackItems.storyboard */; };
 		CD2D0DBA2243837F0012978E /* HeaderViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD2D0DA5224382F70012978E /* HeaderViewController.storyboard */; };
 		CD2D0DBB224385580012978E /* OutputSetup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD2D0DA6224382F70012978E /* OutputSetup.storyboard */; };
 		CD4656B2224C6F3500C587CC /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4656B1224C6F3500C587CC /* SettingsViewController.swift */; };
@@ -24,6 +23,8 @@
 		CDAF13FD222CF357005CDC3C /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDAF13FC222CF357005CDC3C /* State.swift */; };
 		CDAF1401222E6512005CDC3C /* Analysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDAF1400222E6512005CDC3C /* Analysis.swift */; };
 		CDAF14272230FB72005CDC3C /* Variable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDAF14262230FB72005CDC3C /* Variable.swift */; };
+		CDBE33C5224C81B500E1404E /* InitState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBE33C4224C81B500E1404E /* InitState.swift */; };
+		CDBE33C6224CB48200E1404E /* AnalysisInputs.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDE0795A2249EC7400815E7F /* AnalysisInputs.plist */; };
 		CDBEA0A622447A9C00D3159C /* TextOutputsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBEA0A522447A9C00D3159C /* TextOutputsViewController.swift */; };
 		CDC1F5372233978500D1BB25 /* OutputsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC1F5352233978500D1BB25 /* OutputsViewController.swift */; };
 		CDC1F53C2234874000D1BB25 /* MainSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC1F53B2234874000D1BB25 /* MainSplitViewController.swift */; };
@@ -36,8 +37,6 @@
 		CDD5049F22252AFD00B29751 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDD5049E22252AFD00B29751 /* Assets.xcassets */; };
 		CDD504A222252AFD00B29751 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDD504A022252AFD00B29751 /* Main.storyboard */; };
 		CDE078F4224806EF00815E7F /* Inputs.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDE078F3224806EF00815E7F /* Inputs.storyboard */; };
-		CDE0795D2249ECC800815E7F /* AnalysisInput.m in Sources */ = {isa = PBXBuildFile; fileRef = CDE0795C2249ECC800815E7F /* AnalysisInput.m */; };
-		CDE0795F2249ECE300815E7F /* analysisInputsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDE0795E2249ECE300815E7F /* analysisInputsViewController.m */; };
 		CDF1670C2237A10400CD9590 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF1670B2237A10400CD9590 /* MainWindowController.swift */; };
 /* End PBXBuildFile section */
 
@@ -47,7 +46,6 @@
 		CD2D0D94224382F70012978E /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		CD2D0D95224382F70012978E /* StackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackView.swift; sourceTree = "<group>"; };
 		CD2D0D96224382F70012978E /* ThreeAxisOutputSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ThreeAxisOutputSetupViewController.swift; path = ../InfoBarStackView/ThreeAxisOutputSetupViewController.swift; sourceTree = "<group>"; };
-		CD2D0DA4224382F70012978E /* OutputSetupStackItems.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OutputSetupStackItems.storyboard; sourceTree = "<group>"; };
 		CD2D0DA5224382F70012978E /* HeaderViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = HeaderViewController.storyboard; path = Base.lproj/HeaderViewController.storyboard; sourceTree = "<group>"; };
 		CD2D0DA6224382F70012978E /* OutputSetup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OutputSetup.storyboard; sourceTree = "<group>"; };
 		CD2D0DA8224382F70012978E /* ReadMe.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = ReadMe.md; sourceTree = "<group>"; };
@@ -62,6 +60,7 @@
 		CDAF13FC222CF357005CDC3C /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		CDAF1400222E6512005CDC3C /* Analysis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analysis.swift; sourceTree = "<group>"; };
 		CDAF14262230FB72005CDC3C /* Variable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Variable.swift; sourceTree = "<group>"; };
+		CDBE33C4224C81B500E1404E /* InitState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitState.swift; sourceTree = "<group>"; };
 		CDBEA0A522447A9C00D3159C /* TextOutputsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextOutputsViewController.swift; sourceTree = "<group>"; };
 		CDC1F5352233978500D1BB25 /* OutputsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputsViewController.swift; sourceTree = "<group>"; };
 		CDC1F53B2234874000D1BB25 /* MainSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSplitViewController.swift; sourceTree = "<group>"; };
@@ -78,8 +77,6 @@
 		CDD504A422252AFD00B29751 /* Treviz.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Treviz.entitlements; sourceTree = "<group>"; };
 		CDE078F3224806EF00815E7F /* Inputs.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Inputs.storyboard; sourceTree = "<group>"; };
 		CDE0795A2249EC7400815E7F /* AnalysisInputs.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AnalysisInputs.plist; sourceTree = "<group>"; };
-		CDE0795C2249ECC800815E7F /* AnalysisInput.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnalysisInput.m; sourceTree = "<group>"; };
-		CDE0795E2249ECE300815E7F /* analysisInputsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = analysisInputsViewController.m; sourceTree = "<group>"; };
 		CDF1670B2237A10400CD9590 /* MainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -116,7 +113,6 @@
 				CD2D0D96224382F70012978E /* ThreeAxisOutputSetupViewController.swift */,
 				CD2D0DAA224382F70012978E /* MonteCarloOutputSetupViewController.swift */,
 				CD2D0DAE224382F70012978E /* SingleAxisOutputSetupViewController.swift */,
-				CD2D0DA4224382F70012978E /* OutputSetupStackItems.storyboard */,
 				CD2D0D8F224382F70012978E /* OutputSetupViewController.swift */,
 				CD2D0DA6224382F70012978E /* OutputSetup.storyboard */,
 			);
@@ -131,8 +127,7 @@
 				CD4656B3224C6F8C00C587CC /* EnvironmentViewController.swift */,
 				CDD5049722252AFA00B29751 /* InputsViewController.swift */,
 				CDE0795A2249EC7400815E7F /* AnalysisInputs.plist */,
-				CDE0795E2249ECE300815E7F /* analysisInputsViewController.m */,
-				CDE0795C2249ECC800815E7F /* AnalysisInput.m */,
+				CDBE33C4224C81B500E1404E /* InitState.swift */,
 				CDC1F53D2234970F00D1BB25 /* TerminalCondition.swift */,
 				CDE078F3224806EF00815E7F /* Inputs.storyboard */,
 			);
@@ -239,7 +234,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CD2D0DB92243837F0012978E /* OutputSetupStackItems.storyboard in Resources */,
+				CDBE33C6224CB48200E1404E /* AnalysisInputs.plist in Resources */,
 				CD2D0DBA2243837F0012978E /* HeaderViewController.storyboard in Resources */,
 				CDD5049F22252AFD00B29751 /* Assets.xcassets in Resources */,
 				CDE078F4224806EF00815E7F /* Inputs.storyboard in Resources */,
@@ -267,14 +262,13 @@
 				CD4656B2224C6F3500C587CC /* SettingsViewController.swift in Sources */,
 				CDAF14272230FB72005CDC3C /* Variable.swift in Sources */,
 				CDF1670C2237A10400CD9590 /* MainWindowController.swift in Sources */,
-				CDE0795D2249ECC800815E7F /* AnalysisInput.m in Sources */,
 				CDC1F53C2234874000D1BB25 /* MainSplitViewController.swift in Sources */,
 				CDC1F54022363DDB00D1BB25 /* MainViewController.swift in Sources */,
 				CDC1F53E2234970F00D1BB25 /* TerminalCondition.swift in Sources */,
 				CDC1F5372233978500D1BB25 /* OutputsViewController.swift in Sources */,
 				CDD5049D22252AFA00B29751 /* Document.xcdatamodeld in Sources */,
 				CDD5049822252AFA00B29751 /* InputsViewController.swift in Sources */,
-				CDE0795F2249ECE300815E7F /* analysisInputsViewController.m in Sources */,
+				CDBE33C5224C81B500E1404E /* InitState.swift in Sources */,
 				CDAF1401222E6512005CDC3C /* Analysis.swift in Sources */,
 				CDBEA0A622447A9C00D3159C /* TextOutputsViewController.swift in Sources */,
 				CD129622224C67E300663B88 /* InitStateViewController.swift in Sources */,

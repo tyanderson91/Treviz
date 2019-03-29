@@ -17,10 +17,10 @@ class Variable : NSObject{
     let symbol : String
     var units : String //TODO: Turn units into a separate type
     var isParam = false
-    var value : Double = 0 //TODO: all different types
+    var value : Double? //TODO: all different types
     var statePosition : Int //Position of the variable in the state vector
     
-    init(_ id:VariableID, named name:String = "", symbol:String = "", units:String = "", value: Double = 0){
+    init(_ id:VariableID, named name:String = "", symbol:String = "", units:String = ""){
         if id == ""{
             //return
         }
@@ -32,7 +32,6 @@ class Variable : NSObject{
         self.id = id
         self.name = name
         self.symbol = symbol
-        self.value = value
         self.units = units
         self.statePosition = -1
         

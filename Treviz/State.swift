@@ -43,7 +43,7 @@ class State: NSObject {
     
     func getValue(_ id: String)->Double{
         let thisIndex = self.varIDs.firstIndex(of:id)
-        return self.variables[thisIndex!].value
+        return self.variables[thisIndex!].value!
     }
     
     func toArray()->[Double]{
@@ -55,7 +55,7 @@ class State: NSObject {
         //let idMapped = self.varIDs.map {stateVarPositions[$0]}
         var varArray : [Double] = Array<Any>(repeating: 0.0, count:State.stateVarPositions.count) as! [Double]
         for curVar in self.variables{
-            varArray[State.stateVarPositions[curVar.id]!] = curVar.value
+            varArray[State.stateVarPositions[curVar.id]!] = curVar.value!
         }
         return varArray
     }

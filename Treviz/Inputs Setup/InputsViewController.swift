@@ -54,16 +54,16 @@ class InputsViewController: NSViewController, NSTableViewDataSource, NSTableView
         stack.addViewController(fromStoryboardId: "Inputs", withIdentifier: "EnvironmentViewController")
         stack.addViewController(fromStoryboardId: "Inputs", withIdentifier: "InitStateViewController")
         
-
-        let inputStateView = stack.arrangedSubviews[0]
-        
         //self.view.setFrameSize(NSSize.init(width: 200, height: 700))
-        let t0 = Variable("t",named: "time",symbol:"t",units:"s",value:0)
-        let x0 = Variable("x",named:"X pos",symbol:"x",units:"m",value:0)
-        let y0 = Variable("y",named:"Y pos",symbol: "y",units:"m",value:0)
-        let dx0 = Variable("dx",named:"X vel",symbol: "ẋ",units:"m/s",value:20)
-        let dy0 = Variable("dy",named:"Y vel",symbol: "ẏ",units:"m/s",value:10)
-        let m0 = Variable("m",named:"Mass",symbol:"m",units:"kg",value:10)
+        let t0 = Variable("t",named: "time",symbol:"t",units:"s")
+        let x0 = Variable("x",named:"X pos",symbol:"x",units:"m")
+        let y0 = Variable("y",named:"Y pos",symbol: "y",units:"m")
+        let dx0 = Variable("dx",named:"X vel",symbol: "ẋ",units:"m/s")
+        dx0.value = 10
+        let dy0 = Variable("dy",named:"Y vel",symbol: "ẏ",units:"m/s")
+        dy0.value = 10
+        let m0 = Variable("m",named:"Mass",symbol:"m",units:"kg")
+        m0.value = 10
         
         self.initState.fromVars([t0,x0,y0,dx0,dy0,m0])
         

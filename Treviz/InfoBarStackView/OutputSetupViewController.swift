@@ -21,10 +21,10 @@ class OutputSetupViewController: NSViewController {
         stack.setHuggingPriority(NSLayoutConstraint.Priority.defaultHigh, for: .horizontal)
 
         // Load and install all the view controllers from our storyboard in the following order.
-        stack.addViewController(fromStoryboardId: "OutputSetupStackItems", withIdentifier: "SingleAxisOutputSetupViewController")
-        stack.addViewController(fromStoryboardId: "OutputSetupStackItems", withIdentifier: "TwoAxisOutputSetupViewController")
-        stack.addViewController(fromStoryboardId: "OutputSetupStackItems", withIdentifier: "ThreeAxisOutputSetupViewController")
-        stack.addViewController(fromStoryboardId: "OutputSetupStackItems", withIdentifier: "MonteCarloOutputSetupViewController")
+        stack.addViewController(fromStoryboardId: "OutputSetup", withIdentifier: "SingleAxisOutputSetupViewController")
+        stack.addViewController(fromStoryboardId: "OutputSetup", withIdentifier: "TwoAxisOutputSetupViewController")
+        stack.addViewController(fromStoryboardId: "OutputSetup", withIdentifier: "ThreeAxisOutputSetupViewController")
+        stack.addViewController(fromStoryboardId: "OutputSetup", withIdentifier: "MonteCarloOutputSetupViewController")
 
         //addViewController(withIdentifier: "CollectionViewController")
         //addViewController(withIdentifier: "OtherViewController")
