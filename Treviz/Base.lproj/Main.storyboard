@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="jGA-0Y-lOj">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -620,7 +619,7 @@
                                         <menuItem title="Show Sidebar" keyEquivalent="s" id="kIP-vf-haE">
                                             <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
                                             <connections>
-                                                <action selector="toggleSourceList:" target="Ady-hI-5gd" id="iwa-gc-5KM"/>
+                                                <action selector="toggleSidebar:" target="Ady-hI-5gd" id="iwa-gc-5KM"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Enter Full Screen" keyEquivalent="f" id="4J7-dP-txa">
@@ -679,16 +678,15 @@
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-619" y="278"/>
+            <point key="canvasLocation" x="-680" y="100"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
             <objects>
-                <windowController storyboardIdentifier="Document Window Controller" id="jGA-0Y-lOj" customClass="MainWindowController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
+                <windowController storyboardIdentifier="Analysis Window Controller" id="jGA-0Y-lOj" customClass="MainWindowController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
                     <window key="window" title="Treviz" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="Ckk-yw-fiv">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="44" y="240" width="500" height="202"/>
+                        <rect key="contentRect" x="0.0" y="0.0" width="800" height="600"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
                         <toolbar key="toolbar" implicitIdentifier="99EF4609-EB63-466D-9855-35ED2BA88456" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="gC3-LF-Jn5">
                             <allowedToolbarItems>
@@ -720,7 +718,7 @@
                 </windowController>
                 <customObject id="6f7-a7-6o1" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-583" y="539"/>
+            <point key="canvasLocation" x="-589" y="567"/>
         </scene>
         <!--Main Split View Controller-->
         <scene sceneID="fLq-qX-0gB">
@@ -749,7 +747,7 @@
                 </splitViewController>
                 <customObject id="WEA-Dx-jp5" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="43" y="552.5"/>
+            <point key="canvasLocation" x="130" y="553"/>
         </scene>
         <!--MainViewController-->
         <scene sceneID="hGV-gs-ruu">
@@ -762,7 +760,7 @@
                             <containerView translatesAutoresizingMaskIntoConstraints="NO" id="3xq-Zn-lEM">
                                 <rect key="frame" x="0.0" y="3" width="1053" height="598"/>
                                 <connections>
-                                    <segue destination="cNr-ot-ed2" kind="embed" id="jah-hR-W31"/>
+                                    <segue destination="cNr-ot-ed2" kind="embed" identifier="mainSplitViewSegue" id="jah-hR-W31"/>
                                 </connections>
                             </containerView>
                             <progressIndicator wantsLayer="YES" focusRingType="none" maxValue="100" doubleValue="100" displayedWhenStopped="NO" controlSize="small" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="Tnv-gC-ATL">
@@ -805,18 +803,21 @@
                 </viewController>
                 <customObject id="WVM-5U-vTl" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-526.5" y="1012.5"/>
+            <point key="canvasLocation" x="-510" y="1251"/>
         </scene>
         <!--Outputs View Controller-->
         <scene sceneID="Wzb-yo-ICh">
             <objects>
                 <viewController storyboardIdentifier="outputViewControllerk" id="i9B-l3-zwM" customClass="OutputsViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="rTW-eE-Wbd">
-                        <rect key="frame" x="0.0" y="0.0" width="256" height="303"/>
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="303"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <containerView translatesAutoresizingMaskIntoConstraints="NO" id="wyV-WT-hg6">
-                                <rect key="frame" x="0.0" y="0.0" width="256" height="283"/>
+                                <rect key="frame" x="0.0" y="0.0" width="300" height="283"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="eK3-Jz-W0P"/>
+                                </constraints>
                                 <connections>
                                     <segue destination="sDa-jy-4wf" kind="embed" identifier="outputSplitViewSegue" id="otJ-4h-Kd6"/>
                                 </connections>
@@ -936,6 +937,10 @@
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="30" id="xLj-wS-v0r"/>
                                 </constraints>
+                                <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="7O4-gQ-tH2">
+                                    <rect key="frame" x="-100" y="-100" width="215" height="16"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
                                 <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="AnF-o6-KNM">
                                     <rect key="frame" x="199" y="0.0" width="16" height="287"/>
                                     <autoresizingMask key="autoresizingMask"/>

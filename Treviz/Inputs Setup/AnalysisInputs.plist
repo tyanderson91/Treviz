@@ -3,684 +3,316 @@
 <plist version="1.0">
 <array>
 	<dict>
-		<key>ID</key>
+		<key>id</key>
 		<string>State</string>
-		<key>DisplayName</key>
+		<key>name</key>
 		<string>Initial State</string>
 		<key>itemType</key>
 		<string>header</string>
-		<key>checkValid</key>
-		<true/>
 		<key>items</key>
 		<array>
 			<dict>
-				<key>ID</key>
+				<key>id</key>
 				<string>absolute</string>
-				<key>DisplayName</key>
+				<key>name</key>
 				<string>Absolute</string>
 				<key>itemType</key>
 				<string>subHeader</string>
-				<key>checkValid</key>
-				<false/>
 				<key>items</key>
 				<array>
 					<dict>
-						<key>Symbol</key>
-						<string>𝑋₀</string>
-						<key>ID</key>
+						<key>id</key>
 						<string>x</string>
-						<key>DisplayName</key>
-						<string>X pos</string>
-						<key>Value</key>
-						<integer>0</integer>
-						<key>Units</key>
-						<string>distance</string>
 						<key>isParam</key>
 						<false/>
 						<key>itemType</key>
-						<string>variable</string>
-						<key>checkValid</key>
-						<false/>
+						<string>var</string>
 					</dict>
 					<dict>
-						<key>ID</key>
+						<key>id</key>
 						<string>y</string>
-						<key>DisplayName</key>
-						<string>Y pos</string>
-						<key>Value</key>
-						<integer>10</integer>
-						<key>Units</key>
-						<string>distance</string>
 						<key>isParam</key>
 						<true/>
 						<key>itemType</key>
-						<string>variable</string>
-						<key>checkValid</key>
-						<false/>
-						<key>Symbol</key>
-						<string>𝑌₀</string>
+						<string>var</string>
 					</dict>
 					<dict>
-						<key>ID</key>
+						<key>id</key>
 						<string>z</string>
-						<key>DisplayName</key>
-						<string>Z pos</string>
-						<key>Value</key>
-						<integer>0</integer>
-						<key>Units</key>
-						<string>distance</string>
 						<key>isParam</key>
 						<false/>
 						<key>itemType</key>
-						<string>variable</string>
-						<key>checkValid</key>
-						<false/>
-						<key>Symbol</key>
-						<string>𝑍₀</string>
+						<string>var</string>
 					</dict>
 					<dict>
-						<key>Symbol</key>
-						<string>𝑑𝑋/𝑑𝑡₀</string>
-						<key>ID</key>
+						<key>id</key>
 						<string>dx</string>
-						<key>DisplayName</key>
-						<string>X vel</string>
-						<key>Value</key>
-						<integer>10</integer>
-						<key>Units</key>
-						<string>distance</string>
 						<key>isParam</key>
 						<false/>
 						<key>itemType</key>
-						<string>variable</string>
-						<key>checkValid</key>
-						<false/>
+						<string>var</string>
 					</dict>
 					<dict>
-						<key>ID</key>
+						<key>id</key>
 						<string>dy</string>
-						<key>DisplayName</key>
-						<string>Y vel</string>
-						<key>Value</key>
-						<integer>10</integer>
-						<key>Units</key>
-						<string>distance</string>
 						<key>isParam</key>
 						<false/>
 						<key>itemType</key>
-						<string>variable</string>
-						<key>checkValid</key>
-						<false/>
-						<key>Symbol</key>
-						<string>𝑑𝑌/𝑑𝑡₀</string>
+						<string>var</string>
 					</dict>
 					<dict>
-						<key>ID</key>
+						<key>id</key>
 						<string>dz</string>
-						<key>DisplayName</key>
-						<string>Z vel</string>
-						<key>Value</key>
-						<integer>0</integer>
-						<key>Units</key>
-						<string>distance</string>
 						<key>isParam</key>
 						<false/>
 						<key>itemType</key>
-						<string>variable</string>
-						<key>checkValid</key>
-						<false/>
-						<key>Symbol</key>
-						<string>𝑑𝑍/𝑑𝑡₀</string>
+						<string>var</string>
 					</dict>
 				</array>
 			</dict>
 			<dict>
-				<key>ID</key>
+				<key>id</key>
 				<string>Direction</string>
-				<key>DisplayName</key>
+				<key>name</key>
 				<string>Direction</string>
 				<key>itemType</key>
 				<string>subHeader</string>
-				<key>checkValid</key>
-				<false/>
 				<key>items</key>
 				<array>
 					<dict>
-						<key>ID</key>
-						<string>R</string>
-						<key>DisplayName</key>
-						<string>Distance</string>
-						<key>Value</key>
-						<integer>10</integer>
-						<key>Units</key>
-						<string>distance</string>
+						<key>id</key>
+						<string>r</string>
 						<key>isParam</key>
 						<false/>
 						<key>itemType</key>
-						<string>variable</string>
-						<key>checkValid</key>
-						<false/>
-						<key>Symbol</key>
-						<string>𝑅₀</string>
+						<string>var</string>
 					</dict>
 					<dict>
-						<key>ID</key>
-						<string>V1</string>
-						<key>DisplayName</key>
-						<string>Velocity</string>
-						<key>Value</key>
-						<integer>10</integer>
-						<key>Units</key>
-						<string>distance</string>
+						<key>id</key>
+						<string>azp</string>
 						<key>isParam</key>
 						<false/>
 						<key>itemType</key>
-						<string>variable</string>
-						<key>checkValid</key>
-						<false/>
-						<key>Symbol</key>
-						<string>𝑉₀</string>
+						<string>var</string>
 					</dict>
 					<dict>
-						<key>ID</key>
-						<string>posAz</string>
-						<key>DisplayName</key>
-						<string>Position azimuth</string>
-						<key>Value</key>
-						<integer>0</integer>
-						<key>Units</key>
-						<string>angle</string>
+						<key>id</key>
+						<string>elp</string>
 						<key>isParam</key>
 						<false/>
 						<key>itemType</key>
-						<string>variable</string>
-						<key>checkValid</key>
-						<false/>
-						<key>Symbol</key>
-						<string>𝛼</string>
+						<string>var</string>
 					</dict>
 					<dict>
-						<key>ID</key>
-						<string>posEl</string>
-						<key>DisplayName</key>
-						<string>Position elevation</string>
-						<key>Value</key>
-						<integer>0</integer>
-						<key>Units</key>
-						<string>angle</string>
+						<key>id</key>
+						<string>azv</string>
 						<key>isParam</key>
 						<false/>
 						<key>itemType</key>
-						<string>variable</string>
-						<key>checkValid</key>
-						<false/>
-						<key>Symbol</key>
-						<string>𝜆</string>
+						<string>var</string>
 					</dict>
 					<dict>
-						<key>ID</key>
-						<string>velAz</string>
-						<key>DisplayName</key>
-						<string>Velocity azimuth</string>
-						<key>Value</key>
-						<integer>0</integer>
-						<key>Units</key>
-						<string>angle</string>
+						<key>id</key>
+						<string>elv</string>
 						<key>isParam</key>
 						<false/>
 						<key>itemType</key>
-						<string>variable</string>
-						<key>checkValid</key>
-						<false/>
-						<key>Symbol</key>
-						<string>𝛼v</string>
-					</dict>
-					<dict>
-						<key>ID</key>
-						<string>velEl</string>
-						<key>DisplayName</key>
-						<string>Velocity elevation</string>
-						<key>Value</key>
-						<integer>0</integer>
-						<key>Units</key>
-						<string>angle</string>
-						<key>isParam</key>
-						<false/>
-						<key>itemType</key>
-						<string>variable</string>
-						<key>checkValid</key>
-						<false/>
-						<key>Symbol</key>
-						<string>𝜆v</string>
+						<string>var</string>
 					</dict>
 				</array>
 			</dict>
 			<dict>
-				<key>ID</key>
+				<key>id</key>
 				<string>Orbital</string>
-				<key>DisplayName</key>
+				<key>name</key>
 				<string>Orbital</string>
 				<key>itemType</key>
 				<string>subHeader</string>
-				<key>checkValid</key>
-				<false/>
 				<key>items</key>
 				<array>
 					<dict>
-						<key>ID</key>
+						<key>id</key>
 						<string>a</string>
-						<key>DisplayName</key>
-						<string>Semi-major axis</string>
-						<key>Value</key>
-						<integer>0</integer>
-						<key>Units</key>
-						<string>distance</string>
 						<key>isParam</key>
 						<false/>
 						<key>itemType</key>
-						<string>variable</string>
-						<key>checkValid</key>
-						<false/>
-						<key>Symbol</key>
-						<string>𝑎</string>
+						<string>var</string>
 					</dict>
 					<dict>
-						<key>ID</key>
+						<key>id</key>
 						<string>e</string>
-						<key>DisplayName</key>
-						<string>Ecccentricity</string>
-						<key>Value</key>
-						<integer>0</integer>
-						<key>Units</key>
-						<string></string>
 						<key>isParam</key>
 						<false/>
 						<key>itemType</key>
-						<string>variable</string>
-						<key>checkValid</key>
-						<false/>
-						<key>Symbol</key>
-						<string>𝑒</string>
+						<string>var</string>
 					</dict>
 					<dict>
-						<key>ID</key>
+						<key>id</key>
 						<string>i</string>
-						<key>DisplayName</key>
-						<string>Inclination</string>
-						<key>Value</key>
-						<integer>0</integer>
-						<key>Units</key>
-						<string>angle</string>
 						<key>isParam</key>
 						<false/>
 						<key>itemType</key>
-						<string>variable</string>
-						<key>checkValid</key>
-						<false/>
-						<key>Symbol</key>
-						<string>𝑖</string>
+						<string>var</string>
 					</dict>
 					<dict>
-						<key>ID</key>
+						<key>id</key>
 						<string>om</string>
-						<key>DisplayName</key>
-						<string>Longitude of Ascending Node</string>
-						<key>Value</key>
-						<integer>0</integer>
-						<key>Units</key>
-						<string>angle</string>
 						<key>isParam</key>
 						<false/>
 						<key>itemType</key>
-						<string>variable</string>
-						<key>checkValid</key>
-						<false/>
-						<key>Symbol</key>
-						<string>𝛺</string>
+						<string>var</string>
 					</dict>
 					<dict>
-						<key>ID</key>
+						<key>id</key>
 						<string>w</string>
-						<key>DisplayName</key>
-						<string>Argument of perigee</string>
-						<key>Value</key>
-						<integer>0</integer>
-						<key>Units</key>
-						<string>angle</string>
 						<key>isParam</key>
 						<false/>
 						<key>itemType</key>
-						<string>variable</string>
-						<key>checkValid</key>
-						<false/>
-						<key>Symbol</key>
-						<string>𝜔</string>
+						<string>var</string>
 					</dict>
 					<dict>
-						<key>ID</key>
+						<key>id</key>
 						<string>th</string>
-						<key>DisplayName</key>
-						<string>True anomaly</string>
-						<key>Value</key>
-						<integer>0</integer>
-						<key>Units</key>
-						<string>angle</string>
 						<key>isParam</key>
 						<false/>
 						<key>itemType</key>
-						<string>variable</string>
-						<key>checkValid</key>
-						<false/>
-						<key>Symbol</key>
-						<string>𝜽</string>
+						<string>var</string>
 					</dict>
 				</array>
 			</dict>
 			<dict>
-				<key>ID</key>
+				<key>id</key>
 				<string>Entry</string>
-				<key>DisplayName</key>
+				<key>name</key>
 				<string>Entry</string>
-				<key>Value</key>
-				<integer>0</integer>
-				<key>Units</key>
-				<string></string>
-				<key>isParam</key>
-				<false/>
 				<key>itemType</key>
 				<string>subHeader</string>
-				<key>valueType</key>
-				<string>file</string>
-				<key>checkValid</key>
-				<false/>
-				<key>isValid</key>
-				<string></string>
 				<key>items</key>
 				<array>
 					<dict>
-						<key>ID</key>
+						<key>id</key>
 						<string>hangle</string>
-						<key>DisplayName</key>
-						<string>Heading angle</string>
-						<key>Value</key>
-						<integer>0</integer>
-						<key>Units</key>
-						<string>angle</string>
 						<key>isParam</key>
 						<false/>
 						<key>itemType</key>
-						<string>variable</string>
-						<key>checkValid</key>
-						<false/>
-						<key>Symbol</key>
-						<string>𝜓</string>
+						<string>var</string>
 					</dict>
 					<dict>
-						<key>ID</key>
+						<key>id</key>
 						<string>gamma</string>
-						<key>DisplayName</key>
-						<string>Flight path angle</string>
-						<key>Value</key>
-						<integer>0</integer>
-						<key>Units</key>
-						<string>angle</string>
 						<key>isParam</key>
 						<false/>
 						<key>itemType</key>
-						<string>variable</string>
-						<key>checkValid</key>
-						<false/>
-						<key>Symbol</key>
-						<string>𝛾</string>
+						<string>var</string>
 					</dict>
 					<dict>
-						<key>ID</key>
+						<key>id</key>
 						<string>h</string>
-						<key>DisplayName</key>
-						<string>Altitude</string>
-						<key>Value</key>
-						<integer>0</integer>
-						<key>Units</key>
-						<string>distance</string>
 						<key>isParam</key>
 						<false/>
 						<key>itemType</key>
-						<string>variable</string>
-						<key>checkValid</key>
-						<false/>
-						<key>Symbol</key>
-						<string>ℎ</string>
+						<string>var</string>
 					</dict>
 					<dict>
-						<key>ID</key>
-						<string>V2</string>
-						<key>DisplayName</key>
-						<string>Velocity</string>
-						<key>Value</key>
-						<integer>0</integer>
-						<key>Units</key>
-						<string>velocity</string>
-						<key>isParam</key>
-						<false/>
-						<key>itemType</key>
-						<string>variable</string>
-						<key>checkValid</key>
-						<false/>
-						<key>Symbol</key>
-						<string>𝑉</string>
-					</dict>
-					<dict>
-						<key>ID</key>
+						<key>id</key>
 						<string>lat</string>
-						<key>DisplayName</key>
-						<string>Latitude</string>
-						<key>Value</key>
-						<integer>0</integer>
-						<key>Units</key>
-						<string>angle</string>
 						<key>isParam</key>
 						<false/>
 						<key>itemType</key>
-						<string>variable</string>
-						<key>checkValid</key>
-						<false/>
-						<key>Symbol</key>
-						<string>𝜑</string>
+						<string>var</string>
 					</dict>
 					<dict>
-						<key>ID</key>
+						<key>id</key>
 						<string>lon</string>
-						<key>DisplayName</key>
-						<string>Longitude</string>
-						<key>Value</key>
-						<integer>0</integer>
-						<key>Units</key>
-						<string>angle</string>
 						<key>isParam</key>
 						<false/>
 						<key>itemType</key>
-						<string>variable</string>
-						<key>checkValid</key>
-						<false/>
-						<key>Symbol</key>
-						<string>𝜆</string>
+						<string>var</string>
 					</dict>
 				</array>
 			</dict>
 		</array>
 	</dict>
 	<dict>
-		<key>ID</key>
+		<key>id</key>
 		<string>BodyState</string>
-		<key>DisplayName</key>
+		<key>name</key>
 		<string>Initial body orientation</string>
 		<key>itemType</key>
 		<string>header</string>
-		<key>checkValid</key>
-		<true/>
 		<key>items</key>
 		<array>
 			<dict>
-				<key>ID</key>
-				<string>B</string>
-				<key>DisplayName</key>
-				<string>Sideslip angle</string>
-				<key>Value</key>
-				<integer>0</integer>
-				<key>Units</key>
-				<string>angle</string>
-				<key>isParam</key>
-				<true/>
-				<key>itemType</key>
-				<string>variable</string>
-				<key>checkValid</key>
-				<false/>
-				<key>Symbol</key>
-				<string>𝛽</string>
-			</dict>
-			<dict>
-				<key>ID</key>
-				<string>aoa</string>
-				<key>DisplayName</key>
-				<string>Angle-of-attack</string>
-				<key>Value</key>
-				<integer>0</integer>
-				<key>Units</key>
-				<string>angle</string>
+				<key>id</key>
+				<string>b</string>
 				<key>isParam</key>
 				<false/>
 				<key>itemType</key>
-				<string>variable</string>
-				<key>checkValid</key>
-				<false/>
-				<key>Symbol</key>
-				<string>𝛼</string>
+				<string>var</string>
 			</dict>
 			<dict>
-				<key>ID</key>
+				<key>id</key>
+				<string>alpha</string>
+				<key>isParam</key>
+				<false/>
+				<key>itemType</key>
+				<string>var</string>
+			</dict>
+			<dict>
+				<key>id</key>
 				<string>roll</string>
-				<key>DisplayName</key>
-				<string>Roll angle</string>
-				<key>Value</key>
-				<integer>0</integer>
-				<key>Units</key>
-				<string>angle</string>
 				<key>isParam</key>
 				<false/>
 				<key>itemType</key>
-				<string>variable</string>
-				<key>checkValid</key>
-				<false/>
-				<key>Symbol</key>
-				<string>𝜑</string>
+				<string>var</string>
 			</dict>
 			<dict>
-				<key>ID</key>
+				<key>id</key>
 				<string>pitch</string>
-				<key>DisplayName</key>
-				<string>Pitch angle</string>
-				<key>Value</key>
-				<integer>0</integer>
-				<key>Units</key>
-				<string>angle</string>
 				<key>isParam</key>
 				<false/>
 				<key>itemType</key>
-				<string>variable</string>
-				<key>checkValid</key>
-				<false/>
-				<key>Symbol</key>
-				<string>𝜃</string>
+				<string>var</string>
 			</dict>
 			<dict>
-				<key>ID</key>
+				<key>id</key>
 				<string>yaw</string>
-				<key>DisplayName</key>
-				<string>Yaw angle</string>
-				<key>Value</key>
-				<integer>0</integer>
-				<key>Units</key>
-				<string>angle</string>
 				<key>isParam</key>
 				<false/>
 				<key>itemType</key>
-				<string>variable</string>
-				<key>checkValid</key>
-				<false/>
-				<key>Symbol</key>
-				<string>𝜓</string>
+				<string>var</string>
 			</dict>
 			<dict>
-				<key>ID</key>
+				<key>id</key>
 				<string>droll</string>
-				<key>DisplayName</key>
-				<string>Roll rate</string>
-				<key>Value</key>
-				<integer>0</integer>
-				<key>Units</key>
-				<string>angle/time</string>
 				<key>isParam</key>
 				<false/>
 				<key>itemType</key>
-				<string>variable</string>
-				<key>checkValid</key>
-				<false/>
-				<key>Symbol</key>
-				<string>𝑑𝜑/𝑑𝑡</string>
+				<string>var</string>
 			</dict>
 			<dict>
-				<key>ID</key>
+				<key>id</key>
 				<string>dpitch</string>
-				<key>DisplayName</key>
-				<string>Pitch rate</string>
-				<key>Value</key>
-				<integer>0</integer>
-				<key>Units</key>
-				<string>angle/time</string>
 				<key>isParam</key>
 				<false/>
 				<key>itemType</key>
-				<string>variable</string>
-				<key>checkValid</key>
-				<false/>
-				<key>Symbol</key>
-				<string>𝑑𝜃/𝑑𝑡</string>
+				<string>var</string>
 			</dict>
 			<dict>
-				<key>ID</key>
+				<key>id</key>
 				<string>dyaw</string>
-				<key>DisplayName</key>
-				<string>Yaw rate (𝑑𝜓/𝑑𝑡)</string>
-				<key>Value</key>
-				<integer>0</integer>
-				<key>Units</key>
-				<string>angle/time</string>
 				<key>isParam</key>
 				<false/>
 				<key>itemType</key>
-				<string>variable</string>
-				<key>checkValid</key>
-				<false/>
-				<key>Symbol</key>
-				<string>𝑑𝜓/𝑑𝑡</string>
+				<string>var</string>
 			</dict>
 			<dict>
-				<key>ID</key>
+				<key>id</key>
 				<string>bank</string>
-				<key>DisplayName</key>
-				<string>Bank angle</string>
-				<key>Value</key>
-				<integer>0</integer>
-				<key>Units</key>
-				<string>angle</string>
 				<key>isParam</key>
 				<false/>
 				<key>itemType</key>
-				<string>variable</string>
-				<key>checkValid</key>
-				<false/>
-				<key>Symbol</key>
-				<string>𝜎</string>
+				<string>var</string>
 			</dict>
 		</array>
 	</dict>

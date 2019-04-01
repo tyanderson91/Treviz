@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class OutputsViewController: NSViewController {
+class OutputsViewController: ViewController {
         
     @IBOutlet weak var outputsSplitView: NSView!
     var outputSplitViewController: OutputsSplitViewController? = nil
@@ -29,7 +29,7 @@ class OutputsViewController: NSViewController {
 
 
 
-class OutputsSplitViewController: NSSplitViewController {
+class OutputsSplitViewController: SplitViewController {
     
     @IBOutlet weak var textOutputSplitViewItem: NSSplitViewItem!
     //let textOutputView: NSTextView

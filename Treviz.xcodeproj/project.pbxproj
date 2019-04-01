@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -21,9 +21,7 @@
 		CD4656B2224C6F3500C587CC /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4656B1224C6F3500C587CC /* SettingsViewController.swift */; };
 		CD4656B4224C6F8C00C587CC /* EnvironmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4656B3224C6F8C00C587CC /* EnvironmentViewController.swift */; };
 		CDAF13FD222CF357005CDC3C /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDAF13FC222CF357005CDC3C /* State.swift */; };
-		CDAF1401222E6512005CDC3C /* Analysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDAF1400222E6512005CDC3C /* Analysis.swift */; };
 		CDAF14272230FB72005CDC3C /* Variable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDAF14262230FB72005CDC3C /* Variable.swift */; };
-		CDBE33C5224C81B500E1404E /* InitState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBE33C4224C81B500E1404E /* InitState.swift */; };
 		CDBE33C6224CB48200E1404E /* AnalysisInputs.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDE0795A2249EC7400815E7F /* AnalysisInputs.plist */; };
 		CDBEA0A622447A9C00D3159C /* TextOutputsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBEA0A522447A9C00D3159C /* TextOutputsViewController.swift */; };
 		CDC1F5372233978500D1BB25 /* OutputsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC1F5352233978500D1BB25 /* OutputsViewController.swift */; };
@@ -32,12 +30,16 @@
 		CDC1F54022363DDB00D1BB25 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC1F53F22363DDB00D1BB25 /* MainViewController.swift */; };
 		CDD5049622252AF900B29751 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD5049522252AF900B29751 /* AppDelegate.swift */; };
 		CDD5049822252AFA00B29751 /* InputsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD5049722252AFA00B29751 /* InputsViewController.swift */; };
-		CDD5049A22252AFA00B29751 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD5049922252AFA00B29751 /* Document.swift */; };
 		CDD5049D22252AFA00B29751 /* Document.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CDD5049B22252AFA00B29751 /* Document.xcdatamodeld */; };
 		CDD5049F22252AFD00B29751 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDD5049E22252AFD00B29751 /* Assets.xcassets */; };
 		CDD504A222252AFD00B29751 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDD504A022252AFD00B29751 /* Main.storyboard */; };
 		CDE078F4224806EF00815E7F /* Inputs.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDE078F3224806EF00815E7F /* Inputs.storyboard */; };
 		CDF1670C2237A10400CD9590 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF1670B2237A10400CD9590 /* MainWindowController.swift */; };
+		CDF3D1A1225025B00064D70C /* Analysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF3D1A0225025AF0064D70C /* Analysis.swift */; };
+		CDF3D1A3225025E60064D70C /* InitialVars.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDF3D1A2225025E60064D70C /* InitialVars.plist */; };
+		CDF3D1A4225026740064D70C /* InitState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBE33C4224C81B500E1404E /* InitState.swift */; };
+		CDF3D1A6225057270064D70C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF3D1A5225057270064D70C /* ViewController.swift */; };
+		CDF3D1A822505A000064D70C /* AnalysisData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF3D1A722505A000064D70C /* AnalysisData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,7 +60,6 @@
 		CD4656B1224C6F3500C587CC /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		CD4656B3224C6F8C00C587CC /* EnvironmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentViewController.swift; sourceTree = "<group>"; };
 		CDAF13FC222CF357005CDC3C /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
-		CDAF1400222E6512005CDC3C /* Analysis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analysis.swift; sourceTree = "<group>"; };
 		CDAF14262230FB72005CDC3C /* Variable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Variable.swift; sourceTree = "<group>"; };
 		CDBE33C4224C81B500E1404E /* InitState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitState.swift; sourceTree = "<group>"; };
 		CDBEA0A522447A9C00D3159C /* TextOutputsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextOutputsViewController.swift; sourceTree = "<group>"; };
@@ -69,7 +70,6 @@
 		CDD5049222252AF900B29751 /* Treviz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Treviz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDD5049522252AF900B29751 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CDD5049722252AFA00B29751 /* InputsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputsViewController.swift; sourceTree = "<group>"; };
-		CDD5049922252AFA00B29751 /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
 		CDD5049C22252AFA00B29751 /* Document.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Document.xcdatamodel; sourceTree = "<group>"; };
 		CDD5049E22252AFD00B29751 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CDD504A122252AFD00B29751 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -78,6 +78,10 @@
 		CDE078F3224806EF00815E7F /* Inputs.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Inputs.storyboard; sourceTree = "<group>"; };
 		CDE0795A2249EC7400815E7F /* AnalysisInputs.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AnalysisInputs.plist; sourceTree = "<group>"; };
 		CDF1670B2237A10400CD9590 /* MainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
+		CDF3D1A0225025AF0064D70C /* Analysis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Analysis.swift; sourceTree = "<group>"; };
+		CDF3D1A2225025E60064D70C /* InitialVars.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = InitialVars.plist; sourceTree = "<group>"; };
+		CDF3D1A5225057270064D70C /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		CDF3D1A722505A000064D70C /* AnalysisData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +131,7 @@
 				CD4656B3224C6F8C00C587CC /* EnvironmentViewController.swift */,
 				CDD5049722252AFA00B29751 /* InputsViewController.swift */,
 				CDE0795A2249EC7400815E7F /* AnalysisInputs.plist */,
+				CDF3D1A2225025E60064D70C /* InitialVars.plist */,
 				CDBE33C4224C81B500E1404E /* InitState.swift */,
 				CDC1F53D2234970F00D1BB25 /* TerminalCondition.swift */,
 				CDE078F3224806EF00815E7F /* Inputs.storyboard */,
@@ -157,6 +162,7 @@
 				CD9F2041223B7CBF005BFDCB /* Inputs Setup */,
 				CD9F2040223B7C95005BFDCB /* Outputs Setup */,
 				CDC1F53F22363DDB00D1BB25 /* MainViewController.swift */,
+				CDF3D1A722505A000064D70C /* AnalysisData.swift */,
 				CDC1F53B2234874000D1BB25 /* MainSplitViewController.swift */,
 				CDC1F5352233978500D1BB25 /* OutputsViewController.swift */,
 				CDBEA0A522447A9C00D3159C /* TextOutputsViewController.swift */,
@@ -164,8 +170,8 @@
 				CDF1670B2237A10400CD9590 /* MainWindowController.swift */,
 				CDAF13FC222CF357005CDC3C /* State.swift */,
 				CDAF14262230FB72005CDC3C /* Variable.swift */,
-				CDAF1400222E6512005CDC3C /* Analysis.swift */,
-				CDD5049922252AFA00B29751 /* Document.swift */,
+				CDF3D1A0225025AF0064D70C /* Analysis.swift */,
+				CDF3D1A5225057270064D70C /* ViewController.swift */,
 				CDD5049E22252AFD00B29751 /* Assets.xcassets */,
 				CDD504A022252AFD00B29751 /* Main.storyboard */,
 				CDD504A322252AFD00B29751 /* Info.plist */,
@@ -212,7 +218,7 @@
 				};
 			};
 			buildConfigurationList = CDD5048D22252AF900B29751 /* Build configuration list for PBXProject "Treviz" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 10.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -235,6 +241,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDBE33C6224CB48200E1404E /* AnalysisInputs.plist in Resources */,
+				CDF3D1A3225025E60064D70C /* InitialVars.plist in Resources */,
 				CD2D0DBA2243837F0012978E /* HeaderViewController.storyboard in Resources */,
 				CDD5049F22252AFD00B29751 /* Assets.xcassets in Resources */,
 				CDE078F4224806EF00815E7F /* Inputs.storyboard in Resources */,
@@ -250,9 +257,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDF3D1A6225057270064D70C /* ViewController.swift in Sources */,
+				CDF3D1A4225026740064D70C /* InitState.swift in Sources */,
 				CD2D0DB12243836F0012978E /* OutputSetupViewController.swift in Sources */,
 				CD2D0DB22243836F0012978E /* BaseViewController.swift in Sources */,
 				CD2D0DB32243836F0012978E /* StackView.swift in Sources */,
+				CDF3D1A822505A000064D70C /* AnalysisData.swift in Sources */,
 				CD2D0DB42243836F0012978E /* ThreeAxisOutputSetupViewController.swift in Sources */,
 				CD2D0DB52243836F0012978E /* TwoAxisOutputSetupViewController.swift in Sources */,
 				CD2D0DB62243836F0012978E /* MonteCarloOutputSetupViewController.swift in Sources */,
@@ -268,13 +278,11 @@
 				CDC1F5372233978500D1BB25 /* OutputsViewController.swift in Sources */,
 				CDD5049D22252AFA00B29751 /* Document.xcdatamodeld in Sources */,
 				CDD5049822252AFA00B29751 /* InputsViewController.swift in Sources */,
-				CDBE33C5224C81B500E1404E /* InitState.swift in Sources */,
-				CDAF1401222E6512005CDC3C /* Analysis.swift in Sources */,
+				CDF3D1A1225025B00064D70C /* Analysis.swift in Sources */,
 				CDBEA0A622447A9C00D3159C /* TextOutputsViewController.swift in Sources */,
 				CD129622224C67E300663B88 /* InitStateViewController.swift in Sources */,
 				CDD5049622252AF900B29751 /* AppDelegate.swift in Sources */,
 				CDAF13FD222CF357005CDC3C /* State.swift in Sources */,
-				CDD5049A22252AFA00B29751 /* Document.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,7 +351,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -398,7 +406,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;

@@ -16,7 +16,6 @@ class Variable : NSObject{
     let name : String
     let symbol : String
     var units : String //TODO: Turn units into a separate type
-    var isParam = false
     var value : Double? //TODO: all different types
     var statePosition : Int //Position of the variable in the state vector
     
@@ -35,5 +34,42 @@ class Variable : NSObject{
         self.units = units
         self.statePosition = -1
         
+    }
+    
+    static func initVars(filename : String) -> [Variable] {
+        //NSMutableArray<AnalysisInput *> *inputs= [NSMutableArray array];
+        guard let inputList = NSArray.init(contentsOfFile: filename)
+            else {
+                return []}
+        var initVars : [Variable] = []
+        for thisVar in inputList {
+            let dict = thisVar as! NSDictionary
+            let newVar = Variable(dict.value(forKey: "id") as! VariableID, named: dict.value(forKey: "name") as! String,
+                                  symbol: dict.value(forKey: "symbol") as! String, units: dict.value(forKey:"units") as! String)
+            newVar.value = dict.value(forKey: "value") as? Double
+            initVars.append(newVar)
+        }
+        return initVars
+    }
+    
+    static func recursPopulateList(input: NSArray)->[InitState]{ //fixit: for some reason, inputs are getting initialized twice
+        var output : [InitState] = []
+        for curProps in input {
+            let curPropDict = curProps as! NSDictionary
+            let curInput : InitState = InitState.init(withDictionary: curPropDict)
+            if !(curInput.itemType=="variable") {
+                let curOutput : [InitState] = recursPopulateList(input: curPropDict.value(forKey: "items") as! NSArray)
+                curInput.children = curOutput
+            }
+            output.append(curInput)
+        }
+        return output
+    }
+    
+    static func getVariable(_ id : String, inputList: [Variable])->Variable?{
+        for thisVar in inputList {//TODO: turn all variable input into dictionary
+            if thisVar.id == id{return thisVar}
+        }
+        return nil
     }
 }

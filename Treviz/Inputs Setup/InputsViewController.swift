@@ -8,17 +8,15 @@
 
 import Cocoa
 
-class InputsViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate  {
+class InputsViewController: ViewController, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate  {
     
     var initState = State()
     //var parentSplitViewController : MainSplitViewController? = nil
-    
     //@IBOutlet weak var tableView: NSTableView!    
     @IBOutlet weak var stack: CustomStackView!
     
     @IBAction func runAnalysisPushed(_ sender: Any) {
-        
-        let curAnalysis = Analysis()
+        let curAnalysis = self.representedObject as! Analysis
         curAnalysis.initialState = initState
         let parentSplitViewController = self.parent as! MainSplitViewController
         let mainView = parentSplitViewController.parent as! MainViewController

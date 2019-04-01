@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class OutputSetupViewController: NSViewController {
+class OutputSetupViewController: ViewController {
     
     @IBOutlet weak var stack: CustomStackView!
     // MARK: - View Controller Lifecycle

@@ -8,34 +8,31 @@
 
 import Cocoa
 
-class InitState: Variable {
-
+class InitState: NSObject {
+    static var varInputList : [Variable] = []
     var children : [InitState] = []
-    var checkValid : Bool = false
     var isValid : Bool = false
     var itemType : String = ""
+    var id : String = ""
+    var name : String = ""
+    var variable : Variable? = nil
+    var isParam : Bool = false
     
     init(withDictionary dict : NSDictionary){
-        let id = dict["ID"] as! String
+        super.init()
+        let id = dict["id"] as! String
         let itemType = dict["itemType"] as! String
-        let name = dict["DisplayName"] as! String
-        if itemType == "variable"{
-            let cursymbol = dict["Symbol"] as! String
-            let curvalue = dict["Value"] as! Double
-            let curunits = dict["Units"] as! String
-            super.init(id, named : name, symbol : cursymbol, units : curunits)
-            self.value = curvalue
+        if itemType == "var"{
+            //self.name = "thisName"
+            self.variable = Variable.getVariable(id, inputList: InitState.varInputList)
             self.isParam = dict["isParam"] as! Bool
-            self.children = []
         } else {
-            let cursymbol = "--"
-            let curunits = "--"
-            super.init(id, named : name, symbol : cursymbol, units : curunits)
+            self.name = dict["name"] as! String
             self.isParam = false
+            self.isValid = false
         }
+        self.id = id
         self.itemType = itemType
-        self.checkValid = dict["checkValid"] as! Bool
-        
         return
     }
     
@@ -43,6 +40,10 @@ class InitState: Variable {
     //NSMutableArray<AnalysisInput *> *inputs= [NSMutableArray array];
         guard let inputList = NSArray.init(contentsOfFile: filename) else {return []}
         let inputs = recursPopulateList(input: inputList)
+        
+        for thisState in inputs{
+            thisState.setParams()
+        }
         return inputs
     }
     
@@ -51,7 +52,7 @@ class InitState: Variable {
         for curProps in input {
             let curPropDict = curProps as! NSDictionary
             let curInput : InitState = InitState.init(withDictionary: curPropDict)
-            if !(curInput.itemType=="variable") {
+            if !(curInput.itemType=="var") {
                 let curOutput : [InitState] = recursPopulateList(input: curPropDict.value(forKey: "items") as! NSArray)
                 curInput.children = curOutput
             }
@@ -60,18 +61,14 @@ class InitState: Variable {
         return output
     }
     
-    func hasParams()->Bool{
-        if self.itemType == "variable"{
-            return self.isParam
-        }
-        else if self.itemType == "header" || self.itemType == "subHeader"{
+    func setParams(){//Sets param status for headers and subheaders
+        if self.itemType == "header" || self.itemType == "subHeader"{
             var hasParams = false
             for curChild in self.children{
-                hasParams = hasParams || curChild.hasParams()
+                curChild.setParams()
+                hasParams = hasParams || curChild.isParam
             }
-            return hasParams
+            self.isParam = hasParams
         }
-        return false
     }
-    
 }

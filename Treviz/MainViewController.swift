@@ -8,13 +8,28 @@
 
 import Cocoa
 
-class MainViewController: NSViewController {
+class MainViewController: ViewController {
 
     @IBOutlet weak var mainView: NSView!
     @IBOutlet weak var analysisProgressBar: NSProgressIndicator!
+    var mainSplitViewController : MainSplitViewController? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
+    }
+    
+    override func viewDidAppear() {
+        super.viewDidAppear()
+        // Do view setup here.
+    }
+
+    
+    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
+        if segue.identifier == "mainSplitViewSegue"{
+            self.mainSplitViewController =  segue.destinationController as? MainSplitViewController
+        } else {return}
+        
     }
     
 }
