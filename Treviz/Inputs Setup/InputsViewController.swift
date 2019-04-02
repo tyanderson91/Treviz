@@ -8,16 +8,16 @@
 
 import Cocoa
 
-class InputsViewController: ViewController, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate  {
+class InputsViewController: ViewController{//}, NSTableViewDataSource, NSTableViewDelegate {
     
-    var initState = State()
     //var parentSplitViewController : MainSplitViewController? = nil
     //@IBOutlet weak var tableView: NSTableView!    
     @IBOutlet weak var stack: CustomStackView!
     
     @IBAction func runAnalysisPushed(_ sender: Any) {
         let curAnalysis = self.representedObject as! Analysis
-        curAnalysis.initialState = initState
+        
+        curAnalysis.initialState = State(fromInputVars: curAnalysis.analysisData.initVars)
         let parentSplitViewController = self.parent as! MainSplitViewController
         let mainView = parentSplitViewController.parent as! MainViewController
         curAnalysis.progressBar = mainView.analysisProgressBar
@@ -53,6 +53,7 @@ class InputsViewController: ViewController, NSTableViewDataSource, NSTableViewDe
         stack.addViewController(fromStoryboardId: "Inputs", withIdentifier: "InitStateViewController")
         
         //self.view.setFrameSize(NSSize.init(width: 200, height: 700))
+        /*
         let t0 = Variable("t",named: "time",symbol:"t",units:"s")
         let x0 = Variable("x",named:"X pos",symbol:"x",units:"m")
         let y0 = Variable("y",named:"Y pos",symbol: "y",units:"m")
@@ -61,14 +62,12 @@ class InputsViewController: ViewController, NSTableViewDataSource, NSTableViewDe
         let dy0 = Variable("dy",named:"Y vel",symbol: "ẏ",units:"m/s")
         dy0.value = 10
         let m0 = Variable("m",named:"Mass",symbol:"m",units:"kg")
-        m0.value = 10
-        
-        self.initState.fromVars([t0,x0,y0,dx0,dy0,m0])
+        m0.value = 10*/
         
         //tableView.reloadData()
         }
     
-    
+    /*
     func numberOfRows(in tableView: NSTableView) -> Int {
         return initState.variables.count
     }
@@ -98,7 +97,7 @@ class InputsViewController: ViewController, NSTableViewDataSource, NSTableViewDe
         return nil
         
     }
-
+*/
     
 
     override var representedObject: Any? {

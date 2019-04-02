@@ -10,11 +10,12 @@ import Cocoa
 
 class State: NSObject {
     static let stateVarPositions : [VariableID : Int] =
-        ["t":0,"x":1,"y":2,"z":3,"dx":4,"dy":5,"dz":6,"m":7,"q0":8,"q1":9,"q2":10,"q3":11,
+        ["t":0,"x":1,"y":2,"z":3,"dx":4,"dy":5,"dz":6,"mtot":7,"q0":8,"q1":9,"q2":10,"q3":11,
          "dq0":12,"dq1":13,"dq2":14,"dq3":15]
-    var variables : [Variable] = []
-    var varIDs : [VariableID] = []
+    var variables = [Variable]()
+    //var varIDs : [VariableID] = []
     
+    /*
     func fromVars(_ curVars: [Variable]){
         self.variables = []
         self.varIDs = []
@@ -35,15 +36,34 @@ class State: NSObject {
         }*/
     
     }
-    
-    func setItemValue(id: String, value: Double){
-        let thisIndex = self.varIDs.firstIndex(of:id)
-        self.variables[thisIndex!].value = value
+    */
+    override init() {
+        self.variables = []
     }
     
-    func getValue(_ id: String)->Double{
-        let thisIndex = self.varIDs.firstIndex(of:id)
-        return self.variables[thisIndex!].value!
+    init(fromInputVars inputs: [Variable]?){
+        if inputs != nil {
+            var newStateVars = Array(repeating: Variable(""), count: State.stateVarPositions.count) as [Variable]
+            for curVar in inputs! {
+                if State.stateVarPositions.keys.contains(curVar.id){
+                    if let varIndex = State.stateVarPositions[curVar.id]{
+                        newStateVars[varIndex] = curVar}
+                }
+            }
+            self.variables = newStateVars
+            //self.varIDs = []
+        }
+    }
+    
+    func setItemValue(id: VariableID, value: Double){
+        if let thisIndex = State.stateVarPositions[id]{
+            self.variables[thisIndex].value = value}
+    }
+    
+    func getValue(_ id: VariableID)->Double?{
+        if let thisIndex = State.stateVarPositions[id]{
+            return self.variables[thisIndex].value}
+        else {return nil}
     }
     
     func toArray()->[Double]{
@@ -55,7 +75,11 @@ class State: NSObject {
         //let idMapped = self.varIDs.map {stateVarPositions[$0]}
         var varArray : [Double] = Array<Any>(repeating: 0.0, count:State.stateVarPositions.count) as! [Double]
         for curVar in self.variables{
-            varArray[State.stateVarPositions[curVar.id]!] = curVar.value!
+            var doubleValue = 0.0
+            if curVar.value != nil{
+                doubleValue = curVar.value!
+                varArray[State.stateVarPositions[curVar.id]!] = doubleValue
+            }
         }
         return varArray
     }

@@ -19,6 +19,14 @@ class Variable : NSObject{
     var value : Double? //TODO: all different types
     var statePosition : Int //Position of the variable in the state vector
     
+    init(_ id:VariableID){
+        self.id = id
+        self.name = ""
+        self.symbol = ""
+        self.units = ""
+        self.statePosition = -1
+    }
+    
     init(_ id:VariableID, named name:String = "", symbol:String = "", units:String = ""){
         if id == ""{
             //return
@@ -47,18 +55,24 @@ class Variable : NSObject{
             let newVar = Variable(dict.value(forKey: "id") as! VariableID, named: dict.value(forKey: "name") as! String,
                                   symbol: dict.value(forKey: "symbol") as! String, units: dict.value(forKey:"units") as! String)
             newVar.value = dict.value(forKey: "value") as? Double
+            
+            //Below code is meant to initialize as an example
+            if newVar.id == "dx" || newVar.id == "dy" || newVar.id == "mtot" {
+                newVar.value = 10
+            }
+ 
             initVars.append(newVar)
         }
         return initVars
     }
     
-    static func recursPopulateList(input: NSArray)->[InitState]{ //fixit: for some reason, inputs are getting initialized twice
-        var output : [InitState] = []
+    static func recursPopulateList(input: NSArray)->[InputStateVariable]{ //fixit: for some reason, inputs are getting initialized twice
+        var output : [InputStateVariable] = []
         for curProps in input {
             let curPropDict = curProps as! NSDictionary
-            let curInput : InitState = InitState.init(withDictionary: curPropDict)
+            let curInput : InputStateVariable = InputStateVariable.init(withDictionary: curPropDict)
             if !(curInput.itemType=="variable") {
-                let curOutput : [InitState] = recursPopulateList(input: curPropDict.value(forKey: "items") as! NSArray)
+                let curOutput : [InputStateVariable] = recursPopulateList(input: curPropDict.value(forKey: "items") as! NSArray)
                 curInput.children = curOutput
             }
             output.append(curInput)

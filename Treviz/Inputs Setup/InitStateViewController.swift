@@ -10,7 +10,7 @@ import Cocoa
 class InitStateViewController: BaseViewController, NSOutlineViewDelegate, NSOutlineViewDataSource {
 
     @IBOutlet weak var outlineView: NSOutlineView!
-    var inputs : [InitState] = []
+    var inputs : [InputStateVariable] = []
     
     override func headerTitle() -> String { return NSLocalizedString("Initial State", comment: "") }
 
@@ -19,11 +19,10 @@ class InitStateViewController: BaseViewController, NSOutlineViewDelegate, NSOutl
         
         let stateFilePath = Bundle.main.path(forResource: "AnalysisInputs", ofType: "plist")
         if (stateFilePath != nil) {
-            self.inputs = InitState.inputList(filename: stateFilePath!)
+            self.inputs = InputStateVariable.inputList(filename: stateFilePath!)
         }
         
-        outlineView.reloadData()
-        // Do view setup here.
+        outlineView.reloadData()        // Do view setup here.
     }
     
     func outlineViewColumnDidResize(_ notification: Notification) {
@@ -33,8 +32,8 @@ class InitStateViewController: BaseViewController, NSOutlineViewDelegate, NSOutl
     func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
         if item == nil {return self.inputs.count}
         let itemObj = item as! NSObject
-        if itemObj.isKind(of: InitState.self){
-            return (itemObj as! InitState).children.count
+        if itemObj.isKind(of: InputStateVariable.self){
+            return (itemObj as! InputStateVariable).children.count
         }
         else {//Looking at the top level
             return self.inputs.count
@@ -44,8 +43,8 @@ class InitStateViewController: BaseViewController, NSOutlineViewDelegate, NSOutl
     func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
         if item == nil {return self.inputs[index]}
         let itemObj = item as! NSObject
-        if itemObj.isKind(of: InitState.self){
-            return (itemObj as! InitState).children[index]
+        if itemObj.isKind(of: InputStateVariable.self){
+            return (itemObj as! InputStateVariable).children[index]
         }
         else {
             return self.inputs[index]
@@ -53,7 +52,7 @@ class InitStateViewController: BaseViewController, NSOutlineViewDelegate, NSOutl
     }
     
     func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
-        if let curItem = item as? InitState {
+        if let curItem = item as? InputStateVariable {
             if curItem.itemType != "var"{//should be header or subHeader
                 if tableColumn?.identifier.rawValue == "NameColumn"{
                     if curItem.itemType == "header"{
@@ -122,13 +121,24 @@ class InitStateViewController: BaseViewController, NSOutlineViewDelegate, NSOutl
     }
 
     func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
-        let itemObj = item as! InitState
+        let itemObj = item as! InputStateVariable
         return (itemObj.children.count > 0) ? true : false
     }
  
     func outlineView(_ outlineView: NSOutlineView, objectValueFor tableColumn: NSTableColumn?, byItem item: Any?) -> Any? {
         return self.inputs
     }
+    
+    func outlineView(_ outlineView: NSOutlineView, setObjectValue object: Any?, for tableColumn: NSTableColumn?, byItem item: Any?) {
+        
+    }
 
+    func outlineView(_ outlineView: NSOutlineView, shouldEdit tableColumn: NSTableColumn?, item: Any) -> Bool {
+        return true
+        if tableColumn?.identifier.rawValue == "ValueColumn" {
+            return true
+        }
+        return false
+    }
 }
 

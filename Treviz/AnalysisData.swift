@@ -9,7 +9,7 @@ import Foundation
 import Cocoa
 
 class AnalysisData: NSObject {
-    @objc dynamic var initVars : [Variable] = []
+    var initVars : [Variable]
     
     func read(from data: Data) {
         initVars = []// = String(bytes: data, encoding: .utf8)!
@@ -24,7 +24,11 @@ class AnalysisData: NSObject {
         let varFilePath = Bundle.main.path(forResource: plistName, ofType: "plist")
         if (varFilePath != nil) {
             self.initVars = Variable.initVars(filename: varFilePath!)
-            InitState.varInputList = self.initVars
+            InputStateVariable.varInputList = self.initVars
+        }
+        else {
+            let emptyVar = Variable("")
+            self.initVars = [emptyVar]
         }
     }
 }

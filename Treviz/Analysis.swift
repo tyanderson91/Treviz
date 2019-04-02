@@ -9,11 +9,11 @@
 import Cocoa
 
 class Analysis: NSDocument {//TODO: possibly subclass NSPersistentDocument if using CoreData
-    var ouputsViewController : OutputsViewController? = nil //TODO: Initialize like input view controller
-    var ouputsSetupViewController : OutputSetupViewController? = nil //TODO: Initialize like input view controller
-    @objc var analysisData = AnalysisData(fromPlist: "InitialVars")
+    //var ouputsViewController : OutputsViewController? = nil //TODO: Initialize like input view controller
+    //var ouputsSetupViewController : OutputSetupViewController? = nil //TODO: Initialize like input view controller
+    var analysisData = AnalysisData(fromPlist: "InitialVars")
     
-    var initVars : [Variable] = []
+    //var initVars : [Variable] = []
     var initialState = State()
     var terminalConditions = TerminalConditionSet([])
     var returnCodes : [Int] = []
@@ -33,6 +33,7 @@ class Analysis: NSDocument {//TODO: possibly subclass NSPersistentDocument if us
     
     override init() {
         super.init()
+        
         // Add your subclass-specific initialization here.
         //let A = self.analysisData
     }
@@ -46,7 +47,7 @@ class Analysis: NSDocument {//TODO: possibly subclass NSPersistentDocument if us
         let storyboard = NSStoryboard(name: NSStoryboard.Name("Main"), bundle: nil)
         let windowController = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier("Analysis Window Controller")) as! MainWindowController
         self.addWindowController(windowController)
-        windowController.contentViewController?.representedObject = analysisData
+        windowController.contentViewController?.representedObject = self
     }
     
     override func read(from data: Data, ofType typeName: String) throws {
@@ -64,7 +65,9 @@ class Analysis: NSDocument {//TODO: possibly subclass NSPersistentDocument if us
         
         let termCond1 = TerminalCondition(varID: "t", crossing: 100, inDirection: 1) //TODO: make max time a required terminal condition
         let termCond2 = TerminalCondition(varID: "x", crossing: 40, inDirection: 1)
-        terminalConditions = TerminalConditionSet([termCond1,termCond2])
+        let termCond3 = TerminalCondition(varID: "y", crossing: 0, inDirection: -1)
+
+        terminalConditions = TerminalConditionSet([termCond1,termCond2,termCond3])
         terminalConditions.initState = currentState
         
         //let newState = VehicleState()
@@ -75,7 +78,7 @@ class Analysis: NSDocument {//TODO: possibly subclass NSPersistentDocument if us
         self.trajectory.append(currentState)
         while !analysisEnded{
             var newState = State.initAsArray()
-            let m = currentState[state["m"]!]
+            let m = currentState[state["mtot"]!]
             let x = currentState[state["x"]!]
             let y = currentState[state["y"]!]
             let dx = currentState[state["dx"]!]
@@ -91,7 +94,7 @@ class Analysis: NSDocument {//TODO: possibly subclass NSPersistentDocument if us
             newState[state["y"]!] = y+dy*dt
             newState[state["dx"]!] = dx+a_x*dt
             newState[state["x"]!] = x + dx*dt
-            newState[state["m"]!] = m
+            newState[state["mtot"]!] = m
             trajectory.append(newState)
             
             var pctComplete = 0.0

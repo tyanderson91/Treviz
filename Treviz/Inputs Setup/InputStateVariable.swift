@@ -8,9 +8,9 @@
 
 import Cocoa
 
-class InitState: NSObject {
+class InputStateVariable: NSObject {
     static var varInputList : [Variable] = []
-    var children : [InitState] = []
+    var children : [InputStateVariable] = []
     var isValid : Bool = false
     var itemType : String = ""
     var id : String = ""
@@ -24,7 +24,7 @@ class InitState: NSObject {
         let itemType = dict["itemType"] as! String
         if itemType == "var"{
             //self.name = "thisName"
-            self.variable = Variable.getVariable(id, inputList: InitState.varInputList)
+            self.variable = Variable.getVariable(id, inputList: InputStateVariable.varInputList)
             self.isParam = dict["isParam"] as! Bool
         } else {
             self.name = dict["name"] as! String
@@ -36,7 +36,7 @@ class InitState: NSObject {
         return
     }
     
-    static func inputList(filename : String) -> [InitState] {
+    static func inputList(filename : String) -> [InputStateVariable] {
     //NSMutableArray<AnalysisInput *> *inputs= [NSMutableArray array];
         guard let inputList = NSArray.init(contentsOfFile: filename) else {return []}
         let inputs = recursPopulateList(input: inputList)
@@ -47,13 +47,13 @@ class InitState: NSObject {
         return inputs
     }
     
-    static func recursPopulateList(input: NSArray)->[InitState]{ //fixit: for some reason, inputs are getting initialized twice
-        var output : [InitState] = []
+    static func recursPopulateList(input: NSArray)->[InputStateVariable]{ //fixit: for some reason, inputs are getting initialized twice
+        var output : [InputStateVariable] = []
         for curProps in input {
             let curPropDict = curProps as! NSDictionary
-            let curInput : InitState = InitState.init(withDictionary: curPropDict)
+            let curInput : InputStateVariable = InputStateVariable.init(withDictionary: curPropDict)
             if !(curInput.itemType=="var") {
-                let curOutput : [InitState] = recursPopulateList(input: curPropDict.value(forKey: "items") as! NSArray)
+                let curOutput : [InputStateVariable] = recursPopulateList(input: curPropDict.value(forKey: "items") as! NSArray)
                 curInput.children = curOutput
             }
             output.append(curInput)
