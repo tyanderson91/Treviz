@@ -22,7 +22,7 @@
                                             <rect key="frame" x="1" y="0.0" width="463" height="206"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="31c-TF-9un" viewBased="YES" indentationPerLevel="16" autoresizesOutlineColumn="YES" outlineTableColumn="azQ-xe-zxX" id="o6P-Kz-ADk">
+                                                <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnReordering="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="31c-TF-9un" viewBased="YES" indentationPerLevel="11" autoresizesOutlineColumn="YES" outlineTableColumn="azQ-xe-zxX" id="o6P-Kz-ADk">
                                                     <rect key="frame" x="0.0" y="0.0" width="463" height="181"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <size key="intercellSpacing" width="3" height="2"/>
@@ -183,14 +183,34 @@
                                                             </textFieldCell>
                                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                             <prototypeCellViews>
-                                                                <button identifier="ParamCheckBoxView" verticalHuggingPriority="750" id="Q4p-6L-kwQ">
+                                                                <button identifier="ParamCheckBoxView" verticalHuggingPriority="750" id="Q4p-6L-kwQ" userLabel="Value check">
                                                                     <rect key="frame" x="385" y="1" width="76" height="18"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                                    <buttonCell key="cell" type="check" title="Check" bezelStyle="regularSquare" imagePosition="only" alignment="center" allowsMixedState="YES" inset="2" id="926-Li-fLp">
+                                                                    <buttonCell key="cell" type="check" title="Check" bezelStyle="regularSquare" imagePosition="only" alignment="center" inset="2" id="926-Li-fLp">
                                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                         <font key="font" metaFont="system"/>
                                                                     </buttonCell>
+                                                                    <connections>
+                                                                        <action selector="setParams:" target="QV5-fD-s1c" id="vm8-t9-5ZF"/>
+                                                                    </connections>
                                                                 </button>
+                                                                <tableCellView identifier="HasParamsCellView" id="Mlb-wb-KFY" userLabel="Has Params Cell View">
+                                                                    <rect key="frame" x="385" y="21" width="76" height="17"/>
+                                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                    <subviews>
+                                                                        <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="w35-en-TRi">
+                                                                            <rect key="frame" x="32" y="3" width="12" height="12"/>
+                                                                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSMenuOnStateTemplate" id="xeu-zy-0V1"/>
+                                                                        </imageView>
+                                                                    </subviews>
+                                                                    <constraints>
+                                                                        <constraint firstItem="w35-en-TRi" firstAttribute="centerX" secondItem="Mlb-wb-KFY" secondAttribute="centerX" id="KAg-pt-QTT"/>
+                                                                        <constraint firstItem="w35-en-TRi" firstAttribute="centerY" secondItem="Mlb-wb-KFY" secondAttribute="centerY" id="LYn-7F-dgh"/>
+                                                                    </constraints>
+                                                                    <connections>
+                                                                        <outlet property="imageView" destination="w35-en-TRi" id="oIx-1W-Dj1"/>
+                                                                    </connections>
+                                                                </tableCellView>
                                                             </prototypeCellViews>
                                                         </tableColumn>
                                                     </tableColumns>
@@ -786,10 +806,11 @@
                 </viewController>
                 <customObject id="Nbg-fU-7Wu" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-96" y="1629"/>
+            <point key="canvasLocation" x="-57" y="1729"/>
         </scene>
     </scenes>
     <resources>
+        <image name="NSMenuOnStateTemplate" width="12" height="12"/>
         <image name="NSStatusAvailable" width="16" height="16"/>
         <image name="NSStatusUnavailable" width="16" height="16"/>
     </resources>

@@ -11,17 +11,14 @@ class InitStateViewController: BaseViewController, NSOutlineViewDelegate, NSOutl
 
     @IBOutlet weak var outlineView: NSOutlineView!
     var inputs : [InputSetting] = []
-    
     override func headerTitle() -> String { return NSLocalizedString("Initial State", comment: "") }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         let stateFilePath = Bundle.main.path(forResource: "AnalysisInputs", ofType: "plist")
         if (stateFilePath != nil) {
             self.inputs = InputSetting.inputList(filename: stateFilePath!)
         }
-        
         outlineView.reloadData()        // Do view setup here.
     }
     
@@ -75,8 +72,11 @@ class InitStateViewController: BaseViewController, NSOutlineViewDelegate, NSOutl
                 }
                 
                 else if tableColumn?.identifier.rawValue == "ParameterColumn" {
-                    if let newView = outlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier.init(rawValue: "ParamCheckBoxView"), owner: self) as? NSButton{
-                        newView.state = NSControl.StateValue.off//curItem.isParam ? NSControl.StateValue.mixed : NSControl.StateValue.off
+                    if let newView = outlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier.init(rawValue: "HasParamsCellView"), owner: self){
+                        if let thisImageView = (newView as? NSTableCellView)?.imageView {
+                            let curimage = curItem.isParam ? NSImage(named: NSImage.menuOnStateTemplateName) : nil//NSImage(named : NSImage.statusUnavailableName)
+                            thisImageView.image = curimage
+                        }
                         return newView
                     }
                 }
@@ -133,8 +133,7 @@ class InitStateViewController: BaseViewController, NSOutlineViewDelegate, NSOutl
                 return val
             }
             else if tableColumn?.identifier.rawValue == "NameColumn"{
-                let name = stateItem.itemType == "var" ? stateItem.name : stateItem.name
-                return name
+                return stateItem.name
             }
             else if tableColumn?.identifier.rawValue == "UnitsColumn"{
                 let units = stateItem.itemType == "var" ? stateItem.units : nil
@@ -147,13 +146,57 @@ class InitStateViewController: BaseViewController, NSOutlineViewDelegate, NSOutl
         return nil
     }
 
-
     func outlineView(_ outlineView: NSOutlineView, shouldEdit tableColumn: NSTableColumn?, item: Any) -> Bool {
-        return true
         if tableColumn?.identifier.rawValue == "ValueColumn" {
             return true
         }
-        return false
+        return true
     }
+    
+    @IBAction func setParams(_ sender: Any) {
+        if let button = sender as? NSView{
+            let row = outlineView.row(for: button)
+            if let thisInputSetting = outlineView.item(atRow: row) as? InputSetting{
+                thisInputSetting.isParam = (sender as! NSButton).state.rawValue == 1 ? true : false
+            }
+        }
+        
+    }
+    
+    //func setParam(_)
+    /*
+    - (void)_removeItemAtRow:(NSInteger)row {
+    id item = [self.outlineView itemAtRow:row];
+    ATDesktopFolderEntity *parent = (ATDesktopFolderEntity *)[self.outlineView parentForItem:item];
+    if (parent == nil) {
+    parent = self.rootContents;
+    }
+    NSInteger indexInParent = [parent.children indexOfObject:item];
+    [parent.children removeObjectAtIndex:indexInParent];
+    
+    if (parent == self.rootContents) {
+    parent = nil;
+    }
+    [self.outlineView removeItemsAtIndexes:[NSIndexSet indexSetWithIndex:indexInParent]
+    inParent:parent
+    withAnimation:NSTableViewAnimationEffectFade | NSTableViewAnimationSlideLeft];
+    }
+    
+    
+    #pragma mark - Actions
+    
+    - (IBAction)pathCtrlValueChanged:(id)sender {
+    NSURL *url = self.pathCtrlRootDirectory.objectValue;
+    self.rootContents = [[ATDesktopFolderEntity alloc] initWithFileURL:url];
+    [self.outlineView reloadData];
+    }
+    
+    - (IBAction)btnDeleteRowClicked:(id)sender {
+    NSInteger row = [self.outlineView rowForView:sender];
+    if (row != -1) {
+    // Take care of the case of the user clicking on a row that was in the middle of being deleted
+    [self _removeItemAtRow:row];
+    }
+    }*/
 }
 

@@ -66,7 +66,7 @@ class Analysis: NSDocument {//TODO: possibly subclass NSPersistentDocument if us
         return analysisData.data()!
     }
     
-    func runAnalysis() -> [Int] {
+    func runAnalysis() -> [Int] {//TODO: break this method into several phases to make it more manageable
         var currentState = initialState.toArray()
         let dt : Double = 0.1
         
