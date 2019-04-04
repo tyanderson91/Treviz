@@ -2,6 +2,8 @@
 //  EnvironmentViewController.swift
 //  Treviz
 //
+//  View controller that sets analysis environemtn settings, including celestial bodies, atmosphere properties, etc.
+//
 //  Created by Tyler Anderson on 3/27/19.
 //  Copyright © 2019 Tyler Anderson. All rights reserved.
 //

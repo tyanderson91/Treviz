@@ -2,6 +2,9 @@
 //  Analysis.swift
 //  Treviz
 //
+//  This class is the subclass of NSDocument that controls all the anlaysis document information and methods
+//  Data reading and writing occurs in AnalysisData and is passed to this class
+//
 //  Created by Tyler Anderson on 2/26/19.
 //  Copyright © 2019 Tyler Anderson. All rights reserved.
 //
@@ -11,7 +14,7 @@ import Cocoa
 class Analysis: NSDocument {//TODO: possibly subclass NSPersistentDocument if using CoreData
     //var ouputsViewController : OutputsViewController? = nil //TODO: Initialize like input view controller
     //var ouputsSetupViewController : OutputSetupViewController? = nil //TODO: Initialize like input view controller
-    var analysisData = AnalysisData(fromPlist: "InitialVars")
+    var analysisData : AnalysisData!
     
     //var initVars : [Variable] = []
     var initialState = State()
@@ -19,7 +22,9 @@ class Analysis: NSDocument {//TODO: possibly subclass NSPersistentDocument if us
     var returnCodes : [Int] = []
     var trajectory : [[Double]] = [] //TODO : allow multiple variable types
     var progressBar : NSProgressIndicator!
-    var outputsVC : OutputsViewController!
+    var windowController : MainWindowController!//Implicit optional, should always be assigned after initialization
+    var viewController : MainViewController!
+    //var outputsVC : OutputsViewController!
     //Set up terminal conditions
     
     /*var inputsViewController: InputsViewController? {
@@ -34,6 +39,7 @@ class Analysis: NSDocument {//TODO: possibly subclass NSPersistentDocument if us
     override init() {
         super.init()
         
+        analysisData = AnalysisData()
         // Add your subclass-specific initialization here.
         //let A = self.analysisData
     }
@@ -45,9 +51,10 @@ class Analysis: NSDocument {//TODO: possibly subclass NSPersistentDocument if us
     override func makeWindowControllers() {
         // Returns the Storyboard that contains your Document window.
         let storyboard = NSStoryboard(name: NSStoryboard.Name("Main"), bundle: nil)
-        let windowController = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier("Analysis Window Controller")) as! MainWindowController
+        self.windowController = (storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier("Analysis Window Controller")) as! MainWindowController)
         self.addWindowController(windowController)
-        windowController.contentViewController?.representedObject = self
+        self.viewController = (windowController.contentViewController as! MainViewController)
+        viewController.representedObject = self
     }
     
     override func read(from data: Data, ofType typeName: String) throws {
@@ -101,7 +108,9 @@ class Analysis: NSDocument {//TODO: possibly subclass NSPersistentDocument if us
             (returnCodes,analysisEnded,pctComplete) = terminalConditions.checkAllConditions(prevState: currentState, curState: newState)
             
             currentState = newState
-            progressBar.doubleValue = pctComplete*100
+            if let progressBar = viewController.analysisProgressBar{
+                progressBar.doubleValue = pctComplete*100
+            }
         }
         return returnCodes
     }

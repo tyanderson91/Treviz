@@ -727,7 +727,7 @@
                     <splitViewItems>
                         <splitViewItem id="BlO-sN-O6T" userLabel="Input Split View Item"/>
                         <splitViewItem id="K6i-2V-HET" userLabel="Outputs Split View Item"/>
-                        <splitViewItem id="Cdj-CM-cU9"/>
+                        <splitViewItem id="Cdj-CM-cU9" userLabel="Output Setup Split View Item"/>
                     </splitViewItems>
                     <splitView key="splitView" dividerStyle="thin" vertical="YES" id="Bmt-by-9O5">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="199"/>
@@ -738,6 +738,7 @@
                     </splitView>
                     <connections>
                         <outlet property="inputsSplitViewItem" destination="BlO-sN-O6T" id="u5z-an-4yO"/>
+                        <outlet property="outputSetupSplitViewItem" destination="Cdj-CM-cU9" id="jpb-R2-MlZ"/>
                         <outlet property="outputsSplitViewItem" destination="K6i-2V-HET" id="QL8-22-Ch6"/>
                         <outlet property="splitView" destination="Bmt-by-9O5" id="iN4-tG-8uS"/>
                         <segue destination="7En-RZ-8s8" kind="relationship" relationship="splitItems" id="4iH-JR-Y0H"/>
@@ -841,7 +842,7 @@
         <!--Inputs-->
         <scene sceneID="PXu-5S-D46">
             <objects>
-                <controllerPlaceholder storyboardName="Inputs" id="7En-RZ-8s8" sceneMemberID="viewController"/>
+                <controllerPlaceholder storyboardIdentifier="Inputs" storyboardName="Inputs" id="7En-RZ-8s8" sceneMemberID="viewController"/>
                 <customObject id="ZdQ-un-dZl" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="97" y="855"/>

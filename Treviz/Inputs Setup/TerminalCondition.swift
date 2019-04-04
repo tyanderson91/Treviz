@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class TerminalCondition {
+class TerminalCondition {//TODO: make this a subclass of the "Condition" object
     //   var previousState = VehicleState() //TODO: make this value only apply to ALL terminal conditions
     var varID : VariableID //statePosition : Int = 99 //Max number of terminal conditions
     var value : Double = 0.0

@@ -2,6 +2,10 @@
 //  State.swift
 //  Treviz
 //
+//  State is an object containing a collection of Variable objects that combined should fully defines the state of a vehicle at a single instant in time
+//  Used to read input state, write output state, parse outputs, and create derived states.
+//  Converts into an array of Double values before being processed by the propagator
+//
 //  Created by Tyler Anderson on 3/3/19.
 //  Copyright © 2019 Tyler Anderson. All rights reserved.
 //
@@ -12,7 +16,7 @@ class State: NSObject {
     static let stateVarPositions : [VariableID : Int] =
         ["t":0,"x":1,"y":2,"z":3,"dx":4,"dy":5,"dz":6,"mtot":7,"q0":8,"q1":9,"q2":10,"q3":11,
          "dq0":12,"dq1":13,"dq2":14,"dq3":15]
-    var variables = [Variable]()
+    var variables : [Variable]
     //var varIDs : [VariableID] = []
     
     /*
@@ -52,7 +56,7 @@ class State: NSObject {
             }
             self.variables = newStateVars
             //self.varIDs = []
-        }
+        } else {self.variables = []}
     }
     
     func setItemValue(id: VariableID, value: Double){

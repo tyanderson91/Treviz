@@ -2,6 +2,8 @@
 //  TextOutputsViewController.swift
 //  Treviz
 //
+//  Controls the display of text-based outputs
+//
 //  Created by Tyler Anderson on 3/21/19.
 //  Copyright © 2019 Tyler Anderson. All rights reserved.
 //

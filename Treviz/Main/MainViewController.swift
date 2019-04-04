@@ -2,6 +2,8 @@
 //  MainViewController.swift
 //  Treviz
 //
+//  Highest-level view controller
+//
 //  Created by Tyler Anderson on 3/10/19.
 //  Copyright © 2019 Tyler Anderson. All rights reserved.
 //
@@ -12,7 +14,7 @@ class MainViewController: ViewController {
 
     @IBOutlet weak var mainView: NSView!
     @IBOutlet weak var analysisProgressBar: NSProgressIndicator!
-    var mainSplitViewController : MainSplitViewController? = nil
+    var mainSplitViewController : MainSplitViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +29,7 @@ class MainViewController: ViewController {
     
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         if segue.identifier == "mainSplitViewSegue"{
-            self.mainSplitViewController =  segue.destinationController as? MainSplitViewController
+            self.mainSplitViewController =  (segue.destinationController as! MainSplitViewController)
         } else {return}
         
     }

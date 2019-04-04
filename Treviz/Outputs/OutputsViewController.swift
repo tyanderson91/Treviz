@@ -2,6 +2,8 @@
 //  OutputsViewController.swift
 //  Treviz
 //
+//  Controls display of all analysis output information
+//
 //  Created by Tyler Anderson on 3/8/19.
 //  Copyright © 2019 Tyler Anderson. All rights reserved.
 //

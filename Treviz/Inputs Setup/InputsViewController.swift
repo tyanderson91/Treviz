@@ -2,6 +2,8 @@
 //  ViewController.swift
 //  Treviz
 //
+//  View controller controls all information regarding analysis input states and settings
+///
 //  Created by Tyler Anderson on 2/26/19.
 //  Copyright © 2019 Tyler Anderson. All rights reserved.
 //
@@ -15,6 +17,7 @@ class InputsViewController: ViewController{//}, NSTableViewDataSource, NSTableVi
     @IBOutlet weak var stack: CustomStackView!
     
     @IBAction func runAnalysisPushed(_ sender: Any) {
+
         let curAnalysis = self.representedObject as! Analysis
         
         curAnalysis.initialState = State(fromInputVars: curAnalysis.analysisData.initVars)
