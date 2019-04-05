@@ -74,6 +74,7 @@ class InitStateViewController: BaseViewController, NSOutlineViewDelegate, NSOutl
                 else if tableColumn?.identifier.rawValue == "ParameterColumn" {
                     if let newView = outlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier.init(rawValue: "HasParamsCellView"), owner: self){
                         if let thisImageView = (newView as? NSTableCellView)?.imageView {
+                            curItem.setParams()
                             let curimage = curItem.isParam ? NSImage(named: NSImage.menuOnStateTemplateName) : nil//NSImage(named : NSImage.statusUnavailableName)
                             thisImageView.image = curimage
                         }
@@ -159,44 +160,10 @@ class InitStateViewController: BaseViewController, NSOutlineViewDelegate, NSOutl
             if let thisInputSetting = outlineView.item(atRow: row) as? InputSetting{
                 thisInputSetting.isParam = (sender as! NSButton).state.rawValue == 1 ? true : false
             }
+            outlineView.reloadData()
+            NotificationCenter.default.post(name: .didSetParam, object: nil)
         }
         
     }
-    
-    //func setParam(_)
-    /*
-    - (void)_removeItemAtRow:(NSInteger)row {
-    id item = [self.outlineView itemAtRow:row];
-    ATDesktopFolderEntity *parent = (ATDesktopFolderEntity *)[self.outlineView parentForItem:item];
-    if (parent == nil) {
-    parent = self.rootContents;
-    }
-    NSInteger indexInParent = [parent.children indexOfObject:item];
-    [parent.children removeObjectAtIndex:indexInParent];
-    
-    if (parent == self.rootContents) {
-    parent = nil;
-    }
-    [self.outlineView removeItemsAtIndexes:[NSIndexSet indexSetWithIndex:indexInParent]
-    inParent:parent
-    withAnimation:NSTableViewAnimationEffectFade | NSTableViewAnimationSlideLeft];
-    }
-    
-    
-    #pragma mark - Actions
-    
-    - (IBAction)pathCtrlValueChanged:(id)sender {
-    NSURL *url = self.pathCtrlRootDirectory.objectValue;
-    self.rootContents = [[ATDesktopFolderEntity alloc] initWithFileURL:url];
-    [self.outlineView reloadData];
-    }
-    
-    - (IBAction)btnDeleteRowClicked:(id)sender {
-    NSInteger row = [self.outlineView rowForView:sender];
-    if (row != -1) {
-    // Take care of the case of the user clicking on a row that was in the middle of being deleted
-    [self _removeItemAtRow:row];
-    }
-    }*/
 }
 

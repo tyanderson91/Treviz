@@ -10,11 +10,15 @@
 
 import Cocoa
 
-class InputsViewController: ViewController{//}, NSTableViewDataSource, NSTableViewDelegate {
+class InputsViewController: ViewController, NSTableViewDataSource, NSTableViewDelegate {
     
     //var parentSplitViewController : MainSplitViewController? = nil
     //@IBOutlet weak var tableView: NSTableView!    
     @IBOutlet weak var stack: CustomStackView!
+    @IBOutlet weak var tableView: NSTableView!
+    weak var initStateViewController: InitStateViewController!
+    
+    var params : [InputSetting] = []
     
     @IBAction func runAnalysisPushed(_ sender: Any) {
 
@@ -54,55 +58,77 @@ class InputsViewController: ViewController{//}, NSTableViewDataSource, NSTableVi
         stack.addViewController(fromStoryboardId: "Inputs", withIdentifier: "SettingsViewController")
         stack.addViewController(fromStoryboardId: "Inputs", withIdentifier: "EnvironmentViewController")
         stack.addViewController(fromStoryboardId: "Inputs", withIdentifier: "InitStateViewController")
+        let initStateView = stack.views.last
+        self.initStateViewController = initStateView?.nextResponder as? InitStateViewController
         
-        //self.view.setFrameSize(NSSize.init(width: 200, height: 700))
-        /*
-        let t0 = Variable("t",named: "time",symbol:"t",units:"s")
-        let x0 = Variable("x",named:"X pos",symbol:"x",units:"m")
-        let y0 = Variable("y",named:"Y pos",symbol: "y",units:"m")
-        let dx0 = Variable("dx",named:"X vel",symbol: "ẋ",units:"m/s")
-        dx0.value = 10
-        let dy0 = Variable("dy",named:"Y vel",symbol: "ẏ",units:"m/s")
-        dy0.value = 10
-        let m0 = Variable("m",named:"Mass",symbol:"m",units:"kg")
-        m0.value = 10*/
+        self.loadAllParams()
+        tableView.reloadData()
         
-        //tableView.reloadData()
+        NotificationCenter.default.addObserver(tableView!, selector: #selector(paramWasSet(_:)), name: .didSetParam, object: nil)
         }
     
-    /*
+    @objc func loadAllParams(){
+        let initStateParams = getParamSettings(from: initStateViewController.inputs)
+        self.params.append(contentsOf: initStateParams)
+    }
+    
+    @objc func paramWasSet(_ notification: Notification){
+        let initStateParams = getParamSettings(from: initStateViewController.inputs)
+        self.params.append(contentsOf: initStateParams)
+    }
+    
+    
+    func getParamSettings(from settings: [InputSetting], params: [InputSetting] = [])->[InputSetting]{
+        var curParam = params
+        for thisSetting in settings{
+            if thisSetting.itemType != "var"{
+                curParam = getParamSettings(from: thisSetting.children, params: curParam)
+            }
+            else if thisSetting.isParam {
+                curParam.append(thisSetting)
+            }
+        }
+        return curParam
+    }
+    
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return initState.variables.count
+        return params.count
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         //initVariables = initState.getVariables()
-        let thisVar = initState.variables[row]
+        let thisVar = params[row]
         
-        if tableColumn?.identifier.rawValue == "nameColumn"{
-            if let thisCell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "nameCell"), owner: self) as? NSTableCellView{
+        if tableColumn?.identifier.rawValue == "NameColumn"{
+            if let thisCell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "NameCellView"), owner: self) as? NSTableCellView{
                 thisCell.textField!.stringValue = "\(thisVar.name) (\(thisVar.symbol)₀)"
                 return thisCell
             }
         }
-        else if tableColumn?.identifier.rawValue == "valueColumn"{
-            if let thisCell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "valueCell"), owner: self) as? NSTableCellView{
+        else if tableColumn?.identifier.rawValue == "ValueColumn"{
+            if let thisCell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "ValueCellView"), owner: self) as? NSTableCellView{
                 thisCell.textField!.stringValue = "\(thisVar.value)"
                 return thisCell
             }
         }
-        else if tableColumn?.identifier.rawValue == "unitsColumn"{
-            if let thisCell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "unitsCell"), owner: self) as? NSTableCellView{
+        else if tableColumn?.identifier.rawValue == "UnitsColumn"{
+            if let thisCell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "UnitsCellView"), owner: self) as? NSTableCellView{
                 thisCell.textField!.stringValue = thisVar.units
                 return thisCell
             }
         }
         return nil
-        
     }
-*/
     
-
+    private func tableView(_ tableView: NSOutlineView, objectValueFor tableColumn: NSTableColumn?, byItem item: Any?) -> Any? {
+        if let thisSetting = item as? InputSetting{
+            if tableColumn?.identifier.rawValue == "Name Column"{return thisSetting.name}
+            else if tableColumn?.identifier.rawValue == "ValueColumn"{return thisSetting.value}
+            else if tableColumn?.identifier.rawValue == "UnitsColumn"{return thisSetting.units}
+        }
+        return nil
+    }
+            
     override var representedObject: Any? {
         didSet {
         // Update the view, if already loaded.
