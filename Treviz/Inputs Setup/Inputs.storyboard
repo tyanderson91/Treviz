@@ -553,6 +553,9 @@
                                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                         <font key="font" metaFont="system"/>
                                                                     </buttonCell>
+                                                                    <connections>
+                                                                        <action selector="removeParamPressed:" target="BWH-wW-vxd" id="CmI-Em-IYY"/>
+                                                                    </connections>
                                                                 </button>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m6F-da-6Ea">
                                                                     <rect key="frame" x="25" y="0.0" width="75" height="17"/>
@@ -641,10 +644,6 @@
                                                     </prototypeCellViews>
                                                 </tableColumn>
                                             </tableColumns>
-                                            <connections>
-                                                <outlet property="dataSource" destination="BWH-wW-vxd" id="Pii-lc-XDK"/>
-                                                <outlet property="delegate" destination="BWH-wW-vxd" id="b4K-ke-2aE"/>
-                                            </connections>
                                         </tableView>
                                     </subviews>
                                 </clipView>

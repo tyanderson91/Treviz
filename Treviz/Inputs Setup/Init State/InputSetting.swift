@@ -18,6 +18,7 @@ class InputSetting: Variable {
     var isValid : Bool = false
     var itemType : String = ""
     var isParam : Bool = false
+    var heading : InputSetting?
     
     init(withDictionary dict : NSDictionary){
         let curid = dict["id"] as! String
@@ -56,6 +57,9 @@ class InputSetting: Variable {
             let curInput : InputSetting = InputSetting.init(withDictionary: curPropDict)
             if !(curInput.itemType=="var") {
                 let curOutput : [InputSetting] = recursPopulateList(input: curPropDict.value(forKey: "items") as! NSArray)
+                for output in curOutput{
+                    output.heading = curInput
+                }
                 curInput.children = curOutput
             }
             output.append(curInput)

@@ -6,6 +6,7 @@
 //
 
 import Cocoa
+import Foundation
 
 class InitStateViewController: BaseViewController, NSOutlineViewDelegate, NSOutlineViewDataSource {
 
@@ -91,7 +92,7 @@ class InitStateViewController: BaseViewController, NSOutlineViewDelegate, NSOutl
                         if dubVal == nil{
                             textField?.stringValue = "--"
                         } else {
-                            textField?.stringValue = "\(String(describing: dubVal!))"
+                            textField?.stringValue = String(format: "%g" , dubVal!)
                         }
                         return newView
                     }
@@ -159,9 +160,9 @@ class InitStateViewController: BaseViewController, NSOutlineViewDelegate, NSOutl
             let row = outlineView.row(for: button)
             if let thisInputSetting = outlineView.item(atRow: row) as? InputSetting{
                 thisInputSetting.isParam = (sender as! NSButton).state.rawValue == 1 ? true : false
+                outlineView.reloadItem(thisInputSetting.heading)
+                NotificationCenter.default.post(name: .didSetParam, object: thisInputSetting)
             }
-            outlineView.reloadData()
-            NotificationCenter.default.post(name: .didSetParam, object: nil)
         }
         
     }
