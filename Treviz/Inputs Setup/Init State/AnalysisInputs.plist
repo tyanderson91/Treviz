@@ -4,6 +4,14 @@
 <array>
 	<dict>
 		<key>id</key>
+		<string>t</string>
+		<key>isParam</key>
+		<false/>
+		<key>itemType</key>
+		<string>var</string>
+	</dict>
+	<dict>
+		<key>id</key>
 		<string>State</string>
 		<key>name</key>
 		<string>Initial State</string>

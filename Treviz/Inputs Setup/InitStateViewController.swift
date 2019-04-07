@@ -10,7 +10,7 @@ import Foundation
 
 class InitStateViewController: BaseViewController, NSOutlineViewDelegate, NSOutlineViewDataSource {
 
-    @IBOutlet weak var outlineView: NSOutlineView!
+    @IBOutlet weak var outlineView: InitStateOutlineView!
     var inputs : [InputSetting] = []
     override func headerTitle() -> String { return NSLocalizedString("Initial State", comment: "") }
 
@@ -148,23 +148,52 @@ class InitStateViewController: BaseViewController, NSOutlineViewDelegate, NSOutl
         return nil
     }
 
-    func outlineView(_ outlineView: NSOutlineView, shouldEdit tableColumn: NSTableColumn?, item: Any) -> Bool {
-        if tableColumn?.identifier.rawValue == "ValueColumn" {
-            return true
-        }
-        return true
-    }
     
     @IBAction func setParams(_ sender: Any) {
         if let button = sender as? NSView{
             let row = outlineView.row(for: button)
             if let thisInputSetting = outlineView.item(atRow: row) as? InputSetting{
                 thisInputSetting.isParam = (sender as! NSButton).state.rawValue == 1 ? true : false
-                outlineView.reloadItem(thisInputSetting.heading)
+                outlineView.refreshSetting(thisInputSetting)
                 NotificationCenter.default.post(name: .didSetParam, object: thisInputSetting)
             }
         }
         
+    }
+    
+    @IBAction func editUnits(_ sender: NSTextField) {
+        let curRow = outlineView.row(for: sender)
+        if let thisInputSetting = outlineView.item(atRow: curRow) as? InputSetting{
+            thisInputSetting.units = sender.stringValue
+        }
+    }
+    
+    @IBAction func editValues(_ sender: NSTextField) {
+        let curRow = outlineView.row(for: sender)
+        if let thisInputSetting = outlineView.item(atRow: curRow) as? InputSetting{
+            let valuestr = sender.stringValue
+            thisInputSetting.value = Double(valuestr)
+        }
+    }
+    
+    func getInputSettingData(_ input : [InputSetting] = [])->[InputSetting]{
+        var curInputs : [InputSetting]
+        var outputs : [InputSetting] = []
+        if input == []{
+            curInputs = self.inputs
+        } else {curInputs = input}
+        
+        for thisInput in curInputs{
+            var newInputs = [InputSetting]()
+            if thisInput.itemType == "var"{
+                newInputs = [thisInput]
+            }
+            else {
+                newInputs = getInputSettingData(thisInput.children)
+            }
+            outputs.append(contentsOf: newInputs)
+        }
+        return outputs
     }
 }
 

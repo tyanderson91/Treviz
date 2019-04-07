@@ -46,8 +46,17 @@ class InputsViewController: ViewController, NSTableViewDataSource, NSTableViewDe
     @IBAction func runAnalysisPushed(_ sender: Any) {
 
         let curAnalysis = self.representedObject as! Analysis
+        let newInputData = initStateViewController.getInputSettingData() as [Variable]
+        let existingInputData = curAnalysis.analysisData.initVars
+        //curAnalysis.analysisData.initVars = newInputData
         
-        curAnalysis.initialState = State(fromInputVars: curAnalysis.analysisData.initVars)
+        let newState = State(fromInputVars: newInputData)
+        newState.variables[7] = Variable("mtot", named: "mass", symbol: "m", units: "mass", value: 10)
+        curAnalysis.initialState = newState
+        
+        //let existingState = State(fromInputVars: existingInputData)
+        //curAnalysis.initialState = State(fromInputVars: curAnalysis.analysisData.initVars)
+        
         let parentSplitViewController = self.parent as! MainSplitViewController
         let mainView = parentSplitViewController.parent as! MainViewController
         curAnalysis.progressBar = mainView.analysisProgressBar
@@ -70,8 +79,9 @@ class InputsViewController: ViewController, NSTableViewDataSource, NSTableViewDe
         
     }
     
-    @IBAction func removeParamPressed(_ sender: Any) {
-        
+    @IBAction func removeParamPressed(_ sender: Any) {//TODO: move to params table view controller
+        let button = sender as! NSView
+        tableViewController.removeParam(sender : button)
     }
     
     

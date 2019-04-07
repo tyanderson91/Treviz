@@ -57,6 +57,7 @@ class Variable : NSObject{
                                   symbol: dict["symbol"] as! String, units: dict["units"] as! String, value: dict["value"] as? Double)
             
             //Below code is meant to initialize as an example
+            
             if newVar.id == "dx" || newVar.id == "dy" || newVar.id == "mtot" {
                 newVar.value = 10
             }

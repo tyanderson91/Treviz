@@ -84,6 +84,12 @@ class ParamTableViewController: NSObject , NSTableViewDelegate, NSTableViewDataS
         return nil
     }
     
-    
-    
+    func removeParam(sender : NSView){
+        let row = tableView.row(for: sender)
+        let thisInputSetting = params[row]
+        thisInputSetting.isParam = false
+        tableView.reloadData()
+        initStateViewController.outlineView.refreshSetting(thisInputSetting)
+        NotificationCenter.default.post(name: .didSetParam, object: thisInputSetting)
+    }
 }
