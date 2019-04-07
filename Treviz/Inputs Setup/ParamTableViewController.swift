@@ -8,18 +8,21 @@
 
 import Cocoa
 
-class ParamTableViewController: NSObject , NSTableViewDelegate, NSTableViewDataSource {
+class ParamTableViewController: ViewController , NSTableViewDelegate, NSTableViewDataSource {
     
-    var tableView: NSTableView!
+    @IBOutlet weak var tableView: NSTableView!
     var initStateViewController : InitStateViewController!
     var params : [InputSetting] = []
     
-    init(tableView : NSTableView){
-        super.init()
-        tableView.dataSource = self
-        tableView.delegate = self
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        let inputViewController = self.parent as! InputsViewController
+        self.initStateViewController = inputViewController.initStateViewController
         NotificationCenter.default.addObserver(self, selector: #selector(self.paramWasSet(_:)), name: .didSetParam, object: nil)
-    }
+        
+        self.loadAllParams()
+        tableView.reloadData()
+        }
     
     @objc func loadAllParams(){
         let initStateParams = getParamSettings(from: initStateViewController.inputs)
@@ -84,8 +87,9 @@ class ParamTableViewController: NSObject , NSTableViewDelegate, NSTableViewDataS
         return nil
     }
     
-    func removeParam(sender : NSView){
-        let row = tableView.row(for: sender)
+    @IBAction func removeParamPressed(_ sender: Any) {//TODO: move to params table view controller
+        let button = sender as! NSView
+        let row = tableView.row(for: button)
         let thisInputSetting = params[row]
         thisInputSetting.isParam = false
         tableView.reloadData()

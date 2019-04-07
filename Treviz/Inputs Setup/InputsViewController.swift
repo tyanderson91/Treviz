@@ -15,7 +15,6 @@ class InputsViewController: ViewController, NSTableViewDataSource, NSTableViewDe
     //var parentSplitViewController : MainSplitViewController? = nil
     //@IBOutlet weak var tableView: NSTableView!    
     @IBOutlet weak var stack: CustomStackView!
-    @IBOutlet weak var tableView: NSTableView!
     
     var tableViewController : ParamTableViewController!
     weak var initStateViewController: InitStateViewController!
@@ -34,21 +33,18 @@ class InputsViewController: ViewController, NSTableViewDataSource, NSTableViewDe
         let initStateView = stack.views.last
         self.initStateViewController = initStateView?.nextResponder as? InitStateViewController
         
-        tableViewController = ParamTableViewController(tableView: tableView)
-        tableViewController.tableView = tableView
-        tableViewController.initStateViewController = initStateViewController
-        
-        tableViewController.loadAllParams()
-        tableView.reloadData()
-        
+    }
+    
+    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ParamTableViewControllerSegue" as NSStoryboardSegue.Identifier{
+            self.tableViewController = segue.destinationController as? ParamTableViewController
+        }
     }
     
     @IBAction func runAnalysisPushed(_ sender: Any) {
 
         let curAnalysis = self.representedObject as! Analysis
         let newInputData = initStateViewController.getInputSettingData() as [Variable]
-        let existingInputData = curAnalysis.analysisData.initVars
-        //curAnalysis.analysisData.initVars = newInputData
         
         let newState = State(fromInputVars: newInputData)
         newState.variables[7] = Variable("mtot", named: "mass", symbol: "m", units: "mass", value: 10)
@@ -72,18 +68,10 @@ class InputsViewController: ViewController, NSTableViewDataSource, NSTableViewDe
         let textOutputView = textOutputViewController.textView
         textOutputView?.string.append("Y end:\t\(y_end)\n")
         textOutputView?.string.append("X end:\t\(x_end)\n")
-
-        
         //let outputTextView = textViewController.textView!
         //outputTextView.string.append("results!")
         
     }
-    
-    @IBAction func removeParamPressed(_ sender: Any) {//TODO: move to params table view controller
-        let button = sender as! NSView
-        tableViewController.removeParam(sender : button)
-    }
-    
     
     override var representedObject: Any? {
         didSet {

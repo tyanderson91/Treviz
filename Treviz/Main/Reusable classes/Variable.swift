@@ -13,7 +13,7 @@ import Cocoa
 typealias VariableID = String
 
 class Variable : NSObject{
-    static var allIdentifiers : [VariableID] = []
+    //static var allIdentifiers : [VariableID] = []
     
     let id : VariableID
     let name : String
@@ -23,11 +23,11 @@ class Variable : NSObject{
     //var statePosition : Int //Position of the variable in the state vector
     
     init(_ id:VariableID, named name:String = "", symbol:String = ""){
-        if Variable.allIdentifiers.contains(id){
-            print("State item with id \(id) already exists!")//TODO: make error
-        } else {
-            Variable.allIdentifiers.append(id)
-        }
+        //if Variable.allIdentifiers.contains(id){
+         //   print("State item with id \(id) already exists!")//TODO: make error
+        //} else {
+        //    Variable.allIdentifiers.append(id)
+        //}
         self.id = id
         self.name = name
         self.symbol = symbol

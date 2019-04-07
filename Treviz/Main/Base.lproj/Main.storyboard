@@ -686,6 +686,7 @@
                 <windowController storyboardIdentifier="Analysis Window Controller" id="jGA-0Y-lOj" customClass="MainWindowController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
                     <window key="window" title="Treviz" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="Ckk-yw-fiv">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+                        <windowPositionMask key="initialPositionMask" leftStrut="YES"/>
                         <rect key="contentRect" x="0.0" y="0.0" width="800" height="600"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
                         <toolbar key="toolbar" implicitIdentifier="99EF4609-EB63-466D-9855-35ED2BA88456" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="gC3-LF-Jn5">
