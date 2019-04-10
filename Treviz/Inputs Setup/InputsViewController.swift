@@ -36,7 +36,7 @@ class InputsViewController: ViewController, NSTableViewDataSource, NSTableViewDe
     }
     
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ParamTableViewControllerSegue" as NSStoryboardSegue.Identifier{
+        if segue.identifier == .paramTableViewSegue as NSStoryboardSegue.Identifier{
             self.tableViewController = segue.destinationController as? ParamTableViewController
         }
     }

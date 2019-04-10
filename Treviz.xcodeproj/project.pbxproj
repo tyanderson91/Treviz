@@ -23,6 +23,8 @@
 		CDA0F87F2257398F003C62E6 /* NotificationCenterSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA0F87E2257398F003C62E6 /* NotificationCenterSetup.swift */; };
 		CDA0F88122587E05003C62E6 /* ParamTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA0F88022587E05003C62E6 /* ParamTableViewController.swift */; };
 		CDA0F8832259810C003C62E6 /* InitStateOutlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA0F8822259810C003C62E6 /* InitStateOutlineView.swift */; };
+		CDA0F885225A6D0B003C62E6 /* NamedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA0F884225A6D0B003C62E6 /* NamedConstants.swift */; };
+		CDA0F888225C5D47003C62E6 /* InputsCellViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA0F887225C5D47003C62E6 /* InputsCellViews.swift */; };
 		CDAF13FD222CF357005CDC3C /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDAF13FC222CF357005CDC3C /* State.swift */; };
 		CDAF14272230FB72005CDC3C /* Variable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDAF14262230FB72005CDC3C /* Variable.swift */; };
 		CDBE33C6224CB48200E1404E /* AnalysisInputs.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDE0795A2249EC7400815E7F /* AnalysisInputs.plist */; };
@@ -65,6 +67,8 @@
 		CDA0F87E2257398F003C62E6 /* NotificationCenterSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NotificationCenterSetup.swift; path = Treviz/Main/NotificationCenterSetup.swift; sourceTree = SOURCE_ROOT; };
 		CDA0F88022587E05003C62E6 /* ParamTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParamTableViewController.swift; sourceTree = "<group>"; };
 		CDA0F8822259810C003C62E6 /* InitStateOutlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitStateOutlineView.swift; sourceTree = "<group>"; };
+		CDA0F884225A6D0B003C62E6 /* NamedConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NamedConstants.swift; sourceTree = "<group>"; };
+		CDA0F887225C5D47003C62E6 /* InputsCellViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputsCellViews.swift; sourceTree = "<group>"; };
 		CDAF13FC222CF357005CDC3C /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		CDAF14262230FB72005CDC3C /* Variable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Variable.swift; sourceTree = "<group>"; };
 		CDBE33C4224C81B500E1404E /* InputSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputSetting.swift; sourceTree = "<group>"; };
@@ -111,6 +115,7 @@
 				CDF3D1A0225025AF0064D70C /* Analysis.swift */,
 				CDF3D1A722505A000064D70C /* AnalysisData.swift */,
 				CDD5049522252AF900B29751 /* AppDelegate.swift */,
+				CDA0F886225A6D1E003C62E6 /* NamedConstants */,
 				CD05E3BA2254916500906EB0 /* Reusable classes */,
 			);
 			path = Main;
@@ -181,6 +186,7 @@
 			children = (
 				CD05E3BC225491D900906EB0 /* Init State */,
 				CDD5049722252AFA00B29751 /* InputsViewController.swift */,
+				CDA0F887225C5D47003C62E6 /* InputsCellViews.swift */,
 				CDA0F88022587E05003C62E6 /* ParamTableViewController.swift */,
 				CD4656B1224C6F3500C587CC /* SettingsViewController.swift */,
 				CDF3D1A2225025E60064D70C /* InitialVars.plist */,
@@ -189,6 +195,14 @@
 				CDE078F3224806EF00815E7F /* Inputs.storyboard */,
 			);
 			path = "Inputs Setup";
+			sourceTree = "<group>";
+		};
+		CDA0F886225A6D1E003C62E6 /* NamedConstants */ = {
+			isa = PBXGroup;
+			children = (
+				CDA0F884225A6D0B003C62E6 /* NamedConstants.swift */,
+			);
+			path = NamedConstants;
 			sourceTree = "<group>";
 		};
 		CDD5048922252AF900B29751 = {
@@ -322,7 +336,9 @@
 				CDD5049D22252AFA00B29751 /* Document.xcdatamodeld in Sources */,
 				CDA0F88122587E05003C62E6 /* ParamTableViewController.swift in Sources */,
 				CDD5049822252AFA00B29751 /* InputsViewController.swift in Sources */,
+				CDA0F888225C5D47003C62E6 /* InputsCellViews.swift in Sources */,
 				CDF3D1A1225025B00064D70C /* Analysis.swift in Sources */,
+				CDA0F885225A6D0B003C62E6 /* NamedConstants.swift in Sources */,
 				CDBEA0A622447A9C00D3159C /* TextOutputsViewController.swift in Sources */,
 				CD129622224C67E300663B88 /* InitStateViewController.swift in Sources */,
 				CDD5049622252AF900B29751 /* AppDelegate.swift in Sources */,

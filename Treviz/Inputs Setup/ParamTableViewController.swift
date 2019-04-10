@@ -19,7 +19,9 @@ class ParamTableViewController: ViewController , NSTableViewDelegate, NSTableVie
         let inputViewController = self.parent as! InputsViewController
         self.initStateViewController = inputViewController.initStateViewController
         NotificationCenter.default.addObserver(self, selector: #selector(self.paramWasSet(_:)), name: .didSetParam, object: nil)
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.updateTable(_:)), name: .didChangeUnits, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.updateTable(_:)), name: .didChangeValue, object: nil)
+
         self.loadAllParams()
         tableView.reloadData()
         }
@@ -35,6 +37,9 @@ class ParamTableViewController: ViewController , NSTableViewDelegate, NSTableVie
         tableView.reloadData()
     }
     
+    @objc func updateTable(_ notification: Notification){
+        tableView.reloadData()
+    }
     
     func getParamSettings(from settings: [InputSetting], params: [InputSetting] = [])->[InputSetting]{
         var curParam = params
@@ -57,32 +62,26 @@ class ParamTableViewController: ViewController , NSTableViewDelegate, NSTableVie
         //initVariables = initState.getVariables()
         let thisVar = params[row]
         
-        if tableColumn?.identifier.rawValue == "NameColumn"{
-            if let thisCell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "NameCellView"), owner: self) as? NSTableCellView{
-                thisCell.textField!.stringValue = "\(thisVar.name) (\(thisVar.symbol)₀)"
-                return thisCell
-            }
+        switch tableColumn?.identifier{
+        case NSUserInterfaceItemIdentifier.nameColumn:
+            return InputsViewController.nameCellView(view: tableView, thisInput: thisVar)
+        case NSUserInterfaceItemIdentifier.paramValueColumn:
+            return InputsViewController.paramValueCellView(view: tableView, thisInput: thisVar)
+        case NSUserInterfaceItemIdentifier.unitsColumn:
+            return InputsViewController.unitsCellView(view: tableView, thisInput: thisVar)
+        default:
+            return nil
         }
-        else if tableColumn?.identifier.rawValue == "ValueColumn"{
-            if let thisCell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "ValueCellView"), owner: self) as? NSTableCellView{
-                thisCell.textField!.stringValue = String(format: "%g", thisVar.value!)
-                return thisCell
-            }
-        }
-        else if tableColumn?.identifier.rawValue == "UnitsColumn"{
-            if let thisCell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "UnitsCellView"), owner: self) as? NSTableCellView{
-                thisCell.textField!.stringValue = thisVar.units
-                return thisCell
-            }
-        }
-        return nil
     }
     
     private func tableView(_ tableView: NSOutlineView, objectValueFor tableColumn: NSTableColumn?, byItem item: Any?) -> Any? {
         if let thisSetting = item as? InputSetting{
-            if tableColumn?.identifier.rawValue == "Name Column"{return thisSetting.name}
-            else if tableColumn?.identifier.rawValue == "ValueColumn"{return thisSetting.value}
-            else if tableColumn?.identifier.rawValue == "UnitsColumn"{return thisSetting.units}
+            switch tableColumn?.identifier{
+            case NSUserInterfaceItemIdentifier.nameColumn: return thisSetting.name
+            case NSUserInterfaceItemIdentifier.paramValueColumn: return thisSetting.value//TODO: make logic for inputting various parameter values
+            case NSUserInterfaceItemIdentifier.unitsColumn: return thisSetting.units
+            default: return nil
+            }
         }
         return nil
     }

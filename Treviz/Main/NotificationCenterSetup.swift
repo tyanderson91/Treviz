@@ -12,6 +12,9 @@ import Cocoa
 
 extension Notification.Name {
     static let didSetParam = Notification.Name("didSetParam")
+    static let didChangeUnits = Notification.Name("didChangeUnits")
+    static let didChangeValue = Notification.Name("didChangeValue")
+
 
 
 }

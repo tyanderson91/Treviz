@@ -52,77 +52,37 @@ class InitStateViewController: BaseViewController, NSOutlineViewDelegate, NSOutl
     func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
         if let curItem = item as? InputSetting {
             if curItem.itemType != "var"{//should be header or subHeader
-                if tableColumn?.identifier.rawValue == "NameColumn"{
+                switch tableColumn?.identifier{
+                case NSUserInterfaceItemIdentifier.nameColumn:
                     if curItem.itemType == "header"{
-                        if let newView = outlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier.init(rawValue: "HeaderCellView"), owner: self){
-                            let viewAsHeader = newView as! NSTableCellView
-                            viewAsHeader.textField?.stringValue = curItem.name
-                            if let thisImageView = viewAsHeader.imageView {
-                                thisImageView.image = NSImage.init(named: (curItem.isValid ? NSImage.statusAvailableName : NSImage.statusUnavailableName))
-                            }
-                            return newView
-                        }
+                        return InputsViewController.headerCellView(view: outlineView, thisInput: curItem)
                     }
                     else if curItem.itemType == "subHeader"{
-                        if let newView = outlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier.init(rawValue: "SubHeaderCellView"), owner: self){
-                            let viewAsSubHeader = newView as! NSTableCellView
-                            viewAsSubHeader.textField?.stringValue = curItem.name
-                            return newView
-                        }
+                        return InputsViewController.subHeaderCellView(view: outlineView, thisInput: curItem)
                     }
-                }
-                
-                else if tableColumn?.identifier.rawValue == "ParameterColumn" {
-                    if let newView = outlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier.init(rawValue: "HasParamsCellView"), owner: self){
-                        if let thisImageView = (newView as? NSTableCellView)?.imageView {
-                            curItem.setParams()
-                            let curimage = curItem.isParam ? NSImage(named: NSImage.menuOnStateTemplateName) : nil//NSImage(named : NSImage.statusUnavailableName)
-                            thisImageView.image = curimage
-                        }
-                        return newView
-                    }
-                }
-                return nil  //if a non-var object has a name other than those mentioned above
+                case NSUserInterfaceItemIdentifier.initStateParamColumn:
+                    return InputsViewController.inputHeaderParamCellView(view: outlineView, thisInput: curItem)
+                default: return nil}
             }
             else {
-                if tableColumn?.identifier.rawValue == "ValueColumn"{
-                    if let newView = outlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier.init(rawValue: "ValueCellView"), owner: self) {
-                        let textField = (newView as! NSTableCellView).textField
-                        let dubVal = curItem.value
-                        if dubVal == nil{
-                            textField?.stringValue = "--"
-                        } else {
-                            textField?.stringValue = String(format: "%g" , dubVal!)
-                        }
-                        return newView
-                    }
+                switch tableColumn?.identifier{
+                case NSUserInterfaceItemIdentifier.nameColumn:
+                    return InputsViewController.nameCellView(view: outlineView, thisInput: curItem)
+                case NSUserInterfaceItemIdentifier.initStateValueColumn:
+                    return InputsViewController.inputValueCellView(view: outlineView, thisInput: curItem)
+                case NSUserInterfaceItemIdentifier.unitsColumn:
+                    return InputsViewController.unitsCellView(view: outlineView, thisInput: curItem)
+                case NSUserInterfaceItemIdentifier.initStateParamColumn:
+                    return InputsViewController.inputParamCellView(view: outlineView, thisInput: curItem)
+                default:
+                    return nil
                 }
-                else if tableColumn?.identifier.rawValue == "NameColumn"{
-                    let newView = outlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier.init(rawValue: "NameCellView"), owner: self) as? NSTableCellView
-                    //TODO: actual error checking
-                    if let textField = newView?.textField{
-                        textField.stringValue = curItem.name
-                    }
-                    return newView
-                }
-                else if tableColumn?.identifier.rawValue == "UnitsColumn"{
-                    let newView = outlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier.init(rawValue: "UnitsCellView"), owner: self) as! NSTableCellView
-                    let textField = newView.textField
-                    let str = curItem.units
-                    textField?.stringValue = str
-                    return newView
-                }
-                else if tableColumn?.identifier.rawValue == "ParameterColumn"{
-                    let newView = outlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier.init(rawValue: "ParamCheckBoxView"), owner: self) as! NSButton
-                    newView.state = NSControl.StateValue.off//curItem.isParam ? NSControl.StateValue.on : NSControl.StateValue.off
-                    return newView
-                }
-                return nil
             }//End of all var item objects
-        }//End of if item is type InitState
+        }//End of if item is type InputSetting
         return nil
     }
 
+    
     func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
         let itemObj = item as! InputSetting
         return (itemObj.children.count > 0) ? true : false
@@ -130,41 +90,41 @@ class InitStateViewController: BaseViewController, NSOutlineViewDelegate, NSOutl
  
     func outlineView(_ outlineView: NSOutlineView, objectValueFor tableColumn: NSTableColumn?, byItem item: Any?) -> Any? {
         if let stateItem = item as? InputSetting {
-            if tableColumn?.identifier.rawValue == "ValueColumn" && stateItem.itemType == "var" {
-                let val = stateItem.itemType == "var" ? stateItem.value : nil
-                return val
-            }
-            else if tableColumn?.identifier.rawValue == "NameColumn"{
+            
+            switch tableColumn?.identifier{
+            case NSUserInterfaceItemIdentifier.initStateValueColumn:
+                if stateItem.itemType == "var" {return stateItem.value}
+                else {return nil}
+            case NSUserInterfaceItemIdentifier.nameColumn:
                 return stateItem.name
-            }
-            else if tableColumn?.identifier.rawValue == "UnitsColumn"{
-                let units = stateItem.itemType == "var" ? stateItem.units : nil
-                return units
-            }
-            else if tableColumn?.identifier.rawValue == "ParameterColumn"{
+            case NSUserInterfaceItemIdentifier.unitsColumn:
+                if stateItem.itemType == "var" {return stateItem.units}
+                else {return nil}
+            case NSUserInterfaceItemIdentifier.initStateParamColumn:
                 return stateItem.isParam
+            default:
+                return nil
             }
         }
         return nil
     }
 
-    
     @IBAction func setParams(_ sender: Any) {
         if let button = sender as? NSView{
             let row = outlineView.row(for: button)
             if let thisInputSetting = outlineView.item(atRow: row) as? InputSetting{
-                thisInputSetting.isParam = (sender as! NSButton).state.rawValue == 1 ? true : false
+                thisInputSetting.isParam = (sender as! NSButton).state == NSControl.StateValue.on ? true : false
                 outlineView.refreshSetting(thisInputSetting)
                 NotificationCenter.default.post(name: .didSetParam, object: thisInputSetting)
             }
         }
-        
     }
     
     @IBAction func editUnits(_ sender: NSTextField) {
         let curRow = outlineView.row(for: sender)
         if let thisInputSetting = outlineView.item(atRow: curRow) as? InputSetting{
             thisInputSetting.units = sender.stringValue
+            NotificationCenter.default.post(name: .didChangeUnits, object: thisInputSetting)
         }
     }
     
@@ -173,6 +133,7 @@ class InitStateViewController: BaseViewController, NSOutlineViewDelegate, NSOutl
         if let thisInputSetting = outlineView.item(atRow: curRow) as? InputSetting{
             let valuestr = sender.stringValue
             thisInputSetting.value = Double(valuestr)
+            NotificationCenter.default.post(name: .didChangeValue, object: thisInputSetting)
         }
     }
     
