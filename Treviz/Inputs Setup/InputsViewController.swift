@@ -41,36 +41,13 @@ class InputsViewController: ViewController, NSTableViewDataSource, NSTableViewDe
         }
     }
     
-    @IBAction func runAnalysisPushed(_ sender: Any) {
-
+    func collectInitialState(){
         let curAnalysis = self.representedObject as! Analysis
         let newInputData = initStateViewController.getInputSettingData() as [Variable]
         
         let newState = State(fromInputVars: newInputData)
         newState.variables[7] = Variable("mtot", named: "mass", symbol: "m", units: "mass", value: 10)
         curAnalysis.initialState = newState
-        
-        //let existingState = State(fromInputVars: existingInputData)
-        //curAnalysis.initialState = State(fromInputVars: curAnalysis.analysisData.initVars)
-        
-        let parentSplitViewController = self.parent as! MainSplitViewController
-        let mainView = parentSplitViewController.parent as! MainViewController
-        curAnalysis.progressBar = mainView.analysisProgressBar
-        let returnCode = curAnalysis.runAnalysis()
-        print(returnCode)
-        
-        let y_end = curAnalysis.trajectory.last![2]
-        let x_end = curAnalysis.trajectory.last![1]
-        
-        let outputSplitViewController = parentSplitViewController.outputsViewController?.outputSplitViewController
-        let textOutputSplitViewItem = outputSplitViewController?.textOutputSplitViewItem
-        let textOutputViewController = textOutputSplitViewItem?.viewController as! TextOutputsViewController
-        let textOutputView = textOutputViewController.textView
-        textOutputView?.string.append("Y end:\t\(y_end)\n")
-        textOutputView?.string.append("X end:\t\(x_end)\n")
-        //let outputTextView = textViewController.textView!
-        //outputTextView.string.append("results!")
-        
     }
     
     override var representedObject: Any? {

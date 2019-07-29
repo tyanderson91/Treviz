@@ -24,6 +24,7 @@ class Analysis: NSDocument {//TODO: possibly subclass NSPersistentDocument if us
     var progressBar : NSProgressIndicator!
     var windowController : MainWindowController!//Implicit optional, should always be assigned after initialization
     var viewController : MainViewController!
+    var conditions : [Condition]?
     //var outputsVC : OutputsViewController!
     //Set up terminal conditions
     
@@ -58,6 +59,7 @@ class Analysis: NSDocument {//TODO: possibly subclass NSPersistentDocument if us
     }
     
     override func read(from data: Data, ofType typeName: String) throws {
+        let fileContents = self.analysisData
         analysisData.read(from: data)
     }
     
@@ -67,6 +69,10 @@ class Analysis: NSDocument {//TODO: possibly subclass NSPersistentDocument if us
     }
     
     func runAnalysis() -> [Int] {//TODO: break this method into several phases to make it more manageable
+        // Initial State
+        self.viewController.mainSplitViewController.inputsViewController.collectInitialState()
+        
+        // Setup
         var currentState = initialState.toArray()
         let dt : Double = 0.1
         
@@ -82,6 +88,7 @@ class Analysis: NSDocument {//TODO: possibly subclass NSPersistentDocument if us
         var analysisEnded = false
         let state = State.stateVarPositions //map of identifiers to positions
         
+        //Run
         self.trajectory.append(currentState)
         while !analysisEnded{
             var newState = State.initAsArray()
@@ -112,6 +119,9 @@ class Analysis: NSDocument {//TODO: possibly subclass NSPersistentDocument if us
                 progressBar.doubleValue = pctComplete*100
             }
         }
+        
+        //Outputs
+        self.viewController.mainSplitViewController.outputsViewController.processOutputs()
         return returnCodes
     }
 }

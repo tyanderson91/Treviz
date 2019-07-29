@@ -18,6 +18,9 @@
 		CD2D0DB82243836F0012978E /* SingleAxisOutputSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2D0DAE224382F70012978E /* SingleAxisOutputSetupViewController.swift */; };
 		CD2D0DBA2243837F0012978E /* HeaderViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD2D0DA5224382F70012978E /* HeaderViewController.storyboard */; };
 		CD2D0DBB224385580012978E /* OutputSetup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD2D0DA6224382F70012978E /* OutputSetup.storyboard */; };
+		CD3F5E5522EE175400E4CF20 /* Condition.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3F5E5422EE175400E4CF20 /* Condition.swift */; };
+		CD3F5E5822EE4DCD00E4CF20 /* Conditions.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD3F5E5722EE4DCD00E4CF20 /* Conditions.storyboard */; };
+		CD3F5E5A22EE4FFE00E4CF20 /* ConditionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3F5E5922EE4FFE00E4CF20 /* ConditionsViewController.swift */; };
 		CD4656B2224C6F3500C587CC /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4656B1224C6F3500C587CC /* SettingsViewController.swift */; };
 		CD4656B4224C6F8C00C587CC /* EnvironmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4656B3224C6F8C00C587CC /* EnvironmentViewController.swift */; };
 		CDA0F87F2257398F003C62E6 /* NotificationCenterSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA0F87E2257398F003C62E6 /* NotificationCenterSetup.swift */; };
@@ -62,6 +65,9 @@
 		CD2D0DAD224382F70012978E /* LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		CD2D0DAE224382F70012978E /* SingleAxisOutputSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SingleAxisOutputSetupViewController.swift; path = ../InfoBarStackView/SingleAxisOutputSetupViewController.swift; sourceTree = "<group>"; };
 		CD2D0DAF224382F70012978E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CD3F5E5422EE175400E4CF20 /* Condition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Condition.swift; sourceTree = "<group>"; };
+		CD3F5E5722EE4DCD00E4CF20 /* Conditions.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Conditions.storyboard; sourceTree = "<group>"; };
+		CD3F5E5922EE4FFE00E4CF20 /* ConditionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionsViewController.swift; sourceTree = "<group>"; };
 		CD4656B1224C6F3500C587CC /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		CD4656B3224C6F8C00C587CC /* EnvironmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentViewController.swift; sourceTree = "<group>"; };
 		CDA0F87E2257398F003C62E6 /* NotificationCenterSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NotificationCenterSetup.swift; path = Treviz/Main/NotificationCenterSetup.swift; sourceTree = SOURCE_ROOT; };
@@ -128,6 +134,7 @@
 				CDF3D1A5225057270064D70C /* ViewController.swift */,
 				CDAF13FC222CF357005CDC3C /* State.swift */,
 				CDAF14262230FB72005CDC3C /* Variable.swift */,
+				CD3F5E5622EE4D8C00E4CF20 /* Conditions */,
 			);
 			path = "Reusable classes";
 			sourceTree = "<group>";
@@ -167,6 +174,16 @@
 			name = InfoBarStackView;
 			path = /Users/TylerAnderson/Coding/Swift/Treviz/Treviz/InfoBarStackView;
 			sourceTree = "<absolute>";
+		};
+		CD3F5E5622EE4D8C00E4CF20 /* Conditions */ = {
+			isa = PBXGroup;
+			children = (
+				CD3F5E5422EE175400E4CF20 /* Condition.swift */,
+				CD3F5E5922EE4FFE00E4CF20 /* ConditionsViewController.swift */,
+				CD3F5E5722EE4DCD00E4CF20 /* Conditions.storyboard */,
+			);
+			path = Conditions;
+			sourceTree = "<group>";
 		};
 		CD9F2040223B7C95005BFDCB /* Outputs Setup */ = {
 			isa = PBXGroup;
@@ -301,6 +318,7 @@
 				CDD5049F22252AFD00B29751 /* Assets.xcassets in Resources */,
 				CDE078F4224806EF00815E7F /* Inputs.storyboard in Resources */,
 				CDD504A222252AFD00B29751 /* Main.storyboard in Resources */,
+				CD3F5E5822EE4DCD00E4CF20 /* Conditions.storyboard in Resources */,
 				CD2D0DBB224385580012978E /* OutputSetup.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -315,6 +333,7 @@
 				CDF3D1A9225303A00064D70C /* InputSetting.swift in Sources */,
 				CDF3D1A6225057270064D70C /* ViewController.swift in Sources */,
 				CDA0F87F2257398F003C62E6 /* NotificationCenterSetup.swift in Sources */,
+				CD3F5E5A22EE4FFE00E4CF20 /* ConditionsViewController.swift in Sources */,
 				CD2D0DB12243836F0012978E /* OutputSetupViewController.swift in Sources */,
 				CD2D0DB22243836F0012978E /* BaseViewController.swift in Sources */,
 				CD2D0DB32243836F0012978E /* StackView.swift in Sources */,
@@ -329,6 +348,7 @@
 				CDAF14272230FB72005CDC3C /* Variable.swift in Sources */,
 				CDA0F8832259810C003C62E6 /* InitStateOutlineView.swift in Sources */,
 				CDF1670C2237A10400CD9590 /* MainWindowController.swift in Sources */,
+				CD3F5E5522EE175400E4CF20 /* Condition.swift in Sources */,
 				CDC1F53C2234874000D1BB25 /* MainSplitViewController.swift in Sources */,
 				CDC1F54022363DDB00D1BB25 /* MainViewController.swift in Sources */,
 				CDC1F53E2234970F00D1BB25 /* TerminalCondition.swift in Sources */,

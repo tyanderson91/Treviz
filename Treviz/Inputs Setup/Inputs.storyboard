@@ -520,24 +520,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="436"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Q6H-cR-dlc">
-                                <rect key="frame" x="-6" y="408" width="612" height="32"/>
-                                <buttonCell key="cell" type="push" title="Run Analysis" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Zh3-ow-UgB">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="runAnalysisPushed:" target="BWH-wW-vxd" id="fSh-If-Wf3"/>
-                                </connections>
-                            </button>
                             <scrollView ambiguous="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="niT-kp-oja">
-                                <rect key="frame" x="0.0" y="125" width="600" height="290"/>
+                                <rect key="frame" x="0.0" y="125" width="600" height="311"/>
                                 <clipView key="contentView" ambiguous="YES" id="KbV-Po-mOw">
-                                    <rect key="frame" x="1" y="1" width="598" height="288"/>
+                                    <rect key="frame" x="1" y="1" width="598" height="309"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="1" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" ambiguous="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cz5-QM-gft" customClass="CustomStackView" customModule="Treviz" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="288" width="598" height="0.0"/>
+                                            <rect key="frame" x="0.0" y="309" width="598" height="0.0"/>
                                         </stackView>
                                     </subviews>
                                     <constraints>
@@ -550,11 +540,11 @@
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="600" id="45e-xL-u5g"/>
                                 </constraints>
                                 <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="c0b-x2-qE9">
-                                    <rect key="frame" x="1" y="273" width="598" height="16"/>
+                                    <rect key="frame" x="1" y="294" width="598" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="7nO-4f-o6V">
-                                    <rect key="frame" x="583" y="1" width="16" height="288"/>
+                                    <rect key="frame" x="583" y="1" width="16" height="309"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
@@ -567,15 +557,11 @@
                         </subviews>
                         <constraints>
                             <constraint firstItem="LWo-gC-UYm" firstAttribute="top" secondItem="niT-kp-oja" secondAttribute="bottom" constant="10" id="7Le-KY-imv"/>
-                            <constraint firstItem="Q6H-cR-dlc" firstAttribute="top" secondItem="V9E-Gq-8Gm" secondAttribute="top" id="8Ay-9f-6ve"/>
                             <constraint firstItem="LWo-gC-UYm" firstAttribute="leading" secondItem="V9E-Gq-8Gm" secondAttribute="leading" id="FkC-FG-6ex"/>
-                            <constraint firstItem="niT-kp-oja" firstAttribute="top" secondItem="Q6H-cR-dlc" secondAttribute="bottom" id="HAQ-Uv-hfs"/>
-                            <constraint firstItem="Q6H-cR-dlc" firstAttribute="centerX" secondItem="V9E-Gq-8Gm" secondAttribute="centerX" id="JE0-Af-aOO"/>
-                            <constraint firstAttribute="trailing" secondItem="Q6H-cR-dlc" secondAttribute="trailing" id="KZ5-yg-yfX"/>
                             <constraint firstAttribute="trailing" secondItem="LWo-gC-UYm" secondAttribute="trailing" id="Kf7-LL-gcH"/>
                             <constraint firstAttribute="bottom" secondItem="LWo-gC-UYm" secondAttribute="bottom" id="dZZ-sE-u8G"/>
                             <constraint firstItem="niT-kp-oja" firstAttribute="leading" secondItem="V9E-Gq-8Gm" secondAttribute="leading" id="mCo-7H-vgD"/>
-                            <constraint firstItem="Q6H-cR-dlc" firstAttribute="top" secondItem="V9E-Gq-8Gm" secondAttribute="top" id="yNx-o6-j9i"/>
+                            <constraint firstItem="niT-kp-oja" firstAttribute="top" secondItem="V9E-Gq-8Gm" secondAttribute="top" id="pjW-XY-Ho1"/>
                             <constraint firstAttribute="trailing" secondItem="niT-kp-oja" secondAttribute="trailing" id="zAJ-9r-aal"/>
                         </constraints>
                     </view>

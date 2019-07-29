@@ -27,6 +27,20 @@ class OutputsViewController: ViewController {
         }
     }
     
+    func processOutputs(){
+        if let curAnalysis = self.representedObject as? Analysis{
+
+            let y_end = curAnalysis.trajectory.last![2]
+            let x_end = curAnalysis.trajectory.last![1]
+            
+            let textOutputSplitViewItem = outputSplitViewController?.textOutputSplitViewItem
+            let textOutputViewController = textOutputSplitViewItem?.viewController as! TextOutputsViewController
+            let textOutputView = textOutputViewController.textView
+            textOutputView?.string.append("Y end:\t\(y_end)\n")
+            textOutputView?.string.append("X end:\t\(x_end)\n")
+        }
+    }
+    
 }
 
 

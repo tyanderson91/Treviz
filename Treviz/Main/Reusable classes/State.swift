@@ -93,8 +93,8 @@ class State: NSObject {
         for curVar in stateArray{
             let thisVar =
         }
-    }
- */
+    }*/
+ 
     class func initAsArray()->[Double]{
         let thisArray : [Double] = Array(repeating: 0, count:State.stateVarPositions.count)
         return thisArray

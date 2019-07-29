@@ -17,8 +17,3 @@ extension NSStoryboard.Name{
 extension NSStoryboardSegue.Identifier{
     static let paramTableViewSegue = "ParamTableViewControllerSegue"
 }
-
-extension NSUserInterfaceItemIdentifier{
-
-
-}

@@ -8,17 +8,20 @@
 
 import Cocoa
 
-class TerminalCondition {//TODO: make this a subclass of the "Condition" object
+class TerminalCondition : Condition {//TODO: make this a subclass of the "Condition" object
     //   var previousState = VehicleState() //TODO: make this value only apply to ALL terminal conditions
-    var varID : VariableID //statePosition : Int = 99 //Max number of terminal conditions
-    var value : Double = 0.0
-    var direction = -1
+    //var varID : VariableID //statePosition : Int = 99 //Max number of terminal conditions
+    //var value : Double = 0.0
+    //var direction = -1
 
-    
     init(varID: VariableID, crossing value: Double, inDirection: Int){
+        super.init()
         self.varID = varID
-        self.value = value
-        self.direction = inDirection
+        //self.value = value
+        if inDirection == -1 || inDirection == 0 {
+            lbound = value}
+        if inDirection == 1 || inDirection == 0 {
+            ubound = value}
     }
     
     func checkCondition(prevState: [Double], curState : [Double]) -> Int {
@@ -27,6 +30,14 @@ class TerminalCondition {//TODO: make this a subclass of the "Condition" object
         var returnCode = -1
         let statePos = State.stateVarPositions[varID]!
         
+        if let upper = ubound {
+            returnCode = (curStateValue >= upper && prevStateValue < upper) ? statePos : -1
+        }
+        if let lower = lbound {
+            returnCode = (curStateValue <= lower && prevStateValue > lower) ? statePos : -1
+        }
+        
+        /*
         if direction == -1{//Negative crossing TODO: combine into one statement
             returnCode = (curStateValue <= value && prevStateValue > value) ? statePos : -1
             //return returnCode
@@ -40,7 +51,7 @@ class TerminalCondition {//TODO: make this a subclass of the "Condition" object
         }
         else{returnCode = -1
             //return -1
-        }
+        }*/
         
         return returnCode
     }
@@ -48,7 +59,7 @@ class TerminalCondition {//TODO: make this a subclass of the "Condition" object
     func pctComplete(initState: [Double], curState: [Double])->Double{
         let curStateValue = curState[State.stateVarPositions[self.varID]!]
         let initStateValue = initState[State.stateVarPositions[self.varID]!]
-        let finalStateValue = self.value
+        let finalStateValue = self.ubound != nil ? self.ubound! : self.lbound!
         var pctComplete : Double = 0.0
         let progressType = "linear"
         if progressType == "linear"{

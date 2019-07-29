@@ -693,12 +693,42 @@
                             <allowedToolbarItems>
                                 <toolbarItem implicitItemIdentifier="NSToolbarShowColorsItem" id="Ndh-jH-KXn"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarShowFontsItem" id="aaV-pA-eJz"/>
+                                <toolbarItem implicitItemIdentifier="2147365F-2DD7-4C62-A655-FAF13FA8F180" label="Run Analysis" paletteLabel="Run Analysis" sizingBehavior="auto" id="ClC-Qq-Amg">
+                                    <nil key="toolTip"/>
+                                    <button key="view" verticalHuggingPriority="750" id="k0d-C9-zla">
+                                        <rect key="frame" x="22" y="14" width="31" height="25"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="roundTextured" title="&gt;" alternateTitle="Run Analysis" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ytv-0c-3b4">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                    </button>
+                                    <connections>
+                                        <action selector="runAnalysisClicked:" target="jGA-0Y-lOj" id="8Mu-sl-U61"/>
+                                    </connections>
+                                </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="NSToolbarPrintItem" id="iNF-nm-hs1"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="9m0-eV-BGQ"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="sla-GS-rBt"/>
+                                <toolbarItem implicitItemIdentifier="8D3393E5-C975-48A3-A5A2-A9165225D8F0" label="Conditions" paletteLabel="Conditions" sizingBehavior="auto" id="w9Z-vw-qxw">
+                                    <nil key="toolTip"/>
+                                    <button key="view" verticalHuggingPriority="750" id="nfV-d5-noY">
+                                        <rect key="frame" x="12" y="14" width="41" height="26"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="roundTextured" title="(x,y)" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="eyl-U4-WyX">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                    </button>
+                                    <connections>
+                                        <action selector="conditionsClicked:" target="jGA-0Y-lOj" id="xSZ-jt-drV"/>
+                                    </connections>
+                                </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
                                 <toolbarItem reference="9m0-eV-BGQ"/>
+                                <toolbarItem reference="ClC-Qq-Amg"/>
+                                <toolbarItem reference="w9Z-vw-qxw"/>
                                 <toolbarItem reference="Ndh-jH-KXn"/>
                                 <toolbarItem reference="aaV-pA-eJz"/>
                                 <toolbarItem reference="sla-GS-rBt"/>
