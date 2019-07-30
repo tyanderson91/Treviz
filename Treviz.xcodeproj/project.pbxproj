@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CD0B72D622F00AD400452FAA /* AnalysisToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0B72D522F00AD400452FAA /* AnalysisToolbar.swift */; };
 		CD129622224C67E300663B88 /* InitStateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD129621224C67E300663B88 /* InitStateViewController.swift */; };
 		CD2D0DB12243836F0012978E /* OutputSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2D0D8F224382F70012978E /* OutputSetupViewController.swift */; };
 		CD2D0DB22243836F0012978E /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2D0D94224382F70012978E /* BaseViewController.swift */; };
@@ -51,6 +52,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CD0B72D522F00AD400452FAA /* AnalysisToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AnalysisToolbar.swift; path = ../../../../../../../System/Volumes/Data/Users/TylerAnderson/Coding/Swift/Treviz/Treviz/Main/AnalysisToolbar.swift; sourceTree = "<group>"; };
 		CD129621224C67E300663B88 /* InitStateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = InitStateViewController.swift; path = "/Users/TylerAnderson/Coding/Swift/Treviz/Treviz/Inputs Setup/InitStateViewController.swift"; sourceTree = "<absolute>"; };
 		CD2D0D8F224382F70012978E /* OutputSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OutputSetupViewController.swift; path = ../InfoBarStackView/OutputSetupViewController.swift; sourceTree = "<group>"; };
 		CD2D0D94224382F70012978E /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 				CDC1F53F22363DDB00D1BB25 /* MainViewController.swift */,
 				CDC1F53B2234874000D1BB25 /* MainSplitViewController.swift */,
 				CDF1670B2237A10400CD9590 /* MainWindowController.swift */,
+				CD0B72D522F00AD400452FAA /* AnalysisToolbar.swift */,
 				CDF3D1A0225025AF0064D70C /* Analysis.swift */,
 				CDF3D1A722505A000064D70C /* AnalysisData.swift */,
 				CDD5049522252AF900B29751 /* AppDelegate.swift */,
@@ -345,6 +348,7 @@
 				CD2D0DB82243836F0012978E /* SingleAxisOutputSetupViewController.swift in Sources */,
 				CD4656B4224C6F8C00C587CC /* EnvironmentViewController.swift in Sources */,
 				CD4656B2224C6F3500C587CC /* SettingsViewController.swift in Sources */,
+				CD0B72D622F00AD400452FAA /* AnalysisToolbar.swift in Sources */,
 				CDAF14272230FB72005CDC3C /* Variable.swift in Sources */,
 				CDA0F8832259810C003C62E6 /* InitStateOutlineView.swift in Sources */,
 				CDF1670C2237A10400CD9590 /* MainWindowController.swift in Sources */,

@@ -689,7 +689,7 @@
                         <windowPositionMask key="initialPositionMask" leftStrut="YES"/>
                         <rect key="contentRect" x="0.0" y="0.0" width="800" height="600"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
-                        <toolbar key="toolbar" implicitIdentifier="99EF4609-EB63-466D-9855-35ED2BA88456" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="gC3-LF-Jn5">
+                        <toolbar key="toolbar" implicitIdentifier="99EF4609-EB63-466D-9855-35ED2BA88456" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="gC3-LF-Jn5" customClass="AnalysisToolbar">
                             <allowedToolbarItems>
                                 <toolbarItem implicitItemIdentifier="NSToolbarShowColorsItem" id="Ndh-jH-KXn"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarShowFontsItem" id="aaV-pA-eJz"/>
@@ -705,6 +705,24 @@
                                     </button>
                                     <connections>
                                         <action selector="runAnalysisClicked:" target="jGA-0Y-lOj" id="8Mu-sl-U61"/>
+                                    </connections>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="9637223E-3C3E-4B26-B650-92E6DE94E1D2" label="View Panes" paletteLabel="View Panes" sizingBehavior="auto" selectable="YES" id="EUF-yc-cUN">
+                                    <nil key="toolTip"/>
+                                    <segmentedControl key="view" wantsLayer="YES" verticalHuggingPriority="750" id="bbn-UQ-slb">
+                                        <rect key="frame" x="4" y="14" width="59" height="22"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <segmentedCell key="cell" continuous="YES" borderStyle="border" alignment="left" segmentDistribution="fillEqually" style="roundRect" trackingMode="selectAny" id="2AJ-ws-GZa">
+                                            <font key="font" metaFont="cellTitle"/>
+                                            <segments>
+                                                <segment label="Inputs" width="17" selected="YES"/>
+                                                <segment label="Outputs" width="17" selected="YES" tag="1"/>
+                                                <segment label="Output Setup" width="17" selected="YES" tag="2"/>
+                                            </segments>
+                                        </segmentedCell>
+                                    </segmentedControl>
+                                    <connections>
+                                        <action selector="showHidePanesClicked:" target="jGA-0Y-lOj" id="L54-Op-As4"/>
                                     </connections>
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="NSToolbarPrintItem" id="iNF-nm-hs1"/>
@@ -732,6 +750,7 @@
                                 <toolbarItem reference="Ndh-jH-KXn"/>
                                 <toolbarItem reference="aaV-pA-eJz"/>
                                 <toolbarItem reference="sla-GS-rBt"/>
+                                <toolbarItem reference="EUF-yc-cUN"/>
                                 <toolbarItem reference="9m0-eV-BGQ"/>
                             </defaultToolbarItems>
                             <connections>
@@ -744,6 +763,7 @@
                     </window>
                     <connections>
                         <outlet property="toolbar" destination="gC3-LF-Jn5" id="h5O-LV-3cg"/>
+                        <outlet property="viewPanesSegmentedControl" destination="EUF-yc-cUN" id="1Ua-Dd-lPf"/>
                         <segue destination="PzM-8h-kXr" kind="relationship" relationship="window.shadowedContentViewController" id="sfB-bW-bv0"/>
                     </connections>
                 </windowController>
@@ -795,7 +815,7 @@
                                     <segue destination="cNr-ot-ed2" kind="embed" identifier="mainSplitViewSegue" id="jah-hR-W31"/>
                                 </connections>
                             </containerView>
-                            <progressIndicator wantsLayer="YES" focusRingType="none" maxValue="100" doubleValue="100" displayedWhenStopped="NO" controlSize="small" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="Tnv-gC-ATL">
+                            <progressIndicator wantsLayer="YES" focusRingType="none" maxValue="100" displayedWhenStopped="NO" controlSize="small" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="Tnv-gC-ATL">
                                 <rect key="frame" x="-3" y="0.0" width="1059" height="3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="3" id="gPb-Hd-B3J"/>
@@ -835,7 +855,7 @@
                 </viewController>
                 <customObject id="WVM-5U-vTl" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-510" y="1251"/>
+            <point key="canvasLocation" x="-510.5" y="1250.5"/>
         </scene>
         <!--Outputs View Controller-->
         <scene sceneID="Wzb-yo-ICh">
