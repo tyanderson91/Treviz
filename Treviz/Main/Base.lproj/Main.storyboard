@@ -806,17 +806,17 @@
             <objects>
                 <viewController title="MainViewController" id="PzM-8h-kXr" customClass="MainViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="w7z-2N-fQ8">
-                        <rect key="frame" x="0.0" y="0.0" width="1053" height="601"/>
+                        <rect key="frame" x="0.0" y="0.0" width="356" height="165"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView translatesAutoresizingMaskIntoConstraints="NO" id="3xq-Zn-lEM">
-                                <rect key="frame" x="0.0" y="3" width="1053" height="598"/>
+                                <rect key="frame" x="0.0" y="3" width="356" height="162"/>
                                 <connections>
                                     <segue destination="cNr-ot-ed2" kind="embed" identifier="mainSplitViewSegue" id="jah-hR-W31"/>
                                 </connections>
                             </containerView>
                             <progressIndicator wantsLayer="YES" focusRingType="none" maxValue="100" displayedWhenStopped="NO" controlSize="small" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="Tnv-gC-ATL">
-                                <rect key="frame" x="-3" y="0.0" width="1059" height="3"/>
+                                <rect key="frame" x="-3" y="0.0" width="362" height="3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="3" id="gPb-Hd-B3J"/>
                                 </constraints>
@@ -855,18 +855,18 @@
                 </viewController>
                 <customObject id="WVM-5U-vTl" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-510.5" y="1250.5"/>
+            <point key="canvasLocation" x="-469" y="1116"/>
         </scene>
         <!--Outputs View Controller-->
         <scene sceneID="Wzb-yo-ICh">
             <objects>
                 <viewController storyboardIdentifier="outputViewControllerk" id="i9B-l3-zwM" customClass="OutputsViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="rTW-eE-Wbd">
-                        <rect key="frame" x="0.0" y="0.0" width="300" height="303"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="303"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <containerView translatesAutoresizingMaskIntoConstraints="NO" id="wyV-WT-hg6">
-                                <rect key="frame" x="0.0" y="0.0" width="300" height="283"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="283"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="eK3-Jz-W0P"/>
                                 </constraints>
@@ -888,7 +888,7 @@
                 </viewController>
                 <customObject id="Q6v-7a-UZc" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="687" y="442.5"/>
+            <point key="canvasLocation" x="806" y="598.5"/>
         </scene>
         <!--Inputs-->
         <scene sceneID="PXu-5S-D46">
@@ -937,15 +937,11 @@
             <objects>
                 <viewController title="imageOutputViewController" id="4mF-Gl-0O6" sceneMemberID="viewController">
                     <view key="view" id="uAl-T7-7ic">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="200"/>
+                        <rect key="frame" x="0.0" y="0.0" width="369" height="351"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="100" verticalCompressionResistancePriority="100" translatesAutoresizingMaskIntoConstraints="NO" id="EqI-ln-cgW">
-                                <rect key="frame" x="0.0" y="0.0" width="450" height="200"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="450" id="BV8-no-5QQ"/>
-                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="400" id="fRW-Jh-pQI"/>
-                                </constraints>
+                                <rect key="frame" x="0.0" y="0.0" width="369" height="351"/>
                                 <imageCell key="cell" selectable="YES" editable="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="globe_picture" id="M4A-lX-JJN"/>
                             </imageView>
                         </subviews>
@@ -959,27 +955,27 @@
                 </viewController>
                 <customObject id="AUw-GP-L7o" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1337" y="-185"/>
+            <point key="canvasLocation" x="1296.5" y="-109.5"/>
         </scene>
         <!--Text Outputs View Controller-->
         <scene sceneID="Bnn-Ve-NcC">
             <objects>
                 <viewController title="textOutputViewController" storyboardIdentifier="textOutputViewController" id="YnZ-Th-m6N" userLabel="Text Outputs View Controller" customClass="TextOutputsViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="GgS-6k-ppY">
-                        <rect key="frame" x="0.0" y="0.0" width="215" height="300"/>
+                        <rect key="frame" x="0.0" y="0.0" width="215" height="188"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView appearanceType="aqua" borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YWm-k4-cQP">
-                                <rect key="frame" x="0.0" y="0.0" width="215" height="287"/>
+                                <rect key="frame" x="0.0" y="0.0" width="215" height="175"/>
                                 <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="KII-cS-anU">
-                                    <rect key="frame" x="0.0" y="0.0" width="215" height="287"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="215" height="175"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textView editable="NO" verticallyResizable="YES" findStyle="bar" allowsDocumentBackgroundColorChange="YES" spellingCorrection="YES" smartInsertDelete="YES" id="tnd-Lh-0Dl">
-                                            <rect key="frame" x="0.0" y="0.0" width="215" height="287"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="215" height="175"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <size key="minSize" width="215" height="287"/>
+                                            <size key="minSize" width="215" height="175"/>
                                             <size key="maxSize" width="663" height="10000000"/>
                                             <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         </textView>
@@ -994,12 +990,12 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="AnF-o6-KNM">
-                                    <rect key="frame" x="199" y="0.0" width="16" height="287"/>
+                                    <rect key="frame" x="199" y="0.0" width="16" height="175"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="G7v-tt-dhd">
-                                <rect key="frame" x="75" y="287" width="66" height="13"/>
+                                <rect key="frame" x="75" y="175" width="66" height="13"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Text Outputs" id="hS5-aC-nUx">
                                     <font key="font" metaFont="system" size="10"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1022,7 +1018,7 @@
                 </viewController>
                 <customObject id="KBP-Z7-bks" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1239" y="342"/>
+            <point key="canvasLocation" x="1238.5" y="286"/>
         </scene>
     </scenes>
     <resources>

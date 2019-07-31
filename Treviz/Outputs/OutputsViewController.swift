@@ -19,6 +19,8 @@ class OutputsViewController: ViewController {
         super.viewDidLoad()
         //analysisProgressBar. = NSControlTint.blueControlTint
         // Do view setup here.
+        //let curHeight = self.view.frame.height
+        //self.view.setFrameSize(NSSize.init(width: 600, height: curHeight))
     }
     
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {

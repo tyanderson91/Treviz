@@ -18,6 +18,7 @@ class MainViewController: ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.setFrameSize(NSSize.init(width: 1200, height: 600))
         // Do view setup here.
     }
     

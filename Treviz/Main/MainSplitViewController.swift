@@ -18,17 +18,23 @@ class MainSplitViewController: SplitViewController {
     var inputsViewController : InputsViewController!
     var outputsViewController : OutputsViewController!
     var outputSetupViewController : OutputSetupViewController!
+    var splitViewItemList : [NSSplitViewItem]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         inputsViewController = (inputsSplitViewItem?.viewController as! InputsViewController) //TODO: try to move this to the variable declaration
         outputsViewController = (outputsSplitViewItem?.viewController as! OutputsViewController)
         outputSetupViewController = (outputSetupSplitViewItem?.viewController as! OutputSetupViewController)
+        splitViewItemList = [inputsSplitViewItem, outputsSplitViewItem, outputSetupSplitViewItem]
 
-        //inputsViewController!.parentSplitViewController = self
-        //outputsViewController!.parentSplitViewController = self
-        //outputSetupViewController.parentSplitViewController = self
+        //outputsSplitViewItem.setValue(600, forKey: "width")
         // Do view setup here.
+    }
+    
+    func setSectionCollapse(_ collapsed : Bool, forSection secID: Int){
+        if self.representedObject is Analysis {
+            splitViewItemList![secID].animator().isCollapsed = collapsed
+        }
     }
     
 }

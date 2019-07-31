@@ -30,7 +30,7 @@
                                     </constraints>
                                 </clipView>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="410" identifier="widthConstraint" id="uMa-sl-t7p"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" identifier="widthConstraint" id="uMa-sl-t7p"/>
                                 </constraints>
                                 <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="kBx-UO-78b">
                                     <rect key="frame" x="1" y="401" width="408" height="16"/>
@@ -171,14 +171,14 @@
             <objects>
                 <viewController title="Single Axis" storyboardIdentifier="SingleAxisOutputSetupViewController" id="msL-sn-tpe" userLabel="SingleAxisViewController" customClass="SingleAxisOutputSetupViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="UbK-im-XsI">
-                        <rect key="frame" x="0.0" y="0.0" width="418" height="100"/>
+                        <rect key="frame" x="0.0" y="0.0" width="358" height="100"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="LCY-Xe-aHU">
-                                <rect key="frame" x="0.0" y="0.0" width="418" height="100"/>
+                                <rect key="frame" x="0.0" y="0.0" width="358" height="100"/>
                                 <subviews>
                                     <popUpButton horizontalHuggingPriority="200" verticalHuggingPriority="750" horizontalCompressionResistancePriority="100" translatesAutoresizingMaskIntoConstraints="NO" id="20c-Gs-l7m">
-                                        <rect key="frame" x="8" y="39" width="87" height="25"/>
+                                        <rect key="frame" x="8" y="39" width="90" height="25"/>
                                         <popUpButtonCell key="cell" type="push" title="Variable" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyUpOrDown" inset="2" selectedItem="BdM-Jx-IQr" id="q0u-r3-bQW">
                                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -190,7 +190,7 @@
                                         </popUpButtonCell>
                                     </popUpButton>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7jf-3p-lYJ" userLabel="Add Output Button">
-                                        <rect key="frame" x="388" y="39" width="20" height="22"/>
+                                        <rect key="frame" x="328" y="39" width="20" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="V1f-UA-NJ6"/>
                                             <constraint firstAttribute="width" constant="20" id="zf0-GZ-WM7"/>
@@ -204,7 +204,7 @@
                                         </connections>
                                     </button>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mdG-QJ-vmH" userLabel="Variable label">
-                                        <rect key="frame" x="25" y="73" width="53" height="17"/>
+                                        <rect key="frame" x="26" y="73" width="53" height="17"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="17" id="BfO-ak-vA6"/>
                                         </constraints>
@@ -215,7 +215,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <textField horizontalHuggingPriority="241" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Rgl-bL-86e" userLabel="Plot type label">
-                                        <rect key="frame" x="139" y="73" width="59" height="17"/>
+                                        <rect key="frame" x="142" y="73" width="59" height="17"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Plot type" id="A0H-24-9xi">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -223,7 +223,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ppd-ib-ekh" userLabel="At Condition label">
-                                        <rect key="frame" x="241" y="73" width="79" height="17"/>
+                                        <rect key="frame" x="244" y="73" width="79" height="17"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" title="At Condition" id="c1E-Cf-THM">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -231,7 +231,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <popUpButton verticalHuggingPriority="750" horizontalCompressionResistancePriority="100" translatesAutoresizingMaskIntoConstraints="NO" id="nPw-47-oWI" userLabel="Condition Drop Down">
-                                        <rect key="frame" x="243" y="39" width="75" height="25"/>
+                                        <rect key="frame" x="246" y="39" width="75" height="25"/>
                                         <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="ArS-SR-OW2" id="hRA-4W-Zl5">
                                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -243,7 +243,7 @@
                                         </popUpButtonCell>
                                     </popUpButton>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="EiP-JF-MF9">
-                                        <rect key="frame" x="100" y="16" width="137" height="18"/>
+                                        <rect key="frame" x="103" y="16" width="137" height="18"/>
                                         <buttonCell key="cell" type="check" title="Include text output" bezelStyle="regularSquare" imagePosition="left" inset="2" id="YWG-Mw-f1F">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -253,7 +253,7 @@
                                         </connections>
                                     </button>
                                     <popUpButton horizontalHuggingPriority="230" verticalHuggingPriority="750" horizontalCompressionResistancePriority="100" translatesAutoresizingMaskIntoConstraints="NO" id="ZYv-Vs-iDV">
-                                        <rect key="frame" x="100" y="39" width="138" height="25"/>
+                                        <rect key="frame" x="103" y="39" width="138" height="25"/>
                                         <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="EVP-gc-Mdk" id="5oH-1r-Bdz">
                                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -284,6 +284,7 @@
                                     <constraint firstItem="20c-Gs-l7m" firstAttribute="leading" secondItem="LCY-Xe-aHU" secondAttribute="leading" constant="10" id="cEw-Zv-raj"/>
                                     <constraint firstItem="EiP-JF-MF9" firstAttribute="centerX" secondItem="ZYv-Vs-iDV" secondAttribute="centerX" id="d4d-6b-Kkm"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" id="rIn-Tw-fCB"/>
+                                    <constraint firstItem="7jf-3p-lYJ" firstAttribute="leading" secondItem="nPw-47-oWI" secondAttribute="trailing" constant="10" id="sFJ-p3-uXu"/>
                                     <constraint firstItem="Rgl-bL-86e" firstAttribute="centerX" secondItem="ZYv-Vs-iDV" secondAttribute="centerX" id="scK-aS-BUd"/>
                                     <constraint firstItem="20c-Gs-l7m" firstAttribute="centerX" secondItem="mdG-QJ-vmH" secondAttribute="centerX" id="znI-hW-RMW"/>
                                     <constraint firstItem="ZYv-Vs-iDV" firstAttribute="leading" secondItem="20c-Gs-l7m" secondAttribute="trailing" constant="10" id="znS-jr-2fZ"/>
@@ -306,7 +307,7 @@
                 </viewController>
                 <customObject id="W91-dZ-0yQ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5" y="1363"/>
+            <point key="canvasLocation" x="-25" y="1363"/>
         </scene>
         <!--TwoAxisViewController-->
         <scene sceneID="XiG-bK-mMK">
@@ -320,7 +321,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="416" height="145"/>
                                 <subviews>
                                     <stackView hidden="YES" distribution="fill" orientation="vertical" alignment="centerX" spacing="27" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hy8-yg-umX">
-                                        <rect key="frame" x="300" y="70" width="75" height="65"/>
+                                        <rect key="frame" x="301" y="70" width="75" height="65"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mWs-Z5-8V0" userLabel="At Condition label">
                                                 <rect key="frame" x="-2" y="48" width="79" height="17"/>
@@ -356,7 +357,7 @@
                                         </customSpacing>
                                     </stackView>
                                     <textField horizontalHuggingPriority="241" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RzC-OP-BDh" userLabel="Plot type label">
-                                        <rect key="frame" x="194" y="118" width="59" height="17"/>
+                                        <rect key="frame" x="195" y="118" width="59" height="17"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="17" id="p82-H9-UPL"/>
                                         </constraints>
@@ -367,7 +368,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <gridView horizontalHuggingPriority="200" horizontalCompressionResistancePriority="400" xPlacement="fill" yPlacement="fill" rowAlignment="none" rowSpacing="10" columnSpacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="Jko-dd-neg" userLabel="Variables grid view">
-                                        <rect key="frame" x="10" y="28" width="137" height="80"/>
+                                        <rect key="frame" x="10" y="28" width="138" height="80"/>
                                         <rows>
                                             <gridRow id="Si8-6o-BZs"/>
                                             <gridRow id="njf-yo-h5Y"/>
@@ -390,7 +391,7 @@
                                             </gridCell>
                                             <gridCell row="Si8-6o-BZs" column="pwm-8e-pyz" id="8Zg-Ts-FUz">
                                                 <popUpButton key="contentView" horizontalHuggingPriority="200" verticalHuggingPriority="750" horizontalCompressionResistancePriority="100" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="ZBD-16-uYV" userLabel="Variable 1 Drop Down">
-                                                    <rect key="frame" x="65" y="56" width="75" height="25"/>
+                                                    <rect key="frame" x="65" y="56" width="76" height="25"/>
                                                     <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyUpOrDown" inset="2" selectedItem="hyf-2X-J68" id="X1f-zZ-CNq">
                                                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                         <font key="font" metaFont="system"/>
@@ -414,7 +415,7 @@
                                             </gridCell>
                                             <gridCell row="njf-yo-h5Y" column="pwm-8e-pyz" id="HNJ-iy-sxH">
                                                 <popUpButton key="contentView" horizontalHuggingPriority="200" verticalHuggingPriority="750" horizontalCompressionResistancePriority="100" translatesAutoresizingMaskIntoConstraints="NO" id="oH3-C5-ScE" userLabel="Variable 2 Drop Down">
-                                                    <rect key="frame" x="65" y="25" width="75" height="25"/>
+                                                    <rect key="frame" x="65" y="25" width="76" height="25"/>
                                                     <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyUpOrDown" inset="2" selectedItem="hus-Ag-f4U" id="uQ0-Ag-ab1">
                                                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                         <font key="font" metaFont="system"/>
@@ -438,7 +439,7 @@
                                             </gridCell>
                                             <gridCell row="etw-kJ-k4f" column="pwm-8e-pyz" id="Z55-Pe-5xw">
                                                 <popUpButton key="contentView" horizontalHuggingPriority="200" verticalHuggingPriority="750" horizontalCompressionResistancePriority="100" translatesAutoresizingMaskIntoConstraints="NO" id="OP0-ud-81A" userLabel="Variable 3 Drop Down">
-                                                    <rect key="frame" x="65" y="-3" width="75" height="22"/>
+                                                    <rect key="frame" x="65" y="-3" width="76" height="22"/>
                                                     <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyUpOrDown" inset="2" selectedItem="ndj-oi-foB" id="iXr-xb-Kwl">
                                                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                         <font key="font" metaFont="system"/>
@@ -464,7 +465,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="11" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f9M-PQ-Jth" userLabel="All plotting stack view">
-                                        <rect key="frame" x="157" y="45" width="133" height="46"/>
+                                        <rect key="frame" x="158" y="45" width="133" height="46"/>
                                         <subviews>
                                             <popUpButton horizontalHuggingPriority="240" verticalHuggingPriority="750" horizontalCompressionResistancePriority="500" translatesAutoresizingMaskIntoConstraints="NO" id="xFa-gE-G28">
                                                 <rect key="frame" x="-2" y="22" width="138" height="25"/>
@@ -522,6 +523,7 @@
                                 <constraints>
                                     <constraint firstItem="RzC-OP-BDh" firstAttribute="centerY" secondItem="KPt-Sp-4fv" secondAttribute="centerY" id="2Wi-Jf-7g0"/>
                                     <constraint firstAttribute="trailing" secondItem="efV-ta-yTW" secondAttribute="trailing" constant="10" id="3cR-zH-Rno"/>
+                                    <constraint firstItem="efV-ta-yTW" firstAttribute="leading" secondItem="hy8-yg-umX" secondAttribute="trailing" constant="10" id="9pQ-gR-iNJ"/>
                                     <constraint firstItem="hy8-yg-umX" firstAttribute="leading" secondItem="f9M-PQ-Jth" secondAttribute="trailing" constant="10" id="ArT-Cf-K3v"/>
                                     <constraint firstItem="KPt-Sp-4fv" firstAttribute="top" secondItem="vwC-Zq-dxd" secondAttribute="top" constant="10" id="E8L-EU-Ta5"/>
                                     <constraint firstItem="1yV-mt-Cp7" firstAttribute="centerY" secondItem="xFa-gE-G28" secondAttribute="centerY" id="HT4-Tx-jyP"/>
@@ -545,9 +547,12 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addButtonLeadingConstraint" destination="9pQ-gR-iNJ" id="OrT-RP-b3g"/>
+                        <outlet property="conditionStackView" destination="hy8-yg-umX" id="E9b-xc-q9b"/>
                         <outlet property="heightConstraint" destination="l82-SX-cPD" id="tN4-n6-j7k"/>
                         <outlet property="includeTextCheckbox" destination="ddw-Ob-olS" id="wwA-cl-NQA"/>
                         <outlet property="plotTypeDropDown" destination="xFa-gE-G28" id="EQQ-gu-mLm"/>
+                        <outlet property="plottingStackView" destination="f9M-PQ-Jth" id="cUo-bD-r7W"/>
                         <outlet property="variable1DropDown" destination="ZBD-16-uYV" id="nlk-PK-12o"/>
                         <outlet property="variable2DropDown" destination="oH3-C5-ScE" id="TpG-9M-hjq"/>
                     </connections>
@@ -568,7 +573,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="416" height="137"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="241" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dBh-rK-wuS" userLabel="Plot type label">
-                                        <rect key="frame" x="175" y="107" width="59" height="20"/>
+                                        <rect key="frame" x="195" y="107" width="59" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="Ybx-Oz-0wn"/>
                                         </constraints>
@@ -579,7 +584,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <stackView hidden="YES" distribution="fill" orientation="vertical" alignment="centerX" spacing="34" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" horizontalHuggingPriority="500" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BII-Aa-qbw" userLabel="Condition Stack View">
-                                        <rect key="frame" x="281" y="50" width="75" height="77"/>
+                                        <rect key="frame" x="301" y="50" width="75" height="77"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="QfH-Q2-4A2" userLabel="At Condition label">
                                                 <rect key="frame" x="-2" y="57" width="79" height="20"/>
@@ -615,7 +620,7 @@
                                         </customSpacing>
                                     </stackView>
                                     <gridView horizontalHuggingPriority="200" xPlacement="fill" yPlacement="fill" rowAlignment="none" rowSpacing="10" columnSpacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="jLp-4w-AAf" userLabel="Variables grid view">
-                                        <rect key="frame" x="10" y="26" width="118" height="71"/>
+                                        <rect key="frame" x="10" y="26" width="138" height="71"/>
                                         <rows>
                                             <gridRow id="dIn-Zl-Jif"/>
                                             <gridRow id="1K1-m3-XtN"/>
@@ -638,7 +643,7 @@
                                             </gridCell>
                                             <gridCell row="dIn-Zl-Jif" column="dOa-Lr-vCu" id="7Ix-cv-lq3">
                                                 <popUpButton key="contentView" horizontalHuggingPriority="200" verticalHuggingPriority="750" horizontalCompressionResistancePriority="500" translatesAutoresizingMaskIntoConstraints="NO" id="o7J-pr-CHc" userLabel="Variable 1 Drop Down">
-                                                    <rect key="frame" x="46" y="51" width="75" height="21"/>
+                                                    <rect key="frame" x="46" y="51" width="95" height="21"/>
                                                     <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyUpOrDown" inset="2" selectedItem="Skc-tv-az9" id="PVL-Mp-yTS">
                                                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                         <font key="font" metaFont="system"/>
@@ -662,7 +667,7 @@
                                             </gridCell>
                                             <gridCell row="1K1-m3-XtN" column="dOa-Lr-vCu" id="Q7X-V1-7b0">
                                                 <popUpButton key="contentView" horizontalHuggingPriority="200" verticalHuggingPriority="751" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="Ik7-qX-UCr" userLabel="Variable 2 Drop Down">
-                                                    <rect key="frame" x="46" y="24" width="75" height="21"/>
+                                                    <rect key="frame" x="46" y="24" width="95" height="21"/>
                                                     <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyUpOrDown" inset="2" selectedItem="7k9-a8-sGG" id="NVg-nO-vtS">
                                                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                         <font key="font" metaFont="system"/>
@@ -686,7 +691,7 @@
                                             </gridCell>
                                             <gridCell row="axM-D2-oLi" column="dOa-Lr-vCu" id="Xab-G0-3Si">
                                                 <popUpButton key="contentView" horizontalHuggingPriority="200" verticalHuggingPriority="750" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="3ih-YM-AgH" userLabel="Variable 3 Drop Down">
-                                                    <rect key="frame" x="46" y="-3" width="75" height="21"/>
+                                                    <rect key="frame" x="46" y="-3" width="95" height="21"/>
                                                     <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyUpOrDown" inset="2" selectedItem="xAX-QO-0ux" id="je6-i6-hbA">
                                                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                         <font key="font" metaFont="system"/>
@@ -715,7 +720,7 @@
                                         </connections>
                                     </button>
                                     <stackView distribution="equalCentering" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GgJ-Ml-iaH" userLabel="All plotting stack view">
-                                        <rect key="frame" x="138" y="32" width="133" height="59"/>
+                                        <rect key="frame" x="158" y="32" width="133" height="59"/>
                                         <subviews>
                                             <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" horizontalCompressionResistancePriority="500" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fPm-cm-t7d" userLabel="Plot type stack view">
                                                 <rect key="frame" x="0.0" y="22" width="133" height="37"/>
@@ -771,7 +776,7 @@
                                         </customSpacing>
                                     </stackView>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gPF-j4-6jk" userLabel="Variable label">
-                                        <rect key="frame" x="39" y="107" width="60" height="20"/>
+                                        <rect key="frame" x="49" y="107" width="60" height="20"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Variables" id="dyF-gT-Ol9">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -795,6 +800,7 @@
                                     <constraint firstItem="NKy-iq-2uO" firstAttribute="centerY" secondItem="yNk-X1-3h2" secondAttribute="centerY" id="iKQ-zh-ob7"/>
                                     <constraint firstItem="BII-Aa-qbw" firstAttribute="leading" secondItem="GgJ-Ml-iaH" secondAttribute="trailing" constant="10" id="kuO-9f-bOG"/>
                                     <constraint firstItem="BII-Aa-qbw" firstAttribute="top" secondItem="yNk-X1-3h2" secondAttribute="top" constant="10" id="uav-iQ-G7w"/>
+                                    <constraint firstItem="NKy-iq-2uO" firstAttribute="leading" secondItem="BII-Aa-qbw" secondAttribute="trailing" constant="10" id="vtH-PW-kt0"/>
                                 </constraints>
                             </customView>
                         </subviews>
@@ -821,12 +827,12 @@
         <scene sceneID="f2T-ms-HX7">
             <objects>
                 <viewController title="Monte-Carlo" storyboardIdentifier="MonteCarloOutputSetupViewController" id="zkJ-3F-i9f" userLabel="MonteCarloResultViewController" customClass="MonteCarloOutputSetupViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="4uv-Ah-5W4">
-                        <rect key="frame" x="0.0" y="0.0" width="416" height="141"/>
+                    <view key="view" misplaced="YES" id="4uv-Ah-5W4">
+                        <rect key="frame" x="0.0" y="0.0" width="409" height="141"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="WoK-fr-giZ">
-                                <rect key="frame" x="0.0" y="0.0" width="416" height="141"/>
+                                <rect key="frame" x="0.0" y="0.0" width="409" height="141"/>
                                 <subviews>
                                     <gridView xPlacement="leading" yPlacement="center" rowAlignment="firstBaseline" rowSpacing="10" columnSpacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Yti-Eb-oA3">
                                         <rect key="frame" x="10" y="19" width="359" height="103"/>
@@ -1016,7 +1022,7 @@
                                         </gridCells>
                                     </gridView>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="si9-9c-eId" userLabel="Add Output Button">
-                                        <rect key="frame" x="386" y="60" width="20" height="22"/>
+                                        <rect key="frame" x="379" y="60" width="20" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="R3X-Ht-QGo"/>
                                             <constraint firstAttribute="width" constant="20" id="YUu-Ry-fYC"/>
@@ -1031,6 +1037,7 @@
                                     </button>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="si9-9c-eId" firstAttribute="leading" secondItem="Yti-Eb-oA3" secondAttribute="trailing" constant="10" id="1Fc-Gk-81A"/>
                                     <constraint firstItem="Yti-Eb-oA3" firstAttribute="leading" secondItem="WoK-fr-giZ" secondAttribute="leading" constant="10" id="IG8-Sl-JA3"/>
                                     <constraint firstItem="Yti-Eb-oA3" firstAttribute="centerY" secondItem="WoK-fr-giZ" secondAttribute="centerY" id="bkj-sN-Unw"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" id="ecP-D9-OEF"/>

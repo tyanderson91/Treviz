@@ -33,25 +33,9 @@ class MainWindowController: NSWindowController, NSToolbarDelegate {
         let asys = self.contentViewController?.representedObject as! Analysis
 
         if let button = sender as? NSSegmentedControl {
-            //button.setSelected(true, forSegment: 0)
-            //button.setSelected(true, forSegment: 2)
             let curIndex = button.indexOfSelectedItem
-            if button.isSelected(forSegment: curIndex){
-                button.setSelected(true, forSegment: curIndex)
-            } else {
-                button.setSelected(false, forSegment: curIndex)
-            }
-            let selectStatus = button.isSelected(forSegment: curIndex)
-            switch curIndex {
-            case 0:
-                print("1st!")
-            case 1:
-                print("2nd")
-            case 2:
-                asys.viewController.mainSplitViewController.outputSetupViewController.setViewStatus(selectStatus)
-            default:
-                print("nada")
-            }
+            let shouldCollapse = !button.isSelected(forSegment: curIndex)
+            asys.viewController.mainSplitViewController.setSectionCollapse(shouldCollapse, forSection: curIndex)
         }
     }
     /*

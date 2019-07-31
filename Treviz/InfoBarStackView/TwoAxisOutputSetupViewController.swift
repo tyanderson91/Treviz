@@ -16,6 +16,9 @@ class TwoAxisOutputSetupViewController: BaseViewController {
     @IBOutlet weak var variable3DropDown: NSPopUpButton!
     @IBOutlet weak var plotTypeDropDown: NSPopUpButton!
     @IBOutlet weak var includeTextCheckbox: NSButton!
+    @IBOutlet weak var addButtonLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var conditionStackView: NSStackView!
+    @IBOutlet weak var plottingStackView: NSStackView!
     
     @IBAction func plotTypeSelected(_ sender: Any) {
     }
@@ -28,6 +31,12 @@ class TwoAxisOutputSetupViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        /*
+        if conditionStackView.isHidden {
+            //addButtonLeadingConstraint.firstAnchor = NSLayoutAnchor.from plottingStackView
+        } else {
+            
+        }*/
         // Do view setup here.
     }
     

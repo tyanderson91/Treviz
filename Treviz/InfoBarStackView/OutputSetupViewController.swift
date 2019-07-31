@@ -12,7 +12,6 @@ class OutputSetupViewController: ViewController {
     
     @IBOutlet weak var stack: CustomStackView!
     // MARK: - View Controller Lifecycle
-    @IBOutlet weak var widthConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
         
@@ -29,17 +28,6 @@ class OutputSetupViewController: ViewController {
 
         //addViewController(withIdentifier: "CollectionViewController")
         //addViewController(withIdentifier: "OtherViewController")
-    }
-    
-    /// Used to add a particular view controller as an item to our stack view.
-
-    func setViewStatus(_ shouldShow : Bool) {
-        print(shouldShow)
-        if shouldShow {
-            widthConstraint.constant = 410
-        } else {
-            widthConstraint.constant = 0
-        }
     }
 
 }
