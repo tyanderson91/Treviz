@@ -15,8 +15,6 @@ class ThreeAxisOutputSetupViewController: BaseViewController {
     @IBOutlet weak var variable3DropDown: NSPopUpButton!
     @IBOutlet weak var includeTextCheckBox: NSButton!
  
-    
-    @IBOutlet weak var conditionStackView: NSStackView!
     var strongAddButtonLeadingConstraint1 : NSLayoutConstraint? = nil
     var strongAddButtonLeadingConstraint2 : NSLayoutConstraint? = nil
     
@@ -25,8 +23,7 @@ class ThreeAxisOutputSetupViewController: BaseViewController {
     
     
     @IBAction func includeTextCheckboxClicked(_ sender: Any) {
-        conditionStackView.isHidden = !conditionStackView.isHidden
-        didDisclose()
+        //didDisclose()
     }
     @IBAction func addOutputClicked(_ sender: Any) {
     }
