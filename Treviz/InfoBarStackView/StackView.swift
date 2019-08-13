@@ -52,6 +52,11 @@ extension StackItemHost {
         
         // Update the stackItem's header disclosure state.
         stackItem.header.update(toDisclosureState: stackItem.state)
+        
+        if let base = stackItem.body as? BaseViewController {
+            base.disclosureState = stackItem.state // TODO : Figure out the best way to handle this
+            base.didDisclose()
+        }
     }
     
     func show(_ stackItem: StackItemContainer, animated: Bool) {

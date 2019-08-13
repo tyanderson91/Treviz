@@ -689,7 +689,7 @@
                         <windowPositionMask key="initialPositionMask" leftStrut="YES"/>
                         <rect key="contentRect" x="0.0" y="0.0" width="800" height="600"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
-                        <toolbar key="toolbar" implicitIdentifier="99EF4609-EB63-466D-9855-35ED2BA88456" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="gC3-LF-Jn5" customClass="AnalysisToolbar">
+                        <toolbar key="toolbar" implicitIdentifier="99EF4609-EB63-466D-9855-35ED2BA88456" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="gC3-LF-Jn5">
                             <allowedToolbarItems>
                                 <toolbarItem implicitItemIdentifier="NSToolbarShowColorsItem" id="Ndh-jH-KXn"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarShowFontsItem" id="aaV-pA-eJz"/>
@@ -698,9 +698,9 @@
                                     <button key="view" verticalHuggingPriority="750" id="k0d-C9-zla">
                                         <rect key="frame" x="22" y="14" width="31" height="25"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="roundTextured" title="&gt;" alternateTitle="Run Analysis" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ytv-0c-3b4">
+                                        <buttonCell key="cell" type="roundTextured" title="&gt;" alternateTitle="Run Analysis" bezelStyle="texturedRounded" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ytv-0c-3b4">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
+                                            <font key="font" metaFont="systemBold"/>
                                         </buttonCell>
                                     </button>
                                     <connections>
@@ -710,14 +710,14 @@
                                 <toolbarItem implicitItemIdentifier="9637223E-3C3E-4B26-B650-92E6DE94E1D2" label="View Panes" paletteLabel="View Panes" sizingBehavior="auto" selectable="YES" id="EUF-yc-cUN">
                                     <nil key="toolTip"/>
                                     <segmentedControl key="view" wantsLayer="YES" verticalHuggingPriority="750" id="bbn-UQ-slb">
-                                        <rect key="frame" x="4" y="14" width="59" height="22"/>
+                                        <rect key="frame" x="0.0" y="14" width="102" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <segmentedCell key="cell" continuous="YES" borderStyle="border" alignment="left" segmentDistribution="fillEqually" style="roundRect" trackingMode="selectAny" id="2AJ-ws-GZa">
-                                            <font key="font" metaFont="cellTitle"/>
+                                        <segmentedCell key="cell" continuous="YES" borderStyle="border" alignment="left" segmentDistribution="fillProportionally" style="roundRect" trackingMode="selectAny" id="2AJ-ws-GZa">
+                                            <font key="font" metaFont="controlContent"/>
                                             <segments>
-                                                <segment label="Inputs" width="17" selected="YES"/>
-                                                <segment label="Outputs" width="17" selected="YES" tag="1"/>
-                                                <segment label="Output Setup" width="17" selected="YES" tag="2"/>
+                                                <segment label="&lt;" imageScaling="proportionallyUpOrDown" width="32" selected="YES"/>
+                                                <segment label="v" imageScaling="proportionallyUpOrDown" width="31" selected="YES" tag="1"/>
+                                                <segment label="&gt;" imageScaling="proportionallyUpOrDown" width="31" selected="YES" tag="2"/>
                                             </segments>
                                         </segmentedCell>
                                     </segmentedControl>
@@ -762,8 +762,8 @@
                         </connections>
                     </window>
                     <connections>
+                        <outlet property="showHidePanesControl" destination="bbn-UQ-slb" id="dOK-1f-tVj"/>
                         <outlet property="toolbar" destination="gC3-LF-Jn5" id="h5O-LV-3cg"/>
-                        <outlet property="viewPanesSegmentedControl" destination="EUF-yc-cUN" id="1Ua-Dd-lPf"/>
                         <segue destination="PzM-8h-kXr" kind="relationship" relationship="window.shadowedContentViewController" id="sfB-bW-bv0"/>
                     </connections>
                 </windowController>

@@ -14,12 +14,19 @@ class ThreeAxisOutputSetupViewController: BaseViewController {
     @IBOutlet weak var variable2DropDown: NSPopUpButton!
     @IBOutlet weak var variable3DropDown: NSPopUpButton!
     @IBOutlet weak var includeTextCheckBox: NSButton!
+ 
+    
+    @IBOutlet weak var conditionStackView: NSStackView!
+    var strongAddButtonLeadingConstraint1 : NSLayoutConstraint? = nil
+    var strongAddButtonLeadingConstraint2 : NSLayoutConstraint? = nil
     
     @IBAction func plotTypeSelected(_ sender: Any) {
     }
     
     
     @IBAction func includeTextCheckboxClicked(_ sender: Any) {
+        conditionStackView.isHidden = !conditionStackView.isHidden
+        didDisclose()
     }
     @IBAction func addOutputClicked(_ sender: Any) {
     }
@@ -29,6 +36,19 @@ class ThreeAxisOutputSetupViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
+        //didDisclose()
     }
     
+    /*
+    override func didDisclose() {
+        if !conditionStackView.isHidden && disclosureState == .open {
+            addButtonLeadingConstraint2.isActive = false
+            addButtonLeadingConstraint1 = strongAddButtonLeadingConstraint1
+            addButtonLeadingConstraint1.isActive = true
+        } else {
+            addButtonLeadingConstraint1.isActive = false
+            addButtonLeadingConstraint2 = strongAddButtonLeadingConstraint2
+            addButtonLeadingConstraint2.isActive = true
+        }
+    }*/
 }

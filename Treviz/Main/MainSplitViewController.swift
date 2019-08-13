@@ -32,9 +32,18 @@ class MainSplitViewController: SplitViewController {
     }
     
     func setSectionCollapse(_ collapsed : Bool, forSection secID: Int){
-        if self.representedObject is Analysis {
+        guard let _ = self.representedObject as? Analysis else {return}
+        if !(collapsed && numActiveViews() == 1){
             splitViewItemList![secID].animator().isCollapsed = collapsed
         }
+    }
+    
+    func numActiveViews()->Int {
+        var numViews = 0
+        for thisView in splitViewItemList! {
+            numViews += (thisView.isCollapsed ? 0 : 1)
+        }
+        return numViews
     }
     
 }

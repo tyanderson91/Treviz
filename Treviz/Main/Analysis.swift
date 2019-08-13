@@ -59,8 +59,8 @@ class Analysis: NSDocument {//TODO: possibly subclass NSPersistentDocument if us
     }
     
     override func read(from data: Data, ofType typeName: String) throws {
-        let fileContents = self.analysisData
-        analysisData.read(from: data)
+        //let fileContents = self.analysisData
+        //analysisData.read(from: data)
     }
     
     /// - Tag: writeExample

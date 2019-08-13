@@ -10,10 +10,18 @@ import Cocoa
 
 class MainWindowController: NSWindowController, NSToolbarDelegate {
 
-    @IBOutlet weak var toolbar: AnalysisToolbar!
+    @IBOutlet weak var toolbar: NSToolbar!
+    @IBOutlet weak var showHidePanesControl: NSSegmentedControl!
     
     override func windowDidLoad() {
         super.windowDidLoad()
+        //showHidePanesControl.setImage(NSImage(named: "smallSegmentedCell"), forSegment: 0)
+        //showHidePanesControl.setImage(NSImage(named: "largeSegmentedCell"), forSegment: 1)
+        //showHidePanesControl.setImage(NSImage(named: "smallSegmentedCell"), forSegment: 2)
+        showHidePanesControl.setWidth(17, forSegment: 0)
+        showHidePanesControl.setWidth(24, forSegment: 1)
+        showHidePanesControl.setWidth(17, forSegment: 2)
+
         // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
     }
     
@@ -35,7 +43,12 @@ class MainWindowController: NSWindowController, NSToolbarDelegate {
         if let button = sender as? NSSegmentedControl {
             let curIndex = button.indexOfSelectedItem
             let shouldCollapse = !button.isSelected(forSegment: curIndex)
-            asys.viewController.mainSplitViewController.setSectionCollapse(shouldCollapse, forSection: curIndex)
+            let splitViewController = asys.viewController.mainSplitViewController!
+            if splitViewController.numActiveViews() == 1 && shouldCollapse {
+                button.setSelected(true, forSegment: curIndex)
+            } else {
+                splitViewController.setSectionCollapse(shouldCollapse, forSection: curIndex)
+            }
         }
     }
     /*

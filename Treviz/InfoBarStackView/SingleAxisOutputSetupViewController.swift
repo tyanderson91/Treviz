@@ -13,12 +13,23 @@ class SingleAxisOutputSetupViewController: BaseViewController {
     @IBOutlet weak var variableDropDown: NSPopUpButton!
     @IBOutlet weak var plotTypeDropDown: NSPopUpButton!
     @IBOutlet weak var includeTextCheckbox: NSButton!
+    @IBOutlet weak var gridView: CollapsibleGridView!
     
     @IBAction func addOutputClicked(_ sender: Any) {
     }
     @IBAction func plotTypeSelected(_ sender: Any) {
     }
     @IBAction func includeTextCheckboxClicked(_ sender: Any) {
+        switch includeTextCheckbox.state{
+        case .on:
+            print("on")
+            gridView.showHideCols(.show, index: [2])
+        case .off:
+            print("off")
+            gridView.showHideCols(.hide, index: [2])
+        default:
+            print("nada")
+        }
     }
     
     
@@ -27,6 +38,15 @@ class SingleAxisOutputSetupViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
+        //didDisclose()
     }
+    
+    //override func didDisclose() {
+    //    if disclosureState == .open {
+    //
+     //   } else {
+     //
+     //   }
+    //}
     
 }

@@ -23,7 +23,7 @@ class InputsViewController: ViewController, NSTableViewDataSource, NSTableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        stack.setHuggingPriority(NSLayoutConstraint.Priority.defaultHigh, for: .horizontal)
+        //stack.setHuggingPriority(NSLayoutConstraint.Priority.defaultHigh, for: .horizontal)
         
         //TODO: Fix stack loading issues
         // Load and install all the view controllers from our storyboard in the following order.
