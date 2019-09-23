@@ -64,24 +64,30 @@ class CollapsibleStackView: NSStackView {
     }
     
     private func collapseView(_ subViewIndex : Int){
-        let thisView = arrangedSubviews[subViewIndex]
-        if shouldAnimate{
-            thisView.animator().isHidden = true
-            self.animator().removeArrangedSubview(arrangedSubviews[subViewIndex])
-        } else {
-            thisView.isHidden = true
-            self.removeArrangedSubview(arrangedSubviews[subViewIndex])
+        if !(allViews?[subViewIndex].isHidden)!{
+            if let thisView = allViews?[subViewIndex] {
+            //let thisView = arrangedSubviews[subViewIndex]
+                if shouldAnimate{
+                    thisView.animator().isHidden = true
+                    self.animator().removeArrangedSubview(arrangedSubviews[subViewIndex])
+                } else {
+                    thisView.isHidden = true
+                    self.removeArrangedSubview(arrangedSubviews[subViewIndex])
+                }
+            }
         }
     }
     
     private func showView(_ subViewIndex : Int){
-        if let thisView = allViews?[subViewIndex] {
-            if shouldAnimate{
-                thisView.animator().isHidden = false
-                self.animator().insertArrangedSubview(thisView, at : subViewIndex)
-            } else {
-                self.insertArrangedSubview(thisView, at : subViewIndex)
-                thisView.isHidden = false
+        if (allViews?[subViewIndex].isHidden)!{
+            if let thisView = allViews?[subViewIndex] {
+                if shouldAnimate{
+                    thisView.animator().isHidden = false
+                    self.animator().insertArrangedSubview(thisView, at : subViewIndex)
+                } else {
+                    self.insertArrangedSubview(thisView, at : subViewIndex)
+                    thisView.isHidden = false
+                }
             }
         }
     }

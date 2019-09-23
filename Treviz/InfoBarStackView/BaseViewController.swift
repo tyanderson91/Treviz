@@ -57,6 +57,7 @@ class BaseViewController : ViewController, StackItemBody {
         return StackItemContainer(header: header, body: self, state: self.disclosureState)
     }()
     
+    
     func didDisclose(){
         // Function to be overridden. Runs after each disclosure
     }

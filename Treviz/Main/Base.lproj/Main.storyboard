@@ -680,6 +680,14 @@
             </objects>
             <point key="canvasLocation" x="-680" y="100"/>
         </scene>
+        <!--Conditions-->
+        <scene sceneID="or0-xz-kAo">
+            <objects>
+                <controllerPlaceholder storyboardName="Conditions" id="JQf-0b-2JY" sceneMemberID="viewController"/>
+                <customObject id="Ewa-pT-jlg" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-34" y="301"/>
+        </scene>
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
             <objects>
@@ -740,6 +748,7 @@
                                     </button>
                                     <connections>
                                         <action selector="conditionsClicked:" target="jGA-0Y-lOj" id="xSZ-jt-drV"/>
+                                        <segue destination="JQf-0b-2JY" kind="popover" identifier="conditionsPopupSegue" popoverAnchorView="w9Z-vw-qxw" popoverBehavior="t" preferredEdge="maxY" id="AFX-Cu-IWl"/>
                                     </connections>
                                 </toolbarItem>
                             </allowedToolbarItems>

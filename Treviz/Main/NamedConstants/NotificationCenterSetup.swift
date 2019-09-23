@@ -15,6 +15,7 @@ extension Notification.Name {
     static let didChangeUnits = Notification.Name("didChangeUnits")
     static let didChangeValue = Notification.Name("didChangeValue")
 
-
+    static let didAddCondition = Notification.Name("didAddCondition")
+    static let didRemoveCondition = Notification.Name("didAddCondition")
 
 }

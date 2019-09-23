@@ -8,7 +8,11 @@
 
 import Cocoa
 
-class MonteCarloOutputSetupViewController: BaseViewController {
+class MonteCarloOutputSetupViewController: BaseViewController, NSComboBoxDataSource {
+    
+    
+    @IBOutlet weak var conditionComboBox: NSComboBox!
+    var conditions : [Condition] = []
     
     @IBAction func addOutputClicked(_ sender: Any) {
     }
@@ -16,9 +20,31 @@ class MonteCarloOutputSetupViewController: BaseViewController {
     override func headerTitle() -> String { return NSLocalizedString("Monte-Carlo Run Statistics", comment: "") }
         
     override func viewDidLoad() {
+        if let asys = analysis {
+            conditions = asys.conditions!
+        }
+        NotificationCenter.default.addObserver(self, selector: #selector(self.conditionsChanged(_:)), name: .didAddCondition, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.conditionsChanged(_:)), name: .didRemoveCondition, object: nil)
         super.viewDidLoad()
         didDisclose()
     }
+    
+
+    @objc func conditionsChanged(_ notification: Notification){
+        if let asys = analysis {
+            conditions = asys.conditions!
+        }
+        self.conditionComboBox.reloadData()
+    }
+    
+    func numberOfItems(in comboBox: NSComboBox) -> Int {
+        return conditions.count
+    }
+    
+    func comboBox(_ comboBox: NSComboBox, objectValueForItemAt index: Int) -> Any? {
+        return conditions[index].name
+    }
+
     
     /*
     override func didDisclose() {

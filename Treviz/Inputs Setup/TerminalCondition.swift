@@ -65,7 +65,6 @@ class TerminalCondition : Condition {//TODO: make this a subclass of the "Condit
         if progressType == "linear"{
             pctComplete = (curStateValue - initStateValue)/(finalStateValue - initStateValue)
         }
-        
         return pctComplete
     }
 }

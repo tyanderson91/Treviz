@@ -8,14 +8,17 @@
 
 import Cocoa
 
-class SingleAxisOutputSetupViewController: BaseViewController {
+class SingleAxisOutputSetupViewController: BaseViewController, NSComboBoxDataSource {
 
     @IBOutlet weak var variableDropDown: NSPopUpButton!
     @IBOutlet weak var plotTypeDropDown: NSPopUpButton!
     @IBOutlet weak var includeTextCheckbox: NSButton!
     @IBOutlet weak var gridView: CollapsibleGridView!
+    @IBOutlet weak var conditionsComboBox: NSComboBox!
+    var conditions : [Condition] = []
     
     @IBAction func addOutputClicked(_ sender: Any) {
+        
     }
     @IBAction func plotTypeSelected(_ sender: Any) {
     }
@@ -37,8 +40,31 @@ class SingleAxisOutputSetupViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.conditionsChanged(_:)), name: .didAddCondition, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.conditionsChanged(_:)), name: .didRemoveCondition, object: nil)
+
+        if let asys = analysis {
+            conditions = asys.conditions!
+        }
+
         // Do view setup here.
         //didDisclose()
+    }
+    
+    @objc func conditionsChanged(_ notification: Notification){
+        if let asys = analysis {
+            conditions = asys.conditions!
+        }
+        self.conditionsComboBox.reloadData()
+    }
+    
+    func numberOfItems(in comboBox: NSComboBox) -> Int {
+        return conditions.count
+    }
+    
+    func comboBox(_ comboBox: NSComboBox, objectValueForItemAt index: Int) -> Any? {
+        return conditions[index].name
     }
     
     //override func didDisclose() {

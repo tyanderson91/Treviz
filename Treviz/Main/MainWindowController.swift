@@ -32,8 +32,19 @@ class MainWindowController: NSWindowController, NSToolbarDelegate {
         }
     }
     
+    
     @IBAction func conditionsClicked(_ sender: Any) {
-        //self.performSegue(withIdentifier: <#T##NSStoryboardSegue.Identifier#>, sender: <#T##Any?#>)
+        DispatchQueue.main.async {
+            self.performSegue(withIdentifier: "conditionsPopupSegue", sender: self)
+        }
+    }
+    
+    
+    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
+        if segue.identifier == "conditionsPopupSegue" {
+            let conditionsVC = segue.destinationController as! ConditionsViewController
+            conditionsVC.analysis = self.contentViewController!.representedObject as? Analysis
+        }
     }
     
     

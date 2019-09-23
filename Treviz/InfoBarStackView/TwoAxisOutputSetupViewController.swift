@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class TwoAxisOutputSetupViewController: BaseViewController {
+class TwoAxisOutputSetupViewController: BaseViewController, NSComboBoxDataSource {
     
     @IBOutlet weak var variable1DropDown: NSPopUpButton!
     @IBOutlet weak var variable2DropDown: NSPopUpButton!
@@ -16,7 +16,10 @@ class TwoAxisOutputSetupViewController: BaseViewController {
     @IBOutlet weak var plotTypeDropDown: NSPopUpButton!
     @IBOutlet weak var includeTextCheckbox: NSButton!
     @IBOutlet weak var gridView: CollapsibleGridView!
+    @IBOutlet weak var conditionsComboBox: NSComboBox!
     
+    var conditions : [Condition] = []
+
     
     @IBOutlet weak var plottingStackView: NSStackView!
     var strongAddButtonLeadingConstraint1 : NSLayoutConstraint? = nil
@@ -40,8 +43,31 @@ class TwoAxisOutputSetupViewController: BaseViewController {
     override func headerTitle() -> String { return NSLocalizedString("Two Axis", comment: "") }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let asys = analysis {
+            conditions = asys.conditions!
+        }
+        NotificationCenter.default.addObserver(self, selector: #selector(self.conditionsChanged(_:)), name: .didAddCondition, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.conditionsChanged(_:)), name: .didRemoveCondition, object: nil)
         // Do view setup here.
     }
+    
+    
+    @objc func conditionsChanged(_ notification: Notification){
+        if let asys = analysis {
+            conditions = asys.conditions!
+        }
+        self.conditionsComboBox.reloadData()
+    }
+    
+    func numberOfItems(in comboBox: NSComboBox) -> Int {
+        return conditions.count
+    }
+    
+    func comboBox(_ comboBox: NSComboBox, objectValueForItemAt index: Int) -> Any? {
+        return conditions[index].name
+    }
+    
     
     override func didDisclose() {//TODO : collapse grid columns (animated) when view is collapsed
         /*

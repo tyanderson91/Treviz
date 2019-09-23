@@ -74,7 +74,7 @@
 		CD42E0A922FD05F600A0F9A1 /* CollapsibleStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollapsibleStackView.swift; sourceTree = "<group>"; };
 		CD4656B1224C6F3500C587CC /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		CD4656B3224C6F8C00C587CC /* EnvironmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentViewController.swift; sourceTree = "<group>"; };
-		CDA0F87E2257398F003C62E6 /* NotificationCenterSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NotificationCenterSetup.swift; path = Treviz/Main/NotificationCenterSetup.swift; sourceTree = SOURCE_ROOT; };
+		CDA0F87E2257398F003C62E6 /* NotificationCenterSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NotificationCenterSetup.swift; path = Treviz/Main/NamedConstants/NotificationCenterSetup.swift; sourceTree = SOURCE_ROOT; };
 		CDA0F88022587E05003C62E6 /* ParamTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParamTableViewController.swift; sourceTree = "<group>"; };
 		CDA0F8822259810C003C62E6 /* InitStateOutlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitStateOutlineView.swift; sourceTree = "<group>"; };
 		CDA0F884225A6D0B003C62E6 /* NamedConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NamedConstants.swift; sourceTree = "<group>"; };
@@ -159,7 +159,6 @@
 			children = (
 				CD129621224C67E300663B88 /* InitStateViewController.swift */,
 				CDA0F8822259810C003C62E6 /* InitStateOutlineView.swift */,
-				CDA0F87E2257398F003C62E6 /* NotificationCenterSetup.swift */,
 				CDBE33C4224C81B500E1404E /* InputSetting.swift */,
 				CDE0795A2249EC7400815E7F /* AnalysisInputs.plist */,
 			);
@@ -223,6 +222,7 @@
 		CDA0F886225A6D1E003C62E6 /* NamedConstants */ = {
 			isa = PBXGroup;
 			children = (
+				CDA0F87E2257398F003C62E6 /* NotificationCenterSetup.swift */,
 				CDA0F884225A6D0B003C62E6 /* NamedConstants.swift */,
 			);
 			path = NamedConstants;

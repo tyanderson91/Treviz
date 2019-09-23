@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Bucket
+   uuid = "E8CEB84C-313A-4945-BEBC-DCE23900F37E"
    type = "1"
    version = "2.0">
    <Breakpoints>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            uuid = "A51D86E2-F28A-4E4B-9234-83B0114A897A"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Treviz/InfoBarStackView/TwoAxisOutputSetupViewController.swift"
-            timestampString = "587369939.33218"
+            filePath = "Treviz/Main/Reusable classes/Conditions/ConditionsViewController.swift"
+            timestampString = "590778860.959481"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "50"
-            endingLineNumber = "50"
-            landmarkName = "didDisclose()"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
+            landmarkName = "addConditionButtonClicked(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

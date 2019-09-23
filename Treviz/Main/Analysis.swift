@@ -17,6 +17,7 @@ class Analysis: NSDocument {//TODO: possibly subclass NSPersistentDocument if us
     var analysisData : AnalysisData!
     
     //var initVars : [Variable] = []
+    var name : String = ""
     var initialState = State()
     var terminalConditions = TerminalConditionSet([])
     var returnCodes : [Int] = []
@@ -40,7 +41,9 @@ class Analysis: NSDocument {//TODO: possibly subclass NSPersistentDocument if us
     override init() {
         super.init()
         
+        name = "Test Analysis"
         analysisData = AnalysisData()
+        conditions = []
         // Add your subclass-specific initialization here.
         //let A = self.analysisData
     }
