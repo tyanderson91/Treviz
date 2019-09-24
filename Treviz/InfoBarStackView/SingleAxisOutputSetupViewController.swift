@@ -10,12 +10,14 @@ import Cocoa
 
 class SingleAxisOutputSetupViewController: BaseViewController, NSComboBoxDataSource {
 
-    @IBOutlet weak var variableDropDown: NSPopUpButton!
+    
+
     @IBOutlet weak var plotTypeDropDown: NSPopUpButton!
     @IBOutlet weak var includeTextCheckbox: NSButton!
     @IBOutlet weak var gridView: CollapsibleGridView!
     @IBOutlet weak var conditionsComboBox: NSComboBox!
     var conditions : [Condition] = []
+    var variableSelectorViewController : VariableSelectorViewController?
     
     @IBAction func addOutputClicked(_ sender: Any) {
         
@@ -43,13 +45,24 @@ class SingleAxisOutputSetupViewController: BaseViewController, NSComboBoxDataSou
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.conditionsChanged(_:)), name: .didAddCondition, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.conditionsChanged(_:)), name: .didRemoveCondition, object: nil)
-
-        if let asys = analysis {
+        
+        if let asys = self.analysis {
             conditions = asys.conditions!
         }
 
+        let variableSelectorViewController = VariableSelectorViewController()
+        self.addChild(variableSelectorViewController)
+        gridView.cell(atColumnIndex: 0, rowIndex: 1).contentView = variableSelectorViewController.view
+        variableSelectorViewController.addVariables()
         // Do view setup here.
-        //didDisclose()
+       // didDisclose()
+    }
+    
+    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
+        if segue.identifier == .variableSelectorSegue as NSStoryboardSegue.Identifier{
+            variableSelectorViewController = (segue.destinationController as! VariableSelectorViewController)
+            self.addChild(variableSelectorViewController!)
+        }
     }
     
     @objc func conditionsChanged(_ notification: Notification){

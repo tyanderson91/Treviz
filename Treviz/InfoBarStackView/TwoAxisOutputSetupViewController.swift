@@ -17,6 +17,7 @@ class TwoAxisOutputSetupViewController: BaseViewController, NSComboBoxDataSource
     @IBOutlet weak var includeTextCheckbox: NSButton!
     @IBOutlet weak var gridView: CollapsibleGridView!
     @IBOutlet weak var conditionsComboBox: NSComboBox!
+    @IBOutlet weak var variableGridView: NSGridView!
     
     var conditions : [Condition] = []
 
@@ -49,7 +50,15 @@ class TwoAxisOutputSetupViewController: BaseViewController, NSComboBoxDataSource
         }
         NotificationCenter.default.addObserver(self, selector: #selector(self.conditionsChanged(_:)), name: .didAddCondition, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.conditionsChanged(_:)), name: .didRemoveCondition, object: nil)
-        // Do view setup here.
+    
+        let variableSelectorViewControllers = [VariableSelectorViewController(), VariableSelectorViewController(), VariableSelectorViewController()]
+        // Add three subviews containing variable selectors for each dimension
+        for i in [0,1,2]{
+            let curController = variableSelectorViewControllers[i]
+            self.addChild(curController)
+            variableGridView.cell(atColumnIndex: 1, rowIndex: i).contentView = curController.view
+            curController.addVariables()
+        }
     }
     
     

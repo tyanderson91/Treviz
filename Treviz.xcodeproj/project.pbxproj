@@ -25,6 +25,8 @@
 		CD42E0AA22FD05F600A0F9A1 /* CollapsibleStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD42E0A922FD05F600A0F9A1 /* CollapsibleStackView.swift */; };
 		CD4656B2224C6F3500C587CC /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4656B1224C6F3500C587CC /* SettingsViewController.swift */; };
 		CD4656B4224C6F8C00C587CC /* EnvironmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4656B3224C6F8C00C587CC /* EnvironmentViewController.swift */; };
+		CD9B490D2339BB56008ADA2C /* VariableSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9B490B2339BB56008ADA2C /* VariableSelectorViewController.swift */; };
+		CD9B490E2339BB56008ADA2C /* VariableSelectorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD9B490C2339BB56008ADA2C /* VariableSelectorViewController.xib */; };
 		CDA0F87F2257398F003C62E6 /* NotificationCenterSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA0F87E2257398F003C62E6 /* NotificationCenterSetup.swift */; };
 		CDA0F88122587E05003C62E6 /* ParamTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA0F88022587E05003C62E6 /* ParamTableViewController.swift */; };
 		CDA0F8832259810C003C62E6 /* InitStateOutlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA0F8822259810C003C62E6 /* InitStateOutlineView.swift */; };
@@ -74,6 +76,8 @@
 		CD42E0A922FD05F600A0F9A1 /* CollapsibleStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollapsibleStackView.swift; sourceTree = "<group>"; };
 		CD4656B1224C6F3500C587CC /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		CD4656B3224C6F8C00C587CC /* EnvironmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentViewController.swift; sourceTree = "<group>"; };
+		CD9B490B2339BB56008ADA2C /* VariableSelectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableSelectorViewController.swift; sourceTree = "<group>"; };
+		CD9B490C2339BB56008ADA2C /* VariableSelectorViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VariableSelectorViewController.xib; sourceTree = "<group>"; };
 		CDA0F87E2257398F003C62E6 /* NotificationCenterSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NotificationCenterSetup.swift; path = Treviz/Main/NamedConstants/NotificationCenterSetup.swift; sourceTree = SOURCE_ROOT; };
 		CDA0F88022587E05003C62E6 /* ParamTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParamTableViewController.swift; sourceTree = "<group>"; };
 		CDA0F8822259810C003C62E6 /* InitStateOutlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitStateOutlineView.swift; sourceTree = "<group>"; };
@@ -134,6 +138,8 @@
 		CD05E3BA2254916500906EB0 /* Reusable classes */ = {
 			isa = PBXGroup;
 			children = (
+				CD9B490B2339BB56008ADA2C /* VariableSelectorViewController.swift */,
+				CD9B490C2339BB56008ADA2C /* VariableSelectorViewController.xib */,
 				CD2D0DB0224382F70012978E /* InfoBarStackView */,
 				CDF3D1A5225057270064D70C /* ViewController.swift */,
 				CDAF13FC222CF357005CDC3C /* State.swift */,
@@ -325,6 +331,7 @@
 				CDE078F4224806EF00815E7F /* Inputs.storyboard in Resources */,
 				CDD504A222252AFD00B29751 /* Main.storyboard in Resources */,
 				CD3F5E5822EE4DCD00E4CF20 /* Conditions.storyboard in Resources */,
+				CD9B490E2339BB56008ADA2C /* VariableSelectorViewController.xib in Resources */,
 				CD2D0DBB224385580012978E /* OutputSetup.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -357,6 +364,7 @@
 				CD3F5E5522EE175400E4CF20 /* Condition.swift in Sources */,
 				CDC1F53C2234874000D1BB25 /* MainSplitViewController.swift in Sources */,
 				CDC1F54022363DDB00D1BB25 /* MainViewController.swift in Sources */,
+				CD9B490D2339BB56008ADA2C /* VariableSelectorViewController.swift in Sources */,
 				CDC1F53E2234970F00D1BB25 /* TerminalCondition.swift in Sources */,
 				CD42E0AA22FD05F600A0F9A1 /* CollapsibleStackView.swift in Sources */,
 				CDC1F5372233978500D1BB25 /* OutputsViewController.swift in Sources */,

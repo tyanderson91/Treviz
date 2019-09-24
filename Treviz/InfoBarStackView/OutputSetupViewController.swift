@@ -8,6 +8,10 @@
 
 import Cocoa
 
+extension NSStoryboardSegue.Identifier{
+    static let variableSelectorSegue = "variableSelectorSegue"
+}
+
 class OutputSetupViewController: ViewController {
     
     @IBOutlet weak var stack: CustomStackView!

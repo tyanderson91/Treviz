@@ -16,6 +16,7 @@ class ThreeAxisOutputSetupViewController: BaseViewController, NSComboBoxDataSour
     @IBOutlet weak var includeTextCheckBox: NSButton!
     @IBOutlet weak var conditionsComboBox: NSComboBox!
     
+    @IBOutlet weak var variablesGridView: NSGridView!
     var conditions : [Condition] = []
 
     var strongAddButtonLeadingConstraint1 : NSLayoutConstraint? = nil
@@ -40,8 +41,16 @@ class ThreeAxisOutputSetupViewController: BaseViewController, NSComboBoxDataSour
         }
         NotificationCenter.default.addObserver(self, selector: #selector(self.conditionsChanged(_:)), name: .didAddCondition, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.conditionsChanged(_:)), name: .didRemoveCondition, object: nil)
+        
         // Do view setup here.
-        //didDisclose()
+        let variableSelectorViewControllers = [VariableSelectorViewController(), VariableSelectorViewController(), VariableSelectorViewController()]
+        // Add three subviews containing variable selectors for each dimension
+        for i in [0,1,2]{
+            let curController = variableSelectorViewControllers[i]
+            self.addChild(curController)
+            variablesGridView.cell(atColumnIndex: 1, rowIndex: i).contentView = curController.view
+            curController.addVariables()
+        }
     }
     
 

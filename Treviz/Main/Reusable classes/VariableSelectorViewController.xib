@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14868" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14868"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="VariableSelectorViewController" customModule="Treviz" customModuleProvider="target">
+            <connections>
+                <outlet property="variableSelectorPopup" destination="qPL-Dk-0OV" id="urZ-EF-Tv6"/>
+                <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="Hz6-mo-xeY">
+            <rect key="frame" x="0.0" y="0.0" width="33" height="21"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <popUpButton horizontalHuggingPriority="600" verticalHuggingPriority="750" horizontalCompressionResistancePriority="400" translatesAutoresizingMaskIntoConstraints="NO" id="qPL-Dk-0OV">
+                    <rect key="frame" x="-2" y="-3" width="38" height="25"/>
+                    <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="2Nm-il-b2x">
+                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                        <menu key="menu" id="o6k-8g-5DY"/>
+                    </popUpButtonCell>
+                </popUpButton>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="qPL-Dk-0OV" secondAttribute="bottom" id="2t0-iu-yRt"/>
+                <constraint firstItem="qPL-Dk-0OV" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="MEH-Gm-LiG"/>
+                <constraint firstAttribute="trailing" secondItem="qPL-Dk-0OV" secondAttribute="trailing" id="W1x-sB-lbX"/>
+                <constraint firstItem="qPL-Dk-0OV" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="bdy-6F-Eje"/>
+            </constraints>
+            <point key="canvasLocation" x="153.5" y="142.5"/>
+        </customView>
+    </objects>
+</document>

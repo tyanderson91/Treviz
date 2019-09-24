@@ -12,6 +12,7 @@ class MonteCarloOutputSetupViewController: BaseViewController, NSComboBoxDataSou
     
     
     @IBOutlet weak var conditionComboBox: NSComboBox!
+    @IBOutlet weak var gridView: NSGridView!
     var conditions : [Condition] = []
     
     @IBAction func addOutputClicked(_ sender: Any) {
@@ -20,12 +21,18 @@ class MonteCarloOutputSetupViewController: BaseViewController, NSComboBoxDataSou
     override func headerTitle() -> String { return NSLocalizedString("Monte-Carlo Run Statistics", comment: "") }
         
     override func viewDidLoad() {
+        super.viewDidLoad()
         if let asys = analysis {
             conditions = asys.conditions!
         }
         NotificationCenter.default.addObserver(self, selector: #selector(self.conditionsChanged(_:)), name: .didAddCondition, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.conditionsChanged(_:)), name: .didRemoveCondition, object: nil)
-        super.viewDidLoad()
+        
+        let variableSelectorViewController = VariableSelectorViewController()
+        self.addChild(variableSelectorViewController)
+        gridView.cell(atColumnIndex: 1, rowIndex: 1).contentView = variableSelectorViewController.view
+        variableSelectorViewController.addVariables()
+            
         didDisclose()
     }
     
