@@ -10,8 +10,6 @@ import Cocoa
 
 class SingleAxisOutputSetupViewController: BaseViewController, NSComboBoxDataSource {
 
-    
-
     @IBOutlet weak var plotTypeDropDown: NSPopUpButton!
     @IBOutlet weak var includeTextCheckbox: NSButton!
     @IBOutlet weak var gridView: CollapsibleGridView!
@@ -20,8 +18,11 @@ class SingleAxisOutputSetupViewController: BaseViewController, NSComboBoxDataSou
     var variableSelectorViewController : VariableSelectorViewController?
     
     @IBAction func addOutputClicked(_ sender: Any) {
+        var newPlot = TZPlot(0, named: "FirstPlot", type: "singleLine2d")
+        newPlot.var1 = variableSelectorViewController?.getSelectedItem()
         
     }
+    
     @IBAction func plotTypeSelected(_ sender: Any) {
     }
     @IBAction func includeTextCheckboxClicked(_ sender: Any) {
@@ -37,7 +38,6 @@ class SingleAxisOutputSetupViewController: BaseViewController, NSComboBoxDataSou
         }
     }
     
-    
     override func headerTitle() -> String { return NSLocalizedString("Single Axis", comment: "") }
     
     override func viewDidLoad() {
@@ -50,11 +50,10 @@ class SingleAxisOutputSetupViewController: BaseViewController, NSComboBoxDataSou
             conditions = asys.conditions!
         }
 
-        let variableSelectorViewController = VariableSelectorViewController()
-        self.addChild(variableSelectorViewController)
-        gridView.cell(atColumnIndex: 0, rowIndex: 1).contentView = variableSelectorViewController.view
-        variableSelectorViewController.addVariables()
-        // Do view setup here.
+        //let variableSelectorViewController = VariableSelectorViewController()
+        //self.addChild(variableSelectorViewController)
+        //gridView.cell(atColumnIndex: 0, rowIndex: 1).contentView = variableSelectorViewController.view
+        //variableSelectorViewController.addVariables()
        // didDisclose()
     }
     

@@ -51,6 +51,7 @@ class TwoAxisOutputSetupViewController: BaseViewController, NSComboBoxDataSource
         NotificationCenter.default.addObserver(self, selector: #selector(self.conditionsChanged(_:)), name: .didAddCondition, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.conditionsChanged(_:)), name: .didRemoveCondition, object: nil)
     
+        /*
         let variableSelectorViewControllers = [VariableSelectorViewController(), VariableSelectorViewController(), VariableSelectorViewController()]
         // Add three subviews containing variable selectors for each dimension
         for i in [0,1,2]{
@@ -58,7 +59,7 @@ class TwoAxisOutputSetupViewController: BaseViewController, NSComboBoxDataSource
             self.addChild(curController)
             variableGridView.cell(atColumnIndex: 1, rowIndex: i).contentView = curController.view
             curController.addVariables()
-        }
+        }*/
     }
     
     

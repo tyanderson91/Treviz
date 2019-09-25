@@ -43,6 +43,7 @@ class ThreeAxisOutputSetupViewController: BaseViewController, NSComboBoxDataSour
         NotificationCenter.default.addObserver(self, selector: #selector(self.conditionsChanged(_:)), name: .didRemoveCondition, object: nil)
         
         // Do view setup here.
+        /*
         let variableSelectorViewControllers = [VariableSelectorViewController(), VariableSelectorViewController(), VariableSelectorViewController()]
         // Add three subviews containing variable selectors for each dimension
         for i in [0,1,2]{
@@ -50,7 +51,7 @@ class ThreeAxisOutputSetupViewController: BaseViewController, NSComboBoxDataSour
             self.addChild(curController)
             variablesGridView.cell(atColumnIndex: 1, rowIndex: i).contentView = curController.view
             curController.addVariables()
-        }
+        }*/
     }
     
 

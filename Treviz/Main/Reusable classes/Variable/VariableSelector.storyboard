@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="Fkm-Ad-vik">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14868"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Variable Selector View Controller-->
+        <scene sceneID="YO5-nw-yB3">
+            <objects>
+                <viewController id="Fkm-Ad-vik" customClass="VariableSelectorViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="DCu-Hp-6ur">
+                        <rect key="frame" x="0.0" y="0.0" width="163" height="21"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8Bi-7w-Z95">
+                                <rect key="frame" x="-2" y="-3" width="168" height="25"/>
+                                <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="hW2-po-CXR">
+                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <menu key="menu" id="9gx-rd-RcJ"/>
+                                </popUpButtonCell>
+                            </popUpButton>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="8Bi-7w-Z95" firstAttribute="top" secondItem="DCu-Hp-6ur" secondAttribute="top" id="Tva-vU-FaY"/>
+                            <constraint firstAttribute="bottom" secondItem="8Bi-7w-Z95" secondAttribute="bottom" id="czJ-is-zxH"/>
+                            <constraint firstAttribute="trailing" secondItem="8Bi-7w-Z95" secondAttribute="trailing" id="eJG-9Y-tCt"/>
+                            <constraint firstItem="8Bi-7w-Z95" firstAttribute="leading" secondItem="DCu-Hp-6ur" secondAttribute="leading" id="zDz-iM-pZj"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="variableSelectorPopup" destination="8Bi-7w-Z95" id="dux-IB-Ykc"/>
+                    </connections>
+                </viewController>
+                <customObject id="rhV-XW-xKk" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-281.5" y="14.5"/>
+        </scene>
+    </scenes>
+</document>

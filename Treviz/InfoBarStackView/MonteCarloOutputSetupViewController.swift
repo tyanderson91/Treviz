@@ -27,12 +27,12 @@ class MonteCarloOutputSetupViewController: BaseViewController, NSComboBoxDataSou
         }
         NotificationCenter.default.addObserver(self, selector: #selector(self.conditionsChanged(_:)), name: .didAddCondition, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.conditionsChanged(_:)), name: .didRemoveCondition, object: nil)
-        
+        /*
         let variableSelectorViewController = VariableSelectorViewController()
         self.addChild(variableSelectorViewController)
         gridView.cell(atColumnIndex: 1, rowIndex: 1).contentView = variableSelectorViewController.view
         variableSelectorViewController.addVariables()
-            
+            */
         didDisclose()
     }
     

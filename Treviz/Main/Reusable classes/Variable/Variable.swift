@@ -69,7 +69,14 @@ class Variable : NSObject{
     
     static func getVariable(_ id : String, inputList: [Variable])->Variable?{
         for thisVar in inputList {//TODO: turn all variable input into dictionary
-            if thisVar.id == id{return thisVar}
+            if thisVar.id == id {return thisVar}
+        }
+        return nil
+    }
+    
+    static func getVar(fromName name : String, inputList: [Variable])->Variable?{//TODO : determine whether both of these are needed
+        for thisVar in inputList {//TODO: turn all variable input into dictionary
+            if thisVar.name == name {return thisVar}
         }
         return nil
     }
