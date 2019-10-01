@@ -8,11 +8,10 @@
 
 import Cocoa
 
-class MonteCarloOutputSetupViewController: BaseViewController, NSComboBoxDataSource {
+class MonteCarloOutputSetupViewController: AddOutputViewController {
     
     
-    @IBOutlet weak var conditionComboBox: NSComboBox!
-    @IBOutlet weak var gridView: NSGridView!
+    @IBOutlet weak var gridView: CollapsibleGridView!
     var conditions : [Condition] = []
     
     @IBAction func addOutputClicked(_ sender: Any) {
@@ -25,45 +24,22 @@ class MonteCarloOutputSetupViewController: BaseViewController, NSComboBoxDataSou
         if let asys = analysis {
             conditions = asys.conditions!
         }
-        NotificationCenter.default.addObserver(self, selector: #selector(self.conditionsChanged(_:)), name: .didAddCondition, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.conditionsChanged(_:)), name: .didRemoveCondition, object: nil)
-        /*
-        let variableSelectorViewController = VariableSelectorViewController()
-        self.addChild(variableSelectorViewController)
-        gridView.cell(atColumnIndex: 1, rowIndex: 1).contentView = variableSelectorViewController.view
-        variableSelectorViewController.addVariables()
-            */
+
+        let storyboard = NSStoryboard(name: "VariableSelector", bundle: nil)
+        let var1ViewController = storyboard.instantiateController(withIdentifier: "variableSelectorViewController") as! VariableSelectorViewController
+        self.addChild(var1ViewController)
+        gridView.cell(atColumnIndex: 1, rowIndex: 1).contentView = var1ViewController.view
+
         didDisclose()
     }
     
 
-    @objc func conditionsChanged(_ notification: Notification){
-        if let asys = analysis {
-            conditions = asys.conditions!
-        }
-        self.conditionComboBox.reloadData()
-    }
-    
-    func numberOfItems(in comboBox: NSComboBox) -> Int {
-        return conditions.count
-    }
-    
-    func comboBox(_ comboBox: NSComboBox, objectValueForItemAt index: Int) -> Any? {
-        return conditions[index].name
-    }
-
-    
-    /*
     override func didDisclose() {
-        if disclosureState == .open {
-            addButtonLeadingConstraint2.isActive = false
-            addButtonLeadingConstraint1 = strongAddButtonLeadingConstraint1
-            addButtonLeadingConstraint1.isActive = true
+        if disclosureState == .closed {
+            gridView.showHideCols(.hide, index: [0,1,2])
         } else {
-            addButtonLeadingConstraint1.isActive = false
-            addButtonLeadingConstraint2 = strongAddButtonLeadingConstraint2
-            addButtonLeadingConstraint2.isActive = true
+            gridView.showHideCols(.show, index: [0,1,2])
         }
-    }*/
+    }
         
 }

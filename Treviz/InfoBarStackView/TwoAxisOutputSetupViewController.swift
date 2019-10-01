@@ -8,16 +8,16 @@
 
 import Cocoa
 
-class TwoAxisOutputSetupViewController: BaseViewController, NSComboBoxDataSource {
+class TwoAxisOutputSetupViewController: AddOutputViewController {
     
-    @IBOutlet weak var variable1DropDown: NSPopUpButton!
-    @IBOutlet weak var variable2DropDown: NSPopUpButton!
-    @IBOutlet weak var variable3DropDown: NSPopUpButton!
+    @IBOutlet weak var variable1View: NSView!
+    @IBOutlet weak var variable2View: NSView!
+    @IBOutlet weak var variable3View: NSView!
     @IBOutlet weak var plotTypeDropDown: NSPopUpButton!
     @IBOutlet weak var includeTextCheckbox: NSButton!
     @IBOutlet weak var gridView: CollapsibleGridView!
-    @IBOutlet weak var conditionsComboBox: NSComboBox!
     @IBOutlet weak var variableGridView: NSGridView!
+    
     
     var conditions : [Condition] = []
 
@@ -38,59 +38,45 @@ class TwoAxisOutputSetupViewController: BaseViewController, NSComboBoxDataSource
             print("Unknown state")
         }
     }
-    @IBAction func addOutputClicked(_ sender: Any) {
+
+    override func createPlot()->TZPlot? {// TODO : expand for all plot types
+        if let plotType = plotTypeDropDown.selectedItem?.title{
+            let newPlot = TZPlot1line2d()
+            newPlot.plotType = PlotType(rawValue: plotType)!
+            //newPlot.var1 = variableSelectorViewController?.getSelectedItem()
+            newPlot.setName()
+            return newPlot
+        }
+        return nil
     }
     
     override func headerTitle() -> String { return NSLocalizedString("Two Axis", comment: "") }
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let asys = analysis {
-            conditions = asys.conditions!
-        }
-        NotificationCenter.default.addObserver(self, selector: #selector(self.conditionsChanged(_:)), name: .didAddCondition, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.conditionsChanged(_:)), name: .didRemoveCondition, object: nil)
-    
-        /*
-        let variableSelectorViewControllers = [VariableSelectorViewController(), VariableSelectorViewController(), VariableSelectorViewController()]
-        // Add three subviews containing variable selectors for each dimension
-        for i in [0,1,2]{
-            let curController = variableSelectorViewControllers[i]
-            self.addChild(curController)
-            variableGridView.cell(atColumnIndex: 1, rowIndex: i).contentView = curController.view
-            curController.addVariables()
-        }*/
+        let storyboard = NSStoryboard(name: "VariableSelector", bundle: nil)
+        let var1ViewController = storyboard.instantiateController(withIdentifier: "variableSelectorViewController") as! VariableSelectorViewController
+        self.addChild(var1ViewController)
+        variableGridView.cell(atColumnIndex: 1, rowIndex: 0).contentView = var1ViewController.view
+        
+        let var2ViewController = storyboard.instantiateController(withIdentifier: "variableSelectorViewController") as! VariableSelectorViewController
+        self.addChild(var2ViewController)
+        variableGridView.cell(atColumnIndex: 1, rowIndex: 1).contentView = var2ViewController.view
+        
+        let var3ViewController = storyboard.instantiateController(withIdentifier: "variableSelectorViewController") as! VariableSelectorViewController
+         self.addChild(var3ViewController)
+         variableGridView.cell(atColumnIndex: 1, rowIndex: 2).contentView = var3ViewController.view
     }
-    
-    
-    @objc func conditionsChanged(_ notification: Notification){
-        if let asys = analysis {
-            conditions = asys.conditions!
-        }
-        self.conditionsComboBox.reloadData()
-    }
-    
-    func numberOfItems(in comboBox: NSComboBox) -> Int {
-        return conditions.count
-    }
-    
-    func comboBox(_ comboBox: NSComboBox, objectValueForItemAt index: Int) -> Any? {
-        return conditions[index].name
-    }
-    
     
     override func didDisclose() {//TODO : collapse grid columns (animated) when view is collapsed
-        /*
-        NSAnimationContext.beginGrouping()
-        NSAnimationContext.current.duration = 5
+
         if disclosureState == .open {
             //gridView.isHidden = false
-            do {try gridView.showHideCols(.show, index: [0,1,2])} catch {}
+            gridView.showHideCols(.show, index: [0,1,2])
         } else {
             //gridView.isHidden = true
-            do {try gridView.showHideCols(.hide, index : [0,1,2])} catch {}
+            gridView.showHideCols(.hide, index : [0,1,2])
         }
-        NSAnimationContext.endGrouping()
-    */}
+    }
 }
 

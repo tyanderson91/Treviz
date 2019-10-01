@@ -150,7 +150,7 @@ class CustomStackView : NSStackView, StackItemHost {
     var parent : NSViewController?
     //TODO: find better way to access parent view controller
     
-    func addViewController(fromStoryboardId storyboardid:String, withIdentifier identifier: String) {
+    func addViewController(fromStoryboardId storyboardid:String, withIdentifier identifier: String)->NSViewController? {
         
         let storyboard = NSStoryboard(name: storyboardid, bundle: nil)
         let viewController = storyboard.instantiateController(withIdentifier: identifier) as! BaseViewController
@@ -188,6 +188,8 @@ class CustomStackView : NSStackView, StackItemHost {
         case .closed: hide(stackItem, animated: false)
         }
         //show(stackItem, animated: false)
+        
+        return viewController
     }
     
 }

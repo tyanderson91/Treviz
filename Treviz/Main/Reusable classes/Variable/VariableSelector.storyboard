@@ -6,17 +6,17 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Variable Selector View Controller-->
+        <!--Variable Selector-->
         <scene sceneID="YO5-nw-yB3">
             <objects>
-                <viewController id="Fkm-Ad-vik" customClass="VariableSelectorViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Variable Selector" storyboardIdentifier="variableSelectorViewController" id="Fkm-Ad-vik" customClass="VariableSelectorViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="DCu-Hp-6ur">
                         <rect key="frame" x="0.0" y="0.0" width="163" height="21"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8Bi-7w-Z95">
+                            <popUpButton horizontalHuggingPriority="100" verticalHuggingPriority="750" horizontalCompressionResistancePriority="300" verticalCompressionResistancePriority="850" translatesAutoresizingMaskIntoConstraints="NO" id="8Bi-7w-Z95">
                                 <rect key="frame" x="-2" y="-3" width="168" height="25"/>
-                                <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="hW2-po-CXR">
+                                <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" truncatesLastVisibleLine="YES" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="hW2-po-CXR">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                     <menu key="menu" id="9gx-rd-RcJ"/>

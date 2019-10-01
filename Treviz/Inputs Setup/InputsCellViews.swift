@@ -32,7 +32,7 @@ extension NSUserInterfaceItemIdentifier{
     static let paramValueCellView = NSUserInterfaceItemIdentifier.init("paramValueCellView")
 }
 
-extension InputsViewController{
+extension InputsViewController{ // TODO: I don't like this existing here
     //Views in init state and param views
     static func nameCellView(view: NSTableView, thisInput: InputSetting)->NSTableCellView?{
         let newView = view.makeView(withIdentifier: .nameCellView, owner: self) as? NSTableCellView

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14868"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -721,7 +722,7 @@
                                         <rect key="frame" x="0.0" y="14" width="102" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <segmentedCell key="cell" continuous="YES" borderStyle="border" alignment="left" segmentDistribution="fillProportionally" style="roundRect" trackingMode="selectAny" id="2AJ-ws-GZa">
-                                            <font key="font" metaFont="controlContent"/>
+                                            <font key="font" metaFont="label" size="12"/>
                                             <segments>
                                                 <segment label="&lt;" imageScaling="proportionallyUpOrDown" width="32" selected="YES"/>
                                                 <segment label="v" imageScaling="proportionallyUpOrDown" width="31" selected="YES" tag="1"/>
@@ -739,9 +740,9 @@
                                 <toolbarItem implicitItemIdentifier="8D3393E5-C975-48A3-A5A2-A9165225D8F0" label="Conditions" paletteLabel="Conditions" sizingBehavior="auto" id="w9Z-vw-qxw">
                                     <nil key="toolTip"/>
                                     <button key="view" verticalHuggingPriority="750" id="nfV-d5-noY">
-                                        <rect key="frame" x="12" y="14" width="41" height="26"/>
+                                        <rect key="frame" x="5" y="14" width="54" height="27"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="roundTextured" title="(x,y)" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="eyl-U4-WyX">
+                                        <buttonCell key="cell" type="roundTextured" title="(x&lt;y)" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="eyl-U4-WyX">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
@@ -751,13 +752,49 @@
                                         <segue destination="JQf-0b-2JY" kind="popover" identifier="conditionsPopupSegue" popoverAnchorView="w9Z-vw-qxw" popoverBehavior="t" preferredEdge="maxY" id="AFX-Cu-IWl"/>
                                     </connections>
                                 </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="1084F476-9DE7-4161-ABCA-12DAACF8F1FC" label="CSYS" paletteLabel="CSYS" image="CSYS colorful" sizingBehavior="auto" id="ErN-TL-gyx">
+                                    <nil key="toolTip"/>
+                                    <button key="view" verticalHuggingPriority="750" id="x3I-3P-jWu">
+                                        <rect key="frame" x="1" y="14" width="35" height="25"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="CSYS colorful" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="RhO-Tx-rVP">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" size="13" name="STIXGeneral-Regular"/>
+                                        </buttonCell>
+                                    </button>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="18578E62-C79C-4524-BDB2-6547F2266897" label="Vectors" paletteLabel="Vectors" sizingBehavior="auto" id="qt5-nR-d1k">
+                                    <nil key="toolTip"/>
+                                    <button key="view" verticalHuggingPriority="750" id="8Kr-nK-8Tr">
+                                        <rect key="frame" x="2" y="14" width="44" height="25"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="roundTextured" title="↗︎" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="dBm-IX-ZyB">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" size="13" name="PingFangSC-Light"/>
+                                        </buttonCell>
+                                    </button>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="AE30FD21-EB34-403E-9B5B-102D4541E712" label="Variables" paletteLabel="Variables" sizingBehavior="auto" id="9xe-rC-K55" userLabel="Variables">
+                                    <nil key="toolTip"/>
+                                    <button key="view" verticalHuggingPriority="750" id="y45-d9-Yh4">
+                                        <rect key="frame" x="4" y="14" width="49" height="25"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="roundTextured" title="𝒳" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="7mf-ck-s9H">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" size="13" name="STIXGeneral-Regular"/>
+                                        </buttonCell>
+                                    </button>
+                                </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
                                 <toolbarItem reference="9m0-eV-BGQ"/>
                                 <toolbarItem reference="ClC-Qq-Amg"/>
                                 <toolbarItem reference="w9Z-vw-qxw"/>
+                                <toolbarItem reference="9xe-rC-K55"/>
+                                <toolbarItem reference="qt5-nR-d1k"/>
+                                <toolbarItem reference="ErN-TL-gyx"/>
+                                <toolbarItem reference="sla-GS-rBt"/>
                                 <toolbarItem reference="Ndh-jH-KXn"/>
-                                <toolbarItem reference="aaV-pA-eJz"/>
                                 <toolbarItem reference="sla-GS-rBt"/>
                                 <toolbarItem reference="EUF-yc-cUN"/>
                                 <toolbarItem reference="9m0-eV-BGQ"/>
@@ -1031,6 +1068,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="CSYS colorful" width="20" height="20"/>
         <image name="globe_picture" width="2048" height="2048"/>
     </resources>
 </document>

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CD11FA8723408173001A3695 /* AddOutputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD11FA8623408173001A3695 /* AddOutputViewController.swift */; };
+		CD11FA8923411FD3001A3695 /* VariableSelector.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD449023233B378C0095F243 /* VariableSelector.storyboard */; };
 		CD129622224C67E300663B88 /* InitStateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD129621224C67E300663B88 /* InitStateViewController.swift */; };
 		CD280F4A233B45670004263F /* TZPlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD280F49233B45670004263F /* TZPlot.swift */; };
 		CD28477722FF9C8800D192A9 /* CollapsibleGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD28477622FF9C8800D192A9 /* CollapsibleGridView.swift */; };
@@ -24,7 +26,6 @@
 		CD3F5E5822EE4DCD00E4CF20 /* Conditions.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD3F5E5722EE4DCD00E4CF20 /* Conditions.storyboard */; };
 		CD3F5E5A22EE4FFE00E4CF20 /* ConditionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3F5E5922EE4FFE00E4CF20 /* ConditionsViewController.swift */; };
 		CD42E0AA22FD05F600A0F9A1 /* CollapsibleStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD42E0A922FD05F600A0F9A1 /* CollapsibleStackView.swift */; };
-		CD449024233B378C0095F243 /* VariableSelector.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD449023233B378C0095F243 /* VariableSelector.storyboard */; };
 		CD4656B2224C6F3500C587CC /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4656B1224C6F3500C587CC /* SettingsViewController.swift */; };
 		CD4656B4224C6F8C00C587CC /* EnvironmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4656B3224C6F8C00C587CC /* EnvironmentViewController.swift */; };
 		CD9B490D2339BB56008ADA2C /* VariableSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9B490B2339BB56008ADA2C /* VariableSelectorViewController.swift */; };
@@ -56,6 +57,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CD11FA8623408173001A3695 /* AddOutputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOutputViewController.swift; sourceTree = "<group>"; };
 		CD129621224C67E300663B88 /* InitStateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = InitStateViewController.swift; path = "/Users/TylerAnderson/Coding/Swift/Treviz/Treviz/Inputs Setup/InitStateViewController.swift"; sourceTree = "<absolute>"; };
 		CD280F49233B45670004263F /* TZPlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TZPlot.swift; sourceTree = "<group>"; };
 		CD28477622FF9C8800D192A9 /* CollapsibleGridView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollapsibleGridView.swift; sourceTree = "<group>"; };
@@ -214,6 +216,7 @@
 				CD2D0D96224382F70012978E /* ThreeAxisOutputSetupViewController.swift */,
 				CD2D0DAA224382F70012978E /* MonteCarloOutputSetupViewController.swift */,
 				CD2D0D8F224382F70012978E /* OutputSetupViewController.swift */,
+				CD11FA8623408173001A3695 /* AddOutputViewController.swift */,
 				CD2D0DA6224382F70012978E /* OutputSetup.storyboard */,
 				CD280F49233B45670004263F /* TZPlot.swift */,
 			);
@@ -335,8 +338,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD11FA8923411FD3001A3695 /* VariableSelector.storyboard in Resources */,
 				CDBE33C6224CB48200E1404E /* AnalysisInputs.plist in Resources */,
-				CD449024233B378C0095F243 /* VariableSelector.storyboard in Resources */,
 				CDF3D1A3225025E60064D70C /* InitialVars.plist in Resources */,
 				CD2D0DBA2243837F0012978E /* HeaderViewController.storyboard in Resources */,
 				CDD5049F22252AFD00B29751 /* Assets.xcassets in Resources */,
@@ -387,6 +390,7 @@
 				CDF3D1A1225025B00064D70C /* Analysis.swift in Sources */,
 				CDA0F885225A6D0B003C62E6 /* NamedConstants.swift in Sources */,
 				CDBEA0A622447A9C00D3159C /* TextOutputsViewController.swift in Sources */,
+				CD11FA8723408173001A3695 /* AddOutputViewController.swift in Sources */,
 				CD129622224C67E300663B88 /* InitStateViewController.swift in Sources */,
 				CD28477722FF9C8800D192A9 /* CollapsibleGridView.swift in Sources */,
 				CDD5049622252AF900B29751 /* AppDelegate.swift in Sources */,
@@ -459,7 +463,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -514,7 +518,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;

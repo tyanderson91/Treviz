@@ -8,15 +8,15 @@
 
 import Cocoa
 
-class ThreeAxisOutputSetupViewController: BaseViewController, NSComboBoxDataSource {
+class ThreeAxisOutputSetupViewController: AddOutputViewController {
     
     @IBOutlet weak var variable1DropDown: NSPopUpButton!
     @IBOutlet weak var variable2DropDown: NSPopUpButton!
     @IBOutlet weak var variable3DropDown: NSPopUpButton!
     @IBOutlet weak var includeTextCheckBox: NSButton!
-    @IBOutlet weak var conditionsComboBox: NSComboBox!
+    @IBOutlet weak var gridView: CollapsibleGridView!
     
-    @IBOutlet weak var variablesGridView: NSGridView!
+    @IBOutlet weak var variableGridView: NSGridView!
     var conditions : [Condition] = []
 
     var strongAddButtonLeadingConstraint1 : NSLayoutConstraint? = nil
@@ -42,46 +42,26 @@ class ThreeAxisOutputSetupViewController: BaseViewController, NSComboBoxDataSour
         NotificationCenter.default.addObserver(self, selector: #selector(self.conditionsChanged(_:)), name: .didAddCondition, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.conditionsChanged(_:)), name: .didRemoveCondition, object: nil)
         
+        let storyboard = NSStoryboard(name: "VariableSelector", bundle: nil)
+        let var1ViewController = storyboard.instantiateController(withIdentifier: "variableSelectorViewController") as! VariableSelectorViewController
+        self.addChild(var1ViewController)
+        variableGridView.cell(atColumnIndex: 1, rowIndex: 0).contentView = var1ViewController.view
+        
+        let var2ViewController = storyboard.instantiateController(withIdentifier: "variableSelectorViewController") as! VariableSelectorViewController
+        self.addChild(var2ViewController)
+        variableGridView.cell(atColumnIndex: 1, rowIndex: 1).contentView = var2ViewController.view
+        
+        let var3ViewController = storyboard.instantiateController(withIdentifier: "variableSelectorViewController") as! VariableSelectorViewController
+        self.addChild(var3ViewController)
+        variableGridView.cell(atColumnIndex: 1, rowIndex: 2).contentView = var3ViewController.view
         // Do view setup here.
-        /*
-        let variableSelectorViewControllers = [VariableSelectorViewController(), VariableSelectorViewController(), VariableSelectorViewController()]
-        // Add three subviews containing variable selectors for each dimension
-        for i in [0,1,2]{
-            let curController = variableSelectorViewControllers[i]
-            self.addChild(curController)
-            variablesGridView.cell(atColumnIndex: 1, rowIndex: i).contentView = curController.view
-            curController.addVariables()
-        }*/
     }
-    
-
-    @objc func conditionsChanged(_ notification: Notification){
-        if let asys = analysis {
-            conditions = asys.conditions!
-        }
-        self.conditionsComboBox.reloadData()
-    }
-    
-    func numberOfItems(in comboBox: NSComboBox) -> Int {
-        return conditions.count
-    }
-    
-    func comboBox(_ comboBox: NSComboBox, objectValueForItemAt index: Int) -> Any? {
-        return conditions[index].name
-    }
-
-    
-    
-    /*
+        
     override func didDisclose() {
-        if !conditionStackView.isHidden && disclosureState == .open {
-            addButtonLeadingConstraint2.isActive = false
-            addButtonLeadingConstraint1 = strongAddButtonLeadingConstraint1
-            addButtonLeadingConstraint1.isActive = true
+        if disclosureState == .closed {
+            gridView.showHideCols(.hide, index: [0,1,2])
         } else {
-            addButtonLeadingConstraint1.isActive = false
-            addButtonLeadingConstraint2 = strongAddButtonLeadingConstraint2
-            addButtonLeadingConstraint2.isActive = true
+            gridView.showHideCols(.show, index: [0,1,2])
         }
-    }*/
+    }
 }

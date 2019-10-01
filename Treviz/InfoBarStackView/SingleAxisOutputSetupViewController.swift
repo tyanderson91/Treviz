@@ -8,19 +8,23 @@
 
 import Cocoa
 
-class SingleAxisOutputSetupViewController: BaseViewController, NSComboBoxDataSource {
+class SingleAxisOutputSetupViewController: AddOutputViewController {
 
     @IBOutlet weak var plotTypeDropDown: NSPopUpButton!
     @IBOutlet weak var includeTextCheckbox: NSButton!
     @IBOutlet weak var gridView: CollapsibleGridView!
-    @IBOutlet weak var conditionsComboBox: NSComboBox!
     var conditions : [Condition] = []
     var variableSelectorViewController : VariableSelectorViewController?
     
-    @IBAction func addOutputClicked(_ sender: Any) {
-        var newPlot = TZPlot(0, named: "FirstPlot", type: "singleLine2d")
-        newPlot.var1 = variableSelectorViewController?.getSelectedItem()
-        
+    override func createPlot()->TZPlot? {// TODO : expand for all plot types
+        if let plotType = plotTypeDropDown.selectedItem?.title{
+            let newPlot = TZPlot1line2d()
+            newPlot.plotType = PlotType(rawValue: plotType)!
+            newPlot.var1 = variableSelectorViewController?.getSelectedItem()
+            newPlot.setName()
+            return newPlot
+        }
+        return nil
     }
     
     @IBAction func plotTypeSelected(_ sender: Any) {
@@ -43,13 +47,15 @@ class SingleAxisOutputSetupViewController: BaseViewController, NSComboBoxDataSou
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(self.conditionsChanged(_:)), name: .didAddCondition, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.conditionsChanged(_:)), name: .didRemoveCondition, object: nil)
-        
         if let asys = self.analysis {
             conditions = asys.conditions!
         }
 
+        let storyboard = NSStoryboard(name: "VariableSelector", bundle: nil)
+        let var1ViewController = storyboard.instantiateController(withIdentifier: "variableSelectorViewController") as! VariableSelectorViewController
+        self.addChild(var1ViewController)
+        gridView.cell(atColumnIndex: 0, rowIndex: 1).contentView = var1ViewController.view
+        
         //let variableSelectorViewController = VariableSelectorViewController()
         //self.addChild(variableSelectorViewController)
         //gridView.cell(atColumnIndex: 0, rowIndex: 1).contentView = variableSelectorViewController.view
@@ -57,34 +63,12 @@ class SingleAxisOutputSetupViewController: BaseViewController, NSComboBoxDataSou
        // didDisclose()
     }
     
-    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
-        if segue.identifier == .variableSelectorSegue as NSStoryboardSegue.Identifier{
-            variableSelectorViewController = (segue.destinationController as! VariableSelectorViewController)
-            self.addChild(variableSelectorViewController!)
+    override func didDisclose() {
+        if disclosureState == .closed {
+            gridView.showHideCols(.hide, index: [0,1,2])
+        } else {
+            gridView.showHideCols(.show, index: [0,1,2])
         }
     }
-    
-    @objc func conditionsChanged(_ notification: Notification){
-        if let asys = analysis {
-            conditions = asys.conditions!
-        }
-        self.conditionsComboBox.reloadData()
-    }
-    
-    func numberOfItems(in comboBox: NSComboBox) -> Int {
-        return conditions.count
-    }
-    
-    func comboBox(_ comboBox: NSComboBox, objectValueForItemAt index: Int) -> Any? {
-        return conditions[index].name
-    }
-    
-    //override func didDisclose() {
-    //    if disclosureState == .open {
-    //
-     //   } else {
-     //
-     //   }
-    //}
     
 }

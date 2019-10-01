@@ -27,9 +27,9 @@ class InputsViewController: ViewController, NSTableViewDataSource, NSTableViewDe
         
         //TODO: Fix stack loading issues
         // Load and install all the view controllers from our storyboard in the following order.
-        stack.addViewController(fromStoryboardId: "Inputs", withIdentifier: "SettingsViewController")
-        stack.addViewController(fromStoryboardId: "Inputs", withIdentifier: "EnvironmentViewController")
-        stack.addViewController(fromStoryboardId: "Inputs", withIdentifier: "InitStateViewController")
+        _ = stack.addViewController(fromStoryboardId: "Inputs", withIdentifier: "SettingsViewController")
+        _ = stack.addViewController(fromStoryboardId: "Inputs", withIdentifier: "EnvironmentViewController")
+        _ = stack.addViewController(fromStoryboardId: "Inputs", withIdentifier: "InitStateViewController")
         let initStateView = stack.views.last
         self.initStateViewController = initStateView?.nextResponder as? InitStateViewController
         

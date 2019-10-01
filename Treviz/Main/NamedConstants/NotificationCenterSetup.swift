@@ -18,4 +18,5 @@ extension Notification.Name {
     static let didAddCondition = Notification.Name("didAddCondition")
     static let didRemoveCondition = Notification.Name("didAddCondition")
 
+    static let didAddPlot = Notification.Name("didAddPlot")
 }
