@@ -12,27 +12,18 @@ class MonteCarloOutputSetupViewController: AddOutputViewController {
     
     
     @IBOutlet weak var gridView: CollapsibleGridView!
-    var conditions : [Condition] = []
-    
-    @IBAction func addOutputClicked(_ sender: Any) {
-    }
     
     override func headerTitle() -> String { return NSLocalizedString("Monte-Carlo Run Statistics", comment: "") }
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let asys = analysis {
-            conditions = asys.conditions!
-        }
 
         let storyboard = NSStoryboard(name: "VariableSelector", bundle: nil)
         let var1ViewController = storyboard.instantiateController(withIdentifier: "variableSelectorViewController") as! VariableSelectorViewController
         self.addChild(var1ViewController)
         gridView.cell(atColumnIndex: 1, rowIndex: 1).contentView = var1ViewController.view
 
-        didDisclose()
     }
-    
 
     override func didDisclose() {
         if disclosureState == .closed {

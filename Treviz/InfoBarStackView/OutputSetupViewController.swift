@@ -44,12 +44,13 @@ class OutputSetupViewController: ViewController, NSTableViewDelegate, NSTableVie
         //addViewController(withIdentifier: "CollectionViewController")
         //addViewController(withIdentifier: "OtherViewController")
         
+        /*
         let newPlot = TZPlot1line2d()
         newPlot.plotType = PlotType.singleLine2d
         newPlot.var1 = Variable.init("t")
         //newPlot.var1?.name = "Time"
         newPlot.setName()
-        allPlots.append(newPlot)
+        allPlots.append(newPlot)*/
     }
     
     

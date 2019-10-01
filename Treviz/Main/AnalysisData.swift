@@ -12,6 +12,7 @@ import Cocoa
 
 class AnalysisData: NSObject {
     var initVars : [Variable]?
+    var initPlotTypes : [PlotType]?
     
     func read(from data: Data) {
         initVars = []// = String(bytes: data, encoding: .utf8)!
@@ -25,20 +26,34 @@ class AnalysisData: NSObject {
         super.init()
         //This function runs the default loading sub-methods
         //TODO: expand the number of read sourcess
-        self.loadVars(fromPlist: "InitialVars")
+        self.loadVars(from: "InitialVars")
+        self.loadPlotTypes(from: "PlotTypes")
     }
     
-    func loadVars(fromPlist plistName: String){
-        let varFilePath = Bundle.main.path(forResource: plistName, ofType: "plist")
+    func loadVars(from plist: String){
+        let varFilePath = Bundle.main.path(forResource: plist, ofType: "plist")
         if (varFilePath != nil) {
             let listOfVars = Variable.initVars(filename: varFilePath!)
             if listOfVars.count > 0 {//If the initialization did not return an empty array
                 self.initVars = listOfVars
-                InputSetting.varInputList = listOfVars
+                InputSetting.varInputList = listOfVars // TODO : handle this in a more robust way
             } else {self.initVars = nil}
         }
         else {
             self.initVars = nil
+        }
+    }
+    
+    func loadPlotTypes(from plist: String){
+        let plotFilePath = Bundle.main.path(forResource: plist, ofType: "plist")
+        if (plotFilePath != nil) {
+            let listOfPlots = PlotType.loadPlotTypes(filename: plotFilePath!)
+            if listOfPlots.count > 0 {//If the initialization did not return an empty array
+                self.initPlotTypes = listOfPlots
+            } else {self.initPlotTypes = nil}
+        }
+        else {
+            self.initPlotTypes = nil
         }
     }
 }

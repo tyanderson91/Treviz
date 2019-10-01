@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>naxis</key>
+		<integer>1</integer>
+		<key>id</key>
+		<string>boxplot</string>
+		<key>name</key>
+		<string>Boxplot</string>
+		<key>condition</key>
+		<true/>
+		<key>nvar</key>
+		<integer>1</integer>
+	</dict>
+	<dict>
+		<key>naxis</key>
+		<integer>1</integer>
+		<key>id</key>
+		<string>histogram</string>
+		<key>name</key>
+		<string>Histogram</string>
+		<key>condition</key>
+		<true/>
+		<key>nvar</key>
+		<integer>1</integer>
+	</dict>
+	<dict>
+		<key>naxis</key>
+		<integer>2</integer>
+		<key>id</key>
+		<string>1line2d</string>
+		<key>name</key>
+		<string>2 Var, along Trajectory</string>
+		<key>condition</key>
+		<false/>
+		<key>nvar</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>naxis</key>
+		<integer>2</integer>
+		<key>id</key>
+		<string>multiline2d</string>
+		<key>name</key>
+		<string>2 Var w/ Category, along Trajectory</string>
+		<key>condition</key>
+		<false/>
+		<key>nvar</key>
+		<integer>3</integer>
+	</dict>
+	<dict>
+		<key>id</key>
+		<string>multipoint2d</string>
+		<key>name</key>
+		<string>2 Var, at Condition</string>
+		<key>condition</key>
+		<true/>
+		<key>nvar</key>
+		<integer>2</integer>
+		<key>naxis</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>id</key>
+		<string>multimulitpoint2d</string>
+		<key>name</key>
+		<string>2 Var w/ Category, at Condition</string>
+		<key>condition</key>
+		<true/>
+		<key>nvar</key>
+		<integer>3</integer>
+		<key>naxis</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>naxis</key>
+		<integer>2</integer>
+		<key>id</key>
+		<string>contour2d</string>
+		<key>name</key>
+		<string>3 Var Contour</string>
+		<key>condition</key>
+		<true/>
+		<key>nvar</key>
+		<integer>3</integer>
+	</dict>
+	<dict>
+		<key>naxis</key>
+		<integer>3</integer>
+		<key>id</key>
+		<string>1line3d</string>
+		<key>name</key>
+		<string>3 Var, along Trajectory</string>
+		<key>condition</key>
+		<false/>
+		<key>nvar</key>
+		<integer>3</integer>
+	</dict>
+	<dict>
+		<key>naxis</key>
+		<integer>3</integer>
+		<key>id</key>
+		<string>multiline3d</string>
+		<key>name</key>
+		<string>3 Var w/ Category, along Trajectory</string>
+		<key>condition</key>
+		<false/>
+		<key>nvar</key>
+		<integer>4</integer>
+	</dict>
+	<dict>
+		<key>naxis</key>
+		<integer>3</integer>
+		<key>id</key>
+		<string>multipoint3d</string>
+		<key>name</key>
+		<string>3 Var, at Condition</string>
+		<key>condition</key>
+		<true/>
+		<key>nvar</key>
+		<integer>3</integer>
+	</dict>
+	<dict>
+		<key>naxis</key>
+		<integer>3</integer>
+		<key>id</key>
+		<string>multimulitpoint3d</string>
+		<key>name</key>
+		<string>3 Var w/ Category, at Condition</string>
+		<key>condition</key>
+		<true/>
+		<key>nvar</key>
+		<integer>4</integer>
+	</dict>
+	<dict>
+		<key>naxis</key>
+		<integer>3</integer>
+		<key>id</key>
+		<string>surface3d</string>
+		<key>name</key>
+		<string>3 Var Surface</string>
+		<key>condition</key>
+		<true/>
+		<key>nvar</key>
+		<integer>3</integer>
+	</dict>
+</array>
+</plist>

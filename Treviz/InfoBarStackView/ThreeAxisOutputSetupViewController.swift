@@ -10,37 +10,14 @@ import Cocoa
 
 class ThreeAxisOutputSetupViewController: AddOutputViewController {
     
-    @IBOutlet weak var variable1DropDown: NSPopUpButton!
-    @IBOutlet weak var variable2DropDown: NSPopUpButton!
-    @IBOutlet weak var variable3DropDown: NSPopUpButton!
-    @IBOutlet weak var includeTextCheckBox: NSButton!
     @IBOutlet weak var gridView: CollapsibleGridView!
     
     @IBOutlet weak var variableGridView: NSGridView!
-    var conditions : [Condition] = []
-
-    var strongAddButtonLeadingConstraint1 : NSLayoutConstraint? = nil
-    var strongAddButtonLeadingConstraint2 : NSLayoutConstraint? = nil
-    
-    @IBAction func plotTypeSelected(_ sender: Any) {
-    }
-    
-    
-    @IBAction func includeTextCheckboxClicked(_ sender: Any) {
-        //didDisclose()
-    }
-    @IBAction func addOutputClicked(_ sender: Any) {
-    }
     
     override func headerTitle() -> String { return NSLocalizedString("Three Axis", comment: "") }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let asys = analysis {
-            conditions = asys.conditions!
-        }
-        NotificationCenter.default.addObserver(self, selector: #selector(self.conditionsChanged(_:)), name: .didAddCondition, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.conditionsChanged(_:)), name: .didRemoveCondition, object: nil)
         
         let storyboard = NSStoryboard(name: "VariableSelector", bundle: nil)
         let var1ViewController = storyboard.instantiateController(withIdentifier: "variableSelectorViewController") as! VariableSelectorViewController
@@ -55,6 +32,8 @@ class ThreeAxisOutputSetupViewController: AddOutputViewController {
         self.addChild(var3ViewController)
         variableGridView.cell(atColumnIndex: 1, rowIndex: 2).contentView = var3ViewController.view
         // Do view setup here.
+        populatePlotTypes(condition: { (thisPlotType : PlotType)->(Bool) in
+            return thisPlotType.nAxis == 3 } )
     }
         
     override func didDisclose() {

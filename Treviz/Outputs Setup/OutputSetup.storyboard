@@ -57,7 +57,7 @@
                                             <tableColumns>
                                                 <tableColumn identifier="plotNameColumn" width="118" minWidth="40" maxWidth="1000" id="ioJ-cD-IZ9">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Name">
-                                                        <font key="font" metaFont="label" size="11"/>
+                                                        <font key="font" metaFont="menu" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -94,7 +94,7 @@
                                                 </tableColumn>
                                                 <tableColumn identifier="plotDescripColumn" width="155" minWidth="40" maxWidth="1000" id="MXf-j7-hBy">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Description">
-                                                        <font key="font" metaFont="label" size="11"/>
+                                                        <font key="font" metaFont="menu" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -240,18 +240,14 @@
                                                     <subviews>
                                                         <popUpButton horizontalHuggingPriority="300" verticalHuggingPriority="750" horizontalCompressionResistancePriority="400" translatesAutoresizingMaskIntoConstraints="NO" id="ZYv-Vs-iDV">
                                                             <rect key="frame" x="-2" y="21" width="138" height="25"/>
-                                                            <popUpButtonCell key="cell" type="push" title="1 Line 2D" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyUpOrDown" inset="2" selectedItem="EVP-gc-Mdk" id="5oH-1r-Bdz">
+                                                            <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyUpOrDown" inset="2" id="5oH-1r-Bdz">
                                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                                 <font key="font" metaFont="system"/>
-                                                                <menu key="menu" id="sRr-BJ-KH0">
-                                                                    <items>
-                                                                        <menuItem title="1 Line 2D" state="on" id="EVP-gc-Mdk"/>
-                                                                    </items>
-                                                                </menu>
-                                                                <connections>
-                                                                    <action selector="plotTypeSelected:" target="msL-sn-tpe" id="1Wq-nd-s5H"/>
-                                                                </connections>
+                                                                <menu key="menu" id="sRr-BJ-KH0"/>
                                                             </popUpButtonCell>
+                                                            <connections>
+                                                                <action selector="plotTypeWasSelected:" target="msL-sn-tpe" id="c7H-ag-T95"/>
+                                                            </connections>
                                                         </popUpButton>
                                                         <button horizontalHuggingPriority="300" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="EiP-JF-MF9">
                                                             <rect key="frame" x="-2" y="-2" width="137" height="18"/>
@@ -327,13 +323,11 @@
                     </view>
                     <connections>
                         <outlet property="addOutputButton" destination="7jf-3p-lYJ" id="KU3-fV-4k5"/>
-                        <outlet property="addOutputButtonClicked" destination="7jf-3p-lYJ" id="dq5-Vz-DQL"/>
                         <outlet property="conditionsComboBox" destination="MIO-uV-3eZ" id="aCF-CK-3Ha"/>
                         <outlet property="gridView" destination="0r4-fO-Bow" id="XVh-wg-NNb"/>
                         <outlet property="heightConstraint" destination="rIn-Tw-fCB" id="C6J-xu-Pcb"/>
-                        <outlet property="includeTextChecbox" destination="EiP-JF-MF9" id="sgJ-AG-aqD"/>
-                        <outlet property="includeTextCheckbox" destination="EiP-JF-MF9" id="aqU-IO-cHz"/>
-                        <outlet property="plotTypeDropDown" destination="ZYv-Vs-iDV" id="0r2-Ef-QP6"/>
+                        <outlet property="includeTextCheckbox" destination="EiP-JF-MF9" id="mbP-x9-yAW"/>
+                        <outlet property="plotTypePopupButton" destination="ZYv-Vs-iDV" id="omT-KW-3Jl"/>
                     </connections>
                 </viewController>
                 <customObject id="W91-dZ-0yQ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -463,17 +457,13 @@
                                                     <subviews>
                                                         <popUpButton horizontalHuggingPriority="240" verticalHuggingPriority="750" horizontalCompressionResistancePriority="300" translatesAutoresizingMaskIntoConstraints="NO" id="xFa-gE-G28">
                                                             <rect key="frame" x="-2" y="22" width="136" height="25"/>
-                                                            <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="p2J-J9-0Qv" id="ms1-5k-41w">
+                                                            <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="ms1-5k-41w">
                                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                                 <font key="font" metaFont="system"/>
-                                                                <menu key="menu" id="aeb-SX-OcL">
-                                                                    <items>
-                                                                        <menuItem title="Item 1" state="on" id="p2J-J9-0Qv"/>
-                                                                    </items>
-                                                                </menu>
+                                                                <menu key="menu" id="aeb-SX-OcL"/>
                                                             </popUpButtonCell>
                                                             <connections>
-                                                                <action selector="plotTypeSelected:" target="Rjj-aS-ILt" id="W61-c9-Vcp"/>
+                                                                <action selector="plotTypeWasSelected:" target="Rjj-aS-ILt" id="gJj-C3-yGc"/>
                                                             </connections>
                                                         </popUpButton>
                                                         <button horizontalHuggingPriority="240" verticalHuggingPriority="750" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="700" translatesAutoresizingMaskIntoConstraints="NO" id="ddw-Ob-olS">
@@ -483,7 +473,7 @@
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
                                                             <connections>
-                                                                <action selector="includeTextCheckboxClicked:" target="Rjj-aS-ILt" id="We1-rA-HVd"/>
+                                                                <action selector="includeCheckboxButtonClicked:" target="Rjj-aS-ILt" id="1sU-EL-yAZ"/>
                                                             </connections>
                                                         </button>
                                                     </subviews>
@@ -545,15 +535,13 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addOutputButton" destination="efV-ta-yTW" id="Ozc-Q3-DuR"/>
                         <outlet property="conditionsComboBox" destination="doU-Ye-pfg" id="JIW-Bv-oXc"/>
                         <outlet property="gridView" destination="BZU-Nh-SXi" id="veS-fW-1im"/>
                         <outlet property="heightConstraint" destination="l82-SX-cPD" id="tN4-n6-j7k"/>
-                        <outlet property="includeTextCheckbox" destination="ddw-Ob-olS" id="wwA-cl-NQA"/>
-                        <outlet property="plotTypeDropDown" destination="xFa-gE-G28" id="EQQ-gu-mLm"/>
+                        <outlet property="includeTextCheckbox" destination="ddw-Ob-olS" id="Fj7-04-bSm"/>
+                        <outlet property="plotTypePopupButton" destination="xFa-gE-G28" id="p8w-03-ttz"/>
                         <outlet property="plottingStackView" destination="f9M-PQ-Jth" id="cUo-bD-r7W"/>
-                        <outlet property="variable1View" destination="MLa-JO-9gj" id="kPN-l3-fPb"/>
-                        <outlet property="variable2View" destination="JdU-PF-wmP" id="DwG-QL-kej"/>
-                        <outlet property="variable3View" destination="T2d-Uv-JIC" id="aSO-du-szB"/>
                         <outlet property="variableGridView" destination="Jko-dd-neg" id="3GC-tc-6Ct"/>
                     </connections>
                 </viewController>
@@ -573,10 +561,13 @@
                                 <rect key="frame" x="0.0" y="0.0" width="500" height="130"/>
                                 <subviews>
                                     <gridView xPlacement="center" yPlacement="fill" rowAlignment="none" rowSpacing="10" columnSpacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="RGc-FN-Usb" customClass="CollapsibleGridView" customModule="Treviz" customModuleProvider="target">
-                                        <rect key="frame" x="10" y="23" width="450" height="97"/>
+                                        <rect key="frame" x="10" y="25" width="450" height="95"/>
+                                        <constraints>
+                                            <constraint firstItem="fFd-Ax-dVN" firstAttribute="centerY" secondItem="5aN-uW-9nW" secondAttribute="centerY" id="RsH-i8-Mqg"/>
+                                        </constraints>
                                         <rows>
                                             <gridRow yPlacement="top" height="17" id="UhG-kf-32J"/>
-                                            <gridRow yPlacement="center" id="Ud2-GV-ViK"/>
+                                            <gridRow yPlacement="none" id="Ud2-GV-ViK"/>
                                         </rows>
                                         <columns>
                                             <gridColumn xPlacement="center" width="149" id="Hpw-1y-JBI"/>
@@ -586,7 +577,7 @@
                                         <gridCells>
                                             <gridCell row="UhG-kf-32J" column="Hpw-1y-JBI" id="emU-Rk-1Gb">
                                                 <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gPF-j4-6jk" userLabel="Variable label">
-                                                    <rect key="frame" x="45" y="81" width="60" height="16"/>
+                                                    <rect key="frame" x="45" y="79" width="60" height="16"/>
                                                     <textFieldCell key="cell" lineBreakMode="clipping" title="Variables" id="dyF-gT-Ol9">
                                                         <font key="font" metaFont="system"/>
                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -596,7 +587,7 @@
                                             </gridCell>
                                             <gridCell row="UhG-kf-32J" column="fTZ-d5-DS6" id="I7C-GO-KY0">
                                                 <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dBh-rK-wuS" userLabel="Plot type label">
-                                                    <rect key="frame" x="208" y="81" width="63" height="16"/>
+                                                    <rect key="frame" x="208" y="79" width="63" height="16"/>
                                                     <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Plot type" id="DVz-Bt-HGs">
                                                         <font key="font" metaFont="system"/>
                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -606,7 +597,7 @@
                                             </gridCell>
                                             <gridCell row="UhG-kf-32J" column="pvg-OD-zql" id="JnA-iq-BsI">
                                                 <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="QfH-Q2-4A2" userLabel="At Condition label">
-                                                    <rect key="frame" x="328" y="81" width="124" height="16"/>
+                                                    <rect key="frame" x="328" y="79" width="124" height="16"/>
                                                     <textFieldCell key="cell" lineBreakMode="clipping" title="At Condition" id="VyI-Yi-Vcj">
                                                         <font key="font" metaFont="system"/>
                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -616,7 +607,7 @@
                                             </gridCell>
                                             <gridCell row="Ud2-GV-ViK" column="Hpw-1y-JBI" id="kre-p6-M0z">
                                                 <gridView key="contentView" horizontalHuggingPriority="200" xPlacement="fill" yPlacement="fill" rowAlignment="none" rowSpacing="10" columnSpacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="jLp-4w-AAf" userLabel="Variables grid view">
-                                                    <rect key="frame" x="14" y="0.0" width="121" height="70"/>
+                                                    <rect key="frame" x="14" y="0.0" width="121" height="68"/>
                                                     <rows>
                                                         <gridRow id="dIn-Zl-Jif"/>
                                                         <gridRow id="1K1-m3-XtN"/>
@@ -629,7 +620,7 @@
                                                     <gridCells>
                                                         <gridCell row="dIn-Zl-Jif" column="wpC-lD-Kiz" id="Xly-fj-ZbN">
                                                             <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="crQ-2j-2U8" userLabel="x axis label">
-                                                                <rect key="frame" x="-2" y="54" width="41" height="16"/>
+                                                                <rect key="frame" x="-2" y="52" width="41" height="16"/>
                                                                 <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="x-axis" id="g9i-xE-BSE">
                                                                     <font key="font" metaFont="system"/>
                                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -639,12 +630,12 @@
                                                         </gridCell>
                                                         <gridCell row="dIn-Zl-Jif" column="dOa-Lr-vCu" id="7Ix-cv-lq3">
                                                             <containerView key="contentView" translatesAutoresizingMaskIntoConstraints="NO" id="8qZ-E3-to4">
-                                                                <rect key="frame" x="48" y="54" width="73" height="16"/>
+                                                                <rect key="frame" x="48" y="52" width="73" height="16"/>
                                                             </containerView>
                                                         </gridCell>
                                                         <gridCell row="1K1-m3-XtN" column="wpC-lD-Kiz" id="LkB-7y-1n2">
                                                             <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wrS-ZP-FBU" userLabel="y axis label">
-                                                                <rect key="frame" x="-2" y="28" width="41" height="16"/>
+                                                                <rect key="frame" x="-2" y="26" width="41" height="16"/>
                                                                 <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="y-axis" id="ARJ-JD-jrH">
                                                                     <font key="font" metaFont="system"/>
                                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -654,12 +645,12 @@
                                                         </gridCell>
                                                         <gridCell row="1K1-m3-XtN" column="dOa-Lr-vCu" id="qK7-cY-HXm">
                                                             <containerView key="contentView" translatesAutoresizingMaskIntoConstraints="NO" id="A48-N4-MYh">
-                                                                <rect key="frame" x="48" y="28" width="73" height="16"/>
+                                                                <rect key="frame" x="48" y="26" width="73" height="16"/>
                                                             </containerView>
                                                         </gridCell>
                                                         <gridCell row="axM-D2-oLi" column="wpC-lD-Kiz" id="UgH-bY-W1j">
                                                             <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Yzr-pQ-fVV" userLabel="z axis label">
-                                                                <rect key="frame" x="-2" y="0.0" width="41" height="18"/>
+                                                                <rect key="frame" x="-2" y="0.0" width="41" height="16"/>
                                                                 <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="z-axis" id="v5f-wZ-rqE">
                                                                     <font key="font" metaFont="system"/>
                                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -669,63 +660,35 @@
                                                         </gridCell>
                                                         <gridCell row="axM-D2-oLi" column="dOa-Lr-vCu" id="E4z-Pq-heJ">
                                                             <containerView key="contentView" translatesAutoresizingMaskIntoConstraints="NO" id="KIX-oN-eKm">
-                                                                <rect key="frame" x="48" y="0.0" width="73" height="18"/>
+                                                                <rect key="frame" x="48" y="0.0" width="73" height="16"/>
                                                             </containerView>
                                                         </gridCell>
                                                     </gridCells>
                                                 </gridView>
                                             </gridCell>
-                                            <gridCell row="Ud2-GV-ViK" column="fTZ-d5-DS6" id="yxe-Ml-q5e">
-                                                <stackView key="contentView" distribution="fillProportionally" orientation="vertical" alignment="leading" spacing="15" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" verticalCompressionResistancePriority="700" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GgJ-Ml-iaH" userLabel="Plotting stack view">
-                                                    <rect key="frame" x="173" y="0.0" width="133" height="70"/>
+                                            <gridCell row="Ud2-GV-ViK" column="fTZ-d5-DS6" yPlacement="center" id="yxe-Ml-q5e">
+                                                <stackView key="contentView" distribution="fill" orientation="vertical" alignment="centerX" spacing="11" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" horizontalCompressionResistancePriority="300" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WnL-kd-uzN" userLabel="All plotting stack view">
+                                                    <rect key="frame" x="173" y="11" width="133" height="46"/>
                                                     <subviews>
-                                                        <stackView distribution="equalSpacing" orientation="vertical" alignment="leading" spacing="9" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="700" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fPm-cm-t7d" userLabel="Plot type stack view">
-                                                            <rect key="frame" x="0.0" y="29" width="116" height="41"/>
-                                                            <subviews>
-                                                                <button verticalHuggingPriority="750" verticalCompressionResistancePriority="740" translatesAutoresizingMaskIntoConstraints="NO" id="6mg-8E-rSB" userLabel="Along trajectory radio button">
-                                                                    <rect key="frame" x="-1" y="24" width="119" height="18"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="height" constant="16" id="Gz7-4q-q2n"/>
-                                                                    </constraints>
-                                                                    <buttonCell key="cell" type="radio" title="Along trajectory" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="h0u-22-gTY">
-                                                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                                        <font key="font" metaFont="system"/>
-                                                                    </buttonCell>
-                                                                    <connections>
-                                                                        <action selector="plotTypeSelected:" target="fdO-ej-2qj" id="AYf-GP-Meo"/>
-                                                                    </connections>
-                                                                </button>
-                                                                <button verticalHuggingPriority="750" verticalCompressionResistancePriority="740" translatesAutoresizingMaskIntoConstraints="NO" id="9w2-E0-eZN" userLabel="Surface plot radio button">
-                                                                    <rect key="frame" x="-1" y="-1" width="96" height="18"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="height" constant="16" id="IPe-fJ-0gO"/>
-                                                                    </constraints>
-                                                                    <buttonCell key="cell" type="radio" title="Surface plot" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="p6l-Jo-Ab9">
-                                                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                                        <font key="font" metaFont="system"/>
-                                                                    </buttonCell>
-                                                                    <connections>
-                                                                        <action selector="plotTypeSelected:" target="fdO-ej-2qj" id="hwE-nB-D19"/>
-                                                                    </connections>
-                                                                </button>
-                                                            </subviews>
-                                                            <visibilityPriorities>
-                                                                <integer value="1000"/>
-                                                                <integer value="1000"/>
-                                                            </visibilityPriorities>
-                                                            <customSpacing>
-                                                                <real value="3.4028234663852886e+38"/>
-                                                                <real value="3.4028234663852886e+38"/>
-                                                            </customSpacing>
-                                                        </stackView>
-                                                        <button horizontalHuggingPriority="240" verticalHuggingPriority="750" horizontalCompressionResistancePriority="500" translatesAutoresizingMaskIntoConstraints="NO" id="7GC-td-oOJ">
+                                                        <popUpButton horizontalHuggingPriority="240" verticalHuggingPriority="750" horizontalCompressionResistancePriority="300" translatesAutoresizingMaskIntoConstraints="NO" id="5aN-uW-9nW">
+                                                            <rect key="frame" x="-2" y="22" width="138" height="25"/>
+                                                            <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="vWo-Ke-w93">
+                                                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                                <font key="font" metaFont="system"/>
+                                                                <menu key="menu" id="eVl-NI-z9L"/>
+                                                            </popUpButtonCell>
+                                                            <connections>
+                                                                <action selector="plotTypeWasSelected:" target="fdO-ej-2qj" id="tXO-WF-Bxh"/>
+                                                            </connections>
+                                                        </popUpButton>
+                                                        <button horizontalHuggingPriority="240" verticalHuggingPriority="750" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="700" translatesAutoresizingMaskIntoConstraints="NO" id="Q3f-1N-cLw">
                                                             <rect key="frame" x="-2" y="-2" width="137" height="18"/>
-                                                            <buttonCell key="cell" type="check" title="Include text output" bezelStyle="regularSquare" imagePosition="left" alignment="left" truncatesLastVisibleLine="YES" inset="2" id="nQ5-cM-jui">
+                                                            <buttonCell key="cell" type="check" title="Include text output" bezelStyle="regularSquare" imagePosition="left" inset="2" id="aoh-kK-slf">
                                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
                                                             <connections>
-                                                                <action selector="includeTextCheckboxClicked:" target="fdO-ej-2qj" id="vSg-0y-Iyl"/>
+                                                                <action selector="includeCheckboxButtonClicked:" target="fdO-ej-2qj" id="xki-RL-zw1"/>
                                                             </connections>
                                                         </button>
                                                     </subviews>
@@ -741,7 +704,7 @@
                                             </gridCell>
                                             <gridCell row="Ud2-GV-ViK" column="pvg-OD-zql" id="LHI-sf-hed">
                                                 <comboBox key="contentView" horizontalHuggingPriority="400" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fFd-Ax-dVN" userLabel="Conditions Combo Box">
-                                                    <rect key="frame" x="330" y="22" width="123" height="25"/>
+                                                    <rect key="frame" x="330" y="33" width="123" height="25"/>
                                                     <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" usesDataSource="YES" numberOfVisibleItems="5" id="r28-AM-W0z">
                                                         <font key="font" metaFont="system"/>
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -765,7 +728,7 @@
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
-                                            <action selector="addOutputButtonClicked:" target="fdO-ej-2qj" id="d6N-GZ-8ev"/>
+                                            <action selector="addOutputButtonClicked:" target="fdO-ej-2qj" id="N57-5a-42O"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -787,10 +750,12 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addOutputButton" destination="NKy-iq-2uO" id="VLd-aQ-SqX"/>
                         <outlet property="conditionsComboBox" destination="fFd-Ax-dVN" id="qfl-ZZ-c3F"/>
                         <outlet property="gridView" destination="RGc-FN-Usb" id="14X-xF-NaI"/>
                         <outlet property="heightConstraint" destination="4Gz-d7-pMc" id="Wku-UV-f1Q"/>
-                        <outlet property="includeTextCheckBox" destination="7GC-td-oOJ" id="F7f-E5-zLn"/>
+                        <outlet property="includeTextCheckbox" destination="Q3f-1N-cLw" id="ltE-Lr-kvJ"/>
+                        <outlet property="plotTypePopupButton" destination="5aN-uW-9nW" id="61h-D4-2oM"/>
                         <outlet property="variableGridView" destination="jLp-4w-AAf" id="BJv-jS-lyI"/>
                     </connections>
                 </viewController>
@@ -862,7 +827,7 @@
                                                         <menu key="menu" id="sfW-Wv-qWX">
                                                             <items>
                                                                 <menuItem title="# Runs" state="on" id="DKR-mJ-6cl" userLabel="# Runs"/>
-                                                                <menuItem title="% Runs" state="on" id="Kjw-KX-oFT" userLabel="% Runs"/>
+                                                                <menuItem title="% Runs" id="Kjw-KX-oFT" userLabel="% Runs"/>
                                                             </items>
                                                         </menu>
                                                     </popUpButtonCell>
@@ -906,7 +871,7 @@
                                                         <menu key="menu" id="bfN-mn-VF9">
                                                             <items>
                                                                 <menuItem title="Bar Chart" state="on" id="WWd-vU-n7c" userLabel="Bar Chart"/>
-                                                                <menuItem title="Pie Chart" state="on" id="dII-Wg-tLM" userLabel="Pie Chart"/>
+                                                                <menuItem title="Pie Chart" id="dII-Wg-tLM" userLabel="Pie Chart"/>
                                                             </items>
                                                         </menu>
                                                     </popUpButtonCell>
@@ -933,18 +898,17 @@
                                                 </popUpButton>
                                             </gridCell>
                                             <gridCell row="JYp-au-9eT" column="9hw-Rc-Kup" id="qYA-PI-BIc">
-                                                <popUpButton key="contentView" horizontalHuggingPriority="300" verticalHuggingPriority="750" horizontalCompressionResistancePriority="100" translatesAutoresizingMaskIntoConstraints="NO" id="3t6-YT-Fx1" userLabel="Condition Drop Down2">
-                                                    <rect key="frame" x="281" y="21" width="87" height="25"/>
-                                                    <popUpButtonCell key="cell" type="push" title="A" bezelStyle="rounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="bmj-e4-3CZ" id="WRV-Ku-Mxe">
-                                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                <comboBox key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qRb-bG-pdC">
+                                                    <rect key="frame" x="283" y="21" width="85" height="25"/>
+                                                    <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="TLo-5O-dkS">
                                                         <font key="font" metaFont="system"/>
-                                                        <menu key="menu" id="pNb-8Q-0wX">
-                                                            <items>
-                                                                <menuItem title="A" state="on" id="bmj-e4-3CZ"/>
-                                                            </items>
-                                                        </menu>
-                                                    </popUpButtonCell>
-                                                </popUpButton>
+                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                        <objectValues>
+                                                            <string>Item 1</string>
+                                                        </objectValues>
+                                                    </comboBoxCell>
+                                                </comboBox>
                                             </gridCell>
                                             <gridCell row="Xsg-MU-duF" column="gRV-LD-uQh" id="uL3-IU-CzX">
                                                 <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hDF-rz-CNF">
@@ -953,6 +917,9 @@
                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                         <font key="font" metaFont="system"/>
                                                     </buttonCell>
+                                                    <connections>
+                                                        <action selector="includeCheckboxButtonClicked:" target="zkJ-3F-i9f" id="kWU-J7-xlT"/>
+                                                    </connections>
                                                 </button>
                                             </gridCell>
                                             <gridCell row="Xsg-MU-duF" column="V3O-Wx-Bho" id="4gG-4n-oZO"/>
@@ -992,9 +959,11 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addOutputButton" destination="si9-9c-eId" id="Ku2-Jy-XIb"/>
                         <outlet property="conditionsComboBox" destination="COp-qN-cbc" id="MQY-ne-ecL"/>
                         <outlet property="gridView" destination="Yti-Eb-oA3" id="zbr-ki-g1F"/>
                         <outlet property="heightConstraint" destination="ecP-D9-OEF" id="UFz-vP-cBx"/>
+                        <outlet property="includeTextCheckbox" destination="hDF-rz-CNF" id="Mtv-hw-g1W"/>
                     </connections>
                 </viewController>
                 <customObject id="PDD-2P-eGf" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

@@ -14,7 +14,8 @@ class AddOutputViewController: BaseViewController, NSComboBoxDataSource { //TODO
 
     @IBOutlet weak var conditionsComboBox: NSComboBox!
     @IBOutlet weak var addOutputButton: NSButton!
-    @IBOutlet weak var includeTextChecbox: NSButton!
+    @IBOutlet weak var includeTextCheckbox: NSButton!
+    @IBOutlet weak var plotTypePopupButton: NSPopUpButton!
     
     
     var outputSetupViewController : OutputSetupViewController? = nil
@@ -25,11 +26,24 @@ class AddOutputViewController: BaseViewController, NSComboBoxDataSource { //TODO
         // Do view setup here.
     }
     
+    func populatePlotTypes( condition: (PlotType)->(Bool) ) {
+        var plotTypeNames : [String] = []
+        for thisPlotType in PlotType.allPlotTypes{
+            if condition(thisPlotType) { plotTypeNames.append(thisPlotType.name)}
+        }
+        plotTypePopupButton.addItems(withTitles: plotTypeNames)
+    }
+    
     func createPlot()-> TZPlot?{ //Should be overwritten by each subclass
         return nil
     }
+    
     @IBAction func includeCheckboxButtonClicked(_ sender: Any) {
     }
+    
+    @IBAction func plotTypeWasSelected(_ sender: Any) {
+    }
+    
     
     @IBAction func addOutputButtonClicked(_ sender: Any) {
         guard let newPlot = createPlot() else {return}
@@ -59,5 +73,4 @@ class AddOutputViewController: BaseViewController, NSComboBoxDataSource { //TODO
         }
         return nil
     }
-    
 }
