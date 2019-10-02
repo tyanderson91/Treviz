@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class VariableSelectorViewController: ViewController {
+class VariableSelectorViewController: TZViewController {
 
     @IBOutlet weak var variableSelectorPopup: NSPopUpButton!
     //var analysis : Analysis?

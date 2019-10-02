@@ -35,8 +35,7 @@ class SingleAxisOutputSetupViewController: AddOutputViewController {
         self.addChild(var1ViewController)
         gridView.cell(atColumnIndex: 0, rowIndex: 1).contentView = var1ViewController.view
         
-        populatePlotTypes(condition: { (thisPlotType : PlotType)->(Bool) in
-            return thisPlotType.nAxis == 1 } )
+        plotTypeSelector = { (thisPlotType : PlotType)->(Bool) in return thisPlotType.nAxis == 1 }
         //let variableSelectorViewController = VariableSelectorViewController()
         //self.addChild(variableSelectorViewController)
         //gridView.cell(atColumnIndex: 0, rowIndex: 1).contentView = variableSelectorViewController.view

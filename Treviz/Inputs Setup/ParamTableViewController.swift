@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class ParamTableViewController: ViewController , NSTableViewDelegate, NSTableViewDataSource {
+class ParamTableViewController: TZViewController , NSTableViewDelegate, NSTableViewDataSource {
     
     @IBOutlet weak var tableView: NSTableView!
     var initStateViewController : InitStateViewController!

@@ -15,6 +15,8 @@ enum PlotType : String {
     case contour = "Contour"
 }*/
 //TODO : This should probably be in a struct
+
+
 class PlotType {
     var id : String = ""
     var name : String = ""

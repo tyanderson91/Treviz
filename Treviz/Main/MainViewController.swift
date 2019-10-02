@@ -10,7 +10,7 @@
 
 import Cocoa
 
-class MainViewController: ViewController {
+class MainViewController: TZViewController {
 
     @IBOutlet weak var mainView: NSView!
     @IBOutlet weak var analysisProgressBar: NSProgressIndicator!

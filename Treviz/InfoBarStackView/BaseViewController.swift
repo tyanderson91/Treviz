@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class BaseViewController : ViewController, StackItemBody {
+class BaseViewController : TZViewController, StackItemBody {
     
     //static let StackItemBackgroundColor = NSColor(calibratedRed: 244/255, green:244/255, blue:244/255, alpha:1)
     

@@ -10,7 +10,7 @@
 
 import Cocoa
 
-class OutputsViewController: ViewController {
+class OutputsViewController: TZViewController {
         
     @IBOutlet weak var outputsSplitView: NSView!
     var outputSplitViewController: OutputsSplitViewController? = nil

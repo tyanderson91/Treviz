@@ -27,7 +27,7 @@ class AnalysisData: NSObject {
         //This function runs the default loading sub-methods
         //TODO: expand the number of read sourcess
         self.loadVars(from: "InitialVars")
-        self.loadPlotTypes(from: "PlotTypes")
+        //self.loadPlotTypes(from: "PlotTypes")
     }
     
     func loadVars(from plist: String){

@@ -11,7 +11,20 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
     
+    @IBOutlet weak var application: NSApplication!
+    
+    var plotTypes : [PlotType]? = nil
+    
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        
+        let thisWindow = application.mainWindow
+        let windowController = thisWindow?.windowController
+        if let doc = windowController?.document as? Analysis {
+            doc.appDelegate = self
+            loadPlotTypes(from: "PlotTypes")
+        }
+        
+        NotificationCenter.default.post(name: .didLoadAppDelegate, object: nil)
         // Insert code here to initialize your application
         //let newAnalysis = Analysis()
         //print(newAnalysis.initialState)
@@ -22,5 +35,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Insert code here to tear down your application
     }
 
+    func loadPlotTypes(from plist: String){
+        let plotFilePath = Bundle.main.path(forResource: plist, ofType: "plist")
+        if (plotFilePath != nil) {
+            let listOfPlots = PlotType.loadPlotTypes(filename: plotFilePath!)
+            if listOfPlots.count > 0 {//If the initialization did not return an empty array
+                self.plotTypes = listOfPlots
+            } else {self.plotTypes = nil}
+        }
+        else {
+            self.plotTypes = nil
+        }
+    }
+    
 }
 

@@ -18,7 +18,7 @@ extension NSUserInterfaceItemIdentifier{
     static let plotDescripTableCellView = NSUserInterfaceItemIdentifier(rawValue: "plotDescripTableCellView")
 }
 
-class OutputSetupViewController: ViewController, NSTableViewDelegate, NSTableViewDataSource { //TODO : make all output setup view controllers the same base class
+class OutputSetupViewController: TZViewController, NSTableViewDelegate, NSTableViewDataSource { //TODO : make all output setup view controllers the same base class
     
     @IBOutlet weak var stack: CustomStackView!
     @IBOutlet weak var tableView: NSTableView!
@@ -38,6 +38,7 @@ class OutputSetupViewController: ViewController, NSTableViewDelegate, NSTableVie
         let vc4 = stack.addViewController(fromStoryboardId: "OutputSetup", withIdentifier: "MonteCarloOutputSetupViewController") as! MonteCarloOutputSetupViewController
         for thisVC in [vc1,vc2,vc3,vc4]{
             thisVC.outputSetupViewController = self
+            thisVC.representedObject = self.analysis
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.refreshTable(_:)), name: .didAddPlot, object: nil)

@@ -12,9 +12,9 @@
                 <viewController title="Variable Selector" storyboardIdentifier="variableSelectorViewController" id="Fkm-Ad-vik" customClass="VariableSelectorViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="DCu-Hp-6ur">
                         <rect key="frame" x="0.0" y="0.0" width="163" height="21"/>
-                        <autoresizingMask key="autoresizingMask"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                         <subviews>
-                            <popUpButton horizontalHuggingPriority="100" verticalHuggingPriority="750" horizontalCompressionResistancePriority="300" verticalCompressionResistancePriority="850" translatesAutoresizingMaskIntoConstraints="NO" id="8Bi-7w-Z95">
+                            <popUpButton verticalHuggingPriority="750" horizontalCompressionResistancePriority="50" verticalCompressionResistancePriority="850" translatesAutoresizingMaskIntoConstraints="NO" id="8Bi-7w-Z95">
                                 <rect key="frame" x="-2" y="-3" width="168" height="25"/>
                                 <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" truncatesLastVisibleLine="YES" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="hW2-po-CXR">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>

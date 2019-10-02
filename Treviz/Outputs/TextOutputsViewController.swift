@@ -10,7 +10,7 @@
 
 import Cocoa
 
-class TextOutputContainerViewController: ViewController{
+class TextOutputContainerViewController: TZViewController{
     @IBOutlet weak var textOutputSplitView: NSView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,11 +22,11 @@ class TextOutputSplitViewController: NSSplitViewController{
     
 }
 
-class TextLogViewController: ViewController{
+class TextLogViewController: TZViewController{
     
 }
 
-class TextOutputsViewController: ViewController {
+class TextOutputsViewController: TZViewController {
 
     @IBOutlet var textView: NSTextView!
     override func viewDidLoad() {

@@ -10,7 +10,7 @@
 
 import Cocoa
 
-class InputsViewController: ViewController, NSTableViewDataSource, NSTableViewDelegate {
+class InputsViewController: TZViewController, NSTableViewDataSource, NSTableViewDelegate {
     
     //var parentSplitViewController : MainSplitViewController? = nil
     //@IBOutlet weak var tableView: NSTableView!    

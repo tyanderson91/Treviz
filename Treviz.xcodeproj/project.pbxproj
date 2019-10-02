@@ -52,7 +52,7 @@
 		CDF1670C2237A10400CD9590 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF1670B2237A10400CD9590 /* MainWindowController.swift */; };
 		CDF3D1A1225025B00064D70C /* Analysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF3D1A0225025AF0064D70C /* Analysis.swift */; };
 		CDF3D1A3225025E60064D70C /* InitialVars.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDF3D1A2225025E60064D70C /* InitialVars.plist */; };
-		CDF3D1A6225057270064D70C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF3D1A5225057270064D70C /* ViewController.swift */; };
+		CDF3D1A6225057270064D70C /* TZViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF3D1A5225057270064D70C /* TZViewController.swift */; };
 		CDF3D1A822505A000064D70C /* AnalysisData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF3D1A722505A000064D70C /* AnalysisData.swift */; };
 		CDF3D1A9225303A00064D70C /* InputSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBE33C4224C81B500E1404E /* InputSetting.swift */; };
 /* End PBXBuildFile section */
@@ -66,15 +66,15 @@
 		CD2D0D8F224382F70012978E /* OutputSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OutputSetupViewController.swift; path = ../InfoBarStackView/OutputSetupViewController.swift; sourceTree = "<group>"; };
 		CD2D0D94224382F70012978E /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		CD2D0D95224382F70012978E /* StackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackView.swift; sourceTree = "<group>"; };
-		CD2D0D96224382F70012978E /* ThreeAxisOutputSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ThreeAxisOutputSetupViewController.swift; path = ../InfoBarStackView/ThreeAxisOutputSetupViewController.swift; sourceTree = "<group>"; };
+		CD2D0D96224382F70012978E /* ThreeAxisOutputSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeAxisOutputSetupViewController.swift; sourceTree = "<group>"; };
 		CD2D0DA5224382F70012978E /* HeaderViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = HeaderViewController.storyboard; path = Base.lproj/HeaderViewController.storyboard; sourceTree = "<group>"; };
 		CD2D0DA6224382F70012978E /* OutputSetup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OutputSetup.storyboard; sourceTree = "<group>"; };
 		CD2D0DA8224382F70012978E /* ReadMe.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = ReadMe.md; sourceTree = "<group>"; };
-		CD2D0DA9224382F70012978E /* TwoAxisOutputSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TwoAxisOutputSetupViewController.swift; path = ../InfoBarStackView/TwoAxisOutputSetupViewController.swift; sourceTree = "<group>"; };
-		CD2D0DAA224382F70012978E /* MonteCarloOutputSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MonteCarloOutputSetupViewController.swift; path = ../InfoBarStackView/MonteCarloOutputSetupViewController.swift; sourceTree = "<group>"; };
+		CD2D0DA9224382F70012978E /* TwoAxisOutputSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoAxisOutputSetupViewController.swift; sourceTree = "<group>"; };
+		CD2D0DAA224382F70012978E /* MonteCarloOutputSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonteCarloOutputSetupViewController.swift; sourceTree = "<group>"; };
 		CD2D0DAB224382F70012978E /* HeaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderViewController.swift; sourceTree = "<group>"; };
 		CD2D0DAD224382F70012978E /* LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
-		CD2D0DAE224382F70012978E /* SingleAxisOutputSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SingleAxisOutputSetupViewController.swift; path = ../InfoBarStackView/SingleAxisOutputSetupViewController.swift; sourceTree = "<group>"; };
+		CD2D0DAE224382F70012978E /* SingleAxisOutputSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleAxisOutputSetupViewController.swift; sourceTree = "<group>"; };
 		CD2D0DAF224382F70012978E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CD3F5E5422EE175400E4CF20 /* Condition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Condition.swift; sourceTree = "<group>"; };
 		CD3F5E5722EE4DCD00E4CF20 /* Conditions.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Conditions.storyboard; sourceTree = "<group>"; };
@@ -110,7 +110,7 @@
 		CDF1670B2237A10400CD9590 /* MainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
 		CDF3D1A0225025AF0064D70C /* Analysis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Analysis.swift; sourceTree = "<group>"; };
 		CDF3D1A2225025E60064D70C /* InitialVars.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = InitialVars.plist; sourceTree = "<group>"; };
-		CDF3D1A5225057270064D70C /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		CDF3D1A5225057270064D70C /* TZViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TZViewController.swift; sourceTree = "<group>"; };
 		CDF3D1A722505A000064D70C /* AnalysisData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -146,7 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				CD2D0DB0224382F70012978E /* InfoBarStackView */,
-				CDF3D1A5225057270064D70C /* ViewController.swift */,
+				CDF3D1A5225057270064D70C /* TZViewController.swift */,
 				CDAF13FC222CF357005CDC3C /* State.swift */,
 				CD449022233B26370095F243 /* Variable */,
 				CD42E0A922FD05F600A0F9A1 /* CollapsibleStackView.swift */,
@@ -211,15 +211,23 @@
 			path = Variable;
 			sourceTree = "<group>";
 		};
-		CD9F2040223B7C95005BFDCB /* Outputs Setup */ = {
+		CD727F3623446C26003E6368 /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
 				CD2D0DAE224382F70012978E /* SingleAxisOutputSetupViewController.swift */,
 				CD2D0DA9224382F70012978E /* TwoAxisOutputSetupViewController.swift */,
 				CD2D0D96224382F70012978E /* ThreeAxisOutputSetupViewController.swift */,
 				CD2D0DAA224382F70012978E /* MonteCarloOutputSetupViewController.swift */,
-				CD2D0D8F224382F70012978E /* OutputSetupViewController.swift */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
+		CD9F2040223B7C95005BFDCB /* Outputs Setup */ = {
+			isa = PBXGroup;
+			children = (
 				CD11FA8623408173001A3695 /* AddOutputViewController.swift */,
+				CD727F3623446C26003E6368 /* Subviews */,
+				CD2D0D8F224382F70012978E /* OutputSetupViewController.swift */,
 				CD2D0DA6224382F70012978E /* OutputSetup.storyboard */,
 				CD280F49233B45670004263F /* TZPlot.swift */,
 			);
@@ -362,7 +370,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDF3D1A9225303A00064D70C /* InputSetting.swift in Sources */,
-				CDF3D1A6225057270064D70C /* ViewController.swift in Sources */,
+				CDF3D1A6225057270064D70C /* TZViewController.swift in Sources */,
 				CDA0F87F2257398F003C62E6 /* NotificationCenterSetup.swift in Sources */,
 				CD3F5E5A22EE4FFE00E4CF20 /* ConditionsViewController.swift in Sources */,
 				CD2D0DB12243836F0012978E /* OutputSetupViewController.swift in Sources */,

@@ -16,22 +16,26 @@ class AddOutputViewController: BaseViewController, NSComboBoxDataSource { //TODO
     @IBOutlet weak var addOutputButton: NSButton!
     @IBOutlet weak var includeTextCheckbox: NSButton!
     @IBOutlet weak var plotTypePopupButton: NSPopUpButton!
-    
+    var plotTypeSelector : (PlotType)->(Bool) = {(condition: PlotType)->(Bool) in return true}
     
     var outputSetupViewController : OutputSetupViewController? = nil
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(self.conditionsChanged(_:)), name: .didAddCondition, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.conditionsChanged(_:)), name: .didRemoveCondition, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.populatePlotTypes(_:)), name: .didLoadAppDelegate, object: nil)
         // Do view setup here.
     }
     
-    func populatePlotTypes( condition: (PlotType)->(Bool) ) {
+    @objc func populatePlotTypes(_ notification: Notification) {
         var plotTypeNames : [String] = []
-        for thisPlotType in PlotType.allPlotTypes{
-            if condition(thisPlotType) { plotTypeNames.append(thisPlotType.name)}
+        let asys = self.representedObject as? Analysis
+        if let allPlotTypes = asys?.appDelegate?.plotTypes {
+            for thisPlotType in allPlotTypes{
+                if plotTypeSelector(thisPlotType) { plotTypeNames.append(thisPlotType.name)}
+            }
+            plotTypePopupButton.addItems(withTitles: plotTypeNames)
         }
-        plotTypePopupButton.addItems(withTitles: plotTypeNames)
     }
     
     func createPlot()-> TZPlot?{ //Should be overwritten by each subclass

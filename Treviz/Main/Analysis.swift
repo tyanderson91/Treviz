@@ -15,6 +15,7 @@ class Analysis: NSDocument {//TODO: possibly subclass NSPersistentDocument if us
     //var ouputsViewController : OutputsViewController? = nil //TODO: Initialize like input view controller
     //var ouputsSetupViewController : OutputSetupViewController? = nil //TODO: Initialize like input view controller
     var analysisData : AnalysisData!
+    var appDelegate : AppDelegate? = nil
     
     //var initVars : [Variable] = []
     var name : String = ""

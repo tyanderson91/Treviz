@@ -6,7 +6,7 @@ This is a custom subclass that passes the Analysis document data to all child vi
 
 import Cocoa
 //TODO: turn this into some kind of extension on top of NSViewController
-class ViewController: NSViewController {
+class TZViewController: NSViewController {
 
     /// - Tag: setRepresentedObjectExample
     override var representedObject: Any? {
