@@ -53,8 +53,8 @@ class ConditionsViewController: NSViewController, NSTableViewDelegate, NSTableVi
             newSingleCondition.varID = initVars[varindex].id //TODO : ONLY works if variable list is in the same order
             switch curConditionVC1.selectedType {
             case .interval:
-                newSingleCondition.lbound = try? Double(curConditionVC1.lowerBoundTextField.stringValue) ?? -Double.infinity
-                newSingleCondition.ubound = try? Double(curConditionVC1.upperBoundTextField.stringValue) ?? Double.infinity
+                newSingleCondition.lbound = Double(curConditionVC1.lowerBoundTextField.stringValue) ?? -Double.infinity
+                newSingleCondition.ubound = Double(curConditionVC1.upperBoundTextField.stringValue) ?? Double.infinity
             case .equality:
                 newSingleCondition.equality = Double(curConditionVC1.upperBoundTextField.stringValue)
             case .other:
@@ -86,7 +86,7 @@ class ConditionsViewController: NSViewController, NSTableViewDelegate, NSTableVi
         super.viewDidLoad()
         // Do view setup here.
         //print(analysis!.name)
-        initVars = (analysis?.analysisData.initVars)!
+        initVars = (analysis?.initVars)!
         
         let newVC = addConditionView()
         newVC.removeConditionButton.isHidden = true
@@ -237,6 +237,7 @@ class addConditionViewController: NSViewController, NSComboBoxDataSource {
             let lastVC = parent.children[0] as! addConditionViewController
             lastVC.removeConditionButton.isHidden = true
             parent.newConditionStackView.layer?.borderWidth = 0
+            parent.methodStackView.isHidden = true
         }
     }
     

@@ -13,15 +13,26 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     @IBOutlet weak var application: NSApplication!
     
-    var plotTypes : [PlotType]? = nil
+    var plotTypes : [PlotType]! = nil
+    var initVars : [Variable]! = nil
+    //var initStateGroups : InitStateHeader! = nil
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         
-        let thisWindow = application.mainWindow
-        let windowController = thisWindow?.windowController
-        if let doc = windowController?.document as? Analysis {
-            doc.appDelegate = self
-            loadPlotTypes(from: "PlotTypes")
+        loadPlotTypes(from: "PlotTypes")
+        //loadVars(from: "InitVars")
+        //loadVarGroups(from: "InitStateStructure")
+        
+        /*
+        if let maindoc = application.mainWindow?.windowController?.document as? Analysis {
+            maindoc.appDelegate = self
+        }*/
+        
+        for thisWindow in application.windows {
+            let windowController = thisWindow.windowController
+            if let doc = windowController?.document as? Analysis {
+                doc.appDelegate = self
+            }
         }
         
         NotificationCenter.default.post(name: .didLoadAppDelegate, object: nil)
@@ -35,18 +46,68 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Insert code here to tear down your application
     }
 
-    func loadPlotTypes(from plist: String){
-        let plotFilePath = Bundle.main.path(forResource: plist, ofType: "plist")
-        if (plotFilePath != nil) {
-            let listOfPlots = PlotType.loadPlotTypes(filename: plotFilePath!)
-            if listOfPlots.count > 0 {//If the initialization did not return an empty array
-                self.plotTypes = listOfPlots
-            } else {self.plotTypes = nil}
-        }
-        else {
-            self.plotTypes = nil
+    /*
+    func loadVars(from plist: String){
+        guard let varFilePath = Bundle.main.path(forResource: plist, ofType: "plist") else {return}
+        guard let inputList = NSArray.init(contentsOfFile: varFilePath) else {return}//return empty if filename not found
+        initVars = []
+        for thisVar in inputList {
+            let dict = thisVar as! NSDictionary //TODO: error check the type, return [] if not a dictionary
+            let newVar = Variable(dict["id"] as! VariableID, named: dict["name"] as! String, symbol: dict["symbol"] as! String)
+            newVar.units = dict["units"] as! String
+            initVars.append(newVar)
         }
     }
     
+    func loadVarGroups(from plist: String){
+        guard let varFilePath = Bundle.main.path(forResource: plist, ofType: "plist") else {return}
+        guard let inputList = NSArray.init(contentsOfFile: varFilePath) else {return}//return empty if filename not found
+        initStateGroups = InitStateHeader(id: "default")
+        loadVarGroupsRecurs(input: initStateGroups, withList: inputList)
+    }
+    
+    private func loadVarGroupsRecurs(input: InitStateHeader, withList list: NSArray){
+        for thisItem in list {
+            let dict = thisItem as! NSDictionary //TODO: error check the type, return [] if not a dictionary
+            guard let itemType = dict["itemType"] as? String else {print("Incorrect format encountered in statet structure plist"); return}
+            guard let itemID = dict["id"] as? VariableID else {print("Incorrect format encountered in statet structure plist"); return}
+            let name = dict["name"] as? String
+            
+            if itemType == "var"{
+                if let newVar = initVars.first(where: {$0.id == itemID}){
+                    input.variables.append(newVar)}
+                continue
+            } else {
+                var newHeader = InitStateHeader(id: "")
+                if itemType == "header" {
+                    newHeader = InitStateHeader(id: itemID)}
+                else if itemType == "subheader" {
+                    newHeader = InitStateSubHeader(id: itemID)}
+                else {return}
+                newHeader.name = name!
+                input.subheaders.append(newHeader)
+                if let children = dict["items"] as? NSArray {
+                    loadVarGroupsRecurs(input: newHeader, withList: children)
+                }
+            }
+        }
+    }
+    */
+    
+    func loadPlotTypes(from plist: String){
+        guard let plotFilePath = Bundle.main.path(forResource: plist, ofType: "plist") else {return}
+        
+        guard let inputList = NSArray.init(contentsOfFile: plotFilePath) else {return}//return empty if filename not found
+        var initPlotTypes : [PlotType] = []
+        for thisPlot in inputList {
+            let dict = thisPlot as! NSDictionary //TODO: error check the type, return [] if not a dictionary
+            let newPlot = PlotType(dict["id"] as! String, name: dict["name"] as! String, requiresCondition: dict["condition"] as! Bool, nAxis: dict["naxis"] as! Int, nVars: dict["nvar"] as! Int)
+            initPlotTypes.append(newPlot)
+        }
+        
+        if initPlotTypes.count > 0 {//If the initialization did not return an empty array
+            self.plotTypes = initPlotTypes
+        } else {self.plotTypes = nil}
+    }
+    
 }
-

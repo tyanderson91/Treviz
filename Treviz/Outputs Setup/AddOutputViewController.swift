@@ -16,9 +16,9 @@ class AddOutputViewController: BaseViewController, NSComboBoxDataSource { //TODO
     @IBOutlet weak var addOutputButton: NSButton!
     @IBOutlet weak var includeTextCheckbox: NSButton!
     @IBOutlet weak var plotTypePopupButton: NSPopUpButton!
-    var plotTypeSelector : (PlotType)->(Bool) = {(condition: PlotType)->(Bool) in return true}
+    var plotTypeSelector : (PlotType)->(Bool) = {(condition: PlotType)->(Bool) in return true} //Chooses whether a given plot type applis to the current options
+    var outputSetupViewController : OutputSetupViewController!
     
-    var outputSetupViewController : OutputSetupViewController? = nil
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(self.conditionsChanged(_:)), name: .didAddCondition, object: nil)
@@ -51,8 +51,17 @@ class AddOutputViewController: BaseViewController, NSComboBoxDataSource { //TODO
     
     @IBAction func addOutputButtonClicked(_ sender: Any) {
         guard let newPlot = createPlot() else {return}
-        if outputSetupViewController != nil {
-            outputSetupViewController?.allPlots.append(newPlot)
+        var newTextOutput : TZTextOutput?
+        if includeTextCheckbox.state == .on {
+            outputSetupViewController.maxPlotNum += 1
+            newTextOutput = TZTextOutput(id: outputSetupViewController.maxPlotNum, with: newPlot)
+        } else {newTextOutput = nil}
+        
+        if let parentVC = outputSetupViewController {
+            var allPlots = analysis.analysisData.plots
+            allPlots.append(newPlot)
+            if newTextOutput != nil {allPlots.append(newTextOutput!)}
+            if let textOutput = newTextOutput {parentVC.allPlots.append(textOutput)}
             NotificationCenter.default.post(name: .didAddPlot, object: nil)
         }
     }

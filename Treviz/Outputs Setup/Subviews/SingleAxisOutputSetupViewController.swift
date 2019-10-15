@@ -11,18 +11,23 @@ import Cocoa
 class SingleAxisOutputSetupViewController: AddOutputViewController {
 
     @IBOutlet weak var gridView: CollapsibleGridView!
-    var variableSelectorViewController : VariableSelectorViewController?
+    var variableSelectorViewController : VariableSelectorViewController!
     
     override func createPlot()->TZPlot? {// TODO : expand for all plot types
-        /*
-        if let plotType = plotTypeDropDown.selectedItem?.title{
-            let newPlot = TZPlot1line2d()
-            newPlot.plotType = PlotType(rawValue: plotType)!
-            newPlot.var1 = variableSelectorViewController?.getSelectedItem()
-            newPlot.setName()
-            return newPlot
-        }*/
-        return nil
+        var maxPlotID = self.outputSetupViewController.maxPlotNum
+        
+        guard let plotType = plotTypePopupButton.selectedItem?.title else {return nil}
+        var var1 : Variable?
+        if let var1Name = variableSelectorViewController?.variableSelectorPopup.selectedItem?.title {
+            var1 = varList.first(where: { (thisVar:Variable) -> Bool in
+                return thisVar.name == var1Name})//] Variable.getVar(fromName: var1Name, inputList: analysis.appDelegate!.initVars)
+        } else {return nil}
+        
+        let newPlot = TZPlot(id: maxPlotID+1, vars: [var1!], plotType: PlotType.getPlotByName(plotType)!)
+        maxPlotID += 1
+        //newPlot.setName()
+        return newPlot
+        //return nil
     }
     
     override func headerTitle() -> String { return NSLocalizedString("Single Axis", comment: "") }
@@ -31,9 +36,9 @@ class SingleAxisOutputSetupViewController: AddOutputViewController {
         super.viewDidLoad()
 
         let storyboard = NSStoryboard(name: "VariableSelector", bundle: nil)
-        let var1ViewController = storyboard.instantiateController(withIdentifier: "variableSelectorViewController") as! VariableSelectorViewController
-        self.addChild(var1ViewController)
-        gridView.cell(atColumnIndex: 0, rowIndex: 1).contentView = var1ViewController.view
+        variableSelectorViewController = (storyboard.instantiateController(withIdentifier: "variableSelectorViewController") as! VariableSelectorViewController)
+        self.addChild(variableSelectorViewController)
+        gridView.cell(atColumnIndex: 0, rowIndex: 1).contentView = variableSelectorViewController.view
         
         plotTypeSelector = { (thisPlotType : PlotType)->(Bool) in return thisPlotType.nAxis == 1 }
         //let variableSelectorViewController = VariableSelectorViewController()

@@ -18,7 +18,7 @@ class InputsViewController: TZViewController, NSTableViewDataSource, NSTableView
     
     var tableViewController : ParamTableViewController!
     weak var initStateViewController: InitStateViewController!
-    var params : [InputSetting] = []
+    var params : [Parameter] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,10 +29,11 @@ class InputsViewController: TZViewController, NSTableViewDataSource, NSTableView
         // Load and install all the view controllers from our storyboard in the following order.
         _ = stack.addViewController(fromStoryboardId: "Inputs", withIdentifier: "SettingsViewController")
         _ = stack.addViewController(fromStoryboardId: "Inputs", withIdentifier: "EnvironmentViewController")
-        _ = stack.addViewController(fromStoryboardId: "Inputs", withIdentifier: "InitStateViewController")
-        let initStateView = stack.views.last
-        self.initStateViewController = initStateView?.nextResponder as? InitStateViewController
-        
+        initStateViewController = (stack.addViewController(fromStoryboardId: "Inputs", withIdentifier: "InitStateViewController") as! InitStateViewController)
+        for thisController in [initStateViewController]{
+            self.addChild(thisController!)
+            thisController?.representedObject = self.representedObject
+        }
     }
     
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
@@ -40,22 +41,5 @@ class InputsViewController: TZViewController, NSTableViewDataSource, NSTableView
             self.tableViewController = segue.destinationController as? ParamTableViewController
         }
     }
-    
-    func collectInitialState(){
-        let curAnalysis = self.representedObject as! Analysis
-        let newInputData = initStateViewController.getInputSettingData() as [Variable]
-        
-        let newState = State(fromInputVars: newInputData)
-        newState.variables[7] = Variable("mtot", named: "mass", symbol: "m", units: "mass", value: 10)
-        curAnalysis.initialState = newState
-    }
-    
-    override var representedObject: Any? {
-        didSet {
-        // Update the view, if already loaded.
-        }
-    }
-
-
 }
 

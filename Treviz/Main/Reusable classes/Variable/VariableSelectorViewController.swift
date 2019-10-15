@@ -16,21 +16,22 @@ class VariableSelectorViewController: TZViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(self.addVariables(_:)), name: .didLoadAppDelegate, object: nil)
         //self.addVariables()
         
         // Do view setup here.
     }
     
     override func viewWillAppear() { //TODO : figure out why the 'analysis'' object is not loaded by the time viewDidLoad is called, forcing me to put this part in viewDidAppear
-        self.addVariables()
+        //self.addVariables()
     }
     
-    func addVariables(){//_ vars : [Variable]){// TODO : make more automatic from parent analysis
+    @objc func addVariables(_ notification: NSNotification){//_ vars : [Variable]){// TODO : make more automatic from parent analysis
         
         //if let parentViewController = self.parent as? ViewController {
         if let thisAnalysis = self.representedObject as? Analysis {
             //self.representedObject = thisAnalysis
-            for thisVariable in thisAnalysis.analysisData.initVars! {
+            for thisVariable in thisAnalysis.initVars! {
                 variableSelectorPopup.addItem(withTitle: thisVariable.name)
             }
         }
@@ -46,7 +47,9 @@ class VariableSelectorViewController: TZViewController {
     
     func getSelectedItem()->Variable?{
         guard let varTitle = self.variableSelectorPopup.titleOfSelectedItem else { return nil }
-        if let thisVariable = Variable.getVar(fromName: varTitle, inputList: (analysis?.analysisData.initVars!)!) {
+        if let thisVariable = varList.first(where: {$0.name == varTitle })
+            //Variable.getVar(fromName: varTitle, inputList: (analysis?.appDelegate?.initVars!)!)
+        {
             return thisVariable
         }
         return nil

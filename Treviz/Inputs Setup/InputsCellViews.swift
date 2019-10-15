@@ -34,58 +34,62 @@ extension NSUserInterfaceItemIdentifier{
 
 extension InputsViewController{ // TODO: I don't like this existing here
     //Views in init state and param views
-    static func nameCellView(view: NSTableView, thisInput: InputSetting)->NSTableCellView?{
+    static func nameCellView(view: NSTableView, thisInput: Parameter)->NSTableCellView?{
         let newView = view.makeView(withIdentifier: .nameCellView, owner: self) as? NSTableCellView
         if let textField = newView?.textField{
-            textField.stringValue = "\(thisInput.name) (\(thisInput.symbol)₀)"
+            textField.stringValue = "\(thisInput.name)"
+            if let thisVar = thisInput as? Variable {
+                textField.stringValue += (" (\(thisVar.symbol!)₀)")
+            }
         }
         return newView
     }
     
-    static func unitsCellView(view: NSTableView, thisInput: InputSetting)->NSTableCellView?{
+    static func unitsCellView(view: NSTableView, thisInput: Variable?)->NSTableCellView?{
+        guard thisInput != nil else {return nil}
         let newView = view.makeView(withIdentifier: .unitsCellView, owner: self) as? NSTableCellView
         if let textField = newView?.textField{
-            let str = thisInput.units
+            let str = String(thisInput!.units)
             textField.stringValue = str
         }
         return newView
     }
     
     //Views in init state view only
-    static func inputParamCellView(view: NSTableView, thisInput: InputSetting)->NSButton?{
+    static func inputParamCellView(view: NSTableView, thisInput: Parameter)->NSButton?{
         let newView = view.makeView(withIdentifier: .initStateParamCellView, owner: self) as? NSButton
         newView?.state = thisInput.isParam ? NSControl.StateValue.on : NSControl.StateValue.off
         return newView
     }
     
-    static func inputHeaderParamCellView(view: NSTableView, thisInput: InputSetting)->NSTableCellView?{
+    static func inputHeaderParamCellView(view: NSTableView, thisInput: InitStateCheck)->NSTableCellView?{
         let newView = view.makeView(withIdentifier: .initStateHasParamCellView, owner: self) as? NSTableCellView
         if let thisImageView = newView?.imageView {
-            thisInput.setParams()
-            let curimage = thisInput.isParam ? NSImage(named: NSImage.menuOnStateTemplateName) : nil
+            let curimage = thisInput.hasParams ? NSImage(named: NSImage.menuOnStateTemplateName) : nil
             thisImageView.image = curimage
         }
         return newView
     }
     
-    static func inputValueCellView(view: NSTableView, thisInput: InputSetting)->NSTableCellView?{
-        let newView = view.makeView(withIdentifier: .initStateValueCellView, owner: self) as? NSTableCellView
-        if let textField = newView?.textField {
-            let dubVal = thisInput.value
-            textField.stringValue = (dubVal != nil ? String(format: "%g", dubVal!) : "--")
-        }
-        return newView
-    }
-    
-    static func subHeaderCellView(view: NSTableView, thisInput: InputSetting)->NSTableCellView?{
+    static func subHeaderCellView(view: NSTableView, thisInput: InitStateCheck)->NSTableCellView?{
         let newView = view.makeView(withIdentifier: .initStateSubHeaderCellView, owner: self) as? NSTableCellView
         if let textField = newView?.textField {
             textField.stringValue = thisInput.name
         }
         return newView
     }
-
-    static func headerCellView(view: NSTableView, thisInput: InputSetting)->NSTableCellView?{
+    
+    static func inputValueCellView(view: NSTableView, inputVar: Variable?)->NSTableCellView?{
+        guard inputVar != nil else {return nil}
+        let newView = view.makeView(withIdentifier: .initStateValueCellView, owner: self) as? NSTableCellView
+        if let textField = newView?.textField {
+            let dubVal = inputVar!.value[0]
+            textField.stringValue = String(format: "%g", dubVal)
+        }
+        return newView
+    }
+    
+    static func headerCellView(view: NSTableView, thisInput: InitStateHeader)->NSTableCellView?{
         let newView = view.makeView(withIdentifier: .initStateHeaderCellView, owner: self) as? NSTableCellView
             if let textField = newView?.textField {
                 textField.stringValue = thisInput.name
@@ -98,11 +102,12 @@ extension InputsViewController{ // TODO: I don't like this existing here
     
     //Views in param view only
 
-    static func paramValueCellView(view: NSTableView, thisInput: InputSetting)->NSTableCellView?{
+    static func paramValueCellView(view: NSTableView, thisInput: Variable?)->NSTableCellView?{
+        guard thisInput != nil else {return nil}
         let newView = view.makeView(withIdentifier: .paramValueCellView, owner: self) as? NSTableCellView
         if let textField = newView?.textField {
-            let dubVal = thisInput.value
-            textField.stringValue = (dubVal != nil ? String(format: "%g", dubVal!) : "--")
+            let dubVal = thisInput!.value[0]
+            textField.stringValue = String(format: "%g", dubVal)
         }
         return newView
     }

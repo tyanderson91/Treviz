@@ -5,8 +5,6 @@
 	<dict>
 		<key>id</key>
 		<string>t</string>
-		<key>isParam</key>
-		<false/>
 		<key>itemType</key>
 		<string>var</string>
 	</dict>
@@ -31,48 +29,36 @@
 					<dict>
 						<key>id</key>
 						<string>x</string>
-						<key>isParam</key>
-						<false/>
 						<key>itemType</key>
 						<string>var</string>
 					</dict>
 					<dict>
 						<key>id</key>
 						<string>y</string>
-						<key>isParam</key>
-						<true/>
 						<key>itemType</key>
 						<string>var</string>
 					</dict>
 					<dict>
 						<key>id</key>
 						<string>z</string>
-						<key>isParam</key>
-						<false/>
 						<key>itemType</key>
 						<string>var</string>
 					</dict>
 					<dict>
 						<key>id</key>
 						<string>dx</string>
-						<key>isParam</key>
-						<false/>
 						<key>itemType</key>
 						<string>var</string>
 					</dict>
 					<dict>
 						<key>id</key>
 						<string>dy</string>
-						<key>isParam</key>
-						<false/>
 						<key>itemType</key>
 						<string>var</string>
 					</dict>
 					<dict>
 						<key>id</key>
 						<string>dz</string>
-						<key>isParam</key>
-						<false/>
 						<key>itemType</key>
 						<string>var</string>
 					</dict>
@@ -90,40 +76,30 @@
 					<dict>
 						<key>id</key>
 						<string>r</string>
-						<key>isParam</key>
-						<false/>
 						<key>itemType</key>
 						<string>var</string>
 					</dict>
 					<dict>
 						<key>id</key>
 						<string>azp</string>
-						<key>isParam</key>
-						<false/>
 						<key>itemType</key>
 						<string>var</string>
 					</dict>
 					<dict>
 						<key>id</key>
 						<string>elp</string>
-						<key>isParam</key>
-						<false/>
 						<key>itemType</key>
 						<string>var</string>
 					</dict>
 					<dict>
 						<key>id</key>
 						<string>azv</string>
-						<key>isParam</key>
-						<false/>
 						<key>itemType</key>
 						<string>var</string>
 					</dict>
 					<dict>
 						<key>id</key>
 						<string>elv</string>
-						<key>isParam</key>
-						<false/>
 						<key>itemType</key>
 						<string>var</string>
 					</dict>
@@ -141,48 +117,36 @@
 					<dict>
 						<key>id</key>
 						<string>a</string>
-						<key>isParam</key>
-						<false/>
 						<key>itemType</key>
 						<string>var</string>
 					</dict>
 					<dict>
 						<key>id</key>
 						<string>e</string>
-						<key>isParam</key>
-						<false/>
 						<key>itemType</key>
 						<string>var</string>
 					</dict>
 					<dict>
 						<key>id</key>
 						<string>i</string>
-						<key>isParam</key>
-						<false/>
 						<key>itemType</key>
 						<string>var</string>
 					</dict>
 					<dict>
 						<key>id</key>
 						<string>om</string>
-						<key>isParam</key>
-						<false/>
 						<key>itemType</key>
 						<string>var</string>
 					</dict>
 					<dict>
 						<key>id</key>
 						<string>w</string>
-						<key>isParam</key>
-						<false/>
 						<key>itemType</key>
 						<string>var</string>
 					</dict>
 					<dict>
 						<key>id</key>
 						<string>th</string>
-						<key>isParam</key>
-						<false/>
 						<key>itemType</key>
 						<string>var</string>
 					</dict>
@@ -200,40 +164,30 @@
 					<dict>
 						<key>id</key>
 						<string>hangle</string>
-						<key>isParam</key>
-						<true/>
 						<key>itemType</key>
 						<string>var</string>
 					</dict>
 					<dict>
 						<key>id</key>
 						<string>gamma</string>
-						<key>isParam</key>
-						<false/>
 						<key>itemType</key>
 						<string>var</string>
 					</dict>
 					<dict>
 						<key>id</key>
 						<string>h</string>
-						<key>isParam</key>
-						<false/>
 						<key>itemType</key>
 						<string>var</string>
 					</dict>
 					<dict>
 						<key>id</key>
 						<string>lat</string>
-						<key>isParam</key>
-						<false/>
 						<key>itemType</key>
 						<string>var</string>
 					</dict>
 					<dict>
 						<key>id</key>
 						<string>lon</string>
-						<key>isParam</key>
-						<false/>
 						<key>itemType</key>
 						<string>var</string>
 					</dict>
@@ -253,72 +207,54 @@
 			<dict>
 				<key>id</key>
 				<string>b</string>
-				<key>isParam</key>
-				<false/>
 				<key>itemType</key>
 				<string>var</string>
 			</dict>
 			<dict>
 				<key>id</key>
 				<string>alpha</string>
-				<key>isParam</key>
-				<false/>
 				<key>itemType</key>
 				<string>var</string>
 			</dict>
 			<dict>
 				<key>id</key>
 				<string>roll</string>
-				<key>isParam</key>
-				<false/>
 				<key>itemType</key>
 				<string>var</string>
 			</dict>
 			<dict>
 				<key>id</key>
 				<string>pitch</string>
-				<key>isParam</key>
-				<false/>
 				<key>itemType</key>
 				<string>var</string>
 			</dict>
 			<dict>
 				<key>id</key>
 				<string>yaw</string>
-				<key>isParam</key>
-				<false/>
 				<key>itemType</key>
 				<string>var</string>
 			</dict>
 			<dict>
 				<key>id</key>
 				<string>droll</string>
-				<key>isParam</key>
-				<false/>
 				<key>itemType</key>
 				<string>var</string>
 			</dict>
 			<dict>
 				<key>id</key>
 				<string>dpitch</string>
-				<key>isParam</key>
-				<false/>
 				<key>itemType</key>
 				<string>var</string>
 			</dict>
 			<dict>
 				<key>id</key>
 				<string>dyaw</string>
-				<key>isParam</key>
-				<false/>
 				<key>itemType</key>
 				<string>var</string>
 			</dict>
 			<dict>
 				<key>id</key>
 				<string>bank</string>
-				<key>isParam</key>
-				<false/>
 				<key>itemType</key>
 				<string>var</string>
 			</dict>

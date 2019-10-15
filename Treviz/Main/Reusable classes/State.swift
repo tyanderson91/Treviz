@@ -2,7 +2,7 @@
 //  State.swift
 //  Treviz
 //
-//  State is an object containing a collection of Variable objects that combined should fully defines the state of a vehicle at a single instant in time
+//  State is an object containing a collection of Variable objects that combined should fully define the state of a vehicle at any point in time
 //  Used to read input state, write output state, parse outputs, and create derived states.
 //  Converts into an array of Double values before being processed by the propagator
 //
@@ -12,11 +12,13 @@
 
 import Cocoa
 
-class State: NSObject {
-    static let stateVarPositions : [VariableID : Int] =
+class State: NSObject { //TODO: try to phase this out
+    static let stateVarPositions : [VariableID : Int] = //TODO : this can definitely be cleaned up
         ["t":0,"x":1,"y":2,"z":3,"dx":4,"dy":5,"dz":6,"mtot":7,"q0":8,"q1":9,"q2":10,"q3":11,
-         "dq0":12,"dq1":13,"dq2":14,"dq3":15]
+         "dq0":12,"dq1":13,"dq2":14,"dq3":15] //Dear god, get rid of this
     var variables : [Variable]
+    
+    
     //var varIDs : [VariableID] = []
     
     /*
@@ -43,6 +45,31 @@ class State: NSObject {
     */
     override init() {
         self.variables = []
+        super.init()
+    }
+    
+    subscript(varID: VariableID) -> Variable? {
+        get {
+            if let thisVar = variables.first(where: {$0.id == varID}){return thisVar}
+            else {print("VarID \(varID) not found")
+                return nil}
+        }
+    }
+    
+    subscript(varID: VariableID, index: Int) -> Double? {
+        get {
+            if let thisVar = self[varID] {
+                if let thisVal = thisVar[index] {return thisVal}
+            } else {print("Index \(varID) not found")
+                return nil}
+            return nil
+        }
+        
+        set (newVal) {
+            if let thisVar = self[varID] {
+                if newVal != nil {thisVar[index] = newVal}
+            }
+        }
     }
     
     init(fromInputVars inputs: [Variable]?){
@@ -61,12 +88,12 @@ class State: NSObject {
     
     func setItemValue(id: VariableID, value: Double){
         if let thisIndex = State.stateVarPositions[id]{
-            self.variables[thisIndex].value = value}
+            self.variables[thisIndex].value = [value]}
     }
     
-    func getValue(_ id: VariableID)->Double?{
+    func getValue(_ id: VariableID)->Double?{// TODO : do not force Double
         if let thisIndex = State.stateVarPositions[id]{
-            return self.variables[thisIndex].value}
+            return self.variables[thisIndex].value[0]}
         else {return nil}
     }
     
@@ -80,10 +107,8 @@ class State: NSObject {
         var varArray : [Double] = Array<Any>(repeating: 0.0, count:State.stateVarPositions.count) as! [Double]
         for curVar in self.variables{
             var doubleValue = 0.0
-            if curVar.value != nil{
-                doubleValue = curVar.value!
-                varArray[State.stateVarPositions[curVar.id]!] = doubleValue
-            }
+            doubleValue = curVar.value[0]
+            varArray[State.stateVarPositions[curVar.id]!] = doubleValue
         }
         return varArray
     }

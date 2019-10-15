@@ -11,49 +11,44 @@ import Foundation
 import Cocoa
 
 class AnalysisData: NSObject {
-    var initVars : [Variable]?
-    var initPlotTypes : [PlotType]?
+    
+    var initState = State()
+    var inputSettings : [Parameter] = []
+    var plots : [TZOutput] = []
+    var analysis : Analysis!
     
     func read(from data: Data) {
-        initVars = []// = String(bytes: data, encoding: .utf8)!
     }
     
     func data() -> Data? {
         return nil//contentString.data(using: .utf8)
     }
     
-    override init(){
-        super.init()
+    init(analysis: Analysis){
         //This function runs the default loading sub-methods
         //TODO: expand the number of read sourcess
-        self.loadVars(from: "InitialVars")
-        //self.loadPlotTypes(from: "PlotTypes")
+        //self.loadVars(from: "InitialVars")
+        super.init()
+        self.analysis = analysis
+        NotificationCenter.default.addObserver(self, selector: #selector(self.initReadData(_:)), name: .didLoadAppDelegate, object: nil)
+        
+        NotificationCenter.default.post(name: .didLoadAnalysisData, object: nil)
     }
     
-    func loadVars(from plist: String){
-        let varFilePath = Bundle.main.path(forResource: plist, ofType: "plist")
-        if (varFilePath != nil) {
-            let listOfVars = Variable.initVars(filename: varFilePath!)
-            if listOfVars.count > 0 {//If the initialization did not return an empty array
-                self.initVars = listOfVars
-                InputSetting.varInputList = listOfVars // TODO : handle this in a more robust way
-            } else {self.initVars = nil}
-        }
-        else {
-            self.initVars = nil
+    @objc func initReadData(_ notification: Notification){
+        guard let varFilePath = Bundle.main.path(forResource: "InitVarSettings", ofType: "plist") else {return}
+        guard let inputList = NSArray.init(contentsOfFile: varFilePath) else {return}
+        
+        for thisVarElement in inputList {
+            let thisVar = thisVarElement as! NSDictionary
+            let initVars = analysis.initVars
+            let thisVarID = thisVar["id"] as! VariableID
+            let curVar = initVars!.first(where: { $0.id == thisVarID})!
+            curVar.value.append(thisVar["value"] as! Double) // TODO: make sure this is the first element
+            curVar.isParam = thisVar["isParam"] as! Bool
+            inputSettings.append(curVar)
         }
     }
     
-    func loadPlotTypes(from plist: String){
-        let plotFilePath = Bundle.main.path(forResource: plist, ofType: "plist")
-        if (plotFilePath != nil) {
-            let listOfPlots = PlotType.loadPlotTypes(filename: plotFilePath!)
-            if listOfPlots.count > 0 {//If the initialization did not return an empty array
-                self.initPlotTypes = listOfPlots
-            } else {self.initPlotTypes = nil}
-        }
-        else {
-            self.initPlotTypes = nil
-        }
-    }
+    
 }

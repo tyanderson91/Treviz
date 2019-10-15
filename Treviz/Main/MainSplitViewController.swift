@@ -26,7 +26,9 @@ class MainSplitViewController: SplitViewController {
         outputsViewController = (outputsSplitViewItem?.viewController as! OutputsViewController)
         outputSetupViewController = (outputSetupSplitViewItem?.viewController as! OutputSetupViewController)
         splitViewItemList = [inputsSplitViewItem, outputsSplitViewItem, outputSetupSplitViewItem]
+        //let splitViewChildVCs = [inputsViewController!, outputsViewController!, outputSetupViewController!]
 
+        //let par1 = inputsViewController.parent
         //outputsSplitViewItem.setValue(600, forKey: "width")
         // Do view setup here.
     }

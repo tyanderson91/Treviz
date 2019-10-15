@@ -21,4 +21,6 @@ extension Notification.Name {
     static let didAddPlot = Notification.Name("didAddPlot")
     
     static let didLoadAppDelegate = Notification.Name("didLoadAppDelegate")
+    static let didLoadAnalysisData = Notification.Name("didLoadAnalysisData")
+
 }

@@ -15,9 +15,9 @@ class Analysis: NSDocument {//TODO: possibly subclass NSPersistentDocument if us
     //var ouputsViewController : OutputsViewController? = nil //TODO: Initialize like input view controller
     //var ouputsSetupViewController : OutputSetupViewController? = nil //TODO: Initialize like input view controller
     var analysisData : AnalysisData!
-    var appDelegate : AppDelegate? = nil
+    var appDelegate : AppDelegate!
     
-    //var initVars : [Variable] = []
+    var variables : [Variable] = []
     var name : String = ""
     var initialState = State()
     var terminalConditions = TerminalConditionSet([])
@@ -27,6 +27,8 @@ class Analysis: NSDocument {//TODO: possibly subclass NSPersistentDocument if us
     var windowController : MainWindowController!//Implicit optional, should always be assigned after initialization
     var viewController : MainViewController!
     var conditions : [Condition]?
+    var initVars : [Variable]! = nil
+    var initStateGroups : InitStateHeader! = nil
     //var outputsVC : OutputsViewController!
     //Set up terminal conditions
     
@@ -43,8 +45,13 @@ class Analysis: NSDocument {//TODO: possibly subclass NSPersistentDocument if us
         super.init()
         
         name = "Test Analysis"
-        analysisData = AnalysisData()
         conditions = []
+        if let delegate = appDelegate {
+            self.variables = delegate.initVars
+        }
+        loadVars(from: "InitVars")
+        loadVarGroups(from: "InitStateStructure")
+        analysisData = AnalysisData(analysis: self)
         // Add your subclass-specific initialization here.
         //let A = self.analysisData
     }
@@ -59,7 +66,7 @@ class Analysis: NSDocument {//TODO: possibly subclass NSPersistentDocument if us
         self.windowController = (storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier("Analysis Window Controller")) as! MainWindowController)
         self.addWindowController(windowController)
         self.viewController = (windowController.contentViewController as! MainViewController)
-        viewController.representedObject = self
+        self.viewController.representedObject = self        
     }
     
     override func read(from data: Data, ofType typeName: String) throws {
@@ -67,14 +74,59 @@ class Analysis: NSDocument {//TODO: possibly subclass NSPersistentDocument if us
         //analysisData.read(from: data)
     }
     
-    /// - Tag: writeExample
     override func data(ofType typeName: String) throws -> Data {
         return analysisData.data()!
     }
     
+    func loadVars(from plist: String){
+        guard let varFilePath = Bundle.main.path(forResource: plist, ofType: "plist") else {return}
+        guard let inputList = NSArray.init(contentsOfFile: varFilePath) else {return}//return empty if filename not found
+        initVars = []
+        for thisVar in inputList {
+            let dict = thisVar as! NSDictionary //TODO: error check the type, return [] if not a dictionary
+            let newVar = Variable(dict["id"] as! VariableID, named: dict["name"] as! String, symbol: dict["symbol"] as! String)
+            newVar.units = dict["units"] as! String
+            initVars.append(newVar)
+        }
+    }
+    
+    func loadVarGroups(from plist: String){
+        guard let varFilePath = Bundle.main.path(forResource: plist, ofType: "plist") else {return}
+        guard let inputList = NSArray.init(contentsOfFile: varFilePath) else {return}//return empty if filename not found
+        initStateGroups = InitStateHeader(id: "default")
+        loadVarGroupsRecurs(input: initStateGroups, withList: inputList as! [NSDictionary])
+    }
+    
+    private func loadVarGroupsRecurs(input: InitStateHeader, withList list: [NSDictionary]){
+        for dict in list {
+            //let dict = thisItem as! NSDictionary //TODO: error check the type, return [] if not a dictionary
+            guard let itemType = dict["itemType"] as? String else { return }
+            guard let itemID = dict["id"] as? VariableID else { return }
+            let name = dict["name"] as? String
+            
+            if itemType == "var"{
+                if let newVar = initVars.first(where: {$0.id == itemID}){
+                    input.variables.append(newVar)}
+                continue
+            } else {
+                var newHeader = InitStateHeader(id: "")
+                if itemType == "header" {
+                    newHeader = InitStateHeader(id: itemID)}
+                else if itemType == "subHeader" {
+                    newHeader = InitStateSubHeader(id: itemID)}
+                else {return}
+                newHeader.name = name!
+                input.subheaders.append(newHeader)
+                if let children = dict["items"] as? NSArray {
+                    loadVarGroupsRecurs(input: newHeader, withList: children as! [NSDictionary])
+                }
+            }
+        }
+    }
+    
     func runAnalysis() -> [Int] {//TODO: break this method into several phases to make it more manageable
         // Initial State
-        self.viewController.mainSplitViewController.inputsViewController.collectInitialState()
+        //self.viewController.mainSplitViewController.inputsViewController.getState()
         
         // Setup
         var currentState = initialState.toArray()

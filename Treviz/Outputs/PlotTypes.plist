@@ -6,6 +6,18 @@
 		<key>naxis</key>
 		<integer>1</integer>
 		<key>id</key>
+		<string>singlevalue</string>
+		<key>name</key>
+		<string>Single Value</string>
+		<key>condition</key>
+		<true/>
+		<key>nvar</key>
+		<integer>1</integer>
+	</dict>
+	<dict>
+		<key>naxis</key>
+		<integer>1</integer>
+		<key>id</key>
 		<string>boxplot</string>
 		<key>name</key>
 		<string>Boxplot</string>

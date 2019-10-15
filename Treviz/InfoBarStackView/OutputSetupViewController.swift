@@ -22,7 +22,8 @@ class OutputSetupViewController: TZViewController, NSTableViewDelegate, NSTableV
     
     @IBOutlet weak var stack: CustomStackView!
     @IBOutlet weak var tableView: NSTableView!
-    var allPlots : [TZPlot] = []
+    var allPlots : [TZOutput] = []
+    var maxPlotNum : NSInteger = 0
     
     override func viewDidLoad() {
         
@@ -42,6 +43,8 @@ class OutputSetupViewController: TZViewController, NSTableViewDelegate, NSTableV
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.refreshTable(_:)), name: .didAddPlot, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.populateOutputSet(_:)), name: .didLoadAppDelegate, object: nil)
+        
         //addViewController(withIdentifier: "CollectionViewController")
         //addViewController(withIdentifier: "OtherViewController")
         
@@ -57,6 +60,9 @@ class OutputSetupViewController: TZViewController, NSTableViewDelegate, NSTableV
     
     @objc func refreshTable(_ notification: Notification){
         self.tableView.reloadData()
+    }
+    @objc func populateOutputSet(_ notification: Notification){
+        self.allPlots = analysis.analysisData.plots
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {

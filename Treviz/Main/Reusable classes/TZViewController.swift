@@ -18,10 +18,15 @@ class TZViewController: NSViewController {
         }
     }
 
-    weak var analysis: Analysis? {
+    weak var analysis: Analysis! {
         if let analysisRepresentedObject = representedObject as? Analysis {
             return analysisRepresentedObject
         }
+        return nil
+    }
+    
+    var varList: [Variable]! {
+        if let appDelegate = analysis?.appDelegate {return appDelegate.initVars}
         return nil
     }
 
