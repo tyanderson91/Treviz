@@ -19,10 +19,9 @@ class Analysis: NSDocument {//TODO: possibly subclass NSPersistentDocument if us
     
     var variables : [Variable] = []
     var name : String = ""
-    var initialState = State()
-    var terminalConditions = TerminalConditionSet([])
+    var terminalConditions : Condition!
+    var traj: State!
     var returnCodes : [Int] = []
-    var trajectory : [[Double]] = [] //TODO : allow multiple variable types
     var progressBar : NSProgressIndicator!
     var windowController : MainWindowController!//Implicit optional, should always be assigned after initialization
     var viewController : MainViewController!
@@ -129,55 +128,60 @@ class Analysis: NSDocument {//TODO: possibly subclass NSPersistentDocument if us
         //self.viewController.mainSplitViewController.inputsViewController.getState()
         
         // Setup
-        var currentState = initialState.toArray()
+        traj = State(variables: initVars)
+        traj["mtot",0] = 10.0
+        //traj["dy",0] = 10.0
+        //traj["dx",0] = 10.0
+
+        
         let dt : Double = 0.1
         
-        let termCond1 = TerminalCondition(varID: "t", crossing: 100, inDirection: 1) //TODO: make max time a required terminal condition
-        let termCond2 = TerminalCondition(varID: "x", crossing: 40, inDirection: 1)
-        let termCond3 = TerminalCondition(varID: "y", crossing: 0, inDirection: -1)
-
-        terminalConditions = TerminalConditionSet([termCond1,termCond2,termCond3])
-        terminalConditions.initState = currentState
+        //let termCond1 = Condition("t", upperBound : 100) //TerminalCondition(varID: "t", crossing: 100, inDirection: 1) //TODO: make max time a required terminal condition
+        let termCond2 = Condition("y", lowerBound : -0.10) //TerminalCondition(varID: "y", crossing: 0, inDirection: -1)
+        let terminalConditions = Condition()
+        terminalConditions.conditions = [termCond2]
+        terminalConditions.unionType = .and
+        //terminalConditions = TerminalConditionSet([termCond1,termCond2,termCond3])
         
         //let newState = VehicleState()
         //var trajIndex = 1
         var analysisEnded = false
-        let state = State.stateVarPositions //map of identifiers to positions
         
         //Run
-        self.trajectory.append(currentState)
+        var i = 0
+        let outputTextView = (self.viewController.mainSplitViewController.outputsViewController.outputSplitViewController?.textOutputSplitViewItem.viewController as! TextOutputsViewController).textView!
         while !analysisEnded{
-            var newState = State.initAsArray()
-            let m = currentState[state["mtot"]!]
-            let x = currentState[state["x"]!]
-            let y = currentState[state["y"]!]
-            let dx = currentState[state["dx"]!]
-            let dy = currentState[state["dy"]!]
-            let t = currentState[state["t"]!]
-            
+            let x = traj["x", i]!
+            let y = traj["y", i]!
+            let dx = traj["dx", i]!
+            let dy = traj["dy", i]!
+            let t = traj["t", i]!
+            let m = traj["mtot", i]!
+
             let F_g = -9.81*m
             let a_y = F_g/m
             let a_x : Double = 0
             
-            newState[state["t"]!] = t + dt
-            newState[state["dy"]!] = dy + a_y * dt
-            newState[state["y"]!] = y+dy*dt
-            newState[state["dx"]!] = dx+a_x*dt
-            newState[state["x"]!] = x + dx*dt
-            newState[state["mtot"]!] = m
-            trajectory.append(newState)
+            i += 1
+            traj["t", i] = t + dt
+            traj["dy", i] = dy + a_y * dt
+            traj["y", i] = y+dy*dt
+            traj["dx", i] = dx+a_x*dt
+            traj["x", i] = x + dx*dt
+            traj["mtot", i] = m
             
-            var pctComplete = 0.0
+            // var pctComplete = 0.0
+            outputTextView.string.append("X: \(String(describing: x)), Y: \(String(describing: y))\n")
+            analysisEnded = terminalConditions.evaluate(traj[i]) || i == 10000
+            /*
             (returnCodes,analysisEnded,pctComplete) = terminalConditions.checkAllConditions(prevState: currentState, curState: newState)
             
-            currentState = newState
             if let progressBar = viewController.analysisProgressBar{
                 progressBar.doubleValue = pctComplete*100
-            }
+            }*/
         }
-        
         //Outputs
-        self.viewController.mainSplitViewController.outputsViewController.processOutputs()
+        //self.viewController.mainSplitViewController.outputsViewController.processOutputs()
         return returnCodes
     }
 }

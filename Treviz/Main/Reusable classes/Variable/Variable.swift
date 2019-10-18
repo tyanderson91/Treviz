@@ -20,7 +20,8 @@ enum VarValueType : String {
     case vector = "vector"
 }
 
-class Variable : NSObject, Parameter, InitStateCheck { // TODO: maybe this should be a struct?
+class Variable : NSObject, Parameter, InitStateCheck {
+    // TODO: maybe this should be a struct?
     //static var allIdentifiers : [VariableID] = []
     let id: VariableID
     let name: String
@@ -57,13 +58,15 @@ class Variable : NSObject, Parameter, InitStateCheck { // TODO: maybe this shoul
     
     subscript(index: Int)->Double?{
         get {
-            if index > 0 && index <= value.count{
+            if index >= 0 && index < value.count{
                 return value[index]
             } else {return nil}
         }
         set (newVal) {
-            if newVal != nil {value[index] = newVal!}
+            if newVal != nil {value.insert(newVal!, at: index)}
         }
     }
+    
+    // Sequence overrides
 
 }

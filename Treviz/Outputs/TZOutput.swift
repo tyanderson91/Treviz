@@ -52,13 +52,11 @@ class TZOutput : NSObject {
         condition = output.condition
     }
     
-    func processVars(){
+    
+    func processVars(_ traj : State){
         // Evaluates variable and condition information to create vectors for outputting
         if condition != nil {
-            condition!.evaluate()
-            if var1 != nil {
-                
-            }
+            condition!.evaluate(traj)
         }
     }
 }

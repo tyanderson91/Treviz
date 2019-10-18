@@ -40,16 +40,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "DAB80812-DD7A-42DC-9862-D335ED09CFB0"
+            uuid = "0667861D-4E19-4998-B6CE-AF632BF8B1AD"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Treviz/InfoBarStackView/OutputSetupViewController.swift"
+            filePath = "Treviz/Main/Analysis.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
-            landmarkName = "viewDidLoad()"
+            startingLineNumber = "175"
+            endingLineNumber = "175"
+            landmarkName = "runAnalysis()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -374,6 +374,46 @@
 	</dict>
 	<dict>
 		<key>id</key>
+		<string>dq0</string>
+		<key>name</key>
+		<string>Quaternion</string>
+		<key>symbol</key>
+		<string>𝑑𝑞₀</string>
+		<key>units</key>
+		<string>none</string>
+	</dict>
+	<dict>
+		<key>id</key>
+		<string>dq1</string>
+		<key>name</key>
+		<string>Quaternion</string>
+		<key>symbol</key>
+		<string>𝑑𝑞₁</string>
+		<key>units</key>
+		<string>none</string>
+	</dict>
+	<dict>
+		<key>id</key>
+		<string>dq2</string>
+		<key>name</key>
+		<string>Quaternion</string>
+		<key>symbol</key>
+		<string>𝑑𝑞₂</string>
+		<key>units</key>
+		<string>none</string>
+	</dict>
+	<dict>
+		<key>id</key>
+		<string>dq3</string>
+		<key>name</key>
+		<string>Quaternion</string>
+		<key>symbol</key>
+		<string>𝑑𝑞₃</string>
+		<key>units</key>
+		<string>none</string>
+	</dict>
+	<dict>
+		<key>id</key>
 		<string>mtot</string>
 		<key>name</key>
 		<string>Total mass</string>

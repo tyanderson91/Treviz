@@ -48,9 +48,8 @@ class ConditionsViewController: NSViewController, NSTableViewDelegate, NSTableVi
             let varindex = curConditionVC1.variableSelector.indexOfSelectedItem
             if varindex == -1 {curConditionVC1.variableSelector.becomeFirstResponder(); return}
             
-            let newSingleCondition = Condition()
+            let newSingleCondition = SingleCondition(initVars[varindex].id)
             
-            newSingleCondition.varID = initVars[varindex].id //TODO : ONLY works if variable list is in the same order
             switch curConditionVC1.selectedType {
             case .interval:
                 newSingleCondition.lbound = Double(curConditionVC1.lowerBoundTextField.stringValue) ?? -Double.infinity
@@ -155,13 +154,15 @@ class ConditionsViewController: NSViewController, NSTableViewDelegate, NSTableVi
             let newView = tableView.makeView(withIdentifier: .descripCellView, owner: self) as? NSTableCellView
             var dstring = ""
             for thisCond in thisCondition.conditions {
-                if thisCond.equality != nil {
-                    dstring += "(\(thisCond.varID)=\(thisCond.equality ?? 0))"
+                if let singleCond = thisCond as? SingleCondition {
+                    if singleCond.equality != nil {
+                        dstring += "(\(singleCond.varID)=\(singleCond.equality ?? 0))"
+                    }
+                    else {
+                        dstring += "(\(singleCond.lbound ?? 0)<\(singleCond.varID)<\(singleCond.ubound ?? 0))"
+                    }
+                    //if singleCond != thisCondition.conditions.last {dstring += " \(unionTypeDropdown.selectedItem!.title) "}// TODO: fix issue where this is the same for ALL variables in the table
                 }
-                else {
-                    dstring += "(\(thisCond.lbound ?? 0)<\(thisCond.varID)<\(thisCond.ubound ?? 0))"
-                }
-                if thisCond != thisCondition.conditions.last {dstring += " \(unionTypeDropdown.selectedItem!.title) "}// TODO: fix issue where this is the same for ALL variables in the table
             }
             newView?.textField?.stringValue = dstring
             return newView

@@ -150,9 +150,9 @@
 		CD05E3BA2254916500906EB0 /* Reusable classes */ = {
 			isa = PBXGroup;
 			children = (
+				CD2D0DB0224382F70012978E /* InfoBarStackView */,
 				CDB7C7392352B03100BC50F1 /* Parameter.swift */,
 				CD449022233B26370095F243 /* Variable */,
-				CD2D0DB0224382F70012978E /* InfoBarStackView */,
 				CDF3D1A5225057270064D70C /* TZViewController.swift */,
 				CDAF13FC222CF357005CDC3C /* State.swift */,
 				CD42E0A922FD05F600A0F9A1 /* CollapsibleStackView.swift */,
@@ -215,9 +215,9 @@
 		CD449022233B26370095F243 /* Variable */ = {
 			isa = PBXGroup;
 			children = (
+				CDAF14262230FB72005CDC3C /* Variable.swift */,
 				CD9B490B2339BB56008ADA2C /* VariableSelectorViewController.swift */,
 				CD449023233B378C0095F243 /* VariableSelector.storyboard */,
-				CDAF14262230FB72005CDC3C /* Variable.swift */,
 			);
 			path = Variable;
 			sourceTree = "<group>";

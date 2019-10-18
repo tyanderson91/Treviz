@@ -8,12 +8,13 @@
 
 import Cocoa
 
-enum ConditionType {
-    case terminal
-    case variable
+protocol EvaluateCondition {
+    func evaluate(_ state: State)
+    func evaluate(_ singleState: StateArray)->Bool
+    var meetsCondition : [Bool] {get set}
 }
 
-/// Booltype represents the different ways that conditions can be combicned
+// Booltype represents the different ways that conditions can be combicned
 enum BoolType : Int {
     case and = 0
     case or = 1
@@ -23,72 +24,89 @@ enum BoolType : Int {
     case xnor = 5
 }
 
-class SingleCondition: NSObject {
-    var varID : VariableID = "" // TODO: turn into let constant
-    var type : ConditionType = .variable
-    var state = State()
-    var index : [Int] = []
+class SingleCondition: NSObject, EvaluateCondition {
+    
+    let varID : VariableID // TODO: turn into let constant
     var lbound : Double? = nil
     var ubound : Double? = nil
     var equality : Double? = nil
     //var isConditionIndex : [Int]? = nil
-    var isConditionBool : [Bool]? = nil
-    
-    func evaluate(){
-        switch self.type {
-        case .variable:
-            self.evaluateVar()
-        case .terminal:
-            self.evaluateTerminal()
-        }
+    var meetsCondition : [Bool] = []
+    var tests : [(Double)->Bool] {
+        var _tests : [(Double)->Bool] = []
+        if let lower = lbound {
+            _tests.append({return $0 < lower })
+        }; if let upper = ubound {
+            _tests.append({return $0 > upper })
+        }; if let eq = equality {
+            _tests.append({return $0 == eq })
+        }; return _tests
     }
     
-    private func evaluateTerminal(){
-        self.index = [state.toArray().count] // TODO: make more robust way to find terminal condition
+    init(_ vid: VariableID){
+        varID = vid
+        super.init()
     }
     
-    private func evaluateVar(){
-        var tests : [(Double)->(Bool)] = []
-        if let lower = self.lbound {
-            tests.append({(val1)->(Bool) in
-                return val1>lower
-            })
-        }
-        if let upper = self.ubound {
-            tests.append({(val1)->(Bool) in
-                return val1<upper
-            })
-        }
-        if let eq = self.equality {
-            tests.append({(val1)->(Bool) in
-                return val1==eq
-            })
-        }
-        let stateArray = state.toArray()
-        //isConditionIndex = []
-        isConditionBool = Array(repeating: false, count: stateArray.count)
+    init(_ vid: VariableID, upperBound: Double? = nil, lowerBound: Double? = nil, equality eq: Double? = nil){
+        varID = vid
+        lbound = lowerBound
+        ubound = upperBound
+        equality = eq
+        super.init()
+    }
+    
+    func evaluate(_ state: State){
+        let thisVariable = state[varID]
         
-        var i=0
-        for thisVal in stateArray{
-            var isCondition = false
+        //isConditionIndex = []
+        meetsCondition = Array(repeating: false, count: thisVariable.value.count)
+        
+        var i = 0
+        for thisVal in thisVariable.value {
+            var isCondition = true
             for thisTest in tests {
                 isCondition = isCondition && thisTest(thisVal)
             }
             if isCondition {
                 //isConditionIndex!.append(i)
-                isConditionBool![i] = true
+                meetsCondition[i] = true
             }
             i+=1
         }
     }
+    
+    func evaluate(_ singleState: StateArray)->Bool{
+        let varPosition = State.stateVarPositions.firstIndex(where: {$0 == varID} )
+        let thisVal = singleState[varPosition!]
+        var isCondition = true
+        for thisTest in tests {
+            isCondition = isCondition && thisTest(thisVal)
+        }
+        return isCondition
+    }
 }
 
-class Condition : SingleCondition { //TODO : Should really just make this a separate NSObject that conforms to the 'evaluate' protocol
+
+class Condition : NSObject, EvaluateCondition {
     var name : String = ""
-    var conditions : [Condition] = []
+    var conditions : [EvaluateCondition] = []
     var unionType : BoolType = .and
+    var meetsCondition : [Bool] = []
     
-    func comparator(num1: Bool, num2: Bool)->Bool {
+    override init(){
+        name = "NewCondition"
+        super.init()
+    }
+    
+    init(_ vid: VariableID, upperBound: Double? = nil, lowerBound: Double? = nil, equality: Double? = nil){
+        let newCondition = SingleCondition(vid, upperBound: upperBound, lowerBound: lowerBound, equality: equality)
+        name = "NewCondition"
+        conditions = [newCondition]
+        super.init()
+    }
+    
+    func comparator(_ num1: Bool, _ num2: Bool)->Bool {
         switch unionType {
         case .and: return num1 && num2
         case .or: return num1 || num2
@@ -99,28 +117,35 @@ class Condition : SingleCondition { //TODO : Should really just make this a sepa
         }
     }
     
-    func compareLists(list1 : [Bool]?, list2: [Bool])->[Bool]{ // TODO : take this outside of the class, make it a generic function
+    func compareLists(_ list1: [Bool]?, _ list2: [Bool])->[Bool]{
         if list1 == nil{
             return list2
         }
-        guard list1!.count == list2.count else {
+        let n = list2.count
+        guard list1!.count == n else {
             print("Lists do not have the same length. Cannot perform comparison")
             return [false]
         }
-        var returnList : [Bool] = []
-        for i in 0...list2.count-1 {
-            returnList.append(comparator(num1: list1![i], num2: list2[i]))
+        var returnList : [Bool] = Array<Bool>.init(repeating: false, count: n)
+        for i in 0...n-1 {
+            returnList[i] = comparator(list1![i], list2[i])
         }
         return returnList
     }
     
-    override func evaluate(){
+    func evaluate(_ state: State){
         for thisCondition in conditions{
-            thisCondition.evaluate()
-            if let conditionBool = thisCondition.isConditionBool{
-            //conditionBools.append(conditionBool)
-                isConditionBool = compareLists(list1: isConditionBool, list2: conditionBool)
-            }
+            thisCondition.evaluate(state)
+            self.meetsCondition = compareLists(self.meetsCondition, thisCondition.meetsCondition)
         }
     }
+    func evaluate(_ singleState: StateArray)->Bool {
+        var curMeetsCondition = true
+        for thisCondition in conditions{
+            let thisMeetsCondition = thisCondition.evaluate(singleState)
+            curMeetsCondition = comparator(curMeetsCondition, thisMeetsCondition)
+        }
+        return curMeetsCondition
+    }
+
 }
