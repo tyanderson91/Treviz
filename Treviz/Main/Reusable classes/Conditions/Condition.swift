@@ -140,8 +140,8 @@ class Condition : NSObject, EvaluateCondition {
         }
     }
     func evaluate(_ singleState: StateArray)->Bool {
-        var curMeetsCondition = true
-        for thisCondition in conditions{
+        var curMeetsCondition = conditions[0].evaluate(singleState)
+        for thisCondition in conditions.dropFirst(){
             let thisMeetsCondition = thisCondition.evaluate(singleState)
             curMeetsCondition = comparator(curMeetsCondition, thisMeetsCondition)
         }

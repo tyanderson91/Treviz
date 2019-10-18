@@ -18,6 +18,13 @@ class State: NSObject { //TODO: try to phase this out
     static let stateVarPositions : [VariableID] = //TODO : this can definitely be cleaned up
         ["t","x","y","z","dx","dy","dz","mtot","q0","q1","q2","q3",
          "dq0","dq1","dq2","dq3"]
+    
+    static func getValue(_ varID : VariableID, state: StateArray)->Double?{
+        if let index = stateVarPositions.firstIndex(where: { $0 == varID }){
+            return state[index]
+        } else {return nil}
+    }
+    
     var variables : [Variable] = []
     var length : Int {
         var curlen = -1

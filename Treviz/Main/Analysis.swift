@@ -134,54 +134,84 @@ class Analysis: NSDocument {//TODO: possibly subclass NSPersistentDocument if us
         //traj["dx",0] = 10.0
 
         
-        let dt : Double = 0.1
+        let dt : Double = 0.0005
         
-        //let termCond1 = Condition("t", upperBound : 100) //TerminalCondition(varID: "t", crossing: 100, inDirection: 1) //TODO: make max time a required terminal condition
+        let termCond1 = Condition("t", upperBound : 10) //TerminalCondition(varID: "t", crossing: 100, inDirection: 1) //TODO: make max time a required terminal condition
         let termCond2 = Condition("y", lowerBound : -0.10) //TerminalCondition(varID: "y", crossing: 0, inDirection: -1)
         let terminalConditions = Condition()
-        terminalConditions.conditions = [termCond2]
-        terminalConditions.unionType = .and
+        terminalConditions.conditions = [termCond1, termCond2]
+        terminalConditions.unionType = .or
         //terminalConditions = TerminalConditionSet([termCond1,termCond2,termCond3])
         
         //let newState = VehicleState()
         //var trajIndex = 1
         var analysisEnded = false
         
+        let progressBar = viewController.analysisProgressBar!
+        progressBar.usesThreadedAnimation = true
+        //}
         //Run
-        var i = 0
         let outputTextView = (self.viewController.mainSplitViewController.outputsViewController.outputSplitViewController?.textOutputSplitViewItem.viewController as! TextOutputsViewController).textView!
-        while !analysisEnded{
-            let x = traj["x", i]!
-            let y = traj["y", i]!
-            let dx = traj["dx", i]!
-            let dy = traj["dy", i]!
-            let t = traj["t", i]!
-            let m = traj["mtot", i]!
+        DispatchQueue.global().async {
+            var i = 0
+            while !analysisEnded{
+                let x = self.traj["x", i]!
+                let y = self.traj["y", i]!
+                let dx = self.traj["dx", i]!
+                let dy = self.traj["dy", i]!
+                let t = self.traj["t", i]!
+                let m = self.traj["mtot", i]!
 
-            let F_g = -9.81*m
-            let a_y = F_g/m
-            let a_x : Double = 0
-            
-            i += 1
-            traj["t", i] = t + dt
-            traj["dy", i] = dy + a_y * dt
-            traj["y", i] = y+dy*dt
-            traj["dx", i] = dx+a_x*dt
-            traj["x", i] = x + dx*dt
-            traj["mtot", i] = m
-            
-            // var pctComplete = 0.0
-            outputTextView.string.append("X: \(String(describing: x)), Y: \(String(describing: y))\n")
-            analysisEnded = terminalConditions.evaluate(traj[i]) || i == 10000
-            /*
-            (returnCodes,analysisEnded,pctComplete) = terminalConditions.checkAllConditions(prevState: currentState, curState: newState)
-            
-            if let progressBar = viewController.analysisProgressBar{
-                progressBar.doubleValue = pctComplete*100
-            }*/
+                let F_g = -9.81*m
+                let a_y = F_g/m
+                let a_x : Double = 0
+                
+                i += 1
+                self.traj["t", i] = t + dt
+                self.traj["dy", i] = dy + a_y * dt
+                self.traj["y", i] = y+dy*dt
+                self.traj["dx", i] = dx+a_x*dt
+                self.traj["x", i] = x + dx*dt
+                self.traj["mtot", i] = m
+                
+                // var pctComplete = 0.0
+                analysisEnded = terminalConditions.evaluate(self.traj[i]) || i == 100000
+                let pctcomp = pctComplete(cond: terminalConditions, initState: self.traj[0], curState: self.traj[i-1])
+                
+                DispatchQueue.main.async {
+                    outputTextView.string="t: \(String(describing: t)), X: \(String(describing: x)), Y: \(String(describing: y))\n"
+                    outputTextView.string.append(String(describing: pctcomp))
+
+                    progressBar.doubleValue = pctcomp
+                    if analysisEnded {
+                        progressBar.doubleValue = 0
+                    }
+                }
+            }
         }
-        //Outputs
+        
+                //Outputs
         //self.viewController.mainSplitViewController.outputsViewController.processOutputs()
         return returnCodes
     }
+}
+
+func pctComplete(cond: Condition, initState :StateArray, curState: StateArray)->Double{
+    var tempPctComplete = 0.0
+    for thisCond in cond.conditions {
+        var curPctComplete = 0.0
+        if let thisCond1 = thisCond as? SingleCondition {
+            let thisVar = State.getValue(thisCond1.varID, state: curState)!
+            let initVar = State.getValue(thisCond1.varID, state: initState)!
+            let finalVar = thisCond1.ubound != nil ? thisCond1.ubound! : thisCond1.lbound!
+            curPctComplete = (thisVar-initVar) / (finalVar-initVar)
+        } else { curPctComplete = pctComplete(cond: thisCond as! Condition, initState: initState, curState: curState) }
+    
+        tempPctComplete = (tempPctComplete < curPctComplete) ? curPctComplete : tempPctComplete
+        if tempPctComplete < 0{
+            tempPctComplete = 0}
+        else if tempPctComplete > 1{
+            tempPctComplete = 1}
+        }
+    return tempPctComplete
 }
