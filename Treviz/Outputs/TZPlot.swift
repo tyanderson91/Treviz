@@ -54,9 +54,7 @@ class PlotType { //TODO : This should probably be in a struct
     
     
     static func getPlotByName(_ name : String)->PlotType?{
-        if let thisPlot = allPlotTypes.firstIndex(where: { (thisPlot) -> Bool in
-            return thisPlot.name == name
-        })
+        if let thisPlot = allPlotTypes.firstIndex(where: { $0.name == name } )
         { return allPlotTypes[thisPlot]
         } else {return nil}
         /*

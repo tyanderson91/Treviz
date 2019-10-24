@@ -26,7 +26,8 @@ class TZViewController: NSViewController {
     }
     
     var varList: [Variable]! {
-        if let appDelegate = analysis?.appDelegate {return appDelegate.initVars}
+        if let initvar = analysis?.initVars {return initvar}
+        //if let appDelegate = analysis?.appDelegate {return appDelegate.initVars} //TODO: if initVars is moved to AppDelegate, change this
         return nil
     }
 

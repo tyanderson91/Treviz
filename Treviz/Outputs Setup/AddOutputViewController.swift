@@ -41,7 +41,7 @@ class AddOutputViewController: BaseViewController, NSComboBoxDataSource { //TODO
     func createPlot()-> TZPlot?{ //Should be overwritten by each subclass
         return nil
     }
-    
+
     @IBAction func includeCheckboxButtonClicked(_ sender: Any) {
     }
     
@@ -53,17 +53,12 @@ class AddOutputViewController: BaseViewController, NSComboBoxDataSource { //TODO
         guard let newPlot = createPlot() else {return}
         var newTextOutput : TZTextOutput?
         if includeTextCheckbox.state == .on {
-            outputSetupViewController.maxPlotNum += 1
+            outputSetupViewController.maxPlotNum += 1 //TODO: make this a lookup, not a static variable
             newTextOutput = TZTextOutput(id: outputSetupViewController.maxPlotNum, with: newPlot)
         } else {newTextOutput = nil}
         
-        if let parentVC = outputSetupViewController {
-            var allPlots = analysis.analysisData.plots
-            allPlots.append(newPlot)
-            if newTextOutput != nil {allPlots.append(newTextOutput!)}
-            if let textOutput = newTextOutput {parentVC.allPlots.append(textOutput)}
-            NotificationCenter.default.post(name: .didAddPlot, object: nil)
-        }
+        outputSetupViewController.addOutput(newPlot)
+        if newTextOutput != nil { outputSetupViewController.addOutput(newTextOutput!) }
     }
     
     // MARK Conditions view controller
@@ -73,7 +68,7 @@ class AddOutputViewController: BaseViewController, NSComboBoxDataSource { //TODO
     
     func numberOfItems(in comboBox: NSComboBox) -> Int {
         if let asys = analysis {
-            let conditions = asys.conditions!
+            let conditions = asys.conditions
             return conditions.count
         }
         return 0
@@ -81,7 +76,7 @@ class AddOutputViewController: BaseViewController, NSComboBoxDataSource { //TODO
     
     func comboBox(_ comboBox: NSComboBox, objectValueForItemAt index: Int) -> Any? {
         if let asys = analysis {
-            let conditions = asys.conditions!
+            let conditions = asys.conditions
             return conditions[index].name
         }
         return nil

@@ -144,7 +144,7 @@ class ConditionsViewController: NSViewController, NSTableViewDelegate, NSTableVi
     
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        let thisCondition = analysis!.conditions![row]
+        let thisCondition = analysis!.conditions[row]
         switch tableColumn?.identifier {
         case NSUserInterfaceItemIdentifier.varNameColumn:
             let newView = tableView.makeView(withIdentifier: .varNameCellView, owner: self) as? NSTableCellView
@@ -159,7 +159,9 @@ class ConditionsViewController: NSViewController, NSTableViewDelegate, NSTableVi
                         dstring += "(\(singleCond.varID)=\(singleCond.equality ?? 0))"
                     }
                     else {
-                        dstring += "(\(singleCond.lbound ?? 0)<\(singleCond.varID)<\(singleCond.ubound ?? 0))"
+                        let lbstr = singleCond.lbound == nil ? "" : "\(singleCond.lbound!) < "
+                        let ubstr = singleCond.ubound == nil ? "" : " < \(singleCond.ubound!)"
+                        dstring += lbstr + "\(singleCond.varID)" + ubstr
                     }
                     //if singleCond != thisCondition.conditions.last {dstring += " \(unionTypeDropdown.selectedItem!.title) "}// TODO: fix issue where this is the same for ALL variables in the table
                 }
@@ -173,7 +175,7 @@ class ConditionsViewController: NSViewController, NSTableViewDelegate, NSTableVi
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return (analysis?.conditions?.count)!
+        return (analysis?.conditions.count)!
     }
     
     /*

@@ -7,7 +7,6 @@
 //
 //  Created by Tyler Anderson on 2/26/19.
 //  Copyright © 2019 Tyler Anderson. All rights reserved.
-//
 
 import Cocoa
 
@@ -21,13 +20,14 @@ class Analysis: NSDocument {//TODO: possibly subclass NSPersistentDocument if us
     var name : String = ""
     var terminalConditions : Condition!
     var traj: State!
-    var returnCodes : [Int] = []
+    var returnCode : Int = 0
     var progressBar : NSProgressIndicator!
     var windowController : MainWindowController!//Implicit optional, should always be assigned after initialization
     var viewController : MainViewController!
-    var conditions : [Condition]?
+    var conditions : [Condition] = []
     var initVars : [Variable]! = nil
     var initStateGroups : InitStateHeader! = nil
+    var isRunning = false
     //var outputsVC : OutputsViewController!
     //Set up terminal conditions
     
@@ -123,7 +123,8 @@ class Analysis: NSDocument {//TODO: possibly subclass NSPersistentDocument if us
         }
     }
     
-    func runAnalysis() -> [Int] {//TODO: break this method into several phases to make it more manageable
+    
+    func runAnalysis() {//TODO: break this method into several phases to make it more manageable
         // Initial State
         //self.viewController.mainSplitViewController.inputsViewController.getState()
         
@@ -134,27 +135,27 @@ class Analysis: NSDocument {//TODO: possibly subclass NSPersistentDocument if us
         //traj["dx",0] = 10.0
 
         
-        let dt : Double = 0.0005
-        
-        let termCond1 = Condition("t", upperBound : 10) //TerminalCondition(varID: "t", crossing: 100, inDirection: 1) //TODO: make max time a required terminal condition
-        let termCond2 = Condition("y", lowerBound : -0.10) //TerminalCondition(varID: "y", crossing: 0, inDirection: -1)
-        let terminalConditions = Condition()
-        terminalConditions.conditions = [termCond1, termCond2]
-        terminalConditions.unionType = .or
+        let dt : Double = 0.001
         //terminalConditions = TerminalConditionSet([termCond1,termCond2,termCond3])
         
         //let newState = VehicleState()
         //var trajIndex = 1
-        var analysisEnded = false
         
+        let terminalConditions = conditions.first(where: {$0.name == "Terminal Conditions"})!
         let progressBar = viewController.analysisProgressBar!
         progressBar.usesThreadedAnimation = true
         //}
         //Run
         let outputTextView = (self.viewController.mainSplitViewController.outputsViewController.outputSplitViewController?.textOutputSplitViewItem.viewController as! TextOutputsViewController).textView!
+        self.windowController.runButton.title = "■"
+        // self.windowController.runButton.font?.setValue(20, forKeyPath: "PointSize")
+
+        DistributedNotificationCenter.default.addObserver(self, selector: #selector(self.completeAnalysis), name: .didFinishRunningAnalysis, object: nil)
+
+        isRunning = true
         DispatchQueue.global().async {
             var i = 0
-            while !analysisEnded{
+            while self.isRunning {
                 let x = self.traj["x", i]!
                 let y = self.traj["y", i]!
                 let dx = self.traj["dx", i]!
@@ -175,24 +176,32 @@ class Analysis: NSDocument {//TODO: possibly subclass NSPersistentDocument if us
                 self.traj["mtot", i] = m
                 
                 // var pctComplete = 0.0
-                analysisEnded = terminalConditions.evaluate(self.traj[i]) || i == 100000
+                self.isRunning = !terminalConditions.evaluate(self.traj[i]) || i == 100000
+                if !self.isRunning {
+                    self.returnCode = 1
+                }
                 let pctcomp = pctComplete(cond: terminalConditions, initState: self.traj[0], curState: self.traj[i-1])
                 
                 DispatchQueue.main.async {
-                    outputTextView.string="t: \(String(describing: t)), X: \(String(describing: x)), Y: \(String(describing: y))\n"
-                    outputTextView.string.append(String(describing: pctcomp))
+                    outputTextView.string="t: \(String(format: "%.5f", t)), "
+                    outputTextView.string += "X: \(String(format: "%.5f", x)), "
+                    outputTextView.string += "Y: \(String(format: "%.5f", y))\n"
+                    // outputTextView.string.append(String(describing: pctcomp))
 
                     progressBar.doubleValue = pctcomp
-                    if analysisEnded {
-                        progressBar.doubleValue = 0
-                    }
                 }
             }
+            DistributedNotificationCenter.default.post(name: .didFinishRunningAnalysis, object: nil)
         }
-        
-                //Outputs
-        //self.viewController.mainSplitViewController.outputsViewController.processOutputs()
-        return returnCodes
+    }
+    
+    @objc func completeAnalysis(notification: Notification){
+        self.isRunning = false
+        let progressBar = viewController.analysisProgressBar!
+        progressBar.doubleValue = 0
+        self.windowController.runButton.title = "►"
+        if returnCode > 0 {
+            self.viewController.mainSplitViewController.outputsViewController.processOutputs()}
     }
 }
 

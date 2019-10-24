@@ -22,5 +22,5 @@ extension Notification.Name {
     
     static let didLoadAppDelegate = Notification.Name("didLoadAppDelegate")
     static let didLoadAnalysisData = Notification.Name("didLoadAnalysisData")
-
+    static let didFinishRunningAnalysis = Notification.Name("didFinishRunningAnalysis")
 }

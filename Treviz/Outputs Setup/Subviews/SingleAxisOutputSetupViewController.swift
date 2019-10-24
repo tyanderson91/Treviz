@@ -19,8 +19,7 @@ class SingleAxisOutputSetupViewController: AddOutputViewController {
         guard let plotType = plotTypePopupButton.selectedItem?.title else {return nil}
         var var1 : Variable?
         if let var1Name = variableSelectorViewController?.variableSelectorPopup.selectedItem?.title {
-            var1 = varList.first(where: { (thisVar:Variable) -> Bool in
-                return thisVar.name == var1Name})//] Variable.getVar(fromName: var1Name, inputList: analysis.appDelegate!.initVars)
+            var1 = varList.first(where: { $0.name == var1Name } )
         } else {return nil}
         
         let newPlot = TZPlot(id: maxPlotID+1, vars: [var1!], plotType: PlotType.getPlotByName(plotType)!)

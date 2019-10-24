@@ -31,7 +31,7 @@ class OutputSetupViewController: TZViewController, NSTableViewDelegate, NSTableV
         // Have the stackView strongly hug the sides of the views it contains.
         stack.parent = self
         stack.setHuggingPriority(NSLayoutConstraint.Priority.defaultHigh, for: .horizontal)
-
+            
         // Load and install all the view controllers from our storyboard in the following order.
         let vc1 = stack.addViewController(fromStoryboardId: "OutputSetup", withIdentifier: "SingleAxisOutputSetupViewController") as! SingleAxisOutputSetupViewController
         let vc2 = stack.addViewController(fromStoryboardId: "OutputSetup", withIdentifier: "TwoAxisOutputSetupViewController") as! TwoAxisOutputSetupViewController
@@ -39,10 +39,11 @@ class OutputSetupViewController: TZViewController, NSTableViewDelegate, NSTableV
         let vc4 = stack.addViewController(fromStoryboardId: "OutputSetup", withIdentifier: "MonteCarloOutputSetupViewController") as! MonteCarloOutputSetupViewController
         for thisVC in [vc1,vc2,vc3,vc4]{
             thisVC.outputSetupViewController = self
-            thisVC.representedObject = self.analysis
+            thisVC.representedObject = self.representedObject
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.refreshTable(_:)), name: .didAddPlot, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.populateOutputSet(_:)), name: .didLoadAnalysisData, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.populateOutputSet(_:)), name: .didLoadAppDelegate, object: nil)
         
         //addViewController(withIdentifier: "CollectionViewController")
@@ -57,12 +58,18 @@ class OutputSetupViewController: TZViewController, NSTableViewDelegate, NSTableV
         allPlots.append(newPlot)*/
     }
     
+    func addOutput(_ newOutput : TZOutput){
+        newOutput.curTrajectory = self.analysis.traj
+        allPlots.append(newOutput)
+        self.tableView.reloadData()
+    }
     
     @objc func refreshTable(_ notification: Notification){
         self.tableView.reloadData()
     }
     @objc func populateOutputSet(_ notification: Notification){
         self.allPlots = analysis.analysisData.plots
+        self.tableView.reloadData()
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
@@ -77,7 +84,7 @@ class OutputSetupViewController: TZViewController, NSTableViewDelegate, NSTableV
         case .plotNameColumn:
             newView = tableView.makeView(withIdentifier: .plotNameTableCellView, owner: nil) as? NSTableCellView
             if let textField = newView?.textField{
-                textField.stringValue = thisPlot.displayName}
+                textField.stringValue = thisPlot.title ?? ""}
         default:
             return nil
         }

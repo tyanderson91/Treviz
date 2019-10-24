@@ -67,6 +67,14 @@ class Variable : NSObject, Parameter, InitStateCheck {
         }
     }
     
+    subscript(condition: Condition)->[Double]?{
+        var output : [Double] = []
+        let conditionIndices = condition.meetsConditionIndex
+        guard self.value.count == conditionIndices.count else {return nil}
+        for thisIndex in conditionIndices {
+            output.append(self.value[thisIndex])
+        }
+        return output
+    }
     // Sequence overrides
-
 }

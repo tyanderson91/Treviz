@@ -18,6 +18,7 @@ class TZOutput : NSObject {
     var var3 : Variable?
     var categoryVar : Variable?
     var condition : Condition?
+    var curTrajectory : State?
     
     init(id : Int, plotType : PlotType){
         self.displayName = ""
@@ -26,22 +27,26 @@ class TZOutput : NSObject {
         super.init()
     }
     
-    convenience init(id : Int, name : String, plotType : PlotType) {
+    convenience init(id : Int, title : String, plotType : PlotType) {
         self.init(id : id, plotType : plotType)
-        self.displayName = name
-        self.title = name
+        self.displayName = title
+        self.title = title
     }
     
     convenience init(id : Int, vars : [Variable], plotType : PlotType) {
         var title = ""
         for thisVar in vars{
             title += thisVar.name
-            if thisVar != vars.last {title += " vs "}
+            if thisVar != vars.last {title += " vs "} // TODO: vary this for the different plot types
         }
-        self.init(id : id, name : title, plotType : plotType)
+        self.init(id : id, title : title, plotType : plotType)
+        if vars.count >= 1 { var1 = vars[0] }
+        if vars.count >= 2 { var2 = vars[1] }
+        if vars.count >= 3 { var3 = vars[2] }
+        if vars.count >= 4 { categoryVar = vars[4] }
     }
     
-    convenience init(id: Int, with output : TZOutput) {
+    convenience init(id: Int, with output : TZOutput) {// TODO: conform to "copying" protocol?
         self.init(id : id, plotType: output.plotType)
         displayName = output.displayName
         title = output.title
@@ -50,13 +55,7 @@ class TZOutput : NSObject {
         var3 = output.var3
         categoryVar = output.categoryVar
         condition = output.condition
+        curTrajectory = output.curTrajectory
     }
     
-    
-    func processVars(_ traj : State){
-        // Evaluates variable and condition information to create vectors for outputting
-        if condition != nil {
-            condition!.evaluate(traj)
-        }
-    }
 }

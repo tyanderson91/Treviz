@@ -15,7 +15,6 @@ class TwoAxisOutputSetupViewController: AddOutputViewController {
 
     @IBOutlet weak var plottingStackView: NSStackView!
 
-
     override func createPlot()->TZPlot? {// TODO : expand for all plot types
         /*
         if let plotType = plotTypeDropDown.selectedItem?.title{

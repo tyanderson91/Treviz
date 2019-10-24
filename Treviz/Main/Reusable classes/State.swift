@@ -96,5 +96,40 @@ class State: NSObject { //TODO: try to phase this out
         }
         return stateArray
     }
+    
+    //Subscripts by condition
+    subscript(varIDs: [VariableID], condition: Condition) -> [VariableID: [Double]]? {
+        // Note that this subscript may take some time to collect, since by default it will evaluate the condition
+        var output = [VariableID: [Double]]()
+        condition.evaluate(self)
+        let conditionIndex = condition.meetsConditionIndex
+        
+        for thisVarID in varIDs {
+            guard self[thisVarID].value.count == condition.meetsCondition?.count else {return nil}
+            output[thisVarID] = [Double]()
+        }
+        for thisIndex in conditionIndex {
+            for thisVarID in varIDs {
+                let thisVarValue = self[thisVarID].value[thisIndex]
+                output[thisVarID]!.append(thisVarValue)
+            }
+        }
+        return output
+    }
+    subscript(vars: [Variable], condition: Condition)->[VariableID: [Double]]?{
+        let varIDs = vars.map{ $0.id }
+        let output = self[varIDs, condition]
+        return output
+    }
+    subscript(varID: VariableID, condition: Condition)->[Double]?{
+        if let output = self[[varID], condition]{
+            return output[varID]}
+        else {return nil}
+    }
+    subscript(variable: Variable, condition: Condition)->[Double]?{
+        let varID = variable.id
+        return self[varID, condition]
+    }
+    
 
 }

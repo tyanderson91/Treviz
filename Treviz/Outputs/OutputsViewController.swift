@@ -31,20 +31,30 @@ class OutputsViewController: TZViewController {
     
     func processOutputs(){
         if let curAnalysis = self.representedObject as? Analysis{
-
-            let y_end = curAnalysis.traj["y"].value.last
-            let x_end = curAnalysis.traj["x"].value.last
+            let outputSet = curAnalysis.analysisData.plots
             
-            let textOutputSplitViewItem = outputSplitViewController?.textOutputSplitViewItem
-            let textOutputViewController = textOutputSplitViewItem?.viewController as! TextOutputsViewController
-            let textOutputView = textOutputViewController.textView
-            textOutputView?.string.append("Y end:\t\(String(describing: y_end))\n")
-            textOutputView?.string.append("X end:\t\(String(describing: x_end))\n")
+            let textOutputSplitViewItem = outputSplitViewController!.textOutputSplitViewItem
+            let textOutputViewController = textOutputSplitViewItem!.viewController as! TextOutputsViewController
+            let textOutputView = textOutputViewController.textView!
+            
+            textOutputView.string = ""
+            for curOutput in outputSet {
+                curOutput.curTrajectory = curAnalysis.traj
+                if curOutput is TZTextOutput {
+                    let newText = (curOutput as! TZTextOutput).getText()
+                    textOutputView.textStorage?.append(newText)
+                }
+            }
+            // Old
+            //let y_end = curAnalysis.traj["y"].value.last
+            //let x_end = curAnalysis.traj["x"].value.last
+            
+            //textOutputView.string.append("Y end:\t\(String(describing: y_end))\n")
+            //textOutputView.string.append("X end:\t\(String(describing: x_end))\n")
         }
     }
     
 }
-
 
 
 class OutputsSplitViewController: SplitViewController {

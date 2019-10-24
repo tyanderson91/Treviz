@@ -12,15 +12,16 @@ class MainWindowController: NSWindowController, NSToolbarDelegate {
 
     @IBOutlet weak var toolbar: NSToolbar!
     @IBOutlet weak var showHidePanesControl: NSSegmentedControl!
+    @IBOutlet weak var runButton: NSButton!
     
     override func windowDidLoad() {
         super.windowDidLoad()
         //showHidePanesControl.setImage(NSImage(named: "smallSegmentedCell"), forSegment: 0)
         //showHidePanesControl.setImage(NSImage(named: "largeSegmentedCell"), forSegment: 1)
         //showHidePanesControl.setImage(NSImage(named: "smallSegmentedCell"), forSegment: 2)
-        showHidePanesControl.setWidth(17, forSegment: 0)
-        showHidePanesControl.setWidth(24, forSegment: 1)
-        showHidePanesControl.setWidth(17, forSegment: 2)
+        showHidePanesControl.setWidth(18, forSegment: 0)
+        showHidePanesControl.setWidth(26, forSegment: 1)
+        showHidePanesControl.setWidth(18, forSegment: 2)
 
         // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
     }
@@ -28,7 +29,14 @@ class MainWindowController: NSWindowController, NSToolbarDelegate {
     
     @IBAction func runAnalysisClicked(_ sender: Any) {
         if let asys = self.contentViewController?.representedObject as? Analysis {
-            _ = asys.runAnalysis()
+            if asys.isRunning{
+                asys.isRunning = false
+                DistributedNotificationCenter.default().post(name: .didFinishRunningAnalysis, object: nil)
+                
+            }
+            else {
+                _ = asys.runAnalysis()
+            }
         }
     }
     

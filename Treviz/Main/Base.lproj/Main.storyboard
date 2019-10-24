@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14868"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15400"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -711,9 +711,9 @@
                                     <button key="view" verticalHuggingPriority="750" id="k0d-C9-zla">
                                         <rect key="frame" x="22" y="14" width="31" height="25"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="roundTextured" title="&gt;" alternateTitle="Run Analysis" bezelStyle="texturedRounded" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ytv-0c-3b4">
+                                        <buttonCell key="cell" type="roundTextured" title="▶︎" alternateTitle="Run Analysis" bezelStyle="texturedRounded" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ytv-0c-3b4">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="systemBold"/>
+                                            <font key="font" metaFont="controlContent" size="11"/>
                                         </buttonCell>
                                     </button>
                                     <connections>
@@ -723,14 +723,14 @@
                                 <toolbarItem implicitItemIdentifier="9637223E-3C3E-4B26-B650-92E6DE94E1D2" label="View Panes" paletteLabel="View Panes" sizingBehavior="auto" selectable="YES" id="EUF-yc-cUN">
                                     <nil key="toolTip"/>
                                     <segmentedControl key="view" wantsLayer="YES" verticalHuggingPriority="750" id="bbn-UQ-slb">
-                                        <rect key="frame" x="0.0" y="14" width="102" height="22"/>
+                                        <rect key="frame" x="0.0" y="14" width="105" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <segmentedCell key="cell" continuous="YES" borderStyle="border" alignment="left" segmentDistribution="fillProportionally" style="roundRect" trackingMode="selectAny" id="2AJ-ws-GZa">
-                                            <font key="font" metaFont="label" size="12"/>
+                                        <segmentedCell key="cell" continuous="YES" refusesFirstResponder="YES" borderStyle="border" alignment="left" segmentDistribution="fillProportionally" style="roundRect" trackingMode="selectAny" id="2AJ-ws-GZa">
+                                            <font key="font" metaFont="system" size="10"/>
                                             <segments>
-                                                <segment label="&lt;" imageScaling="proportionallyUpOrDown" width="32" selected="YES"/>
-                                                <segment label="v" imageScaling="proportionallyUpOrDown" width="31" selected="YES" tag="1"/>
-                                                <segment label="&gt;" imageScaling="proportionallyUpOrDown" width="31" selected="YES" tag="2"/>
+                                                <segment label="◁" imageScaling="proportionallyUpOrDown" selected="YES"/>
+                                                <segment label="▽" imageScaling="proportionallyUpOrDown" width="31" selected="YES" tag="1"/>
+                                                <segment label="▷" imageScaling="proportionallyUpOrDown" selected="YES" tag="2"/>
                                             </segments>
                                         </segmentedCell>
                                     </segmentedControl>
@@ -746,7 +746,7 @@
                                     <button key="view" verticalHuggingPriority="750" id="nfV-d5-noY">
                                         <rect key="frame" x="5" y="14" width="54" height="27"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="roundTextured" title="(x&lt;y)" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="eyl-U4-WyX">
+                                        <buttonCell key="cell" type="roundTextured" title="(𝑥&lt;𝑦)" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="eyl-U4-WyX">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
@@ -798,8 +798,6 @@
                                 <toolbarItem reference="qt5-nR-d1k"/>
                                 <toolbarItem reference="ErN-TL-gyx"/>
                                 <toolbarItem reference="sla-GS-rBt"/>
-                                <toolbarItem reference="Ndh-jH-KXn"/>
-                                <toolbarItem reference="sla-GS-rBt"/>
                                 <toolbarItem reference="EUF-yc-cUN"/>
                                 <toolbarItem reference="9m0-eV-BGQ"/>
                             </defaultToolbarItems>
@@ -812,6 +810,7 @@
                         </connections>
                     </window>
                     <connections>
+                        <outlet property="runButton" destination="k0d-C9-zla" id="uZg-AK-X7S"/>
                         <outlet property="showHidePanesControl" destination="bbn-UQ-slb" id="dOK-1f-tVj"/>
                         <outlet property="toolbar" destination="gC3-LF-Jn5" id="h5O-LV-3cg"/>
                         <segue destination="PzM-8h-kXr" kind="relationship" relationship="window.shadowedContentViewController" id="sfB-bW-bv0"/>

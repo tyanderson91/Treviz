@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="FMf-NL-ufc">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="FMf-NL-ufc">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14868"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15400"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -15,13 +15,13 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView verticalHuggingPriority="900" verticalCompressionResistancePriority="50" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X3z-Eb-GAM" userLabel="Output Setup Custom Scroll View">
-                                <rect key="frame" x="0.0" y="213" width="281" height="400"/>
+                                <rect key="frame" x="0.0" y="161" width="281" height="452"/>
                                 <clipView key="contentView" id="iZT-XH-WJ0">
-                                    <rect key="frame" x="1" y="1" width="279" height="398"/>
+                                    <rect key="frame" x="1" y="1" width="279" height="450"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="1" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" verticalClippingResistancePriority="900" verticalHuggingPriority="900" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gfp-GI-MP9" customClass="CustomStackView" customModule="Treviz" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="398" width="279" height="0.0"/>
+                                            <rect key="frame" x="0.0" y="450" width="279" height="0.0"/>
                                         </stackView>
                                     </subviews>
                                     <constraints>
@@ -34,22 +34,22 @@
                                     <constraint firstAttribute="height" priority="50" constant="400" placeholder="YES" id="sXx-O9-x1F"/>
                                 </constraints>
                                 <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="kBx-UO-78b">
-                                    <rect key="frame" x="1" y="383" width="279" height="16"/>
+                                    <rect key="frame" x="1" y="435" width="279" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="39l-sD-gFI">
-                                    <rect key="frame" x="264" y="1" width="16" height="398"/>
+                                    <rect key="frame" x="264" y="1" width="16" height="450"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
                             <scrollView verticalHuggingPriority="100" horizontalCompressionResistancePriority="150" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AVK-iS-hVV">
-                                <rect key="frame" x="0.0" y="0.0" width="281" height="198"/>
+                                <rect key="frame" x="0.0" y="0.0" width="281" height="146"/>
                                 <clipView key="contentView" id="AdT-5W-YYn">
-                                    <rect key="frame" x="1" y="0.0" width="279" height="197"/>
+                                    <rect key="frame" x="1" y="0.0" width="279" height="145"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="ilb-uV-gPZ" viewBased="YES" id="quK-tu-3hE">
-                                            <rect key="frame" x="0.0" y="0.0" width="279" height="172"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="279" height="120"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -57,7 +57,7 @@
                                             <tableColumns>
                                                 <tableColumn identifier="plotNameColumn" width="118" minWidth="40" maxWidth="1000" id="ioJ-cD-IZ9">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Name">
-                                                        <font key="font" metaFont="menu" size="11"/>
+                                                        <font key="font" metaFont="controlContent" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -94,7 +94,7 @@
                                                 </tableColumn>
                                                 <tableColumn identifier="plotDescripColumn" width="155" minWidth="40" maxWidth="1000" id="MXf-j7-hBy">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Description">
-                                                        <font key="font" metaFont="menu" size="11"/>
+                                                        <font key="font" metaFont="controlContent" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -105,11 +105,11 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
-                                                        <tableCellView id="UdY-h2-eqB">
+                                                        <tableCellView identifier="plotDescripTableCellView" id="UdY-h2-eqB">
                                                             <rect key="frame" x="122" y="1" width="155" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
-                                                                <textField identifier="plotDescripTableCellView" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="79G-Ci-R9Q">
+                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="79G-Ci-R9Q">
                                                                     <rect key="frame" x="0.0" y="1" width="155" height="16"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="FjU-Tp-C89">
                                                                         <font key="font" metaFont="system"/>

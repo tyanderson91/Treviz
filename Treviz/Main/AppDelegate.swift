@@ -107,6 +107,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         if initPlotTypes.count > 0 {//If the initialization did not return an empty array
             self.plotTypes = initPlotTypes
+            PlotType.allPlotTypes = initPlotTypes
         } else {self.plotTypes = nil}
     }
     

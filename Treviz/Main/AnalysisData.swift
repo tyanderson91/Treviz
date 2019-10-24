@@ -36,6 +36,7 @@ class AnalysisData: NSObject {
     }
     
     @objc func initReadData(_ notification: Notification){
+        // Initialize var values
         guard let varFilePath = Bundle.main.path(forResource: "InitVarSettings", ofType: "plist") else {return}
         guard let inputList = NSArray.init(contentsOfFile: varFilePath) else {return}
         
@@ -48,6 +49,26 @@ class AnalysisData: NSObject {
             curVar.isParam = thisVar["isParam"] as! Bool
             inputSettings.append(curVar)
         }
+        
+        // Init conditions
+        let termCond1 = Condition("t", lowerBound : 10) //TerminalCondition(varID: "t", crossing: 100, inDirection: 1) //TODO: make max time a required terminal condition
+        termCond1.name = "Final time"
+        let termCond2 = Condition("y", upperBound : -0.10) //TerminalCondition(varID: "y", crossing: 0, inDirection: -1)
+        termCond2.name = "Ground Impact"
+        let terminalConditions = Condition()
+        terminalConditions.conditions = [termCond1, termCond2]
+        terminalConditions.unionType = .or
+        terminalConditions.name = "Terminal Conditions"
+        terminalConditions.isSinglePoint = true
+        analysis.conditions.append(contentsOf: [termCond1, termCond2, terminalConditions])
+        
+        //Plots
+        let testVarX = analysis.initVars.first(where: { $0.id == "x"} )!
+        let newOutput = TZTextOutput(id: 1, vars: [testVarX], plotType: analysis.appDelegate.plotTypes.first(where: {$0.name == "Single Value"})!)
+        newOutput.condition = terminalConditions //terminalConditions
+        newOutput.curTrajectory = analysis.traj
+        plots.append(newOutput)
+        // analysis.viewController.mainSplitViewController.outputSetupViewController.addOutput(newOutput)
     }
     
     
