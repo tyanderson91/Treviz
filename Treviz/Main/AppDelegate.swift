@@ -15,13 +15,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     var plotTypes : [PlotType]! = nil
     var initVars : [Variable]! = nil
-    //var initStateGroups : InitStateHeader! = nil
+    var initStateGroups : InitStateHeader! = nil
+    
+    func applicationWillFinishLaunching(_ notification: Notification) {
+        
+    }
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         
         loadPlotTypes(from: "PlotTypes")
-        //loadVars(from: "InitVars")
-        //loadVarGroups(from: "InitStateStructure")
+        loadVars(from: "InitVars")
+        loadVarGroups(from: "InitStateStructure")
         
         /*
         if let maindoc = application.mainWindow?.windowController?.document as? Analysis {
@@ -41,12 +45,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         //print(newAnalysis.initialState)
         //newAnalysis.makeWindowControllers()
     }
-
+    
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
     }
-
-    /*
+    
     func loadVars(from plist: String){
         guard let varFilePath = Bundle.main.path(forResource: plist, ofType: "plist") else {return}
         guard let inputList = NSArray.init(contentsOfFile: varFilePath) else {return}//return empty if filename not found
@@ -63,14 +66,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         guard let varFilePath = Bundle.main.path(forResource: plist, ofType: "plist") else {return}
         guard let inputList = NSArray.init(contentsOfFile: varFilePath) else {return}//return empty if filename not found
         initStateGroups = InitStateHeader(id: "default")
-        loadVarGroupsRecurs(input: initStateGroups, withList: inputList)
+        loadVarGroupsRecurs(input: initStateGroups, withList: inputList as! [NSDictionary])
     }
     
-    private func loadVarGroupsRecurs(input: InitStateHeader, withList list: NSArray){
-        for thisItem in list {
-            let dict = thisItem as! NSDictionary //TODO: error check the type, return [] if not a dictionary
-            guard let itemType = dict["itemType"] as? String else {print("Incorrect format encountered in statet structure plist"); return}
-            guard let itemID = dict["id"] as? VariableID else {print("Incorrect format encountered in statet structure plist"); return}
+    private func loadVarGroupsRecurs(input: InitStateHeader, withList list: [NSDictionary]){
+        for dict in list {
+            //let dict = thisItem as! NSDictionary //TODO: error check the type, return [] if not a dictionary
+            guard let itemType = dict["itemType"] as? String else { return }
+            guard let itemID = dict["id"] as? VariableID else { return }
             let name = dict["name"] as? String
             
             if itemType == "var"{
@@ -81,18 +84,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 var newHeader = InitStateHeader(id: "")
                 if itemType == "header" {
                     newHeader = InitStateHeader(id: itemID)}
-                else if itemType == "subheader" {
+                else if itemType == "subHeader" {
                     newHeader = InitStateSubHeader(id: itemID)}
                 else {return}
                 newHeader.name = name!
                 input.subheaders.append(newHeader)
                 if let children = dict["items"] as? NSArray {
-                    loadVarGroupsRecurs(input: newHeader, withList: children)
+                    loadVarGroupsRecurs(input: newHeader, withList: children as! [NSDictionary])
                 }
             }
         }
     }
-    */
     
     func loadPlotTypes(from plist: String){
         guard let plotFilePath = Bundle.main.path(forResource: plist, ofType: "plist") else {return}

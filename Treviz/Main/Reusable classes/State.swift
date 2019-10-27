@@ -14,12 +14,17 @@ import Cocoa
 
 typealias StateArray = Array<Double>
 
+
 class State: NSObject { //TODO: try to phase this out
     static let stateVarPositions : [VariableID] = //TODO : this can definitely be cleaned up
         ["t","x","y","z","dx","dy","dz","mtot","q0","q1","q2","q3",
          "dq0","dq1","dq2","dq3"]
-    
-    static func getValue(_ varID : VariableID, state: StateArray)->Double?{
+    static func getValue(_ varID : VariableID, _ state: StateArray)->Double?{
+        if let index = stateVarPositions.firstIndex(where: { $0 == varID }){
+            return state[index]
+        } else {return nil}
+    }
+    static func setValue(_ varID : VariableID, _ state: StateArray)->Double?{
         if let index = stateVarPositions.firstIndex(where: { $0 == varID }){
             return state[index]
         } else {return nil}
@@ -33,31 +38,8 @@ class State: NSObject { //TODO: try to phase this out
         }
         return curlen
     }
+    // var t : Variable {return Variable()} //TODO: implement this as properties
     
-    //var varIDs : [VariableID] = []
-    
-    /*
-    func fromVars(_ curVars: [Variable]){
-        self.variables = []
-        self.varIDs = []
-        
-        var newVarIndex = 0
-        for curVar in curVars{
-            curVar.statePosition = newVarIndex
-            newVarIndex+=1
-            self.varIDs.append(curVar.id)
-            self.variables.append(curVar)
-        }
-        /*
-        for curID in Variable.allIdentifiers{
-            self.variables.append(curVars[varIDs.firstIndex(of:curID)!])//rearrange the state Items to match with the itemType order
-            
-            newVarIndex+=1
-
-        }*/
-    
-    }
-    */
     override init() {
         self.variables = []
         super.init()
@@ -68,6 +50,7 @@ class State: NSObject { //TODO: try to phase this out
         super.init()
     }
     
+    // Subscripts by variable
     subscript(_ varID: VariableID) -> Variable {
         get {
             let thisVar = variables.first(where: {$0.id == varID})!
@@ -75,7 +58,7 @@ class State: NSObject { //TODO: try to phase this out
         }
     }
     
-    subscript(_ varID: VariableID, index: Int) -> Double? {// TODO : see how to get rid of keyword
+    subscript(_ varID: VariableID, index: Int) -> Double? {
         get {
             let thisVar = self[varID]
             if let thisVal = thisVar[index] {return thisVal}
@@ -88,13 +71,23 @@ class State: NSObject { //TODO: try to phase this out
     }
     
     subscript(index: Int) -> [Double] {
-        var stateArray = StateArray() //Array.init(repeating: 0, count: State.stateVarPositions.count)
-        for thisVarID in State.stateVarPositions {
-            if let thisVal = self[thisVarID, index] {
-                stateArray.append(thisVal)
+        get {
+            var stateArray = StateArray() //Array.init(repeating: 0, count: State.stateVarPositions.count)
+            for thisVarID in State.stateVarPositions {
+                if let thisVal = self[thisVarID, index] {
+                    stateArray.append(thisVal)
+                }
+            }
+            return stateArray
+        }
+        set (newArray) {
+            var i = 0
+            for thisValue in newArray {
+                let thisVar = self[State.stateVarPositions[i]]
+                thisVar[index] = thisValue
+                i += 1
             }
         }
-        return stateArray
     }
     
     //Subscripts by condition
@@ -131,5 +124,4 @@ class State: NSObject { //TODO: try to phase this out
         return self[varID, condition]
     }
     
-
 }

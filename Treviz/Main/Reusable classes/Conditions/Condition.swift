@@ -123,11 +123,19 @@ class Condition : NSObject, EvaluateCondition {
         super.init()
     }
     
-    init(_ vid: VariableID, upperBound: Double? = nil, lowerBound: Double? = nil, equality: Double? = nil){
-        let newCondition = SingleCondition(vid, upperBound: upperBound, lowerBound: lowerBound, equality: equality)
+    init(_ varid: VariableID, upperBound: Double? = nil, lowerBound: Double? = nil, equality: Double? = nil){
+        let newCondition = SingleCondition(varid, upperBound: upperBound, lowerBound: lowerBound, equality: equality)
         name = "NewCondition"
         conditions = [newCondition]
         super.init()
+    }
+    
+    init(conditions condIn: [EvaluateCondition], unionType unTypeIn: BoolType, name nameIn: String, isSinglePoint singlePointIn: Bool = false) {
+        conditions = condIn
+        unionType = unTypeIn
+        name = nameIn
+        super.init()
+        self.isSinglePoint = singlePointIn
     }
     
     func comparator(_ num1: Bool, _ num2: Bool)->Bool {

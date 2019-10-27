@@ -26,7 +26,7 @@ class ParamTableViewController: TZViewController , NSTableViewDelegate, NSTableV
     }
     
     @objc func getAllParams(_ notification: Notification){
-        self.params = self.analysis.analysisData.inputSettings.filter( {$0.isParam} )
+        self.params = self.analysis.inputSettings.filter( {$0.isParam} )
         tableView.reloadData()
     }
     

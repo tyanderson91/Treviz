@@ -51,7 +51,7 @@ class ThreeAxisOutputSetupViewController: AddOutputViewController {
         var1 = varList.first(where: {$0.name == var1Name} )
         var2 = varList.first(where: {$0.name == var2Name} )
         
-        let newPlot = TZPlot(id: maxPlotID+1, vars: [var1!, var2!], plotType: PlotType.getPlotByName(plotType)!)
+        let newPlot = TZPlot(id: maxPlotID+1, vars: [var1!, var2!], plotType: PlotType.getPlotTypeByName(plotType)!)
         maxPlotID += 1
         //newPlot.setName()
         return newPlot

@@ -35,8 +35,13 @@ class PlotType { //TODO : This should probably be in a struct
         self.nVars = nVars
     }
     
-    
+    /**
+     Create a list of all existing plot type IDs
+     - Returns: ids, a list of all plot type IDs that have been initialized in the class-level variable allPlotTypes
+     - TODO: store plot type information in app delegate, not a class-level variable
+     */
     static func getIDs()->[String]{
+
         var ids : [String] = []
         for thisType in allPlotTypes {
             ids.append(thisType.id)
@@ -44,6 +49,11 @@ class PlotType { //TODO : This should probably be in a struct
         return ids
     }
     
+    /**
+     Create a list of all existing plot type names
+     - Returns: names, a list of all plot type names that have been initialized in the class-level variable allPlotTypes
+     - TODO: store plot type information in app delegate, not a class-level variable
+     */
     static func getNames()->[String]{ // TODO : replace with key value bindings in dropdown
         var names : [String] = []
         for thisType in allPlotTypes {
@@ -52,18 +62,16 @@ class PlotType { //TODO : This should probably be in a struct
         return names
     }
     
-    
-    static func getPlotByName(_ name : String)->PlotType?{
+    /**
+     Get a PlotType object corresponding to a given name
+     - Parameter name: String, name of the plot type you want to return
+     - Returns:thisPlot, a PlotType object
+     - TODO: use bindings to get this info from interface builder instead
+     */
+    static func getPlotTypeByName(_ name : String)->PlotType?{
         if let thisPlot = allPlotTypes.firstIndex(where: { $0.name == name } )
         { return allPlotTypes[thisPlot]
         } else {return nil}
-        /*
-        for thisType in allPlotTypes {
-            if thisType.name == name { //TODO : binary search?
-                return thisType
-            }
-        }
-        return nil*/
     }
  }
  

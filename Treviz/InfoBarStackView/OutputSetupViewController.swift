@@ -68,7 +68,7 @@ class OutputSetupViewController: TZViewController, NSTableViewDelegate, NSTableV
         self.tableView.reloadData()
     }
     @objc func populateOutputSet(_ notification: Notification){
-        self.allPlots = analysis.analysisData.plots
+        self.allPlots = analysis.plots
         self.tableView.reloadData()
     }
     

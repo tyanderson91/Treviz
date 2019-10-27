@@ -34,7 +34,7 @@ class InitStateViewController: BaseViewController, NSOutlineViewDelegate, NSOutl
     @objc func loadData(_ notification: Notification){        
         let asys = self.analysis!
         inputVarStructure = asys.initStateGroups
-        inputVars = self.analysis.analysisData.inputSettings
+        inputVars = self.analysis.inputSettings
         //NotificationCenter.default.post(name: .didSetParam, object: nil) //TODO : Maybe this belongs in ParamViewController
         outlineView.reloadData()
     }

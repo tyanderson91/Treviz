@@ -3,6 +3,7 @@
 //  Treviz
 //
 //  Highest-level view controller
+//  Mainly consists of the main split view controller and the progress bar
 //
 //  Created by Tyler Anderson on 3/10/19.
 //  Copyright © 2019 Tyler Anderson. All rights reserved.
@@ -15,11 +16,13 @@ class MainViewController: TZViewController {
     @IBOutlet weak var mainView: NSView!
     @IBOutlet weak var analysisProgressBar: NSProgressIndicator!
     var mainSplitViewController : MainSplitViewController!
+    var textOutputView : NSTextView? {
+        return mainSplitViewController.outputsViewController.outputSplitViewController?.textOutputView
+    } //TODO: add other frequently used views/view controllers here
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.setFrameSize(NSSize.init(width: 1200, height: 500))
-        // Do view setup here.
     }
     
     override func viewDidAppear() {
@@ -27,7 +30,6 @@ class MainViewController: TZViewController {
         // Do view setup here.
     }
 
-    
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         if segue.identifier == "mainSplitViewSegue"{
             self.mainSplitViewController =  (segue.destinationController as! MainSplitViewController)

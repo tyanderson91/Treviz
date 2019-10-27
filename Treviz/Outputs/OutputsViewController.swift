@@ -31,7 +31,7 @@ class OutputsViewController: TZViewController {
     
     func processOutputs(){
         if let curAnalysis = self.representedObject as? Analysis{
-            let outputSet = curAnalysis.analysisData.plots
+            let outputSet = curAnalysis.plots
             
             let textOutputSplitViewItem = outputSplitViewController!.textOutputSplitViewItem
             let textOutputViewController = textOutputSplitViewItem!.viewController as! TextOutputsViewController
@@ -60,7 +60,10 @@ class OutputsViewController: TZViewController {
 class OutputsSplitViewController: SplitViewController {
     
     @IBOutlet weak var textOutputSplitViewItem: NSSplitViewItem!
-    //let textOutputView: NSTextView
+    var textOutputView: NSTextView! {
+        if let _textOutputView = (textOutputSplitViewItem.viewController as? TextOutputsViewController)?.textView { return _textOutputView }
+        else {return nil}
+    }
     
     
     override func viewDidLoad() {

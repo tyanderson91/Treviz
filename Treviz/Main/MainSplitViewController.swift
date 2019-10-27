@@ -18,7 +18,11 @@ class MainSplitViewController: SplitViewController {
     var inputsViewController : InputsViewController!
     var outputsViewController : OutputsViewController!
     var outputSetupViewController : OutputSetupViewController!
-    var splitViewItemList : [NSSplitViewItem]?
+    var splitViewItemList : [NSSplitViewItem] = []
+    var numActiveViews : Int {
+        var numViews = 0
+        for thisView in splitViewItemList { numViews += (thisView.isCollapsed ? 0 : 1) }
+        return numViews}
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,26 +30,18 @@ class MainSplitViewController: SplitViewController {
         outputsViewController = (outputsSplitViewItem?.viewController as! OutputsViewController)
         outputSetupViewController = (outputSetupSplitViewItem?.viewController as! OutputSetupViewController)
         splitViewItemList = [inputsSplitViewItem, outputsSplitViewItem, outputSetupSplitViewItem]
-        //let splitViewChildVCs = [inputsViewController!, outputsViewController!, outputSetupViewController!]
-
-        //let par1 = inputsViewController.parent
-        //outputsSplitViewItem.setValue(600, forKey: "width")
-        // Do view setup here.
     }
     
+    /**
+     Collapse and expand Main Split View items
+     - Parameter collapsed: Bool, whether to collapse or expand the view
+     - Parameter secID: Int, which section (Inputs, Outputs, Outputs setup) to expand/collapse
+     */
     func setSectionCollapse(_ collapsed : Bool, forSection secID: Int){
         guard let _ = self.representedObject as? Analysis else {return}
-        if !(collapsed && numActiveViews() == 1){
-            splitViewItemList![secID].animator().isCollapsed = collapsed
+        if !(collapsed && numActiveViews == 1){
+            splitViewItemList[secID].animator().isCollapsed = collapsed
         }
-    }
-    
-    func numActiveViews()->Int {
-        var numViews = 0
-        for thisView in splitViewItemList! {
-            numViews += (thisView.isCollapsed ? 0 : 1)
-        }
-        return numViews
     }
     
 }

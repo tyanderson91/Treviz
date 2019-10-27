@@ -30,7 +30,7 @@ class AddOutputViewController: BaseViewController, NSComboBoxDataSource { //TODO
     @objc func populatePlotTypes(_ notification: Notification) {
         var plotTypeNames : [String] = []
         let asys = self.representedObject as? Analysis
-        if let allPlotTypes = asys?.appDelegate?.plotTypes {
+        if let allPlotTypes = asys?.plotTypes {
             for thisPlotType in allPlotTypes{
                 if plotTypeSelector(thisPlotType) { plotTypeNames.append(thisPlotType.name)}
             }

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="9UX-jO-cEV">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="9UX-jO-cEV">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15400"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -14,13 +15,13 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView verticalHuggingPriority="260" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="ge0-ps-pVJ">
-                                <rect key="frame" x="0.0" y="112" width="320" height="227"/>
+                                <rect key="frame" x="0.0" y="111" width="320" height="228"/>
                                 <clipView key="contentView" id="xrS-NT-tfo">
-                                    <rect key="frame" x="1" y="0.0" width="318" height="226"/>
+                                    <rect key="frame" x="1" y="0.0" width="318" height="227"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="UWr-bn-Dgb" viewBased="YES" id="ITv-m7-Ey6" userLabel="Condition Summary Table View">
-                                            <rect key="frame" x="0.0" y="0.0" width="318" height="201"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="318" height="202"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -136,7 +137,7 @@
                                 </constraints>
                             </stackView>
                             <button verticalHuggingPriority="750" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" translatesAutoresizingMaskIntoConstraints="NO" id="BVe-vE-dVP" userLabel="Add Condition Button">
-                                <rect key="frame" x="279" y="72" width="37" height="36"/>
+                                <rect key="frame" x="279" y="71" width="37" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="HCO-Yh-THg"/>
                                     <constraint firstAttribute="width" secondItem="BVe-vE-dVP" secondAttribute="height" multiplier="1:1" id="Tzk-4H-DN8"/>
@@ -150,7 +151,7 @@
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="700" verticalHuggingPriority="750" horizontalCompressionResistancePriority="700" translatesAutoresizingMaskIntoConstraints="NO" id="SQ2-n5-0je">
-                                <rect key="frame" x="10" y="80" width="121" height="22"/>
+                                <rect key="frame" x="10" y="80" width="121" height="21"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Condition Name" id="dY9-nJ-NVR">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -158,10 +159,10 @@
                                 </textFieldCell>
                             </textField>
                             <stackView hidden="YES" distribution="fill" orientation="horizontal" alignment="centerY" spacing="7" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ije-r1-bnx">
-                                <rect key="frame" x="151" y="81" width="99" height="21"/>
+                                <rect key="frame" x="151" y="80" width="99" height="21"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="900" translatesAutoresizingMaskIntoConstraints="NO" id="do3-sK-dT1">
-                                        <rect key="frame" x="-2" y="2" width="38" height="17"/>
+                                        <rect key="frame" x="-2" y="3" width="38" height="16"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Type:" id="aQc-dy-NJp">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -238,7 +239,7 @@
             <objects>
                 <viewController title="addConditionViewController" storyboardIdentifier="addConditionViewController" id="MME-Yq-Esp" customClass="addConditionViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="cu2-ri-3xA">
-                        <rect key="frame" x="0.0" y="0.0" width="453" height="80"/>
+                        <rect key="frame" x="0.0" y="0.0" width="713" height="80"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="6" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" horizontalHuggingPriority="750" horizontalCompressionResistancePriority="500" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F81-kn-fiU" userLabel="Condition Type Selector Stack View">
@@ -304,10 +305,10 @@
                                 </connections>
                             </button>
                             <stackView distribution="equalSpacing" orientation="horizontal" alignment="bottom" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" horizontalHuggingPriority="50" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fd5-Ma-hzJ" userLabel="Condition Input Stack View" customClass="CollapsibleStackView" customModule="Treviz" customModuleProvider="target">
-                                <rect key="frame" x="127" y="29" width="326" height="22"/>
+                                <rect key="frame" x="127" y="30" width="586" height="21"/>
                                 <subviews>
                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="500" translatesAutoresizingMaskIntoConstraints="NO" id="Y9N-df-bvC">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="22"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="width" priority="850" constant="50" id="BfP-EC-U45"/>
                                         </constraints>
@@ -318,7 +319,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="53k-z9-SNq" userLabel="Less than comparison label">
-                                        <rect key="frame" x="58" y="3" width="17" height="17"/>
+                                        <rect key="frame" x="58" y="2" width="17" height="16"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="&lt;" id="jWQ-89-eV8">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -326,9 +327,9 @@
                                         </textFieldCell>
                                     </textField>
                                     <comboBox horizontalHuggingPriority="150" verticalHuggingPriority="750" horizontalCompressionResistancePriority="500" translatesAutoresizingMaskIntoConstraints="NO" id="HR8-98-TCQ">
-                                        <rect key="frame" x="83" y="-4" width="153" height="26"/>
+                                        <rect key="frame" x="83" y="-4" width="413" height="25"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="125" id="xwH-o8-zQC"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="xwH-o8-zQC"/>
                                         </constraints>
                                         <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" usesSingleLineMode="YES" completes="NO" usesDataSource="YES" numberOfVisibleItems="5" id="CE2-4v-o0e">
                                             <font key="font" metaFont="system"/>
@@ -341,7 +342,7 @@
                                         </connections>
                                     </comboBox>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7bb-ju-ZVW" userLabel="Condition comparison label">
-                                        <rect key="frame" x="241" y="3" width="17" height="17"/>
+                                        <rect key="frame" x="501" y="2" width="17" height="16"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" alignment="center" title="&lt;" id="o6l-Sn-EEE">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -349,7 +350,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="500" translatesAutoresizingMaskIntoConstraints="NO" id="pJp-kY-69n">
-                                        <rect key="frame" x="266" y="0.0" width="50" height="22"/>
+                                        <rect key="frame" x="526" y="0.0" width="50" height="21"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="kHz-J5-GTk">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -404,7 +405,7 @@
                 </viewController>
                 <customObject id="yhl-MY-06M" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-250.5" y="143"/>
+            <point key="canvasLocation" x="-120.5" y="143"/>
         </scene>
     </scenes>
     <resources>

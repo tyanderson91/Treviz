@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CD0F01072364139200C920AA /* Outputs.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD0F01062364139200C920AA /* Outputs.storyboard */; };
+		CD0F010923654ED400C920AA /* AnalysisRunFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0F010823654ED400C920AA /* AnalysisRunFunctions.swift */; };
+		CD0F010B2365595700C920AA /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0F010A2365595700C920AA /* Vehicle.swift */; };
+		CD0F011323656B7200C920AA /* TrevizTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0F011223656B7200C920AA /* TrevizTests.swift */; };
 		CD11FA8723408173001A3695 /* AddOutputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD11FA8623408173001A3695 /* AddOutputViewController.swift */; };
 		CD11FA8923411FD3001A3695 /* VariableSelector.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD449023233B378C0095F243 /* VariableSelector.storyboard */; };
 		CD11FA9323433096001A3695 /* PlotTypes.plist in Resources */ = {isa = PBXBuildFile; fileRef = CD11FA9223433096001A3695 /* PlotTypes.plist */; };
@@ -60,7 +64,23 @@
 		CDF3D1A822505A000064D70C /* AnalysisData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF3D1A722505A000064D70C /* AnalysisData.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		CD0F011523656B7200C920AA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CDD5048A22252AF900B29751 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CDD5049122252AF900B29751;
+			remoteInfo = Treviz;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		CD0F01062364139200C920AA /* Outputs.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Outputs.storyboard; path = Treviz/Outputs/Outputs.storyboard; sourceTree = SOURCE_ROOT; };
+		CD0F010823654ED400C920AA /* AnalysisRunFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisRunFunctions.swift; sourceTree = "<group>"; };
+		CD0F010A2365595700C920AA /* Vehicle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vehicle.swift; sourceTree = "<group>"; };
+		CD0F011023656B7200C920AA /* TrevizTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrevizTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD0F011223656B7200C920AA /* TrevizTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrevizTests.swift; sourceTree = "<group>"; };
+		CD0F011423656B7200C920AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CD11FA8623408173001A3695 /* AddOutputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOutputViewController.swift; sourceTree = "<group>"; };
 		CD11FA9223433096001A3695 /* PlotTypes.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = PlotTypes.plist; sourceTree = "<group>"; };
 		CD129621224C67E300663B88 /* InitStateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = InitStateViewController.swift; path = "/Users/TylerAnderson/Coding/Swift/Treviz/Treviz/Inputs Setup/InitStateViewController.swift"; sourceTree = "<absolute>"; };
@@ -121,6 +141,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		CD0F010D23656B7200C920AA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CDD5048F22252AF900B29751 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -139,6 +166,8 @@
 				CDC1F53B2234874000D1BB25 /* MainSplitViewController.swift */,
 				CDF1670B2237A10400CD9590 /* MainWindowController.swift */,
 				CDF3D1A0225025AF0064D70C /* Analysis.swift */,
+				CD0F010823654ED400C920AA /* AnalysisRunFunctions.swift */,
+				CD0F010A2365595700C920AA /* Vehicle.swift */,
 				CDF3D1A722505A000064D70C /* AnalysisData.swift */,
 				CDD5049522252AF900B29751 /* AppDelegate.swift */,
 				CDA0F886225A6D1E003C62E6 /* NamedConstants */,
@@ -165,6 +194,7 @@
 		CD05E3BB225491A100906EB0 /* Outputs */ = {
 			isa = PBXGroup;
 			children = (
+				CD0F01062364139200C920AA /* Outputs.storyboard */,
 				CD11FA9223433096001A3695 /* PlotTypes.plist */,
 				CDD60A962345C5AE00249987 /* TZOutput.swift */,
 				CDD60A902345BF5C00249987 /* TZTextOutput.swift */,
@@ -185,6 +215,15 @@
 				CDB7C73B2352B58300BC50F1 /* InitStateHeader.swift */,
 			);
 			path = "Init State";
+			sourceTree = "<group>";
+		};
+		CD0F011123656B7200C920AA /* TrevizTests */ = {
+			isa = PBXGroup;
+			children = (
+				CD0F011223656B7200C920AA /* TrevizTests.swift */,
+				CD0F011423656B7200C920AA /* Info.plist */,
+			);
+			path = TrevizTests;
 			sourceTree = "<group>";
 		};
 		CD2D0DB0224382F70012978E /* InfoBarStackView */ = {
@@ -272,6 +311,7 @@
 			isa = PBXGroup;
 			children = (
 				CDD5049422252AF900B29751 /* Treviz */,
+				CD0F011123656B7200C920AA /* TrevizTests */,
 				CDD5049322252AF900B29751 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -280,6 +320,7 @@
 			isa = PBXGroup;
 			children = (
 				CDD5049222252AF900B29751 /* Treviz.app */,
+				CD0F011023656B7200C920AA /* TrevizTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -302,6 +343,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		CD0F010F23656B7200C920AA /* TrevizTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CD0F011723656B7200C920AA /* Build configuration list for PBXNativeTarget "TrevizTests" */;
+			buildPhases = (
+				CD0F010C23656B7200C920AA /* Sources */,
+				CD0F010D23656B7200C920AA /* Frameworks */,
+				CD0F010E23656B7200C920AA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CD0F011623656B7200C920AA /* PBXTargetDependency */,
+			);
+			name = TrevizTests;
+			productName = TrevizTests;
+			productReference = CD0F011023656B7200C920AA /* TrevizTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		CDD5049122252AF900B29751 /* Treviz */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = CDD504A722252AFD00B29751 /* Build configuration list for PBXNativeTarget "Treviz" */;
@@ -325,10 +384,14 @@
 		CDD5048A22252AF900B29751 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1010;
+				LastSwiftUpdateCheck = 1110;
 				LastUpgradeCheck = 1100;
 				ORGANIZATIONNAME = "Tyler Anderson";
 				TargetAttributes = {
+					CD0F010F23656B7200C920AA = {
+						CreatedOnToolsVersion = 11.1;
+						TestTargetID = CDD5049122252AF900B29751;
+					};
 					CDD5049122252AF900B29751 = {
 						CreatedOnToolsVersion = 10.1;
 						LastSwiftMigration = 1020;
@@ -349,11 +412,19 @@
 			projectRoot = "";
 			targets = (
 				CDD5049122252AF900B29751 /* Treviz */,
+				CD0F010F23656B7200C920AA /* TrevizTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		CD0F010E23656B7200C920AA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CDD5049022252AF900B29751 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -367,6 +438,7 @@
 				CDD504A222252AFD00B29751 /* Main.storyboard in Resources */,
 				CD3F5E5822EE4DCD00E4CF20 /* Conditions.storyboard in Resources */,
 				CD2D0DBB224385580012978E /* OutputSetup.storyboard in Resources */,
+				CD0F01072364139200C920AA /* Outputs.storyboard in Resources */,
 				CD11FA9323433096001A3695 /* PlotTypes.plist in Resources */,
 				CD500337234DA64F00D71099 /* InitVarSettings.plist in Resources */,
 			);
@@ -375,6 +447,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		CD0F010C23656B7200C920AA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CD0F011323656B7200C920AA /* TrevizTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CDD5048E22252AF900B29751 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -396,6 +476,8 @@
 				CD4656B2224C6F3500C587CC /* SettingsViewController.swift in Sources */,
 				CDAF14272230FB72005CDC3C /* Variable.swift in Sources */,
 				CDB7C73A2352B03100BC50F1 /* Parameter.swift in Sources */,
+				CD0F010923654ED400C920AA /* AnalysisRunFunctions.swift in Sources */,
+				CD0F010B2365595700C920AA /* Vehicle.swift in Sources */,
 				CDF1670C2237A10400CD9590 /* MainWindowController.swift in Sources */,
 				CD3F5E5522EE175400E4CF20 /* Condition.swift in Sources */,
 				CDC1F53C2234874000D1BB25 /* MainSplitViewController.swift in Sources */,
@@ -424,6 +506,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		CD0F011623656B7200C920AA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CDD5049122252AF900B29751 /* Treviz */;
+			targetProxy = CD0F011523656B7200C920AA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		CDD504A022252AFD00B29751 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -436,6 +526,46 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		CD0F011823656B7200C920AA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = QD374MRFUS;
+				INFOPLIST_FILE = TrevizTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.TylerAnderson.TrevizTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Treviz.app/Contents/MacOS/Treviz";
+			};
+			name = Debug;
+		};
+		CD0F011923656B7200C920AA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = QD374MRFUS;
+				INFOPLIST_FILE = TrevizTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.TylerAnderson.TrevizTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Treviz.app/Contents/MacOS/Treviz";
+			};
+			name = Release;
+		};
 		CDD504A522252AFD00B29751 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -601,6 +731,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		CD0F011723656B7200C920AA /* Build configuration list for PBXNativeTarget "TrevizTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CD0F011823656B7200C920AA /* Debug */,
+				CD0F011923656B7200C920AA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		CDD5048D22252AF900B29751 /* Build configuration list for PBXProject "Treviz" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

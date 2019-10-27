@@ -59,19 +59,15 @@ class MainWindowController: NSWindowController, NSToolbarDelegate {
     @IBAction func showHidePanesClicked(_ sender: Any) {
         let asys = self.contentViewController?.representedObject as! Analysis
 
-        if let button = sender as? NSSegmentedControl {
-            let curIndex = button.indexOfSelectedItem
-            let shouldCollapse = !button.isSelected(forSegment: curIndex)
-            let splitViewController = asys.viewController.mainSplitViewController!
-            if splitViewController.numActiveViews() == 1 && shouldCollapse {
-                button.setSelected(true, forSegment: curIndex)
-            } else {
-                splitViewController.setSectionCollapse(shouldCollapse, forSection: curIndex)
-            }
+        guard let button = sender as? NSSegmentedControl else {return}
+        let curIndex = button.indexOfSelectedItem
+        let shouldCollapse = !button.isSelected(forSegment: curIndex)
+        let splitViewController = asys.viewController.mainSplitViewController!
+
+        splitViewController.setSectionCollapse(shouldCollapse, forSection: curIndex)
+        for i in 0...2 { // If there is one button left, disable it so user cannot collapse everything
+            let enableButton = (splitViewController.numActiveViews == 1 && button.isSelected(forSegment: i)) ? false : true
+            button.setEnabled(enableButton, forSegment: i)
         }
     }
-    /*
-    override func perform(_ aSelector: runAnalysisClicked, on thr: Thread, with arg: Any?, waitUntilDone wait: Bool, modes array: [String]?) {
-    }
- */
 }

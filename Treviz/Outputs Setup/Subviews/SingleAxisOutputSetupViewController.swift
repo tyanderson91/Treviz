@@ -22,7 +22,7 @@ class SingleAxisOutputSetupViewController: AddOutputViewController {
             var1 = varList.first(where: { $0.name == var1Name } )
         } else {return nil}
         
-        let newPlot = TZPlot(id: maxPlotID+1, vars: [var1!], plotType: PlotType.getPlotByName(plotType)!)
+        let newPlot = TZPlot(id: maxPlotID+1, vars: [var1!], plotType: PlotType.getPlotTypeByName(plotType)!)
         maxPlotID += 1
         //newPlot.setName()
         return newPlot

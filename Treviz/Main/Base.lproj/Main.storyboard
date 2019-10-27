@@ -826,11 +826,11 @@
                 <splitViewController id="cNr-ot-ed2" customClass="MainSplitViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
                     <splitViewItems>
                         <splitViewItem id="BlO-sN-O6T" userLabel="Input Split View Item"/>
-                        <splitViewItem id="K6i-2V-HET" userLabel="Outputs Split View Item"/>
-                        <splitViewItem id="Cdj-CM-cU9" userLabel="Output Setup Split View Item"/>
+                        <splitViewItem id="7OF-1a-Fl7" userLabel="Outputs Split View Item"/>
+                        <splitViewItem id="vb0-La-d8P"/>
                     </splitViewItems>
                     <splitView key="splitView" dividerStyle="thin" vertical="YES" id="Bmt-by-9O5">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="199"/>
+                        <rect key="frame" x="0.0" y="0.0" width="449" height="199"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <connections>
                             <outlet property="delegate" destination="cNr-ot-ed2" id="k8f-ze-e9u"/>
@@ -838,17 +838,17 @@
                     </splitView>
                     <connections>
                         <outlet property="inputsSplitViewItem" destination="BlO-sN-O6T" id="u5z-an-4yO"/>
-                        <outlet property="outputSetupSplitViewItem" destination="Cdj-CM-cU9" id="jpb-R2-MlZ"/>
-                        <outlet property="outputsSplitViewItem" destination="K6i-2V-HET" id="QL8-22-Ch6"/>
+                        <outlet property="outputSetupSplitViewItem" destination="vb0-La-d8P" id="Pgj-8s-Ryi"/>
+                        <outlet property="outputsSplitViewItem" destination="7OF-1a-Fl7" id="hvO-iT-XA0"/>
                         <outlet property="splitView" destination="Bmt-by-9O5" id="iN4-tG-8uS"/>
                         <segue destination="7En-RZ-8s8" kind="relationship" relationship="splitItems" id="4iH-JR-Y0H"/>
-                        <segue destination="i9B-l3-zwM" kind="relationship" relationship="splitItems" id="NjM-QM-aVJ"/>
-                        <segue destination="dpe-8P-rjX" kind="relationship" relationship="splitItems" id="9hj-Cr-JtL"/>
+                        <segue destination="Y48-WP-5Q2" kind="relationship" relationship="splitItems" id="nsg-gx-j2I"/>
+                        <segue destination="dpe-8P-rjX" kind="relationship" relationship="splitItems" id="oEq-Bu-ZOJ"/>
                     </connections>
                 </splitViewController>
                 <customObject id="WEA-Dx-jp5" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="130" y="553"/>
+            <point key="canvasLocation" x="129.5" y="552.5"/>
         </scene>
         <!--MainViewController-->
         <scene sceneID="hGV-gs-ruu">
@@ -906,39 +906,6 @@
             </objects>
             <point key="canvasLocation" x="-469" y="1115.5"/>
         </scene>
-        <!--Outputs View Controller-->
-        <scene sceneID="Wzb-yo-ICh">
-            <objects>
-                <viewController storyboardIdentifier="outputViewControllerk" id="i9B-l3-zwM" customClass="OutputsViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" wantsLayer="YES" id="rTW-eE-Wbd">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="303"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <subviews>
-                            <containerView translatesAutoresizingMaskIntoConstraints="NO" id="wyV-WT-hg6">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="283"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="eK3-Jz-W0P"/>
-                                </constraints>
-                                <connections>
-                                    <segue destination="sDa-jy-4wf" kind="embed" identifier="outputSplitViewSegue" id="otJ-4h-Kd6"/>
-                                </connections>
-                            </containerView>
-                        </subviews>
-                        <constraints>
-                            <constraint firstItem="wyV-WT-hg6" firstAttribute="top" secondItem="rTW-eE-Wbd" secondAttribute="top" constant="20" id="SgW-CB-beY"/>
-                            <constraint firstItem="wyV-WT-hg6" firstAttribute="leading" secondItem="rTW-eE-Wbd" secondAttribute="leading" id="ZSZ-s4-3Qg"/>
-                            <constraint firstAttribute="bottom" secondItem="wyV-WT-hg6" secondAttribute="bottom" id="iBo-Nq-41h"/>
-                            <constraint firstAttribute="trailing" secondItem="wyV-WT-hg6" secondAttribute="trailing" id="wvn-CT-nuE"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="outputsSplitView" destination="wyV-WT-hg6" id="3Qi-bt-bvP"/>
-                    </connections>
-                </viewController>
-                <customObject id="Q6v-7a-UZc" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="806" y="598.5"/>
-        </scene>
         <!--Inputs-->
         <scene sceneID="PXu-5S-D46">
             <objects>
@@ -953,125 +920,18 @@
                 <controllerPlaceholder storyboardIdentifier="OutputSetup" storyboardName="OutputSetup" id="dpe-8P-rjX" userLabel="OutputSetup" sceneMemberID="viewController"/>
                 <customObject id="JGS-3Q-1JB" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="354" y="794"/>
+            <point key="canvasLocation" x="343" y="812"/>
         </scene>
-        <!--Outputs Split View Controller-->
-        <scene sceneID="5w8-Wb-Cfj">
+        <!--Outputs-->
+        <scene sceneID="lto-4z-ERP">
             <objects>
-                <splitViewController id="sDa-jy-4wf" customClass="OutputsSplitViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
-                    <splitViewItems>
-                        <splitViewItem id="ANU-1R-8HH" userLabel="Plot Split View Item"/>
-                        <splitViewItem id="3Cb-uj-NQ2"/>
-                    </splitViewItems>
-                    <splitView key="splitView" dividerStyle="thin" id="dkH-yJ-Ihh">
-                        <rect key="frame" x="0.0" y="0.0" width="350" height="166"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <connections>
-                            <outlet property="delegate" destination="sDa-jy-4wf" id="ojG-hH-xTJ"/>
-                        </connections>
-                    </splitView>
-                    <connections>
-                        <outlet property="splitView" destination="dkH-yJ-Ihh" id="Hzc-q7-t6O"/>
-                        <outlet property="textOutputSplitViewItem" destination="3Cb-uj-NQ2" id="ECY-i0-M13"/>
-                        <segue destination="4mF-Gl-0O6" kind="relationship" relationship="splitItems" id="E2n-ef-nX5"/>
-                        <segue destination="YnZ-Th-m6N" kind="relationship" relationship="splitItems" id="4zF-Td-bMO"/>
-                    </connections>
-                </splitViewController>
-                <customObject id="HMf-8J-woZ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <controllerPlaceholder storyboardName="Outputs" id="Y48-WP-5Q2" sceneMemberID="viewController"/>
+                <customObject id="b68-Fe-IgA" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="785" y="7"/>
-        </scene>
-        <!--imageOutputViewController-->
-        <scene sceneID="lGd-Y3-Nqx">
-            <objects>
-                <viewController title="imageOutputViewController" id="4mF-Gl-0O6" sceneMemberID="viewController">
-                    <view key="view" id="uAl-T7-7ic">
-                        <rect key="frame" x="0.0" y="0.0" width="369" height="351"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="100" verticalCompressionResistancePriority="100" translatesAutoresizingMaskIntoConstraints="NO" id="EqI-ln-cgW">
-                                <rect key="frame" x="0.0" y="0.0" width="369" height="351"/>
-                                <imageCell key="cell" selectable="YES" editable="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="globe_picture" id="M4A-lX-JJN"/>
-                            </imageView>
-                        </subviews>
-                        <constraints>
-                            <constraint firstAttribute="bottom" secondItem="EqI-ln-cgW" secondAttribute="bottom" id="QU6-9v-Cmb"/>
-                            <constraint firstItem="EqI-ln-cgW" firstAttribute="leading" secondItem="uAl-T7-7ic" secondAttribute="leading" id="W9M-nW-Z5t"/>
-                            <constraint firstItem="EqI-ln-cgW" firstAttribute="top" secondItem="uAl-T7-7ic" secondAttribute="top" id="Y6l-ZO-cTk"/>
-                            <constraint firstAttribute="trailing" secondItem="EqI-ln-cgW" secondAttribute="trailing" id="g2M-MR-XhI"/>
-                        </constraints>
-                    </view>
-                </viewController>
-                <customObject id="AUw-GP-L7o" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1296.5" y="-109.5"/>
-        </scene>
-        <!--Text Outputs View Controller-->
-        <scene sceneID="Bnn-Ve-NcC">
-            <objects>
-                <viewController title="textOutputViewController" storyboardIdentifier="textOutputViewController" id="YnZ-Th-m6N" userLabel="Text Outputs View Controller" customClass="TextOutputsViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="GgS-6k-ppY">
-                        <rect key="frame" x="0.0" y="0.0" width="215" height="188"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <scrollView appearanceType="aqua" borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YWm-k4-cQP">
-                                <rect key="frame" x="0.0" y="0.0" width="215" height="175"/>
-                                <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="KII-cS-anU">
-                                    <rect key="frame" x="0.0" y="0.0" width="215" height="175"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <subviews>
-                                        <textView editable="NO" verticallyResizable="YES" findStyle="bar" allowsDocumentBackgroundColorChange="YES" spellingCorrection="YES" smartInsertDelete="YES" id="tnd-Lh-0Dl">
-                                            <rect key="frame" x="0.0" y="0.0" width="215" height="175"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <size key="minSize" width="215" height="175"/>
-                                            <size key="maxSize" width="663" height="10000000"/>
-                                            <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                        </textView>
-                                    </subviews>
-                                    <color key="backgroundColor" name="windowFrameTextColor" catalog="System" colorSpace="catalog"/>
-                                </clipView>
-                                <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="30" id="xLj-wS-v0r"/>
-                                </constraints>
-                                <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="7O4-gQ-tH2">
-                                    <rect key="frame" x="-100" y="-100" width="215" height="16"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </scroller>
-                                <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="AnF-o6-KNM">
-                                    <rect key="frame" x="199" y="0.0" width="16" height="175"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </scroller>
-                            </scrollView>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="G7v-tt-dhd">
-                                <rect key="frame" x="75" y="175" width="66" height="13"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="Text Outputs" id="hS5-aC-nUx">
-                                    <font key="font" metaFont="system" size="10"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                        </subviews>
-                        <constraints>
-                            <constraint firstItem="G7v-tt-dhd" firstAttribute="top" secondItem="GgS-6k-ppY" secondAttribute="top" id="2Wu-4x-KxN"/>
-                            <constraint firstItem="YWm-k4-cQP" firstAttribute="top" secondItem="G7v-tt-dhd" secondAttribute="bottom" id="gZz-Ww-mUi"/>
-                            <constraint firstItem="YWm-k4-cQP" firstAttribute="leading" secondItem="GgS-6k-ppY" secondAttribute="leading" id="jqf-l0-aSI"/>
-                            <constraint firstItem="G7v-tt-dhd" firstAttribute="centerX" secondItem="GgS-6k-ppY" secondAttribute="centerX" id="rnC-1D-Cis"/>
-                            <constraint firstAttribute="bottom" secondItem="YWm-k4-cQP" secondAttribute="bottom" id="tAH-4S-y8t"/>
-                            <constraint firstAttribute="trailing" secondItem="YWm-k4-cQP" secondAttribute="trailing" id="uun-qa-Dkx"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="textView" destination="tnd-Lh-0Dl" id="M6J-qw-M0H"/>
-                    </connections>
-                </viewController>
-                <customObject id="KBP-Z7-bks" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1238.5" y="286"/>
+            <point key="canvasLocation" x="235" y="853"/>
         </scene>
     </scenes>
     <resources>
-        <image name="CSYS" width="20" height="20"/>
-        <image name="globe_picture" width="2048" height="2048"/>
+        <image name="CSYS" width="40" height="40"/>
     </resources>
 </document>
