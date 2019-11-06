@@ -26,11 +26,8 @@ class MonteCarloOutputSetupViewController: AddOutputViewController {
     }
 
     override func didDisclose() {
-        if disclosureState == .closed {
-            gridView.showHideCols(.hide, index: [0,1,2])
-        } else {
-            gridView.showHideCols(.show, index: [0,1,2])
-        }
+        // let showHideMethod : CollapsibleGridView.showHide = (disclosureState == .closed) ? .hide : .show
+        // gridView.showHide(showHideMethod, .column, index: [0,1,2])
     }
         
 }

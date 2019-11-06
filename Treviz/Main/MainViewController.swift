@@ -18,7 +18,7 @@ class MainViewController: TZViewController {
     var mainSplitViewController : MainSplitViewController!
     var textOutputView : NSTextView? {
         return mainSplitViewController.outputsViewController.outputSplitViewController?.textOutputView
-    } //TODO: add other frequently used views/view controllers here
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

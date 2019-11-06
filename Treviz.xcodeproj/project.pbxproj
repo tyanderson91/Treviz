@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -11,6 +11,7 @@
 		CD0F010923654ED400C920AA /* AnalysisRunFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0F010823654ED400C920AA /* AnalysisRunFunctions.swift */; };
 		CD0F010B2365595700C920AA /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0F010A2365595700C920AA /* Vehicle.swift */; };
 		CD0F011323656B7200C920AA /* TrevizTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0F011223656B7200C920AA /* TrevizTests.swift */; };
+		CD0F011B23656EF200C920AA /* StateArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0F011A23656EF200C920AA /* StateArray.swift */; };
 		CD11FA8723408173001A3695 /* AddOutputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD11FA8623408173001A3695 /* AddOutputViewController.swift */; };
 		CD11FA8923411FD3001A3695 /* VariableSelector.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD449023233B378C0095F243 /* VariableSelector.storyboard */; };
 		CD11FA9323433096001A3695 /* PlotTypes.plist in Resources */ = {isa = PBXBuildFile; fileRef = CD11FA9223433096001A3695 /* PlotTypes.plist */; };
@@ -34,11 +35,14 @@
 		CD4656B2224C6F3500C587CC /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4656B1224C6F3500C587CC /* SettingsViewController.swift */; };
 		CD4656B4224C6F8C00C587CC /* EnvironmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4656B3224C6F8C00C587CC /* EnvironmentViewController.swift */; };
 		CD500337234DA64F00D71099 /* InitVarSettings.plist in Resources */ = {isa = PBXBuildFile; fileRef = CD500336234DA64F00D71099 /* InitVarSettings.plist */; };
+		CD557437236EA14500DA53A1 /* PlotViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD557436236EA14500DA53A1 /* PlotViewController.swift */; };
 		CD9B490D2339BB56008ADA2C /* VariableSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9B490B2339BB56008ADA2C /* VariableSelectorViewController.swift */; };
 		CDA0F87F2257398F003C62E6 /* NotificationCenterSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA0F87E2257398F003C62E6 /* NotificationCenterSetup.swift */; };
 		CDA0F88122587E05003C62E6 /* ParamTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA0F88022587E05003C62E6 /* ParamTableViewController.swift */; };
-		CDA0F885225A6D0B003C62E6 /* NamedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA0F884225A6D0B003C62E6 /* NamedConstants.swift */; };
 		CDA0F888225C5D47003C62E6 /* InputsCellViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA0F887225C5D47003C62E6 /* InputsCellViews.swift */; };
+		CDA7FD75236FE9CC009CDFAF /* InitVarSettings.yaml in Resources */ = {isa = PBXBuildFile; fileRef = CDA7FD74236FE9CC009CDFAF /* InitVarSettings.yaml */; };
+		CDA7FD78236FFF2E009CDFAF /* Yams in Frameworks */ = {isa = PBXBuildFile; productRef = CDA7FD77236FFF2E009CDFAF /* Yams */; };
+		CDA7FD7A23715399009CDFAF /* AnalysisSettings.yaml in Resources */ = {isa = PBXBuildFile; fileRef = CDA7FD7923715399009CDFAF /* AnalysisSettings.yaml */; };
 		CDAF13FD222CF357005CDC3C /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDAF13FC222CF357005CDC3C /* State.swift */; };
 		CDAF14272230FB72005CDC3C /* Variable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDAF14262230FB72005CDC3C /* Variable.swift */; };
 		CDB7C73823503DBF00BC50F1 /* InitVars.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDB7C73723503DBF00BC50F1 /* InitVars.plist */; };
@@ -48,7 +52,6 @@
 		CDBEA0A622447A9C00D3159C /* TextOutputsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBEA0A522447A9C00D3159C /* TextOutputsViewController.swift */; };
 		CDC1F5372233978500D1BB25 /* OutputsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC1F5352233978500D1BB25 /* OutputsViewController.swift */; };
 		CDC1F53C2234874000D1BB25 /* MainSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC1F53B2234874000D1BB25 /* MainSplitViewController.swift */; };
-		CDC1F53E2234970F00D1BB25 /* TerminalCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC1F53D2234970F00D1BB25 /* TerminalCondition.swift */; };
 		CDC1F54022363DDB00D1BB25 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC1F53F22363DDB00D1BB25 /* MainViewController.swift */; };
 		CDD5049622252AF900B29751 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD5049522252AF900B29751 /* AppDelegate.swift */; };
 		CDD5049822252AFA00B29751 /* InputsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD5049722252AFA00B29751 /* InputsViewController.swift */; };
@@ -81,6 +84,7 @@
 		CD0F011023656B7200C920AA /* TrevizTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrevizTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD0F011223656B7200C920AA /* TrevizTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrevizTests.swift; sourceTree = "<group>"; };
 		CD0F011423656B7200C920AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CD0F011A23656EF200C920AA /* StateArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateArray.swift; sourceTree = "<group>"; };
 		CD11FA8623408173001A3695 /* AddOutputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOutputViewController.swift; sourceTree = "<group>"; };
 		CD11FA9223433096001A3695 /* PlotTypes.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = PlotTypes.plist; sourceTree = "<group>"; };
 		CD129621224C67E300663B88 /* InitStateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = InitStateViewController.swift; path = "/Users/TylerAnderson/Coding/Swift/Treviz/Treviz/Inputs Setup/InitStateViewController.swift"; sourceTree = "<absolute>"; };
@@ -107,11 +111,13 @@
 		CD4656B1224C6F3500C587CC /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		CD4656B3224C6F8C00C587CC /* EnvironmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentViewController.swift; sourceTree = "<group>"; };
 		CD500336234DA64F00D71099 /* InitVarSettings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = InitVarSettings.plist; sourceTree = "<group>"; };
+		CD557436236EA14500DA53A1 /* PlotViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlotViewController.swift; sourceTree = "<group>"; };
 		CD9B490B2339BB56008ADA2C /* VariableSelectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableSelectorViewController.swift; sourceTree = "<group>"; };
-		CDA0F87E2257398F003C62E6 /* NotificationCenterSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NotificationCenterSetup.swift; path = Treviz/Main/NamedConstants/NotificationCenterSetup.swift; sourceTree = SOURCE_ROOT; };
+		CDA0F87E2257398F003C62E6 /* NotificationCenterSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NotificationCenterSetup.swift; path = Treviz/Main/NotificationCenterSetup.swift; sourceTree = SOURCE_ROOT; };
 		CDA0F88022587E05003C62E6 /* ParamTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParamTableViewController.swift; sourceTree = "<group>"; };
-		CDA0F884225A6D0B003C62E6 /* NamedConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NamedConstants.swift; sourceTree = "<group>"; };
 		CDA0F887225C5D47003C62E6 /* InputsCellViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputsCellViews.swift; sourceTree = "<group>"; };
+		CDA7FD74236FE9CC009CDFAF /* InitVarSettings.yaml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = InitVarSettings.yaml; sourceTree = "<group>"; };
+		CDA7FD7923715399009CDFAF /* AnalysisSettings.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = AnalysisSettings.yaml; path = "Treviz/Inputs Setup/AnalysisSettings.yaml"; sourceTree = SOURCE_ROOT; };
 		CDAF13FC222CF357005CDC3C /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		CDAF14262230FB72005CDC3C /* Variable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Variable.swift; sourceTree = "<group>"; };
 		CDB7C73723503DBF00BC50F1 /* InitVars.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = InitVars.plist; path = "Treviz/Inputs Setup/InitVars.plist"; sourceTree = SOURCE_ROOT; };
@@ -120,7 +126,6 @@
 		CDBEA0A522447A9C00D3159C /* TextOutputsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextOutputsViewController.swift; sourceTree = "<group>"; };
 		CDC1F5352233978500D1BB25 /* OutputsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputsViewController.swift; sourceTree = "<group>"; };
 		CDC1F53B2234874000D1BB25 /* MainSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSplitViewController.swift; sourceTree = "<group>"; };
-		CDC1F53D2234970F00D1BB25 /* TerminalCondition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalCondition.swift; sourceTree = "<group>"; };
 		CDC1F53F22363DDB00D1BB25 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		CDD5049222252AF900B29751 /* Treviz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Treviz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDD5049522252AF900B29751 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -152,6 +157,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDA7FD78236FFF2E009CDFAF /* Yams in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -167,10 +173,10 @@
 				CDF1670B2237A10400CD9590 /* MainWindowController.swift */,
 				CDF3D1A0225025AF0064D70C /* Analysis.swift */,
 				CD0F010823654ED400C920AA /* AnalysisRunFunctions.swift */,
-				CD0F010A2365595700C920AA /* Vehicle.swift */,
 				CDF3D1A722505A000064D70C /* AnalysisData.swift */,
+				CD0F010A2365595700C920AA /* Vehicle.swift */,
 				CDD5049522252AF900B29751 /* AppDelegate.swift */,
-				CDA0F886225A6D1E003C62E6 /* NamedConstants */,
+				CDA0F87E2257398F003C62E6 /* NotificationCenterSetup.swift */,
 				CD05E3BA2254916500906EB0 /* Reusable classes */,
 			);
 			path = Main;
@@ -180,10 +186,11 @@
 			isa = PBXGroup;
 			children = (
 				CD2D0DB0224382F70012978E /* InfoBarStackView */,
-				CDB7C7392352B03100BC50F1 /* Parameter.swift */,
 				CD449022233B26370095F243 /* Variable */,
 				CDF3D1A5225057270064D70C /* TZViewController.swift */,
+				CDB7C7392352B03100BC50F1 /* Parameter.swift */,
 				CDAF13FC222CF357005CDC3C /* State.swift */,
+				CD0F011A23656EF200C920AA /* StateArray.swift */,
 				CD42E0A922FD05F600A0F9A1 /* CollapsibleStackView.swift */,
 				CD28477622FF9C8800D192A9 /* CollapsibleGridView.swift */,
 				CD3F5E5622EE4D8C00E4CF20 /* Conditions */,
@@ -200,6 +207,7 @@
 				CDD60A902345BF5C00249987 /* TZTextOutput.swift */,
 				CD280F49233B45670004263F /* TZPlot.swift */,
 				CDC1F5352233978500D1BB25 /* OutputsViewController.swift */,
+				CD557436236EA14500DA53A1 /* PlotViewController.swift */,
 				CDBEA0A522447A9C00D3159C /* TextOutputsViewController.swift */,
 			);
 			path = Outputs;
@@ -211,6 +219,7 @@
 				CD129621224C67E300663B88 /* InitStateViewController.swift */,
 				CDE0795A2249EC7400815E7F /* InitStateStructure.plist */,
 				CD500336234DA64F00D71099 /* InitVarSettings.plist */,
+				CDA7FD74236FE9CC009CDFAF /* InitVarSettings.yaml */,
 				CDB7C73723503DBF00BC50F1 /* InitVars.plist */,
 				CDB7C73B2352B58300BC50F1 /* InitStateHeader.swift */,
 			);
@@ -286,25 +295,16 @@
 		CD9F2041223B7CBF005BFDCB /* Inputs Setup */ = {
 			isa = PBXGroup;
 			children = (
+				CDA7FD7923715399009CDFAF /* AnalysisSettings.yaml */,
 				CD05E3BC225491D900906EB0 /* Init State */,
 				CDD5049722252AFA00B29751 /* InputsViewController.swift */,
 				CDA0F887225C5D47003C62E6 /* InputsCellViews.swift */,
 				CDA0F88022587E05003C62E6 /* ParamTableViewController.swift */,
 				CD4656B1224C6F3500C587CC /* SettingsViewController.swift */,
 				CD4656B3224C6F8C00C587CC /* EnvironmentViewController.swift */,
-				CDC1F53D2234970F00D1BB25 /* TerminalCondition.swift */,
 				CDE078F3224806EF00815E7F /* Inputs.storyboard */,
 			);
 			path = "Inputs Setup";
-			sourceTree = "<group>";
-		};
-		CDA0F886225A6D1E003C62E6 /* NamedConstants */ = {
-			isa = PBXGroup;
-			children = (
-				CDA0F87E2257398F003C62E6 /* NotificationCenterSetup.swift */,
-				CDA0F884225A6D0B003C62E6 /* NamedConstants.swift */,
-			);
-			path = NamedConstants;
 			sourceTree = "<group>";
 		};
 		CDD5048922252AF900B29751 = {
@@ -374,6 +374,9 @@
 			dependencies = (
 			);
 			name = Treviz;
+			packageProductDependencies = (
+				CDA7FD77236FFF2E009CDFAF /* Yams */,
+			);
 			productName = Treviz;
 			productReference = CDD5049222252AF900B29751 /* Treviz.app */;
 			productType = "com.apple.product-type.application";
@@ -407,6 +410,9 @@
 				Base,
 			);
 			mainGroup = CDD5048922252AF900B29751;
+			packageReferences = (
+				CDA7FD76236FFF2E009CDFAF /* XCRemoteSwiftPackageReference "Yams" */,
+			);
 			productRefGroup = CDD5049322252AF900B29751 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -435,8 +441,10 @@
 				CD2D0DBA2243837F0012978E /* HeaderViewController.storyboard in Resources */,
 				CDD5049F22252AFD00B29751 /* Assets.xcassets in Resources */,
 				CDE078F4224806EF00815E7F /* Inputs.storyboard in Resources */,
+				CDA7FD75236FE9CC009CDFAF /* InitVarSettings.yaml in Resources */,
 				CDD504A222252AFD00B29751 /* Main.storyboard in Resources */,
 				CD3F5E5822EE4DCD00E4CF20 /* Conditions.storyboard in Resources */,
+				CDA7FD7A23715399009CDFAF /* AnalysisSettings.yaml in Resources */,
 				CD2D0DBB224385580012978E /* OutputSetup.storyboard in Resources */,
 				CD0F01072364139200C920AA /* Outputs.storyboard in Resources */,
 				CD11FA9323433096001A3695 /* PlotTypes.plist in Resources */,
@@ -483,7 +491,8 @@
 				CDC1F53C2234874000D1BB25 /* MainSplitViewController.swift in Sources */,
 				CDC1F54022363DDB00D1BB25 /* MainViewController.swift in Sources */,
 				CD9B490D2339BB56008ADA2C /* VariableSelectorViewController.swift in Sources */,
-				CDC1F53E2234970F00D1BB25 /* TerminalCondition.swift in Sources */,
+				CD0F011B23656EF200C920AA /* StateArray.swift in Sources */,
+				CD557437236EA14500DA53A1 /* PlotViewController.swift in Sources */,
 				CDD60A972345C5AE00249987 /* TZOutput.swift in Sources */,
 				CDD60A912345BF5C00249987 /* TZTextOutput.swift in Sources */,
 				CD42E0AA22FD05F600A0F9A1 /* CollapsibleStackView.swift in Sources */,
@@ -494,7 +503,6 @@
 				CDB7C73C2352B58300BC50F1 /* InitStateHeader.swift in Sources */,
 				CDA0F888225C5D47003C62E6 /* InputsCellViews.swift in Sources */,
 				CDF3D1A1225025B00064D70C /* Analysis.swift in Sources */,
-				CDA0F885225A6D0B003C62E6 /* NamedConstants.swift in Sources */,
 				CDBEA0A622447A9C00D3159C /* TextOutputsViewController.swift in Sources */,
 				CD11FA8723408173001A3695 /* AddOutputViewController.swift in Sources */,
 				CD129622224C67E300663B88 /* InitStateViewController.swift in Sources */,
@@ -759,6 +767,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CDA7FD76236FFF2E009CDFAF /* XCRemoteSwiftPackageReference "Yams" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jpsim/Yams.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CDA7FD77236FFF2E009CDFAF /* Yams */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CDA7FD76236FFF2E009CDFAF /* XCRemoteSwiftPackageReference "Yams" */;
+			productName = Yams;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		CDD5049B22252AFA00B29751 /* Document.xcdatamodeld */ = {

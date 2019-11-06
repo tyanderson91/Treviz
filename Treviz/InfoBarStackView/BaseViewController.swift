@@ -10,7 +10,8 @@ import Cocoa
 
 class BaseViewController : TZViewController, StackItemBody {
     
-    //static let StackItemBackgroundColor = NSColor(calibratedRed: 244/255, green:244/255, blue:244/255, alpha:1)
+    // static let StackItemBackgroundColor = NSColor(calibratedRed: 0.1, green: 0.105, blue: 0.1, alpha:1)
+    static let StackItemBackgroundColor = NSColor.controlBackgroundColor
     
     @IBOutlet var heightConstraint: NSLayoutConstraint!
     
@@ -30,7 +31,9 @@ class BaseViewController : TZViewController, StackItemBody {
         savedDefaultHeight = view.bounds.height
         
         view.wantsLayer = true
-        //view.layer?.backgroundColor = BaseViewController.StackItemBackgroundColor.cgColor
+        view.layer?.backgroundColor = BaseViewController.StackItemBackgroundColor.cgColor
+        // view.layer?.borderColor = BaseViewController.StackItemBackgroundColor.cgColor
+        // view.layer?.borderWidth = 0.5
     }
     
     // MARK: - StackItemBody

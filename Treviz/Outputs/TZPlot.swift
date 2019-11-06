@@ -40,6 +40,7 @@ class PlotType { //TODO : This should probably be in a struct
      - Returns: ids, a list of all plot type IDs that have been initialized in the class-level variable allPlotTypes
      - TODO: store plot type information in app delegate, not a class-level variable
      */
+
     static func getIDs()->[String]{
 
         var ids : [String] = []

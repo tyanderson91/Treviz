@@ -2,6 +2,8 @@
 //  TZOutput.swift
 //  Treviz
 //
+//  This is the superclass for all plots, text output, and any other output sets for an analysis
+//
 //  Created by Tyler Anderson on 10/2/19.
 //  Copyright © 2019 Tyler Anderson. All rights reserved.
 //
@@ -46,7 +48,7 @@ class TZOutput : NSObject {
         if vars.count >= 4 { categoryVar = vars[4] }
     }
     
-    convenience init(id: Int, with output : TZOutput) {// TODO: conform to "copying" protocol?
+    convenience init(id: Int, with output : TZOutput) {
         self.init(id : id, plotType: output.plotType)
         displayName = output.displayName
         title = output.title

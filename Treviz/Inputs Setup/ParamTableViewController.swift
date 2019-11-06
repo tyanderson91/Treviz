@@ -8,34 +8,27 @@
 
 import Cocoa
 
+extension NSStoryboardSegue.Identifier{
+    static let paramTableViewSegue = "ParamTableViewControllerSegue"
+}
+
 class ParamTableViewController: TZViewController , NSTableViewDelegate, NSTableViewDataSource {
     
     @IBOutlet weak var tableView: NSTableView!
-    var initStateViewController : InitStateViewController!
     var params : [Parameter] = []
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        let inputViewController = self.parent as! InputsViewController
-        self.initStateViewController = inputViewController.initStateViewController
+        super.viewDidLoad() // TODO: Figure out which of these I actually need
         NotificationCenter.default.addObserver(self, selector: #selector(self.getAllParams(_:)), name: .didSetParam, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.updateTable(_:)), name: .didChangeUnits, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.updateTable(_:)), name: .didChangeValue, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.getAllParams(_:)), name: .didLoadAppDelegate, object: nil)
-        
     }
     
     @objc func getAllParams(_ notification: Notification){
-        self.params = self.analysis.inputSettings.filter( {$0.isParam} )
+        self.params = self.analysis.parameters
         tableView.reloadData()
     }
-    
-    @objc func paramWasSet(_ notification: Notification){
-        //let initStateParams = getParamSettings(from: initStateViewController.inputs)
-        //self.params = initStateParams
-        tableView.reloadData()
-    }
-    
     @objc func updateTable(_ notification: Notification){
         tableView.reloadData()
     }
@@ -63,7 +56,7 @@ class ParamTableViewController: TZViewController , NSTableViewDelegate, NSTableV
         if let thisSetting = item as? Variable{
             switch tableColumn?.identifier{
             case NSUserInterfaceItemIdentifier.nameColumn: return thisSetting.name
-            case NSUserInterfaceItemIdentifier.paramValueColumn: return thisSetting.value//TODO: make logic for inputting various parameter values
+            case NSUserInterfaceItemIdentifier.paramValueColumn: return thisSetting.value
             case NSUserInterfaceItemIdentifier.unitsColumn: return thisSetting.units
             default: return nil
             }
@@ -77,13 +70,30 @@ class ParamTableViewController: TZViewController , NSTableViewDelegate, NSTableV
         return nil
     }
     
-    @IBAction func removeParamPressed(_ sender: Any) {//TODO: move to params table view controller
+    @IBAction func removeParamPressed(_ sender: Any) {
         let button = sender as! NSView
         let row = tableView.row(for: button)
         var thisParam = params[row]
         thisParam.isParam = false
         tableView.reloadData()
-        initStateViewController.outlineView.reloadItem(thisParam)
         NotificationCenter.default.post(name: .didSetParam, object: nil)
+    }
+    
+    
+    @IBAction func editUnits(_ sender: NSTextField) {
+        let curRow = tableView.row(for: sender)
+        if let thisParam = analysis.parameters[curRow] as? Variable{
+            thisParam.units = sender.stringValue
+            NotificationCenter.default.post(name: .didChangeUnits, object: nil)
+        }
+    }
+    
+    @IBAction func editValues(_ sender: NSTextField) {
+        let curRow = tableView.row(for: sender)
+        if let thisParam = analysis.parameters[curRow] as? Variable{
+            if let value = Double(sender.stringValue) {
+                thisParam.value[0] = value}
+            NotificationCenter.default.post(name: .didChangeValue, object: nil)
+        }
     }
 }

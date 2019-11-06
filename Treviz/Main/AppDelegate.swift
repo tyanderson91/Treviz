@@ -17,16 +17,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var initVars : [Variable]! = nil
     var initStateGroups : InitStateHeader! = nil
     
-    func applicationWillFinishLaunching(_ notification: Notification) {
+    //func applicationWillFinishLaunching(_ notification: Notification) {
         
-    }
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         
         loadPlotTypes(from: "PlotTypes")
         loadVars(from: "InitVars")
+        initVars = State.sortVarIndices(initVars)
         loadVarGroups(from: "InitStateStructure")
-        
         /*
         if let maindoc = application.mainWindow?.windowController?.document as? Analysis {
             maindoc.appDelegate = self
@@ -55,9 +54,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         guard let inputList = NSArray.init(contentsOfFile: varFilePath) else {return}//return empty if filename not found
         initVars = []
         for thisVar in inputList {
-            let dict = thisVar as! NSDictionary //TODO: error check the type, return [] if not a dictionary
+            guard let dict = thisVar as? NSDictionary else {return}
             let newVar = Variable(dict["id"] as! VariableID, named: dict["name"] as! String, symbol: dict["symbol"] as! String)
             newVar.units = dict["units"] as! String
+            newVar.value = [0]
             initVars.append(newVar)
         }
     }
@@ -71,7 +71,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     private func loadVarGroupsRecurs(input: InitStateHeader, withList list: [NSDictionary]){
         for dict in list {
-            //let dict = thisItem as! NSDictionary //TODO: error check the type, return [] if not a dictionary
             guard let itemType = dict["itemType"] as? String else { return }
             guard let itemID = dict["id"] as? VariableID else { return }
             let name = dict["name"] as? String
@@ -99,18 +98,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func loadPlotTypes(from plist: String){
         guard let plotFilePath = Bundle.main.path(forResource: plist, ofType: "plist") else {return}
         
-        guard let inputList = NSArray.init(contentsOfFile: plotFilePath) else {return}//return empty if filename not found
+        guard let inputList = NSArray.init(contentsOfFile: plotFilePath) else {
+            self.plotTypes = nil
+            return}
         var initPlotTypes : [PlotType] = []
         for thisPlot in inputList {
-            let dict = thisPlot as! NSDictionary //TODO: error check the type, return [] if not a dictionary
+            guard let dict = thisPlot as? NSDictionary else {return}
             let newPlot = PlotType(dict["id"] as! String, name: dict["name"] as! String, requiresCondition: dict["condition"] as! Bool, nAxis: dict["naxis"] as! Int, nVars: dict["nvar"] as! Int)
             initPlotTypes.append(newPlot)
         }
-        
-        if initPlotTypes.count > 0 {//If the initialization did not return an empty array
-            self.plotTypes = initPlotTypes
-            PlotType.allPlotTypes = initPlotTypes
-        } else {self.plotTypes = nil}
-    }
-    
+        self.plotTypes = initPlotTypes
+        PlotType.allPlotTypes = initPlotTypes
+    }    
 }

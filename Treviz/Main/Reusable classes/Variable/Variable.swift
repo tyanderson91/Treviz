@@ -20,9 +20,8 @@ enum VarValueType : String {
     case vector = "vector"
 }
 
-class Variable : NSObject, Parameter, InitStateCheck {
-    // TODO: maybe this should be a struct?
-    //static var allIdentifiers : [VariableID] = []
+class Variable : NSObject, Parameter, InitStateCheck, NSCopying {
+    
     let id: VariableID
     let name: String
     let symbol: String!
@@ -31,31 +30,35 @@ class Variable : NSObject, Parameter, InitStateCheck {
     
     var isValid: Bool = true
     var hasParams: Bool {return isParam}
-    var children: [InitStateCheck] = []
+    var children: [InitStateCheck] { return [] }
     
     var isParam: Bool = false
-    //var statePosition : Int //Position of the variable in the state vector
     
-    init(_ id:VariableID, named name:String = "", symbol:String = ""){
-        //if Variable.allIdentifiers.contains(id){
-         //   print("State item with id \(id) already exists!")//TODO: make error
-        //} else {
-        //    Variable.allIdentifiers.append(id)
-        //}
-        self.id = id
-        self.name = name
-        self.symbol = symbol
-        self.units = ""
-        
+    init(_ idIn: VariableID, named nameIn:String = "", symbol symbolIn: String = "", units unitsIn: String = ""){
+        id = idIn
+        name = nameIn
+        symbol = symbolIn
+        units = unitsIn
         super.init()
-        //self.statePosition = -1
     }
     
-    convenience init(_ id: VariableID, named inputName:String = "", symbol inputSymbol:String = "", units inputUnits:String = ""){
-        self.init(id,named: inputName, symbol: inputSymbol)
-        units = inputUnits
+    func copy(with zone: NSZone? = nil) -> Any {
+        let newVar = Variable(id, named: name, symbol: symbol, units: units)
+        newVar.value = self.value
+        newVar.isValid = self.isValid
+        newVar.isParam = self.isParam
+        return newVar
+    }
+    func copyAtIndex(_ index: Int) -> Variable?{
+        guard index < self.value.count else {return nil}
+        let newVar = Variable(id, named: name, symbol: symbol, units: units)
+        newVar.value = [self[index]!]
+        newVar.isValid = self.isValid
+        newVar.isParam = self.isParam
+        return newVar
     }
     
+    // Subscripts to get value data
     subscript(index: Int)->Double?{
         get {
             if index >= 0 && index < value.count{
@@ -76,5 +79,4 @@ class Variable : NSObject, Parameter, InitStateCheck {
         }
         return output
     }
-    // Sequence overrides
 }

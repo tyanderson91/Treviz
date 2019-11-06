@@ -15,7 +15,7 @@ class TwoAxisOutputSetupViewController: AddOutputViewController {
 
     @IBOutlet weak var plottingStackView: NSStackView!
 
-    override func createPlot()->TZPlot? {// TODO : expand for all plot types
+    override func createOutput()->TZOutput? {// TODO : expand for all plot types
         /*
         if let plotType = plotTypeDropDown.selectedItem?.title{
             let newPlot = TZPlot1line2d()
@@ -45,18 +45,16 @@ class TwoAxisOutputSetupViewController: AddOutputViewController {
         self.addChild(var3ViewController)
         variableGridView.cell(atColumnIndex: 1, rowIndex: 2).contentView = var3ViewController.view
         
-        plotTypeSelector = {(thisPlotType : PlotType)->(Bool) in return thisPlotType.nAxis == 2 }
+        plotTypeSelector = { return $0.nAxis == 2 }
+        /*
+        setWidth(component: var1ViewController, width: varSelectorWidth)
+        setWidth(component: var2ViewController, width: varSelectorWidth)
+        setWidth(component: var3ViewController, width: varSelectorWidth)*/
     }
     
-    override func didDisclose() {//TODO : collapse grid columns (animated) when view is collapsed
-
-        if disclosureState == .open {
-            //gridView.isHidden = false
-            gridView.showHideCols(.show, index: [0,1,2])
-        } else {
-            //gridView.isHidden = true
-            gridView.showHideCols(.hide, index : [0,1,2])
-        }
+    override func didDisclose() {
+        // let showHideMethod : CollapsibleGridView.showHide = (disclosureState == .closed) ? .hide : .show
+        // gridView.showHide(showHideMethod, .column, index: [0,1,2])
     }
 }
 

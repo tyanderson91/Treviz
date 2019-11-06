@@ -51,7 +51,7 @@ class MainWindowController: NSWindowController, NSToolbarDelegate {
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         if segue.identifier == "conditionsPopupSegue" {
             let conditionsVC = segue.destinationController as! ConditionsViewController
-            conditionsVC.analysis = self.contentViewController!.representedObject as? Analysis
+            conditionsVC.representedObject = self.contentViewController!.representedObject as? Analysis
         }
     }
     

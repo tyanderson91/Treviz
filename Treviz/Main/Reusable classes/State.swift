@@ -12,23 +12,7 @@
 
 import Cocoa
 
-typealias StateArray = Array<Double>
-
-
-class State: NSObject { //TODO: try to phase this out
-    static let stateVarPositions : [VariableID] = //TODO : this can definitely be cleaned up
-        ["t","x","y","z","dx","dy","dz","mtot","q0","q1","q2","q3",
-         "dq0","dq1","dq2","dq3"]
-    static func getValue(_ varID : VariableID, _ state: StateArray)->Double?{
-        if let index = stateVarPositions.firstIndex(where: { $0 == varID }){
-            return state[index]
-        } else {return nil}
-    }
-    static func setValue(_ varID : VariableID, _ state: StateArray)->Double?{
-        if let index = stateVarPositions.firstIndex(where: { $0 == varID }){
-            return state[index]
-        } else {return nil}
-    }
+class State: NSObject {
     
     var variables : [Variable] = []
     var length : Int {
@@ -38,17 +22,24 @@ class State: NSObject { //TODO: try to phase this out
         }
         return curlen
     }
-    // var t : Variable {return Variable()} //TODO: implement this as properties
     
     override init() {
-        self.variables = []
         super.init()
     }
     
-    init(variables: [Variable]) {
-        self.variables = variables
+    init(variables varsIn: [Variable]) {
+        variables = varsIn
         super.init()
     }
+    
+    func copyAtIndex(_ index: Int)->State{
+        let newState = State.init()
+        for thisVar in self.variables{
+            if let newVar = thisVar.copyAtIndex(index) { newState.variables.append(newVar) }
+        }
+        return newState
+    }
+
     
     // Subscripts by variable
     subscript(_ varID: VariableID) -> Variable {
@@ -70,29 +61,9 @@ class State: NSObject { //TODO: try to phase this out
         }
     }
     
-    subscript(index: Int) -> [Double] {
-        get {
-            var stateArray = StateArray() //Array.init(repeating: 0, count: State.stateVarPositions.count)
-            for thisVarID in State.stateVarPositions {
-                if let thisVal = self[thisVarID, index] {
-                    stateArray.append(thisVal)
-                }
-            }
-            return stateArray
-        }
-        set (newArray) {
-            var i = 0
-            for thisValue in newArray {
-                let thisVar = self[State.stateVarPositions[i]]
-                thisVar[index] = thisValue
-                i += 1
-            }
-        }
-    }
-    
     //Subscripts by condition
     subscript(varIDs: [VariableID], condition: Condition) -> [VariableID: [Double]]? {
-        // Note that this subscript may take some time to collect, since by default it will evaluate the condition
+        // Note that this subscript take some time to collect, since by default it will evaluate the condition
         var output = [VariableID: [Double]]()
         condition.evaluate(self)
         let conditionIndex = condition.meetsConditionIndex

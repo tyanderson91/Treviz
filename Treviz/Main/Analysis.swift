@@ -25,7 +25,6 @@ import Cocoa
 class Analysis: NSDocument {//TODO: possibly subclass NSPersistentDocument if using CoreData
     
     // Connections to interface
-    // var analysisData : AnalysisData! // Reader/writer for analysis data
     var appDelegate : AppDelegate!
     var windowController : MainWindowController! //Implicit optional, should always be assigned after initialization
     var viewController : MainViewController!
@@ -41,10 +40,14 @@ class Analysis: NSDocument {//TODO: possibly subclass NSPersistentDocument if us
     var traj: State!
     var conditions : [Condition] = []
     var inputSettings : [Parameter] = []
+    var parameters : [Parameter] { //TODO: this should contain more than just input settings
+        return inputSettings.filter( {$0.isParam} )
+    }
     var plots : [TZOutput] = []
     var defaultTimestep : Double = 1
     var vehicle : Vehicle!
     var propagatorType : PropagatorType = .explicit
+    
     
     // Run tracking
     var isRunning = false
@@ -67,7 +70,7 @@ class Analysis: NSDocument {//TODO: possibly subclass NSPersistentDocument if us
      - TODO: point out which inputs need to be fixed
      */
     func isValid()->Bool{
-        var checks : [Bool] = [] // Array of booleans for each indivitual condition that must be satisfied
+        var checks : [Bool] = [] // Array of booleans for each individual condition that must be satisfied
         for _ in self.initStateGroups.subheaders {
             checks.append(true) // thisSet.isValid
         }

@@ -36,33 +36,32 @@ class ThreeAxisOutputSetupViewController: AddOutputViewController {
         self.addChild(var3ViewController)
         variableGridView.cell(atColumnIndex: 1, rowIndex: 2).contentView = var3ViewController.view
         // Do view setup here.
-        plotTypeSelector = { (thisPlotType : PlotType)->(Bool) in return thisPlotType.nAxis == 3 }
+        plotTypeSelector = { return $0.nAxis == 3 }
+        
+        /*setWidth(component: var1ViewController!, width: varSelectorWidth)
+        setWidth(component: var2ViewController!, width: varSelectorWidth)
+        setWidth(component: var3ViewController!, width: varSelectorWidth)*/
     }
     
-    override func createPlot()->TZPlot? {// TODO : expand for all plot types
+    override func createOutput()->TZOutput? {// TODO : expand for all plot types
         //TODO : Allow 3 variables
-        var maxPlotID = self.outputSetupViewController.maxPlotNum
         
         guard let plotType = plotTypePopupButton.selectedItem?.title else {return nil}
         var var1 : Variable?
         var var2 : Variable?
         guard let var1Name = var1ViewController.variableSelectorPopup.selectedItem?.title else {return nil}
         guard let var2Name = var2ViewController.variableSelectorPopup.selectedItem?.title else {return nil}
-        var1 = varList.first(where: {$0.name == var1Name} )
-        var2 = varList.first(where: {$0.name == var2Name} )
+        var1 = analysis.initVars.first(where: {$0.name == var1Name} )
+        var2 = analysis.initVars.first(where: {$0.name == var2Name} )
         
         let newPlot = TZPlot(id: maxPlotID+1, vars: [var1!, var2!], plotType: PlotType.getPlotTypeByName(plotType)!)
-        maxPlotID += 1
         //newPlot.setName()
         return newPlot
         //return nil
     }
     
     override func didDisclose() {
-        if disclosureState == .closed {
-            gridView.showHideCols(.hide, index: [0,1,2])
-        } else {
-            gridView.showHideCols(.show, index: [0,1,2])
-        }
+        // let showHideMethod : CollapsibleGridView.showHide = (disclosureState == .closed) ? .hide : .show
+        // gridView.showHide(showHideMethod, .column, index: [0,1,2])
     }
 }

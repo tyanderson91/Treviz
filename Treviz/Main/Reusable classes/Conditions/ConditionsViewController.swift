@@ -19,9 +19,8 @@ extension NSUserInterfaceItemIdentifier {
     static let descripCellView = NSUserInterfaceItemIdentifier.init("DescriptionCellView")
 }
 
-class ConditionsViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource {
+class ConditionsViewController: TZViewController, NSTableViewDelegate, NSTableViewDataSource {
 
-    var analysis : Analysis?
     var curCondition = Condition()
     var initVars : [Variable] = []
     
@@ -34,38 +33,32 @@ class ConditionsViewController: NSViewController, NSTableViewDelegate, NSTableVi
     
     
     @IBAction func addConditionButtonClicked(_ sender: Any) {
-        curCondition = Condition()
-        curCondition.name = conditionNameTextBox.stringValue
-        if curCondition.name == "" {
-            conditionNameTextBox.becomeFirstResponder()
+        if conditionNameTextBox.stringValue == "" {
+            conditionNameTextBox.becomeFirstResponder() //Set focus to the name field if it is empty
             return
         }
+        curCondition = Condition()
+        curCondition.name = conditionNameTextBox.stringValue
         curCondition.unionType = BoolType(rawValue: unionTypeDropdown.indexOfSelectedItem)!
-        for curConditionVC in self.children {
-            guard curConditionVC is addConditionViewController else {continue}
-            let curConditionVC1 = curConditionVC as! addConditionViewController // TODO: figure out why the guard statement doesnt work
-            
-            let varindex = curConditionVC1.variableSelector.indexOfSelectedItem
-            if varindex == -1 {curConditionVC1.variableSelector.becomeFirstResponder(); return}
+        for curConditionVC in (self.children as? Array<addConditionViewController> ?? []) {
+            let varindex = curConditionVC.variableSelector.indexOfSelectedItem
+            if varindex == -1 {curConditionVC.variableSelector.becomeFirstResponder(); return}
             
             let newSingleCondition = SingleCondition(initVars[varindex].id)
             
-            switch curConditionVC1.selectedType {
+            switch curConditionVC.selectedType {
             case .interval:
-                newSingleCondition.lbound = Double(curConditionVC1.lowerBoundTextField.stringValue) ?? -Double.infinity
-                newSingleCondition.ubound = Double(curConditionVC1.upperBoundTextField.stringValue) ?? Double.infinity
+                newSingleCondition.lbound = Double(curConditionVC.lowerBoundTextField.stringValue) ?? -Double.infinity
+                newSingleCondition.ubound = Double(curConditionVC.upperBoundTextField.stringValue) ?? Double.infinity
             case .equality:
-                newSingleCondition.equality = Double(curConditionVC1.upperBoundTextField.stringValue)
+                newSingleCondition.equality = Double(curConditionVC.upperBoundTextField.stringValue)
             case .other:
                 print("Other")
             }
             curCondition.conditions.append(newSingleCondition)
         }
         
-        if var conditionList = analysis?.conditions {
-            conditionList.append(curCondition)
-            analysis?.conditions = conditionList
-        }
+        analysis.conditions.append(curCondition)
         NotificationCenter.default.post(name: .didAddCondition, object: nil)
         tableView.reloadData()
     }
@@ -128,23 +121,12 @@ class ConditionsViewController: NSViewController, NSTableViewDelegate, NSTableVi
         }
         
         viewController.variableList = initVars
-        
-        /*
-        for thisVar in initVars {
-            let newMenuItem = NSMenuItem()
-            //newMenuItem.target = thisVar
-            //newMenuItem.title = thisVar.name
-            viewController.variableSelector.addItem(withTitle: thisVar.name)
-            //viewController.variableSelector.item(withTitle: thisVar.name)!.target = thisVar
-        }*/
-        
-        //viewController.variableSelector.addItems(withTitles: varnames)
         return viewController
     }
     
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        let thisCondition = analysis!.conditions[row]
+        let thisCondition = analysis.conditions[row]
         switch tableColumn?.identifier {
         case NSUserInterfaceItemIdentifier.varNameColumn:
             let newView = tableView.makeView(withIdentifier: .varNameCellView, owner: self) as? NSTableCellView
@@ -156,14 +138,13 @@ class ConditionsViewController: NSViewController, NSTableViewDelegate, NSTableVi
             for thisCond in thisCondition.conditions {
                 if let singleCond = thisCond as? SingleCondition {
                     if singleCond.equality != nil {
-                        dstring += "(\(singleCond.varID)=\(singleCond.equality ?? 0))"
+                        dstring += "\(singleCond.varID)=\(singleCond.equality ?? 0)"
                     }
                     else {
                         let lbstr = singleCond.lbound == nil ? "" : "\(singleCond.lbound!) < "
                         let ubstr = singleCond.ubound == nil ? "" : " < \(singleCond.ubound!)"
                         dstring += lbstr + "\(singleCond.varID)" + ubstr
                     }
-                    //if singleCond != thisCondition.conditions.last {dstring += " \(unionTypeDropdown.selectedItem!.title) "}// TODO: fix issue where this is the same for ALL variables in the table
                 }
             }
             newView?.textField?.stringValue = dstring
@@ -175,7 +156,7 @@ class ConditionsViewController: NSViewController, NSTableViewDelegate, NSTableVi
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return (analysis?.conditions.count)!
+        return analysis.conditions.count
     }
     
     /*
@@ -234,8 +215,8 @@ class addConditionViewController: NSViewController, NSComboBoxDataSource {
         let parent = self.parent as! ConditionsViewController
         if parent.newConditionStackView.arrangedSubviews.count == 1 {return}
         parent.newConditionStackView.removeArrangedSubview(self.view)
-        self.removeFromParent()
         self.view.removeFromSuperview()
+        self.removeFromParent()
         if parent.newConditionStackView.arrangedSubviews.count == 1 {
             let lastVC = parent.children[0] as! addConditionViewController
             lastVC.removeConditionButton.isHidden = true

@@ -10,7 +10,7 @@
 
 import Cocoa
 
-class MainSplitViewController: SplitViewController {
+class MainSplitViewController: TZSplitViewController {
 
     @IBOutlet weak var inputsSplitViewItem: NSSplitViewItem!
     @IBOutlet weak var outputsSplitViewItem: NSSplitViewItem!
@@ -26,7 +26,7 @@ class MainSplitViewController: SplitViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        inputsViewController = (inputsSplitViewItem?.viewController as! InputsViewController) //TODO: try to move this to the variable declaration
+        inputsViewController = (inputsSplitViewItem?.viewController as! InputsViewController)
         outputsViewController = (outputsSplitViewItem?.viewController as! OutputsViewController)
         outputSetupViewController = (outputSetupSplitViewItem?.viewController as! OutputSetupViewController)
         splitViewItemList = [inputsSplitViewItem, outputsSplitViewItem, outputSetupSplitViewItem]

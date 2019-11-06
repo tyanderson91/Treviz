@@ -26,8 +26,10 @@ class HeaderViewController : NSViewController, StackItemHeader {
         // We want the header's color to be different color than its associated stack item.
         view.wantsLayer = true
         view.layer?.backgroundColor = NSColor.windowBackgroundColor.cgColor
+        // view.layer?.borderColor = NSColor.controlBackgroundColor.cgColor
+        // view.layer?.borderWidth = 1
 
-//#if !DisclosureTriangleAppearance
+        //#if !DisclosureTriangleAppearance
         // Track the mouse movement so we can show/hide the disclosure button.
         let trackingArea = NSTrackingArea(rect: self.view.bounds,
                                           options: [NSTrackingArea.Options.mouseEnteredAndExited,

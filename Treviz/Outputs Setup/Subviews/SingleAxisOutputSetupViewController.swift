@@ -13,20 +13,13 @@ class SingleAxisOutputSetupViewController: AddOutputViewController {
     @IBOutlet weak var gridView: CollapsibleGridView!
     var variableSelectorViewController : VariableSelectorViewController!
     
-    override func createPlot()->TZPlot? {// TODO : expand for all plot types
-        var maxPlotID = self.outputSetupViewController.maxPlotNum
-        
+    override func createOutput() -> TZOutput? {// TODO : expand for all plot types
         guard let plotType = plotTypePopupButton.selectedItem?.title else {return nil}
-        var var1 : Variable?
-        if let var1Name = variableSelectorViewController?.variableSelectorPopup.selectedItem?.title {
-            var1 = varList.first(where: { $0.name == var1Name } )
-        } else {return nil}
-        
-        let newPlot = TZPlot(id: maxPlotID+1, vars: [var1!], plotType: PlotType.getPlotTypeByName(plotType)!)
-        maxPlotID += 1
-        //newPlot.setName()
-        return newPlot
-        //return nil
+        let var1 = variableSelectorViewController?.getSelectedItem()
+        let newOutput = TZOutput(id: maxPlotID+1, vars: [var1!], plotType: PlotType.getPlotTypeByName(plotType)!)
+        let condIndex = conditionsComboBox.indexOfSelectedItem
+        if condIndex>=0 { newOutput.condition = analysis.conditions[condIndex] }
+        return newOutput
     }
     
     override func headerTitle() -> String { return NSLocalizedString("Single Axis", comment: "") }
@@ -39,7 +32,10 @@ class SingleAxisOutputSetupViewController: AddOutputViewController {
         self.addChild(variableSelectorViewController)
         gridView.cell(atColumnIndex: 0, rowIndex: 1).contentView = variableSelectorViewController.view
         
-        plotTypeSelector = { (thisPlotType : PlotType)->(Bool) in return thisPlotType.nAxis == 1 }
+        plotTypeSelector = { return $0.nAxis == 1 }
+        
+        // setWidth(component: variableSelectorViewController!, width: varSelectorWidth)
+        
         //let variableSelectorViewController = VariableSelectorViewController()
         //self.addChild(variableSelectorViewController)
         //gridView.cell(atColumnIndex: 0, rowIndex: 1).contentView = variableSelectorViewController.view
@@ -48,11 +44,8 @@ class SingleAxisOutputSetupViewController: AddOutputViewController {
     }
     
     override func didDisclose() {
-        if disclosureState == .closed {
-            gridView.showHideCols(.hide, index: [0,1,2])
-        } else {
-            gridView.showHideCols(.show, index: [0,1,2])
-        }
+        // let showHideMethod : CollapsibleGridView.showHide = (disclosureState == .closed) ? .hide : .show
+        // gridView.showHide(showHideMethod, .column, index: [0,1,2])
     }
     
 }

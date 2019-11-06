@@ -9,10 +9,24 @@
 //
 import Foundation
 import Cocoa
+import Yams
 
 enum PropagatorType {
     case explicit
     case rungeKutta4
+}
+
+typealias YamlString = String
+/**
+ Structure for reading and writing initial variable values
+ params id: Variable ID
+ param isParam: Whether the variable is to be used as a parameter in the analysis
+ param value: Initial value
+ */
+struct InitStateSetting {
+    let id: VariableID
+    let isParam: Bool
+    let value: Double
 }
 
 extension Analysis {
@@ -22,12 +36,16 @@ extension Analysis {
 
     @objc func initReadData(_ notification: Notification){ //TODO: override with persistent data, last opened analysis, etc.
         // For now, this is just a test configuration
+        // TODO: Allow reading multiple configurations from a single yaml file
         
         self.name = "Test Analysis"
         self.defaultTimestep = 0.001
         self.vehicle = Vehicle()
+        
         // Initialize var values
-        readSettings(from: "InitVarSettings")
+        //readSettings(from: "InitVarSettings")
+        readInitVars(from: "AnalysisSettings")
+
         traj = State(variables: initVars)
         for thisVar in self.inputSettings {
             traj[thisVar.id, 0] = (thisVar as! Variable)[0]
@@ -55,21 +73,85 @@ extension Analysis {
     }
     
     /**
-     Read initial state variable info from a given plist file
-     plist should be an array of dictionaries, and each dictionary should contain:
+     Get the object associated with a given yaml file
+     */
+    func getYamlObject(from file: String)->Any?{
+        var outputList: Any?
+        if let yamlFilePath = Bundle.main.path(forResource: file, ofType: "yaml"){
+            do {
+                let stryaml = try String(contentsOfFile: yamlFilePath, encoding: String.Encoding.utf8)
+                outputList = try (Yams.load(yaml: stryaml))
+            } catch {
+                outputList = nil }
+        }
+        return outputList
+    }
+    
+    /**
+     Read initial state variable info from a given yaml file
+     Should be an array of dictionaries, and each dictionary should contain:
      * VariableID
      * Initial value (Double)
      * IsParam (Bool)
      */
     func readSettings(from file: String){
-        guard let varFilePath = Bundle.main.path(forResource: file, ofType: "plist") else {return}
-        guard let inputList = NSArray.init(contentsOfFile: varFilePath) as? Array<NSDictionary> else {return}
+        let inputList = getYamlObject(from: file) as! [[String:Any]]
+        
         for thisVar in inputList {
             let thisVarID = thisVar["id"] as! VariableID
             let curVar = self.initVars.first(where: { $0.id == thisVarID})!
-            curVar.value.append(thisVar["value"] as! Double) // TODO: make sure this is the first element
+            // assert(curVar.value.count == 0)
+            let val = thisVar["value"]
+            if val is Int {
+                curVar.value = [Double(val as! Int)]
+            } else if val is Double {
+                curVar.value = [val as! Double]
+            }
             curVar.isParam = thisVar["isParam"] as! Bool
             inputSettings.append(curVar)
+        }
+    }
+    
+    /**
+     Read setup for plots and text outputs from a given yaml file
+     Should be an array of dictionaries, and each dictionary should contain:
+     * VariableID
+     * Initial value (Double)
+     * IsParam (Bool)
+     */
+    func readOutput(from file: String){
+        var outputList: [[String:Any]] = []
+        if let yamlFilePath = Bundle.main.path(forResource: file, ofType: "yaml"){
+            do {
+                let stryaml = try String(contentsOfFile: yamlFilePath, encoding: String.Encoding.utf8)
+                outputList = try (Yams.load(yaml: stryaml) as! [[String : Any]])
+            } catch {
+                outputList = [] }
+        }
+        
+        for thisVar in outputList {
+            let thisVarID = thisVar["id"] as! VariableID
+            let curVar = self.initVars.first(where: { $0.id == thisVarID})!
+            assert(curVar.value.count == 0)
+            let val = thisVar["value"]
+            if val is Int {
+                curVar.value.append(Double(val as! Int))
+            } else if val is Double {
+                curVar.value.append(val as! Double)
+            }
+            curVar.isParam = thisVar["isParam"] as! Bool
+            inputSettings.append(curVar)
+        }
+        
+    }
+    func readInitVars(from file: String){
+        let yamlList: [String:Any] = getYamlObject(from: file) as! [String : Any]
+        let inputList = try yamlList["Initial Variables"] as? [String: Int] ?? [:]
+        for thisVarID in inputList.keys {
+            let thisVar =  self.initVars.first(where: { $0.id == thisVarID})!
+            let val = inputList[thisVarID]
+            thisVar.value = [Double(val!)]
+            inputSettings.append(thisVar)
         }
     }
     

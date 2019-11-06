@@ -148,7 +148,11 @@ class CustomStackView : NSStackView, StackItemHost {
     
     override var isFlipped: Bool { return true }
     var parent : NSViewController?
-    //TODO: find better way to access parent view controller
+    
+    override func viewWillDraw() {
+        self.wantsLayer = true
+        // self.layer?.backgroundColor = NSColor.windowBackgroundColor.cgColor
+    }
     
     func addViewController(fromStoryboardId storyboardid:String, withIdentifier identifier: String)->NSViewController? {
         

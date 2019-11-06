@@ -1,0 +1,5 @@
+--- # Init state variables
+Initial Variables:
+  t: 0
+  dy: 50
+  dx: 100

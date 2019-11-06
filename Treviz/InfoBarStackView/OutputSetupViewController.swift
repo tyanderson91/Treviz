@@ -14,16 +14,16 @@ extension NSStoryboardSegue.Identifier{
 extension NSUserInterfaceItemIdentifier{
     static let plotNameColumn = NSUserInterfaceItemIdentifier(rawValue: "plotNameColumn")
     static let plotDescripColumn = NSUserInterfaceItemIdentifier(rawValue: "plotDescripColumn")
+    static let plotIDColumn = NSUserInterfaceItemIdentifier(rawValue: "plotIDColumn")
     static let plotNameTableCellView = NSUserInterfaceItemIdentifier(rawValue: "plotNameTableCellView")
+    static let plotIDTableCellView = NSUserInterfaceItemIdentifier(rawValue: "plotIDTableCellView")
     static let plotDescripTableCellView = NSUserInterfaceItemIdentifier(rawValue: "plotDescripTableCellView")
 }
 
-class OutputSetupViewController: TZViewController, NSTableViewDelegate, NSTableViewDataSource { //TODO : make all output setup view controllers the same base class
-    
+class OutputSetupViewController: TZViewController, NSTableViewDelegate, NSTableViewDataSource {
     @IBOutlet weak var stack: CustomStackView!
     @IBOutlet weak var tableView: NSTableView!
-    var allPlots : [TZOutput] = []
-    var maxPlotNum : NSInteger = 0
+    var allPlots : [TZOutput] {if analysis == nil {return []} else {return analysis.plots}}
     
     override func viewDidLoad() {
         
@@ -43,8 +43,8 @@ class OutputSetupViewController: TZViewController, NSTableViewDelegate, NSTableV
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.refreshTable(_:)), name: .didAddPlot, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.populateOutputSet(_:)), name: .didLoadAnalysisData, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.populateOutputSet(_:)), name: .didLoadAppDelegate, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.refreshTable(_:)), name: .didLoadAnalysisData, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.refreshTable(_:)), name: .didLoadAppDelegate, object: nil)
         
         //addViewController(withIdentifier: "CollectionViewController")
         //addViewController(withIdentifier: "OtherViewController")
@@ -60,7 +60,7 @@ class OutputSetupViewController: TZViewController, NSTableViewDelegate, NSTableV
     
     func addOutput(_ newOutput : TZOutput){
         newOutput.curTrajectory = self.analysis.traj
-        allPlots.append(newOutput)
+        analysis.plots.append(newOutput)
         self.tableView.reloadData()
     }
     
@@ -68,7 +68,6 @@ class OutputSetupViewController: TZViewController, NSTableViewDelegate, NSTableV
         self.tableView.reloadData()
     }
     @objc func populateOutputSet(_ notification: Notification){
-        self.allPlots = analysis.plots
         self.tableView.reloadData()
     }
     
@@ -81,6 +80,10 @@ class OutputSetupViewController: TZViewController, NSTableViewDelegate, NSTableV
             newView = tableView.makeView(withIdentifier: .plotDescripTableCellView, owner: nil) as? NSTableCellView
             if let textField = newView?.textField{
                 textField.stringValue = thisPlot.displayName}
+        case .plotIDColumn:
+            newView = tableView.makeView(withIdentifier: .plotIDTableCellView, owner: nil) as? NSTableCellView
+            if let textField = newView?.textField{
+                textField.stringValue = "\(thisPlot.id)"}
         case .plotNameColumn:
             newView = tableView.makeView(withIdentifier: .plotNameTableCellView, owner: nil) as? NSTableCellView
             if let textField = newView?.textField{

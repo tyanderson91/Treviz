@@ -6,9 +6,10 @@ This is a custom subclass that passes the Analysis document data to all child vi
 
 import Cocoa
 //TODO: turn this into some kind of extension on top of NSViewController
+
+
 class TZViewController: NSViewController {
 
-    /// - Tag: setRepresentedObjectExample
     override var representedObject: Any? {
         didSet {
             // Pass down the represented object to all of the child view controllers.
@@ -24,19 +25,10 @@ class TZViewController: NSViewController {
         }
         return nil
     }
-    
-    var varList: [Variable]! {
-        if let initvar = analysis?.initVars {return initvar}
-        //if let appDelegate = analysis?.appDelegate {return appDelegate.initVars} //TODO: if initVars is moved to AppDelegate, change this
-        return nil
-    }
-
 }
 
 
-class SplitViewController: NSSplitViewController {
-    
-    /// - Tag: setRepresentedObjectExample
+class TZSplitViewController: NSSplitViewController {
     override var representedObject: Any? {
         didSet {
             // Pass down the represented object to all of the child view controllers.

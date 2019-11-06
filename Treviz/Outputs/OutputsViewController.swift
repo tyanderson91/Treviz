@@ -10,6 +10,10 @@
 
 import Cocoa
 
+extension NSStoryboardSegue.Identifier{
+    static let outputSplitViewSegue = "outputSplitViewSegue"
+}
+
 class OutputsViewController: TZViewController {
         
     @IBOutlet weak var outputsSplitView: NSView!
@@ -17,14 +21,10 @@ class OutputsViewController: TZViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //analysisProgressBar. = NSControlTint.blueControlTint
-        // Do view setup here.
-        //let curHeight = self.view.frame.height
-        //self.view.setFrameSize(NSSize.init(width: 600, height: curHeight))
     }
     
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
-        if segue.identifier == "outputSplitViewSegue"{
+        if segue.identifier == .outputSplitViewSegue {
             self.outputSplitViewController =  segue.destinationController as? OutputsSplitViewController
         }
     }
@@ -45,21 +45,19 @@ class OutputsViewController: TZViewController {
                     textOutputView.textStorage?.append(newText)
                 }
             }
-            // Old
-            //let y_end = curAnalysis.traj["y"].value.last
-            //let x_end = curAnalysis.traj["x"].value.last
-            
-            //textOutputView.string.append("Y end:\t\(String(describing: y_end))\n")
-            //textOutputView.string.append("X end:\t\(String(describing: x_end))\n")
         }
     }
     
 }
 
 
-class OutputsSplitViewController: SplitViewController {
+class OutputsSplitViewController: TZSplitViewController {
     
     @IBOutlet weak var textOutputSplitViewItem: NSSplitViewItem!
+    var textOutputViewController: TextOutputsViewController! {
+        if let _textOutputViewVC = textOutputSplitViewItem.viewController as? TextOutputsViewController { return _textOutputViewVC }
+        else {return nil}
+    }
     var textOutputView: NSTextView! {
         if let _textOutputView = (textOutputSplitViewItem.viewController as? TextOutputsViewController)?.textView { return _textOutputView }
         else {return nil}
@@ -68,11 +66,6 @@ class OutputsSplitViewController: SplitViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //let textOutputViewController = textOutputSplitViewItem.viewController as? TextOutputsViewController
-        //let textOutputView = textOutputViewController?.textView
-        //textOutputView?.string.append("dsfgeaef")
-        //analysisProgressBar. = NSControlTint.blueControlTint
-        // Do view setup here.
     }
     
 }

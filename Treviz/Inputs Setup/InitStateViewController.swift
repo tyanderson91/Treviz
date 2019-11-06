@@ -19,9 +19,13 @@ class InitStateViewController: BaseViewController, NSOutlineViewDelegate, NSOutl
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(self.loadData(_:)), name: .didLoadAppDelegate, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.loadData(_:)), name: .didSetParam, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.reloadData(_:)), name: .didChangeUnits, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.reloadData(_:)), name: .didChangeValue, object: nil)
     }
     
     override func viewDidAppear() {
+        // outlineView.wantsLayer = true
+        // outlineView.layer?.backgroundColor = NSColor.red.cgColor
     }
     
     func outlineViewColumnDidResize(_ notification: Notification) {
@@ -32,21 +36,22 @@ class InitStateViewController: BaseViewController, NSOutlineViewDelegate, NSOutl
     }
     
     @objc func loadData(_ notification: Notification){        
-        let asys = self.analysis!
-        inputVarStructure = asys.initStateGroups
+        inputVarStructure = analysis.initStateGroups
         inputVars = self.analysis.inputSettings
-        //NotificationCenter.default.post(name: .didSetParam, object: nil) //TODO : Maybe this belongs in ParamViewController
+        outlineView.reloadData()
+    }
+    @objc func reloadData(_ notification: Notification){
         outlineView.reloadData()
     }
     
     func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
-        // if item is Parameter {return 0}
         if item is InitStateHeader {
             let children = (item as! InitStateHeader).children
-            return children.count}
-        else {
-            let children = inputVarStructure?.children
-            return children?.count ?? 0
+            return children.count
+        } else if item is Variable {
+            return 0
+        } else {
+            return inputVarStructure?.children.count ?? 0
         }
     }
     
@@ -54,14 +59,16 @@ class InitStateViewController: BaseViewController, NSOutlineViewDelegate, NSOutl
         if item is InitStateHeader{
             let children = (item as! InitStateHeader).children
             return children[index]
-        }
-        else {
+        } else if item is Variable {
+            return 0
+        } else {
             let children = inputVarStructure?.children
-            return children?[index] ?? "None"
+            return children?[index] ?? 0
         }
     }
     
     func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
+        //  Custom view creators live in InputsCellViews.swift
         if let curItem = item as? InitStateHeader {
             switch tableColumn?.identifier{
             case NSUserInterfaceItemIdentifier.nameColumn:
@@ -87,7 +94,7 @@ class InitStateViewController: BaseViewController, NSOutlineViewDelegate, NSOutl
             default:
                 return nil
             }
-        }//End of if item is type InputSetting
+        }
         return nil
     }
 
@@ -96,22 +103,16 @@ class InitStateViewController: BaseViewController, NSOutlineViewDelegate, NSOutl
     }
  
     func outlineView(_ outlineView: NSOutlineView, objectValueFor tableColumn: NSTableColumn?, byItem item: Any?) -> Any? {
-        if let paramItem = item as? Parameter {
-            switch tableColumn?.identifier{
-            case NSUserInterfaceItemIdentifier.nameColumn:
-                return paramItem.name
-            case NSUserInterfaceItemIdentifier.initStateParamColumn:
-                return paramItem.isParam
-            default:
-                return nil
-            }
-        }
         if let varItem = item as? Variable {
             switch tableColumn?.identifier{
             case NSUserInterfaceItemIdentifier.initStateValueColumn:
                 return varItem.value[0]
             case NSUserInterfaceItemIdentifier.unitsColumn:
                 return varItem.units
+            case NSUserInterfaceItemIdentifier.nameColumn:
+                return varItem.name
+            case NSUserInterfaceItemIdentifier.initStateParamColumn:
+                return varItem.isParam
             default:
                 return nil
             }
@@ -120,6 +121,8 @@ class InitStateViewController: BaseViewController, NSOutlineViewDelegate, NSOutl
             switch tableColumn?.identifier{
             case NSUserInterfaceItemIdentifier.initStateParamColumn:
                 return headerItem.hasParams
+            case NSUserInterfaceItemIdentifier.nameColumn:
+                return headerItem.name
             default:
                 return nil
             }
@@ -128,13 +131,11 @@ class InitStateViewController: BaseViewController, NSOutlineViewDelegate, NSOutl
     }
 
     @IBAction func setParams(_ sender: Any) {
-        if let button = sender as? NSView{
-            let row = outlineView.row(for: button)
-            if var thisParam = outlineView.item(atRow: row) as? Parameter {
-                thisParam.isParam = (sender as! NSButton).state == NSControl.StateValue.on ? true : false
-                //outlineView.refreshSetting(thisParam)
-                NotificationCenter.default.post(name: .didSetParam, object: nil)
-            }
+        guard let button = sender as? NSButton else {return}
+        let row = outlineView.row(for: button)
+        if var thisParam = outlineView.item(atRow: row) as? Parameter {
+            thisParam.isParam = button.state == NSControl.StateValue.on
+            NotificationCenter.default.post(name: .didSetParam, object: nil)
         }
     }
     

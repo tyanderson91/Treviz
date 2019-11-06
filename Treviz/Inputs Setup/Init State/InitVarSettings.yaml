@@ -1,0 +1,22 @@
+--- # Init state variables
+- id: t
+  isParam: false
+  value: 0
+- id: dz
+  isParam: false
+  value: 0
+- id: dy
+  isParam: false
+  value: 10
+- id: dx
+  isParam: false
+  value: 20
+- id: z
+  isParam: false
+  value: 0
+- id: y
+  isParam: false
+  value: 50
+- id: x
+  isParam: false
+  value: 0

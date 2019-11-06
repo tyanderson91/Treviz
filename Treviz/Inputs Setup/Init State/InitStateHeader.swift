@@ -8,6 +8,10 @@
 
 import Cocoa
 
+/**
+ InitStateCheck consists of any class that can serve as an initial state setting. This includes variables like initial state, run settings, environment, vehicle, etc.
+ An InitStateCheck may have children (if it is a headen or subheader), can be checked for validity before running, and can be a parameter or contain parameters
+ */
 protocol InitStateCheck{
     var name: String {get}
     var isValid: Bool {get}
@@ -26,12 +30,11 @@ class InitStateHeader: InitStateCheck{
         _children.append(contentsOf: subheaders)
         return _children}
     var name: String = ""
-    var isValid: Bool {
-        var curValid = true
+    var isValid: Bool { var curValid = true
         for curChild in self.children{
             curValid = curValid && curChild.isValid}
         return curValid}
-    var hasParams: Bool {var curParam = false
+    var hasParams: Bool { var curParam = false
         for curChild in self.children{
             curParam = curParam || curChild.hasParams}
         return curParam}

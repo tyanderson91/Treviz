@@ -64,7 +64,7 @@
         <!--imageOutputViewController-->
         <scene sceneID="X15-YZ-sea">
             <objects>
-                <viewController title="imageOutputViewController" id="kWr-Ah-mB4" sceneMemberID="viewController">
+                <viewController title="imageOutputViewController" id="kWr-Ah-mB4" customClass="PlotViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="kVX-fw-nPv">
                         <rect key="frame" x="0.0" y="0.0" width="369" height="351"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

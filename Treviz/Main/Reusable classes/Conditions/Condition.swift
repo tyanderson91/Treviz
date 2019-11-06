@@ -15,7 +15,10 @@ protocol EvaluateCondition {
     var isSinglePoint : Bool {get set}// Boolean to tell whether the condition should return a single point per trajectory (such as terminal condition, max/min, etc
 }
 
-// Booltype represents the different ways that conditions can be combicned
+/**
+ Booltype represents the different ways that conditions can be combined
+ Rawvalue is set to indew to allow for easy integration with dropdown menus
+*/
 enum BoolType : Int {
     case and = 0
     case or = 1
@@ -26,14 +29,14 @@ enum BoolType : Int {
 }
 
 class SingleCondition: NSObject, EvaluateCondition {
-    
-    let varID : VariableID // TODO: turn into let constant
+    let varID : VariableID
     var lbound : Double? = nil
     var ubound : Double? = nil
     var equality : Double? = nil
-    //var isConditionIndex : [Int]? = nil
     var meetsCondition : [Bool]?
     var isSinglePoint: Bool = false
+    var varPosition : Int? // Position of the current variable in the index of StateVarPositions
+    var previousState : StateArray? = nil //For use in "equality" type comparisons
     var tests : [(Double)->Bool] {
         var _tests : [(Double)->Bool] = []
         if let lower = lbound {
@@ -60,10 +63,7 @@ class SingleCondition: NSObject, EvaluateCondition {
     
     func evaluate(_ state: State){
         let thisVariable = state[varID]
-        
-        //isConditionIndex = []
         meetsCondition = Array(repeating: false, count: thisVariable.value.count)
-        
         var i = 0
         for thisVal in thisVariable.value {
             var isCondition = true
@@ -71,15 +71,13 @@ class SingleCondition: NSObject, EvaluateCondition {
                 isCondition = isCondition && thisTest(thisVal)
             }
             if isCondition {
-                //isConditionIndex!.append(i)
                 meetsCondition![i] = true
             }
             i+=1
         }
     }
-
-    func evaluate(_ singleState: StateArray)->Bool{
-        let varPosition = State.stateVarPositions.firstIndex(where: {$0 == varID} )
+    func evaluate(_ singleState: StateArray)->Bool{ // TODO: get rid of this, it cant handle derived states
+        if varPosition == nil {varPosition = State.stateVarPositions.firstIndex(where: {$0 == varID} ) }
         let thisVal = singleState[varPosition!]
         var isCondition = true
         for thisTest in tests {
@@ -108,8 +106,7 @@ class Condition : NSObject, EvaluateCondition {
     
     var isSinglePoint: Bool {
         get {
-            let _singlePoints = conditions.filter( { $0.isSinglePoint } )
-            return _singlePoints.count > 0
+            return conditions.filter( { $0.isSinglePoint } ).count > 0
         } set (newVal) {
             for thisCondition in self.conditions {
                 var thisCondition1 = thisCondition
@@ -117,15 +114,13 @@ class Condition : NSObject, EvaluateCondition {
             }
         }
     }
-
+    
     override init(){
-        name = "NewCondition"
         super.init()
     }
     
     init(_ varid: VariableID, upperBound: Double? = nil, lowerBound: Double? = nil, equality: Double? = nil){
         let newCondition = SingleCondition(varid, upperBound: upperBound, lowerBound: lowerBound, equality: equality)
-        name = "NewCondition"
         conditions = [newCondition]
         super.init()
     }
@@ -165,13 +160,21 @@ class Condition : NSObject, EvaluateCondition {
         return returnList
     }
     
-    func evaluate(_ state: State){
+    func evaluate(_ state: State) {
+        self.meetsCondition = nil
         for thisCondition in conditions{
             thisCondition.evaluate(state)
             self.meetsCondition = compareLists(self.meetsCondition, thisCondition.meetsCondition!)
         }
     }
-    func evaluate(_ singleState: StateArray)->Bool {
+    
+    func evaluateSingle(_ state: State)->Bool{ // TODO: get rid of this if it is not in use
+        evaluate(state)
+        if self.meetsCondition!.count == 1 {return self.meetsCondition![0]}
+        else {return false}
+    }
+
+    func evaluate(_ singleState: StateArray)->Bool { //Only use this if ALL states acn be put into the State Array
         var curMeetsCondition = conditions[0].evaluate(singleState)
         for thisCondition in conditions.dropFirst(){
             let thisMeetsCondition = thisCondition.evaluate(singleState)
@@ -179,5 +182,4 @@ class Condition : NSObject, EvaluateCondition {
         }
         return curMeetsCondition
     }
-
 }

@@ -17,6 +17,8 @@ class InputsViewController: TZViewController, NSTableViewDataSource, NSTableView
     @IBOutlet weak var stack: CustomStackView!
     
     var tableViewController : ParamTableViewController!
+    weak var settingsViewController: SettingsViewController!
+    weak var environmentsViewController: EnvironmentViewController!
     weak var initStateViewController: InitStateViewController!
     var params : [Parameter] = []
     
@@ -25,12 +27,11 @@ class InputsViewController: TZViewController, NSTableViewDataSource, NSTableView
         
         //stack.setHuggingPriority(NSLayoutConstraint.Priority.defaultHigh, for: .horizontal)
         
-        //TODO: Fix stack loading issues
         // Load and install all the view controllers from our storyboard in the following order.
-        _ = stack.addViewController(fromStoryboardId: "Inputs", withIdentifier: "SettingsViewController")
-        _ = stack.addViewController(fromStoryboardId: "Inputs", withIdentifier: "EnvironmentViewController")
+        settingsViewController = (stack.addViewController(fromStoryboardId: "Inputs", withIdentifier: "SettingsViewController") as! SettingsViewController)
+        environmentsViewController = (stack.addViewController(fromStoryboardId: "Inputs", withIdentifier: "EnvironmentViewController") as! EnvironmentViewController)
         initStateViewController = (stack.addViewController(fromStoryboardId: "Inputs", withIdentifier: "InitStateViewController") as! InitStateViewController)
-        for thisController in [initStateViewController]{
+        for thisController in [settingsViewController, environmentsViewController, initStateViewController]{
             self.addChild(thisController!)
             thisController?.representedObject = self.representedObject
         }
