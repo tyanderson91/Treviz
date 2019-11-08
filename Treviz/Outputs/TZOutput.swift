@@ -29,6 +29,16 @@ class TZOutput : NSObject {
         super.init()
     }
     
+    init?(with dict: Dictionary<String,Any>){
+        if let id = dict["id"] as? Int {self.id = id} else {return nil}
+        if let plotType = dict["plot type"] as? PlotType {self.plotType = plotType}else {return nil}
+        if let name = dict["name"] as? String {self.displayName = name} else {self.displayName = ""}
+        super.init()
+        if let title = dict["title"] as? String {self.title = title}
+        if let var1 = dict["variable"] as? Variable {self.var1 = var1}
+        if let condition = dict["condition"] as? Condition {self.condition = condition}
+    }
+    
     convenience init(id : Int, title : String, plotType : PlotType) {
         self.init(id : id, plotType : plotType)
         self.displayName = title

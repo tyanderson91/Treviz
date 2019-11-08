@@ -78,7 +78,7 @@ class Analysis: NSDocument {//TODO: possibly subclass NSPersistentDocument if us
             self.terminalConditions != nil,
             self.defaultTimestep > 0
         ])
-        return checks.allSatisfy({ $0 })
+        return checks.allSatisfy { $0 }
     }
     
     override func makeWindowControllers() {

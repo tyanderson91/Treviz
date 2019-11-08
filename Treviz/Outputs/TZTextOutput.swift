@@ -35,7 +35,7 @@ class TZTextOutput: TZOutput {
     private func loopThroughSingleVar()->NSAttributedString {
         guard let thisVar = self.var1 else {return NSAttributedString(string: "No variable assigned")}
         guard let curTraj = curTrajectory else {return NSAttributedString(string: "No trajectory assigned")}
-        assert(condition?.isSinglePoint ?? false, "Condition not set or condition produces muliple points")
+        // assert(condition?.isSinglePoint ?? false, "Condition not set or condition produces muliple points")
         guard let varDoubleValues = curTraj[thisVar, condition!] else {
             return NSAttributedString(string: "No matching points could be found for output set '\(self.displayName)'")}
         let stringOutput = NSMutableAttributedString(string: "\(thisVar.name):\t", attributes: [NSAttributedString.Key.font : NSFont.boldSystemFont(ofSize: 12)])

@@ -1,5 +1,36 @@
---- # Init state variables
+--- # Test configurations
 Initial Variables:
   t: 0
   dy: 50
   dx: 100
+  
+Conditions:
+  - Ground Impact: y<0
+  - Final time: t>10
+  - TerminalTest:
+    union: and
+    conditions:
+    - Ground Impact
+    - Final time
+    
+Terminal Condition:
+  union: or
+  conditions:
+  - Ground Impact
+  - Final time
+  
+Outputs:
+  - id: 1
+    name: X pos
+    variable: x
+    plot type: Single Value
+    condition: terminal
+    output type: text
+  - id: 2
+    name: Final time
+    variable: t
+    plot type: Single Value
+    condition: terminal
+    output type: text
+
+

@@ -36,6 +36,10 @@ class ConditionsViewController: TZViewController, NSTableViewDelegate, NSTableVi
         if conditionNameTextBox.stringValue == "" {
             conditionNameTextBox.becomeFirstResponder() //Set focus to the name field if it is empty
             return
+        } else if conditionNameTextBox.stringValue == "terminal" {
+            conditionNameTextBox.stringValue = "" // TODO: throw error message for reserved keyword "terminal"
+            conditionNameTextBox.becomeFirstResponder()
+            return
         }
         curCondition = Condition()
         curCondition.name = conditionNameTextBox.stringValue
