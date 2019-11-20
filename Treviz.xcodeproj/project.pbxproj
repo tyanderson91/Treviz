@@ -10,7 +10,6 @@
 		CD0F01072364139200C920AA /* Outputs.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD0F01062364139200C920AA /* Outputs.storyboard */; };
 		CD0F010923654ED400C920AA /* AnalysisRunFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0F010823654ED400C920AA /* AnalysisRunFunctions.swift */; };
 		CD0F010B2365595700C920AA /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0F010A2365595700C920AA /* Vehicle.swift */; };
-		CD0F011323656B7200C920AA /* TrevizTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0F011223656B7200C920AA /* TrevizTests.swift */; };
 		CD0F011B23656EF200C920AA /* StateArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0F011A23656EF200C920AA /* StateArray.swift */; };
 		CD11FA8723408173001A3695 /* AddOutputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD11FA8623408173001A3695 /* AddOutputViewController.swift */; };
 		CD11FA8923411FD3001A3695 /* VariableSelector.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD449023233B378C0095F243 /* VariableSelector.storyboard */; };
@@ -45,6 +44,7 @@
 		CDA7FD7A23715399009CDFAF /* AnalysisSettings.yaml in Resources */ = {isa = PBXBuildFile; fileRef = CDA7FD7923715399009CDFAF /* AnalysisSettings.yaml */; };
 		CDAF13FD222CF357005CDC3C /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDAF13FC222CF357005CDC3C /* State.swift */; };
 		CDAF14272230FB72005CDC3C /* Variable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDAF14262230FB72005CDC3C /* Variable.swift */; };
+		CDB457B52383E19B004F13AA /* TrevizTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0F011223656B7200C920AA /* TrevizTests.swift */; };
 		CDB7C73823503DBF00BC50F1 /* InitVars.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDB7C73723503DBF00BC50F1 /* InitVars.plist */; };
 		CDB7C73A2352B03100BC50F1 /* Parameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB7C7392352B03100BC50F1 /* Parameter.swift */; };
 		CDB7C73C2352B58300BC50F1 /* InitStateHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB7C73B2352B58300BC50F1 /* InitStateHeader.swift */; };
@@ -254,7 +254,6 @@
 			isa = PBXGroup;
 			children = (
 				CD3F5E5422EE175400E4CF20 /* Condition.swift */,
-				CD3F5E5922EE4FFE00E4CF20 /* ConditionsViewController.swift */,
 				CD3F5E5722EE4DCD00E4CF20 /* Conditions.storyboard */,
 			);
 			path = Conditions;
@@ -336,6 +335,7 @@
 				CDD504A322252AFD00B29751 /* Info.plist */,
 				CDD504A422252AFD00B29751 /* Treviz.entitlements */,
 				CDD5049B22252AFA00B29751 /* Document.xcdatamodeld */,
+				CD3F5E5922EE4FFE00E4CF20 /* ConditionsViewController.swift */,
 			);
 			path = Treviz;
 			sourceTree = "<group>";
@@ -459,7 +459,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CD0F011323656B7200C920AA /* TrevizTests.swift in Sources */,
+				CDB457B52383E19B004F13AA /* TrevizTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

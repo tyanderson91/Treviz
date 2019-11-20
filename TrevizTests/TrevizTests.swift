@@ -6,6 +6,8 @@
 //  Copyright © 2019 Tyler Anderson. All rights reserved.
 //
 
+import Foundation
+// import Cocoa
 import XCTest
 
 class TrevizTests: XCTestCase {
@@ -21,6 +23,7 @@ class TrevizTests: XCTestCase {
     func testExample() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+        // Conditions test
     }
 
     func testPerformanceExample() {

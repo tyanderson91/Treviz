@@ -44,7 +44,7 @@ class Analysis: NSDocument {//TODO: possibly subclass NSPersistentDocument if us
         return inputSettings.filter( {$0.isParam} )
     }
     var plots : [TZOutput] = []
-    var defaultTimestep : Double = 1
+    var defaultTimestep : VarValue = 1
     var vehicle : Vehicle!
     var propagatorType : PropagatorType = .explicit
     

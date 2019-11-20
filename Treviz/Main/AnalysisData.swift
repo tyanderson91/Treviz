@@ -36,22 +36,12 @@ extension Analysis {
 
     @objc func initReadData(_ notification: Notification){ //TODO: override with persistent data, last opened analysis, etc.
         // For now, this is just a test configuration
-        // TODO: Allow reading multiple configurations from a single yaml file
         
         self.name = "Test Analysis"
         self.defaultTimestep = 0.001
         self.vehicle = Vehicle()
         
-        // Initialize var values
-        //readSettings(from: "InitVarSettings")
-        let termCond1 = Condition("t", lowerBound : 10)
-        termCond1.name = "Final time"
-        let termCond2 = Condition("y", upperBound : -0.1)
-        termCond2.name = "Ground Impact"
-        let terminalConditions = Condition(conditions: [termCond1, termCond2], unionType: .or, name: "terminal", isSinglePoint: true)
-        self.conditions.append(contentsOf: [termCond1, termCond2])//, terminalConditions])
-        self.terminalConditions = terminalConditions
-        
+        // Read all inputs
         readSettings(from: "AnalysisSettings")
 
         traj = State(variables: initVars)
@@ -59,32 +49,8 @@ extension Analysis {
             traj[thisVar.id, 0] = (thisVar as! Variable)[0]
         }
         traj["mtot",0] = 10.0
-        
-        //Plots
-        /*
-        let testVarX = self.initVars.first(where: { $0.id == "x"} )!
-        let newOutput = TZTextOutput(id: 1, vars: [testVarX], plotType: self.plotTypes.first(where: {$0.name == "Single Value"})!)
-        newOutput.condition = terminalConditions
-        newOutput.curTrajectory = self.traj
-        plots.append(newOutput)
-        */
+
         NotificationCenter.default.post(name: .didLoadAnalysisData, object: nil)
-    }
-    
-    /**
-     Get the object associated with a given yaml file
-     */
-    func getYamlObject(from file: String)->Any?{
-        var outputList: Any?
-        if let yamlFilePath = Bundle.main.path(forResource: file, ofType: "yaml"){
-            do {
-                let stryaml = try String(contentsOfFile: yamlFilePath, encoding: String.Encoding.utf8)
-                outputList = try Yams.load(yaml: stryaml)
-                // outputList = Array(try Yams.load_all(yaml: stryaml))
-            } catch {
-                outputList = nil }
-        }
-        return outputList
     }
     
     /**
@@ -114,13 +80,13 @@ extension Analysis {
     }*/
     
     /**
-       Returns a nte variable describes by the yaml input key using the value(s) in the yaml value
+       Returns a variable described by the yaml input key using the value(s) in the yaml value
        - Parameter yamlObj: a Dictionary of the type [String: Any] read from a yaml file.
        */
     func initVar(varID: VariableID, varStr: Any) -> Variable? {
         let thisVar =  self.initVars.first(where: { $0.id == varID})!
         if let val = varStr as? NSNumber {
-            thisVar.value = [Double(truncating: val)]
+            thisVar.value = [VarValue(truncating: val)]
             return thisVar
         } else {return nil}
     }
@@ -172,6 +138,7 @@ extension Analysis {
         //if let inputList = try yamlListDict["Initial Variables"] as? [String: Int] {return}
         //guard let yamlList: [[String:Any]] = getYamlObject(from: file) as? [[String : Any]] else {return}
         //for thisYaml in yamlList {
+        
         if let inputList = yamlDict["Initial Variables"] as? [String: Any] {
             for (curVarID, curVarVal) in inputList {
                 //let thisVar =  self.initVars.first(where: { $0.id == curVarID})!
@@ -183,13 +150,14 @@ extension Analysis {
         if let conditionList = yamlDict["Conditions"] as? [[String: Any]] {
             // self.conditions = []
             for thisConditionDict in conditionList {
-                if let newCond = Condition(fromYaml: thisConditionDict) {
+                if let newCond = Condition(fromYaml: thisConditionDict, inputConditions: conditions) {
+                    //initCondition(fromYaml: thisConditionDict) {
                     conditions.append(newCond)
                 } // TODO: else print error
             }
         }
         if let terminalConditionDict = yamlDict["Terminal Condition"] as? [String: Any] {
-            if let newCond = Condition(fromYaml: terminalConditionDict) {
+            if let newCond = Condition(fromYaml: terminalConditionDict, inputConditions: conditions) {
                 self.terminalConditions = newCond
             }
         }
@@ -201,4 +169,20 @@ extension Analysis {
             }
         }
     }
+}
+
+/**
+ Get the object associated with a given yaml file
+ */
+func getYamlObject(from file: String)->Any?{
+    var outputList: Any?
+    if let yamlFilePath = Bundle.main.path(forResource: file, ofType: "yaml"){
+        do {
+            let stryaml = try String(contentsOfFile: yamlFilePath, encoding: String.Encoding.utf8)
+            outputList = try Yams.load(yaml: stryaml)
+            // outputList = Array(try Yams.load_all(yaml: stryaml))
+        } catch {
+            outputList = nil }
+    }
+    return outputList
 }

@@ -6,13 +6,13 @@
 //  Copyright © 2019 Tyler Anderson. All rights reserved.
 //
 
-import Cocoa
+import Foundation
 
 protocol EvaluateCondition {
     func evaluate(_ state: State)
     func evaluate(_ singleState: StateArray)->Bool
     var meetsCondition : [Bool]? {get set}
-    var isSinglePoint : Bool {get set}// Boolean to tell whether the condition should return a single point per trajectory (such as terminal condition, max/min, etc
+    // var isSinglePoint : Bool {get set}// Boolean to tell whether the condition should return a single point per trajectory (such as terminal condition, max/min, etc
 }
 
 /**
@@ -20,12 +20,20 @@ protocol EvaluateCondition {
  Rawvalue is set to indew to allow for easy integration with dropdown menus
 */
 enum BoolType : Int {
-    case and = 0
-    case or = 1
-    case nor = 2
-    case nand = 3
-    case xor = 4
-    case xnor = 5
+    case single = 0
+    case and = 1
+    case or = 2
+    case nor = 3
+    case nand = 4
+    case xor = 5
+    case xnor = 6
+
+    static func fromStr(_ input: String)->BoolType?{ //TODO: turn this into an init
+        let returnDict : Dictionary<String, BoolType> = ["and": .and, "or": .or, "nor": .nor, "nand": .nand, "xor": .xor, "xnor": .xnor]
+        if let returnBool = returnDict[input] {
+            return returnBool
+        } else {return nil}
+    }
 }
 /**
  Special conditions are conditions unique to a particular variable
@@ -36,21 +44,28 @@ enum SpecialConditionType : Int {
     case localMin = 1
     case globalMax = 2
     case globalMin = 3
+    
+    static func fromStr(_ input: String)->SpecialConditionType?{ //TODO: turn this into an init
+        let returnDict : Dictionary<String, SpecialConditionType> = ["max": .globalMax, "global max": .globalMax, "min": .globalMin, "global min": .globalMin, "local max": .localMax, "local min": .localMin]
+        if let returnBool = returnDict[input] {
+            return returnBool
+        } else {return nil}
+    }
 }
 
 class SingleCondition: NSObject, EvaluateCondition {
     let varID : VariableID
-    var lbound : Double? = nil
-    var ubound : Double? = nil
-    var equality : Double? = nil
+    var lbound : VarValue? = nil
+    var ubound : VarValue? = nil
+    var equality : VarValue? = nil
     var specialCondition : SpecialConditionType? = nil
     var meetsCondition : [Bool]?
-    var isSinglePoint: Bool = false
+    // var isSinglePoint: Bool = false
     var varPosition : Int? // Position of the current variable in the index of StateVarPositions (automatically assigned, speeds up performance)
-    private var previousState : Double! // For use in equality type or special case lookups
-    private var nextState: Double! // For use in special case lookups, e.g. local min
-    var tests : [(Double)->Bool] {
-        var _tests : [(Double)->Bool] = []
+    private var previousState : VarValue! = 0 // For use in equality type or special case lookups
+    private var nextState: VarValue! = 0 // For use in special case lookups, e.g. local min
+    var tests : [(VarValue)->Bool] {
+        var _tests : [(VarValue)->Bool] = []
         if let lower = lbound {
             _tests.append {$0 > lower }
         }; if let upper = ubound {
@@ -58,6 +73,14 @@ class SingleCondition: NSObject, EvaluateCondition {
         }
         if let eq = equality {
             _tests = [{ ($0-eq).sign != (self.previousState-eq).sign }]
+        }
+        if let spc = specialCondition {
+            if spc == .localMin {
+                _tests.append { $0 < self.nextState && $0 < self.previousState}
+            }
+            if spc == .localMax {
+                _tests.append { $0 > self.nextState && $0 > self.previousState}
+            }
         }
         return _tests
     }
@@ -67,7 +90,7 @@ class SingleCondition: NSObject, EvaluateCondition {
         super.init()
     }
     
-    init(_ vid: VariableID, upperBound: Double? = nil, lowerBound: Double? = nil, equality eq: Double? = nil, specialCondition spc: SpecialConditionType? = nil){
+    init(_ vid: VariableID, upperBound: VarValue? = nil, lowerBound: VarValue? = nil, equality eq: VarValue? = nil, specialCondition spc: SpecialConditionType? = nil){
         varID = vid
         lbound = lowerBound
         ubound = upperBound
@@ -80,16 +103,36 @@ class SingleCondition: NSObject, EvaluateCondition {
         let thisVariable = state[varID]
         meetsCondition = Array(repeating: false, count: thisVariable.value.count)
         previousState = thisVariable[0]
-        var i = 0
-        for thisVal in thisVariable.value {
-            var isCondition = true
-            for thisTest in tests {
-                isCondition = isCondition && thisTest(thisVal)
+        nextState = thisVariable[1]
+        if specialCondition == .globalMax || specialCondition == .globalMin {
+            var val : VarValue = 0
+            switch specialCondition {
+            case .globalMax:
+                val = thisVariable.value.max()!
+            case .globalMin:
+                val = thisVariable.value.min()!
+            default:
+                return
             }
-            if isCondition {
-                meetsCondition![i] = true
+            let valIndex = thisVariable.value.firstIndex(where: { $0 == val})
+            meetsCondition![valIndex!] = true
+        }
+        else {
+            var i = 0
+            for thisVal in thisVariable.value {
+                var isCondition : Bool = true
+                for thisTest in tests {
+                    isCondition = isCondition && thisTest(thisVal)
+                }
+                if isCondition {
+                    meetsCondition![i] = true
+                }
+                if equality != nil || specialCondition != nil {
+                    previousState = thisVal
+                    nextState = (i < thisVariable.value.count - 1) ? thisVariable[i+1] : thisVal
+                }
+                i+=1
             }
-            i+=1
         }
     }
     func evaluate(_ singleState: StateArray)->Bool{ // TODO: get rid of this, it cant handle derived states like AoA
@@ -120,6 +163,7 @@ class Condition : NSObject, EvaluateCondition {
         return indices
     }
     
+    /*
     var isSinglePoint: Bool {
         get {
             return conditions.filter( { $0.isSinglePoint } ).count > 0
@@ -129,42 +173,105 @@ class Condition : NSObject, EvaluateCondition {
                 thisCondition1.isSinglePoint = newVal
             }
         }
-    }
+    }*/
     
     override init(){
         super.init()
     }
 
-    init(_ varid: VariableID, upperBound: Double? = nil, lowerBound: Double? = nil, equality: Double? = nil){
+    init(_ varid: VariableID, upperBound: VarValue? = nil, lowerBound: VarValue? = nil, equality: VarValue? = nil){
         let newCondition = SingleCondition(varid, upperBound: upperBound, lowerBound: lowerBound, equality: equality)
         conditions = [newCondition]
         super.init()
     }
     
-    init(conditions condIn: [EvaluateCondition], unionType unTypeIn: BoolType, name nameIn: String, isSinglePoint singlePointIn: Bool = false) {
+    init(conditions condIn: [EvaluateCondition], unionType unTypeIn: BoolType, name nameIn: String) { //}, isSinglePoint singlePointIn: Bool = false) {
         conditions = condIn
         unionType = unTypeIn
         name = nameIn
         super.init()
-        self.isSinglePoint = singlePointIn
+        // self.isSinglePoint = singlePointIn
     }
+
     /**
      Creates a single Condition from a Dictionary of the type that a yaml file can read. This dict can take two forms. In both forms, the condition name is the key. The simplest form is for a single condition. In this form the value string describes the condition, e.g."'x=5" or "2\<y\<10"> or "q is maximum"
      The string must meet three criteria: 1) it includes a single valid variable identifier, 2) it includes one of the comparison symbols (=, <, >, or 'is'), and 3) It has one or two numbers (or special conditions, e.g. global max, local min) to compare against
      - Parameter yamlObj: a Dictionary of the type [String: String] read from a yaml file.
      */
-    init?(fromYaml yamlObj: [String: Any]){
-        for (thisKey, thisVal) in yamlObj {
-            let name = thisKey
-            if let valstr = thisVal as? String { // for single line condition declarations (e.g. 'x>5')
-                
+    convenience init?(fromYaml yamlObj: [String: Any], inputConditions: [Condition] = []){
+        //if yamlObj.count > 1 { return nil }
+        if yamlObj.count == 1 {
+            let conditionName = yamlObj.keys.first!
+            guard let valstr = yamlObj.values.first as? String else {return nil}
+           
+            let capturestr = #"(?:(?<lowerBound>[0-9\.-]+) ?(?<lowerSign>[\<\>]))?(?<varID>[\w ]+)(?<sign>[\<\>]|=|is) ?(?<upperBound>[0-9\.-]+|[a-zA-Z]+)"#
+            guard let regex = try? NSRegularExpression(pattern: capturestr, options: []) else { return nil }
+            let match = regex.firstMatch(in: valstr, options: [], range: NSRange(valstr.startIndex..<valstr.endIndex, in: valstr))
+            guard match != nil else { return nil } // No match found
+           
+            var componentDict = Dictionary<String, String>()
+            for component in ["lowerBound","lowerSign","sign","varID","upperBound"] {
+                if let curRange = Range((match!.range(withName: component)), in: capturestr){
+                    let curVal = valstr[curRange]
+                    componentDict[component] = String(curVal)
+                }
             }
+           
+            let varID = componentDict["varID"]!
+            let newSingleCondition = SingleCondition(varID)
+           
+            let ub = componentDict["upperBound"]!
+           
+     
+            let lb : VarValue? = {
+                if componentDict.keys.contains("lowerBound") { return VarValue(componentDict["lowerBound"]!) }
+                else { return nil }
+            }()
+     
+            switch componentDict["sign"]{
+            case "<":
+                newSingleCondition.ubound = VarValue(ub)
+                newSingleCondition.lbound = lb
+            case ">":
+                newSingleCondition.ubound = lb
+                newSingleCondition.lbound = VarValue(ub)
+            case "=":
+                newSingleCondition.equality = VarValue(ub)
+            case "is":
+                if let specialCond = SpecialConditionType.fromStr(ub){
+                    newSingleCondition.specialCondition = specialCond
+                } else {return nil}
+            default:
+                return nil
+            }
+           
+            self.init(conditions: [newSingleCondition], unionType: .or, name: conditionName)
+        } // End of single-line definition
+        else {
+            var curConditions: [Condition] = []
+            var condName = ""
+            var utype: BoolType!
+            for (thisKey, thisVal) in yamlObj {
+                if thisKey == "conditions", let condList = thisVal as? [String]{
+                    curConditions = condList.compactMap( { (condName: String)->Condition? in
+                        return inputConditions.first { $0.name == condName } } )
+                    if curConditions.count != condList.count { return nil }
+                } else if thisKey == "union", let ustr = thisVal as? String{
+                    guard let utype1 = BoolType.fromStr(ustr) else {return nil}
+                    utype = utype1
+                } else {
+                    condName = thisKey
+                }
+            }
+            self.init(conditions: curConditions, unionType: utype, name: condName)
         }
-        return nil
+        
     }
+    
     
     func comparator(_ num1: Bool, _ num2: Bool)->Bool {
         switch unionType {
+        case .single: return num1
         case .and: return num1 && num2
         case .or: return num1 || num2
         case .nor: return !(num1 || num2)
@@ -204,7 +311,7 @@ class Condition : NSObject, EvaluateCondition {
         else {return false}
     }
 
-    func evaluate(_ singleState: StateArray)->Bool { //Only use this if ALL states acn be put into the State Array
+    func evaluate(_ singleState: StateArray)->Bool { //Only use this if ALL states can be put into the State Array
         var curMeetsCondition = conditions[0].evaluate(singleState)
         for thisCondition in conditions.dropFirst(){
             let thisMeetsCondition = thisCondition.evaluate(singleState)

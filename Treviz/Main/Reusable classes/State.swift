@@ -49,7 +49,7 @@ class State: NSObject {
         }
     }
     
-    subscript(_ varID: VariableID, index: Int) -> Double? {
+    subscript(_ varID: VariableID, index: Int) -> VarValue? {
         get {
             let thisVar = self[varID]
             if let thisVal = thisVar[index] {return thisVal}
@@ -62,15 +62,15 @@ class State: NSObject {
     }
     
     //Subscripts by condition
-    subscript(varIDs: [VariableID], condition: Condition) -> [VariableID: [Double]]? {
+    subscript(varIDs: [VariableID], condition: Condition) -> [VariableID: [VarValue]]? {
         // Note that this subscript take some time to collect, since by default it will evaluate the condition
-        var output = [VariableID: [Double]]()
+        var output = [VariableID: [VarValue]]()
         condition.evaluate(self)
         let conditionIndex = condition.meetsConditionIndex
         
         for thisVarID in varIDs {
             guard self[thisVarID].value.count == condition.meetsCondition?.count else {return nil}
-            output[thisVarID] = [Double]()
+            output[thisVarID] = [VarValue]()
         }
         for thisIndex in conditionIndex {
             for thisVarID in varIDs {
@@ -80,17 +80,17 @@ class State: NSObject {
         }
         return output
     }
-    subscript(vars: [Variable], condition: Condition)->[VariableID: [Double]]?{
+    subscript(vars: [Variable], condition: Condition)->[VariableID: [VarValue]]?{
         let varIDs = vars.map{ $0.id }
         let output = self[varIDs, condition]
         return output
     }
-    subscript(varID: VariableID, condition: Condition)->[Double]?{
+    subscript(varID: VariableID, condition: Condition)->[VarValue]?{
         if let output = self[[varID], condition]{
             return output[varID]}
         else {return nil}
     }
-    subscript(variable: Variable, condition: Condition)->[Double]?{
+    subscript(variable: Variable, condition: Condition)->[VarValue]?{
         let varID = variable.id
         return self[varID, condition]
     }

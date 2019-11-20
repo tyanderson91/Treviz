@@ -150,7 +150,7 @@ class InitStateViewController: BaseViewController, NSOutlineViewDelegate, NSOutl
     @IBAction func editValues(_ sender: NSTextField) {
         let curRow = outlineView.row(for: sender)
         if let thisParam = outlineView.item(atRow: curRow) as? Variable{
-            if let value = Double(sender.stringValue) {
+            if let value = VarValue(sender.stringValue) {
                 thisParam.value[0] = value}
             NotificationCenter.default.post(name: .didChangeValue, object: nil)
         }

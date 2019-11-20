@@ -14,11 +14,7 @@ import Cocoa
 import simd
 
 typealias VariableID = String
-
-enum VarValueType : String {
-    case double = "double"
-    case vector = "vector"
-}
+typealias VarValue = Float
 
 class Variable : NSObject, Parameter, InitStateCheck, NSCopying {
     
@@ -26,7 +22,7 @@ class Variable : NSObject, Parameter, InitStateCheck, NSCopying {
     let name: String
     let symbol: String!
     var units: String //TODO: Turn units into a separate type
-    var value: [Double] = []
+    var value: [VarValue] = []
     
     var isValid: Bool = true
     var hasParams: Bool {return isParam}
@@ -59,7 +55,7 @@ class Variable : NSObject, Parameter, InitStateCheck, NSCopying {
     }
     
     // Subscripts to get value data
-    subscript(index: Int)->Double?{
+    subscript(index: Int)->VarValue?{
         get {
             if index >= 0 && index < value.count{
                 return value[index]
@@ -70,8 +66,8 @@ class Variable : NSObject, Parameter, InitStateCheck, NSCopying {
         }
     }
     
-    subscript(condition: Condition)->[Double]?{
-        var output : [Double] = []
+    subscript(condition: Condition)->[VarValue]?{
+        var output : [VarValue] = []
         let conditionIndices = condition.meetsConditionIndex
         guard self.value.count == conditionIndices.count else {return nil}
         for thisIndex in conditionIndices {

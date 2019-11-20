@@ -43,7 +43,7 @@ class ConditionsViewController: TZViewController, NSTableViewDelegate, NSTableVi
         }
         curCondition = Condition()
         curCondition.name = conditionNameTextBox.stringValue
-        curCondition.unionType = BoolType(rawValue: unionTypeDropdown.indexOfSelectedItem)!
+        curCondition.unionType = BoolType(rawValue: unionTypeDropdown.indexOfSelectedItem - 1)! // Minus 1 because index 0 is reserved for 'single' union type
         for curConditionVC in (self.children as? Array<addConditionViewController> ?? []) {
             let varindex = curConditionVC.variableSelector.indexOfSelectedItem
             if varindex == -1 {curConditionVC.variableSelector.becomeFirstResponder(); return}
@@ -52,16 +52,16 @@ class ConditionsViewController: TZViewController, NSTableViewDelegate, NSTableVi
             
             switch curConditionVC.selectedType {
             case .interval:
-                newSingleCondition.lbound = Double(curConditionVC.lowerBoundTextField.stringValue) ?? -Double.infinity
-                newSingleCondition.ubound = Double(curConditionVC.upperBoundTextField.stringValue) ?? Double.infinity
+                newSingleCondition.lbound = VarValue(curConditionVC.lowerBoundTextField.stringValue) ?? -VarValue.infinity
+                newSingleCondition.ubound = VarValue(curConditionVC.upperBoundTextField.stringValue) ?? VarValue.infinity
             case .equality:
-                newSingleCondition.equality = Double(curConditionVC.upperBoundTextField.stringValue)
+                newSingleCondition.equality = VarValue(curConditionVC.upperBoundTextField.stringValue)
             case .other:
                 print("Other")
             }
             curCondition.conditions.append(newSingleCondition)
         }
-        
+        if curCondition.conditions.count == 1 {curCondition.unionType = .single}
         analysis.conditions.append(curCondition)
         NotificationCenter.default.post(name: .didAddCondition, object: nil)
         tableView.reloadData()

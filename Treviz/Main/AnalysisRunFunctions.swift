@@ -24,7 +24,7 @@ extension Analysis {
             if thisVar.value.count > 1 { thisVar.value.removeLast(thisVar.value.count - 1) }
         }
         self.traj.sortVarIndices() // Ensure that time is the first variable, x is second, etc.
-        let dt : Double = defaultTimestep
+        let dt : VarValue = defaultTimestep
 
         let progressBar = viewController.analysisProgressBar!
         progressBar.usesThreadedAnimation = true
@@ -76,7 +76,7 @@ extension Analysis {
         }
     }
     
-    func equationsOfMotion(curState: StateArray, dt: Double)->StateArray { //TODO: Move calculation of forces and moments to separate function
+    func equationsOfMotion(curState: StateArray, dt: VarValue)->StateArray { //TODO: Move calculation of forces and moments to separate function
         
         var x = curState[State.ix]
         var y = curState[State.iy]
@@ -87,7 +87,7 @@ extension Analysis {
         
         let F_g = -9.81*m
         let a_y = F_g/m
-        let a_x : Double = 0
+        let a_x : VarValue = 0
         
         t += dt
         dy += a_y * dt
@@ -95,7 +95,7 @@ extension Analysis {
         dx += a_x*dt
         x += dx*dt
         m += 0
-        let newState : Array<Double> = [t, x, y, 0, dx, dy, 0, m]
+        let newState : Array<VarValue> = [t, x, y, 0, dx, dy, 0, m]
         
         return newState
     }
@@ -139,8 +139,16 @@ extension Analysis {
             if let thisCond1 = thisCond as? SingleCondition {
                 let thisVar = State.getValue(thisCond1.varID, curState)!
                 let initVar = State.getValue(thisCond1.varID, initState)!
-                let finalVar = thisCond1.ubound != nil ? thisCond1.ubound! : thisCond1.lbound!
-                curPctComplete = (thisVar-initVar) / (finalVar-initVar)
+                if thisCond1.equality != nil {
+                    let finalVar = thisCond1.equality!
+                    curPctComplete = Double((thisVar-initVar) / (finalVar-initVar))
+                }
+                else if thisCond1.specialCondition != nil {
+                    
+                } else {
+                    let finalVar = thisCond1.ubound != nil ? thisCond1.ubound! : thisCond1.lbound!
+                    curPctComplete = Double((thisVar-initVar) / (finalVar-initVar))
+                }
             } else { curPctComplete = pctComplete(cond: thisCond as! Condition, initState: initState, curState: curState) }
         
             tempPctComplete = (tempPctComplete < curPctComplete) ? curPctComplete : tempPctComplete

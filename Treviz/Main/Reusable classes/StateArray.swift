@@ -10,7 +10,7 @@
 
 import Cocoa
 
-typealias StateArray = Array<Double>
+typealias StateArray = Array<VarValue>
 
 extension State {
     static let stateVarPositions : [VariableID] = [
@@ -48,13 +48,13 @@ extension State {
         
     }
     
-    static func getValue(_ varID : VariableID, _ state: StateArray)->Double?{
+    static func getValue(_ varID : VariableID, _ state: StateArray)->VarValue?{
         if let index = stateVarPositions.firstIndex(where: { $0 == varID }){
             return state[index]
         } else {return nil}
     }
     
-    subscript(index: Int) -> [Double] {
+    subscript(index: Int) -> [VarValue] {
         get {
             var stateArray = StateArray() //Array.init(repeating: 0, count: State.stateVarPositions.count)
             for thisVarID in State.stateVarPositions {
