@@ -4,6 +4,10 @@ Initial Variables:
   dy: 20
   dx: 100
   
+Parameters:
+  - t: 0
+  - x: 10
+  
 Conditions:
   - Ground Impact: y=-0.1
   - Final time: t>10

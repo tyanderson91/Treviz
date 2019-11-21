@@ -30,8 +30,8 @@ class Analysis: NSDocument {//TODO: possibly subclass NSPersistentDocument if us
     var viewController : MainViewController!
     
     //AppDelegate variables
-    var initVars : [Variable]! {return appDelegate.initVars}
-    var initStateGroups : InitStateHeader! {return appDelegate.initStateGroups}
+    var varList : [Variable]! {return appDelegate.initVars}
+    var initStateGroups : InitStateHeader!
     var plotTypes : [PlotType]! {return appDelegate.plotTypes}
     
     // Analysis-specific data and configs (read/writing functions in AnalysisData.swift)
@@ -41,7 +41,7 @@ class Analysis: NSDocument {//TODO: possibly subclass NSPersistentDocument if us
     var conditions : [Condition] = []
     var inputSettings : [Parameter] = []
     var parameters : [Parameter] { //TODO: this should contain more than just input settings
-        return inputSettings.filter( {$0.isParam} )
+        return inputSettings.filter {$0.isParam}
     }
     var plots : [TZOutput] = []
     var defaultTimestep : VarValue = 1

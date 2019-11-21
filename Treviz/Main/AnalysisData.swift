@@ -42,9 +42,13 @@ extension Analysis {
         self.vehicle = Vehicle()
         
         // Read all inputs
+        self.inputSettings = self.varList.compactMap { ($0.copy() as! Parameter) } // TODO: Bettor way to copy?
         readSettings(from: "AnalysisSettings")
-
-        traj = State(variables: initVars)
+        if var tvar = self.inputSettings.first(where: {$0.id == "t"}) {tvar.isParam = true}
+        
+        loadVarGroups(from: "InitStateStructure")
+        
+        traj = State(variables: varList)
         for thisVar in self.inputSettings {
             traj[thisVar.id, 0] = (thisVar as! Variable)[0]
         }
@@ -84,7 +88,7 @@ extension Analysis {
        - Parameter yamlObj: a Dictionary of the type [String: Any] read from a yaml file.
        */
     func initVar(varID: VariableID, varStr: Any) -> Variable? {
-        let thisVar =  self.initVars.first(where: { $0.id == varID})!
+        guard let thisVar = self.inputSettings.first(where: { $0.id == varID}) as? Variable else {return nil}
         if let val = varStr as? NSNumber {
             thisVar.value = [VarValue(truncating: val)]
             return thisVar
@@ -144,7 +148,15 @@ extension Analysis {
                 //let thisVar =  self.initVars.first(where: { $0.id == curVarID})!
                 //let val = inputList[thisVarID]
                 //thisVar.value = [Double(truncating: val!)]
-                if let thisVar = initVar(varID: curVarID, varStr: curVarVal) { inputSettings.append(thisVar) }
+                let thisVar = initVar(varID: curVarID, varStr: curVarVal)
+                //if let thisVar = initVar(varID: curVarID, varStr: curVarVal) { inputSettings.append(thisVar) }
+            }
+        }
+        if let inputList = yamlDict["Parameters"] as? [String: Any] {
+            for (curVarID, curVarVal) in inputList {
+                //let thisVar =  self.initVars.first(where: { $0.id == curVarID})!
+                //let val = inputList[thisVarID]
+                //thisVar.value = [Double(truncating: val!)]
             }
         }
         if let conditionList = yamlDict["Conditions"] as? [[String: Any]] {
@@ -169,20 +181,50 @@ extension Analysis {
             }
         }
     }
-}
-
-/**
- Get the object associated with a given yaml file
- */
-func getYamlObject(from file: String)->Any?{
-    var outputList: Any?
-    if let yamlFilePath = Bundle.main.path(forResource: file, ofType: "yaml"){
-        do {
-            let stryaml = try String(contentsOfFile: yamlFilePath, encoding: String.Encoding.utf8)
-            outputList = try Yams.load(yaml: stryaml)
-            // outputList = Array(try Yams.load_all(yaml: stryaml))
-        } catch {
-            outputList = nil }
+    
+    /**
+     This function reads in the current physics model and pre-populates all the required initial states with 0 values
+     */
+    func defaultInitSettings()->[Variable] { //TODO: vary depending on the physics type
+        var varList = [Variable]()
+        for thisVar in self.varList {
+            guard let newVar = thisVar.copy() as? Variable else {continue}
+            varList.append(newVar)
+        }
+        return varList
     }
-    return outputList
+    
+    func loadVarGroups(from plist: String){
+         guard let varFilePath = Bundle.main.path(forResource: plist, ofType: "plist") else {return}
+         guard let inputList = NSArray.init(contentsOfFile: varFilePath) else {return} //return empty if filename not found
+         initStateGroups = InitStateHeader(id: "default")
+         loadVarGroupsRecurs(input: initStateGroups, withList: inputList as! [NSDictionary])
+     }
+     
+     private func loadVarGroupsRecurs(input: InitStateHeader, withList list: [NSDictionary]){
+         for dict in list {
+             guard let itemType = dict["itemType"] as? String else { return }
+             guard let itemID = dict["id"] as? VariableID else { return }
+             let name = dict["name"] as? String
+             
+             if itemType == "var"{
+                 if let newVar = inputSettings.first(where: {$0.id == itemID}) as? Variable {
+                    input.variables.append(newVar)
+                 }
+                 continue
+             } else {
+                 var newHeader = InitStateHeader(id: "")
+                 if itemType == "header" {
+                     newHeader = InitStateHeader(id: itemID)}
+                 else if itemType == "subHeader" {
+                     newHeader = InitStateSubHeader(id: itemID)}
+                 else {return}
+                 newHeader.name = name!
+                 input.subheaders.append(newHeader)
+                 if let children = dict["items"] as? NSArray {
+                     loadVarGroupsRecurs(input: newHeader, withList: children as! [NSDictionary])
+                 }
+             }
+         }
+     }
 }

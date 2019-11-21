@@ -24,6 +24,8 @@ class TrevizTests: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
         // Conditions test
+        let yamlDict: [String:Any] = getYamlObject(from: "AnalysisSettings") as! [String : Any]
+        conditionTest(yamlDict: yamlDict)
     }
 
     func testPerformanceExample() {

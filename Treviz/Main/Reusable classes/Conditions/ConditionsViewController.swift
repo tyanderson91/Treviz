@@ -82,7 +82,7 @@ class ConditionsViewController: TZViewController, NSTableViewDelegate, NSTableVi
         super.viewDidLoad()
         // Do view setup here.
         //print(analysis!.name)
-        initVars = (analysis?.initVars)!
+        initVars = (analysis?.varList)!
         
         let newVC = addConditionView()
         newVC.removeConditionButton.isHidden = true

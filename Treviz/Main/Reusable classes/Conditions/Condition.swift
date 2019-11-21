@@ -29,7 +29,7 @@ enum BoolType : Int {
     case xnor = 6
 
     static func fromStr(_ input: String)->BoolType?{ //TODO: turn this into an init
-        let returnDict : Dictionary<String, BoolType> = ["and": .and, "or": .or, "nor": .nor, "nand": .nand, "xor": .xor, "xnor": .xnor]
+        let returnDict : Dictionary<String, BoolType> = ["single": .single, "and": .and, "or": .or, "nor": .nor, "nand": .nand, "xor": .xor, "xnor": .xnor]
         if let returnBool = returnDict[input] {
             return returnBool
         } else {return nil}
@@ -151,7 +151,7 @@ class Condition : NSObject, EvaluateCondition {
     
     var name : String = ""
     var conditions : [EvaluateCondition] = []
-    var unionType : BoolType = .and
+    var unionType : BoolType = .single
     var meetsCondition : [Bool]? // TODO: Move this out of the Conditions object
     var meetsConditionIndex : [Int] { // Converts array of bools into indices
         var i = 0
@@ -245,7 +245,7 @@ class Condition : NSObject, EvaluateCondition {
                 return nil
             }
            
-            self.init(conditions: [newSingleCondition], unionType: .or, name: conditionName)
+            self.init(conditions: [newSingleCondition], unionType: .single, name: conditionName)
         } // End of single-line definition
         else {
             var curConditions: [Condition] = []

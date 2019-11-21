@@ -14,6 +14,14 @@ class MainWindowController: NSWindowController, NSToolbarDelegate {
     @IBOutlet weak var showHidePanesControl: NSSegmentedControl!
     @IBOutlet weak var runButton: NSButton!
     
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        /** NSWindows loaded from the storyboard will be cascaded
+         based on the original frame of the window in the storyboard.
+         */
+        shouldCascadeWindows = true
+    }
+    
     override func windowDidLoad() {
         super.windowDidLoad()
         //showHidePanesControl.setImage(NSImage(named: "smallSegmentedCell"), forSegment: 0)

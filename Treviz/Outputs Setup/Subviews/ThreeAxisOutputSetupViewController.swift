@@ -51,8 +51,8 @@ class ThreeAxisOutputSetupViewController: AddOutputViewController {
         var var2 : Variable?
         guard let var1Name = var1ViewController.variableSelectorPopup.selectedItem?.title else {return nil}
         guard let var2Name = var2ViewController.variableSelectorPopup.selectedItem?.title else {return nil}
-        var1 = analysis.initVars.first(where: {$0.name == var1Name} )
-        var2 = analysis.initVars.first(where: {$0.name == var2Name} )
+        var1 = analysis.varList.first(where: {$0.name == var1Name} )
+        var2 = analysis.varList.first(where: {$0.name == var2Name} )
         
         let newPlot = TZPlot(id: maxPlotID+1, vars: [var1!, var2!], plotType: PlotType.getPlotTypeByName(plotType)!)
         //newPlot.setName()

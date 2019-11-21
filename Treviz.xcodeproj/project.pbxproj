@@ -45,6 +45,15 @@
 		CDAF13FD222CF357005CDC3C /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDAF13FC222CF357005CDC3C /* State.swift */; };
 		CDAF14272230FB72005CDC3C /* Variable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDAF14262230FB72005CDC3C /* Variable.swift */; };
 		CDB457B52383E19B004F13AA /* TrevizTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0F011223656B7200C920AA /* TrevizTests.swift */; };
+		CDB457B62384F861004F13AA /* Condition.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3F5E5422EE175400E4CF20 /* Condition.swift */; };
+		CDB457B72384F8B3004F13AA /* Variable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDAF14262230FB72005CDC3C /* Variable.swift */; };
+		CDB457B82384F90A004F13AA /* Parameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB7C7392352B03100BC50F1 /* Parameter.swift */; };
+		CDB457B92384F90E004F13AA /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDAF13FC222CF357005CDC3C /* State.swift */; };
+		CDB457BA2384F912004F13AA /* StateArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0F011A23656EF200C920AA /* StateArray.swift */; };
+		CDB457BB2384FA09004F13AA /* InitStateHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB7C73B2352B58300BC50F1 /* InitStateHeader.swift */; };
+		CDB457BD2384FABC004F13AA /* IO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB457BC2384FABC004F13AA /* IO.swift */; };
+		CDB457BE2384FADB004F13AA /* IO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB457BC2384FABC004F13AA /* IO.swift */; };
+		CDB457C0238508B6004F13AA /* ConditionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB457BF238508B6004F13AA /* ConditionTests.swift */; };
 		CDB7C73823503DBF00BC50F1 /* InitVars.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDB7C73723503DBF00BC50F1 /* InitVars.plist */; };
 		CDB7C73A2352B03100BC50F1 /* Parameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB7C7392352B03100BC50F1 /* Parameter.swift */; };
 		CDB7C73C2352B58300BC50F1 /* InitStateHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB7C73B2352B58300BC50F1 /* InitStateHeader.swift */; };
@@ -120,6 +129,8 @@
 		CDA7FD7923715399009CDFAF /* AnalysisSettings.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = AnalysisSettings.yaml; path = "Treviz/Inputs Setup/AnalysisSettings.yaml"; sourceTree = SOURCE_ROOT; };
 		CDAF13FC222CF357005CDC3C /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		CDAF14262230FB72005CDC3C /* Variable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Variable.swift; sourceTree = "<group>"; };
+		CDB457BC2384FABC004F13AA /* IO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IO.swift; path = "Treviz/Main/Reusable classes/IO.swift"; sourceTree = SOURCE_ROOT; };
+		CDB457BF238508B6004F13AA /* ConditionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionTests.swift; sourceTree = "<group>"; };
 		CDB7C73723503DBF00BC50F1 /* InitVars.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = InitVars.plist; path = "Treviz/Inputs Setup/InitVars.plist"; sourceTree = SOURCE_ROOT; };
 		CDB7C7392352B03100BC50F1 /* Parameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Parameter.swift; path = "Treviz/Main/Reusable classes/Parameter.swift"; sourceTree = SOURCE_ROOT; };
 		CDB7C73B2352B58300BC50F1 /* InitStateHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitStateHeader.swift; sourceTree = "<group>"; };
@@ -188,6 +199,7 @@
 				CD2D0DB0224382F70012978E /* InfoBarStackView */,
 				CD449022233B26370095F243 /* Variable */,
 				CDF3D1A5225057270064D70C /* TZViewController.swift */,
+				CDB457BC2384FABC004F13AA /* IO.swift */,
 				CDB7C7392352B03100BC50F1 /* Parameter.swift */,
 				CDAF13FC222CF357005CDC3C /* State.swift */,
 				CD0F011A23656EF200C920AA /* StateArray.swift */,
@@ -230,6 +242,7 @@
 			isa = PBXGroup;
 			children = (
 				CD0F011223656B7200C920AA /* TrevizTests.swift */,
+				CDB457BF238508B6004F13AA /* ConditionTests.swift */,
 				CD0F011423656B7200C920AA /* Info.plist */,
 			);
 			path = TrevizTests;
@@ -254,6 +267,7 @@
 			isa = PBXGroup;
 			children = (
 				CD3F5E5422EE175400E4CF20 /* Condition.swift */,
+				CD3F5E5922EE4FFE00E4CF20 /* ConditionsViewController.swift */,
 				CD3F5E5722EE4DCD00E4CF20 /* Conditions.storyboard */,
 			);
 			path = Conditions;
@@ -335,7 +349,6 @@
 				CDD504A322252AFD00B29751 /* Info.plist */,
 				CDD504A422252AFD00B29751 /* Treviz.entitlements */,
 				CDD5049B22252AFA00B29751 /* Document.xcdatamodeld */,
-				CD3F5E5922EE4FFE00E4CF20 /* ConditionsViewController.swift */,
 			);
 			path = Treviz;
 			sourceTree = "<group>";
@@ -402,7 +415,7 @@
 				};
 			};
 			buildConfigurationList = CDD5048D22252AF900B29751 /* Build configuration list for PBXProject "Treviz" */;
-			compatibilityVersion = "Xcode 10.0";
+			compatibilityVersion = "Xcode 11.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -460,6 +473,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDB457B52383E19B004F13AA /* TrevizTests.swift in Sources */,
+				CDB457C0238508B6004F13AA /* ConditionTests.swift in Sources */,
+				CDB457BB2384FA09004F13AA /* InitStateHeader.swift in Sources */,
+				CDB457B72384F8B3004F13AA /* Variable.swift in Sources */,
+				CDB457BE2384FADB004F13AA /* IO.swift in Sources */,
+				CDB457B62384F861004F13AA /* Condition.swift in Sources */,
+				CDB457B92384F90E004F13AA /* State.swift in Sources */,
+				CDB457B82384F90A004F13AA /* Parameter.swift in Sources */,
+				CDB457BA2384F912004F13AA /* StateArray.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -482,6 +503,7 @@
 				CD2D0DB82243836F0012978E /* SingleAxisOutputSetupViewController.swift in Sources */,
 				CD4656B4224C6F8C00C587CC /* EnvironmentViewController.swift in Sources */,
 				CD4656B2224C6F3500C587CC /* SettingsViewController.swift in Sources */,
+				CDB457BD2384FABC004F13AA /* IO.swift in Sources */,
 				CDAF14272230FB72005CDC3C /* Variable.swift in Sources */,
 				CDB7C73A2352B03100BC50F1 /* Parameter.swift in Sources */,
 				CD0F010923654ED400C920AA /* AnalysisRunFunctions.swift in Sources */,

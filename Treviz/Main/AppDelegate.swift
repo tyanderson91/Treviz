@@ -15,22 +15,21 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     var plotTypes : [PlotType]! = nil
     var initVars : [Variable]! = nil
-    var initStateGroups : InitStateHeader! = nil
+    // var initStateGroups : InitStateHeader! = nil
     
-    //func applicationWillFinishLaunching(_ notification: Notification) {
-        
-    
-    func applicationDidFinishLaunching(_ aNotification: Notification) {
-        
+    func applicationWillFinishLaunching(_ notification: Notification) {
         loadPlotTypes(from: "PlotTypes")
         loadVars(from: "InitVars")
         initVars = State.sortVarIndices(initVars)
-        loadVarGroups(from: "InitStateStructure")
+        // loadVarGroups(from: "InitStateStructure")
+    }
+    
+    func applicationDidFinishLaunching(_ aNotification: Notification) {
         /*
-        if let maindoc = application.mainWindow?.windowController?.document as? Analysis {
-            maindoc.appDelegate = self
-        }*/
-        
+        loadPlotTypes(from: "PlotTypes")
+        loadVars(from: "InitVars")
+        initVars = State.sortVarIndices(initVars)
+        loadVarGroups(from: "InitStateStructure")*/
         for thisWindow in application.windows {
             let windowController = thisWindow.windowController
             if let doc = windowController?.document as? Analysis {
@@ -62,6 +61,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
     
+    /*
     func loadVarGroups(from plist: String){
         guard let varFilePath = Bundle.main.path(forResource: plist, ofType: "plist") else {return}
         guard let inputList = NSArray.init(contentsOfFile: varFilePath) else {return}//return empty if filename not found
@@ -93,7 +93,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 }
             }
         }
-    }
+    }*/
     
     func loadPlotTypes(from plist: String){
         guard let plotFilePath = Bundle.main.path(forResource: plist, ofType: "plist") else {return}

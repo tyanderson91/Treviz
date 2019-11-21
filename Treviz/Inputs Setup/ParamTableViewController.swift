@@ -22,10 +22,11 @@ class ParamTableViewController: TZViewController , NSTableViewDelegate, NSTableV
         NotificationCenter.default.addObserver(self, selector: #selector(self.getAllParams(_:)), name: .didSetParam, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.updateTable(_:)), name: .didChangeUnits, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.updateTable(_:)), name: .didChangeValue, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.getAllParams(_:)), name: .didLoadAppDelegate, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.getAllParams(_:)), name: .didLoadAnalysisData, object: nil)
     }
     
     @objc func getAllParams(_ notification: Notification){
+        let asys = self.analysis
         self.params = self.analysis.parameters
         tableView.reloadData()
     }

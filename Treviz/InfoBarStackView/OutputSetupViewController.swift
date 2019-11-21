@@ -44,7 +44,7 @@ class OutputSetupViewController: TZViewController, NSTableViewDelegate, NSTableV
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.refreshTable(_:)), name: .didAddPlot, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.refreshTable(_:)), name: .didLoadAnalysisData, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.refreshTable(_:)), name: .didLoadAppDelegate, object: nil)
+        //NotificationCenter.default.addObserver(self, selector: #selector(self.refreshTable(_:)), name: .didLoadAppDelegate, object: nil)
         
         //addViewController(withIdentifier: "CollectionViewController")
         //addViewController(withIdentifier: "OtherViewController")
