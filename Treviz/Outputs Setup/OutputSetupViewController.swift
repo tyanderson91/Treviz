@@ -24,6 +24,7 @@ class OutputSetupViewController: TZViewController, NSTableViewDelegate, NSTableV
     @IBOutlet weak var stack: CustomStackView!
     @IBOutlet weak var tableView: NSTableView!
     var allPlots : [TZOutput] {if analysis == nil {return []} else {return analysis.plots}}
+    //var plotViews : [AddOutputViewController] = []
     
     override func viewDidLoad() {
         
@@ -34,13 +35,14 @@ class OutputSetupViewController: TZViewController, NSTableViewDelegate, NSTableV
             
         // Load and install all the view controllers from our storyboard in the following order.
         let vc1 = stack.addViewController(fromStoryboardId: "OutputSetup", withIdentifier: "SingleAxisOutputSetupViewController") as! SingleAxisOutputSetupViewController
-        let vc2 = stack.addViewController(fromStoryboardId: "OutputSetup", withIdentifier: "TwoAxisOutputSetupViewController") as! TwoAxisOutputSetupViewController
+        /*
+         let vc2 = stack.addViewController(fromStoryboardId: "OutputSetup", withIdentifier: "TwoAxisOutputSetupViewController") as! TwoAxisOutputSetupViewController
         let vc3 = stack.addViewController(fromStoryboardId: "OutputSetup", withIdentifier: "ThreeAxisOutputSetupViewController") as! ThreeAxisOutputSetupViewController
         let vc4 = stack.addViewController(fromStoryboardId: "OutputSetup", withIdentifier: "MonteCarloOutputSetupViewController") as! MonteCarloOutputSetupViewController
         for thisVC in [vc1,vc2,vc3,vc4]{
             thisVC.outputSetupViewController = self
             thisVC.representedObject = self.representedObject
-        }
+        }*/
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.refreshTable(_:)), name: .didAddPlot, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.refreshTable(_:)), name: .didLoadAnalysisData, object: nil)
@@ -62,6 +64,42 @@ class OutputSetupViewController: TZViewController, NSTableViewDelegate, NSTableV
         newOutput.curTrajectory = self.analysis.traj
         analysis.plots.append(newOutput)
         self.tableView.reloadData()
+    }
+    
+    func addOutputView(text: TZTextOutput?, plot: TZPlot?){
+        
+        var curPlotType : PlotType!
+        if text != nil {
+            var curPlotType = text!.plotType
+        } else {
+            var curPlotType = plot!.plotType
+        }
+        /*
+        var newVC : AddOutputViewController!
+        switch curPlotType.nAxis { //TODO: find a more robust way of assigning output type
+        case 1:
+            newVC = stack.addViewController(fromStoryboardId: "OutputSetup", withIdentifier: "SingleAxisOutputSetupViewController") as! SingleAxisOutputSetupViewController
+        case 2:
+            newVC = stack.addViewController(fromStoryboardId: "OutputSetup", withIdentifier: "TwoAxisOutputSetupViewController") as! TwoAxisOutputSetupViewController
+        case 3:
+            newVC = stack.addViewController(fromStoryboardId: "OutputSetup", withIdentifier: "ThreeAxisOutputSetupViewController") as! ThreeAxisOutputSetupViewController
+        default:
+            newVC = stack.addViewController(fromStoryboardId: "OutputSetup", withIdentifier: "MonteCarloOutputSetupViewController") as! MonteCarloOutputSetupViewController
+        }
+        if newVC != nil {
+            newVC.includeTextCheckbox.state = text == nil ? .off : .on
+            newVC.includePlotCheckbox.state = plot == nil ? .off : .on
+            newVC.populateWithOutput(text: text, plot: plot)
+        }*/
+        
+    }
+    
+    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
+        if ["add1AxisSegue", "add2AxisSegue", "add3AxisSegue", "addMCSegue"].contains(segue.identifier) {
+            let target = segue.destinationController as! AddOutputViewController
+            target.representedObject = self.analysis
+            target.outputSetupViewController = self
+        }
     }
     
     @objc func refreshTable(_ notification: Notification){
