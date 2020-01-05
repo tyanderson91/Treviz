@@ -13,7 +13,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     @IBOutlet weak var application: NSApplication!
     
-    var plotTypes : [PlotType]! = nil
+    var plotTypes : [TZPlotType]! = nil
     var initVars : [Variable]! = nil
     // var initStateGroups : InitStateHeader! = nil
     
@@ -101,13 +101,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         guard let inputList = NSArray.init(contentsOfFile: plotFilePath) else {
             self.plotTypes = nil
             return}
-        var initPlotTypes : [PlotType] = []
+        var initPlotTypes : [TZPlotType] = []
         for thisPlot in inputList {
             guard let dict = thisPlot as? NSDictionary else {return}
-            let newPlot = PlotType(dict["id"] as! String, name: dict["name"] as! String, requiresCondition: dict["condition"] as! Bool, nAxis: dict["naxis"] as! Int, nVars: dict["nvar"] as! Int)
+            let newPlot = TZPlotType(dict["id"] as! String, name: dict["name"] as! String, requiresCondition: dict["condition"] as! Bool, nAxis: dict["naxis"] as! Int, nVars: dict["nvar"] as! Int)
             initPlotTypes.append(newPlot)
         }
         self.plotTypes = initPlotTypes
-        PlotType.allPlotTypes = initPlotTypes
+        TZPlotType.allPlotTypes = initPlotTypes
     }    
 }

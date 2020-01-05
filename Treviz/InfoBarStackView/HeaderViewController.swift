@@ -44,11 +44,9 @@ class HeaderViewController : NSViewController, StackItemHeader {
     }
     
     // MARK: - Actions
-    
-    @IBAction func showHidePressed(_ sender: AnyObject) {
+    override func mouseUp(with event: NSEvent) {
         disclose?()
     }
-    
     
     // MARK: - Mouse tracking
     

@@ -13,6 +13,8 @@ class ThreeAxisOutputSetupViewController: AddOutputViewController {
     var var1ViewController : VariableSelectorViewController!
     var var2ViewController : VariableSelectorViewController!
     var var3ViewController : VariableSelectorViewController!
+    override func plotTypeSelector(_ plotType: TZPlotType)->(Bool){ return plotType.nAxis == 3 }
+
     
     @IBOutlet weak var gridView: CollapsibleGridView!
     
@@ -25,19 +27,20 @@ class ThreeAxisOutputSetupViewController: AddOutputViewController {
         
         let storyboard = NSStoryboard(name: "VariableSelector", bundle: nil)
         var1ViewController = (storyboard.instantiateController(withIdentifier: "variableSelectorViewController") as! VariableSelectorViewController)
+        var1ViewController.representedObject = self.analysis
         self.addChild(var1ViewController)
         variableGridView.cell(atColumnIndex: 1, rowIndex: 0).contentView = var1ViewController.view
         
         var2ViewController = (storyboard.instantiateController(withIdentifier: "variableSelectorViewController") as! VariableSelectorViewController)
+        var2ViewController.representedObject = self.analysis
         self.addChild(var2ViewController)
         variableGridView.cell(atColumnIndex: 1, rowIndex: 1).contentView = var2ViewController.view
         
         var3ViewController = (storyboard.instantiateController(withIdentifier: "variableSelectorViewController") as! VariableSelectorViewController)
+        var3ViewController.representedObject = self.analysis
         self.addChild(var3ViewController)
         variableGridView.cell(atColumnIndex: 1, rowIndex: 2).contentView = var3ViewController.view
         // Do view setup here.
-        plotTypeSelector = { return $0.nAxis == 3 }
-        
         /*setWidth(component: var1ViewController!, width: varSelectorWidth)
         setWidth(component: var2ViewController!, width: varSelectorWidth)
         setWidth(component: var3ViewController!, width: varSelectorWidth)*/
@@ -54,10 +57,14 @@ class ThreeAxisOutputSetupViewController: AddOutputViewController {
         var1 = analysis.varList.first(where: {$0.name == var1Name} )
         var2 = analysis.varList.first(where: {$0.name == var2Name} )
         
-        let newPlot = TZPlot(id: maxPlotID+1, vars: [var1!, var2!], plotType: PlotType.getPlotTypeByName(plotType)!)
+        let newPlot = TZPlot(id: maxPlotID+1, vars: [var1!, var2!], plotType: TZPlotType.getPlotTypeByName(plotType)!)
         //newPlot.setName()
         return newPlot
         //return nil
+    }
+    
+    override func populateWithOutput(text: TZTextOutput?, plot: TZPlot?){ //Should be overwritten by each subclass
+        return
     }
     
     override func didDisclose() {

@@ -30,15 +30,15 @@ class Analysis: NSDocument {//TODO: possibly subclass NSPersistentDocument if us
     var viewController : MainViewController!
     
     //AppDelegate variables
-    var varList : [Variable]! {return appDelegate.initVars}
+    @objc var varList : [Variable]! {return appDelegate.initVars}
     var initStateGroups : InitStateHeader!
-    var plotTypes : [PlotType]! {return appDelegate.plotTypes}
+    var plotTypes : [TZPlotType]! {return appDelegate.plotTypes}
     
     // Analysis-specific data and configs (read/writing functions in AnalysisData.swift)
     var name : String = ""
     var terminalConditions : Condition!
     var traj: State!
-    var conditions : [Condition] = []
+    @objc var conditions : [Condition] = []
     var inputSettings : [Parameter] = []
     var parameters : [Parameter] { //TODO: this should contain more than just input settings
         return inputSettings.filter {$0.isParam}

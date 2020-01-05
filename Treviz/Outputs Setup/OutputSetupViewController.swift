@@ -25,6 +25,7 @@ class OutputSetupViewController: TZViewController, NSTableViewDelegate, NSTableV
     @IBOutlet weak var tableView: NSTableView!
     var allPlots : [TZOutput] {if analysis == nil {return []} else {return analysis.plots}}
     //var plotViews : [AddOutputViewController] = []
+    var stackViewContainerDict = Dictionary<TZOutput, StackItemContainer>()
     
     override func viewDidLoad() {
         
@@ -34,7 +35,7 @@ class OutputSetupViewController: TZViewController, NSTableViewDelegate, NSTableV
         stack.setHuggingPriority(NSLayoutConstraint.Priority.defaultHigh, for: .horizontal)
             
         // Load and install all the view controllers from our storyboard in the following order.
-        let vc1 = stack.addViewController(fromStoryboardId: "OutputSetup", withIdentifier: "SingleAxisOutputSetupViewController") as! SingleAxisOutputSetupViewController
+        //let vc1 = stack.addViewController(fromStoryboardId: "OutputSetup", withIdentifier: "SingleAxisOutputSetupViewController") as! SingleAxisOutputSetupViewController
         /*
          let vc2 = stack.addViewController(fromStoryboardId: "OutputSetup", withIdentifier: "TwoAxisOutputSetupViewController") as! TwoAxisOutputSetupViewController
         let vc3 = stack.addViewController(fromStoryboardId: "OutputSetup", withIdentifier: "ThreeAxisOutputSetupViewController") as! ThreeAxisOutputSetupViewController
@@ -64,11 +65,35 @@ class OutputSetupViewController: TZViewController, NSTableViewDelegate, NSTableV
         newOutput.curTrajectory = self.analysis.traj
         analysis.plots.append(newOutput)
         self.tableView.reloadData()
+        addOutputView(with: newOutput)
     }
     
-    func addOutputView(text: TZTextOutput?, plot: TZPlot?){
+    func addOutputView(with output: TZOutput){
+        let newOutputVC = stack.addViewController(fromStoryboardId: "OutputSetup", withIdentifier: "SingleAxisOutputSetupViewController") as! SingleAxisOutputSetupViewController
+        newOutputVC.loadAnalysis(self.analysis)
+        newOutputVC.representedOutput = output
+        //newOutputVC.conditionsArrayController.content = analysis.conditions
+        //newOutputVC.plotTypeArrayController.content = newOutputVC.plotTypes
+        newOutputVC.objectController.content = output
         
-        var curPlotType : PlotType!
+        // GUI changes
+        newOutputVC.addRemoveOutputButton.image = NSImage(named: NSImage.removeTemplateName)
+        newOutputVC.editingOutputStackView.isHidden = true
+        newOutputVC.displayOutputStackView.isHidden = false
+        if output is TZPlot {newOutputVC.selectedOutputTypeLabel.stringValue = "Plot"}
+        else if output is TZTextOutput {newOutputVC.selectedOutputTypeLabel.stringValue = "Text"}
+        stackViewContainerDict[output] = newOutputVC.stackItemContainer
+    }
+    
+    func removeOutput(_ output: TZOutput){
+        if let stackItemContainer = stackViewContainerDict[output]{
+            stackItemContainer.deleteFromHost()
+        }
+    }
+    /*
+    func addOutputView(output: TZOutput){
+        
+        var curPlotType : TZPlotType!
         if text != nil {
             var curPlotType = text!.plotType
         } else {
@@ -92,7 +117,7 @@ class OutputSetupViewController: TZViewController, NSTableViewDelegate, NSTableV
             newVC.populateWithOutput(text: text, plot: plot)
         }*/
         
-    }
+    }*/
     
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         if ["add1AxisSegue", "add2AxisSegue", "add3AxisSegue", "addMCSegue"].contains(segue.identifier) {

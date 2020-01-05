@@ -11,11 +11,19 @@ import Cocoa
 class VariableSelectorViewController: TZViewController {
 
     @IBOutlet weak var variableSelectorPopup: NSPopUpButton!
-    var selectedVariable : Variable?
+    @IBOutlet var variableSeletorArrayController: NSArrayController!
+    @objc var selectedVariable : Variable?
+    @objc dynamic var varList: [Variable]? { return analysis != nil ? analysis.varList : nil }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        NotificationCenter.default.addObserver(self, selector: #selector(self.addVariables(_:)), name: .didLoadAppDelegate, object: nil)
+        variableSeletorArrayController.content = varList
+        /*NotificationCenter.default.addObserver(self, selector: #selector(self.addVariables(_:)), name: .didLoadAppDelegate, object: nil)
+        if let thisAnalysis = self.representedObject as? Analysis { //TODO: use bindings rather than manually typing the name
+            for thisVariable in thisAnalysis.varList! {
+                variableSelectorPopup.addItem(withTitle: thisVariable.name)
+            }
+        }*/
     }
     
     override func viewWillAppear() {

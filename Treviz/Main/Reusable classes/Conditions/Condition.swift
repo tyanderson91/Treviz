@@ -11,6 +11,7 @@ import Foundation
 protocol EvaluateCondition {
     func evaluate(_ state: State)
     func evaluate(_ singleState: StateArray)->Bool
+    func reset(initialState: StateArray?)
     var meetsCondition : [Bool]? {get set}
     // var isSinglePoint : Bool {get set}// Boolean to tell whether the condition should return a single point per trajectory (such as terminal condition, max/min, etc
 }
@@ -62,8 +63,8 @@ class SingleCondition: NSObject, EvaluateCondition {
     var meetsCondition : [Bool]?
     // var isSinglePoint: Bool = false
     var varPosition : Int? // Position of the current variable in the index of StateVarPositions (automatically assigned, speeds up performance)
-    private var previousState : VarValue! = 0 // For use in equality type or special case lookups
-    private var nextState: VarValue! = 0 // For use in special case lookups, e.g. local min
+    private var previousState : VarValue! // For use in equality type or special case lookups
+    private var nextState: VarValue! // For use in special case lookups, e.g. local min
     var tests : [(VarValue)->Bool] {
         var _tests : [(VarValue)->Bool] = []
         if let lower = lbound {
@@ -144,12 +145,21 @@ class SingleCondition: NSObject, EvaluateCondition {
         }
         return isCondition
     }
+
+    func reset(initialState: StateArray? = nil){
+        if varPosition == nil {varPosition = State.stateVarPositions.firstIndex(where: {$0 == varID} ) }
+        if initialState != nil {let thisVal = initialState![varPosition!]
+            previousState = thisVal
+            nextState = thisVal
+        }
+        meetsCondition = nil
+    }
 }
 
 
 class Condition : NSObject, EvaluateCondition {
     
-    var name : String = ""
+    @objc var name : String = ""
     var conditions : [EvaluateCondition] = []
     var unionType : BoolType = .single
     var meetsCondition : [Bool]? // TODO: Move this out of the Conditions object
@@ -318,5 +328,15 @@ class Condition : NSObject, EvaluateCondition {
             curMeetsCondition = comparator(curMeetsCondition, thisMeetsCondition)
         }
         return curMeetsCondition
+    }
+    
+    /**
+     Reset all temporary values stored in the condition to make it suitable for restarting analysis
+     */
+    func reset(initialState: StateArray? = nil){
+        meetsCondition = nil
+        for thisCondition in conditions {
+            thisCondition.reset(initialState: initialState)
+        }
     }
 }

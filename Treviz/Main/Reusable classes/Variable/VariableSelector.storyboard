@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="Fkm-Ad-vik">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="Fkm-Ad-vik">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14868"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15702"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -16,11 +16,16 @@
                         <subviews>
                             <popUpButton verticalHuggingPriority="750" horizontalCompressionResistancePriority="50" verticalCompressionResistancePriority="850" translatesAutoresizingMaskIntoConstraints="NO" id="8Bi-7w-Z95">
                                 <rect key="frame" x="-2" y="-3" width="168" height="25"/>
-                                <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" truncatesLastVisibleLine="YES" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="hW2-po-CXR">
+                                <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" truncatesLastVisibleLine="YES" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="hW2-po-CXR">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent">v</string>
                                     <menu key="menu" id="9gx-rd-RcJ"/>
                                 </popUpButtonCell>
+                                <connections>
+                                    <binding destination="Zwe-wM-tJU" name="content" keyPath="arrangedObjects" id="PT2-4D-h5K"/>
+                                    <binding destination="Zwe-wM-tJU" name="contentValues" keyPath="arrangedObjects.name" previousBinding="PT2-4D-h5K" id="mm3-uj-3KO"/>
+                                </connections>
                             </popUpButton>
                         </subviews>
                         <constraints>
@@ -32,9 +37,15 @@
                     </view>
                     <connections>
                         <outlet property="variableSelectorPopup" destination="8Bi-7w-Z95" id="dux-IB-Ykc"/>
+                        <outlet property="variableSeletorArrayController" destination="Zwe-wM-tJU" id="nOj-vh-xl9"/>
                     </connections>
                 </viewController>
                 <customObject id="rhV-XW-xKk" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <arrayController objectClassName="Variable" id="Zwe-wM-tJU">
+                    <connections>
+                        <binding destination="Fkm-Ad-vik" name="contentArray" keyPath="self.varList" id="RN8-Gr-yBW"/>
+                    </connections>
+                </arrayController>
             </objects>
             <point key="canvasLocation" x="-281.5" y="14.5"/>
         </scene>

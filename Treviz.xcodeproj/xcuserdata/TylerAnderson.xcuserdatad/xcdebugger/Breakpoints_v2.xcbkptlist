@@ -7,16 +7,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "170DD8F8-8ABA-47A8-B931-E94E8BBB8D66"
-            shouldBeEnabled = "No"
+            uuid = "E96F95C6-109D-4797-BF50-9E01282B7051"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Treviz/Inputs Setup/InitStateViewController.swift"
+            filePath = "Treviz/Outputs/OutputsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
-            landmarkName = "loadData(_:)"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+            landmarkName = "processOutputs()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

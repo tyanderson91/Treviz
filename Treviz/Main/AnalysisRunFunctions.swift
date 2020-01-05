@@ -30,6 +30,8 @@ extension Analysis {
         progressBar.usesThreadedAnimation = true
         // let outputTextView = self.viewController.textOutputView!
         
+        self.terminalConditions.reset(initialState: traj[0])
+        
         self.windowController.runButton.title = "■"
         isRunning = true
         DispatchQueue.global().async {

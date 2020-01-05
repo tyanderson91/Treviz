@@ -38,6 +38,9 @@ class TZTextOutput: TZOutput {
         // assert(condition?.isSinglePoint ?? false, "Condition not set or condition produces muliple points")
         guard let varDoubleValues = curTraj[thisVar, condition!] else {
             return NSAttributedString(string: "No matching points could be found for output set '\(self.displayName)'")}
+        guard varDoubleValues.count >= 1 else {
+            return NSAttributedString(string: "No matching points could be found for output set '\(self.displayName)'")
+        }
         let stringOutput = NSMutableAttributedString(string: "\(thisVar.name):\t", attributes: [NSAttributedString.Key.font : NSFont.boldSystemFont(ofSize: 12)])
         let strval = String(format: "%2.4f", varDoubleValues[0])
         stringOutput.append(NSAttributedString(string: strval, attributes: [NSAttributedString.Key.font : NSFont.systemFont(ofSize: 12)]))

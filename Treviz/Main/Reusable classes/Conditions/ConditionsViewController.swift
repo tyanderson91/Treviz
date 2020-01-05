@@ -43,7 +43,7 @@ class ConditionsViewController: TZViewController, NSTableViewDelegate, NSTableVi
         }
         curCondition = Condition()
         curCondition.name = conditionNameTextBox.stringValue
-        curCondition.unionType = BoolType(rawValue: unionTypeDropdown.indexOfSelectedItem - 1)! // Minus 1 because index 0 is reserved for 'single' union type
+
         for curConditionVC in (self.children as? Array<addConditionViewController> ?? []) {
             let varindex = curConditionVC.variableSelector.indexOfSelectedItem
             if varindex == -1 {curConditionVC.variableSelector.becomeFirstResponder(); return}
@@ -61,7 +61,12 @@ class ConditionsViewController: TZViewController, NSTableViewDelegate, NSTableVi
             }
             curCondition.conditions.append(newSingleCondition)
         }
-        if curCondition.conditions.count == 1 {curCondition.unionType = .single}
+        if curCondition.conditions.count == 1 {
+            curCondition.unionType = .single
+            
+        } else {
+            curCondition.unionType = BoolType(rawValue: unionTypeDropdown.indexOfSelectedItem - 1)!
+        }// Minus 1 because index 0 is reserved for 'single' union type
         analysis.conditions.append(curCondition)
         NotificationCenter.default.post(name: .didAddCondition, object: nil)
         tableView.reloadData()

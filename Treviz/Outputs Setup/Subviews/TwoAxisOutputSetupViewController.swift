@@ -10,6 +10,9 @@ import Cocoa
 
 class TwoAxisOutputSetupViewController: AddOutputViewController {
     
+    
+    override func plotTypeSelector(_ plotType: TZPlotType)->(Bool){ return plotType.nAxis == 2 }
+
     @IBOutlet weak var gridView: CollapsibleGridView!
     @IBOutlet weak var variableGridView: NSGridView!
 
@@ -34,22 +37,27 @@ class TwoAxisOutputSetupViewController: AddOutputViewController {
         
         let storyboard = NSStoryboard(name: "VariableSelector", bundle: nil)
         let var1ViewController = storyboard.instantiateController(withIdentifier: "variableSelectorViewController") as! VariableSelectorViewController
+        var1ViewController.representedObject = self.analysis
         self.addChild(var1ViewController)
         variableGridView.cell(atColumnIndex: 1, rowIndex: 0).contentView = var1ViewController.view
         
         let var2ViewController = storyboard.instantiateController(withIdentifier: "variableSelectorViewController") as! VariableSelectorViewController
+        var2ViewController.representedObject = self.analysis
         self.addChild(var2ViewController)
         variableGridView.cell(atColumnIndex: 1, rowIndex: 1).contentView = var2ViewController.view
         
         let var3ViewController = storyboard.instantiateController(withIdentifier: "variableSelectorViewController") as! VariableSelectorViewController
+        var3ViewController.representedObject = self.analysis
         self.addChild(var3ViewController)
         variableGridView.cell(atColumnIndex: 1, rowIndex: 2).contentView = var3ViewController.view
-        
-        plotTypeSelector = { return $0.nAxis == 2 }
         /*
         setWidth(component: var1ViewController, width: varSelectorWidth)
         setWidth(component: var2ViewController, width: varSelectorWidth)
         setWidth(component: var3ViewController, width: varSelectorWidth)*/
+    }
+    
+    override func populateWithOutput(text: TZTextOutput?, plot: TZPlot?){ //Should be overwritten by each subclass
+        return
     }
     
     override func didDisclose() {

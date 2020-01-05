@@ -14,33 +14,59 @@ enum outputLocation{
     case plot, text
 }
 
-class AddOutputViewController: BaseViewController, NSComboBoxDataSource { //TODO : Add a way to add variable selectors and associated logic
+class AddOutputViewController: BaseViewController { //TODO : Add a way to add variable selectors and associated logic
     
-    @IBOutlet weak var conditionsComboBox: NSComboBox!
-    @IBOutlet weak var addOutputButton: NSButton!
-    @IBOutlet weak var includeTextCheckbox: NSButton!
-    @IBOutlet weak var includePlotCheckbox: NSButton!
+    @IBOutlet weak var conditionsPopupButton: NSPopUpButton!
+    var conditionsArrayController = NSArrayController()
+    @objc var conditions: [Condition]? {
+        if let asys = analysis { return asys.conditions } else { return nil }
+    }
     
     @IBOutlet weak var plotTypePopupButton: NSPopUpButton!
-    var plotTypeSelector : (PlotType)->(Bool) = { _ in return true} //Chooses whether a given plot type applies to the current options
+    var plotTypeArrayController = NSArrayController()
+    @objc var plotTypes: [TZPlotType]? {
+        guard let allPlotTypes = analysis?.plotTypes else {return nil}
+        return allPlotTypes.filter { plotTypeSelector($0) }
+    }
+    
+    @IBOutlet weak var addRemoveOutputButton: NSButton!
+    @IBOutlet weak var includeTextCheckbox: NSButton!
+    @IBOutlet weak var includePlotCheckbox: NSButton!
+    @IBOutlet var objectController: NSObjectController!
+    @IBOutlet weak var editingOutputStackView: NSStackView!
+    @IBOutlet weak var displayOutputStackView: NSStackView!
+    @IBOutlet weak var selectedOutputTypeLabel: NSTextField!
+    
+    
+    func plotTypeSelector(_ plotType: TZPlotType)->(Bool) {return true}//Chooses whether a given plot type applies to the current options
     var outputSetupViewController : OutputSetupViewController!
-    var maxPlotID : Int { if self.analysis.plots.count == 0 { return 0 }
-                            else { return self.analysis.plots.map( {return $0.id} ).max()! }
-                        }
+    var maxPlotID : Int { return self.analysis?.plots.map( {return $0.id} ).max() ?? 0 }
+    private var selectedConditionIndex: Int = 0
+    
+    @objc var representedOutput: TZOutput!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        NotificationCenter.default.addObserver(self, selector: #selector(self.conditionsChanged(_:)), name: .didAddCondition, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.conditionsChanged(_:)), name: .didRemoveCondition, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.populatePlotTypes(_:)), name: .didLoadAppDelegate, object: nil)
-        
-        //setWidth(component: conditionsComboBox!, width: 100)
-        //setWidth(component: plotTypePopupButton!, width: 100)
-        //setWidth(component: includeTextCheckbox!, width: 100)
-        //setWidth(component: includePlotCheckbox!, width: 100)
+        //NotificationCenter.default.addObserver(self, selector: #selector(self.conditionsChanged(_:)), name: .didAddCondition, object: nil)
+        //NotificationCenter.default.addObserver(self, selector: #selector(self.conditionsChanged(_:)), name: .didRemoveCondition, object: nil)
+        // NotificationCenter.default.addObserver(self, selector: #selector(self.populatePlotTypes(_:)), name: .didLoadAppDelegate, object: nil)
 
-        // conditionsComboBox.constraints
-        // Do view setup here.
+        //populatePlotTypes()
+        displayOutputStackView.isHidden = true
+        editingOutputStackView.isHidden = false
+        
+        representedOutput = TZOutput(id: 0, plotType: TZPlotType.allPlotTypes[0])
+        objectController.content = representedOutput
+        
+        loadAnalysis(representedObject as? Analysis)
+        //conditionsArrayController.content = conditions
+        conditionsPopupButton.bind(.content, to: conditionsArrayController, withKeyPath: "arrangedObjects", options: nil)
+        conditionsPopupButton.bind(.contentValues, to: conditionsArrayController, withKeyPath: "arrangedObjects.name", options: nil)
+        conditionsPopupButton.bind(.selectedObject, to: objectController!, withKeyPath: "selection.condition", options: nil)
+        
+        plotTypePopupButton.bind(.content, to: plotTypeArrayController, withKeyPath: "arrangedObjects", options: nil)
+        plotTypePopupButton.bind(.contentValues, to: plotTypeArrayController, withKeyPath: "arrangedObjects.name", options: nil)
+        plotTypePopupButton.bind(.selectedObject, to: objectController, withKeyPath: "selection.plotType", options: nil)
     }
     
     /*
@@ -48,22 +74,26 @@ class AddOutputViewController: BaseViewController, NSComboBoxDataSource { //TODO
         let conditionWidth = NSLayoutConstraint(item: component, attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute,multiplier: 1, constant: width)
         self.view.addConstraint(conditionWidth)
     }*/
+    override func viewWillAppear() {
+        self.view.appearance = NSAppearance(named: .darkAqua)
+    }
     
-    @objc func populatePlotTypes(_ notification: Notification) {
-        var plotTypeNames : [String] = []
-        let asys = self.representedObject as? Analysis
-        if let allPlotTypes = asys?.plotTypes {
-            for thisPlotType in allPlotTypes{
-                if plotTypeSelector(thisPlotType) { plotTypeNames.append(thisPlotType.name) }
-            }
-            plotTypePopupButton.addItems(withTitles: plotTypeNames)
+    func loadAnalysis(_ analysis: Analysis?){
+        if analysis != nil {
+            self.representedObject = analysis
+            outputSetupViewController = analysis!.viewController.mainSplitViewController.outputSetupViewController
         }
+        conditionsArrayController.content = conditions
+        plotTypeArrayController.content = plotTypes
     }
     
     func createOutput()-> TZOutput?{ //Should be overwritten by each subclass
         return nil
     }
-
+    func populateWithOutput(text: TZTextOutput?, plot: TZPlot?){ //Should be overwritten by each subclass
+        return
+    }
+    
     @IBAction func includeTextCheckboxClicked(_ sender: Any) {
         setOutputType(type: .text)
     }
@@ -86,36 +116,22 @@ class AddOutputViewController: BaseViewController, NSComboBoxDataSource { //TODO
     @IBAction func plotTypeWasSelected(_ sender: Any) {
     }
     
-    @IBAction func addOutputButtonClicked(_ sender: Any) {
-        guard let newOutput = createOutput() else {return}
-        if includePlotCheckbox.state == .on {
-            let newPlot = TZPlot(id: maxPlotID+1, with: newOutput)
-            outputSetupViewController.addOutput(newPlot)
-        }
-        if includeTextCheckbox.state == .on {
-            let newText = TZTextOutput(id: maxPlotID+1, with: newOutput)
-            outputSetupViewController.addOutput(newText)
+    @IBAction func addRemoveOutputButtonClicked(_ sender: Any) {
+        if addRemoveOutputButton.image == NSImage(named: NSImage.addTemplateName) {
+            //self.title = representedOutput.title
+            if includePlotCheckbox.state == .on {
+                let newPlot = TZPlot(id: maxPlotID+1, with: representedOutput)
+                outputSetupViewController.addOutput(newPlot)
+            }
+            if includeTextCheckbox.state == .on {
+                let newText = TZTextOutput(id: maxPlotID+1, with: representedOutput)
+                outputSetupViewController.addOutput(newText)
+            }
+            self.removeFromParent()
+            outputSetupViewController.dismiss(self)
+        } else if addRemoveOutputButton.image == NSImage(named: NSImage.removeTemplateName) {
+            outputSetupViewController.removeOutput(representedOutput)
         }
     }
-    
-    // MARK Conditions view controller
-    @objc func conditionsChanged(_ notification: Notification){
-        self.conditionsComboBox.reloadData()
-    }
-    
-    func numberOfItems(in comboBox: NSComboBox) -> Int {
-        if let asys = analysis {
-            let conditions = asys.conditions
-            return conditions.count
-        }
-        return 0
-    }
-    
-    func comboBox(_ comboBox: NSComboBox, objectValueForItemAt index: Int) -> Any? {
-        if let asys = analysis { //TODO:: implement bindings
-            let conditions = asys.conditions
-            return conditions[index].name
-        }
-        return nil
-    }
+
 }

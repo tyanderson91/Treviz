@@ -132,13 +132,25 @@ class StackItemContainer {
     
     let header: StackItemHeader
     var state: DisclosureState
-    
     let body: StackItemBody
+    var hostStackView: CustomStackView? {
+        return (self.body as? BaseViewController)?.parentStackView ?? nil }
     
     init(header: StackItemHeader, body: StackItemBody, state: DisclosureState) {
         self.header = header
         self.body = body
         self.state = state
+    }
+    
+    func deleteFromHost(){ // Used to remove a view and its header completely from the host view
+        if hostStackView != nil {
+            let hvc = self.header.viewController
+            let bvc = self.body.viewController
+            hostStackView!.removeView(hvc.view)
+            hostStackView!.removeView(bvc.view)
+            hvc.removeFromParent()
+            bvc.removeFromParent()
+        }
     }
     
 }
@@ -158,6 +170,11 @@ class CustomStackView : NSStackView, StackItemHost {
         
         let storyboard = NSStoryboard(name: storyboardid, bundle: nil)
         let viewController = storyboard.instantiateController(withIdentifier: identifier) as! BaseViewController
+        self.addViewController(viewController)
+        return viewController
+    }
+    
+    func addViewController(_ viewController : BaseViewController) {
         
         // Check if we stored the disclosure state from a previous launch (default state is open).
         if let defaultDisclosureState = UserDefaults().value(forKey: viewController.headerTitle()) {
@@ -179,6 +196,7 @@ class CustomStackView : NSStackView, StackItemHost {
         
         // Add the main body content view.
         self.addArrangedSubview(stackItem.body.viewController.view)
+
         
         // Make sure the appropriate view controllers are added as children of the current controller.
         if let parentController = self.parent {
@@ -191,9 +209,10 @@ class CustomStackView : NSStackView, StackItemHost {
         case .open: show(stackItem, animated: false)
         case .closed: hide(stackItem, animated: false)
         }
-        //show(stackItem, animated: false)
         
-        return viewController
+        // Final setup
+        viewController.parentStackView = self
+        //show(stackItem, animated: false)
     }
     
 }

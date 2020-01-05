@@ -19,7 +19,7 @@ typealias VarValue = Float
 class Variable : NSObject, Parameter, InitStateCheck, NSCopying {
     
     let id: VariableID
-    let name: String
+    @objc let name: String
     let symbol: String!
     var units: String //TODO: Turn units into a separate type
     var value: [VarValue] = []

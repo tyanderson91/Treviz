@@ -17,6 +17,7 @@ class BaseViewController : TZViewController, StackItemBody {
     
     var savedDefaultHeight: CGFloat = 0
     var disclosureState: StackItemContainer.DisclosureState = .open
+    weak var parentStackView: CustomStackView?
     
     // Subclasses determine the header title.
     func headerTitle() -> String { return "" }
@@ -40,17 +41,7 @@ class BaseViewController : TZViewController, StackItemBody {
     
     lazy var stackItemContainer: StackItemContainer? = {
         
-        // Note:
-        // We conditionally decide what flavor of header to use by "DisclosureTriangleAppearance" compilation flag,
-        // which is defined in “Active Compilation Conditions” Build Settings (for passing conditional compilation flags to the Swift compiler).
-        // If you want to use the non-triangle disclosure version, remove that compilation flag.
-        //
-        var storyboardIdentifier : String
-#if DisclosureTriangleAppearance
-        storyboardIdentifier = "HeaderTriangleViewController"
-#else
-        storyboardIdentifier = "HeaderViewController"
-#endif
+        let storyboardIdentifier = "HeaderTriangleViewController"
         let storyboard = NSStoryboard(name: "HeaderViewController", bundle: nil)
         guard let header = storyboard.instantiateController(withIdentifier: storyboardIdentifier) as? HeaderViewController else {
             return .none
@@ -60,6 +51,12 @@ class BaseViewController : TZViewController, StackItemBody {
         return StackItemContainer(header: header, body: self, state: self.disclosureState)
     }()
     
+    func delete(){//Used to delete the base view from the host stack view (called from the stack item container which also deletes the header)
+        self.removeFromParent()
+        if parentStackView != nil {
+            parentStackView?.removeView(self.view)
+        }
+    }
     
     func didDisclose(){
         // Function to be overridden. Runs after each disclosure

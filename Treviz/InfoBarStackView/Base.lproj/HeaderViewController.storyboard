@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15400"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15702"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -78,28 +78,12 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                             </button>
-                            <button horizontalHuggingPriority="50" verticalHuggingPriority="50" horizontalCompressionResistancePriority="50" verticalCompressionResistancePriority="50" translatesAutoresizingMaskIntoConstraints="NO" id="585-gz-Toq">
-                                <rect key="frame" x="0.0" y="0.0" width="450" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="g8N-Ir-25B"/>
-                                </constraints>
-                                <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" transparent="YES" imageScaling="proportionallyDown" inset="2" id="r7y-xC-rGO">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="showHidePressed:" target="QsI-mr-tf4" id="VfY-IE-EIo"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="C34-nq-mBa" firstAttribute="leading" secondItem="m3B-p0-uYR" secondAttribute="leading" constant="5" id="Bjk-u9-yOU"/>
-                            <constraint firstAttribute="bottom" secondItem="585-gz-Toq" secondAttribute="bottom" id="EMR-v3-EPV"/>
                             <constraint firstItem="C34-nq-mBa" firstAttribute="centerY" secondItem="m3B-p0-uYR" secondAttribute="centerY" id="HWI-7U-3vN"/>
-                            <constraint firstItem="585-gz-Toq" firstAttribute="top" secondItem="m3B-p0-uYR" secondAttribute="top" id="IBU-fm-DPf"/>
-                            <constraint firstItem="2QF-Iy-jUX" firstAttribute="centerY" secondItem="m3B-p0-uYR" secondAttribute="centerY" id="OkT-Qi-pgf"/>
-                            <constraint firstItem="585-gz-Toq" firstAttribute="leading" secondItem="m3B-p0-uYR" secondAttribute="leading" id="b0t-L4-6Du"/>
-                            <constraint firstAttribute="trailing" secondItem="585-gz-Toq" secondAttribute="trailing" id="cv3-dd-YEe"/>
+                            <constraint firstAttribute="bottom" secondItem="2QF-Iy-jUX" secondAttribute="bottom" constant="7" id="T1w-lw-a1K"/>
+                            <constraint firstItem="2QF-Iy-jUX" firstAttribute="top" secondItem="m3B-p0-uYR" secondAttribute="top" constant="7" id="fQb-nK-6E3"/>
                             <constraint firstAttribute="trailing" secondItem="2QF-Iy-jUX" secondAttribute="trailing" constant="261" id="itt-u6-TGl"/>
                             <constraint firstItem="2QF-Iy-jUX" firstAttribute="leading" secondItem="C34-nq-mBa" secondAttribute="trailing" constant="5" id="qlp-rp-Adj"/>
                         </constraints>

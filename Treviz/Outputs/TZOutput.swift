@@ -14,15 +14,15 @@ class TZOutput : NSObject {
     var displayName : String
     var id : Int
     var title : String?
-    var plotType : PlotType
+    @objc var plotType : TZPlotType
     var var1 : Variable?
     var var2 : Variable?
     var var3 : Variable?
     var categoryVar : Variable?
-    var condition : Condition?
+    @objc var condition : Condition?
     var curTrajectory : State?
     
-    init(id : Int, plotType : PlotType){
+    init(id : Int, plotType : TZPlotType){
         self.displayName = ""
         self.id = id
         self.plotType = plotType
@@ -31,7 +31,7 @@ class TZOutput : NSObject {
     
     init?(with dict: Dictionary<String,Any>){
         if let id = dict["id"] as? Int {self.id = id} else {return nil}
-        if let plotType = dict["plot type"] as? PlotType {self.plotType = plotType}else {return nil}
+        if let plotType = dict["plot type"] as? TZPlotType {self.plotType = plotType}else {return nil}
         if let name = dict["name"] as? String {self.displayName = name} else {self.displayName = ""}
         super.init()
         if let title = dict["title"] as? String {self.title = title}
@@ -39,13 +39,13 @@ class TZOutput : NSObject {
         if let condition = dict["condition"] as? Condition {self.condition = condition}
     }
     
-    convenience init(id : Int, title : String, plotType : PlotType) {
+    convenience init(id : Int, title : String, plotType : TZPlotType) {
         self.init(id : id, plotType : plotType)
         self.displayName = title
         self.title = title
     }
     
-    convenience init(id : Int, vars : [Variable], plotType : PlotType) {
+    convenience init(id : Int, vars : [Variable], plotType : TZPlotType) {
         var title = ""
         for thisVar in vars{
             title += thisVar.name
