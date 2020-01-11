@@ -697,7 +697,7 @@
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController storyboardIdentifier="Analysis Window Controller" id="jGA-0Y-lOj" customClass="MainWindowController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
-                    <window key="window" title="Treviz" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="Ckk-yw-fiv">
+                    <window key="window" identifier="mainWindow" title="Treviz" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="mainWindow" animationBehavior="default" id="Ckk-yw-fiv">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES"/>
                         <rect key="contentRect" x="0.0" y="0.0" width="800" height="600"/>
@@ -823,7 +823,7 @@
         <!--Main Split View Controller-->
         <scene sceneID="fLq-qX-0gB">
             <objects>
-                <splitViewController id="cNr-ot-ed2" customClass="MainSplitViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
+                <splitViewController identifier="mainSplitViewRestoration" storyboardIdentifier="mainSplitView" id="cNr-ot-ed2" customClass="MainSplitViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
                     <splitViewItems>
                         <splitViewItem holdingPriority="249" id="BlO-sN-O6T" userLabel="Input Split View Item"/>
                         <splitViewItem id="7OF-1a-Fl7" userLabel="Outputs Split View Item"/>
@@ -853,7 +853,7 @@
         <!--MainViewController-->
         <scene sceneID="hGV-gs-ruu">
             <objects>
-                <viewController title="MainViewController" id="PzM-8h-kXr" customClass="MainViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="MainViewController" identifier="mainViewControllerRestoration" storyboardIdentifier="mainViewController" id="PzM-8h-kXr" customClass="MainViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="w7z-2N-fQ8">
                         <rect key="frame" x="0.0" y="0.0" width="356" height="165"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -925,7 +925,7 @@
         <!--Outputs-->
         <scene sceneID="lto-4z-ERP">
             <objects>
-                <controllerPlaceholder storyboardName="Outputs" id="Y48-WP-5Q2" sceneMemberID="viewController"/>
+                <controllerPlaceholder storyboardIdentifier="Outputs" storyboardName="Outputs" id="Y48-WP-5Q2" sceneMemberID="viewController"/>
                 <customObject id="b68-Fe-IgA" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="235" y="853"/>

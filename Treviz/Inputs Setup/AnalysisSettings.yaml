@@ -9,7 +9,7 @@ Parameters:
   - x: 10
   
 Conditions:
-  - Ground Impact: y=-0.1
+  - Ground Impact: y<-0.1
   - Final time: t>10
   - TerminalTest:
     union: and

@@ -47,15 +47,15 @@ class AddOutputViewController: BaseViewController { //TODO : Add a way to add va
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //NotificationCenter.default.addObserver(self, selector: #selector(self.conditionsChanged(_:)), name: .didAddCondition, object: nil)
-        //NotificationCenter.default.addObserver(self, selector: #selector(self.conditionsChanged(_:)), name: .didRemoveCondition, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.conditionsChanged(_:)), name: .didAddCondition, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.conditionsChanged(_:)), name: .didRemoveCondition, object: nil)
         // NotificationCenter.default.addObserver(self, selector: #selector(self.populatePlotTypes(_:)), name: .didLoadAppDelegate, object: nil)
-
         //populatePlotTypes()
         displayOutputStackView.isHidden = true
         editingOutputStackView.isHidden = false
         
         representedOutput = TZOutput(id: 0, plotType: TZPlotType.allPlotTypes[0])
+        //if analysis.conditions.count > 0 { representedOutput.condition = }
         objectController.content = representedOutput
         
         loadAnalysis(representedObject as? Analysis)
@@ -63,10 +63,11 @@ class AddOutputViewController: BaseViewController { //TODO : Add a way to add va
         conditionsPopupButton.bind(.content, to: conditionsArrayController, withKeyPath: "arrangedObjects", options: nil)
         conditionsPopupButton.bind(.contentValues, to: conditionsArrayController, withKeyPath: "arrangedObjects.name", options: nil)
         conditionsPopupButton.bind(.selectedObject, to: objectController!, withKeyPath: "selection.condition", options: nil)
-        
+        //let a = analysis
+        //let b = representedOutput
         plotTypePopupButton.bind(.content, to: plotTypeArrayController, withKeyPath: "arrangedObjects", options: nil)
         plotTypePopupButton.bind(.contentValues, to: plotTypeArrayController, withKeyPath: "arrangedObjects.name", options: nil)
-        plotTypePopupButton.bind(.selectedObject, to: objectController, withKeyPath: "selection.plotType", options: nil)
+        plotTypePopupButton.bind(.selectedObject, to: objectController!, withKeyPath: "selection.plotType")
     }
     
     /*
@@ -94,6 +95,15 @@ class AddOutputViewController: BaseViewController { //TODO : Add a way to add va
         return
     }
     
+    @objc func conditionsChanged(_ notification: Notification){
+        conditionsArrayController.content = analysis.conditions
+        guard representedOutput.condition != nil else { return }
+        if !analysis.conditions.contains(representedOutput.condition!) {
+            representedOutput.condition = nil
+            conditionsPopupButton.select(nil)
+            conditionsPopupButton.bind(.contentValues, to: conditionsArrayController, withKeyPath: "arrangedObjects.name", options: nil)
+        }
+    }
     @IBAction func includeTextCheckboxClicked(_ sender: Any) {
         setOutputType(type: .text)
     }

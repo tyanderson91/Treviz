@@ -21,6 +21,8 @@ class OutputsViewController: TZViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.wantsLayer = true
+        view.layer?.backgroundColor = NSColor.black.cgColor
     }
     
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {

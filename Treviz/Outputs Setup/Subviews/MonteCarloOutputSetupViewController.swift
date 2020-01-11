@@ -22,6 +22,9 @@ class MonteCarloOutputSetupViewController: AddOutputViewController {
         let storyboard = NSStoryboard(name: "VariableSelector", bundle: nil)
         let var1ViewController = storyboard.instantiateController(withIdentifier: "variableSelectorViewController") as! VariableSelectorViewController
         var1ViewController.representedObject = self.analysis
+        super.viewDidLoad()
+
+        var1ViewController.selectedVariable = representedOutput.var1
         self.addChild(var1ViewController)
         gridView.cell(atColumnIndex: 1, rowIndex: 1).contentView = var1ViewController.view
 

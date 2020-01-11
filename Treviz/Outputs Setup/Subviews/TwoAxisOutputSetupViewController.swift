@@ -33,8 +33,6 @@ class TwoAxisOutputSetupViewController: AddOutputViewController {
     override func headerTitle() -> String { return NSLocalizedString("Two Axis", comment: "") }
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        
         let storyboard = NSStoryboard(name: "VariableSelector", bundle: nil)
         let var1ViewController = storyboard.instantiateController(withIdentifier: "variableSelectorViewController") as! VariableSelectorViewController
         var1ViewController.representedObject = self.analysis
@@ -50,6 +48,12 @@ class TwoAxisOutputSetupViewController: AddOutputViewController {
         var3ViewController.representedObject = self.analysis
         self.addChild(var3ViewController)
         variableGridView.cell(atColumnIndex: 1, rowIndex: 2).contentView = var3ViewController.view
+        
+        super.viewDidLoad()
+        var1ViewController.selectedVariable = self.representedOutput.var1
+        var2ViewController.selectedVariable = self.representedOutput.var2
+        var3ViewController.selectedVariable = self.representedOutput.var3
+
         /*
         setWidth(component: var1ViewController, width: varSelectorWidth)
         setWidth(component: var2ViewController, width: varSelectorWidth)

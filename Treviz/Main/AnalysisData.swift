@@ -38,7 +38,7 @@ extension Analysis {
         // For now, this is just a test configuration
         
         self.name = "Test Analysis"
-        self.defaultTimestep = 0.001
+        self.defaultTimestep = 0.1
         self.vehicle = Vehicle()
         
         // Read all inputs
@@ -170,6 +170,8 @@ extension Analysis {
         }
         if let terminalConditionDict = yamlDict["Terminal Condition"] as? [String: Any] {
             if let newCond = Condition(fromYaml: terminalConditionDict, inputConditions: conditions) {
+                newCond.name = "Terminal"
+                conditions.append(newCond)
                 self.terminalConditions = newCond
             }
         }
@@ -177,7 +179,9 @@ extension Analysis {
             self.plots = []
             for thisOutputDict in outputList {
                 if let newOutput = initOutput(fromYaml: thisOutputDict) {
-                    plots.append(newOutput) }
+                    //plots.append(newOutput)
+                    self.viewController.mainSplitViewController.outputSetupViewController.addOutput(newOutput)
+                }
             }
         }
     }

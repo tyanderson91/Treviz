@@ -32,7 +32,7 @@
                                                     <tableColumns>
                                                         <tableColumn identifier="NameColumn" width="252" minWidth="40" maxWidth="1000" id="azQ-xe-zxX">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Name">
-                                                                <font key="font" metaFont="label" size="11"/>
+                                                                <font key="font" metaFont="toolTip"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                             </tableHeaderCell>
@@ -132,7 +132,7 @@
                                                         </tableColumn>
                                                         <tableColumn identifier="InitStateValueColumn" width="111" minWidth="40" maxWidth="1000" id="qWa-Ie-HJJ">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Value">
-                                                                <font key="font" metaFont="label" size="11"/>
+                                                                <font key="font" metaFont="toolTip"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                             </tableHeaderCell>
@@ -175,7 +175,7 @@
                                                         </tableColumn>
                                                         <tableColumn identifier="UnitsColumn" width="102" minWidth="40" maxWidth="1000" id="CMX-bt-7R9" userLabel="Units">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Units">
-                                                                <font key="font" metaFont="label" size="11"/>
+                                                                <font key="font" metaFont="toolTip"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                             </tableHeaderCell>
@@ -219,7 +219,7 @@
                                                         </tableColumn>
                                                         <tableColumn identifier="InitStateParameterColumn" width="93" minWidth="40" maxWidth="1000" id="KA9-aC-fyg" userLabel="Parameter">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Parameter?">
-                                                                <font key="font" metaFont="label" size="11"/>
+                                                                <font key="font" metaFont="toolTip"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                             </tableHeaderCell>
@@ -314,35 +314,62 @@
             <objects>
                 <viewController title="Settings" storyboardIdentifier="SettingsViewController" id="nO6-jD-DH1" customClass="SettingsViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="I4F-E2-8ug">
-                        <rect key="frame" x="0.0" y="0.0" width="534" height="147"/>
+                        <rect key="frame" x="0.0" y="0.0" width="534" height="21"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <customView horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="500" translatesAutoresizingMaskIntoConstraints="NO" id="AmF-w8-wse">
-                                <rect key="frame" x="0.0" y="0.0" width="534" height="147"/>
+                                <rect key="frame" x="0.0" y="0.0" width="534" height="21"/>
+                                <subviews>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cih-oc-nIr">
+                                        <rect key="frame" x="151" y="3" width="118" height="16"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Terminal Condition" id="yTr-yl-FDp">
+                                            <font key="font" usesAppearanceFont="YES"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                </subviews>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" id="cTS-5A-538"/>
+                                    <constraint firstItem="cih-oc-nIr" firstAttribute="trailing" secondItem="AmF-w8-wse" secondAttribute="centerX" id="jGY-wK-xQK"/>
+                                    <constraint firstItem="cih-oc-nIr" firstAttribute="centerY" secondItem="AmF-w8-wse" secondAttribute="centerY" id="zv6-6p-jPP"/>
                                 </constraints>
                             </customView>
+                            <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RTv-kH-GyD">
+                                <rect key="frame" x="275" y="-3" width="45" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40" id="YlX-7m-a52"/>
+                                </constraints>
+                                <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="LWZ-fo-bZ0">
+                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <menu key="menu" id="Tiz-NQ-vo4"/>
+                                </popUpButtonCell>
+                            </popUpButton>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="AmF-w8-wse" secondAttribute="trailing" id="CqL-0t-Ho0"/>
+                            <constraint firstAttribute="bottom" secondItem="RTv-kH-GyD" secondAttribute="bottom" id="Det-dP-uqi"/>
+                            <constraint firstItem="RTv-kH-GyD" firstAttribute="top" secondItem="I4F-E2-8ug" secondAttribute="top" id="K8y-qy-y88"/>
+                            <constraint firstItem="AmF-w8-wse" firstAttribute="leading" secondItem="I4F-E2-8ug" secondAttribute="leading" id="SI2-gj-7ac"/>
                             <constraint firstAttribute="bottom" secondItem="AmF-w8-wse" secondAttribute="bottom" id="kv3-g4-4IB"/>
                             <constraint firstItem="AmF-w8-wse" firstAttribute="top" secondItem="I4F-E2-8ug" secondAttribute="top" id="nm8-ht-TFq"/>
-                            <constraint firstItem="AmF-w8-wse" firstAttribute="leading" secondItem="I4F-E2-8ug" secondAttribute="leading" id="vlG-hM-OWO"/>
+                            <constraint firstItem="RTv-kH-GyD" firstAttribute="leading" secondItem="cih-oc-nIr" secondAttribute="trailing" constant="10" id="vqv-8U-vOK"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="heightConstraint" destination="cTS-5A-538" id="xK8-5J-vvh"/>
+                        <outlet property="terminalConditionPopupButton" destination="RTv-kH-GyD" id="33G-LB-o2V"/>
                     </connections>
                 </viewController>
                 <customObject id="W4Z-T9-kdE" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-204" y="1373"/>
+            <point key="canvasLocation" x="-191" y="1343.5"/>
         </scene>
         <!--Inputs View Controller-->
         <scene sceneID="PF7-IS-NV6">
             <objects>
-                <viewController title="Inputs View Controller" id="BWH-wW-vxd" customClass="InputsViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Inputs View Controller" identifier="inputsRestoration" storyboardIdentifier="inputs" id="BWH-wW-vxd" customClass="InputsViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="V9E-Gq-8Gm">
                         <rect key="frame" x="0.0" y="0.0" width="400" height="436"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -430,7 +457,7 @@
                                                     <tableColumns>
                                                         <tableColumn width="116" minWidth="40" maxWidth="1000" id="8pr-PT-JX1">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
-                                                                <font key="font" metaFont="label" size="11"/>
+                                                                <font key="font" metaFont="toolTip"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                             </tableHeaderCell>
@@ -463,7 +490,7 @@
                                                         </tableColumn>
                                                         <tableColumn width="245" minWidth="40" maxWidth="1000" id="aiz-hU-5V2">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
-                                                                <font key="font" metaFont="label" size="11"/>
+                                                                <font key="font" metaFont="toolTip"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                             </tableHeaderCell>
@@ -535,7 +562,7 @@
                 </viewController>
                 <customObject id="Nbg-fU-7Wu" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-159" y="1557"/>
+            <point key="canvasLocation" x="-211" y="1537"/>
         </scene>
         <!--Param Table View Controller-->
         <scene sceneID="HKS-bR-VCd">
@@ -560,7 +587,7 @@
                                             <tableColumns>
                                                 <tableColumn identifier="NameColumn" width="150" minWidth="40" maxWidth="1000" id="AbC-Hg-Ysp">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Parameter Name">
-                                                        <font key="font" metaFont="label" size="11"/>
+                                                        <font key="font" metaFont="toolTip"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -583,7 +610,7 @@
                                                                     </constraints>
                                                                     <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSRemoveTemplate" imagePosition="only" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="SDM-P9-QAy">
                                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                                        <font key="font" metaFont="label" size="11"/>
+                                                                        <font key="font" metaFont="toolTip"/>
                                                                     </buttonCell>
                                                                     <connections>
                                                                         <action selector="removeParamPressed:" target="hM9-90-DLw" id="7Wu-PU-niW"/>
@@ -611,7 +638,7 @@
                                                 </tableColumn>
                                                 <tableColumn identifier="ParamValueColumn" width="80" minWidth="40" maxWidth="1000" id="dmT-5h-h5R">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Values">
-                                                        <font key="font" metaFont="label" size="11"/>
+                                                        <font key="font" metaFont="toolTip"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -647,7 +674,7 @@
                                                 </tableColumn>
                                                 <tableColumn identifier="UnitsColumn" width="79.5" minWidth="40" maxWidth="1000" id="Zaw-V9-cti">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Units">
-                                                        <font key="font" metaFont="label" size="11"/>
+                                                        <font key="font" metaFont="toolTip"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>

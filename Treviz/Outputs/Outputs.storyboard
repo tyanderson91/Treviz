@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="Pa4-gg-nuF">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="Pa4-gg-nuF">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15400"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15702"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Outputs View Controller-->
         <scene sceneID="KNJ-g2-3uE">
             <objects>
-                <viewController id="Pa4-gg-nuF" customClass="OutputsViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController identifier="outputsRestoration" storyboardIdentifier="outputs" id="Pa4-gg-nuF" customClass="OutputsViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="1cc-LO-2Bp">
                         <rect key="frame" x="0.0" y="0.0" width="278" height="228"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -39,7 +39,7 @@
         <!--Outputs Split View Controller-->
         <scene sceneID="ooh-00-C22">
             <objects>
-                <splitViewController id="N6o-UD-So8" customClass="OutputsSplitViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
+                <splitViewController identifier="outputsSplitViewRestoration" storyboardIdentifier="outputsSplitView" id="N6o-UD-So8" customClass="OutputsSplitViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
                     <splitViewItems>
                         <splitViewItem id="mNy-07-dZ6" userLabel="Output Split View Item"/>
                         <splitViewItem id="q18-kp-lhX" userLabel="Text Split View Item"/>
@@ -64,14 +64,14 @@
         <!--imageOutputViewController-->
         <scene sceneID="X15-YZ-sea">
             <objects>
-                <viewController title="imageOutputViewController" id="kWr-Ah-mB4" customClass="PlotViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="imageOutputViewController" identifier="imageOutputRestoration" storyboardIdentifier="imageOutput" id="kWr-Ah-mB4" customClass="PlotViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="kVX-fw-nPv">
                         <rect key="frame" x="0.0" y="0.0" width="369" height="351"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="100" verticalCompressionResistancePriority="100" translatesAutoresizingMaskIntoConstraints="NO" id="dVC-90-yCV">
                                 <rect key="frame" x="0.0" y="0.0" width="369" height="351"/>
-                                <imageCell key="cell" selectable="YES" editable="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="globe_picture" id="z1w-gs-roZ"/>
+                                <imageCell key="cell" selectable="YES" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="globe_picture" id="z1w-gs-roZ"/>
                             </imageView>
                         </subviews>
                         <constraints>
@@ -89,7 +89,7 @@
         <!--Text Outputs View Controller-->
         <scene sceneID="9HR-bL-jxG">
             <objects>
-                <viewController title="textOutputViewController" storyboardIdentifier="textOutputViewController" id="C1c-ub-Xf2" userLabel="Text Outputs View Controller" customClass="TextOutputsViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="textOutputViewController" identifier="textOutputRestoration" storyboardIdentifier="textOutputViewController" id="C1c-ub-Xf2" userLabel="Text Outputs View Controller" customClass="TextOutputsViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="Mmw-rs-Ljz">
                         <rect key="frame" x="0.0" y="0.0" width="215" height="188"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

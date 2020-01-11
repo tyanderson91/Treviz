@@ -202,14 +202,13 @@
 			children = (
 				CD2D0DB0224382F70012978E /* InfoBarStackView */,
 				CD449022233B26370095F243 /* Variable */,
-				CDF3D1A5225057270064D70C /* TZViewController.swift */,
+				CD3F5E5622EE4D8C00E4CF20 /* Conditions */,
 				CDB457BC2384FABC004F13AA /* IO.swift */,
 				CDB7C7392352B03100BC50F1 /* Parameter.swift */,
 				CDAF13FC222CF357005CDC3C /* State.swift */,
 				CD0F011A23656EF200C920AA /* StateArray.swift */,
 				CD42E0A922FD05F600A0F9A1 /* CollapsibleStackView.swift */,
 				CD28477622FF9C8800D192A9 /* CollapsibleGridView.swift */,
-				CD3F5E5622EE4D8C00E4CF20 /* Conditions */,
 			);
 			path = "Reusable classes";
 			sourceTree = "<group>";
@@ -285,6 +284,7 @@
 				CDAF14262230FB72005CDC3C /* Variable.swift */,
 				CD9B490B2339BB56008ADA2C /* VariableSelectorViewController.swift */,
 				CD449023233B378C0095F243 /* VariableSelector.storyboard */,
+				CDF3D1A5225057270064D70C /* TZViewController.swift */,
 			);
 			path = Variable;
 			sourceTree = "<group>";

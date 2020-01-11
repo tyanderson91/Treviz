@@ -16,7 +16,7 @@ extension NSNotification.Name {
     static let didChangeValue = Notification.Name("didChangeValue")
 
     static let didAddCondition = Notification.Name("didAddCondition")
-    static let didRemoveCondition = Notification.Name("didAddCondition")
+    static let didRemoveCondition = Notification.Name("didRemoveCondition")
 
     static let didAddPlot = Notification.Name("didAddPlot")
     

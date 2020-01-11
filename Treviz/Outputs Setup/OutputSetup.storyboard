@@ -9,19 +9,19 @@
         <!--Output Setup View Controller-->
         <scene sceneID="pk8-NG-Akl">
             <objects>
-                <viewController storyboardIdentifier="outputSetup" id="FMf-NL-ufc" customClass="OutputSetupViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController identifier="outputSetupRestoration" storyboardIdentifier="outputSetup" id="FMf-NL-ufc" customClass="OutputSetupViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="fmw-WQ-uxs">
-                        <rect key="frame" x="0.0" y="0.0" width="511" height="289"/>
+                        <rect key="frame" x="0.0" y="0.0" width="513" height="289"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView verticalHuggingPriority="900" verticalCompressionResistancePriority="50" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X3z-Eb-GAM" userLabel="Output Setup Custom Scroll View">
-                                <rect key="frame" x="0.0" y="115" width="511" height="123"/>
+                                <rect key="frame" x="0.0" y="115" width="513" height="123"/>
                                 <clipView key="contentView" id="iZT-XH-WJ0">
-                                    <rect key="frame" x="1" y="1" width="509" height="121"/>
+                                    <rect key="frame" x="1" y="1" width="511" height="121"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="1" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" verticalClippingResistancePriority="900" verticalHuggingPriority="900" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gfp-GI-MP9" customClass="CustomStackView" customModule="Treviz" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="121" width="509" height="0.0"/>
+                                            <rect key="frame" x="0.0" y="121" width="511" height="0.0"/>
                                         </stackView>
                                     </subviews>
                                     <constraints>
@@ -34,11 +34,11 @@
                                     <constraint firstAttribute="height" priority="50" constant="400" placeholder="YES" id="sXx-O9-x1F"/>
                                 </constraints>
                                 <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="kBx-UO-78b">
-                                    <rect key="frame" x="1" y="106" width="509" height="16"/>
+                                    <rect key="frame" x="1" y="106" width="511" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="39l-sD-gFI">
-                                    <rect key="frame" x="494" y="1" width="16" height="121"/>
+                                    <rect key="frame" x="496" y="1" width="16" height="121"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
@@ -54,21 +54,21 @@
                                 </textFieldCell>
                             </textField>
                             <scrollView verticalHuggingPriority="100" horizontalCompressionResistancePriority="150" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AVK-iS-hVV">
-                                <rect key="frame" x="0.0" y="0.0" width="511" height="100"/>
+                                <rect key="frame" x="0.0" y="0.0" width="513" height="100"/>
                                 <clipView key="contentView" id="AdT-5W-YYn">
-                                    <rect key="frame" x="1" y="0.0" width="509" height="99"/>
+                                    <rect key="frame" x="1" y="0.0" width="511" height="99"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="ilb-uV-gPZ" viewBased="YES" id="quK-tu-3hE">
-                                            <rect key="frame" x="0.0" y="0.0" width="509" height="74"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="511" height="74"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn identifier="plotIDColumn" width="75" minWidth="40" maxWidth="1000" id="vRW-au-D73" userLabel="ID">
+                                                <tableColumn width="75" minWidth="40" maxWidth="1000" id="vRW-au-D73" userLabel="ID">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="ID">
-                                                        <font key="font" metaFont="toolTip"/>
+                                                        <font key="font" metaFont="label" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -79,7 +79,7 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
-                                                        <tableCellView identifier="plotIDTableCellView" id="BUK-Xk-xTa">
+                                                        <tableCellView id="BUK-Xk-xTa">
                                                             <rect key="frame" x="1" y="1" width="75" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -90,6 +90,9 @@
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
+                                                                    <connections>
+                                                                        <binding destination="BUK-Xk-xTa" name="value" keyPath="objectValue.id" id="e04-xp-2xK"/>
+                                                                    </connections>
                                                                 </textField>
                                                             </subviews>
                                                             <constraints>
@@ -103,9 +106,9 @@
                                                         </tableCellView>
                                                     </prototypeCellViews>
                                                 </tableColumn>
-                                                <tableColumn identifier="plotNameColumn" width="118" minWidth="40" maxWidth="1000" id="ioJ-cD-IZ9">
-                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Name">
-                                                        <font key="font" metaFont="toolTip"/>
+                                                <tableColumn width="120" minWidth="40" maxWidth="1000" id="ioJ-cD-IZ9">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Title">
+                                                        <font key="font" metaFont="label" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -116,17 +119,20 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
-                                                        <tableCellView identifier="plotNameTableCellView" id="Sv2-rT-2MN">
-                                                            <rect key="frame" x="79" y="1" width="118" height="17"/>
+                                                        <tableCellView id="Sv2-rT-2MN">
+                                                            <rect key="frame" x="79" y="1" width="120" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="CSb-uG-B8q">
-                                                                    <rect key="frame" x="0.0" y="1" width="118" height="16"/>
-                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Name" id="Co7-Wx-vV9">
+                                                                    <rect key="frame" x="0.0" y="1" width="120" height="16"/>
+                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Title" id="Co7-Wx-vV9">
                                                                         <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
+                                                                    <connections>
+                                                                        <binding destination="Sv2-rT-2MN" name="value" keyPath="objectValue.title" id="0CA-i2-2j0"/>
+                                                                    </connections>
                                                                 </textField>
                                                             </subviews>
                                                             <constraints>
@@ -140,9 +146,9 @@
                                                         </tableCellView>
                                                     </prototypeCellViews>
                                                 </tableColumn>
-                                                <tableColumn identifier="plotDescripColumn" width="307" minWidth="40" maxWidth="1000" id="MXf-j7-hBy">
+                                                <tableColumn width="307" minWidth="40" maxWidth="1000" id="MXf-j7-hBy">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Description">
-                                                        <font key="font" metaFont="toolTip"/>
+                                                        <font key="font" metaFont="label" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -153,17 +159,20 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
-                                                        <tableCellView identifier="plotDescripTableCellView" id="UdY-h2-eqB">
-                                                            <rect key="frame" x="200" y="1" width="307" height="17"/>
+                                                        <tableCellView id="UdY-h2-eqB">
+                                                            <rect key="frame" x="202" y="1" width="307" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="79G-Ci-R9Q">
                                                                     <rect key="frame" x="0.0" y="1" width="307" height="16"/>
-                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Descrip" id="FjU-Tp-C89">
+                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Description" id="FjU-Tp-C89">
                                                                         <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
+                                                                    <connections>
+                                                                        <binding destination="UdY-h2-eqB" name="value" keyPath="objectValue.displayName" id="jE5-1d-IXE"/>
+                                                                    </connections>
                                                                 </textField>
                                                             </subviews>
                                                             <constraints>
@@ -179,8 +188,7 @@
                                                 </tableColumn>
                                             </tableColumns>
                                             <connections>
-                                                <outlet property="dataSource" destination="FMf-NL-ufc" id="Bw2-ZV-LiA"/>
-                                                <outlet property="delegate" destination="FMf-NL-ufc" id="WOT-s0-x4m"/>
+                                                <binding destination="3Am-te-Ukr" name="selectionIndexes" keyPath="selectionIndexes" id="Ny9-UC-DD9"/>
                                             </connections>
                                         </tableView>
                                     </subviews>
@@ -189,7 +197,7 @@
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="Qh9-xK-Txy"/>
                                 </constraints>
                                 <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="S5C-t8-OmY">
-                                    <rect key="frame" x="1" y="155" width="357" height="16"/>
+                                    <rect key="frame" x="1" y="83" width="509" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="g5N-ph-kiH">
@@ -197,15 +205,15 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <tableHeaderView key="headerView" id="ilb-uV-gPZ">
-                                    <rect key="frame" x="0.0" y="0.0" width="509" height="25"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="511" height="25"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableHeaderView>
                             </scrollView>
                             <stackView distribution="fillEqually" orientation="horizontal" alignment="top" spacing="1" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uyZ-oY-mbV">
-                                <rect key="frame" x="78" y="253" width="355" height="21"/>
+                                <rect key="frame" x="78" y="253" width="357" height="21"/>
                                 <subviews>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vQy-oS-3AV">
-                                        <rect key="frame" x="-6" y="-7" width="100" height="32"/>
+                                        <rect key="frame" x="-6" y="-7" width="101" height="32"/>
                                         <buttonCell key="cell" type="push" title="1 axis" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="SMr-oE-NhK">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -215,7 +223,7 @@
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fwq-je-lfB">
-                                        <rect key="frame" x="83" y="-7" width="100" height="32"/>
+                                        <rect key="frame" x="84" y="-7" width="100" height="32"/>
                                         <buttonCell key="cell" type="push" title="2 axis" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="t0c-rj-E2a">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -226,7 +234,7 @@
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cvd-2C-b4Y">
-                                        <rect key="frame" x="172" y="-7" width="100" height="32"/>
+                                        <rect key="frame" x="173" y="-7" width="101" height="32"/>
                                         <buttonCell key="cell" type="push" title="3 axis" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="TXr-RE-xq4">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -237,7 +245,7 @@
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9OR-M0-X3v">
-                                        <rect key="frame" x="261" y="-7" width="100" height="32"/>
+                                        <rect key="frame" x="263" y="-7" width="100" height="32"/>
                                         <buttonCell key="cell" type="push" title="M-C" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="nYJ-q0-whR">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -278,11 +286,18 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="outputsArrayController" destination="3Am-te-Ukr" id="5Mr-Kb-P7w"/>
                         <outlet property="stack" destination="Gfp-GI-MP9" id="DTY-Kq-eYx"/>
                         <outlet property="tableView" destination="quK-tu-3hE" id="anw-Uf-ajL"/>
                     </connections>
                 </viewController>
                 <customObject id="DhO-km-sdV" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <arrayController objectClassName="Treviz.TZOutput" id="3Am-te-Ukr" userLabel="Outputs array controller">
+                    <connections>
+                        <binding destination="FMf-NL-ufc" name="contentArray" keyPath="self.allPlots" id="fxh-bn-yse"/>
+                        <binding destination="FMf-NL-ufc" name="selectionIndexes" keyPath="self.selectedOutputIndex" id="kwK-GC-rq8"/>
+                    </connections>
+                </arrayController>
             </objects>
             <point key="canvasLocation" x="-108.5" y="860.5"/>
         </scene>
@@ -1062,7 +1077,7 @@
                     </connections>
                 </objectController>
             </objects>
-            <point key="canvasLocation" x="267" y="1443"/>
+            <point key="canvasLocation" x="266.5" y="1443"/>
         </scene>
         <!--MonteCarloResultViewController-->
         <scene sceneID="f2T-ms-HX7">

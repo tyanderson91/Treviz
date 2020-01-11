@@ -30,7 +30,14 @@ class MainWindowController: NSWindowController, NSToolbarDelegate {
         showHidePanesControl.setWidth(18, forSegment: 0)
         showHidePanesControl.setWidth(26, forSegment: 1)
         showHidePanesControl.setWidth(18, forSegment: 2)
-
+        for i in 0...2 { // TODO: handle this all with restoration IDs
+            if let isEnabled = UserDefaults().value(forKey: "mainSplitViewDiscloseButton\(i)Enabled") as? Bool {
+                showHidePanesControl.setEnabled(isEnabled, forSegment: i)
+            }
+            if let isSelected = UserDefaults().value(forKey: "mainSplitViewDiscloseButton\(i)Selected") as? Bool {
+                showHidePanesControl.setSelected(isSelected, forSegment: i)
+            }
+        }
         // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
     }
     
@@ -71,11 +78,14 @@ class MainWindowController: NSWindowController, NSToolbarDelegate {
         let curIndex = button.indexOfSelectedItem
         let shouldCollapse = !button.isSelected(forSegment: curIndex)
         let splitViewController = asys.viewController.mainSplitViewController!
-
-        splitViewController.setSectionCollapse(shouldCollapse, forSection: curIndex)
+        let thisKey = "mainSplitViewDiscloseButton\(curIndex)"
+        let didDisclose = splitViewController.setSectionCollapse(shouldCollapse, forSection: curIndex)
+        
         for i in 0...2 { // If there is one button left, disable it so user cannot collapse everything
             let enableButton = (splitViewController.numActiveViews == 1 && button.isSelected(forSegment: i)) ? false : true
             button.setEnabled(enableButton, forSegment: i)
+            UserDefaults().set(button.isEnabled(forSegment: i), forKey: "mainSplitViewDiscloseButton\(i)Enabled")
+            UserDefaults().set(button.isSelected(forSegment: i), forKey: "mainSplitViewDiscloseButton\(i)Selected")
         }
     }
 }

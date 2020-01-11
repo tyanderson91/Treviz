@@ -31,6 +31,7 @@ class SingleAxisOutputSetupViewController: AddOutputViewController {
         super.viewDidLoad()
         
         variableSelectorViewController.representedObject = self.analysis
+        variableSelectorViewController.selectedVariable = self.representedOutput.var1
         self.addChild(variableSelectorViewController)
         gridView.cell(atColumnIndex: 0, rowIndex: 1).contentView = variableSelectorViewController.view
         self.variableSelectorViewController.view.becomeFirstResponder()
@@ -40,7 +41,9 @@ class SingleAxisOutputSetupViewController: AddOutputViewController {
         super.loadAnalysis(analysis)
         if analysis != nil {
             variableSelectorViewController.representedObject = analysis!
-            variableSelectorViewController.variableSeletorArrayController.content = analysis?.varList
+            variableSelectorViewController.selectedVariable = representedOutput.var1
+            variableSelectorViewController.variableSelectorArrayController.content = analysis?.varList
+            variableSelectorViewController.variableSelectorPopup.bind(.selectedObject, to: representedOutput, withKeyPath: "var1", options: nil)
         }
     }
 

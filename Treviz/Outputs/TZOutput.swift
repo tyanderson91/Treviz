@@ -9,21 +9,23 @@
 //
 
 import Cocoa
+import Foundation
 
 class TZOutput : NSObject {
-    var displayName : String
-    var id : Int
-    var title : String?
+    //var displayName : String
+    @objc var displayName: String {return getDisplayName() }
+    @objc var id : Int
+    @objc var title : String?
     @objc var plotType : TZPlotType
-    var var1 : Variable?
-    var var2 : Variable?
-    var var3 : Variable?
-    var categoryVar : Variable?
+    @objc var var1 : Variable?
+    @objc var var2 : Variable?
+    @objc var var3 : Variable?
+    @objc var categoryVar : Variable?
     @objc var condition : Condition?
     var curTrajectory : State?
     
     init(id : Int, plotType : TZPlotType){
-        self.displayName = ""
+        //self.displayName = ""
         self.id = id
         self.plotType = plotType
         super.init()
@@ -32,7 +34,7 @@ class TZOutput : NSObject {
     init?(with dict: Dictionary<String,Any>){
         if let id = dict["id"] as? Int {self.id = id} else {return nil}
         if let plotType = dict["plot type"] as? TZPlotType {self.plotType = plotType}else {return nil}
-        if let name = dict["name"] as? String {self.displayName = name} else {self.displayName = ""}
+        //if let name = dict["name"] as? String {self.displayName = name} else {self.displayName = ""}
         super.init()
         if let title = dict["title"] as? String {self.title = title}
         if let var1 = dict["variable"] as? Variable {self.var1 = var1}
@@ -41,7 +43,7 @@ class TZOutput : NSObject {
     
     convenience init(id : Int, title : String, plotType : TZPlotType) {
         self.init(id : id, plotType : plotType)
-        self.displayName = title
+        //self.displayName = title
         self.title = title
     }
     
@@ -60,7 +62,7 @@ class TZOutput : NSObject {
     
     convenience init(id: Int, with output : TZOutput) {
         self.init(id : id, plotType: output.plotType)
-        displayName = output.displayName
+        //displayName = output.displayName
         title = output.title
         var1 = output.var1
         var2 = output.var2
@@ -68,6 +70,15 @@ class TZOutput : NSObject {
         categoryVar = output.categoryVar
         condition = output.condition
         curTrajectory = output.curTrajectory
+    }
+    
+    private func getDisplayName()->String {
+        var name = ""
+        let varnames = [var1, var2, var3].compactMap { $0?.name }
+        name += varnames.joined(separator: ", ")
+        if categoryVar != nil { name += " by " + categoryVar!.name }
+        if condition != nil { name += " at " + condition!.name}
+        return name
     }
     
 }

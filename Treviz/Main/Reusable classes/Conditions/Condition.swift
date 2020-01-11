@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Cocoa
 
 protocol EvaluateCondition {
     func evaluate(_ state: State)
@@ -35,6 +36,10 @@ enum BoolType : Int {
             return returnBool
         } else {return nil}
     }
+    func stringValue()->String{
+        let returnDict : Dictionary<BoolType, String> = [.single: "single", .and: "and", .or: "or", .nor: "nor", .nand: "nand", .xor: "xor", .xnor: "xnor"]
+        return returnDict[self]!
+    }
 }
 /**
  Special conditions are conditions unique to a particular variable
@@ -52,14 +57,19 @@ enum SpecialConditionType : Int {
             return returnBool
         } else {return nil}
     }
+    
+    func asString()->String{
+        let returnDict : Dictionary<SpecialConditionType, String> = [.globalMax: "Max", .globalMin: "Min", .localMax: "Local Max", .localMin: "Local Min"]
+        return returnDict[self]!
+    }
 }
 
 class SingleCondition: NSObject, EvaluateCondition {
-    let varID : VariableID
-    var lbound : VarValue? = nil
-    var ubound : VarValue? = nil
-    var equality : VarValue? = nil
-    var specialCondition : SpecialConditionType? = nil
+    var varID : VariableID!
+    var lbound : VarValue?
+    var ubound : VarValue?
+    var equality : VarValue?
+    var specialCondition : SpecialConditionType?
     var meetsCondition : [Bool]?
     // var isSinglePoint: Bool = false
     var varPosition : Int? // Position of the current variable in the index of StateVarPositions (automatically assigned, speeds up performance)
@@ -84,6 +94,11 @@ class SingleCondition: NSObject, EvaluateCondition {
             }
         }
         return _tests
+    }
+    
+    override init(){
+        self.varID = nil
+        super.init()
     }
     
     init(_ vid: VariableID){
@@ -171,6 +186,29 @@ class Condition : NSObject, EvaluateCondition {
             i += 1
         }
         return indices
+    }
+    @objc dynamic var summary : String {
+        var dstring = ""
+        var dstrings = [String]()
+        for thisCond in self.conditions {
+            if let singleCond = thisCond as? SingleCondition {
+                if singleCond.equality != nil {
+                    dstring += "\(singleCond.varID ?? "")=\(singleCond.equality!)"
+                } else if let sc = singleCond.specialCondition {
+                    dstring += sc.asString()
+                } else {
+                    let lbstr = singleCond.lbound == nil ? "" : "\(singleCond.lbound!) < "
+                    let ubstr = singleCond.ubound == nil ? "" : " < \(singleCond.ubound!)"
+                    dstring += lbstr + "\(singleCond.varID ?? "")" + ubstr
+                }
+            } else if let cond = thisCond as? Condition {
+                dstring = cond.summary
+                if cond.conditions.count > 1 { dstring = "(" + dstring + ")" }
+            }
+            dstrings.append(dstring)
+        }
+        let combinedString = dstrings.joined(separator: " \(unionType.stringValue()) ")
+        return combinedString
     }
     
     /*

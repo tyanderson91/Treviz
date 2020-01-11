@@ -22,7 +22,7 @@ class TZTextOutput: TZOutput {
     
     convenience init(id: Int, with output : TZOutput) {
         self.init(id : id, plotType: output.plotType)
-        displayName = output.displayName + " (Text)"
+        //displayName = output.displayName + " (Text)"
         title = output.title
         var1 = output.var1
         var2 = output.var2
@@ -37,9 +37,9 @@ class TZTextOutput: TZOutput {
         guard let curTraj = curTrajectory else {return NSAttributedString(string: "No trajectory assigned")}
         // assert(condition?.isSinglePoint ?? false, "Condition not set or condition produces muliple points")
         guard let varDoubleValues = curTraj[thisVar, condition!] else {
-            return NSAttributedString(string: "No matching points could be found for output set '\(self.displayName)'")}
+            return NSAttributedString(string: "No matching points could be found for output set '\(self.description)'")}
         guard varDoubleValues.count >= 1 else {
-            return NSAttributedString(string: "No matching points could be found for output set '\(self.displayName)'")
+            return NSAttributedString(string: "No matching points could be found for output set '\(self.description)'")
         }
         let stringOutput = NSMutableAttributedString(string: "\(thisVar.name):\t", attributes: [NSAttributedString.Key.font : NSFont.boldSystemFont(ofSize: 12)])
         let strval = String(format: "%2.4f", varDoubleValues[0])

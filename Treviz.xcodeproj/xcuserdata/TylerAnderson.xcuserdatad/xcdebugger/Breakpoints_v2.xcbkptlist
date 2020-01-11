@@ -7,17 +7,95 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "E96F95C6-109D-4797-BF50-9E01282B7051"
-            shouldBeEnabled = "Yes"
+            uuid = "3A09515A-4644-4A43-AB02-DF0FC5B79E01"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Treviz/Outputs/OutputsViewController.swift"
+            filePath = "Treviz/Main/Reusable classes/Conditions/ConditionsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
-            landmarkName = "processOutputs()"
+            startingLineNumber = "216"
+            endingLineNumber = "216"
+            landmarkName = "lowerBoundWasSet(_:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E9E7FDF4-E717-4823-A674-2C2D54BD9312"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Treviz/Main/Reusable classes/Conditions/ConditionsViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "219"
+            endingLineNumber = "219"
+            landmarkName = "typeWasSelected(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "E9E7FDF4-E717-4823-A674-2C2D54BD9312 - d9213f8e8c393504"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Treviz.AddConditionViewController.typeWasSelected(__C.NSButton) -&gt; ()"
+                  moduleName = "Treviz"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/TylerAnderson/Coding/Swift/Treviz/Treviz/Main/Reusable%20classes/Conditions/ConditionsViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "199"
+                  endingLineNumber = "199"
+                  offsetFromSymbolStart = "105">
+               </Location>
+               <Location
+                  uuid = "E9E7FDF4-E717-4823-A674-2C2D54BD9312 - d9213f8e8c393504"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Treviz.AddConditionViewController.typeWasSelected(__C.NSButton) -&gt; ()"
+                  moduleName = "Treviz"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/TylerAnderson/Coding/Swift/Treviz/Treviz/Main/Reusable%20classes/Conditions/ConditionsViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "199"
+                  endingLineNumber = "199"
+                  offsetFromSymbolStart = "188">
+               </Location>
+               <Location
+                  uuid = "E9E7FDF4-E717-4823-A674-2C2D54BD9312 - d9213f8e8c393504"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Treviz.AddConditionViewController.typeWasSelected(__C.NSButton) -&gt; ()"
+                  moduleName = "Treviz"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/TylerAnderson/Coding/Swift/Treviz/Treviz/Main/Reusable%20classes/Conditions/ConditionsViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "199"
+                  endingLineNumber = "199"
+                  offsetFromSymbolStart = "1605">
+               </Location>
+               <Location
+                  uuid = "E9E7FDF4-E717-4823-A674-2C2D54BD9312 - d9213f8e8c393504"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Treviz.AddConditionViewController.typeWasSelected(__C.NSButton) -&gt; ()"
+                  moduleName = "Treviz"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/TylerAnderson/Coding/Swift/Treviz/Treviz/Main/Reusable%20classes/Conditions/ConditionsViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "199"
+                  endingLineNumber = "199"
+                  offsetFromSymbolStart = "3056">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

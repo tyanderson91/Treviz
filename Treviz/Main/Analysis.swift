@@ -36,14 +36,14 @@ class Analysis: NSDocument {//TODO: possibly subclass NSPersistentDocument if us
     
     // Analysis-specific data and configs (read/writing functions in AnalysisData.swift)
     var name : String = ""
-    var terminalConditions : Condition!
+    @objc var terminalConditions : Condition!
     var traj: State!
     @objc var conditions : [Condition] = []
     var inputSettings : [Parameter] = []
     var parameters : [Parameter] { //TODO: this should contain more than just input settings
         return inputSettings.filter {$0.isParam}
     }
-    var plots : [TZOutput] = []
+    @objc var plots : [TZOutput] = []
     var defaultTimestep : VarValue = 1
     var vehicle : Vehicle!
     var propagatorType : PropagatorType = .explicit

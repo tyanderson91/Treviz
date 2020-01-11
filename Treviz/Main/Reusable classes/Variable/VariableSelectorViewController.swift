@@ -11,13 +11,12 @@ import Cocoa
 class VariableSelectorViewController: TZViewController {
 
     @IBOutlet weak var variableSelectorPopup: NSPopUpButton!
-    @IBOutlet var variableSeletorArrayController: NSArrayController!
+    @IBOutlet var variableSelectorArrayController: NSArrayController!
     @objc var selectedVariable : Variable?
-    @objc dynamic var varList: [Variable]? { return analysis != nil ? analysis.varList : nil }
+    @objc var varList: [Variable]? { return analysis != nil ? analysis.varList : nil }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        variableSeletorArrayController.content = varList
         /*NotificationCenter.default.addObserver(self, selector: #selector(self.addVariables(_:)), name: .didLoadAppDelegate, object: nil)
         if let thisAnalysis = self.representedObject as? Analysis { //TODO: use bindings rather than manually typing the name
             for thisVariable in thisAnalysis.varList! {
@@ -25,8 +24,11 @@ class VariableSelectorViewController: TZViewController {
             }
         }*/
     }
+
     
-    override func viewWillAppear() {
+    func initLoadVars(){
+        variableSelectorArrayController.content = varList
+        variableSelectorPopup.bind(.selectedObject, to: self, withKeyPath: "selectedVariable", options: nil)
     }
     
     @objc func addVariables(_ notification: NSNotification){

@@ -12,9 +12,9 @@ import Cocoa
 
 class MainSplitViewController: TZSplitViewController {
 
-    @IBOutlet weak var inputsSplitViewItem: NSSplitViewItem!
-    @IBOutlet weak var outputsSplitViewItem: NSSplitViewItem!
-    @IBOutlet weak var outputSetupSplitViewItem: NSSplitViewItem!
+    @IBOutlet @objc weak var inputsSplitViewItem: NSSplitViewItem!
+    @IBOutlet @objc weak var outputsSplitViewItem: NSSplitViewItem!
+    @IBOutlet @objc weak var outputSetupSplitViewItem: NSSplitViewItem!
     var inputsViewController : InputsViewController!
     var outputsViewController : OutputsViewController!
     var outputSetupViewController : OutputSetupViewController!
@@ -30,6 +30,14 @@ class MainSplitViewController: TZSplitViewController {
         outputsViewController = (outputsSplitViewItem?.viewController as! OutputsViewController)
         outputSetupViewController = (outputSetupSplitViewItem?.viewController as! OutputSetupViewController)
         splitViewItemList = [inputsSplitViewItem, outputsSplitViewItem, outputSetupSplitViewItem]
+        
+        for splitViewName in ["inputs", "outputs", "outputSetup"] {
+            let itemKey = splitViewName + "SplitViewItem"
+            guard let splitViewItem = self.value(forKey: itemKey) as? NSSplitViewItem else { continue }
+            if let shouldCollapseView = UserDefaults().value(forKey: itemKey + ".isCollapsed") as? Bool {
+                splitViewItem.isCollapsed = shouldCollapseView as! Bool
+            }
+        }
     }
     
     /**
@@ -37,11 +45,15 @@ class MainSplitViewController: TZSplitViewController {
      - Parameter collapsed: Bool, whether to collapse or expand the view
      - Parameter secID: Int, which section (Inputs, Outputs, Outputs setup) to expand/collapse
      */
-    func setSectionCollapse(_ collapsed : Bool, forSection secID: Int){
-        guard let _ = self.representedObject as? Analysis else {return}
+    func setSectionCollapse(_ collapsed : Bool, forSection secID: Int)->Bool{
+        let listNames = ["inputs", "outputs", "outputSetup"]
+        guard self.representedObject is Analysis else {return false}
         if !(collapsed && numActiveViews == 1){
             splitViewItemList[secID].animator().isCollapsed = collapsed
-        }
+            let itemKey = listNames[secID] + "SplitViewItem.isCollapsed"
+            UserDefaults().set(collapsed, forKey: itemKey)
+            return true
+        } else {return false}
     }
     
 }

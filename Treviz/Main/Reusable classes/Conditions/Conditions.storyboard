@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="9UX-jO-cEV">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="9UX-jO-cEV">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15702"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -29,7 +29,7 @@
                                             <tableColumns>
                                                 <tableColumn identifier="VarNameColumn" width="118" minWidth="40" maxWidth="1000" id="viH-5m-MSV">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Condition Name">
-                                                        <font key="font" metaFont="menu" size="11"/>
+                                                        <font key="font" metaFont="label" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -40,7 +40,7 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
-                                                        <tableCellView identifier="VarNameCellView" id="jdg-mM-Lrr">
+                                                        <tableCellView id="jdg-mM-Lrr">
                                                             <rect key="frame" x="1" y="1" width="118" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -52,6 +52,9 @@
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
+                                                                    <connections>
+                                                                        <binding destination="jdg-mM-Lrr" name="value" keyPath="objectValue.name" id="0r2-RJ-Am8"/>
+                                                                    </connections>
                                                                 </textField>
                                                             </subviews>
                                                             <connections>
@@ -62,7 +65,7 @@
                                                 </tableColumn>
                                                 <tableColumn identifier="DescriptionColumn" width="194" minWidth="40" maxWidth="1000" id="vHF-HC-1Ya">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Description">
-                                                        <font key="font" metaFont="menu" size="11"/>
+                                                        <font key="font" metaFont="label" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -73,18 +76,21 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
-                                                        <tableCellView identifier="DescriptionCellView" id="dRa-n5-KEU">
-                                                            <rect key="frame" x="122" y="1" width="229" height="17"/>
+                                                        <tableCellView id="dRa-n5-KEU">
+                                                            <rect key="frame" x="122" y="1" width="194" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8aI-x0-026">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="229" height="17"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="194" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="e65-eS-5Bn">
                                                                         <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
+                                                                    <connections>
+                                                                        <binding destination="dRa-n5-KEU" name="value" keyPath="objectValue.summary" id="UQl-M3-Edf"/>
+                                                                    </connections>
                                                                 </textField>
                                                             </subviews>
                                                             <connections>
@@ -95,8 +101,8 @@
                                                 </tableColumn>
                                             </tableColumns>
                                             <connections>
-                                                <outlet property="dataSource" destination="9UX-jO-cEV" id="IXt-3Z-mGB"/>
-                                                <outlet property="delegate" destination="9UX-jO-cEV" id="D4O-65-sXq"/>
+                                                <binding destination="HY2-fb-T9E" name="content" keyPath="arrangedObjects" id="b7y-YG-mnX"/>
+                                                <binding destination="HY2-fb-T9E" name="selectionIndexes" keyPath="selectionIndexes" previousBinding="b7y-YG-mnX" id="ysl-xc-zY2"/>
                                             </connections>
                                         </tableView>
                                     </subviews>
@@ -157,6 +163,9 @@
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
+                                <connections>
+                                    <action selector="conditionNameTextFieldChanged:" target="9UX-jO-cEV" id="ljW-bo-0k5"/>
+                                </connections>
                             </textField>
                             <stackView hidden="YES" distribution="fill" orientation="horizontal" alignment="centerY" spacing="7" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ije-r1-bnx">
                                 <rect key="frame" x="151" y="85" width="99" height="21"/>
@@ -185,6 +194,9 @@
                                                 </items>
                                             </menu>
                                         </popUpButtonCell>
+                                        <connections>
+                                            <action selector="joinTypePopupButtonClicked:" target="9UX-jO-cEV" id="NV1-mo-8Dy"/>
+                                        </connections>
                                     </popUpButton>
                                 </subviews>
                                 <constraints>
@@ -221,6 +233,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="allConditionsArrayController" destination="HY2-fb-T9E" id="hXM-H3-Rop"/>
                         <outlet property="comparisonLabel" destination="BVe-vE-dVP" id="mth-yk-08A"/>
                         <outlet property="compoundConditionButton" destination="sDY-AO-yAc" id="gKE-XR-QFK"/>
                         <outlet property="conditionNameTextBox" destination="SQ2-n5-0je" id="1tK-K1-DiR"/>
@@ -231,15 +244,21 @@
                     </connections>
                 </viewController>
                 <customObject id="Em4-Ef-fUs" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <arrayController objectClassName="Condition" id="HY2-fb-T9E">
+                    <connections>
+                        <binding destination="9UX-jO-cEV" name="contentArray" keyPath="self.allConditions" id="1Wm-HU-cq6"/>
+                        <binding destination="9UX-jO-cEV" name="selectionIndexes" keyPath="self.selectedConditionIndices" id="W0e-Dk-wPc"/>
+                    </connections>
+                </arrayController>
             </objects>
             <point key="canvasLocation" x="-270" y="-135.5"/>
         </scene>
         <!--addConditionViewController-->
         <scene sceneID="K05-MQ-8EP">
             <objects>
-                <viewController title="addConditionViewController" storyboardIdentifier="addConditionViewController" id="MME-Yq-Esp" customClass="addConditionViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="addConditionViewController" storyboardIdentifier="addConditionViewController" id="MME-Yq-Esp" customClass="AddConditionViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="cu2-ri-3xA">
-                        <rect key="frame" x="0.0" y="0.0" width="430" height="80"/>
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="80"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="6" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" horizontalHuggingPriority="750" horizontalCompressionResistancePriority="500" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F81-kn-fiU" userLabel="Condition Type Selector Stack View">
@@ -301,11 +320,11 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="removeConditonButtonClicked:" target="MME-Yq-Esp" id="Dhv-Do-HvS"/>
+                                    <action selector="removeConditionButtonClicked:" target="MME-Yq-Esp" id="Dhv-Do-HvS"/>
                                 </connections>
                             </button>
                             <stackView distribution="equalSpacing" orientation="horizontal" alignment="bottom" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" horizontalHuggingPriority="50" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fd5-Ma-hzJ" userLabel="Condition Input Stack View" customClass="CollapsibleStackView" customModule="Treviz" customModuleProvider="target">
-                                <rect key="frame" x="127" y="30" width="303" height="21"/>
+                                <rect key="frame" x="127" y="30" width="353" height="21"/>
                                 <subviews>
                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="500" translatesAutoresizingMaskIntoConstraints="NO" id="Y9N-df-bvC">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="21"/>
@@ -317,32 +336,35 @@
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
+                                        <connections>
+                                            <action selector="lowerBoundWasSet:" target="MME-Yq-Esp" id="BEv-Pp-Dvf"/>
+                                        </connections>
                                     </textField>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="53k-z9-SNq" userLabel="Less than comparison label">
-                                        <rect key="frame" x="58" y="2" width="17" height="16"/>
+                                        <rect key="frame" x="86" y="2" width="19" height="16"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="15" id="uEZ-Do-Snt"/>
+                                        </constraints>
                                         <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="&lt;" id="jWQ-89-eV8">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <comboBox horizontalHuggingPriority="150" verticalHuggingPriority="750" horizontalCompressionResistancePriority="500" translatesAutoresizingMaskIntoConstraints="NO" id="HR8-98-TCQ">
-                                        <rect key="frame" x="83" y="-4" width="130" height="25"/>
+                                    <containerView horizontalHuggingPriority="950" translatesAutoresizingMaskIntoConstraints="NO" id="lAL-pw-VID">
+                                        <rect key="frame" x="141" y="0.0" width="72" height="20"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="xwH-o8-zQC"/>
+                                            <constraint firstAttribute="height" constant="20" id="Oz8-Xy-nki"/>
                                         </constraints>
-                                        <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" usesSingleLineMode="YES" completes="NO" usesDataSource="YES" numberOfVisibleItems="5" id="CE2-4v-o0e">
-                                            <font key="font" metaFont="system"/>
-                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </comboBoxCell>
                                         <connections>
-                                            <action selector="variableSelectorClicked:" target="MME-Yq-Esp" id="vIn-AB-lCZ"/>
-                                            <outlet property="dataSource" destination="MME-Yq-Esp" id="5gC-1F-Ycy"/>
+                                            <segue destination="d9P-Ko-S8e" kind="embed" identifier="variableSelectorSegue" id="G9b-v3-1SW"/>
                                         </connections>
-                                    </comboBox>
+                                    </containerView>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7bb-ju-ZVW" userLabel="Condition comparison label">
-                                        <rect key="frame" x="218" y="2" width="17" height="16"/>
+                                        <rect key="frame" x="248" y="2" width="19" height="16"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="15" id="gm7-Gc-IQm"/>
+                                        </constraints>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" alignment="center" title="&lt;" id="o6l-Sn-EEE">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -350,19 +372,38 @@
                                         </textFieldCell>
                                     </textField>
                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="500" translatesAutoresizingMaskIntoConstraints="NO" id="pJp-kY-69n">
-                                        <rect key="frame" x="243" y="0.0" width="50" height="21"/>
+                                        <rect key="frame" x="303" y="0.0" width="50" height="21"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="kHz-J5-GTk">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
+                                        <connections>
+                                            <action selector="upperBoundWasSet:" target="MME-Yq-Esp" id="OOj-sc-2i1"/>
+                                        </connections>
                                     </textField>
+                                    <popUpButton identifier="Custom Choice Popup" hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="35G-qS-zXJ" userLabel="Custom Type Popup">
+                                        <rect key="frame" x="-2" y="-3" width="99" height="25"/>
+                                        <popUpButtonCell key="cell" type="push" title="Max" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="NX5-i0-o6Z" id="K5r-1P-GvT">
+                                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                            <menu key="menu" id="bav-KK-vz7">
+                                                <items>
+                                                    <menuItem title="Max" state="on" id="NX5-i0-o6Z" userLabel="Max"/>
+                                                    <menuItem title="Min" id="qLH-0K-b5W" userLabel="Min"/>
+                                                    <menuItem title="Local Max" id="RJW-G3-eeF" userLabel="Local Max"/>
+                                                    <menuItem title="Local Min" id="Hb0-PJ-soo" userLabel="Local Min"/>
+                                                </items>
+                                            </menu>
+                                        </popUpButtonCell>
+                                        <connections>
+                                            <action selector="customTypeWasSelected:" target="MME-Yq-Esp" id="vIK-ph-xzO"/>
+                                        </connections>
+                                    </popUpButton>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="53k-z9-SNq" firstAttribute="centerY" secondItem="Fd5-Ma-hzJ" secondAttribute="centerY" id="3NF-hF-nAe"/>
-                                    <constraint firstItem="Y9N-df-bvC" firstAttribute="leading" secondItem="Fd5-Ma-hzJ" secondAttribute="leading" id="4Rb-hc-6dp"/>
                                     <constraint firstItem="7bb-ju-ZVW" firstAttribute="centerY" secondItem="Fd5-Ma-hzJ" secondAttribute="centerY" id="KVx-jA-JSP"/>
-                                    <constraint firstAttribute="trailing" secondItem="pJp-kY-69n" secondAttribute="trailing" constant="10" id="iUS-um-mmd"/>
                                     <constraint firstItem="Y9N-df-bvC" firstAttribute="width" secondItem="pJp-kY-69n" secondAttribute="width" id="slb-Jr-HC8"/>
                                 </constraints>
                                 <visibilityPriorities>
@@ -371,8 +412,10 @@
                                     <integer value="1000"/>
                                     <integer value="1000"/>
                                     <integer value="1000"/>
+                                    <integer value="1000"/>
                                 </visibilityPriorities>
                                 <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
@@ -399,13 +442,26 @@
                         <outlet property="intervalTypeRadioButton" destination="oKn-JL-0JT" id="YRQ-W7-MCv"/>
                         <outlet property="lowerBoundTextField" destination="Y9N-df-bvC" id="2Bh-uw-TPM"/>
                         <outlet property="removeConditionButton" destination="ydx-Wx-M9w" id="zp8-IK-H2b"/>
+                        <outlet property="singleConditionObjectController" destination="MyE-R9-vTc" id="c6c-Fh-531"/>
                         <outlet property="upperBoundTextField" destination="pJp-kY-69n" id="gLw-Bg-whh"/>
-                        <outlet property="variableSelector" destination="HR8-98-TCQ" id="sby-fa-wVS"/>
                     </connections>
                 </viewController>
                 <customObject id="yhl-MY-06M" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <objectController objectClassName="SingleCondition" id="MyE-R9-vTc">
+                    <connections>
+                        <binding destination="MME-Yq-Esp" name="contentObject" keyPath="self.singleCondition" id="txv-ae-UJm"/>
+                    </connections>
+                </objectController>
             </objects>
-            <point key="canvasLocation" x="-262" y="143"/>
+            <point key="canvasLocation" x="-286" y="143"/>
+        </scene>
+        <!--VariableSelector-->
+        <scene sceneID="4KQ-BM-iBy">
+            <objects>
+                <controllerPlaceholder storyboardIdentifier="VariableSelector" storyboardName="VariableSelector" id="d9P-Ko-S8e" sceneMemberID="viewController"/>
+                <customObject id="1dA-kn-9sr" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-299" y="303"/>
         </scene>
     </scenes>
     <resources>
