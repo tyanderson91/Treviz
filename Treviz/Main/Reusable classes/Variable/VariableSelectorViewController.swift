@@ -41,8 +41,17 @@ class VariableSelectorViewController: TZViewController {
     
     func getSelectedItem()->Variable?{
         guard let varTitle = self.variableSelectorPopup.titleOfSelectedItem else { return nil }
-        if let thisVariable = self.analysis.varList.first(where: {$0.name == varTitle })
-        {return thisVariable}
-        else {return nil}
+        if let thisVariable = self.analysis.varList.first(where: {$0.name == varTitle }) {
+            selectedVariable = thisVariable
+            return thisVariable
+        }
+        else { return nil }
+    }
+    
+    func selectVariable(with varid: VariableID){
+        if let thisVarIndex = varList?.firstIndex(where: {$0.id == varid }) {
+            selectedVariable = varList?[thisVarIndex]
+            variableSelectorPopup.selectItem(at: thisVarIndex)
+        }
     }
 }

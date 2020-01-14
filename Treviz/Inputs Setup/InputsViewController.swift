@@ -29,9 +29,11 @@ class InputsViewController: TZViewController, NSTableViewDataSource, NSTableView
         
         // Load and install all the view controllers from our storyboard in the following order.
         settingsViewController = (stack.addViewController(fromStoryboardId: "Inputs", withIdentifier: "SettingsViewController") as! SettingsViewController)
-        environmentsViewController = (stack.addViewController(fromStoryboardId: "Inputs", withIdentifier: "EnvironmentViewController") as! EnvironmentViewController)
+        //environmentsViewController = (stack.addViewController(fromStoryboardId: "Inputs", withIdentifier: "EnvironmentViewController") as! EnvironmentViewController)
         initStateViewController = (stack.addViewController(fromStoryboardId: "Inputs", withIdentifier: "InitStateViewController") as! InitStateViewController)
-        for thisController in [settingsViewController, environmentsViewController, initStateViewController]{
+        for thisController in [settingsViewController,
+                               //environmentsViewController,
+                               initStateViewController]{
             self.addChild(thisController!)
             thisController?.representedObject = self.representedObject
         }

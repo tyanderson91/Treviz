@@ -11,11 +11,17 @@ Parameters:
 Conditions:
   - Ground Impact: y<-0.1
   - Final time: t>10
+  - Too far: x>100
   - TerminalTest:
     union: and
     conditions:
     - Ground Impact
     - Final time
+  - NestedTest:
+    union: nor
+    conditions:
+    - TerminalTest
+    - Too far
     
 Terminal Condition:
   union: or

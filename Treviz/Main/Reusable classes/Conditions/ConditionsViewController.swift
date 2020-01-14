@@ -28,11 +28,14 @@ class ConditionsViewController: TZViewController {
     
     @IBOutlet weak var tableView: NSTableView!
     @IBOutlet weak var compoundConditionButton: NSButton!
+    @IBOutlet weak var addConditionButton: NSButton!
     @IBOutlet weak var unionTypeDropdown: NSPopUpButton!
     @IBOutlet weak var newConditionStackView: NSStackView!
     @IBOutlet weak var methodStackView: NSStackView!
     @IBOutlet weak var conditionNameTextBox: NSTextField!
     @IBOutlet var allConditionsArrayController: NSArrayController!
+    @IBOutlet var addConditionTypeMenu: NSMenu!
+    @IBOutlet var comparisonLabel: NSButton!
     
     @IBAction func addConditionButtonClicked(_ sender: Any) {
         if conditionNameTextBox.stringValue == "" {
@@ -40,31 +43,58 @@ class ConditionsViewController: TZViewController {
             return
         }
         for thisVC in self.children {
-            guard let condVC = thisVC as? AddConditionViewController else {continue}
-            condVC.getVariable() //TODO: handle this more automatically
+            if let condVC = thisVC as? AddNewConditionViewController {
+                _ = condVC.variableSelectorViewController?.getSelectedItem()
+                condVC.getVariable() //TODO: handle this more automatically
+                curCondition.conditions.append(condVC.representedSingleCondition)
+            } else if let condVC = thisVC as? AddExistingConditionViewController {
+                condVC.representedExistingCondition = (condVC.conditionSelectorPopup.selectedItem?.representedObject as! Condition)
+                curCondition.conditions.append(condVC.representedExistingCondition)
+            }
         }
+        
+        //let dsum = curCondition.summary
+        //curCondition.summary = dsum
+        //print(curCondition.summary)
         analysis.conditions.append(curCondition)
-        allConditionsArrayController.addObject(curCondition)
+        allConditionsArrayController.content = analysis.conditions
         NotificationCenter.default.post(name: .didAddCondition, object: nil)
+        
+        resetView()
         tableView.reloadData()
     }
     
     
-    @IBAction func compoundConditionButtonClicked(_ sender: Any) {
+    @IBAction func addSubCondition(_ sender: Any) {
         if newConditionStackView.views.count == 1 {
             let firstViewController = self.children[0] as! AddConditionViewController
             firstViewController.removeConditionButton.isHidden = false
         }
-        _ = addConditionView()
+        if let buttonID = (sender as? NSButton)?.identifier?.rawValue {
+            if buttonID == "compoundConditionButton" { _ = addNewConditionView() }
+        } else if let senderMenuItem = (sender as? NSMenuItem){
+            if senderMenuItem.identifier!.rawValue == "addNewConditionMenuItem" { _ = addNewConditionView() }
+            else if senderMenuItem.identifier!.rawValue == "addExistingConditionMenuItem" { _ = addExistingConditionView() }
+        }
+        if newConditionStackView.arrangedSubviews.count > 1{
+            newConditionStackView.layer?.borderWidth = 1
+            newConditionStackView.layer?.borderColor = CGColor.init(gray: 0.35, alpha: 1)
+            methodStackView.isHidden = false
+            unionTypeDropdown.selectItem(at: 0)
+            curCondition.unionType = .and
+            joinTypePopupButtonClicked(self)
+        } else {
+            newConditionStackView.layer?.borderWidth = 0
+            methodStackView.isHidden = true
+            curCondition.unionType = .single
+        }
     }
-    
-    @IBOutlet var comparisonLabel: NSButton!
-    
+        
     override func viewDidLoad() {
         // Do view setup here.
         allConditions = analysis?.conditions
         
-        let newVC = addConditionView()
+        let newVC = addNewConditionView()
         newVC.removeConditionButton.isHidden = true
         allConditionsArrayController.content = allConditions
         
@@ -75,9 +105,27 @@ class ConditionsViewController: TZViewController {
                                                     ],
                                           owner: self, userInfo: nil)
         view.addTrackingArea(trackingArea)
+        //let longPress = NSPressGestureRecognizer(target: self, action: #selector(longPressAddCondition(_:)))
+        //compoundConditionButton.addGestureRecognizer(longPress)
         super.viewDidLoad()
     }
 
+    func resetView(){
+        eraseView()
+        let newVC = addNewConditionView()
+        newVC.removeConditionButton.isHidden = true
+        newVC.initLoadVars()
+    }
+    func eraseView(){
+        for thisVC in self.children {
+            if let condVC = thisVC as? AddConditionViewController {
+                condVC.deleteView()
+            }
+        }
+        conditionNameTextBox.stringValue = ""
+        unionTypeDropdown.selectItem(at: 0)
+    }
+    
     override func mouseEntered(with theEvent: NSEvent) {
         // Mouse entered the header area, show disclosure button.
         super.mouseEntered(with: theEvent)
@@ -96,9 +144,36 @@ class ConditionsViewController: TZViewController {
         if curCondition.conditions.count == 1 {
             curCondition.unionType = .single
         } else {
-            curCondition.unionType = BoolType(rawValue: unionTypeDropdown.indexOfSelectedItem - 1)!
+            curCondition.unionType = BoolType(rawValue: unionTypeDropdown.indexOfSelectedItem + 1)!
         }
     }
+    
+    @IBAction func tableViewSelected(_ sender: NSTableView) {
+        let tableRow = tableView.selectedRow
+        if tableRow != -1 {
+            curCondition = analysis.conditions[tableRow]
+            eraseView()
+            conditionNameTextBox.stringValue = curCondition.name
+            unionTypeDropdown.selectItem(withTitle: curCondition.unionType.stringValue())
+            for thisCondition in curCondition.conditions {
+                var newVC: AddConditionViewController!
+                if thisCondition is Condition {
+                    newVC = addExistingConditionView()
+                    newVC.representedExistingCondition = (thisCondition as! Condition)
+                } else if thisCondition is SingleCondition {
+                    newVC = addNewConditionView()
+                    newVC.representedSingleCondition = (thisCondition as! SingleCondition)
+                }
+                newVC.populateWithCondition(thisCondition)
+                newVC.removeConditionButton.isHidden = true
+            }
+            addConditionButton.isHidden = true
+        } else {
+            addConditionButton.isHidden = false
+            resetView()
+        }
+    }
+    
     
     override func keyDown(with event: NSEvent) {
         if event.keyCode == 51 {//NSDeleteCharacter {
@@ -111,9 +186,20 @@ class ConditionsViewController: TZViewController {
         }
     }
     
-    func addConditionView()->AddConditionViewController {
+    func addExistingConditionView()->AddExistingConditionViewController {
         let storyboard = NSStoryboard(name: "Conditions", bundle: nil)
-        let viewController = storyboard.instantiateController(withIdentifier: "addConditionViewController") as! AddConditionViewController
+        let viewController = storyboard.instantiateController(withIdentifier: "addExistingConditionViewController") as! AddExistingConditionViewController
+        viewController.representedObject = analysis
+        viewController.initLoadAll()
+        newConditionStackView.addArrangedSubview(viewController.view)
+        self.addChild(viewController)
+        // curCondition.conditions.append(viewController.representedExistingCondition)
+        return viewController
+    }
+    
+    func addNewConditionView()->AddNewConditionViewController {
+        let storyboard = NSStoryboard(name: "Conditions", bundle: nil)
+        let viewController = storyboard.instantiateController(withIdentifier: "addNewConditionViewController") as! AddNewConditionViewController
         viewController.representedObject = analysis
         newConditionStackView.addArrangedSubview(viewController.view)
         viewController.initLoadVars()
@@ -124,6 +210,7 @@ class ConditionsViewController: TZViewController {
             newConditionStackView.layer?.borderWidth = 1
             newConditionStackView.layer?.borderColor = CGColor.init(gray: 0.35, alpha: 1)
             methodStackView.isHidden = false
+            unionTypeDropdown.selectItem(at: 0)
             joinTypePopupButtonClicked(self)
         } else {
             newConditionStackView.layer?.borderWidth = 0
@@ -131,7 +218,7 @@ class ConditionsViewController: TZViewController {
             curCondition.unionType = .single
         }
         
-        curCondition.conditions.append(viewController.singleCondition)
+        //curCondition.conditions.append(viewController.representedSingleCondition)
         return viewController
     }
     
@@ -169,115 +256,4 @@ class ConditionsViewController: TZViewController {
     func numberOfRows(in tableView: NSTableView) -> Int {
         return analysis.conditions.count
     }*/
-}
-
-
-// New View Controller
-enum singleConditionType : String {
-    case interval = "interval"
-    case equality = "equality"
-    case other = "other"
-}
-
-class AddConditionViewController: TZViewController {
-
-    @IBOutlet weak var intervalTypeRadioButton: NSButton!
-    @IBOutlet weak var equalityTypeRadioButton: NSButton!
-    @IBOutlet weak var comparisonLabelCell: NSTextFieldCell!
-    @IBOutlet weak var conditionInputStackView: CollapsibleStackView!
-    @IBOutlet weak var lowerBoundTextField: NSTextField!
-    @IBOutlet weak var upperBoundTextField: NSControl!//NSTextField!
-    @IBOutlet weak var removeConditionButton: NSButton!
-    var selectedType : singleConditionType = .interval
-    var variableList : [Variable] = []
-    @objc var variableSelectorViewController : VariableSelectorViewController?
-    @objc var singleCondition = SingleCondition()
-    @objc var selectedVariable: Variable!
-    @IBOutlet var singleConditionObjectController: NSObjectController!
-    
-    override func viewDidLoad() {
-    }
-    
-    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
-        if segue.identifier == "variableSelectorSegue" {
-            guard let viewController = segue.destinationController as? VariableSelectorViewController else {return}
-            variableSelectorViewController = viewController
-        }
-    }
-    
-    func initLoadVars(){
-        guard variableSelectorViewController != nil else {return}
-        variableSelectorViewController!.representedObject = analysis
-        variableSelectorViewController!.initLoadVars()
-        /*
-        _ = self.observe(\.variableSelectorViewController) { object, change in
-            self.singleCondition.varID = self.variableSelectorViewController?.selectedVariable?.id
-            print(self.variableSelectorViewController?.selectedVariable?.id)
-         }*/ // TODO: get this observer working
-        
-    }
-    func getVariable(){ singleCondition.varID = self.variableSelectorViewController!.selectedVariable!.id }
-    
-    @IBAction func removeConditionButtonClicked(_ sender: Any) {
-        let parent = self.parent as! ConditionsViewController
-        if parent.newConditionStackView.arrangedSubviews.count == 1 {return}
-        parent.newConditionStackView.removeArrangedSubview(self.view)
-        self.view.removeFromSuperview()
-        self.removeFromParent()
-        parent.curCondition.conditions.removeAll { (c1: EvaluateCondition)->Bool in
-            if let c1s = c1 as? SingleCondition {return c1s == self.singleCondition} else {return false} }
-        if parent.newConditionStackView.arrangedSubviews.count == 1 {
-            let lastVC = parent.children[0] as! AddConditionViewController
-            lastVC.removeConditionButton.isHidden = true
-            parent.newConditionStackView.layer?.borderWidth = 0
-            parent.methodStackView.isHidden = true
-        }
-    }
-    
-    @IBAction func customTypeWasSelected(_ sender: Any) {
-        guard let popup = sender as? NSPopUpButton else {return}
-        let specialOptions: Array<SpecialConditionType> = [.globalMax, .globalMin, .localMax, .localMin]
-        if selectedType == .other { singleCondition.specialCondition = specialOptions[popup.indexOfSelectedItem] }
-    }
-    @IBAction func upperBoundWasSet(_ sender: Any) {
-        let varVal = VarValue(upperBoundTextField.stringValue)
-        if selectedType == .interval {
-            singleCondition.ubound = varVal
-        } else if selectedType == .equality {
-            singleCondition.equality = varVal
-        }
-    }
-    @IBAction func lowerBoundWasSet(_ sender: Any) {
-        if selectedType == .interval { singleCondition.lbound = VarValue(upperBoundTextField.stringValue) }
-    }
-    @IBAction func typeWasSelected(_ sender: NSButton) {
-        switch(sender.identifier){
-        case NSUserInterfaceItemIdentifier.singleConditionTypeSelectorInterval:
-            comparisonLabelCell.stringValue = "<"
-            conditionInputStackView.showHideViews(.show, index: [0,1,4])
-            conditionInputStackView.showHideViews(.hide, index: [5])
-            selectedType = .interval
-            singleCondition.equality = nil
-            singleCondition.specialCondition = nil
-        case NSUserInterfaceItemIdentifier.singleConditionTypeSelectorEqual:
-            comparisonLabelCell.stringValue = "="
-            conditionInputStackView.showHideViews(.show, index: [4])
-            conditionInputStackView.showHideViews(.hide, index: [0,1,5])
-            selectedType = .equality
-            singleCondition.ubound = nil
-            singleCondition.lbound = nil
-            singleCondition.specialCondition = nil
-        case NSUserInterfaceItemIdentifier.singleConditionTypeSelectorOther:
-            comparisonLabelCell.stringValue = "is"
-            conditionInputStackView.showHideViews(.hide, index: [0,1,4])
-            conditionInputStackView.showHideViews(.show, index: [5])
-            selectedType = .other
-            singleCondition.lbound = nil
-            singleCondition.ubound = nil
-            singleCondition.equality = nil
-        default:
-            return
-        }
-    }
-    
 }

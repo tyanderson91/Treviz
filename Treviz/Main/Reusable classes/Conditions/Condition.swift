@@ -14,6 +14,7 @@ protocol EvaluateCondition {
     func evaluate(_ singleState: StateArray)->Bool
     func reset(initialState: StateArray?)
     var meetsCondition : [Bool]? {get set}
+    var summary : String {get}
     // var isSinglePoint : Bool {get set}// Boolean to tell whether the condition should return a single point per trajectory (such as terminal condition, max/min, etc
 }
 
@@ -73,6 +74,20 @@ class SingleCondition: NSObject, EvaluateCondition {
     var meetsCondition : [Bool]?
     // var isSinglePoint: Bool = false
     var varPosition : Int? // Position of the current variable in the index of StateVarPositions (automatically assigned, speeds up performance)
+    var summary: String {
+        var dstring = ""
+        if equality != nil {
+            dstring += "\(varID ?? "")=\(equality!)"
+        } else if let sc = specialCondition {
+            dstring += sc.asString()
+        } else {
+            let lbstr = lbound == nil ? "" : "\(lbound!) < "
+            let ubstr = ubound == nil ? "" : " < \(ubound!)"
+            dstring += lbstr + "\(varID ?? "")" + ubstr
+        }
+        return dstring
+    }
+    
     private var previousState : VarValue! // For use in equality type or special case lookups
     private var nextState: VarValue! // For use in special case lookups, e.g. local min
     var tests : [(VarValue)->Bool] {
@@ -187,28 +202,22 @@ class Condition : NSObject, EvaluateCondition {
         }
         return indices
     }
+    private var _summary = ""
     @objc dynamic var summary : String {
-        var dstring = ""
-        var dstrings = [String]()
-        for thisCond in self.conditions {
-            if let singleCond = thisCond as? SingleCondition {
-                if singleCond.equality != nil {
-                    dstring += "\(singleCond.varID ?? "")=\(singleCond.equality!)"
-                } else if let sc = singleCond.specialCondition {
-                    dstring += sc.asString()
-                } else {
-                    let lbstr = singleCond.lbound == nil ? "" : "\(singleCond.lbound!) < "
-                    let ubstr = singleCond.ubound == nil ? "" : " < \(singleCond.ubound!)"
-                    dstring += lbstr + "\(singleCond.varID ?? "")" + ubstr
+        get {
+            if _summary != "" {return _summary}
+            var dstring = ""
+            var dstrings = [String]()
+            for thisCond in self.conditions {
+                dstring = thisCond.summary
+                if let cond = thisCond as? Condition {
+                    if cond.conditions.count > 1 { dstring = "(" + dstring + ")" }
                 }
-            } else if let cond = thisCond as? Condition {
-                dstring = cond.summary
-                if cond.conditions.count > 1 { dstring = "(" + dstring + ")" }
+                dstrings.append(dstring)
             }
-            dstrings.append(dstring)
-        }
-        let combinedString = dstrings.joined(separator: " \(unionType.stringValue()) ")
-        return combinedString
+            let combinedString = dstrings.joined(separator: " \(unionType.stringValue()) ")
+            return combinedString
+        } set { _summary = newValue }
     }
     
     /*
