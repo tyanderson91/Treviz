@@ -65,7 +65,7 @@ class State: NSObject {
     subscript(varIDs: [VariableID], condition: Condition) -> [VariableID: [VarValue]]? {
         // Note that this subscript take some time to collect, since by default it will evaluate the condition
         var output = [VariableID: [VarValue]]()
-        condition.evaluate(self)
+        condition.evaluateState(self)
         let conditionIndex = condition.meetsConditionIndex
         
         for thisVarID in varIDs {

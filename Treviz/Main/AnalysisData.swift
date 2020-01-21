@@ -148,17 +148,19 @@ extension Analysis {
                 //let thisVar =  self.initVars.first(where: { $0.id == curVarID})!
                 //let val = inputList[thisVarID]
                 //thisVar.value = [Double(truncating: val!)]
-                let thisVar = initVar(varID: curVarID, varStr: curVarVal)
-                //if let thisVar = initVar(varID: curVarID, varStr: curVarVal) { inputSettings.append(thisVar) }
+                if let thisVar = initVar(varID: curVarID, varStr: curVarVal) { inputSettings.append(thisVar) }
             }
         }
+        
+        /*
         if let inputList = yamlDict["Parameters"] as? [String: Any] {
             for (curVarID, curVarVal) in inputList {
-                //let thisVar =  self.initVars.first(where: { $0.id == curVarID})!
-                //let val = inputList[thisVarID]
-                //thisVar.value = [Double(truncating: val!)]
+                let thisVar =  self.varList.first(where: { $0.id == curVarID})!
+                thisVar.value = [VarValue(truncating: curVarVal as! NSNumber)]
+                thisVar.isParam = true
             }
-        }
+        }*/
+        
         if let conditionList = yamlDict["Conditions"] as? [[String: Any]] {
             // self.conditions = []
             for thisConditionDict in conditionList {

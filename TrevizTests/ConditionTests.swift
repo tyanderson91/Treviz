@@ -20,6 +20,14 @@ func conditionTest(yamlDict: [String: Any]) { //TODO: Add more test cases here
             } // TODO: else print error
         }
     }
-    XCTAssert(readConditions.count == 3)
-    XCTAssert(readConditions[0].name == "Ground Impact")
+    let groundImpact = readConditions[0]
+    let terminalTest = readConditions[3]
+    let nestedCondition = readConditions[4]
+    XCTAssert(readConditions.count == 5)
+    XCTAssert(groundImpact.name == "Ground Impact")
+    XCTAssertTrue(nestedCondition.containsCondition(groundImpact))
+    XCTAssertTrue(nestedCondition.containsCondition(groundImpact))
+    XCTAssertTrue(nestedCondition.containsCondition(nestedCondition))
+    XCTAssertTrue(nestedCondition.containsCondition(terminalTest))
+    
 }

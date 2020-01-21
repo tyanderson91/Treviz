@@ -12,10 +12,12 @@ class VariableSelectorViewController: TZViewController {
 
     @IBOutlet weak var variableSelectorPopup: NSPopUpButton!
     @IBOutlet var variableSelectorArrayController: NSArrayController!
-    @objc var selectedVariable : Variable?
+    @objc dynamic var selectedVariable : Variable?
+    @objc dynamic var unwrappedVariable : Variable { return selectedVariable! }
     @objc var varList: [Variable]? { return analysis != nil ? analysis.varList : nil }
     
     override func viewDidLoad() {
+        variableSelectorPopup.bind(.selectedObject, to: self, withKeyPath: "selectedVariable", options: nil)
         super.viewDidLoad()
         /*NotificationCenter.default.addObserver(self, selector: #selector(self.addVariables(_:)), name: .didLoadAppDelegate, object: nil)
         if let thisAnalysis = self.representedObject as? Analysis { //TODO: use bindings rather than manually typing the name
@@ -28,7 +30,7 @@ class VariableSelectorViewController: TZViewController {
     
     func initLoadVars(){
         variableSelectorArrayController.content = varList
-        variableSelectorPopup.bind(.selectedObject, to: self, withKeyPath: "selectedVariable", options: nil)
+        //variableSelectorPopup.bind(.selectedObject, to: self, withKeyPath: "selectedVariable", options: nil)
     }
     
     @objc func addVariables(_ notification: NSNotification){
@@ -48,10 +50,9 @@ class VariableSelectorViewController: TZViewController {
         else { return nil }
     }
     
-    func selectVariable(with varid: VariableID){
+    func selectVariable(with varid: VariableID?){
         if let thisVarIndex = varList?.firstIndex(where: {$0.id == varid }) {
             selectedVariable = varList?[thisVarIndex]
-            variableSelectorPopup.selectItem(at: thisVarIndex)
         }
     }
 }

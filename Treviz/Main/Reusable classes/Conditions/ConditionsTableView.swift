@@ -6,11 +6,15 @@
 //  Copyright © 2020 Tyler Anderson. All rights reserved.
 //
 
+
 import Cocoa
 
 class ConditionsTableView: NSTableView {
 
     var analysis: Analysis!
+    var conditionViewController: ConditionsViewController!
+
+    var tableSelector: ((NSTableView) -> ())?
     
     override func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)
@@ -24,33 +28,14 @@ class ConditionsTableView: NSTableView {
             let character = event.keyCode
             switch (character) {
             case UInt16(126):
-                if selectedRow == 0 {
-                    selectRowIndexes([numberOfRows - 1], byExtendingSelection: false)
-                    scrollRowToVisible(numberOfRows - 1)
-                    //scrollToEndOfDocument(nil)
-                } else {
-                    super.keyDown(with: event)
-                }
-                break
+                tableSelector!(self)
             case UInt16(125):
-                if selectedRow == numberOfRows - 1 {
-                    selectRowIndexes([0], byExtendingSelection: false)
-                    scrollRowToVisible(0)
-                    //scrollToBeginningOfDocument(nil)
-                } else {
-                    super.keyDown(with: event)
-                }
+                tableSelector!(self)
             default:
                 super.keyDown(with: event)
-                break
             }
-        } else {
-            super.keyDown(with: event)
         }
-    }
-    
-    func changeSelection(){
-        
+        super.keyDown(with: event)
     }
     
 }

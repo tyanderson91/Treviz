@@ -52,7 +52,7 @@ extension Analysis {
                 // var pctComplete = 0.0
                 // self.isRunning = !self.terminalConditions.evaluateSingle(self.traj.copyAtIndex(i))
                 // Only use this if ALL state variable can be represented in array form
-                self.isRunning = !self.terminalConditions.evaluate(self.traj![i])
+                self.isRunning = !self.terminalConditions.evaluateStateArray(self.traj![i])
                 
                 if !self.isRunning {
                     self.returnCode = 1

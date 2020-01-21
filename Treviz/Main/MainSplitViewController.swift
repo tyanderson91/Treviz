@@ -35,7 +35,7 @@ class MainSplitViewController: TZSplitViewController {
             let itemKey = splitViewName + "SplitViewItem"
             guard let splitViewItem = self.value(forKey: itemKey) as? NSSplitViewItem else { continue }
             if let shouldCollapseView = UserDefaults().value(forKey: itemKey + ".isCollapsed") as? Bool {
-                splitViewItem.isCollapsed = shouldCollapseView as! Bool
+                splitViewItem.isCollapsed = shouldCollapseView
             }
         }
     }

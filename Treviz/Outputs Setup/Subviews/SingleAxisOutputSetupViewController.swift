@@ -43,12 +43,12 @@ class SingleAxisOutputSetupViewController: AddOutputViewController {
             variableSelectorViewController.representedObject = analysis!
             variableSelectorViewController.selectedVariable = representedOutput.var1
             variableSelectorViewController.variableSelectorArrayController.content = analysis?.varList
-            variableSelectorViewController.variableSelectorPopup.bind(.selectedObject, to: representedOutput, withKeyPath: "var1", options: nil)
+            variableSelectorViewController.variableSelectorPopup.bind(.selectedObject, to: representedOutput as Any, withKeyPath: "var1", options: nil)
         }
     }
 
     override func populateWithOutput(text: TZTextOutput?, plot: TZPlot?){ //Should be overwritten by each subclass
-        let output = text == nil ? plot : text as! TZOutput
+        // let output = text == nil ? plot : text as! TZOutput
         // variableSelectorViewController.selectedVariable = output
     }
     

@@ -49,7 +49,6 @@
 		CDAF13FD222CF357005CDC3C /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDAF13FC222CF357005CDC3C /* State.swift */; };
 		CDAF14272230FB72005CDC3C /* Variable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDAF14262230FB72005CDC3C /* Variable.swift */; };
 		CDB457B52383E19B004F13AA /* TrevizTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0F011223656B7200C920AA /* TrevizTests.swift */; };
-		CDB457B62384F861004F13AA /* Condition.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3F5E5422EE175400E4CF20 /* Condition.swift */; };
 		CDB457B72384F8B3004F13AA /* Variable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDAF14262230FB72005CDC3C /* Variable.swift */; };
 		CDB457B82384F90A004F13AA /* Parameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB7C7392352B03100BC50F1 /* Parameter.swift */; };
 		CDB457B92384F90E004F13AA /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDAF13FC222CF357005CDC3C /* State.swift */; };
@@ -278,8 +277,8 @@
 				CD3F5E5422EE175400E4CF20 /* Condition.swift */,
 				CD3F5E5922EE4FFE00E4CF20 /* ConditionsViewController.swift */,
 				CDA549EE23CC254B00933C6B /* AddConditionViewControllers.swift */,
-				CD3F5E5722EE4DCD00E4CF20 /* Conditions.storyboard */,
 				CDA549F023CC3C5400933C6B /* ConditionsTableView.swift */,
+				CD3F5E5722EE4DCD00E4CF20 /* Conditions.storyboard */,
 			);
 			path = Conditions;
 			sourceTree = "<group>";
@@ -490,7 +489,6 @@
 				CDB457B72384F8B3004F13AA /* Variable.swift in Sources */,
 				CDB457BE2384FADB004F13AA /* IO.swift in Sources */,
 				CD4AD70A23BD404000FC815F /* OutputSetupViewTest.swift in Sources */,
-				CDB457B62384F861004F13AA /* Condition.swift in Sources */,
 				CDB457B92384F90E004F13AA /* State.swift in Sources */,
 				CDB457B82384F90A004F13AA /* Parameter.swift in Sources */,
 				CDB457BA2384F912004F13AA /* StateArray.swift in Sources */,
