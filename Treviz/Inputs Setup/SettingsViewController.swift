@@ -22,7 +22,6 @@ class SettingsViewController: BaseViewController {
         terminalConditionArrayController.content = analysis?.conditions
         terminalConditionPopupButton.bind(.content, to: terminalConditionArrayController, withKeyPath: "arrangedObjects", options: nil)
         terminalConditionPopupButton.bind(.contentValues, to: terminalConditionArrayController, withKeyPath: "arrangedObjects.name", options: nil)
-        terminalConditionPopupButton.bind(.selectedObject, to: analysis, withKeyPath: "terminalConditions", options: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.didLoadAnalysisData(_:)), name: .didLoadAnalysisData, object: nil)
         
         // Do view setup here.
@@ -30,7 +29,7 @@ class SettingsViewController: BaseViewController {
     
     @objc func didLoadAnalysisData(_ notification: Notification){
         terminalConditionArrayController.content = analysis?.conditions
-        terminalConditionPopupButton.bind(.selectedObject, to: analysis, withKeyPath: "terminalConditions", options: nil)
+        terminalConditionPopupButton.bind(.selectedObject, to: analysis!, withKeyPath: "terminalConditions", options: nil)
     }
     
 }

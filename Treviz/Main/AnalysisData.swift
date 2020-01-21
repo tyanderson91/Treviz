@@ -42,9 +42,9 @@ extension Analysis {
         self.vehicle = Vehicle()
         
         // Read all inputs
-        self.inputSettings = self.varList.compactMap { ($0.copy() as! Parameter) } // TODO: Bettor way to copy?
+        self.inputSettings = self.varList.compactMap { ($0.copy() as! Parameter) } // TODO: Better way to copy?
         readSettings(from: "AnalysisSettings")
-        if var tvar = self.inputSettings.first(where: {$0.id == "t"}) {tvar.isParam = true}
+        //if var tvar = self.inputSettings.first(where: {$0.id == "t"}) {tvar.isParam = true}
         
         loadVarGroups(from: "InitStateStructure")
         
@@ -148,11 +148,11 @@ extension Analysis {
                 //let thisVar =  self.initVars.first(where: { $0.id == curVarID})!
                 //let val = inputList[thisVarID]
                 //thisVar.value = [Double(truncating: val!)]
-                if let thisVar = initVar(varID: curVarID, varStr: curVarVal) { inputSettings.append(thisVar) }
+                _ = initVar(varID: curVarID, varStr: curVarVal)// { inputSettings.append(thisVar) }
             }
         }
         
-        /*
+        /*  // TODO: figure out how to load parameters
         if let inputList = yamlDict["Parameters"] as? [String: Any] {
             for (curVarID, curVarVal) in inputList {
                 let thisVar =  self.varList.first(where: { $0.id == curVarID})!

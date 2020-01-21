@@ -78,8 +78,7 @@ class MainWindowController: NSWindowController, NSToolbarDelegate {
         let curIndex = button.indexOfSelectedItem
         let shouldCollapse = !button.isSelected(forSegment: curIndex)
         let splitViewController = asys.viewController.mainSplitViewController!
-        // let thisKey = "mainSplitViewDiscloseButton\(curIndex)"
-        // let didDisclose = splitViewController.setSectionCollapse(shouldCollapse, forSection: curIndex)
+        _ = splitViewController.setSectionCollapse(shouldCollapse, forSection: curIndex)
         
         for i in 0...2 { // If there is one button left, disable it so user cannot collapse everything
             let enableButton = (splitViewController.numActiveViews == 1 && button.isSelected(forSegment: i)) ? false : true

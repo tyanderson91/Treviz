@@ -18,7 +18,7 @@ class InitStateViewController: BaseViewController, NSOutlineViewDelegate, NSOutl
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(self.loadData(_:)), name: .didLoadAnalysisData, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.loadData(_:)), name: .didSetParam, object: nil)
+        //NotificationCenter.default.addObserver(self, selector: #selector(self.loadData(_:)), name: .didSetParam, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.reloadData(_:)), name: .didChangeUnits, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.reloadData(_:)), name: .didChangeValue, object: nil)
     }
@@ -132,7 +132,6 @@ class InitStateViewController: BaseViewController, NSOutlineViewDelegate, NSOutl
 
     @IBAction func setParams(_ sender: Any) {
         guard let button = sender as? NSButton else {return}
-        
         let row = outlineView.row(for: button)
         if var thisParam = outlineView.item(atRow: row) as? Parameter {
             thisParam.isParam = button.state == NSControl.StateValue.on
