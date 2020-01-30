@@ -32,20 +32,24 @@ class OutputsViewController: TZViewController {
     }
     
     func processOutputs(){
-        if let curAnalysis = self.representedObject as? Analysis{
-            let outputSet = curAnalysis.plots
-            
-            let textOutputSplitViewItem = outputSplitViewController!.textOutputSplitViewItem
-            let textOutputViewController = textOutputSplitViewItem!.viewController as! TextOutputsViewController
-            let textOutputView = textOutputViewController.textView!
-            
-            textOutputView.string = ""
-            for curOutput in outputSet {
-                curOutput.curTrajectory = curAnalysis.traj
-                if curOutput is TZTextOutput {
-                    let newText = (curOutput as! TZTextOutput).getText()
-                    textOutputView.textStorage?.append(newText)
-                }
+        guard let curAnalysis = self.representedObject as? Analysis else { return }
+        let outputSet = curAnalysis.plots
+        
+        let textOutputSplitViewItem = outputSplitViewController!.textOutputSplitViewItem
+        let textOutputViewController = textOutputSplitViewItem!.viewController as! TextOutputsViewController
+        
+        let plotViewController = outputSplitViewController!.plotViewController
+        
+        let textOutputView = textOutputViewController.textView!
+                
+        textOutputView.string = ""
+        for curOutput in outputSet {
+            curOutput.curTrajectory = curAnalysis.traj
+            if curOutput is TZTextOutput {
+                let newText = (curOutput as! TZTextOutput).getText()
+                textOutputView.textStorage?.append(newText)
+            } else if curOutput is TZPlot {
+                
             }
         }
     }
@@ -55,7 +59,14 @@ class OutputsViewController: TZViewController {
 
 class OutputsSplitViewController: TZSplitViewController {
     
+    
+    @IBOutlet weak var viewerOutputSplitViewItem: NSSplitViewItem!
     @IBOutlet weak var textOutputSplitViewItem: NSSplitViewItem!
+    
+    private var viewerTabViewController: ViewerTabViewController {
+        return viewerOutputSplitViewItem.viewController as! ViewerTabViewController
+    }
+    
     var textOutputViewController: TextOutputsViewController! {
         if let _textOutputViewVC = textOutputSplitViewItem.viewController as? TextOutputsViewController { return _textOutputViewVC }
         else {return nil}
@@ -64,6 +75,8 @@ class OutputsSplitViewController: TZSplitViewController {
         if let _textOutputView = (textOutputSplitViewItem.viewController as? TextOutputsViewController)?.textView { return _textOutputView }
         else {return nil}
     }
+    var visualizerViewController: VisualizerViewController! { return viewerTabViewController.visualizerTabViewItem.viewController as? VisualizerViewController ?? nil }
+    var plotViewController: PlotOutputViewController! { return viewerTabViewController.plotTabViewItem.viewController as? PlotOutputViewController ?? nil }
     
     
     override func viewDidLoad() {

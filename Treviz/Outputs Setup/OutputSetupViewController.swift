@@ -36,7 +36,7 @@ class OutputSetupViewController: TZViewController{//}, NSTableViewDelegate, NSTa
     
     func addOutput(_ newOutput : TZOutput){
         newOutput.curTrajectory = self.analysis.traj
-        newOutput.title = "New Output Title"
+        //newOutput.title = "New Output Title"
         // let numPlots = allPlots.count
         outputsArrayController.insert(newOutput, atArrangedObjectIndex: allPlots.count)
         addOutputView(with: newOutput)
@@ -52,10 +52,14 @@ class OutputSetupViewController: TZViewController{//}, NSTableViewDelegate, NSTa
         newOutputVC.objectController.content = output
         
         // GUI changes
+        newOutputVC.titleTextField.isHidden = true
+        newOutputVC.titleTextFieldConstraint.constant = 0
+        
         outputsArrayController.content = analysis.plots
         newOutputVC.addRemoveOutputButton.image = NSImage(named: NSImage.removeTemplateName)
         newOutputVC.editingOutputStackView.isHidden = true
         newOutputVC.displayOutputStackView.isHidden = false
+        //newOutputVC.stackItemContainer?.header.viewController.title = output.title
         if output is TZPlot {newOutputVC.selectedOutputTypeLabel.stringValue = "Plot"}
         else if output is TZTextOutput {newOutputVC.selectedOutputTypeLabel.stringValue = "Text"}
         stackViewContainerDict[output] = newOutputVC.stackItemContainer

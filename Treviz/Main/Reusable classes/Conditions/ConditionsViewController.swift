@@ -172,8 +172,10 @@ class ConditionsViewController: TZViewController {
     }
     
     func deleteCondition(at index: Int) {
+        //let conditionToRemove = analysis.conditions[index]
         analysis.conditions.remove(at: index)
         allConditionsArrayController.remove(atArrangedObjectIndex: index)
+        //conditionToRemove.deinit()
         NotificationCenter.default.post(name: .didRemoveCondition, object: nil)
         eraseView()
         tableView.selectRowIndexes([], byExtendingSelection: false)

@@ -5,8 +5,9 @@ Initial Variables:
   dx: 100
   
 Parameters:
-  t: 0
-  x: 10
+  - t: 0
+  - x: 10
+  - dy: 30
   
 Conditions:
   - Ground Impact: y<-0.1

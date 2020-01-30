@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="Pa4-gg-nuF">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="Pa4-gg-nuF">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15702"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15705"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -41,8 +41,8 @@
             <objects>
                 <splitViewController identifier="outputsSplitViewRestoration" storyboardIdentifier="outputsSplitView" id="N6o-UD-So8" customClass="OutputsSplitViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
                     <splitViewItems>
-                        <splitViewItem id="mNy-07-dZ6" userLabel="Output Split View Item"/>
-                        <splitViewItem id="q18-kp-lhX" userLabel="Text Split View Item"/>
+                        <splitViewItem id="r8c-ry-S8W"/>
+                        <splitViewItem id="z53-zv-CfF" userLabel="Text Output Split View Item"/>
                     </splitViewItems>
                     <splitView key="splitView" dividerStyle="thin" id="Jhy-ME-60a">
                         <rect key="frame" x="0.0" y="0.0" width="350" height="166"/>
@@ -52,19 +52,62 @@
                         </connections>
                     </splitView>
                     <connections>
-                        <outlet property="textOutputSplitViewItem" destination="q18-kp-lhX" id="Z5Y-p9-IB0"/>
-                        <segue destination="kWr-Ah-mB4" kind="relationship" relationship="splitItems" id="IQg-2w-cbQ"/>
-                        <segue destination="C1c-ub-Xf2" kind="relationship" relationship="splitItems" id="zfL-x3-4n1"/>
+                        <outlet property="textOutputSplitViewItem" destination="z53-zv-CfF" id="3s4-cU-7to"/>
+                        <outlet property="viewerOutputSplitViewItem" destination="r8c-ry-S8W" id="hof-KV-0W6"/>
+                        <segue destination="mOM-Iz-vf6" kind="relationship" relationship="splitItems" id="Swl-rw-7If"/>
+                        <segue destination="C1c-ub-Xf2" kind="relationship" relationship="splitItems" id="OdY-5w-5C9"/>
                     </connections>
                 </splitViewController>
                 <customObject id="RZF-nk-gcm" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="505" y="79"/>
         </scene>
-        <!--imageOutputViewController-->
+        <!--Viewer Tab View Controller-->
+        <scene sceneID="7dg-bH-2ZR">
+            <objects>
+                <tabViewController selectedTabViewItemIndex="0" id="mOM-Iz-vf6" customClass="ViewerTabViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabViewItems>
+                        <tabViewItem label="Visualizer" identifier="visualizerTabViewItem" id="rQj-OT-E8h"/>
+                        <tabViewItem label="Plotter" id="Egc-SW-yOb"/>
+                    </tabViewItems>
+                    <viewControllerTransitionOptions key="transitionOptions" allowUserInteraction="YES"/>
+                    <tabView key="tabView" type="noTabsNoBorder" id="nLU-aM-vwa">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <font key="font" metaFont="system"/>
+                        <connections>
+                            <outlet property="delegate" destination="mOM-Iz-vf6" id="dns-qH-Th7"/>
+                        </connections>
+                    </tabView>
+                    <connections>
+                        <outlet property="plotTabViewItem" destination="Egc-SW-yOb" id="C5h-ss-yfH"/>
+                        <outlet property="tabView" destination="nLU-aM-vwa" id="SXt-Jl-yO2"/>
+                        <outlet property="visualizerTabViewItem" destination="rQj-OT-E8h" id="yZG-j5-Ebl"/>
+                        <segue destination="kWr-Ah-mB4" kind="relationship" relationship="tabItems" id="uwu-Ql-y3x"/>
+                        <segue destination="BcX-Kn-pAr" kind="relationship" relationship="tabItems" id="gWx-cI-84d"/>
+                    </connections>
+                </tabViewController>
+                <customObject id="Kum-Q4-fOu" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="896" y="-625"/>
+        </scene>
+        <!--Plot Output View Controller-->
+        <scene sceneID="Beb-V0-0iB">
+            <objects>
+                <viewController id="BcX-Kn-pAr" customClass="PlotOutputViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="v8a-8N-YZw" customClass="CPTGraphHostingView">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                </viewController>
+                <customObject id="yZO-iK-8Az" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1445" y="-647"/>
+        </scene>
+        <!--visualizerOutputViewController-->
         <scene sceneID="X15-YZ-sea">
             <objects>
-                <viewController title="imageOutputViewController" identifier="imageOutputRestoration" storyboardIdentifier="imageOutput" id="kWr-Ah-mB4" customClass="PlotViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="visualizerOutputViewController" identifier="visualizerOutputRestoration" storyboardIdentifier="visualizerOutput" id="kWr-Ah-mB4" customClass="VisualizerViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="kVX-fw-nPv">
                         <rect key="frame" x="0.0" y="0.0" width="369" height="351"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -81,10 +124,13 @@
                             <constraint firstItem="dVC-90-yCV" firstAttribute="leading" secondItem="kVX-fw-nPv" secondAttribute="leading" id="f9V-C9-fHn"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="placeholderImageView" destination="dVC-90-yCV" id="mLS-pN-0ZN"/>
+                    </connections>
                 </viewController>
                 <customObject id="Ofl-UG-cIh" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1143" y="-181"/>
+            <point key="canvasLocation" x="1142.5" y="-181.5"/>
         </scene>
         <!--Text Outputs View Controller-->
         <scene sceneID="9HR-bL-jxG">

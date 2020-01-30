@@ -28,13 +28,13 @@ class SingleAxisOutputSetupViewController: AddOutputViewController {
     override func viewDidLoad() {
         let storyboard = NSStoryboard(name: "VariableSelector", bundle: nil)
         variableSelectorViewController = (storyboard.instantiateController(withIdentifier: "variableSelectorViewController") as! VariableSelectorViewController)
-        super.viewDidLoad()
-        
         variableSelectorViewController.representedObject = self.analysis
-        variableSelectorViewController.selectedVariable = self.representedOutput.var1
+        //variableSelectorViewController.selectedVariable = self.representedOutput.var1? ?? nil
         self.addChild(variableSelectorViewController)
         gridView.cell(atColumnIndex: 0, rowIndex: 1).contentView = variableSelectorViewController.view
         self.variableSelectorViewController.view.becomeFirstResponder()
+        
+        super.viewDidLoad()
     }
     
     override func loadAnalysis(_ analysis: Analysis?) {

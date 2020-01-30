@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="FMf-NL-ufc">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="FMf-NL-ufc">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15702"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15705"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -229,7 +229,6 @@
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
-                                            <action selector="add2AxisClicked:" target="FMf-NL-ufc" id="g0U-Io-y1m"/>
                                             <segue destination="Rjj-aS-ILt" kind="modal" identifier="add2AxisSegue" id="E2K-Uf-AwM"/>
                                         </connections>
                                     </button>
@@ -240,7 +239,6 @@
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
-                                            <action selector="add3AxisClicked:" target="FMf-NL-ufc" id="lID-qT-fVF"/>
                                             <segue destination="fdO-ej-2qj" kind="modal" identifier="add3AxisSegue" id="xIn-Q4-IIe"/>
                                         </connections>
                                     </button>
@@ -251,7 +249,6 @@
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
-                                            <action selector="addMCClicked:" target="FMf-NL-ufc" id="Vub-Mz-fAa"/>
                                             <segue destination="zkJ-3F-i9f" kind="modal" identifier="addMCSegue" id="3eJ-w5-niK"/>
                                         </connections>
                                     </button>
@@ -306,14 +303,14 @@
             <objects>
                 <viewController title="Single Axis" storyboardIdentifier="SingleAxisOutputSetupViewController" id="msL-sn-tpe" userLabel="SingleAxisViewController" customClass="SingleAxisOutputSetupViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="UbK-im-XsI">
-                        <rect key="frame" x="0.0" y="0.0" width="384" height="108"/>
+                        <rect key="frame" x="0.0" y="0.0" width="384" height="132"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <customView verticalHuggingPriority="900" translatesAutoresizingMaskIntoConstraints="NO" id="LCY-Xe-aHU">
-                                <rect key="frame" x="0.0" y="0.0" width="384" height="108"/>
+                                <rect key="frame" x="0.0" y="0.0" width="384" height="132"/>
                                 <subviews>
                                     <gridView verticalCompressionResistancePriority="1" xPlacement="center" yPlacement="fill" rowAlignment="none" rowSpacing="10" columnSpacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="0r4-fO-Bow" customClass="CollapsibleGridView" customModule="Treviz" customModuleProvider="target">
-                                        <rect key="frame" x="10" y="42" width="334" height="56"/>
+                                        <rect key="frame" x="10" y="35" width="334" height="56"/>
                                         <rows>
                                             <gridRow id="xTk-LJ-TLb"/>
                                             <gridRow yPlacement="top" id="aaj-xq-o1N"/>
@@ -389,7 +386,7 @@
                                         </gridCells>
                                     </gridView>
                                     <button horizontalHuggingPriority="255" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7jf-3p-lYJ" userLabel="Add Output Button">
-                                        <rect key="frame" x="348" y="37" width="32" height="31"/>
+                                        <rect key="frame" x="348" y="49" width="32" height="31"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="V1f-UA-NJ6"/>
                                             <constraint firstAttribute="width" constant="20" id="zf0-GZ-WM7"/>
@@ -405,7 +402,7 @@
                                         </connections>
                                     </button>
                                     <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BQ7-1h-lLd" userLabel="Editing Output Stack View">
-                                        <rect key="frame" x="98" y="18" width="188" height="14"/>
+                                        <rect key="frame" x="98" y="11" width="188" height="14"/>
                                         <subviews>
                                             <button horizontalHuggingPriority="300" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="EiP-JF-MF9" userLabel="Include Plot Checkbox">
                                                 <rect key="frame" x="-2" y="-2" width="93" height="18"/>
@@ -439,7 +436,7 @@
                                         </customSpacing>
                                     </stackView>
                                     <stackView hidden="YES" distribution="fill" orientation="horizontal" alignment="top" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w6L-MH-6bC" userLabel="Display Output Stack View">
-                                        <rect key="frame" x="142" y="16" width="101" height="16"/>
+                                        <rect key="frame" x="142" y="9" width="101" height="16"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Klk-4V-anP">
                                                 <rect key="frame" x="-2" y="0.0" width="50" height="16"/>
@@ -467,15 +464,35 @@
                                             <real value="3.4028234663852886e+38"/>
                                         </customSpacing>
                                     </stackView>
+                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hiN-Ca-1vZ">
+                                        <rect key="frame" x="92" y="101" width="200" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="200" id="J66-Hv-181"/>
+                                        </constraints>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Title" drawsBackground="YES" id="2vA-dp-AyH">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                        <connections>
+                                            <binding destination="LfK-KG-5a7" name="value" keyPath="selection.title" id="no4-T0-xnQ">
+                                                <dictionary key="options">
+                                                    <bool key="NSConditionallySetsEditable" value="NO"/>
+                                                </dictionary>
+                                            </binding>
+                                        </connections>
+                                    </textField>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="BQ7-1h-lLd" firstAttribute="top" secondItem="0r4-fO-Bow" secondAttribute="bottom" constant="10" id="1Ps-Yu-bV6"/>
                                     <constraint firstItem="0r4-fO-Bow" firstAttribute="leading" secondItem="LCY-Xe-aHU" secondAttribute="leading" constant="10" id="93n-eZ-0yw"/>
+                                    <constraint firstItem="0r4-fO-Bow" firstAttribute="top" secondItem="hiN-Ca-1vZ" secondAttribute="bottom" constant="10" id="DS4-ND-No5"/>
                                     <constraint firstItem="BQ7-1h-lLd" firstAttribute="centerX" secondItem="LCY-Xe-aHU" secondAttribute="centerX" id="Pm9-eU-C9U"/>
+                                    <constraint firstItem="hiN-Ca-1vZ" firstAttribute="top" secondItem="LCY-Xe-aHU" secondAttribute="top" constant="10" id="Ygu-b1-kKG"/>
                                     <constraint firstItem="7jf-3p-lYJ" firstAttribute="leading" secondItem="0r4-fO-Bow" secondAttribute="trailing" constant="10" id="aif-la-25O"/>
+                                    <constraint firstItem="hiN-Ca-1vZ" firstAttribute="centerX" secondItem="LCY-Xe-aHU" secondAttribute="centerX" id="ccM-2N-Fdr"/>
                                     <constraint firstItem="7jf-3p-lYJ" firstAttribute="centerY" secondItem="LCY-Xe-aHU" secondAttribute="centerY" id="hJk-46-jbR"/>
                                     <constraint firstAttribute="trailing" secondItem="7jf-3p-lYJ" secondAttribute="trailing" constant="10" id="hlg-7b-fMk"/>
-                                    <constraint firstItem="0r4-fO-Bow" firstAttribute="top" secondItem="LCY-Xe-aHU" secondAttribute="top" constant="10" id="ijh-sa-Ha4"/>
                                     <constraint firstItem="w6L-MH-6bC" firstAttribute="top" secondItem="0r4-fO-Bow" secondAttribute="bottom" constant="10" id="pZ8-Cl-Bdh"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" id="rIn-Tw-fCB"/>
                                     <constraint firstItem="w6L-MH-6bC" firstAttribute="centerX" secondItem="LCY-Xe-aHU" secondAttribute="centerX" id="tap-SG-tOt"/>
@@ -501,6 +518,8 @@
                         <outlet property="objectController" destination="LfK-KG-5a7" id="KyL-Rt-Xc5"/>
                         <outlet property="plotTypePopupButton" destination="ZYv-Vs-iDV" id="omT-KW-3Jl"/>
                         <outlet property="selectedOutputTypeLabel" destination="tTs-jD-7Ds" id="lib-M6-6zw"/>
+                        <outlet property="titleTextField" destination="hiN-Ca-1vZ" id="pUP-AZ-M25"/>
+                        <outlet property="titleTextFieldConstraint" destination="Ygu-b1-kKG" id="IL4-1r-Dyd"/>
                     </connections>
                 </viewController>
                 <customObject id="W91-dZ-0yQ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -510,21 +529,21 @@
                     </connections>
                 </objectController>
             </objects>
-            <point key="canvasLocation" x="-404" y="1186"/>
+            <point key="canvasLocation" x="-404" y="1198"/>
         </scene>
         <!--TwoAxisViewController-->
         <scene sceneID="XiG-bK-mMK">
             <objects>
                 <viewController title="Two Axis" storyboardIdentifier="TwoAxisOutputSetupViewController" id="Rjj-aS-ILt" userLabel="TwoAxisViewController" customClass="TwoAxisOutputSetupViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="JEq-og-d31">
-                        <rect key="frame" x="0.0" y="0.0" width="482" height="140"/>
+                        <rect key="frame" x="0.0" y="0.0" width="482" height="180"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <customView verticalHuggingPriority="900" translatesAutoresizingMaskIntoConstraints="NO" id="vwC-Zq-dxd">
-                                <rect key="frame" x="0.0" y="0.0" width="482" height="140"/>
+                                <rect key="frame" x="0.0" y="0.0" width="482" height="180"/>
                                 <subviews>
                                     <gridView xPlacement="center" yPlacement="center" rowAlignment="none" rowSpacing="10" columnSpacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="BZU-Nh-SXi" customClass="CollapsibleGridView" customModule="Treviz" customModuleProvider="target">
-                                        <rect key="frame" x="10" y="7" width="432" height="123"/>
+                                        <rect key="frame" x="10" y="16" width="432" height="123"/>
                                         <rows>
                                             <gridRow yPlacement="top" height="17" id="bE2-2R-GF6"/>
                                             <gridRow yPlacement="top" id="pWB-9z-F1B"/>
@@ -739,7 +758,7 @@
                                         </gridCells>
                                     </gridView>
                                     <button horizontalHuggingPriority="255" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="efV-ta-yTW" userLabel="Add Output Button">
-                                        <rect key="frame" x="446" y="53" width="32" height="31"/>
+                                        <rect key="frame" x="446" y="73" width="32" height="31"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="20" id="ZOg-f0-KJY"/>
                                             <constraint firstAttribute="height" constant="20" id="sGJ-6s-HhN"/>
@@ -753,9 +772,25 @@
                                             <action selector="addRemoveOutputButtonClicked:" target="Rjj-aS-ILt" id="pj8-Gc-ek4"/>
                                         </connections>
                                     </button>
+                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="z8M-mg-33r">
+                                        <rect key="frame" x="141" y="149" width="200" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="200" id="dzI-2U-uz0"/>
+                                        </constraints>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Title" drawsBackground="YES" id="D9z-TU-Eah">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                        <connections>
+                                            <binding destination="oBD-mI-XUc" name="value" keyPath="selection.title" id="XS4-9B-NTb"/>
+                                        </connections>
+                                    </textField>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="BZU-Nh-SXi" firstAttribute="top" secondItem="vwC-Zq-dxd" secondAttribute="top" constant="10" id="QJw-cO-ghn"/>
+                                    <constraint firstItem="BZU-Nh-SXi" firstAttribute="top" secondItem="z8M-mg-33r" secondAttribute="bottom" constant="10" id="KWd-SL-NAY"/>
+                                    <constraint firstItem="z8M-mg-33r" firstAttribute="top" secondItem="vwC-Zq-dxd" secondAttribute="top" constant="10" id="PtO-vk-7aP"/>
+                                    <constraint firstItem="z8M-mg-33r" firstAttribute="centerX" secondItem="vwC-Zq-dxd" secondAttribute="centerX" id="Tma-LM-KMh"/>
                                     <constraint firstAttribute="trailing" secondItem="efV-ta-yTW" secondAttribute="trailing" constant="10" id="VKf-5n-6vC"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" id="l82-SX-cPD"/>
                                     <constraint firstItem="BZU-Nh-SXi" firstAttribute="leading" secondItem="vwC-Zq-dxd" secondAttribute="leading" constant="10" id="pDw-dX-Dff"/>
@@ -784,6 +819,8 @@
                         <outlet property="plotTypePopupButton" destination="xFa-gE-G28" id="p8w-03-ttz"/>
                         <outlet property="plottingStackView" destination="f9M-PQ-Jth" id="cUo-bD-r7W"/>
                         <outlet property="selectedOutputTypeLabel" destination="RQt-3A-1Rt" id="ZgX-uQ-pvN"/>
+                        <outlet property="titleTextField" destination="z8M-mg-33r" id="YrI-XG-G6H"/>
+                        <outlet property="titleTextFieldConstraint" destination="PtO-vk-7aP" id="AUq-ua-BHG"/>
                         <outlet property="variableGridView" destination="Jko-dd-neg" id="3GC-tc-6Ct"/>
                     </connections>
                 </viewController>
@@ -794,21 +831,21 @@
                     </connections>
                 </objectController>
             </objects>
-            <point key="canvasLocation" x="-246" y="1428"/>
+            <point key="canvasLocation" x="-246" y="1448"/>
         </scene>
         <!--ThreeAxisViewController-->
         <scene sceneID="GHf-DF-viq">
             <objects>
                 <viewController title="Three Axis" storyboardIdentifier="ThreeAxisOutputSetupViewController" id="fdO-ej-2qj" userLabel="ThreeAxisViewController" customClass="ThreeAxisOutputSetupViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="yIq-7l-XiJ">
-                        <rect key="frame" x="0.0" y="0.0" width="465" height="130"/>
+                        <rect key="frame" x="0.0" y="0.0" width="465" height="174"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <customView verticalHuggingPriority="900" translatesAutoresizingMaskIntoConstraints="NO" id="yNk-X1-3h2">
-                                <rect key="frame" x="0.0" y="0.0" width="465" height="130"/>
+                                <rect key="frame" x="0.0" y="0.0" width="465" height="174"/>
                                 <subviews>
                                     <gridView xPlacement="center" yPlacement="center" rowAlignment="none" rowSpacing="10" columnSpacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="RGc-FN-Usb" customClass="CollapsibleGridView" customModule="Treviz" customModuleProvider="target">
-                                        <rect key="frame" x="10" y="11" width="415" height="109"/>
+                                        <rect key="frame" x="10" y="24" width="415" height="109"/>
                                         <rows>
                                             <gridRow yPlacement="top" height="17" id="UhG-kf-32J"/>
                                             <gridRow yPlacement="top" id="Ud2-GV-ViK"/>
@@ -1023,7 +1060,7 @@
                                         </gridCells>
                                     </gridView>
                                     <button horizontalHuggingPriority="255" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NKy-iq-2uO" userLabel="Add Output Button">
-                                        <rect key="frame" x="429" y="48" width="32" height="31"/>
+                                        <rect key="frame" x="429" y="70" width="32" height="31"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="20" id="IOg-fT-bW6"/>
                                             <constraint firstAttribute="height" constant="20" id="lud-1d-33w"/>
@@ -1037,14 +1074,30 @@
                                             <action selector="addRemoveOutputButtonClicked:" target="fdO-ej-2qj" id="xwE-UE-2FN"/>
                                         </connections>
                                     </button>
+                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9h1-Og-pYc">
+                                        <rect key="frame" x="133" y="143" width="200" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="200" id="BVr-K2-2DR"/>
+                                        </constraints>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Title" drawsBackground="YES" id="BY7-nH-03F">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                        <connections>
+                                            <binding destination="YQ2-e0-avo" name="value" keyPath="selection.title" id="d7E-uy-mpX"/>
+                                        </connections>
+                                    </textField>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" id="4Gz-d7-pMc"/>
                                     <constraint firstItem="NKy-iq-2uO" firstAttribute="centerY" secondItem="yNk-X1-3h2" secondAttribute="centerY" id="5Rw-AQ-McQ"/>
                                     <constraint firstItem="NKy-iq-2uO" firstAttribute="leading" secondItem="RGc-FN-Usb" secondAttribute="trailing" constant="10" id="AVa-gE-4aE"/>
+                                    <constraint firstItem="9h1-Og-pYc" firstAttribute="centerX" secondItem="yNk-X1-3h2" secondAttribute="centerX" id="EVJ-WA-YLS"/>
                                     <constraint firstAttribute="trailing" secondItem="NKy-iq-2uO" secondAttribute="trailing" constant="10" id="JNc-Em-PaT"/>
+                                    <constraint firstItem="RGc-FN-Usb" firstAttribute="top" secondItem="9h1-Og-pYc" secondAttribute="bottom" constant="10" id="Kjc-t4-cYX"/>
+                                    <constraint firstItem="9h1-Og-pYc" firstAttribute="top" secondItem="yNk-X1-3h2" secondAttribute="top" constant="10" id="M5T-S2-5Bu"/>
                                     <constraint firstItem="RGc-FN-Usb" firstAttribute="leading" secondItem="yNk-X1-3h2" secondAttribute="leading" constant="10" id="MHu-k8-Keb"/>
-                                    <constraint firstItem="RGc-FN-Usb" firstAttribute="top" secondItem="yNk-X1-3h2" secondAttribute="top" constant="10" id="qsV-9l-2hE"/>
                                 </constraints>
                             </customView>
                         </subviews>
@@ -1067,6 +1120,8 @@
                         <outlet property="objectController" destination="YQ2-e0-avo" id="ifC-Bd-DBu"/>
                         <outlet property="plotTypePopupButton" destination="5aN-uW-9nW" id="61h-D4-2oM"/>
                         <outlet property="selectedOutputTypeLabel" destination="5Ya-Fs-3Tu" id="9mJ-YQ-0bu"/>
+                        <outlet property="titleTextField" destination="9h1-Og-pYc" id="usr-aX-tEJ"/>
+                        <outlet property="titleTextFieldConstraint" destination="M5T-S2-5Bu" id="h3N-Qn-GDQ"/>
                         <outlet property="variableGridView" destination="jLp-4w-AAf" id="BJv-jS-lyI"/>
                     </connections>
                 </viewController>
@@ -1077,21 +1132,21 @@
                     </connections>
                 </objectController>
             </objects>
-            <point key="canvasLocation" x="266.5" y="1443"/>
+            <point key="canvasLocation" x="266.5" y="1465"/>
         </scene>
         <!--MonteCarloResultViewController-->
         <scene sceneID="f2T-ms-HX7">
             <objects>
                 <viewController title="Monte-Carlo" storyboardIdentifier="MonteCarloOutputSetupViewController" id="zkJ-3F-i9f" userLabel="MonteCarloResultViewController" customClass="MonteCarloOutputSetupViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="4uv-Ah-5W4">
-                        <rect key="frame" x="0.0" y="0.0" width="338" height="133"/>
+                        <rect key="frame" x="0.0" y="0.0" width="338" height="190"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <customView verticalHuggingPriority="900" translatesAutoresizingMaskIntoConstraints="NO" id="WoK-fr-giZ">
-                                <rect key="frame" x="0.0" y="0.0" width="338" height="133"/>
+                                <rect key="frame" x="0.0" y="0.0" width="338" height="190"/>
                                 <subviews>
                                     <gridView xPlacement="fill" yPlacement="center" rowAlignment="firstBaseline" rowSpacing="10" columnSpacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Yti-Eb-oA3" customClass="CollapsibleGridView" customModule="Treviz" customModuleProvider="target">
-                                        <rect key="frame" x="10" y="35" width="288" height="88"/>
+                                        <rect key="frame" x="10" y="61" width="288" height="88"/>
                                         <rows>
                                             <gridRow height="17" id="0yv-cr-Mpg"/>
                                             <gridRow id="0L2-mu-Wvb"/>
@@ -1214,7 +1269,7 @@
                                         </gridCells>
                                     </gridView>
                                     <button horizontalHuggingPriority="255" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="si9-9c-eId" userLabel="Add Output Button">
-                                        <rect key="frame" x="302" y="50" width="32" height="31"/>
+                                        <rect key="frame" x="302" y="78" width="32" height="31"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="R3X-Ht-QGo"/>
                                             <constraint firstAttribute="width" constant="20" id="YUu-Ry-fYC"/>
@@ -1229,7 +1284,7 @@
                                         </connections>
                                     </button>
                                     <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="059-67-xQx" userLabel="Editing Output Stack View">
-                                        <rect key="frame" x="75" y="11" width="188" height="14"/>
+                                        <rect key="frame" x="75" y="37" width="188" height="14"/>
                                         <subviews>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zDY-pg-NNs" userLabel="Include Plot Checkbox">
                                                 <rect key="frame" x="-2" y="-2" width="93" height="18"/>
@@ -1262,7 +1317,7 @@
                                         </customSpacing>
                                     </stackView>
                                     <stackView hidden="YES" distribution="fill" orientation="horizontal" alignment="top" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MLD-JW-eBn" userLabel="Display Output Stack View">
-                                        <rect key="frame" x="119" y="9" width="101" height="16"/>
+                                        <rect key="frame" x="119" y="35" width="101" height="16"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="csE-da-50M">
                                                 <rect key="frame" x="-2" y="0.0" width="50" height="16"/>
@@ -1296,7 +1351,6 @@
                                     <constraint firstItem="MLD-JW-eBn" firstAttribute="centerX" secondItem="WoK-fr-giZ" secondAttribute="centerX" id="9jn-hV-Z3B"/>
                                     <constraint firstItem="059-67-xQx" firstAttribute="top" secondItem="Yti-Eb-oA3" secondAttribute="bottom" constant="10" id="C3W-bS-vgE"/>
                                     <constraint firstItem="Yti-Eb-oA3" firstAttribute="leading" secondItem="WoK-fr-giZ" secondAttribute="leading" constant="10" id="IG8-Sl-JA3"/>
-                                    <constraint firstItem="Yti-Eb-oA3" firstAttribute="top" secondItem="WoK-fr-giZ" secondAttribute="top" constant="10" id="Vns-Ys-dLe"/>
                                     <constraint firstItem="si9-9c-eId" firstAttribute="leading" secondItem="Yti-Eb-oA3" secondAttribute="trailing" constant="10" id="YcF-Nz-Y7Q"/>
                                     <constraint firstItem="MLD-JW-eBn" firstAttribute="top" secondItem="Yti-Eb-oA3" secondAttribute="bottom" constant="10" id="aaD-rt-DEh"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" id="ecP-D9-OEF"/>
@@ -1304,12 +1358,29 @@
                                     <constraint firstItem="si9-9c-eId" firstAttribute="centerY" secondItem="WoK-fr-giZ" secondAttribute="centerY" id="zgx-Ia-gc8"/>
                                 </constraints>
                             </customView>
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wu1-9b-VSz">
+                                <rect key="frame" x="69" y="159" width="200" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="z7d-m2-tOH"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Title" drawsBackground="YES" id="8Ez-Tk-npJ">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <connections>
+                                    <binding destination="NkQ-UU-Eit" name="value" keyPath="selection.title" id="T7h-al-si1"/>
+                                </connections>
+                            </textField>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="wu1-9b-VSz" firstAttribute="centerX" secondItem="WoK-fr-giZ" secondAttribute="centerX" id="7fW-2F-Wmk"/>
                             <constraint firstAttribute="trailing" secondItem="WoK-fr-giZ" secondAttribute="trailing" id="Mgq-V5-Dor"/>
                             <constraint firstAttribute="bottom" secondItem="WoK-fr-giZ" secondAttribute="bottom" id="Xmr-ah-fld"/>
                             <constraint firstItem="WoK-fr-giZ" firstAttribute="top" secondItem="4uv-Ah-5W4" secondAttribute="top" id="d8d-Ko-oPX"/>
+                            <constraint firstItem="wu1-9b-VSz" firstAttribute="top" secondItem="4uv-Ah-5W4" secondAttribute="top" constant="10" id="ij7-cy-ED2"/>
                             <constraint firstItem="WoK-fr-giZ" firstAttribute="leading" secondItem="4uv-Ah-5W4" secondAttribute="leading" id="vxy-NE-imB"/>
+                            <constraint firstItem="Yti-Eb-oA3" firstAttribute="top" secondItem="wu1-9b-VSz" secondAttribute="bottom" constant="10" id="z5d-gB-UcY"/>
                         </constraints>
                     </view>
                     <connections>
@@ -1324,6 +1395,8 @@
                         <outlet property="objectController" destination="NkQ-UU-Eit" id="G4w-dt-WRq"/>
                         <outlet property="plotTypePopupButton" destination="mhn-hm-1hX" id="xAP-ms-eYv"/>
                         <outlet property="selectedOutputTypeLabel" destination="V4K-T0-ciq" id="Ffh-oD-07S"/>
+                        <outlet property="titleTextField" destination="wu1-9b-VSz" id="dfl-dY-sbl"/>
+                        <outlet property="titleTextFieldConstraint" destination="ij7-cy-ED2" id="v4B-Bb-GCA"/>
                     </connections>
                 </viewController>
                 <customObject id="PDD-2P-eGf" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -1342,7 +1415,7 @@
                     </popUpButtonCell>
                 </popUpButton>
             </objects>
-            <point key="canvasLocation" x="286" y="1161"/>
+            <point key="canvasLocation" x="286" y="1189"/>
         </scene>
     </scenes>
     <resources>

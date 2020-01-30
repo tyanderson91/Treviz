@@ -152,14 +152,16 @@ extension Analysis {
             }
         }
         
-        /*  // TODO: figure out how to load parameters
-        if let inputList = yamlDict["Parameters"] as? [String: Any] {
-            for (curVarID, curVarVal) in inputList {
-                let thisVar =  self.varList.first(where: { $0.id == curVarID})!
-                thisVar.value = [VarValue(truncating: curVarVal as! NSNumber)]
-                thisVar.isParam = true
+        if let inputList = yamlDict["Parameters"] as? [[String: Any]] {
+            for paramSet in inputList {
+                for thisKey in paramSet.keys { //TODO: better way to do this
+                    let curVarID = thisKey
+                    let thisVar =  self.inputSettings.first(where: { $0.id == curVarID }) as! Variable
+                    thisVar.value = [VarValue(truncating: paramSet[curVarID] as! NSNumber)]
+                    thisVar.isParam = true
+                }
             }
-        }*/
+        }
         
         if let conditionList = yamlDict["Conditions"] as? [[String: Any]] {
             // self.conditions = []
@@ -182,7 +184,7 @@ extension Analysis {
             for thisOutputDict in outputList {
                 if let newOutput = initOutput(fromYaml: thisOutputDict) {
                     //plots.append(newOutput)
-                    self.viewController.mainSplitViewController.outputSetupViewController.addOutput(newOutput)
+                self.viewController.mainSplitViewController.outputSetupViewController.addOutput(newOutput)
                 }
             }
         }

@@ -22,6 +22,9 @@ class AddOutputViewController: BaseViewController { //TODO : Add a way to add va
         if let asys = analysis { return asys.conditions } else { return nil }
     }
     
+    @IBOutlet weak var titleTextField: NSTextField!
+    @IBOutlet weak var titleTextFieldConstraint: NSLayoutConstraint!
+    
     @IBOutlet weak var plotTypePopupButton: NSPopUpButton!
     var plotTypeArrayController = NSArrayController()
     @objc var plotTypes: [TZPlotType]? {

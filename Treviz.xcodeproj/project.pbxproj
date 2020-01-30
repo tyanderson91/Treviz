@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4DB08FC11410BCCCFA10D307 /* Pods_TrevizTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A89AF26E4296F559D5BACE4 /* Pods_TrevizTests.framework */; };
+		C64C6BFC546CEE151D210DAB /* Pods_Treviz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AE63A207D59BC03E0AD95A7 /* Pods_Treviz.framework */; };
 		CD0F01072364139200C920AA /* Outputs.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD0F01062364139200C920AA /* Outputs.storyboard */; };
 		CD0F010923654ED400C920AA /* AnalysisRunFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0F010823654ED400C920AA /* AnalysisRunFunctions.swift */; };
 		CD0F010B2365595700C920AA /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0F010A2365595700C920AA /* Vehicle.swift */; };
@@ -15,6 +17,7 @@
 		CD11FA8923411FD3001A3695 /* VariableSelector.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD449023233B378C0095F243 /* VariableSelector.storyboard */; };
 		CD11FA9323433096001A3695 /* PlotTypes.plist in Resources */ = {isa = PBXBuildFile; fileRef = CD11FA9223433096001A3695 /* PlotTypes.plist */; };
 		CD129622224C67E300663B88 /* InitStateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD129621224C67E300663B88 /* InitStateViewController.swift */; };
+		CD1F6C6B23DADBFE00461FC7 /* Yams in Frameworks */ = {isa = PBXBuildFile; productRef = CD1F6C6A23DADBFE00461FC7 /* Yams */; };
 		CD280F4A233B45670004263F /* TZPlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD280F49233B45670004263F /* TZPlot.swift */; };
 		CD28477722FF9C8800D192A9 /* CollapsibleGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD28477622FF9C8800D192A9 /* CollapsibleGridView.swift */; };
 		CD2D0DB22243836F0012978E /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2D0D94224382F70012978E /* BaseViewController.swift */; };
@@ -36,7 +39,7 @@
 		CD4AD70A23BD404000FC815F /* OutputSetupViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4AD70923BD404000FC815F /* OutputSetupViewTest.swift */; };
 		CD4AD70D23BD4C0C00FC815F /* TZPlotType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4AD70C23BD4C0C00FC815F /* TZPlotType.swift */; };
 		CD500337234DA64F00D71099 /* InitVarSettings.plist in Resources */ = {isa = PBXBuildFile; fileRef = CD500336234DA64F00D71099 /* InitVarSettings.plist */; };
-		CD557437236EA14500DA53A1 /* PlotViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD557436236EA14500DA53A1 /* PlotViewController.swift */; };
+		CD557437236EA14500DA53A1 /* VisualizerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD557436236EA14500DA53A1 /* VisualizerViewController.swift */; };
 		CD9B490D2339BB56008ADA2C /* VariableSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9B490B2339BB56008ADA2C /* VariableSelectorViewController.swift */; };
 		CDA0F87F2257398F003C62E6 /* NotificationCenterSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA0F87E2257398F003C62E6 /* NotificationCenterSetup.swift */; };
 		CDA0F88122587E05003C62E6 /* ParamTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA0F88022587E05003C62E6 /* ParamTableViewController.swift */; };
@@ -44,7 +47,6 @@
 		CDA549EF23CC254B00933C6B /* AddConditionViewControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA549EE23CC254B00933C6B /* AddConditionViewControllers.swift */; };
 		CDA549F123CC3C5400933C6B /* ConditionsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA549F023CC3C5400933C6B /* ConditionsTableView.swift */; };
 		CDA7FD75236FE9CC009CDFAF /* InitVarSettings.yaml in Resources */ = {isa = PBXBuildFile; fileRef = CDA7FD74236FE9CC009CDFAF /* InitVarSettings.yaml */; };
-		CDA7FD78236FFF2E009CDFAF /* Yams in Frameworks */ = {isa = PBXBuildFile; productRef = CDA7FD77236FFF2E009CDFAF /* Yams */; };
 		CDA7FD7A23715399009CDFAF /* AnalysisSettings.yaml in Resources */ = {isa = PBXBuildFile; fileRef = CDA7FD7923715399009CDFAF /* AnalysisSettings.yaml */; };
 		CDAF13FD222CF357005CDC3C /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDAF13FC222CF357005CDC3C /* State.swift */; };
 		CDAF14272230FB72005CDC3C /* Variable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDAF14262230FB72005CDC3C /* Variable.swift */; };
@@ -77,6 +79,9 @@
 		CDF3D1A1225025B00064D70C /* Analysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF3D1A0225025AF0064D70C /* Analysis.swift */; };
 		CDF3D1A6225057270064D70C /* TZViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF3D1A5225057270064D70C /* TZViewController.swift */; };
 		CDF3D1A822505A000064D70C /* AnalysisData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF3D1A722505A000064D70C /* AnalysisData.swift */; };
+		CDFE81F623E0104A0013945F /* PlotView.m in Sources */ = {isa = PBXBuildFile; fileRef = CDFE81F523E0104A0013945F /* PlotView.m */; };
+		CDFE81F923E147060013945F /* PlotOutputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFE81F823E147060013945F /* PlotOutputViewController.swift */; };
+		CDFE81FC23E14B730013945F /* ViewerTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFE81FB23E14B730013945F /* ViewerTabViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +95,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0290A4567B9A9B5D492B5A1E /* Pods-Treviz.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Treviz.release.xcconfig"; path = "Target Support Files/Pods-Treviz/Pods-Treviz.release.xcconfig"; sourceTree = "<group>"; };
+		27A3F7FA6A6A0DBD2D916439 /* Pods-TrevizTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrevizTests.debug.xcconfig"; path = "Target Support Files/Pods-TrevizTests/Pods-TrevizTests.debug.xcconfig"; sourceTree = "<group>"; };
+		42565B6ABF9F400B071A9EBD /* Pods-Treviz.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Treviz.debug.xcconfig"; path = "Target Support Files/Pods-Treviz/Pods-Treviz.debug.xcconfig"; sourceTree = "<group>"; };
+		5AE63A207D59BC03E0AD95A7 /* Pods_Treviz.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Treviz.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		769BD7D250FD37ECAE0EDE76 /* Pods-TrevizTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrevizTests.release.xcconfig"; path = "Target Support Files/Pods-TrevizTests/Pods-TrevizTests.release.xcconfig"; sourceTree = "<group>"; };
+		8A89AF26E4296F559D5BACE4 /* Pods_TrevizTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TrevizTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD0F01062364139200C920AA /* Outputs.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Outputs.storyboard; path = Treviz/Outputs/Outputs.storyboard; sourceTree = SOURCE_ROOT; };
 		CD0F010823654ED400C920AA /* AnalysisRunFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisRunFunctions.swift; sourceTree = "<group>"; };
 		CD0F010A2365595700C920AA /* Vehicle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vehicle.swift; sourceTree = "<group>"; };
@@ -125,7 +136,7 @@
 		CD4AD70923BD404000FC815F /* OutputSetupViewTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputSetupViewTest.swift; sourceTree = "<group>"; };
 		CD4AD70C23BD4C0C00FC815F /* TZPlotType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TZPlotType.swift; sourceTree = "<group>"; };
 		CD500336234DA64F00D71099 /* InitVarSettings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = InitVarSettings.plist; sourceTree = "<group>"; };
-		CD557436236EA14500DA53A1 /* PlotViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlotViewController.swift; sourceTree = "<group>"; };
+		CD557436236EA14500DA53A1 /* VisualizerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualizerViewController.swift; sourceTree = "<group>"; };
 		CD9B490B2339BB56008ADA2C /* VariableSelectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableSelectorViewController.swift; sourceTree = "<group>"; };
 		CDA0F87E2257398F003C62E6 /* NotificationCenterSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NotificationCenterSetup.swift; path = Treviz/Main/NotificationCenterSetup.swift; sourceTree = SOURCE_ROOT; };
 		CDA0F88022587E05003C62E6 /* ParamTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParamTableViewController.swift; sourceTree = "<group>"; };
@@ -161,6 +172,11 @@
 		CDF3D1A0225025AF0064D70C /* Analysis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Analysis.swift; sourceTree = "<group>"; };
 		CDF3D1A5225057270064D70C /* TZViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TZViewController.swift; sourceTree = "<group>"; };
 		CDF3D1A722505A000064D70C /* AnalysisData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisData.swift; sourceTree = "<group>"; };
+		CDFE81F423E0104A0013945F /* Treviz-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Treviz-Bridging-Header.h"; sourceTree = "<group>"; };
+		CDFE81F523E0104A0013945F /* PlotView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlotView.m; sourceTree = "<group>"; };
+		CDFE81F723E142B50013945F /* PlotView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PlotView.h; path = "Treviz/Outputs/Viewer Outputs/PlotView.h"; sourceTree = SOURCE_ROOT; };
+		CDFE81F823E147060013945F /* PlotOutputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlotOutputViewController.swift; sourceTree = "<group>"; };
+		CDFE81FB23E14B730013945F /* ViewerTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewerTabViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +184,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4DB08FC11410BCCCFA10D307 /* Pods_TrevizTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,13 +192,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CDA7FD78236FFF2E009CDFAF /* Yams in Frameworks */,
+				CD1F6C6B23DADBFE00461FC7 /* Yams in Frameworks */,
+				C64C6BFC546CEE151D210DAB /* Pods_Treviz.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5D2C1C606B2E6BDC836FE371 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5AE63A207D59BC03E0AD95A7 /* Pods_Treviz.framework */,
+				8A89AF26E4296F559D5BACE4 /* Pods_TrevizTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		CD05E3B9225490C500906EB0 /* Main */ = {
 			isa = PBXGroup;
 			children = (
@@ -219,6 +246,7 @@
 		CD05E3BB225491A100906EB0 /* Outputs */ = {
 			isa = PBXGroup;
 			children = (
+				CDFE81FA23E14AD10013945F /* Viewer Outputs */,
 				CD0F01062364139200C920AA /* Outputs.storyboard */,
 				CD11FA9223433096001A3695 /* PlotTypes.plist */,
 				CDD60A962345C5AE00249987 /* TZOutput.swift */,
@@ -226,7 +254,6 @@
 				CD280F49233B45670004263F /* TZPlot.swift */,
 				CD4AD70C23BD4C0C00FC815F /* TZPlotType.swift */,
 				CDC1F5352233978500D1BB25 /* OutputsViewController.swift */,
-				CD557436236EA14500DA53A1 /* PlotViewController.swift */,
 				CDBEA0A522447A9C00D3159C /* TextOutputsViewController.swift */,
 			);
 			path = Outputs;
@@ -337,6 +364,8 @@
 				CDD5049422252AF900B29751 /* Treviz */,
 				CD0F011123656B7200C920AA /* TrevizTests */,
 				CDD5049322252AF900B29751 /* Products */,
+				FCFFA2756257FED5D6D5A440 /* Pods */,
+				5D2C1C606B2E6BDC836FE371 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -352,6 +381,7 @@
 		CDD5049422252AF900B29751 /* Treviz */ = {
 			isa = PBXGroup;
 			children = (
+				CDFE81F423E0104A0013945F /* Treviz-Bridging-Header.h */,
 				CD05E3B9225490C500906EB0 /* Main */,
 				CD9F2041223B7CBF005BFDCB /* Inputs Setup */,
 				CD9F2040223B7C95005BFDCB /* Outputs Setup */,
@@ -364,6 +394,29 @@
 			path = Treviz;
 			sourceTree = "<group>";
 		};
+		CDFE81FA23E14AD10013945F /* Viewer Outputs */ = {
+			isa = PBXGroup;
+			children = (
+				CD557436236EA14500DA53A1 /* VisualizerViewController.swift */,
+				CDFE81FB23E14B730013945F /* ViewerTabViewController.swift */,
+				CDFE81F723E142B50013945F /* PlotView.h */,
+				CDFE81F523E0104A0013945F /* PlotView.m */,
+				CDFE81F823E147060013945F /* PlotOutputViewController.swift */,
+			);
+			path = "Viewer Outputs";
+			sourceTree = "<group>";
+		};
+		FCFFA2756257FED5D6D5A440 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				42565B6ABF9F400B071A9EBD /* Pods-Treviz.debug.xcconfig */,
+				0290A4567B9A9B5D492B5A1E /* Pods-Treviz.release.xcconfig */,
+				27A3F7FA6A6A0DBD2D916439 /* Pods-TrevizTests.debug.xcconfig */,
+				769BD7D250FD37ECAE0EDE76 /* Pods-TrevizTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -371,6 +424,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CD0F011723656B7200C920AA /* Build configuration list for PBXNativeTarget "TrevizTests" */;
 			buildPhases = (
+				1D2872C8FE38C5938A8D00AD /* [CP] Check Pods Manifest.lock */,
 				CD0F010C23656B7200C920AA /* Sources */,
 				CD0F010D23656B7200C920AA /* Frameworks */,
 				CD0F010E23656B7200C920AA /* Resources */,
@@ -389,9 +443,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CDD504A722252AFD00B29751 /* Build configuration list for PBXNativeTarget "Treviz" */;
 			buildPhases = (
+				0508561047050E3F423D55C5 /* [CP] Check Pods Manifest.lock */,
 				CDD5048E22252AF900B29751 /* Sources */,
 				CDD5048F22252AF900B29751 /* Frameworks */,
 				CDD5049022252AF900B29751 /* Resources */,
+				B32BED1CC58BCBE0606DC198 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -399,7 +455,7 @@
 			);
 			name = Treviz;
 			packageProductDependencies = (
-				CDA7FD77236FFF2E009CDFAF /* Yams */,
+				CD1F6C6A23DADBFE00461FC7 /* Yams */,
 			);
 			productName = Treviz;
 			productReference = CDD5049222252AF900B29751 /* Treviz.app */;
@@ -421,7 +477,7 @@
 					};
 					CDD5049122252AF900B29751 = {
 						CreatedOnToolsVersion = 10.1;
-						LastSwiftMigration = 1020;
+						LastSwiftMigration = 1130;
 					};
 				};
 			};
@@ -435,7 +491,7 @@
 			);
 			mainGroup = CDD5048922252AF900B29751;
 			packageReferences = (
-				CDA7FD76236FFF2E009CDFAF /* XCRemoteSwiftPackageReference "Yams" */,
+				CD1F6C6923DADBFE00461FC7 /* XCRemoteSwiftPackageReference "Yams" */,
 			);
 			productRefGroup = CDD5049322252AF900B29751 /* Products */;
 			projectDirPath = "";
@@ -478,6 +534,70 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0508561047050E3F423D55C5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Treviz-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		1D2872C8FE38C5938A8D00AD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TrevizTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B32BED1CC58BCBE0606DC198 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Treviz/Pods-Treviz-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Treviz/Pods-Treviz-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Treviz/Pods-Treviz-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		CD0F010C23656B7200C920AA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -518,14 +638,17 @@
 				CDB7C73A2352B03100BC50F1 /* Parameter.swift in Sources */,
 				CD0F010923654ED400C920AA /* AnalysisRunFunctions.swift in Sources */,
 				CD4AD70D23BD4C0C00FC815F /* TZPlotType.swift in Sources */,
+				CDFE81F623E0104A0013945F /* PlotView.m in Sources */,
 				CD0F010B2365595700C920AA /* Vehicle.swift in Sources */,
 				CDF1670C2237A10400CD9590 /* MainWindowController.swift in Sources */,
 				CD3F5E5522EE175400E4CF20 /* Condition.swift in Sources */,
 				CDC1F53C2234874000D1BB25 /* MainSplitViewController.swift in Sources */,
+				CDFE81F923E147060013945F /* PlotOutputViewController.swift in Sources */,
+				CDFE81FC23E14B730013945F /* ViewerTabViewController.swift in Sources */,
 				CDC1F54022363DDB00D1BB25 /* MainViewController.swift in Sources */,
 				CD9B490D2339BB56008ADA2C /* VariableSelectorViewController.swift in Sources */,
 				CD0F011B23656EF200C920AA /* StateArray.swift in Sources */,
-				CD557437236EA14500DA53A1 /* PlotViewController.swift in Sources */,
+				CD557437236EA14500DA53A1 /* VisualizerViewController.swift in Sources */,
 				CDD60A972345C5AE00249987 /* TZOutput.swift in Sources */,
 				CDD60A912345BF5C00249987 /* TZTextOutput.swift in Sources */,
 				CD42E0AA22FD05F600A0F9A1 /* CollapsibleStackView.swift in Sources */,
@@ -572,6 +695,7 @@
 /* Begin XCBuildConfiguration section */
 		CD0F011823656B7200C920AA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 27A3F7FA6A6A0DBD2D916439 /* Pods-TrevizTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -592,6 +716,7 @@
 		};
 		CD0F011923656B7200C920AA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 769BD7D250FD37ECAE0EDE76 /* Pods-TrevizTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -667,6 +792,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "Treviz/Treviz-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -721,12 +847,14 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OBJC_BRIDGING_HEADER = "Treviz/Treviz-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
 			name = Release;
 		};
 		CDD504A822252AFD00B29751 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 42565B6ABF9F400B071A9EBD /* Pods-Treviz.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -744,6 +872,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.TylerAnderson.Treviz;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG DisclosureTriangleAppearance";
+				SWIFT_OBJC_BRIDGING_HEADER = "Treviz/Treviz-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
@@ -751,6 +880,7 @@
 		};
 		CDD504A922252AFD00B29751 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0290A4567B9A9B5D492B5A1E /* Pods-Treviz.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -768,6 +898,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.TylerAnderson.Treviz;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DisclosureTriangleAppearance;
+				SWIFT_OBJC_BRIDGING_HEADER = "Treviz/Treviz-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
@@ -805,7 +936,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		CDA7FD76236FFF2E009CDFAF /* XCRemoteSwiftPackageReference "Yams" */ = {
+		CD1F6C6923DADBFE00461FC7 /* XCRemoteSwiftPackageReference "Yams" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/jpsim/Yams.git";
 			requirement = {
@@ -816,9 +947,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		CDA7FD77236FFF2E009CDFAF /* Yams */ = {
+		CD1F6C6A23DADBFE00461FC7 /* Yams */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CDA7FD76236FFF2E009CDFAF /* XCRemoteSwiftPackageReference "Yams" */;
+			package = CD1F6C6923DADBFE00461FC7 /* XCRemoteSwiftPackageReference "Yams" */;
 			productName = Yams;
 		};
 /* End XCSwiftPackageProductDependency section */

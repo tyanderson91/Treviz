@@ -36,7 +36,7 @@ class Analysis: NSDocument {//TODO: possibly subclass NSPersistentDocument if us
     
     // Analysis-specific data and configs (read/writing functions in AnalysisData.swift)
     var name : String = ""
-    @objc var terminalConditions : Condition!
+    @objc weak var terminalConditions : Condition!
     var traj: State!
     @objc var conditions : [Condition] = []
     var inputSettings : [Parameter] = []

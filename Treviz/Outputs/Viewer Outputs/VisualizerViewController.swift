@@ -8,10 +8,13 @@
 
 import Cocoa
 
-class PlotViewController: NSViewController {
+class VisualizerViewController: NSViewController {
 
+    @IBOutlet weak var placeholderImageView: NSImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        //placeholderImageView.image = nil
         // Do view setup here.
     }
     

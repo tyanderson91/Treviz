@@ -21,7 +21,7 @@ class TZOutput : NSObject {
     @objc var var2 : Variable?
     @objc var var3 : Variable?
     @objc var categoryVar : Variable?
-    @objc var condition : Condition?
+    @objc weak var condition : Condition?
     var curTrajectory : State?
     
     init(id : Int, plotType : TZPlotType){
