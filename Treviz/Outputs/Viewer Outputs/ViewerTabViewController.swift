@@ -16,6 +16,8 @@ class ViewerTabViewController: NSTabViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
+        let plotView = plotTabViewItem.viewController
+        plotView?.loadView()
     }
     
 }

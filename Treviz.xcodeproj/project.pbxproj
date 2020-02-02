@@ -29,6 +29,7 @@
 		CD2D0DB82243836F0012978E /* SingleAxisOutputSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2D0DAE224382F70012978E /* SingleAxisOutputSetupViewController.swift */; };
 		CD2D0DBA2243837F0012978E /* HeaderViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD2D0DA5224382F70012978E /* HeaderViewController.storyboard */; };
 		CD2D0DBB224385580012978E /* OutputSetup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD2D0DA6224382F70012978E /* OutputSetup.storyboard */; };
+		CD3C187E23E2B03800E72EFF /* TZPlotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3C187D23E2B03700E72EFF /* TZPlotView.swift */; };
 		CD3F5E5522EE175400E4CF20 /* Condition.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3F5E5422EE175400E4CF20 /* Condition.swift */; };
 		CD3F5E5822EE4DCD00E4CF20 /* Conditions.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD3F5E5722EE4DCD00E4CF20 /* Conditions.storyboard */; };
 		CD3F5E5A22EE4FFE00E4CF20 /* ConditionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3F5E5922EE4FFE00E4CF20 /* ConditionsViewController.swift */; };
@@ -79,7 +80,6 @@
 		CDF3D1A1225025B00064D70C /* Analysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF3D1A0225025AF0064D70C /* Analysis.swift */; };
 		CDF3D1A6225057270064D70C /* TZViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF3D1A5225057270064D70C /* TZViewController.swift */; };
 		CDF3D1A822505A000064D70C /* AnalysisData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF3D1A722505A000064D70C /* AnalysisData.swift */; };
-		CDFE81F623E0104A0013945F /* PlotView.m in Sources */ = {isa = PBXBuildFile; fileRef = CDFE81F523E0104A0013945F /* PlotView.m */; };
 		CDFE81F923E147060013945F /* PlotOutputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFE81F823E147060013945F /* PlotOutputViewController.swift */; };
 		CDFE81FC23E14B730013945F /* ViewerTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFE81FB23E14B730013945F /* ViewerTabViewController.swift */; };
 /* End PBXBuildFile section */
@@ -125,6 +125,7 @@
 		CD2D0DAD224382F70012978E /* LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		CD2D0DAE224382F70012978E /* SingleAxisOutputSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleAxisOutputSetupViewController.swift; sourceTree = "<group>"; };
 		CD2D0DAF224382F70012978E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CD3C187D23E2B03700E72EFF /* TZPlotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TZPlotView.swift; sourceTree = "<group>"; };
 		CD3F5E5422EE175400E4CF20 /* Condition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Condition.swift; sourceTree = "<group>"; };
 		CD3F5E5722EE4DCD00E4CF20 /* Conditions.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Conditions.storyboard; sourceTree = "<group>"; };
 		CD3F5E5922EE4FFE00E4CF20 /* ConditionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionsViewController.swift; sourceTree = "<group>"; };
@@ -144,7 +145,7 @@
 		CDA549EE23CC254B00933C6B /* AddConditionViewControllers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddConditionViewControllers.swift; sourceTree = "<group>"; };
 		CDA549F023CC3C5400933C6B /* ConditionsTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionsTableView.swift; sourceTree = "<group>"; };
 		CDA7FD74236FE9CC009CDFAF /* InitVarSettings.yaml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = InitVarSettings.yaml; sourceTree = "<group>"; };
-		CDA7FD7923715399009CDFAF /* AnalysisSettings.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = AnalysisSettings.yaml; path = "Treviz/Inputs Setup/AnalysisSettings.yaml"; sourceTree = SOURCE_ROOT; };
+		CDA7FD7923715399009CDFAF /* AnalysisSettings.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = AnalysisSettings.yaml; path = Treviz/AnalysisSettings.yaml; sourceTree = SOURCE_ROOT; };
 		CDAF13FC222CF357005CDC3C /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		CDAF14262230FB72005CDC3C /* Variable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Variable.swift; sourceTree = "<group>"; };
 		CDB457BC2384FABC004F13AA /* IO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IO.swift; path = "Treviz/Main/Reusable classes/IO.swift"; sourceTree = SOURCE_ROOT; };
@@ -173,8 +174,6 @@
 		CDF3D1A5225057270064D70C /* TZViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TZViewController.swift; sourceTree = "<group>"; };
 		CDF3D1A722505A000064D70C /* AnalysisData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisData.swift; sourceTree = "<group>"; };
 		CDFE81F423E0104A0013945F /* Treviz-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Treviz-Bridging-Header.h"; sourceTree = "<group>"; };
-		CDFE81F523E0104A0013945F /* PlotView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlotView.m; sourceTree = "<group>"; };
-		CDFE81F723E142B50013945F /* PlotView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PlotView.h; path = "Treviz/Outputs/Viewer Outputs/PlotView.h"; sourceTree = SOURCE_ROOT; };
 		CDFE81F823E147060013945F /* PlotOutputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlotOutputViewController.swift; sourceTree = "<group>"; };
 		CDFE81FB23E14B730013945F /* ViewerTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewerTabViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -346,7 +345,6 @@
 		CD9F2041223B7CBF005BFDCB /* Inputs Setup */ = {
 			isa = PBXGroup;
 			children = (
-				CDA7FD7923715399009CDFAF /* AnalysisSettings.yaml */,
 				CD05E3BC225491D900906EB0 /* Init State */,
 				CDD5049722252AFA00B29751 /* InputsViewController.swift */,
 				CDA0F887225C5D47003C62E6 /* InputsCellViews.swift */,
@@ -382,6 +380,7 @@
 			isa = PBXGroup;
 			children = (
 				CDFE81F423E0104A0013945F /* Treviz-Bridging-Header.h */,
+				CDA7FD7923715399009CDFAF /* AnalysisSettings.yaml */,
 				CD05E3B9225490C500906EB0 /* Main */,
 				CD9F2041223B7CBF005BFDCB /* Inputs Setup */,
 				CD9F2040223B7C95005BFDCB /* Outputs Setup */,
@@ -399,9 +398,8 @@
 			children = (
 				CD557436236EA14500DA53A1 /* VisualizerViewController.swift */,
 				CDFE81FB23E14B730013945F /* ViewerTabViewController.swift */,
-				CDFE81F723E142B50013945F /* PlotView.h */,
-				CDFE81F523E0104A0013945F /* PlotView.m */,
 				CDFE81F823E147060013945F /* PlotOutputViewController.swift */,
+				CD3C187D23E2B03700E72EFF /* TZPlotView.swift */,
 			);
 			path = "Viewer Outputs";
 			sourceTree = "<group>";
@@ -638,9 +636,9 @@
 				CDB7C73A2352B03100BC50F1 /* Parameter.swift in Sources */,
 				CD0F010923654ED400C920AA /* AnalysisRunFunctions.swift in Sources */,
 				CD4AD70D23BD4C0C00FC815F /* TZPlotType.swift in Sources */,
-				CDFE81F623E0104A0013945F /* PlotView.m in Sources */,
 				CD0F010B2365595700C920AA /* Vehicle.swift in Sources */,
 				CDF1670C2237A10400CD9590 /* MainWindowController.swift in Sources */,
+				CD3C187E23E2B03800E72EFF /* TZPlotView.swift in Sources */,
 				CD3F5E5522EE175400E4CF20 /* Condition.swift in Sources */,
 				CDC1F53C2234874000D1BB25 /* MainSplitViewController.swift in Sources */,
 				CDFE81F923E147060013945F /* PlotOutputViewController.swift in Sources */,

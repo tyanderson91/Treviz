@@ -114,6 +114,8 @@ extension Analysis {
 
     func processOutputs(){
         guard let textOutputView = viewController.textOutputView else {return}
+        guard let plotViewController = viewController.mainSplitViewController.outputsViewController.outputSplitViewController?.plotViewController else { return }
+
         textOutputView.string = ""
         for curOutput in plots {
             curOutput.curTrajectory = traj
@@ -121,6 +123,9 @@ extension Analysis {
                 let newText = (curOutput as! TZTextOutput).getText()
                 textOutputView.textStorage?.append(newText)
                 textOutputView.textStorage?.append(NSAttributedString(string: "\n\n"))
+            }
+            else if curOutput is TZPlot {
+                plotViewController.createPlot(plot: curOutput as! TZPlot)
             }
         }
     }

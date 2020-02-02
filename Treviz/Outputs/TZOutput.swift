@@ -20,7 +20,7 @@ class TZOutput : NSObject {
     @objc var var1 : Variable?
     @objc var var2 : Variable?
     @objc var var3 : Variable?
-    @objc var categoryVar : Variable?
+    var categoryVar : Parameter?
     @objc weak var condition : Condition?
     var curTrajectory : State?
     
@@ -33,11 +33,16 @@ class TZOutput : NSObject {
     
     init?(with dict: Dictionary<String,Any>){
         if let id = dict["id"] as? Int {self.id = id} else {return nil}
-        if let plotType = dict["plot type"] as? TZPlotType {self.plotType = plotType}else {return nil}
+        if let plotType = dict["plot type"] as? TZPlotType {self.plotType = plotType} else {return nil}
         //if let name = dict["name"] as? String {self.displayName = name} else {self.displayName = ""}
         super.init()
         if let title = dict["title"] as? String {self.title = title}
-        if let var1 = dict["variable"] as? Variable {self.var1 = var1}
+        if let var1 = dict["variable1"] as? Variable {self.var1 = var1}
+        if let var2 = dict["variable2"] as? Variable {self.var2 = var2}
+        if let var3 = dict["variable3"] as? Variable {self.var3 = var3}
+        if let categoryvar = dict["category"] as? Parameter {self.categoryVar = categoryvar}
+
+        
         if let condition = dict["condition"] as? Condition {self.condition = condition}
     }
     

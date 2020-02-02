@@ -8,40 +8,49 @@
 
 import Cocoa
 
-class PlotOutputViewController: NSViewController, CPTScatterPlotDelegate, CPTScatterPlotDataSource, CPTPlotSpaceDelegate {
+extension NSUserInterfaceItemIdentifier {
+    static let plotThumbnailTableCellView = NSUserInterfaceItemIdentifier(rawValue: "plotThumbnailTableCellView")
+}
+
+class PlotOutputViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource {//}, CPTScatterPlotDelegate, CPTScatterPlotDataSource, CPTPlotSpaceDelegate  {
 
     
-
-    var graph: CPTGraph!
-    var graphHostingView: CPTGraphHostingView { return self.view as! CPTGraphHostingView }
+    @IBOutlet weak var tableView: NSTableView!
+    @IBOutlet weak var graphHostingView: CPTGraphHostingView!
+    
+    @objc var plotViews: [TZPlotView] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let defaultTheme = CPTTheme(named: .plainWhiteTheme)
-        graph = (defaultTheme?.newGraph() as! CPTGraph)
-        graphHostingView.hostedGraph = graph
-        let scatterPlot = CPTScatterPlot(frame: graph.bounds)
-        graph.add(scatterPlot)
-        scatterPlot.delegate = self
-        scatterPlot.dataSource = self
-        let plotSpace = graph.defaultPlotSpace as! CPTXYPlotSpace
-        plotSpace.allowsUserInteraction = true
-        plotSpace.delegate = self
-        plotSpace.scale(toFit: [scatterPlot])
+        tableView.rowHeight = 100
     }
     
-    func numberOfRecords(for plot: CPTPlot) -> UInt {
-        return 20
+    func createPlot(plot: TZPlot){
+        let newGraph = TZPlotView(with: plot)
+        plotViews.append(newGraph)
+        //graph.defaultPlotSpace?.allowsUserInteraction = true
+        graphHostingView.hostedGraph = newGraph.graph
+        tableView.reloadData()
     }
     
-    func number(for plot: CPTPlot, field fieldEnum: UInt, record idx: UInt) -> Any? {
-        switch fieldEnum {
-        case 0:
-            return NSNumber(value: idx)
-        case 1:
-            return NSNumber(value: 2*idx)
-        default:
-            return nil
-        }
+    func numberOfRows(in tableView: NSTableView) -> Int {
+        return plotViews.count
+    }
+    
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+        let curPlot = plotViews[row]
+        let tableCellView =  tableView.makeView(withIdentifier: .plotThumbnailTableCellView, owner: self) as? NSTableCellView
+        let imageView = tableCellView!.imageView!
+        imageView.image = curPlot.thumbnail
+        return tableCellView
+    }
+    
+    func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
+        return plotViews[row]
+    }
+    
+    func tableViewSelectionDidChange(_ notification: Notification) {
+        let newPlotView = plotViews[tableView.selectedRow]
+        graphHostingView.hostedGraph = newPlotView.graph
     }
 }

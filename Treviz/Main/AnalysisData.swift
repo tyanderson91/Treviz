@@ -110,8 +110,17 @@ extension Analysis {
             let newID = ((self.plots.compactMap {$0.id}).max() ?? 0) + 1
             outputDict["id"] = newID
         }
-        if let varstr = yamlObj["variable"] as? VariableID{
-            outputDict["variable"] = self.appDelegate.initVars.first(where: {$0.id == varstr}) ?? ""
+        if let varstr = yamlObj["variable1"] as? VariableID{
+            outputDict["variable1"] = self.appDelegate.initVars.first(where: {$0.id == varstr}) ?? ""
+        }
+        else if let varstr = yamlObj["variable"] as? VariableID{
+            outputDict["variable1"] = self.appDelegate.initVars.first(where: {$0.id == varstr}) ?? ""
+        }
+        if let varstr = yamlObj["variable2"] as? VariableID{
+            outputDict["variable2"] = self.appDelegate.initVars.first(where: {$0.id == varstr}) ?? ""
+        }
+        if let varstr = yamlObj["variable3"] as? VariableID{
+            outputDict["variable3"] = self.appDelegate.initVars.first(where: {$0.id == varstr}) ?? ""
         }
         if let condstr = yamlObj["condition"] as? String{
             if condstr == "terminal" {

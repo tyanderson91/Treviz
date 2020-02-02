@@ -30,7 +30,7 @@ class OutputsViewController: TZViewController {
             self.outputSplitViewController =  segue.destinationController as? OutputsSplitViewController
         }
     }
-    
+    /*
     func processOutputs(){
         guard let curAnalysis = self.representedObject as? Analysis else { return }
         let outputSet = curAnalysis.plots
@@ -49,10 +49,10 @@ class OutputsViewController: TZViewController {
                 let newText = (curOutput as! TZTextOutput).getText()
                 textOutputView.textStorage?.append(newText)
             } else if curOutput is TZPlot {
-                
+                plotViewController!.createPlot(plot: curOutput as! TZPlot)
             }
         }
-    }
+    }*/
     
 }
 

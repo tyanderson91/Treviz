@@ -95,14 +95,98 @@
         <scene sceneID="Beb-V0-0iB">
             <objects>
                 <viewController id="BcX-Kn-pAr" customClass="PlotOutputViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="v8a-8N-YZw" customClass="CPTGraphHostingView">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                    <view key="view" id="v8a-8N-YZw">
+                        <rect key="frame" x="0.0" y="0.0" width="446" height="315"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="q6x-sP-SB5" customClass="CPTGraphHostingView">
+                                <rect key="frame" x="100" y="0.0" width="346" height="315"/>
+                            </customView>
+                            <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fAb-Rd-ex3" userLabel="Plot Selector Scroll View">
+                                <rect key="frame" x="0.0" y="0.0" width="100" height="315"/>
+                                <clipView key="contentView" id="TRb-Z1-rrT">
+                                    <rect key="frame" x="1" y="1" width="98" height="313"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="none" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" typeSelect="NO" rowSizeStyle="automatic" viewBased="YES" id="UWb-kI-vO6">
+                                            <rect key="frame" x="0.0" y="0.0" width="98" height="313"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <size key="intercellSpacing" width="3" height="2"/>
+                                            <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
+                                            <tableColumns>
+                                                <tableColumn editable="NO" width="94" minWidth="40" maxWidth="1000" id="CLG-sb-9dB" userLabel="Plot Thumbnail column">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center">
+                                                        <font key="font" metaFont="menu" size="11"/>
+                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                                    </tableHeaderCell>
+                                                    <imageCell key="dataCell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="CSYS" id="kS7-hX-Y1V" customClass="TZPlotThumbnailImageCell" customModule="Treviz" customModuleProvider="target"/>
+                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES"/>
+                                                    <prototypeCellViews>
+                                                        <tableCellView identifier="plotThumbnailTableCellView" id="9zB-RF-Eyv">
+                                                            <rect key="frame" x="1" y="1" width="94" height="94"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                            <subviews>
+                                                                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BLe-Nn-Wf1">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="94" height="94"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" secondItem="BLe-Nn-Wf1" secondAttribute="height" multiplier="1:1" id="THS-aJ-uhK"/>
+                                                                    </constraints>
+                                                                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="NSComputer" id="B0s-jW-ClV"/>
+                                                                </imageView>
+                                                            </subviews>
+                                                            <constraints>
+                                                                <constraint firstItem="BLe-Nn-Wf1" firstAttribute="centerY" secondItem="9zB-RF-Eyv" secondAttribute="centerY" id="EYY-YY-XVB"/>
+                                                                <constraint firstItem="BLe-Nn-Wf1" firstAttribute="centerX" secondItem="9zB-RF-Eyv" secondAttribute="centerX" id="HcE-mz-0Aj"/>
+                                                                <constraint firstAttribute="trailing" secondItem="BLe-Nn-Wf1" secondAttribute="trailing" id="NnE-1O-7PZ"/>
+                                                                <constraint firstItem="BLe-Nn-Wf1" firstAttribute="leading" secondItem="9zB-RF-Eyv" secondAttribute="leading" id="o6B-Bd-H7g"/>
+                                                            </constraints>
+                                                            <connections>
+                                                                <outlet property="imageView" destination="BLe-Nn-Wf1" id="H68-WF-8zk"/>
+                                                            </connections>
+                                                        </tableCellView>
+                                                    </prototypeCellViews>
+                                                </tableColumn>
+                                            </tableColumns>
+                                            <connections>
+                                                <outlet property="dataSource" destination="BcX-Kn-pAr" id="cUp-RG-wVa"/>
+                                                <outlet property="delegate" destination="BcX-Kn-pAr" id="nCe-bJ-LGb"/>
+                                            </connections>
+                                        </tableView>
+                                    </subviews>
+                                </clipView>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="JmC-lG-4R0"/>
+                                </constraints>
+                                <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="ZlS-ZN-Zjv">
+                                    <rect key="frame" x="1" y="300" width="98" height="16"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                                <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="hlY-1w-NfT">
+                                    <rect key="frame" x="224" y="17" width="15" height="102"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                            </scrollView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="fAb-Rd-ex3" firstAttribute="top" secondItem="v8a-8N-YZw" secondAttribute="top" id="86r-Va-4fK"/>
+                            <constraint firstItem="q6x-sP-SB5" firstAttribute="leading" secondItem="fAb-Rd-ex3" secondAttribute="trailing" id="EwV-PX-byt"/>
+                            <constraint firstAttribute="bottom" secondItem="fAb-Rd-ex3" secondAttribute="bottom" id="RU2-Sg-hXc"/>
+                            <constraint firstAttribute="trailing" secondItem="q6x-sP-SB5" secondAttribute="trailing" id="afP-pR-7B5"/>
+                            <constraint firstAttribute="bottom" secondItem="q6x-sP-SB5" secondAttribute="bottom" id="i4o-Y8-Mki"/>
+                            <constraint firstItem="fAb-Rd-ex3" firstAttribute="leading" secondItem="v8a-8N-YZw" secondAttribute="leading" id="r4i-NL-EFP"/>
+                            <constraint firstItem="q6x-sP-SB5" firstAttribute="top" secondItem="v8a-8N-YZw" secondAttribute="top" id="uY5-NI-JZY"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="graphHostingView" destination="q6x-sP-SB5" id="aKd-ru-mn4"/>
+                        <outlet property="tableView" destination="UWb-kI-vO6" id="ns8-6j-8o2"/>
+                    </connections>
                 </viewController>
                 <customObject id="yZO-iK-8Az" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1445" y="-647"/>
+            <point key="canvasLocation" x="1443" y="-636.5"/>
         </scene>
         <!--visualizerOutputViewController-->
         <scene sceneID="X15-YZ-sea">
@@ -197,6 +281,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="CSYS" width="20" height="20"/>
+        <image name="NSComputer" width="32" height="32"/>
         <image name="globe_picture" width="2048" height="2048"/>
     </resources>
 </document>
