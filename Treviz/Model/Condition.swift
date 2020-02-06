@@ -9,7 +9,7 @@
 import Foundation
 import Cocoa
 
-@objc protocol EvaluateCondition : AnyObject {
+@objc protocol EvaluateCondition : AnyObject, NSCoding {
     func evaluateState(_ state: State)
     func evaluateStateArray(_ singleState: StateArray)->Bool
     func reset(initialState: StateArray?)
@@ -20,7 +20,7 @@ import Cocoa
 
 /**
  Booltype represents the different ways that conditions can be combined
- Rawvalue is set to indew to allow for easy integration with dropdown menus
+ Rawvalue is set to index to allow for easy integration with dropdown menus
 */
 enum BoolType : Int {
     case single = 0
@@ -65,7 +65,7 @@ enum SpecialConditionType : Int {
     }
 }
 
-class SingleCondition: NSObject, EvaluateCondition {
+public class SingleCondition: NSObject, EvaluateCondition {
     var varID : VariableID!
     var lbound : VarValue?
     var ubound : VarValue?
@@ -115,6 +115,23 @@ class SingleCondition: NSObject, EvaluateCondition {
             }
         }
         return _tests
+    }
+    
+    public func encode(with coder: NSCoder) {
+        coder.encode(varID, forKey: "varid")
+        coder.encode(lbound, forKey: "lbound")
+        coder.encode(ubound, forKey: "ubound")
+        coder.encode(equality, forKey: "equality")
+        coder.encode(specialCondition?.rawValue, forKey: "specialCondition")
+    }
+    
+    required public init?(coder: NSCoder) {
+        varID = coder.decodeObject(forKey: "varid") as? VariableID ?? ""
+        lbound = coder.decodeObject(forKey: "lbound") as? VarValue ?? nil
+        ubound = coder.decodeObject(forKey: "ubound") as? VarValue ?? nil
+        equality = coder.decodeObject(forKey: "equality") as? VarValue ?? nil
+        specialCondition = SpecialConditionType(rawValue: coder.decodeInteger(forKey: "specialCondition"))
+        super.init()
     }
     
     override init(){
@@ -193,7 +210,7 @@ class SingleCondition: NSObject, EvaluateCondition {
 }
 
 
-class Condition : NSObject, EvaluateCondition {
+public class Condition : NSObject, EvaluateCondition {
     
     @objc var name : String = ""
     var conditions : [EvaluateCondition] = []
@@ -231,6 +248,21 @@ class Condition : NSObject, EvaluateCondition {
         super.init()
     }
 
+    public func encode(with coder: NSCoder) {
+        coder.encode(name, forKey: "name")
+        coder.encode(conditions, forKey: "conditions")
+        coder.encode(unionType.rawValue, forKey: "unionType")
+        if _summary != "" { coder.encode(_summary, forKey: "summary") }
+    }
+    
+    required public init?(coder: NSCoder) {
+        name = coder.decodeObject(forKey: "name") as? String ?? ""
+        conditions = coder.decodeObject(forKey: "conditions") as? [EvaluateCondition] ?? [EvaluateCondition]()
+        unionType = BoolType(rawValue: coder.decodeInteger(forKey: "unionType")) ?? .single
+        _summary = coder.decodeObject(forKey: "summary") as? String ?? ""
+        super.init()
+    }
+    
     init(_ varid: VariableID, upperBound: VarValue? = nil, lowerBound: VarValue? = nil, equality: VarValue? = nil){
         let newCondition = SingleCondition(varid, upperBound: upperBound, lowerBound: lowerBound, equality: equality)
         conditions = [newCondition]

@@ -12,7 +12,7 @@
 
 import Cocoa
 
-class State: NSObject {
+class State: NSObject, NSCoding {
     
     var variables : [Variable] = []
     var length : Int {
@@ -27,13 +27,22 @@ class State: NSObject {
         super.init()
     }
     
+    func encode(with coder: NSCoder) {
+        coder.encode(variables, forKey: "variables")
+    }
+    
+    required init?(coder: NSCoder) {
+        variables = coder.decodeObject(forKey: "variables") as? [Variable] ?? [Variable]()
+        super.init()
+    }
+    
     init(variables varsIn: [Variable]) {
         variables = varsIn
         super.init()
     }
     
     func copyAtIndex(_ index: Int)->State{
-        let newState = State.init()
+        let newState = State()
         for thisVar in self.variables{
             if let newVar = thisVar.copyAtIndex(index) { newState.variables.append(newVar) }
         }

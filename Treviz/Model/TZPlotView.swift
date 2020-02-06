@@ -72,6 +72,7 @@ class TZPlotView: NSObject, CPTScatterPlotDelegate, CPTScatterPlotDataSource, CP
         let scatterPlot = CPTScatterPlot(frame: graph.bounds)
         scatterPlot.delegate = self
         scatterPlot.dataSource = self
+        scatterPlot.plotSymbol = .cross()
         let plotSpace = graph.defaultPlotSpace as! CPTXYPlotSpace
         plotSpace.allowsUserInteraction = true
         plotSpace.delegate = self

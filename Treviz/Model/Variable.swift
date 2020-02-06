@@ -16,7 +16,7 @@ import simd
 typealias VariableID = String
 typealias VarValue = Float
 
-class Variable : NSObject, Parameter, InitStateCheck, NSCopying {
+class Variable : NSObject, Parameter, NSCopying, NSCoding {
     
     let id: VariableID
     @objc let name: String
@@ -26,9 +26,27 @@ class Variable : NSObject, Parameter, InitStateCheck, NSCopying {
     
     var isValid: Bool = true
     var hasParams: Bool {return isParam}
-    var children: [InitStateCheck] { return [] }
     
     var isParam: Bool = false
+    
+    func encode(with coder: NSCoder) {
+        coder.encode(id, forKey: "varid")
+        coder.encode(name, forKey: "name")
+        coder.encode(symbol, forKey: "symbol")
+        coder.encode(units, forKey: "units")
+        coder.encode(value, forKey: "value")
+        coder.encode(isParam, forKey: "isParam")
+    }
+    
+    required init?(coder: NSCoder) {
+        id = coder.decodeObject(forKey: "varid") as? VariableID ?? ""
+        name = coder.decodeObject(forKey: "name") as? String ?? ""
+        symbol = coder.decodeObject(forKey: "symbol") as? String ?? ""
+        units = coder.decodeObject(forKey: "units") as? String ?? ""
+        isParam = coder.decodeBool(forKey: "isParam")
+        value = coder.decodeObject(forKey: "value") as? [VarValue] ?? [VarValue]()
+
+    }
     
     init(_ idIn: VariableID, named nameIn:String = "", symbol symbolIn: String = "", units unitsIn: String = ""){
         id = idIn

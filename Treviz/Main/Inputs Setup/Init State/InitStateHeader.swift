@@ -19,6 +19,9 @@ protocol InitStateCheck{
     var children: [InitStateCheck] {get}
 }
 
+extension Variable: InitStateCheck {
+    var children: [InitStateCheck] { return [] }
+}
 
 class InitStateHeader: InitStateCheck{
     var id: VariableID = ""
