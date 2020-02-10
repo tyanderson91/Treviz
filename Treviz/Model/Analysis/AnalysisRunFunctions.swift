@@ -32,7 +32,6 @@ extension Analysis {
         
         self.terminalConditions.reset(initialState: traj[0])
         
-        self.windowController.runButton.title = "■"
         isRunning = true
         DispatchQueue.global().async {
             var i = 0
@@ -102,15 +101,6 @@ extension Analysis {
         return newState
     }
     
-    
-    @objc func completeAnalysis(notification: Notification){ // Runs when the analysis has terminated
-        self.isRunning = false
-        let progressBar = viewController.analysisProgressBar!
-        progressBar.doubleValue = 0
-        self.windowController.runButton.title = "►"
-        if returnCode > 0 { //Nominal successfull completion
-            processOutputs()}
-    }
 
     func processOutputs(){
         guard let textOutputView = viewController.textOutputView else {return}

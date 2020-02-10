@@ -85,7 +85,6 @@ class AddOutputViewController: BaseViewController { //TODO : Add a way to add va
     func loadAnalysis(_ analysis: Analysis?){
         if analysis != nil {
             self.representedObject = analysis
-            outputSetupViewController = analysis!.viewController.mainSplitViewController.outputSetupViewController
         }
         conditionsArrayController.content = conditions
         plotTypeArrayController.content = plotTypes

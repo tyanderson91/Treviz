@@ -32,7 +32,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         loadVarGroups(from: "InitStateStructure")*/
         for thisWindow in application.windows {
             let windowController = thisWindow.windowController
-            if let doc = windowController?.document as? Analysis {
+            if let doc = windowController?.document as? AnalysisDoc {
                 doc.appDelegate = self
             }
         }

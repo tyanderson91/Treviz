@@ -2,77 +2,25 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>CFBundleDisplayName</key>
-	<string></string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleDisplayName</key>
+	<string></string>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
-				<string>binary</string>
-			</array>
-			<key>CFBundleTypeMIMETypes</key>
-			<array>
-				<string>application/octet-stream</string>
+				<string>asys</string>
 			</array>
 			<key>CFBundleTypeName</key>
-			<string>Binary</string>
+			<string>Analysis</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
-			<key>LSTypeIsPackage</key>
-			<integer>0</integer>
+			<key>LSItemContentTypes</key>
+			<array/>
 			<key>NSDocumentClass</key>
-			<string>$(PRODUCT_MODULE_NAME).Analysis</string>
-			<key>NSPersistentStoreTypeKey</key>
-			<string>Binary</string>
-		</dict>
-		<dict>
-			<key>CFBundleTypeExtensions</key>
-			<array>
-				<string>sqlite</string>
-			</array>
-			<key>CFBundleTypeMIMETypes</key>
-			<array>
-				<string>application/octet-stream</string>
-			</array>
-			<key>CFBundleTypeName</key>
-			<string>SQLite</string>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>LSTypeIsPackage</key>
-			<false/>
-			<key>NSDocumentClass</key>
-			<string>$(PRODUCT_MODULE_NAME).Analysis</string>
-			<key>NSPersistentStoreTypeKey</key>
-			<string>SQLite</string>
-		</dict>
-		<dict>
-			<key>CFBundleTypeExtensions</key>
-			<array>
-				<string>xml</string>
-			</array>
-			<key>CFBundleTypeIconFile</key>
-			<string></string>
-			<key>CFBundleTypeMIMETypes</key>
-			<array>
-				<string>text/xml</string>
-			</array>
-			<key>CFBundleTypeName</key>
-			<string>XML</string>
-			<key>CFBundleTypeOSTypes</key>
-			<array>
-				<string>????</string>
-			</array>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>LSTypeIsPackage</key>
-			<false/>
-			<key>NSDocumentClass</key>
-			<string>$(PRODUCT_MODULE_NAME).Analysis</string>
-			<key>NSPersistentStoreTypeKey</key>
-			<string>XML</string>
+			<string>Treviz.AnalysisDoc</string>
 		</dict>
 	</array>
 	<key>CFBundleExecutable</key>

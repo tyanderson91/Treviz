@@ -30,6 +30,7 @@ class SettingsViewController: BaseViewController {
     
     @objc func didRemoveCondition(_ notification: Notification){
         terminalConditionArrayController.content = analysis!.conditions
+        if analysis.terminalConditions == nil {return}
         if !analysis.conditions.contains(analysis.terminalConditions) {
             analysis.terminalConditions = nil
             terminalConditionPopupButton.bind(.selectedObject, to: analysis!, withKeyPath: "terminalConditions", options: nil)

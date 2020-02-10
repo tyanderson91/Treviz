@@ -29,30 +29,83 @@ struct InitStateSetting {
     let value: Double
 }
 
-extension Analysis {
+class AnalysisDoc: NSDocument {
 
-    func read(from data: Data) {
+    var analysis = Analysis()
+    // Connections to interface
+    var appDelegate : AppDelegate!
+    var windowController : MainWindowController! //Implicit optional, should always be assigned after initialization
+    var viewController : MainViewController!
+    /*
+    override var windowNibName: String? {
+        // Override returning the nib file name of the document
+        // If you need to use a subclass of NSWindowController or if your document supports multiple NSWindowControllers, you should remove this method and override -makeWindowControllers instead.
+        return "AnalysisDoc"
+    }
+    */
+    override init() {
+        super.init()
+        NotificationCenter.default.addObserver(self, selector: #selector(self.initReadData(_:)), name: .didLoadAppDelegate, object: nil)
+    }
+    
+    override func makeWindowControllers() {
+        // Returns the Storyboard that contains your Document window.
+        let storyboard = NSStoryboard(name: NSStoryboard.Name("Main"), bundle: nil)
+        self.windowController = (storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier("Analysis Window Controller")) as! MainWindowController)
+        self.addWindowController(windowController)
+        self.viewController = (windowController.contentViewController as! MainViewController)
+        self.viewController.representedObject = analysis
+    }
+    
+    override func windowControllerDidLoadNib(_ aController: NSWindowController) {
+        super.windowControllerDidLoadNib(aController)
+        // Add any code here that needs to be executed once the windowController has loaded the document's window.
     }
 
+    override func data(ofType typeName: String) throws -> Data {
+        // Insert code here to write your document to data of the specified type, throwing an error in case of failure.
+        // Alternatively, you could remove this method and override fileWrapper(ofType:), write(to:ofType:), or write(to:ofType:for:originalContentsURL:) instead.
+        let condData = try NSKeyedArchiver.archivedData(withRootObject: analysis.terminalConditions as Any, requiringSecureCoding: false)
+        return condData
+        //throw NSError(domain: NSOSStatusErrorDomain, code: unimpErr, userInfo: nil)
+    }
+    
+    override func read(from data: Data, ofType typeName: String) throws {
+        // Insert code here to read your document from the given data of the specified type, throwing an error in case of failure.
+        // Alternatively, you could remove this method and override read(from:ofType:) instead.  If you do, you should also override isEntireFileLoaded to return false if the contents are lazily loaded.
+        analysis.terminalConditions = try NSKeyedUnarchiver.unarchivedObject(ofClass: Condition.self, from: data)
+        NotificationCenter.default.post(name: .didAddCondition, object: nil)
+        //throw NSError(domain: NSOSStatusErrorDomain, code: unimpErr, userInfo: nil)
+    }
+    
+    override class var autosavesInPlace: Bool {
+        return false
+    }
+    
+    
     @objc func initReadData(_ notification: Notification){ //TODO: override with persistent data, last opened analysis, etc.
         // For now, this is just a test configuration
         
-        self.name = "Test Analysis"
-        self.defaultTimestep = 0.1
-        self.vehicle = Vehicle()
+        analysis.appDelegate = appDelegate
+        //analysis.windowController = windowController
+        analysis.viewController = viewController
+        
+        analysis.name = "Test Analysis"
+        analysis.defaultTimestep = 0.1
+        analysis.vehicle = Vehicle()
         
         // Read all inputs
-        self.inputSettings = self.varList.compactMap { ($0.copy() as! Parameter) } // TODO: Better way to copy?
+        analysis.inputSettings = analysis.varList.compactMap { ($0.copy() as! Parameter) } // TODO: Better way to copy?
         readSettings(from: "AnalysisSettings")
         //if var tvar = self.inputSettings.first(where: {$0.id == "t"}) {tvar.isParam = true}
         
         loadVarGroups(from: "InitStateStructure")
         
-        traj = State(variables: varList)
-        for thisVar in self.inputSettings {
-            traj[thisVar.id, 0] = (thisVar as! Variable)[0]
+        analysis.traj = State(variables: analysis.varList)
+        for thisVar in analysis.inputSettings {
+            analysis.traj[thisVar.id, 0] = (thisVar as! Variable)[0]
         }
-        traj["mtot",0] = 10.0
+        analysis.traj["mtot",0] = 10.0
 
         NotificationCenter.default.post(name: .didLoadAnalysisData, object: nil)
     }
@@ -88,7 +141,7 @@ extension Analysis {
        - Parameter yamlObj: a Dictionary of the type [String: Any] read from a yaml file.
        */
     func initVar(varID: VariableID, varStr: Any) -> Variable? {
-        guard let thisVar = self.inputSettings.first(where: { $0.id == varID}) as? Variable else {return nil}
+        guard let thisVar = analysis.inputSettings.first(where: { $0.id == varID}) as? Variable else {return nil}
         if let val = varStr as? NSNumber {
             thisVar.value = [VarValue(truncating: val)]
             return thisVar
@@ -107,7 +160,7 @@ extension Analysis {
         if let idInt = yamlObj["id"] as? Int {
             outputDict["id"] = idInt
         } else {
-            let newID = ((self.plots.compactMap {$0.id}).max() ?? 0) + 1
+            let newID = ((analysis.plots.compactMap {$0.id}).max() ?? 0) + 1
             outputDict["id"] = newID
         }
         if let varstr = yamlObj["variable1"] as? VariableID{
@@ -124,8 +177,8 @@ extension Analysis {
         }
         if let condstr = yamlObj["condition"] as? String{
             if condstr == "terminal" {
-                outputDict["condition"] = self.terminalConditions
-            } else if let thisCondition = self.conditions.first(where: {$0.name == condstr}) {
+                outputDict["condition"] = analysis.terminalConditions
+            } else if let thisCondition = analysis.conditions.first(where: {$0.name == condstr}) {
                 outputDict["condition"] = thisCondition
             }
         }
@@ -165,7 +218,7 @@ extension Analysis {
             for paramSet in inputList {
                 for thisKey in paramSet.keys { //TODO: better way to do this
                     let curVarID = thisKey
-                    let thisVar =  self.inputSettings.first(where: { $0.id == curVarID }) as! Variable
+                    let thisVar =  analysis.inputSettings.first(where: { $0.id == curVarID }) as! Variable
                     thisVar.value = [VarValue(truncating: paramSet[curVarID] as! NSNumber)]
                     thisVar.isParam = true
                 }
@@ -175,21 +228,21 @@ extension Analysis {
         if let conditionList = yamlDict["Conditions"] as? [[String: Any]] {
             // self.conditions = []
             for thisConditionDict in conditionList {
-                if let newCond = Condition(fromYaml: thisConditionDict, inputConditions: conditions) {
+                if let newCond = Condition(fromYaml: thisConditionDict, inputConditions: analysis.conditions) {
                     //initCondition(fromYaml: thisConditionDict) {
-                    conditions.append(newCond)
+                    analysis.conditions.append(newCond)
                 } // TODO: else print error
             }
         }
         if let terminalConditionDict = yamlDict["Terminal Condition"] as? [String: Any] {
-            if let newCond = Condition(fromYaml: terminalConditionDict, inputConditions: conditions) {
+            if let newCond = Condition(fromYaml: terminalConditionDict, inputConditions: analysis.conditions) {
                 newCond.name = "Terminal"
-                conditions.append(newCond)
-                self.terminalConditions = newCond
+                analysis.conditions.append(newCond)
+                analysis.terminalConditions = newCond
             }
         }
         if let outputList = yamlDict["Outputs"] as? [[String: Any]] {
-            self.plots = []
+            analysis.plots = []
             for thisOutputDict in outputList {
                 if let newOutput = initOutput(fromYaml: thisOutputDict) {
                     //plots.append(newOutput)
@@ -204,7 +257,7 @@ extension Analysis {
      */
     func defaultInitSettings()->[Variable] { //TODO: vary depending on the physics type
         var varList = [Variable]()
-        for thisVar in self.varList {
+        for thisVar in analysis.varList {
             guard let newVar = thisVar.copy() as? Variable else {continue}
             varList.append(newVar)
         }
@@ -214,8 +267,8 @@ extension Analysis {
     func loadVarGroups(from plist: String){
          guard let varFilePath = Bundle.main.path(forResource: plist, ofType: "plist") else {return}
          guard let inputList = NSArray.init(contentsOfFile: varFilePath) else {return} //return empty if filename not found
-         initStateGroups = InitStateHeader(id: "default")
-         loadVarGroupsRecurs(input: initStateGroups, withList: inputList as! [NSDictionary])
+         analysis.initStateGroups = InitStateHeader(id: "default")
+         loadVarGroupsRecurs(input: analysis.initStateGroups, withList: inputList as! [NSDictionary])
      }
      
      private func loadVarGroupsRecurs(input: InitStateHeader, withList list: [NSDictionary]){
@@ -225,7 +278,7 @@ extension Analysis {
              let name = dict["name"] as? String
              
              if itemType == "var"{
-                 if let newVar = inputSettings.first(where: {$0.id == itemID}) as? Variable {
+                 if let newVar = analysis.inputSettings.first(where: {$0.id == itemID}) as? Variable {
                     input.variables.append(newVar)
                  }
                  continue

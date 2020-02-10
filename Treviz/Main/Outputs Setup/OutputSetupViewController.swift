@@ -45,6 +45,7 @@ class OutputSetupViewController: TZViewController{//}, NSTableViewDelegate, NSTa
     func addOutputView(with output: TZOutput){
         let newOutputVC = stack.addViewController(fromStoryboardId: "OutputSetup", withIdentifier: "SingleAxisOutputSetupViewController") as! SingleAxisOutputSetupViewController
         newOutputVC.representedOutput = output
+        newOutputVC.outputSetupViewController = self
         newOutputVC.loadAnalysis(self.analysis)
         //newOutputVC.representedOutput = output
         //newOutputVC.conditionsArrayController.content = analysis.conditions

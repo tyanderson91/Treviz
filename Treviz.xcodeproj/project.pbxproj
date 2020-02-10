@@ -54,6 +54,7 @@
 		CD63AEA523E7EA26006502F2 /* Variable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD63AEA123E7EA26006502F2 /* Variable.swift */; };
 		CD63AEA623E7EA26006502F2 /* Condition.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD63AEA223E7EA26006502F2 /* Condition.swift */; };
 		CD63AEA723E7EA26006502F2 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD63AEA323E7EA26006502F2 /* State.swift */; };
+		CD715E8023EBE70400E31F97 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = CD715E7F23EBE70400E31F97 /* README.md */; };
 		CDA0F87F2257398F003C62E6 /* NotificationCenterSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA0F87E2257398F003C62E6 /* NotificationCenterSetup.swift */; };
 		CDA0F88122587E05003C62E6 /* ParamTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA0F88022587E05003C62E6 /* ParamTableViewController.swift */; };
 		CDA0F888225C5D47003C62E6 /* InputsCellViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA0F887225C5D47003C62E6 /* InputsCellViews.swift */; };
@@ -82,7 +83,7 @@
 		CDF1670C2237A10400CD9590 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF1670B2237A10400CD9590 /* MainWindowController.swift */; };
 		CDF3D1A1225025B00064D70C /* Analysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF3D1A0225025AF0064D70C /* Analysis.swift */; };
 		CDF3D1A6225057270064D70C /* TZViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF3D1A5225057270064D70C /* TZViewController.swift */; };
-		CDF3D1A822505A000064D70C /* AnalysisData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF3D1A722505A000064D70C /* AnalysisData.swift */; };
+		CDF3D1A822505A000064D70C /* AnalysisDoc.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF3D1A722505A000064D70C /* AnalysisDoc.swift */; };
 		CDFAD0ED23EA84EB00CE7424 /* TrajectoryAnalysis.h in Headers */ = {isa = PBXBuildFile; fileRef = CDFAD0EB23EA84EB00CE7424 /* TrajectoryAnalysis.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CDFAD0F523EA84FE00CE7424 /* Parameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB7C7392352B03100BC50F1 /* Parameter.swift */; };
 		CDFAD0F623EA84FE00CE7424 /* Condition.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD63AEA223E7EA26006502F2 /* Condition.swift */; };
@@ -182,6 +183,7 @@
 		CD63AEA223E7EA26006502F2 /* Condition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Condition.swift; sourceTree = "<group>"; };
 		CD63AEA323E7EA26006502F2 /* State.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		CD63AEC523E7EBE8006502F2 /* CorePlot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CorePlot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD715E7F23EBE70400E31F97 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		CDA0F87E2257398F003C62E6 /* NotificationCenterSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NotificationCenterSetup.swift; path = Treviz/Main/NotificationCenterSetup.swift; sourceTree = SOURCE_ROOT; };
 		CDA0F88022587E05003C62E6 /* ParamTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParamTableViewController.swift; sourceTree = "<group>"; };
 		CDA0F887225C5D47003C62E6 /* InputsCellViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputsCellViews.swift; sourceTree = "<group>"; };
@@ -211,7 +213,7 @@
 		CDF1670B2237A10400CD9590 /* MainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
 		CDF3D1A0225025AF0064D70C /* Analysis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Analysis.swift; sourceTree = "<group>"; };
 		CDF3D1A5225057270064D70C /* TZViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TZViewController.swift; sourceTree = "<group>"; };
-		CDF3D1A722505A000064D70C /* AnalysisData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisData.swift; sourceTree = "<group>"; };
+		CDF3D1A722505A000064D70C /* AnalysisDoc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisDoc.swift; sourceTree = "<group>"; };
 		CDFAD0E923EA84EB00CE7424 /* TrajectoryAnalysis.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TrajectoryAnalysis.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDFAD0EB23EA84EB00CE7424 /* TrajectoryAnalysis.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TrajectoryAnalysis.h; sourceTree = "<group>"; };
 		CDFAD0EC23EA84EB00CE7424 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -284,7 +286,7 @@
 			isa = PBXGroup;
 			children = (
 				CDF3D1A0225025AF0064D70C /* Analysis.swift */,
-				CDF3D1A722505A000064D70C /* AnalysisData.swift */,
+				CDF3D1A722505A000064D70C /* AnalysisDoc.swift */,
 				CD0F010823654ED400C920AA /* AnalysisRunFunctions.swift */,
 			);
 			path = Analysis;
@@ -445,6 +447,7 @@
 		CDD5048922252AF900B29751 = {
 			isa = PBXGroup;
 			children = (
+				CD715E7F23EBE70400E31F97 /* README.md */,
 				CDD5049422252AF900B29751 /* Treviz */,
 				CD0F011123656B7200C920AA /* TrevizTests */,
 				CD590D4623E7E42C000897C2 /* Playgrounds */,
@@ -659,6 +662,7 @@
 				CD2D0DBB224385580012978E /* OutputSetup.storyboard in Resources */,
 				CD11FA9323433096001A3695 /* PlotTypes.plist in Resources */,
 				CD59C54623E79476001D98D5 /* Outputs.storyboard in Resources */,
+				CD715E8023EBE70400E31F97 /* README.md in Resources */,
 				CD500337234DA64F00D71099 /* InitVarSettings.plist in Resources */,
 				CD59C53B23E79295001D98D5 /* VariableSelector.storyboard in Resources */,
 			);
@@ -767,7 +771,7 @@
 				CD59C54023E793E3001D98D5 /* VariableSelectorViewController.swift in Sources */,
 				CD2D0DB22243836F0012978E /* BaseViewController.swift in Sources */,
 				CD2D0DB32243836F0012978E /* StackView.swift in Sources */,
-				CDF3D1A822505A000064D70C /* AnalysisData.swift in Sources */,
+				CDF3D1A822505A000064D70C /* AnalysisDoc.swift in Sources */,
 				CD63AEA723E7EA26006502F2 /* State.swift in Sources */,
 				CD2D0DB42243836F0012978E /* ThreeAxisOutputSetupViewController.swift in Sources */,
 				CD2D0DB52243836F0012978E /* TwoAxisOutputSetupViewController.swift in Sources */,

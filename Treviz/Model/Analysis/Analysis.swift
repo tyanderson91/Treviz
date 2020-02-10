@@ -22,11 +22,13 @@ import Cocoa
  * Run settings: things like default timestep, propagator, etc.
  */
 
-class Analysis: NSDocument {//TODO: possibly subclass NSPersistentDocument if using CoreData
+class Analysis: NSObject {
+
+    //TODO: possibly subclass NSPersistentDocument if using CoreData
     
     // Connections to interface
     var appDelegate : AppDelegate!
-    var windowController : MainWindowController! //Implicit optional, should always be assigned after initialization
+    //var windowController : MainWindowController! //Implicit optional, should always be assigned after initialization
     var viewController : MainViewController!
     
     //AppDelegate variables
@@ -52,17 +54,10 @@ class Analysis: NSDocument {//TODO: possibly subclass NSPersistentDocument if us
     // Run tracking
     var isRunning = false
     var returnCode : Int = 0
-    
-    override init() {
+
+    override init(){
         super.init()
-        NotificationCenter.default.addObserver(self, selector: #selector(self.initReadData(_:)), name: .didLoadAppDelegate, object: nil)
-        DistributedNotificationCenter.default.addObserver(self, selector: #selector(self.completeAnalysis), name: .didFinishRunningAnalysis, object: nil)
     }
-
-    override class var autosavesInPlace: Bool {
-        return true
-    }
-
     // Validity check prior to running
     /**
      Check whether the analysis has enough inputs defined in order to run
@@ -80,13 +75,4 @@ class Analysis: NSDocument {//TODO: possibly subclass NSPersistentDocument if us
         ])
         return checks.allSatisfy { $0 }
     }
-    
-    override func makeWindowControllers() {
-        // Returns the Storyboard that contains your Document window.
-        let storyboard = NSStoryboard(name: NSStoryboard.Name("Main"), bundle: nil)
-        self.windowController = (storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier("Analysis Window Controller")) as! MainWindowController)
-        self.addWindowController(windowController)
-        self.viewController = (windowController.contentViewController as! MainViewController)
-        self.viewController.representedObject = self        
-    }    
 }

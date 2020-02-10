@@ -13,6 +13,8 @@ class MainWindowController: NSWindowController, NSToolbarDelegate {
     @IBOutlet weak var toolbar: NSToolbar!
     @IBOutlet weak var showHidePanesControl: NSSegmentedControl!
     @IBOutlet weak var runButton: NSButton!
+    var analysis: Analysis! { return contentViewController?.representedObject as? Analysis ?? nil }
+    var viewController: MainViewController! { return contentViewController as? MainViewController ?? nil}
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -38,6 +40,7 @@ class MainWindowController: NSWindowController, NSToolbarDelegate {
                 showHidePanesControl.setSelected(isSelected, forSegment: i)
             }
         }
+        DistributedNotificationCenter.default.addObserver(self, selector: #selector(self.completeAnalysis), name: .didFinishRunningAnalysis, object: nil)
         // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
     }
     
@@ -45,16 +48,25 @@ class MainWindowController: NSWindowController, NSToolbarDelegate {
     @IBAction func runAnalysisClicked(_ sender: Any) {
         if let asys = self.contentViewController?.representedObject as? Analysis {
             if asys.isRunning{
+                runButton.title = "►"
                 asys.isRunning = false
                 DistributedNotificationCenter.default().post(name: .didFinishRunningAnalysis, object: nil)
-                
             }
             else {
+                runButton.title = "■"
                 _ = asys.runAnalysis()
             }
         }
     }
     
+    @objc func completeAnalysis(notification: Notification){ // Runs when the analysis has terminated
+        analysis.isRunning = false
+        runButton.title = "►"
+        let progressBar = viewController.analysisProgressBar!
+        progressBar.doubleValue = 0
+        if analysis.returnCode > 0 { //Nominal successfull completion
+            analysis.processOutputs()}
+    }
     
     @IBAction func conditionsClicked(_ sender: Any) {
         DispatchQueue.main.async {
