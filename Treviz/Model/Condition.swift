@@ -130,7 +130,7 @@ public class SingleCondition: NSObject, EvaluateCondition {
         lbound = coder.decodeObject(forKey: "lbound") as? VarValue ?? nil
         ubound = coder.decodeObject(forKey: "ubound") as? VarValue ?? nil
         equality = coder.decodeObject(forKey: "equality") as? VarValue ?? nil
-        specialCondition = SpecialConditionType(rawValue: coder.decodeInteger(forKey: "specialCondition"))
+        specialCondition = SpecialConditionType(rawValue: coder.decodeInteger(forKey: "specialCondition")) ?? nil
         super.init()
     }
     
@@ -257,7 +257,7 @@ public class Condition : NSObject, EvaluateCondition {
     
     required public init?(coder: NSCoder) {
         name = coder.decodeObject(forKey: "name") as? String ?? ""
-        conditions = coder.decodeObject(forKey: "conditions") as? [EvaluateCondition] ?? [EvaluateCondition]()
+        conditions = coder.decodeObject(forKey: "conditions") as? [EvaluateCondition] ?? [SingleCondition]()
         unionType = BoolType(rawValue: coder.decodeInteger(forKey: "unionType")) ?? .single
         _summary = coder.decodeObject(forKey: "summary") as? String ?? ""
         super.init()

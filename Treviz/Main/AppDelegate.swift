@@ -18,9 +18,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     // var initStateGroups : InitStateHeader! = nil
     
     func applicationWillFinishLaunching(_ notification: Notification) {
-        loadPlotTypes(from: "PlotTypes")
-        loadVars(from: "InitVars")
-        initVars = State.sortVarIndices(initVars)
+        //loadPlotTypes(from: "PlotTypes")
+        //loadVars(from: "InitVars")
+        //initVars = State.sortVarIndices(initVars)
         // loadVarGroups(from: "InitStateStructure")
     }
     

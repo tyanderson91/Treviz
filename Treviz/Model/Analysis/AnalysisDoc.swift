@@ -36,6 +36,9 @@ class AnalysisDoc: NSDocument {
     var appDelegate : AppDelegate!
     var windowController : MainWindowController! //Implicit optional, should always be assigned after initialization
     var viewController : MainViewController!
+    var plotTypes : [TZPlotType]! = nil
+    var initVars : [Variable]! = nil
+    
     /*
     override var windowNibName: String? {
         // Override returning the nib file name of the document
@@ -45,16 +48,30 @@ class AnalysisDoc: NSDocument {
     */
     override init() {
         super.init()
-        NotificationCenter.default.addObserver(self, selector: #selector(self.initReadData(_:)), name: .didLoadAppDelegate, object: nil)
+        //NotificationCenter.default.addObserver(self, selector: #selector(self.initReadData(_:)), name: .didLoadAppDelegate, object: nil)
+        loadPlotTypes(from: "PlotTypes")
+        loadVars(from: "InitVars")
+        initVars = State.sortVarIndices(initVars)
+        
+        analysis.plotTypes = plotTypes
+        analysis.varList = initVars
+        analysis.inputSettings = analysis.varList.compactMap { ($0.copy() as! Parameter) } // TODO: Better way to copy?
+        loadVarGroups(from: "InitStateStructure")
+        
+        initReadData()
     }
     
     override func makeWindowControllers() {
         // Returns the Storyboard that contains your Document window.
         let storyboard = NSStoryboard(name: NSStoryboard.Name("Main"), bundle: nil)
         self.windowController = (storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier("Analysis Window Controller")) as! MainWindowController)
+        windowController.analysis = analysis
         self.addWindowController(windowController)
         self.viewController = (windowController.contentViewController as! MainViewController)
         self.viewController.representedObject = analysis
+        self.viewController.analysis = analysis
+        
+        NotificationCenter.default.post(name: .didLoadAnalysisData, object: nil)
     }
     
     override func windowControllerDidLoadNib(_ aController: NSWindowController) {
@@ -73,9 +90,15 @@ class AnalysisDoc: NSDocument {
     override func read(from data: Data, ofType typeName: String) throws {
         // Insert code here to read your document from the given data of the specified type, throwing an error in case of failure.
         // Alternatively, you could remove this method and override read(from:ofType:) instead.  If you do, you should also override isEntireFileLoaded to return false if the contents are lazily loaded.
-        analysis.terminalConditions = try NSKeyedUnarchiver.unarchivedObject(ofClass: Condition.self, from: data)
+        if let newConditions = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? Condition {
+            analysis.conditions.append(newConditions)
+            analysis.terminalConditions = newConditions
+        }
         NotificationCenter.default.post(name: .didAddCondition, object: nil)
         //throw NSError(domain: NSOSStatusErrorDomain, code: unimpErr, userInfo: nil)
+    }
+    override func read(from url: URL, ofType typeName: String) throws {
+        //readSettings(from: "AnalysisSettings")
     }
     
     override class var autosavesInPlace: Bool {
@@ -83,23 +106,17 @@ class AnalysisDoc: NSDocument {
     }
     
     
-    @objc func initReadData(_ notification: Notification){ //TODO: override with persistent data, last opened analysis, etc.
+    func initReadData(){ //TODO: override with persistent data, last opened analysis, etc.
         // For now, this is just a test configuration
-        
-        analysis.appDelegate = appDelegate
-        //analysis.windowController = windowController
-        analysis.viewController = viewController
         
         analysis.name = "Test Analysis"
         analysis.defaultTimestep = 0.1
         analysis.vehicle = Vehicle()
         
         // Read all inputs
-        analysis.inputSettings = analysis.varList.compactMap { ($0.copy() as! Parameter) } // TODO: Better way to copy?
-        readSettings(from: "AnalysisSettings")
+        //readSettings(from: "AnalysisSettings")
         //if var tvar = self.inputSettings.first(where: {$0.id == "t"}) {tvar.isParam = true}
         
-        loadVarGroups(from: "InitStateStructure")
         
         analysis.traj = State(variables: analysis.varList)
         for thisVar in analysis.inputSettings {
@@ -107,6 +124,7 @@ class AnalysisDoc: NSDocument {
         }
         analysis.traj["mtot",0] = 10.0
 
+        readSettings(from: "AnalysisSettings")
         NotificationCenter.default.post(name: .didLoadAnalysisData, object: nil)
     }
     
@@ -155,7 +173,7 @@ class AnalysisDoc: NSDocument {
     func initOutput(fromYaml yamlObj: [String: Any]) -> TZOutput? {
         var outputDict = yamlObj
         if let plotTypeStr = yamlObj["plot type"] as? String{
-            outputDict["plot type"] = self.appDelegate.plotTypes.first(where: {$0.name == plotTypeStr}) ?? ""
+            outputDict["plot type"] = plotTypes.first(where: {$0.name == plotTypeStr}) ?? ""
         }
         if let idInt = yamlObj["id"] as? Int {
             outputDict["id"] = idInt
@@ -164,16 +182,16 @@ class AnalysisDoc: NSDocument {
             outputDict["id"] = newID
         }
         if let varstr = yamlObj["variable1"] as? VariableID{
-            outputDict["variable1"] = self.appDelegate.initVars.first(where: {$0.id == varstr}) ?? ""
+            outputDict["variable1"] = initVars.first(where: {$0.id == varstr}) ?? ""
         }
         else if let varstr = yamlObj["variable"] as? VariableID{
-            outputDict["variable1"] = self.appDelegate.initVars.first(where: {$0.id == varstr}) ?? ""
+            outputDict["variable1"] = initVars.first(where: {$0.id == varstr}) ?? ""
         }
         if let varstr = yamlObj["variable2"] as? VariableID{
-            outputDict["variable2"] = self.appDelegate.initVars.first(where: {$0.id == varstr}) ?? ""
+            outputDict["variable2"] = initVars.first(where: {$0.id == varstr}) ?? ""
         }
         if let varstr = yamlObj["variable3"] as? VariableID{
-            outputDict["variable3"] = self.appDelegate.initVars.first(where: {$0.id == varstr}) ?? ""
+            outputDict["variable3"] = initVars.first(where: {$0.id == varstr}) ?? ""
         }
         if let condstr = yamlObj["condition"] as? String{
             if condstr == "terminal" {
@@ -245,11 +263,40 @@ class AnalysisDoc: NSDocument {
             analysis.plots = []
             for thisOutputDict in outputList {
                 if let newOutput = initOutput(fromYaml: thisOutputDict) {
-                    //plots.append(newOutput)
-                self.viewController.mainSplitViewController.outputSetupViewController.addOutput(newOutput)
+                    analysis.plots.append(newOutput)
                 }
             }
         }
+        analysis.traj = State(variables: analysis.varList)
+    }
+    
+    func loadVars(from plist: String){
+        guard let varFilePath = Bundle.main.path(forResource: plist, ofType: "plist") else {return}
+        guard let inputList = NSArray.init(contentsOfFile: varFilePath) else {return}//return empty if filename not found
+        initVars = []
+        for thisVar in inputList {
+            guard let dict = thisVar as? NSDictionary else {return}
+            let newVar = Variable(dict["id"] as! VariableID, named: dict["name"] as! String, symbol: dict["symbol"] as! String)
+            newVar.units = dict["units"] as! String
+            newVar.value = [0]
+            initVars.append(newVar)
+        }
+    }
+    
+    func loadPlotTypes(from plist: String){
+        guard let plotFilePath = Bundle.main.path(forResource: plist, ofType: "plist") else {return}
+        
+        guard let inputList = NSArray.init(contentsOfFile: plotFilePath) else {
+            self.plotTypes = nil
+            return}
+        var initPlotTypes : [TZPlotType] = []
+        for thisPlot in inputList {
+            guard let dict = thisPlot as? NSDictionary else {return}
+            let newPlot = TZPlotType(dict["id"] as! String, name: dict["name"] as! String, requiresCondition: dict["condition"] as! Bool, nAxis: dict["naxis"] as! Int, nVars: dict["nvar"] as! Int)
+            initPlotTypes.append(newPlot)
+        }
+        self.plotTypes = initPlotTypes
+        TZPlotType.allPlotTypes = initPlotTypes
     }
     
     /**

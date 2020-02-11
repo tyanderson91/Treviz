@@ -11,23 +11,21 @@
 import Cocoa
 
 extension Analysis {
-    
+        
     func runAnalysis() {
         //Check if enough inputs are defined
-        guard self.isValid() else {
-            self.viewController.textOutputView?.string.append("Not enough inputs to make analysis fully defined!")
-            return
-        }
+        guard self.isValid() else { return }  // TODO: error code for this case
         
         // Setup
         for thisVar in self.traj.variables { // Delete all data except for initial state
             if thisVar.value.count > 1 { thisVar.value.removeLast(thisVar.value.count - 1) }
+            if let existingVar = varList.first(where: { (var1: Variable)->Bool in return var1.id == thisVar.id }) {
+                thisVar.value[0] = existingVar.value[0]
+            }
         }
         self.traj.sortVarIndices() // Ensure that time is the first variable, x is second, etc.
         let dt : VarValue = defaultTimestep
 
-        let progressBar = viewController.analysisProgressBar!
-        progressBar.usesThreadedAnimation = true
         // let outputTextView = self.viewController.textOutputView!
         
         self.terminalConditions.reset(initialState: traj[0])
@@ -69,8 +67,7 @@ extension Analysis {
                     outputTextView.string += "X: \(String(format: "%.5f", x)), "
                     outputTextView.string += "Y: \(String(format: "%.5f", y))\n"*/
                     // outputTextView.string.append(String(describing: pctcomp))
-                    let pctcomp = self.pctComplete(cond: self.terminalConditions, initState: initState, curState: curState)
-                    progressBar.doubleValue = pctcomp
+                    self.pctComplete = self.pctComplete(cond: self.terminalConditions, initState: initState, curState: curState)
                 }
             }
             DistributedNotificationCenter.default.post(name: .didFinishRunningAnalysis, object: nil)
@@ -102,23 +99,7 @@ extension Analysis {
     }
     
 
-    func processOutputs(){
-        guard let textOutputView = viewController.textOutputView else {return}
-        guard let plotViewController = viewController.mainSplitViewController.outputsViewController.outputSplitViewController?.plotViewController else { return }
 
-        textOutputView.string = ""
-        for curOutput in plots {
-            curOutput.curTrajectory = traj
-            if curOutput is TZTextOutput {
-                let newText = (curOutput as! TZTextOutput).getText()
-                textOutputView.textStorage?.append(newText)
-                textOutputView.textStorage?.append(NSAttributedString(string: "\n\n"))
-            }
-            else if curOutput is TZPlot {
-                plotViewController.createPlot(plot: curOutput as! TZPlot)
-            }
-        }
-    }
     
     /**
      Provide an estimate for the percentage completion of the analysis based on the initial state, current state, and terminal conditions

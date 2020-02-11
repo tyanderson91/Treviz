@@ -34,8 +34,8 @@ class VariableSelectorViewController: TZViewController {
     }
     
     @objc func addVariables(_ notification: NSNotification){
-        if let thisAnalysis = self.representedObject as? Analysis { //TODO: use bindings rather than manually typing the name
-            for thisVariable in thisAnalysis.varList! {
+        if analysis != nil { //TODO: use bindings rather than manually typing the name
+            for thisVariable in analysis.varList! {
                 variableSelectorPopup.addItem(withTitle: thisVariable.name)
             }
         }

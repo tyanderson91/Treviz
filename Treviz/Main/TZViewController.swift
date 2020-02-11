@@ -9,7 +9,7 @@ import Cocoa
 
 
 class TZViewController: NSViewController {
-
+    
     override var representedObject: Any? {
         didSet {
             // Pass down the represented object to all of the child view controllers.
@@ -18,13 +18,22 @@ class TZViewController: NSViewController {
             }
         }
     }
-
+/*
     weak var analysis: Analysis! {
         if let analysisRepresentedObject = representedObject as? Analysis {
             return analysisRepresentedObject
         }
         return nil
+    }*/
+    weak var analysis: Analysis! {
+        didSet {
+            for child in children {
+                if let tzchild = child as? TZViewController { tzchild.analysis = self.analysis }
+                else if let tzchild = child as? TZSplitViewController { tzchild.analysis = self.analysis }
+            }
+        }
     }
+    
 }
 
 
@@ -37,12 +46,21 @@ class TZSplitViewController: NSSplitViewController {
             }
         }
     }
-    
+    /*
     weak var analysis: Analysis? {
         if let analysisRepresentedObject = representedObject as? Analysis {
             return analysisRepresentedObject
         }
         return nil
+    }*/
+    
+    weak var analysis: Analysis! {
+        didSet {
+            for child in children {
+                if let tzchild = child as? TZViewController { tzchild.analysis = self.analysis }
+                else if let tzchild = child as? TZSplitViewController { tzchild.analysis = self.analysis }
+            }
+        }
     }
     
 }

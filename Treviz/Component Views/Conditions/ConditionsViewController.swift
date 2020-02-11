@@ -200,7 +200,7 @@ class ConditionsViewController: TZViewController {
             storyboardID = "addExistingConditionViewController"
         }
         viewController = storyboard.instantiateController(withIdentifier: storyboardID) as? AddConditionViewController
-        viewController.representedObject = analysis
+        viewController.analysis = analysis
         viewController.representedCondition = condition
         newConditionStackView.addArrangedSubview(viewController.view)
         self.addChild(viewController)

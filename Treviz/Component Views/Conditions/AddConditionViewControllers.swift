@@ -136,7 +136,7 @@ class AddNewConditionViewController: AddConditionViewController {
     
     override func initLoadAll(){
         guard variableSelectorViewController != nil else {return}
-        variableSelectorViewController!.representedObject = analysis
+        variableSelectorViewController!.analysis = analysis
         variableSelectorViewController!.initLoadVars()
         singleConditionObjectController.bind(.content, to: self, withKeyPath: "representedSingleCondition", options: nil)
         subConditionIndex = conditionViewController!.newConditionStackView.arrangedSubviews.count - 1

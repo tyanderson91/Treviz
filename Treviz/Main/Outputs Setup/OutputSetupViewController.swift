@@ -30,7 +30,6 @@ class OutputSetupViewController: TZViewController{//}, NSTableViewDelegate, NSTa
         stack.parent = self
         stack.setHuggingPriority(NSLayoutConstraint.Priority.defaultHigh, for: .horizontal)
         NotificationCenter.default.addObserver(self, selector: #selector(self.refreshTable(_:)), name: .didLoadAnalysisData, object: nil)
-
     }
     
     
@@ -77,7 +76,7 @@ class OutputSetupViewController: TZViewController{//}, NSTableViewDelegate, NSTa
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         if ["add1AxisSegue", "add2AxisSegue", "add3AxisSegue", "addMCSegue"].contains(segue.identifier) {
             let target = segue.destinationController as! AddOutputViewController
-            target.representedObject = self.analysis
+            target.analysis = self.analysis
             target.outputSetupViewController = self
             target.title = "Add Output"
         }
@@ -85,6 +84,9 @@ class OutputSetupViewController: TZViewController{//}, NSTableViewDelegate, NSTa
     
     
     @objc func refreshTable(_ notification: Notification){
+        for thisOutput in analysis.plots {
+            addOutputView(with: thisOutput)
+        }
         self.outputsArrayController.content = allPlots
         self.tableView.bind(.content, to: outputsArrayController!, withKeyPath: "arrangedObjects", options: nil)
     }

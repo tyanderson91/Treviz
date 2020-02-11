@@ -22,19 +22,11 @@ import Cocoa
  * Run settings: things like default timestep, propagator, etc.
  */
 
-class Analysis: NSObject {
-
-    //TODO: possibly subclass NSPersistentDocument if using CoreData
-    
-    // Connections to interface
-    var appDelegate : AppDelegate!
-    //var windowController : MainWindowController! //Implicit optional, should always be assigned after initialization
-    var viewController : MainViewController!
-    
+class Analysis: NSObject {    
     //AppDelegate variables
-    @objc var varList : [Variable]! {return appDelegate.initVars}
+    @objc var varList : [Variable]!// {return appDelegate.initVars}
     var initStateGroups : InitStateHeader!
-    var plotTypes : [TZPlotType]! {return appDelegate.plotTypes}
+    var plotTypes : [TZPlotType]!// {return appDelegate.plotTypes}
     
     // Analysis-specific data and configs (read/writing functions in AnalysisData.swift)
     var name : String = ""
@@ -49,7 +41,8 @@ class Analysis: NSObject {
     var defaultTimestep : VarValue = 0.01
     var vehicle : Vehicle!
     var propagatorType : PropagatorType = .explicit
-    
+    var pctComplete: Double = 0
+
     
     // Run tracking
     var isRunning = false

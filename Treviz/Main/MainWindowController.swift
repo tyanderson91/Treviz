@@ -13,7 +13,11 @@ class MainWindowController: NSWindowController, NSToolbarDelegate {
     @IBOutlet weak var toolbar: NSToolbar!
     @IBOutlet weak var showHidePanesControl: NSSegmentedControl!
     @IBOutlet weak var runButton: NSButton!
-    var analysis: Analysis! { return contentViewController?.representedObject as? Analysis ?? nil }
+    var analysis: Analysis! {
+        get { return contentViewController?.representedObject as? Analysis ?? nil }
+        set { contentViewController?.representedObject = newValue }
+    }
+        
     var viewController: MainViewController! { return contentViewController as? MainViewController ?? nil}
     
     required init?(coder aDecoder: NSCoder) {
@@ -54,7 +58,26 @@ class MainWindowController: NSWindowController, NSToolbarDelegate {
             }
             else {
                 runButton.title = "■"
+                viewController.analysisProgressBar.doubleValue = analysis.pctComplete
                 _ = asys.runAnalysis()
+            }
+        }
+    }
+    
+    func processOutputs(){
+        guard let textOutputView = viewController.textOutputView else {return}
+        guard let plotViewController = viewController.mainSplitViewController.outputsViewController.outputSplitViewController?.plotViewController else { return }
+
+        textOutputView.string = ""
+        for curOutput in analysis.plots {
+            curOutput.curTrajectory = analysis.traj
+            if curOutput is TZTextOutput {
+                let newText = (curOutput as! TZTextOutput).getText()
+                textOutputView.textStorage?.append(newText)
+                textOutputView.textStorage?.append(NSAttributedString(string: "\n\n"))
+            }
+            else if curOutput is TZPlot {
+                plotViewController.createPlot(plot: curOutput as! TZPlot)
             }
         }
     }
@@ -65,7 +88,10 @@ class MainWindowController: NSWindowController, NSToolbarDelegate {
         let progressBar = viewController.analysisProgressBar!
         progressBar.doubleValue = 0
         if analysis.returnCode > 0 { //Nominal successfull completion
-            analysis.processOutputs()}
+            processOutputs()}
+        else { //TODO: make different error codes for analysis run
+            viewController.textOutputView?.string.append("Not enough inputs to make analysis fully defined!")
+        }
     }
     
     @IBAction func conditionsClicked(_ sender: Any) {
@@ -78,18 +104,16 @@ class MainWindowController: NSWindowController, NSToolbarDelegate {
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         if segue.identifier == "conditionsPopupSegue" {
             let conditionsVC = segue.destinationController as! ConditionsViewController
-            conditionsVC.representedObject = self.contentViewController!.representedObject as? Analysis
+            conditionsVC.analysis = self.viewController.analysis
         }
     }
     
     
     @IBAction func showHidePanesClicked(_ sender: Any) {
-        let asys = self.contentViewController?.representedObject as! Analysis
-
         guard let button = sender as? NSSegmentedControl else {return}
         let curIndex = button.indexOfSelectedItem
         let shouldCollapse = !button.isSelected(forSegment: curIndex)
-        let splitViewController = asys.viewController.mainSplitViewController!
+        let splitViewController = viewController.mainSplitViewController!
         _ = splitViewController.setSectionCollapse(shouldCollapse, forSection: curIndex)
         
         for i in 0...2 { // If there is one button left, disable it so user cannot collapse everything

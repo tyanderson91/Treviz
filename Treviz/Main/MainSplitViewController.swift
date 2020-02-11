@@ -30,7 +30,7 @@ class MainSplitViewController: TZSplitViewController {
         outputsViewController = (outputsSplitViewItem?.viewController as! OutputsViewController)
         outputSetupViewController = (outputSetupSplitViewItem?.viewController as! OutputSetupViewController)
         splitViewItemList = [inputsSplitViewItem, outputsSplitViewItem, outputSetupSplitViewItem]
-        
+  
         for splitViewName in ["inputs", "outputs", "outputSetup"] {
             let itemKey = splitViewName + "SplitViewItem"
             guard let splitViewItem = self.value(forKey: itemKey) as? NSSplitViewItem else { continue }

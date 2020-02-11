@@ -35,7 +35,8 @@ class InputsViewController: TZViewController, NSTableViewDataSource, NSTableView
                                //environmentsViewController,
                                initStateViewController]{
             self.addChild(thisController!)
-            thisController?.representedObject = self.representedObject
+            thisController?.analysis = self.analysis
+            //thisController?.representedObject = self.representedObject
         }
     }
     
