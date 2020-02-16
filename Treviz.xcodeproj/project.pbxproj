@@ -55,6 +55,7 @@
 		CD63AEA623E7EA26006502F2 /* Condition.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD63AEA223E7EA26006502F2 /* Condition.swift */; };
 		CD63AEA723E7EA26006502F2 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD63AEA323E7EA26006502F2 /* State.swift */; };
 		CD715E8023EBE70400E31F97 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = CD715E7F23EBE70400E31F97 /* README.md */; };
+		CD8A81D523F7CF1200EBF19A /* AppIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = CD8A81D423F7CF1100EBF19A /* AppIcon.icns */; };
 		CDA0F87F2257398F003C62E6 /* NotificationCenterSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA0F87E2257398F003C62E6 /* NotificationCenterSetup.swift */; };
 		CDA0F88122587E05003C62E6 /* ParamTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA0F88022587E05003C62E6 /* ParamTableViewController.swift */; };
 		CDA0F888225C5D47003C62E6 /* InputsCellViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA0F887225C5D47003C62E6 /* InputsCellViews.swift */; };
@@ -184,6 +185,7 @@
 		CD63AEA323E7EA26006502F2 /* State.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		CD63AEC523E7EBE8006502F2 /* CorePlot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CorePlot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD715E7F23EBE70400E31F97 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		CD8A81D423F7CF1100EBF19A /* AppIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = AppIcon.icns; sourceTree = "<group>"; };
 		CDA0F87E2257398F003C62E6 /* NotificationCenterSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NotificationCenterSetup.swift; path = Treviz/Main/NotificationCenterSetup.swift; sourceTree = SOURCE_ROOT; };
 		CDA0F88022587E05003C62E6 /* ParamTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParamTableViewController.swift; sourceTree = "<group>"; };
 		CDA0F887225C5D47003C62E6 /* InputsCellViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputsCellViews.swift; sourceTree = "<group>"; };
@@ -286,7 +288,6 @@
 			isa = PBXGroup;
 			children = (
 				CDF3D1A0225025AF0064D70C /* Analysis.swift */,
-				CDF3D1A722505A000064D70C /* AnalysisDoc.swift */,
 				CD0F010823654ED400C920AA /* AnalysisRunFunctions.swift */,
 			);
 			path = Analysis;
@@ -296,6 +297,7 @@
 			isa = PBXGroup;
 			children = (
 				CDD504A022252AFD00B29751 /* Main.storyboard */,
+				CDF3D1A722505A000064D70C /* AnalysisDoc.swift */,
 				CDC1F53F22363DDB00D1BB25 /* MainViewController.swift */,
 				CDC1F53B2234874000D1BB25 /* MainSplitViewController.swift */,
 				CDF1670B2237A10400CD9590 /* MainWindowController.swift */,
@@ -475,6 +477,7 @@
 				CDFE81F423E0104A0013945F /* Treviz-Bridging-Header.h */,
 				CDA7FD7923715399009CDFAF /* AnalysisSettings.yaml */,
 				CDD5049E22252AFD00B29751 /* Assets.xcassets */,
+				CD8A81D423F7CF1100EBF19A /* AppIcon.icns */,
 				CDD504A322252AFD00B29751 /* Info.plist */,
 				CDD504A422252AFD00B29751 /* Treviz.entitlements */,
 				CDD5049B22252AFA00B29751 /* Document.xcdatamodeld */,
@@ -497,8 +500,8 @@
 		CDFE81FA23E14AD10013945F /* Viewer Outputs */ = {
 			isa = PBXGroup;
 			children = (
-				CD557436236EA14500DA53A1 /* VisualizerViewController.swift */,
 				CDFE81FB23E14B730013945F /* ViewerTabViewController.swift */,
+				CD557436236EA14500DA53A1 /* VisualizerViewController.swift */,
 				CDFE81F823E147060013945F /* PlotOutputViewController.swift */,
 			);
 			path = "Viewer Outputs";
@@ -651,6 +654,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDBE33C6224CB48200E1404E /* InitStateStructure.plist in Resources */,
+				CD8A81D523F7CF1200EBF19A /* AppIcon.icns in Resources */,
 				CD2D0DBA2243837F0012978E /* HeaderViewController.storyboard in Resources */,
 				CD59C54323E79449001D98D5 /* InitVars.plist in Resources */,
 				CDD5049F22252AFD00B29751 /* Assets.xcassets in Resources */,

@@ -19,8 +19,8 @@ extension Analysis {
         // Setup
         for thisVar in self.traj.variables { // Delete all data except for initial state
             if thisVar.value.count > 1 { thisVar.value.removeLast(thisVar.value.count - 1) }
-            if let existingVar = varList.first(where: { (var1: Variable)->Bool in return var1.id == thisVar.id }) {
-                thisVar.value[0] = existingVar.value[0]
+            if let existingVar = inputSettings.first(where: { (var1: Parameter)->Bool in return var1.id == thisVar.id }) {
+                thisVar.value[0] = (existingVar as? Variable)?.value[0] ?? 0
             }
         }
         self.traj.sortVarIndices() // Ensure that time is the first variable, x is second, etc.
@@ -28,9 +28,10 @@ extension Analysis {
 
         // let outputTextView = self.viewController.textOutputView!
         
-        self.terminalConditions.reset(initialState: traj[0])
+        self.terminalCondition.reset(initialState: traj[0])
         
         isRunning = true
+        traj["mtot",0] = 10.0
         DispatchQueue.global().async {
             var i = 0
             let initState = self.traj[0]
@@ -47,14 +48,14 @@ extension Analysis {
                 self.traj[i] = newState
                 
                 // var pctComplete = 0.0
-                // self.isRunning = !self.terminalConditions.evaluateSingle(self.traj.copyAtIndex(i))
+                // self.isRunning = !self.terminalCondition.evaluateSingle(self.traj.copyAtIndex(i))
                 // Only use this if ALL state variable can be represented in array form
-                self.isRunning = !self.terminalConditions.evaluateStateArray(self.traj![i])
+                self.isRunning = !self.terminalCondition.evaluateStateArray(self.traj![i])
                 
                 if !self.isRunning {
                     self.returnCode = 1
                 }
-                
+                /*
                 DispatchQueue.main.async {
                     let curIndex = self.traj["t"].value.count - 2
                     let curState = self.traj[curIndex]
@@ -67,8 +68,8 @@ extension Analysis {
                     outputTextView.string += "X: \(String(format: "%.5f", x)), "
                     outputTextView.string += "Y: \(String(format: "%.5f", y))\n"*/
                     // outputTextView.string.append(String(describing: pctcomp))
-                    self.pctComplete = self.pctComplete(cond: self.terminalConditions, initState: initState, curState: curState)
-                }
+                    self.pctComplete = self.pctComplete(cond: self.terminalCondition, initState: initState, curState: curState)
+                }*/
             }
             DistributedNotificationCenter.default.post(name: .didFinishRunningAnalysis, object: nil)
         }

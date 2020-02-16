@@ -12,7 +12,7 @@ extension NSUserInterfaceItemIdentifier {
     static let plotThumbnailTableCellView = NSUserInterfaceItemIdentifier(rawValue: "plotThumbnailTableCellView")
 }
 
-class PlotOutputViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource {//}, CPTScatterPlotDelegate, CPTScatterPlotDataSource, CPTPlotSpaceDelegate  {
+class PlotOutputViewController: TZViewController, NSTableViewDelegate, NSTableViewDataSource {//}, CPTScatterPlotDelegate, CPTScatterPlotDataSource, CPTPlotSpaceDelegate  {
 
     
     @IBOutlet weak var tableView: NSTableView!

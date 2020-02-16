@@ -69,6 +69,7 @@ class MainWindowController: NSWindowController, NSToolbarDelegate {
         guard let plotViewController = viewController.mainSplitViewController.outputsViewController.outputSplitViewController?.plotViewController else { return }
 
         textOutputView.string = ""
+        plotViewController.plotViews = []
         for curOutput in analysis.plots {
             curOutput.curTrajectory = analysis.traj
             if curOutput is TZTextOutput {

@@ -18,6 +18,12 @@ class ViewerTabViewController: NSTabViewController {
         // Do view setup here.
         let plotView = plotTabViewItem.viewController
         plotView?.loadView()
+        let lastTabView = UserDefaults.standard.value(forKey: "selectedOutputTab")
+        tabView.selectTabViewItem(withIdentifier: lastTabView)
+        
     }
     
+    override func tabView(_ tabView: NSTabView, didSelect tabViewItem: NSTabViewItem?) {
+        UserDefaults.standard.set(tabViewItem?.identifier, forKey: "selectedOutputTab")
+    }
 }

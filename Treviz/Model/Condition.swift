@@ -9,7 +9,7 @@
 import Foundation
 import Cocoa
 
-@objc protocol EvaluateCondition : AnyObject, NSCoding {
+@objc protocol EvaluateCondition : NSCoding {
     func evaluateState(_ state: State)
     func evaluateStateArray(_ singleState: StateArray)->Bool
     func reset(initialState: StateArray?)
@@ -116,7 +116,8 @@ public class SingleCondition: NSObject, EvaluateCondition {
         }
         return _tests
     }
-    
+    // MARK: NSCoding implementation
+
     public func encode(with coder: NSCoder) {
         coder.encode(varID, forKey: "varid")
         coder.encode(lbound, forKey: "lbound")
@@ -130,7 +131,8 @@ public class SingleCondition: NSObject, EvaluateCondition {
         lbound = coder.decodeObject(forKey: "lbound") as? VarValue ?? nil
         ubound = coder.decodeObject(forKey: "ubound") as? VarValue ?? nil
         equality = coder.decodeObject(forKey: "equality") as? VarValue ?? nil
-        specialCondition = SpecialConditionType(rawValue: coder.decodeInteger(forKey: "specialCondition")) ?? nil
+        if let scint = coder.decodeObject(forKey: "specialCondition") as? Int {
+            specialCondition = SpecialConditionType(rawValue: scint) ?? nil }
         super.init()
     }
     
@@ -247,7 +249,10 @@ public class Condition : NSObject, EvaluateCondition {
     override init(){
         super.init()
     }
-
+    
+    // MARK: NSSecureCoding implementation
+    public static var supportsSecureCoding: Bool { return true }
+    
     public func encode(with coder: NSCoder) {
         coder.encode(name, forKey: "name")
         coder.encode(conditions, forKey: "conditions")

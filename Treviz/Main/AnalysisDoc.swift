@@ -82,24 +82,33 @@ class AnalysisDoc: NSDocument {
     override func data(ofType typeName: String) throws -> Data {
         // Insert code here to write your document to data of the specified type, throwing an error in case of failure.
         // Alternatively, you could remove this method and override fileWrapper(ofType:), write(to:ofType:), or write(to:ofType:for:originalContentsURL:) instead.
-        let condData = try NSKeyedArchiver.archivedData(withRootObject: analysis.terminalConditions as Any, requiringSecureCoding: false)
-        return condData
+        let asysData = try NSKeyedArchiver.archivedData(withRootObject: analysis as Any, requiringSecureCoding: false)
+        return asysData
         //throw NSError(domain: NSOSStatusErrorDomain, code: unimpErr, userInfo: nil)
     }
     
     override func read(from data: Data, ofType typeName: String) throws {
         // Insert code here to read your document from the given data of the specified type, throwing an error in case of failure.
         // Alternatively, you could remove this method and override read(from:ofType:) instead.  If you do, you should also override isEntireFileLoaded to return false if the contents are lazily loaded.
-        if let newConditions = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? Condition {
-            analysis.conditions.append(newConditions)
-            analysis.terminalConditions = newConditions
-        }
+        
+        analysis = try (NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? Analysis)!
+        /*if newAnalysis != nil {
+            analysis.conditions.append(newAnalysis!.terminalCondition)
+            analysis.terminalCondition = newAnalysis!.terminalCondition
+        }*/
         NotificationCenter.default.post(name: .didAddCondition, object: nil)
+        NotificationCenter.default.post(name: .didLoadAnalysisData, object: nil)
+        //viewController.mainSplitViewController.inputsViewController.settingsViewController.terminalConditionPopupButton
         //throw NSError(domain: NSOSStatusErrorDomain, code: unimpErr, userInfo: nil)
     }
+    /*
     override func read(from url: URL, ofType typeName: String) throws {
+        do {
+            let asysData = try Data(contentsOf: url)
+            try read(from: asysData, ofType: typeName)
+        }
         //readSettings(from: "AnalysisSettings")
-    }
+    }*/
     
     override class var autosavesInPlace: Bool {
         return false
@@ -195,7 +204,7 @@ class AnalysisDoc: NSDocument {
         }
         if let condstr = yamlObj["condition"] as? String{
             if condstr == "terminal" {
-                outputDict["condition"] = analysis.terminalConditions
+                outputDict["condition"] = analysis.terminalCondition
             } else if let thisCondition = analysis.conditions.first(where: {$0.name == condstr}) {
                 outputDict["condition"] = thisCondition
             }
@@ -256,7 +265,7 @@ class AnalysisDoc: NSDocument {
             if let newCond = Condition(fromYaml: terminalConditionDict, inputConditions: analysis.conditions) {
                 newCond.name = "Terminal"
                 analysis.conditions.append(newCond)
-                analysis.terminalConditions = newCond
+                analysis.terminalCondition = newCond
             }
         }
         if let outputList = yamlDict["Outputs"] as? [[String: Any]] {

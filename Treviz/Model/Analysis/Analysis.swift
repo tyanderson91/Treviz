@@ -22,7 +22,8 @@ import Cocoa
  * Run settings: things like default timestep, propagator, etc.
  */
 
-class Analysis: NSObject {    
+class Analysis: NSObject, NSCoding {
+    
     //AppDelegate variables
     @objc var varList : [Variable]!// {return appDelegate.initVars}
     var initStateGroups : InitStateHeader!
@@ -30,7 +31,7 @@ class Analysis: NSObject {
     
     // Analysis-specific data and configs (read/writing functions in AnalysisData.swift)
     var name : String = ""
-    @objc weak var terminalConditions : Condition!
+    @objc weak var terminalCondition : Condition!
     var traj: State!
     @objc var conditions : [Condition] = []
     var inputSettings : [Parameter] = []
@@ -63,9 +64,20 @@ class Analysis: NSObject {
             checks.append(true) // thisSet.isValid
         }
         checks.append(contentsOf: [
-            self.terminalConditions != nil,
+            self.terminalCondition != nil,
             self.defaultTimestep > 0
         ])
         return checks.allSatisfy { $0 }
+    }
+    
+    // MARK: NSCoding implementation
+    func encode(with coder: NSCoder) {
+        coder.encode(terminalCondition, forKey: "terminalCondition")
+    }
+    
+    required init?(coder: NSCoder) {
+        terminalCondition = coder.decodeObject(forKey: "terminalCondition") as? Condition ?? nil
+        conditions.append(terminalCondition)
+        super.init()
     }
 }

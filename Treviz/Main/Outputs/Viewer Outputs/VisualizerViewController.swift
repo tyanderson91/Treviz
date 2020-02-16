@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class VisualizerViewController: NSViewController {
+class VisualizerViewController: TZViewController {
 
     @IBOutlet weak var placeholderImageView: NSImageView!
     

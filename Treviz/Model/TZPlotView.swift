@@ -76,7 +76,9 @@ class TZPlotView: NSObject, CPTScatterPlotDelegate, CPTScatterPlotDataSource, CP
         let plotSpace = graph.defaultPlotSpace as! CPTXYPlotSpace
         plotSpace.allowsUserInteraction = true
         plotSpace.delegate = self
-        plotSpace.scale(toFitEntirePlots: [scatterPlot])
+        // plotSpace.scale(toFitEntirePlots: [scatterPlot])
+        //plotSpace.allowsMomentum = true
+
         graph.add(scatterPlot)
         graph.paddingRight = 0
         graph.paddingTop = 0
@@ -88,5 +90,10 @@ class TZPlotView: NSObject, CPTScatterPlotDelegate, CPTScatterPlotDataSource, CP
         let yaxis = graph.axisSet!.axes![1]
         xaxis.labelingPolicy = .automatic
         yaxis.labelingPolicy = .automatic
+        if plot.var1?.units == plot.var2?.units {
+            let sortedAxes = [xaxis, yaxis].sorted(by: { (axis1: CPTAxis, axis2: CPTAxis) in
+                return axis1.majorTickLength > axis2.majorTickLength
+            })
+        }
     }
 }

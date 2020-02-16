@@ -69,6 +69,7 @@ class ConditionsViewController: TZViewController {
             curCondition.conditions.append(newCondition)
             showConditionView(condition: newCondition)
             tableView.reloadData()
+            tableView.selectRowIndexes([(analysis.conditions.firstIndex(of: curCondition) ?? analysis.conditions.count)], byExtendingSelection: false)
             canAddSubCondition = true
             conditionNameTextBox.isHidden = false
             conditionNameTextBox.becomeFirstResponder()
