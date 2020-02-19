@@ -8,7 +8,7 @@
 
 import Cocoa
 
-protocol Parameter {
+protocol Parameter: NSCoding {
     var id: VariableID {get}
     var name: VariableID {get}
     var isParam : Bool {get set}

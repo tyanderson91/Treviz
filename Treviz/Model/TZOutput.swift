@@ -11,7 +11,8 @@
 import Cocoa
 import Foundation
 
-class TZOutput : NSObject {
+class TZOutput : NSObject, NSCoding {
+    
     //var displayName : String
     @objc var displayName: String {return getDisplayName() }
     @objc var id : Int
@@ -84,6 +85,31 @@ class TZOutput : NSObject {
         if categoryVar != nil { name += " by " + categoryVar!.name }
         if condition != nil { name += " at " + condition!.name}
         return name
+    }
+    
+    // MARK: NSCoding implementation
+    
+    func encode(with coder: NSCoder) {
+        coder.encode(id, forKey: "id")
+        coder.encode(title, forKey: "title")
+        coder.encode(var1, forKey: "var1")
+        coder.encode(var2, forKey: "var2")
+        coder.encode(var3, forKey: "var3")
+        coder.encode(categoryVar, forKey: "categoryVar")
+        coder.encode(condition, forKey: "condition")
+        coder.encode(plotType, forKey: "plotType")
+    }
+    
+    required init?(coder: NSCoder) {
+        id = coder.decodeInteger(forKey: "id")
+        title = coder.decodeObject(forKey: "title") as? String
+        var1 = coder.decodeObject(forKey: "var1") as? Variable ?? nil
+        var2 = coder.decodeObject(forKey: "var2") as? Variable ?? nil
+        var3 = coder.decodeObject(forKey: "var3") as? Variable ?? nil
+        categoryVar = coder.decodeObject(forKey: "categoryVar") as? Parameter ?? nil
+        condition = coder.decodeObject(forKey: "condition") as? Condition
+        plotType = coder.decodeObject(forKey: "plotType") as! TZPlotType
+        super.init()
     }
     
 }

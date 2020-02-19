@@ -18,13 +18,7 @@ class TZViewController: NSViewController {
             }
         }
     }
-/*
-    weak var analysis: Analysis! {
-        if let analysisRepresentedObject = representedObject as? Analysis {
-            return analysisRepresentedObject
-        }
-        return nil
-    }*/
+    
     weak var analysis: Analysis! {
         didSet {
             for child in children {
@@ -46,13 +40,6 @@ class TZSplitViewController: NSSplitViewController {
             }
         }
     }
-    /*
-    weak var analysis: Analysis? {
-        if let analysisRepresentedObject = representedObject as? Analysis {
-            return analysisRepresentedObject
-        }
-        return nil
-    }*/
     
     weak var analysis: Analysis! {
         didSet {

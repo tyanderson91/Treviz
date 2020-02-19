@@ -84,8 +84,11 @@ class OutputSetupViewController: TZViewController{//}, NSTableViewDelegate, NSTa
     
     
     @objc func refreshTable(_ notification: Notification){
-        for thisOutput in analysis.plots {
-            addOutputView(with: thisOutput)
+        if notification.object as? Analysis == analysis { // This is required to prevent running twice for two different open windows.
+            //TODO: Get rid of this design pattern by initializing with analysis object
+            for thisOutput in analysis.plots {
+                addOutputView(with: thisOutput)
+            }
         }
         self.outputsArrayController.content = allPlots
         self.tableView.bind(.content, to: outputsArrayController!, withKeyPath: "arrangedObjects", options: nil)

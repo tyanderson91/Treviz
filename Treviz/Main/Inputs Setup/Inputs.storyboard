@@ -17,7 +17,7 @@
                             <customView horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="500" translatesAutoresizingMaskIntoConstraints="NO" id="Hmv-lq-0J5">
                                 <rect key="frame" x="0.0" y="0.0" width="572" height="252"/>
                                 <subviews>
-                                    <scrollView placeholderIntrinsicWidth="572" placeholderIntrinsicHeight="200" verifyAmbiguity="ignoreSizes" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IJ7-Zw-yB3">
+                                    <scrollView horizontalHuggingPriority="500" placeholderIntrinsicWidth="572" placeholderIntrinsicHeight="200" verifyAmbiguity="ignoreSizes" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IJ7-Zw-yB3">
                                         <rect key="frame" x="0.0" y="1" width="572" height="250"/>
                                         <clipView key="contentView" id="CLe-47-xth">
                                             <rect key="frame" x="1" y="0.0" width="570" height="249"/>
@@ -32,7 +32,7 @@
                                                     <tableColumns>
                                                         <tableColumn identifier="NameColumn" width="252" minWidth="40" maxWidth="1000" id="azQ-xe-zxX">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Name">
-                                                                <font key="font" metaFont="controlContent" size="11"/>
+                                                                <font key="font" metaFont="message" size="11"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                             </tableHeaderCell>
@@ -132,7 +132,7 @@
                                                         </tableColumn>
                                                         <tableColumn identifier="InitStateValueColumn" width="111" minWidth="40" maxWidth="1000" id="qWa-Ie-HJJ">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Value">
-                                                                <font key="font" metaFont="controlContent" size="11"/>
+                                                                <font key="font" metaFont="message" size="11"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                             </tableHeaderCell>
@@ -175,7 +175,7 @@
                                                         </tableColumn>
                                                         <tableColumn identifier="UnitsColumn" width="102" minWidth="40" maxWidth="1000" id="CMX-bt-7R9" userLabel="Units">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Units">
-                                                                <font key="font" metaFont="controlContent" size="11"/>
+                                                                <font key="font" metaFont="message" size="11"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                             </tableHeaderCell>
@@ -219,7 +219,7 @@
                                                         </tableColumn>
                                                         <tableColumn identifier="InitStateParameterColumn" width="93" minWidth="40" maxWidth="1000" id="KA9-aC-fyg" userLabel="Parameter">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Parameter?">
-                                                                <font key="font" metaFont="controlContent" size="11"/>
+                                                                <font key="font" metaFont="message" size="11"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                             </tableHeaderCell>
@@ -374,7 +374,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="400" height="436"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <scrollView verticalHuggingPriority="750" verticalCompressionResistancePriority="250" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="niT-kp-oja">
+                            <scrollView horizontalHuggingPriority="500" verticalHuggingPriority="750" verticalCompressionResistancePriority="250" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="niT-kp-oja">
                                 <rect key="frame" x="0.0" y="186" width="400" height="250"/>
                                 <clipView key="contentView" id="KbV-Po-mOw">
                                     <rect key="frame" x="1" y="1" width="398" height="248"/>
@@ -403,7 +403,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
-                            <containerView verticalHuggingPriority="150" translatesAutoresizingMaskIntoConstraints="NO" id="LWo-gC-UYm">
+                            <containerView horizontalHuggingPriority="500" verticalHuggingPriority="150" translatesAutoresizingMaskIntoConstraints="NO" id="LWo-gC-UYm">
                                 <rect key="frame" x="0.0" y="0.0" width="400" height="176"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" priority="900" constant="500" id="VPp-5e-8Mv"/>
@@ -457,7 +457,7 @@
                                                     <tableColumns>
                                                         <tableColumn width="116" minWidth="40" maxWidth="1000" id="8pr-PT-JX1">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
-                                                                <font key="font" metaFont="controlContent" size="11"/>
+                                                                <font key="font" metaFont="message" size="11"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                             </tableHeaderCell>
@@ -490,7 +490,7 @@
                                                         </tableColumn>
                                                         <tableColumn width="245" minWidth="40" maxWidth="1000" id="aiz-hU-5V2">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
-                                                                <font key="font" metaFont="controlContent" size="11"/>
+                                                                <font key="font" metaFont="message" size="11"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                             </tableHeaderCell>
@@ -572,7 +572,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <scrollView verticalHuggingPriority="150" autohidesScrollers="YES" horizontalLineScroll="22" horizontalPageScroll="10" verticalLineScroll="22" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="puu-RH-hwt">
+                            <scrollView horizontalHuggingPriority="500" verticalHuggingPriority="150" autohidesScrollers="YES" horizontalLineScroll="22" horizontalPageScroll="10" verticalLineScroll="22" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="puu-RH-hwt">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
                                 <clipView key="contentView" ambiguous="YES" id="xMK-Uy-VZG">
                                     <rect key="frame" x="1" y="0.0" width="318" height="99"/>
@@ -587,7 +587,7 @@
                                             <tableColumns>
                                                 <tableColumn identifier="NameColumn" width="150" minWidth="40" maxWidth="1000" id="AbC-Hg-Ysp">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Parameter Name">
-                                                        <font key="font" metaFont="controlContent" size="11"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -610,7 +610,7 @@
                                                                     </constraints>
                                                                     <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSRemoveTemplate" imagePosition="only" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="SDM-P9-QAy">
                                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                                        <font key="font" metaFont="controlContent" size="11"/>
+                                                                        <font key="font" metaFont="message" size="11"/>
                                                                     </buttonCell>
                                                                 </button>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bNd-Sl-WlH">
@@ -635,7 +635,7 @@
                                                 </tableColumn>
                                                 <tableColumn identifier="ParamValueColumn" width="80" minWidth="40" maxWidth="1000" id="dmT-5h-h5R">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Values">
-                                                        <font key="font" metaFont="controlContent" size="11"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -671,7 +671,7 @@
                                                 </tableColumn>
                                                 <tableColumn identifier="UnitsColumn" width="79.5" minWidth="40" maxWidth="1000" id="Zaw-V9-cti">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Units">
-                                                        <font key="font" metaFont="controlContent" size="11"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>

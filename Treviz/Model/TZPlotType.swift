@@ -15,7 +15,8 @@ enum PlotType : String {
     case multiLine2d = "Multi Line 2D"
     case contour = "Contour"
 }*/
-class TZPlotType : NSObject { //TODO : This should probably be in a struct
+class TZPlotType : NSObject, NSCoding {
+    //TODO : This should probably be in a struct
     
     var id : String = ""
     @objc var name : String = ""
@@ -23,7 +24,7 @@ class TZPlotType : NSObject { //TODO : This should probably be in a struct
     var nAxis : Int = 0
     var nVars : Int = 0
     
-    static var allPlotTypes : [TZPlotType] = []
+    static var allPlotTypes : [TZPlotType] = []  // TODO: Replace with class members
     
     init(_ id: String, name: String, requiresCondition: Bool, nAxis: Int, nVars: Int) {
         self.id = id
@@ -77,4 +78,22 @@ class TZPlotType : NSObject { //TODO : This should probably be in a struct
         { return allPlotTypes[thisPlot]
         } else {return nil}
     }
+    
+    // MARK: NSCoding Implementation
+    func encode(with coder: NSCoder) {
+        coder.encode(id, forKey: "id")
+        coder.encode(name, forKey: "name")
+        coder.encode(requiresCondition, forKey: "requiresCondition")
+        coder.encode(nAxis, forKey: "naxis")
+        coder.encode(nVars, forKey: "nvars")
+    }
+    
+    required init?(coder: NSCoder) {
+        id = coder.decodeObject(forKey: "id") as? String ?? ""
+        name = coder.decodeObject(forKey: "name") as? String ?? ""
+        requiresCondition = coder.decodeBool(forKey: "requiresCondition")
+        nAxis = coder.decodeInteger(forKey: "naxis")
+        nVars = coder.decodeInteger(forKey: "nvars")
+    }
+    
  }

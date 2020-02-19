@@ -21,6 +21,10 @@ import Cocoa
  * Terminal condition: The final condition or set of conditions that ends the simulation
  * Run settings: things like default timestep, propagator, etc.
  */
+enum PropagatorType {
+    case explicit
+    case rungeKutta4
+}
 
 class Analysis: NSObject, NSCoding {
     
@@ -44,7 +48,6 @@ class Analysis: NSObject, NSCoding {
     var propagatorType : PropagatorType = .explicit
     var pctComplete: Double = 0
 
-    
     // Run tracking
     var isRunning = false
     var returnCode : Int = 0
@@ -73,11 +76,16 @@ class Analysis: NSObject, NSCoding {
     // MARK: NSCoding implementation
     func encode(with coder: NSCoder) {
         coder.encode(terminalCondition, forKey: "terminalCondition")
+        coder.encode(conditions, forKey: "conditions")
+        coder.encode(plots, forKey: "plots")
+        coder.encode(inputSettings, forKey: "inputSettings")
     }
     
     required init?(coder: NSCoder) {
+        conditions = coder.decodeObject(forKey: "conditions") as? [Condition] ?? []
         terminalCondition = coder.decodeObject(forKey: "terminalCondition") as? Condition ?? nil
-        conditions.append(terminalCondition)
+        plots = coder.decodeObject(forKey: "plots") as? [TZOutput] ?? []
+        inputSettings = coder.decodeObject(forKey: "inputSettings") as? [Parameter] ?? []
         super.init()
     }
 }
