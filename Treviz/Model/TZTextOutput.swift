@@ -23,7 +23,7 @@ class TZTextOutput: TZOutput {
     convenience init(id: Int, with output : TZOutput) {
         self.init(id : id, plotType: output.plotType)
         //displayName = output.displayName + " (Text)"
-        title = output.title
+        //title = output.title
         var1 = output.var1
         var2 = output.var2
         var3 = output.var3

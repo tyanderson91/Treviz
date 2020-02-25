@@ -34,7 +34,7 @@ extension Analysis {
         traj["mtot",0] = 10.0
         DispatchQueue.global().async {
             var i = 0
-            let initState = self.traj[0]
+            // let initState = self.traj[0]
             while self.isRunning {
                 let curstate = self.traj[i]
                 var newState = StateArray()

@@ -18,8 +18,9 @@ class ViewerTabViewController: NSTabViewController {
         // Do view setup here.
         let plotView = plotTabViewItem.viewController
         plotView?.loadView()
-        let lastTabView = UserDefaults.standard.value(forKey: "selectedOutputTab")
-        tabView.selectTabViewItem(withIdentifier: lastTabView)
+        if let lastTabView = UserDefaults.standard.value(forKey: "selectedOutputTab") {
+            tabView.selectTabViewItem(withIdentifier: lastTabView)
+        }
         
     }
     

@@ -100,6 +100,9 @@ extension AnalysisDoc {
             let newID = ((analysis.plots.compactMap {$0.id}).max() ?? 0) + 1
             outputDict["id"] = newID
         }
+        if let titlestr = yamlObj["title"] as? String{
+            outputDict["title"] = titlestr
+        }
         if let varstr = yamlObj["variable1"] as? VariableID{
             outputDict["variable1"] = initVars.first(where: {$0.id == varstr}) ?? ""
         }

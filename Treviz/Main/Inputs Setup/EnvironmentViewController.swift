@@ -14,7 +14,7 @@ class EnvironmentViewController: BaseViewController {
 
     @IBOutlet weak var tableView: NSTableView!
     
-    override func headerTitle() -> String { return NSLocalizedString("Environment", comment: "") }
+    override func getHeaderTitle() -> String { return NSLocalizedString("Environment", comment: "") }
     
     override func viewDidLoad() {
         super.viewDidLoad()

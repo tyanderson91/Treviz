@@ -15,14 +15,16 @@ class SettingsViewController: BaseViewController {
     @IBOutlet weak var terminalConditionPopupButton: NSPopUpButton!
     let terminalConditionArrayController = NSArrayController()
     
-    override func headerTitle() -> String { return NSLocalizedString("Settings", comment: "") }
+    override func getHeaderTitle() -> String { return NSLocalizedString("Settings", comment: "") }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         terminalConditionArrayController.content = analysis?.conditions
         terminalConditionPopupButton.bind(.content, to: terminalConditionArrayController, withKeyPath: "arrangedObjects", options: nil)
         terminalConditionPopupButton.bind(.contentValues, to: terminalConditionArrayController, withKeyPath: "arrangedObjects.name", options: nil)
-        terminalConditionPopupButton.bind(.selectedObject, to: analysis, withKeyPath: "terminalCondition")
+        if analysis != nil {
+            terminalConditionPopupButton.bind(.selectedObject, to: analysis!, withKeyPath: "terminalCondition")
+        }
         NotificationCenter.default.addObserver(self, selector: #selector(self.didLoadAnalysisData(_:)), name: .didLoadAnalysisData, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.didLoadAnalysisData(_:)), name: .didAddCondition, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.didRemoveCondition(_:)), name: .didRemoveCondition, object: nil)

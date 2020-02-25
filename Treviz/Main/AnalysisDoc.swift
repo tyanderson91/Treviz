@@ -30,7 +30,24 @@ class AnalysisDoc: NSDocument {
     override func makeWindowControllers() {
         // Returns the Storyboard that contains your Document window.
         let storyboard = NSStoryboard(name: NSStoryboard.Name("Main"), bundle: nil)
-        self.windowController = (storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier("Analysis Window Controller")) as! MainWindowController)
+        //self.windowController = (storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier("Analysis Window Controller")) as! MainWindowController)
+        /*if #available(OSX 10.15, *) {
+            let mainViewController = storyboard.instantiateController(identifier: NSStoryboard.SceneIdentifier("mainViewController"), creator: { (aDecoder: NSCoder)->MainViewController in
+                MainViewController(coder: aDecoder, newAnalysis: self.analysis)!
+            })
+            let mainWindow = NSWindow(contentViewController: mainViewController)
+            self.windowController = MainWindowController(window: mainWindow)
+        }*/
+        /*
+        if #available(OSX 10.15, *) {
+            let mainWindowController = storyboard.instantiateController(identifier: NSStoryboard.SceneIdentifier("Analysis Window Controller")) { aDecoder in
+                return MainWindowController(coder: aDecoder, newAnalysis: self.analysis, storyboard: storyboard)
+            }
+            self.windowController = mainWindowController
+        }*/
+        let mainWindowController = storyboard.instantiateController(withIdentifier: "Analysis Window Controller") as! MainWindowController
+        self.windowController = mainWindowController
+        
         windowController.analysis = analysis
         self.addWindowController(windowController)
         self.viewController = (windowController.contentViewController as! MainViewController)
@@ -57,6 +74,7 @@ class AnalysisDoc: NSDocument {
     override func read(from data: Data, ofType typeName: String) throws {
         // Insert code here to read your document from the given data of the specified type, throwing an error in case of failure.
         // Alternatively, you could remove this method and override read(from:ofType:) instead.  If you do, you should also override isEntireFileLoaded to return false if the contents are lazily loaded.
+        loadPlotTypes(from: "PlotTypes")
         setupConstants()
         switch typeName {
         case "public.yaml":
@@ -110,7 +128,6 @@ class AnalysisDoc: NSDocument {
     // MARK: Initial analysis setup functions and constants
     
     func setupConstants(){
-        loadPlotTypes(from: "PlotTypes")
         loadVars(from: "InitVars")
         initVars = State.sortVarIndices(initVars)
         

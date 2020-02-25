@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15702"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15705"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -59,9 +58,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="450" height="30"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2QF-Iy-jUX">
-                                <rect key="frame" x="28" y="7" width="163" height="16"/>
-                                <textFieldCell key="cell" lineBreakMode="truncatingMiddle" sendsActionOnEndEditing="YES" alignment="left" placeholderString="Heading Title" id="Ppy-WU-6mc">
+                            <textField horizontalHuggingPriority="900" verticalHuggingPriority="750" horizontalCompressionResistancePriority="800" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2QF-Iy-jUX" customClass="EditableHeaderTextField" customModule="Treviz" customModuleProvider="target">
+                                <rect key="frame" x="28" y="7" width="86" height="16"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="16" id="yxl-EH-4rM"/>
+                                </constraints>
+                                <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="left" placeholderString="Heading Title" usesSingleLineMode="YES" id="Ppy-WU-6mc">
                                     <font key="font" size="13" name="HelveticaNeue-Bold"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -84,7 +86,7 @@
                             <constraint firstItem="C34-nq-mBa" firstAttribute="centerY" secondItem="m3B-p0-uYR" secondAttribute="centerY" id="HWI-7U-3vN"/>
                             <constraint firstAttribute="bottom" secondItem="2QF-Iy-jUX" secondAttribute="bottom" constant="7" id="T1w-lw-a1K"/>
                             <constraint firstItem="2QF-Iy-jUX" firstAttribute="top" secondItem="m3B-p0-uYR" secondAttribute="top" constant="7" id="fQb-nK-6E3"/>
-                            <constraint firstAttribute="trailing" secondItem="2QF-Iy-jUX" secondAttribute="trailing" constant="261" id="itt-u6-TGl"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="2QF-Iy-jUX" secondAttribute="trailing" constant="1" id="q9Z-2o-vYg"/>
                             <constraint firstItem="2QF-Iy-jUX" firstAttribute="leading" secondItem="C34-nq-mBa" secondAttribute="trailing" constant="5" id="qlp-rp-Adj"/>
                         </constraints>
                     </view>

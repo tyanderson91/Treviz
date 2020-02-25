@@ -46,12 +46,12 @@ class TZOutput : NSObject, NSCoding {
         
         if let condition = dict["condition"] as? Condition {self.condition = condition}
     }
-    
+    /*
     convenience init(id : Int, title : String, plotType : TZPlotType) {
         self.init(id : id, plotType : plotType)
         //self.displayName = title
-        self.title = title
-    }
+        //self.title = title
+    }*/
     
     convenience init(id : Int, vars : [Variable], plotType : TZPlotType) {
         var title = ""
@@ -59,7 +59,7 @@ class TZOutput : NSObject, NSCoding {
             title += thisVar.name
             if thisVar != vars.last {title += " vs "} // TODO: vary this for the different plot types
         }
-        self.init(id : id, title : title, plotType : plotType)
+        self.init(id: id, plotType: plotType)
         if vars.count >= 1 { var1 = vars[0] }
         if vars.count >= 2 { var2 = vars[1] }
         if vars.count >= 3 { var3 = vars[2] }

@@ -61,7 +61,7 @@ class AddOutputViewController: BaseViewController { //TODO : Add a way to add va
         //if analysis.conditions.count > 0 { representedOutput.condition = }
         objectController.content = representedOutput
         
-        loadAnalysis(representedObject as? Analysis)
+        loadAnalysis(analysis)
         //conditionsArrayController.content = conditions
         conditionsPopupButton.bind(.content, to: conditionsArrayController, withKeyPath: "arrangedObjects", options: nil)
         conditionsPopupButton.bind(.contentValues, to: conditionsArrayController, withKeyPath: "arrangedObjects.name", options: nil)
@@ -71,6 +71,7 @@ class AddOutputViewController: BaseViewController { //TODO : Add a way to add va
         plotTypePopupButton.bind(.content, to: plotTypeArrayController, withKeyPath: "arrangedObjects", options: nil)
         plotTypePopupButton.bind(.contentValues, to: plotTypeArrayController, withKeyPath: "arrangedObjects.name", options: nil)
         plotTypePopupButton.bind(.selectedObject, to: objectController!, withKeyPath: "selection.plotType")
+        self.bind(.title, to: objectController!, withKeyPath: "selection.title")
     }
     
     /*
@@ -78,6 +79,8 @@ class AddOutputViewController: BaseViewController { //TODO : Add a way to add va
         let conditionWidth = NSLayoutConstraint(item: component, attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute,multiplier: 1, constant: width)
         self.view.addConstraint(conditionWidth)
     }*/
+    override func getHeaderTitle() -> String { return representedOutput?.title ?? "New Output" }
+    
     override func viewWillAppear() {
         self.view.appearance = NSAppearance(named: .darkAqua)
     }
@@ -88,6 +91,11 @@ class AddOutputViewController: BaseViewController { //TODO : Add a way to add va
         }
         conditionsArrayController.content = conditions
         plotTypeArrayController.content = plotTypes
+        
+        plotTypePopupButton.bind(.content, to: plotTypeArrayController, withKeyPath: "arrangedObjects", options: nil)
+        plotTypePopupButton.bind(.contentValues, to: plotTypeArrayController, withKeyPath: "arrangedObjects.name", options: nil)
+        plotTypePopupButton.bind(.selectedObject, to: objectController!, withKeyPath: "selection.plotType")
+        self.bind(.title, to: objectController!, withKeyPath: "selection.title")
     }
     
     func createOutput()-> TZOutput?{ //Should be overwritten by each subclass
@@ -130,7 +138,7 @@ class AddOutputViewController: BaseViewController { //TODO : Add a way to add va
     
     @IBAction func addRemoveOutputButtonClicked(_ sender: Any) {
         if addRemoveOutputButton.image == NSImage(named: NSImage.addTemplateName) {
-            //self.title = representedOutput.title
+            self.title = representedOutput.title
             if includePlotCheckbox.state == .on {
                 let newPlot = TZPlot(id: maxPlotID+1, with: representedOutput)
                 outputSetupViewController.addOutput(newPlot)

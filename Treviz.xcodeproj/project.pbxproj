@@ -14,6 +14,7 @@
 		CD11FA8723408173001A3695 /* AddOutputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD11FA8623408173001A3695 /* AddOutputViewController.swift */; };
 		CD11FA9323433096001A3695 /* PlotTypes.plist in Resources */ = {isa = PBXBuildFile; fileRef = CD11FA9223433096001A3695 /* PlotTypes.plist */; };
 		CD1A5B5D23FD1E9A00BE3BFB /* AnalysisDocYaml.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1A5B5C23FD1E9A00BE3BFB /* AnalysisDocYaml.swift */; };
+		CD1A5B832404F1DA00BE3BFB /* EditableHeaderTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1A5B822404F1DA00BE3BFB /* EditableHeaderTextField.swift */; };
 		CD1F6C6B23DADBFE00461FC7 /* Yams in Frameworks */ = {isa = PBXBuildFile; productRef = CD1F6C6A23DADBFE00461FC7 /* Yams */; };
 		CD280F4A233B45670004263F /* TZPlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD280F49233B45670004263F /* TZPlot.swift */; };
 		CD28477722FF9C8800D192A9 /* CollapsibleGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD28477622FF9C8800D192A9 /* CollapsibleGridView.swift */; };
@@ -147,6 +148,7 @@
 		CD11FA8623408173001A3695 /* AddOutputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOutputViewController.swift; sourceTree = "<group>"; };
 		CD11FA9223433096001A3695 /* PlotTypes.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = PlotTypes.plist; sourceTree = "<group>"; };
 		CD1A5B5C23FD1E9A00BE3BFB /* AnalysisDocYaml.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AnalysisDocYaml.swift; path = /Users/TylerAnderson/Coding/Swift/Treviz/Treviz/AnalysisDocYaml.swift; sourceTree = "<absolute>"; };
+		CD1A5B822404F1DA00BE3BFB /* EditableHeaderTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableHeaderTextField.swift; sourceTree = "<group>"; };
 		CD280F49233B45670004263F /* TZPlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TZPlot.swift; sourceTree = "<group>"; };
 		CD28477622FF9C8800D192A9 /* CollapsibleGridView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollapsibleGridView.swift; sourceTree = "<group>"; };
 		CD2D0D94224382F70012978E /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -365,6 +367,7 @@
 				CD2D0DA5224382F70012978E /* HeaderViewController.storyboard */,
 				CD2D0DA8224382F70012978E /* ReadMe.md */,
 				CD2D0DAB224382F70012978E /* HeaderViewController.swift */,
+				CD1A5B822404F1DA00BE3BFB /* EditableHeaderTextField.swift */,
 				CD2D0DAD224382F70012978E /* LICENSE.txt */,
 				CD2D0DAF224382F70012978E /* Info.plist */,
 			);
@@ -807,6 +810,7 @@
 				CD1A5B5D23FD1E9A00BE3BFB /* AnalysisDocYaml.swift in Sources */,
 				CDD5049822252AFA00B29751 /* InputsViewController.swift in Sources */,
 				CDB7C73C2352B58300BC50F1 /* InitStateHeader.swift in Sources */,
+				CD1A5B832404F1DA00BE3BFB /* EditableHeaderTextField.swift in Sources */,
 				CD63AEA423E7EA26006502F2 /* StateArray.swift in Sources */,
 				CDA0F888225C5D47003C62E6 /* InputsCellViews.swift in Sources */,
 				CDF3D1A1225025B00064D70C /* Analysis.swift in Sources */,
@@ -1039,7 +1043,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_BUNDLE_IDENTIFIER = com.TylerAnderson.Treviz;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG DisclosureTriangleAppearance";
@@ -1066,7 +1070,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_BUNDLE_IDENTIFIER = com.TylerAnderson.Treviz;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DisclosureTriangleAppearance;

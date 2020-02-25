@@ -14,7 +14,7 @@ class MonteCarloOutputSetupViewController: AddOutputViewController {
 
     @IBOutlet weak var gridView: CollapsibleGridView!
     
-    override func headerTitle() -> String { return NSLocalizedString("Monte-Carlo Run Statistics", comment: "") }
+    override func getHeaderTitle() -> String { return NSLocalizedString("Monte-Carlo Run Statistics", comment: "") }
         
     override func viewDidLoad() {
         super.viewDidLoad()

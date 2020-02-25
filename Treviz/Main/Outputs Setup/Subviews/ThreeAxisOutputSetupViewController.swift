@@ -20,7 +20,7 @@ class ThreeAxisOutputSetupViewController: AddOutputViewController {
     
     @IBOutlet weak var variableGridView: NSGridView!
     
-    override func headerTitle() -> String { return NSLocalizedString("Three Axis", comment: "") }
+    override func getHeaderTitle() -> String { return NSLocalizedString("Three Axis", comment: "") }
     
     override func viewDidLoad() {
         

@@ -10,6 +10,10 @@ import Cocoa
 
 class TZViewController: NSViewController {
     
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
     override var representedObject: Any? {
         didSet {
             // Pass down the represented object to all of the child view controllers.
@@ -26,6 +30,11 @@ class TZViewController: NSViewController {
                 else if let tzchild = child as? TZSplitViewController { tzchild.analysis = self.analysis }
             }
         }
+    }
+    
+    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
+        _ = segue.destinationController
+        super.prepare(for: segue, sender: sender)
     }
     
 }
@@ -48,6 +57,11 @@ class TZSplitViewController: NSSplitViewController {
                 else if let tzchild = child as? TZSplitViewController { tzchild.analysis = self.analysis }
             }
         }
+    }
+    
+    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
+        _ = segue.destinationController
+        super.prepare(for: segue, sender: sender)
     }
     
 }

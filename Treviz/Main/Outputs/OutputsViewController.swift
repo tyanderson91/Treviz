@@ -63,7 +63,7 @@ class OutputsSplitViewController: TZSplitViewController {
     @IBOutlet weak var viewerOutputSplitViewItem: NSSplitViewItem!
     @IBOutlet weak var textOutputSplitViewItem: NSSplitViewItem!
     
-    private var viewerTabViewController: ViewerTabViewController {
+    var viewerTabViewController: ViewerTabViewController {
         return viewerOutputSplitViewItem.viewController as! ViewerTabViewController
     }
     

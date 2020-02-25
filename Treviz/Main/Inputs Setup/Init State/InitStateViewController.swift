@@ -13,7 +13,7 @@ class InitStateViewController: BaseViewController, NSOutlineViewDelegate, NSOutl
     @IBOutlet weak var outlineView: NSOutlineView!
     var inputVars : [Parameter] = []
     var inputVarStructure : InitStateHeader?
-    override func headerTitle() -> String { return NSLocalizedString("Initial State", comment: "") }
+    override func getHeaderTitle() -> String { return NSLocalizedString("Initial State", comment: "") }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -133,7 +133,7 @@ class InitStateViewController: BaseViewController, NSOutlineViewDelegate, NSOutl
     @IBAction func setParams(_ sender: Any) {
         guard let button = sender as? NSButton else {return}
         let row = outlineView.row(for: button)
-        if var thisParam = outlineView.item(atRow: row) as? Parameter {
+        if let thisParam = outlineView.item(atRow: row) as? Parameter {
             thisParam.isParam = button.state == NSControl.StateValue.on
             NotificationCenter.default.post(name: .didSetParam, object: nil)
         }

@@ -30,7 +30,7 @@ class TwoAxisOutputSetupViewController: AddOutputViewController {
         return nil
     }
     
-    override func headerTitle() -> String { return NSLocalizedString("Two Axis", comment: "") }
+    override func getHeaderTitle() -> String { return NSLocalizedString("Two Axis", comment: "") }
     
     override func viewDidLoad() {
         let storyboard = NSStoryboard(name: "VariableSelector", bundle: nil)

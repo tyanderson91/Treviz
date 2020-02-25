@@ -32,25 +32,25 @@ Terminal Condition:
   
 Outputs:
   - id: 1
-    name: X pos
+    title: X pos
     variable: x
     plot type: Single Value
     condition: terminal
     output type: text
   - id: 2
-    name: Final time
+    title: Final time
     variable: t
     plot type: Single Value
     condition: terminal
     output type: text
   - id: 3
-    name: Traj
+    title: Traj
     variable1: x
     variable2: y
     plot type: 2 Var, along Trajectory
     output type: plot
   - id: 4
-    name: Traj2
+    title: Traj2
     variable1: y
     variable2: t
     plot type: 2 Var, along Trajectory

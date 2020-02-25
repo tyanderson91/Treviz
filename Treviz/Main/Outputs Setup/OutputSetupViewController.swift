@@ -63,6 +63,14 @@ class OutputSetupViewController: TZViewController{//}, NSTableViewDelegate, NSTa
         if output is TZPlot {newOutputVC.selectedOutputTypeLabel.stringValue = "Plot"}
         else if output is TZTextOutput {newOutputVC.selectedOutputTypeLabel.stringValue = "Text"}
         stackViewContainerDict[output] = newOutputVC.stackItemContainer
+        
+        //newOutputVC.bind(.title, to: output, withKeyPath: "title", options: nil)
+        let outputVCStackItem = newOutputVC.stackItemContainer
+        if let header = outputVCStackItem?.header.viewController as? HeaderViewController{
+            header.headerTextField.bind(.value, to: output, withKeyPath: "title", options: nil)
+            header.canEditHeader = true
+            header.headerTextField.isEditable = true
+        }
     }
     
     func removeOutput(_ output: TZOutput){

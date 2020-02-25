@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="Pa4-gg-nuF">
     <dependencies>
-        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15705"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -44,7 +43,7 @@
                         <splitViewItem id="r8c-ry-S8W"/>
                         <splitViewItem id="z53-zv-CfF" userLabel="Text Output Split View Item"/>
                     </splitViewItems>
-                    <splitView key="splitView" dividerStyle="thin" id="Jhy-ME-60a">
+                    <splitView key="splitView" autosaveName="outputsSplitView" dividerStyle="paneSplitter" id="Jhy-ME-60a">
                         <rect key="frame" x="0.0" y="0.0" width="350" height="166"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <connections>
@@ -65,10 +64,10 @@
         <!--Viewer Tab View Controller-->
         <scene sceneID="7dg-bH-2ZR">
             <objects>
-                <tabViewController selectedTabViewItemIndex="0" id="mOM-Iz-vf6" customClass="ViewerTabViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
+                <tabViewController identifier="viewerTabViewControllerRestoration" storyboardIdentifier="viewerTabViewController" selectedTabViewItemIndex="0" id="mOM-Iz-vf6" customClass="ViewerTabViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
                     <tabViewItems>
                         <tabViewItem label="Visualizer" identifier="visualizerTabViewItem" id="rQj-OT-E8h"/>
-                        <tabViewItem label="Plotter" id="Egc-SW-yOb"/>
+                        <tabViewItem label="Plotter" identifier="plotterTabViewItem" id="Egc-SW-yOb"/>
                     </tabViewItems>
                     <viewControllerTransitionOptions key="transitionOptions" allowUserInteraction="YES"/>
                     <tabView key="tabView" type="noTabsNoBorder" id="nLU-aM-vwa">
@@ -117,7 +116,7 @@
                                             <tableColumns>
                                                 <tableColumn editable="NO" width="94" minWidth="40" maxWidth="1000" id="CLG-sb-9dB" userLabel="Plot Thumbnail column">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center">
-                                                        <font key="font" metaFont="message" size="11"/>
+                                                        <font key="font" metaFont="menu" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -214,7 +213,7 @@
                 </viewController>
                 <customObject id="Ofl-UG-cIh" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1142.5" y="-181.5"/>
+            <point key="canvasLocation" x="488" y="-732"/>
         </scene>
         <!--Text Outputs View Controller-->
         <scene sceneID="9HR-bL-jxG">
@@ -225,16 +224,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView appearanceType="aqua" borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yIs-a6-Pyw">
-                                <rect key="frame" x="0.0" y="0.0" width="215" height="175"/>
+                                <rect key="frame" x="0.0" y="0.0" width="215" height="188"/>
                                 <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="oZs-5e-czr">
-                                    <rect key="frame" x="0.0" y="0.0" width="215" height="175"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="215" height="188"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textView editable="NO" verticallyResizable="YES" findStyle="bar" allowsDocumentBackgroundColorChange="YES" spellingCorrection="YES" smartInsertDelete="YES" id="mKh-do-hrr">
-                                            <rect key="frame" x="0.0" y="0.0" width="215" height="175"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="215" height="188"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <size key="minSize" width="215" height="175"/>
+                                            <size key="minSize" width="215" height="188"/>
                                             <size key="maxSize" width="663" height="10000000"/>
                                             <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         </textView>
@@ -249,25 +248,15 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="Ulp-cu-N4h">
-                                    <rect key="frame" x="199" y="0.0" width="16" height="175"/>
+                                    <rect key="frame" x="199" y="0.0" width="16" height="188"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OfM-qb-Krm">
-                                <rect key="frame" x="75" y="175" width="66" height="13"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="Text Outputs" id="hN4-9z-I8M">
-                                    <font key="font" metaFont="system" size="10"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                         </subviews>
                         <constraints>
                             <constraint firstItem="yIs-a6-Pyw" firstAttribute="leading" secondItem="Mmw-rs-Ljz" secondAttribute="leading" id="1an-1L-ALl"/>
                             <constraint firstAttribute="bottom" secondItem="yIs-a6-Pyw" secondAttribute="bottom" id="1rX-cq-6KL"/>
-                            <constraint firstItem="OfM-qb-Krm" firstAttribute="centerX" secondItem="Mmw-rs-Ljz" secondAttribute="centerX" id="PXL-3U-Ovu"/>
-                            <constraint firstItem="yIs-a6-Pyw" firstAttribute="top" secondItem="OfM-qb-Krm" secondAttribute="bottom" id="cqC-K8-v6m"/>
-                            <constraint firstItem="OfM-qb-Krm" firstAttribute="top" secondItem="Mmw-rs-Ljz" secondAttribute="top" id="hWX-M8-5A1"/>
+                            <constraint firstItem="yIs-a6-Pyw" firstAttribute="top" secondItem="Mmw-rs-Ljz" secondAttribute="top" id="KoZ-Vf-Ujp"/>
                             <constraint firstAttribute="trailing" secondItem="yIs-a6-Pyw" secondAttribute="trailing" id="kcJ-FA-AK5"/>
                         </constraints>
                     </view>

@@ -10,17 +10,18 @@ import Cocoa
 
 class HeaderViewController : NSViewController, StackItemHeader {
     
-    @IBOutlet weak var headerTextField: NSTextField!
+    @IBOutlet weak var headerTextField: EditableHeaderTextField!
     @IBOutlet weak var showHideButton: NSButton!
     
     var disclose: (() -> ())? // This state will be set by the item view controller.
-    
+    var canEditHeader = false
     // MARK: - View Controller Lifecycle
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
+        //textEditor = NSText(frame: headerTextField.bounds)
         headerTextField.stringValue = title!
         
         // We want the header's color to be different color than its associated stack item.

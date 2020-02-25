@@ -20,6 +20,16 @@ class MainViewController: TZViewController {
         return mainSplitViewController.outputsViewController.outputSplitViewController?.textOutputView
     }
     
+    init?(coder aDecoder: NSCoder, newAnalysis: Analysis){
+        super.init(coder: aDecoder)
+        analysis = newAnalysis
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.setFrameSize(NSSize.init(width: 1200, height: 500))
@@ -33,6 +43,7 @@ class MainViewController: TZViewController {
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         if segue.identifier == "mainSplitViewSegue"{
             self.mainSplitViewController =  (segue.destinationController as! MainSplitViewController)
+            self.mainSplitViewController.analysis = analysis
         } else {return}
         
     }

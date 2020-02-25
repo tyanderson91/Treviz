@@ -13,21 +13,34 @@ class MainWindowController: NSWindowController, NSToolbarDelegate {
     @IBOutlet weak var toolbar: NSToolbar!
     @IBOutlet weak var showHidePanesControl: NSSegmentedControl!
     @IBOutlet weak var runButton: NSButton!
-    var analysis: Analysis! {
-        get { return contentViewController?.representedObject as? Analysis ?? nil }
-        set { contentViewController?.representedObject = newValue }
-    }
+    /*var analysis: Analysis! {
+        get { return (contentViewController as? TZViewController)?.analysis ?? nil }
+        set { (contentViewController as? TZViewController)?.analysis = newValue }
+    }*/
+    var analysis = Analysis()
         
     var viewController: MainViewController! { return contentViewController as? MainViewController ?? nil}
     
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        /** NSWindows loaded from the storyboard will be cascaded
-         based on the original frame of the window in the storyboard.
-         */
-        shouldCascadeWindows = true
+    init?(coder: NSCoder, newAnalysis: Analysis, storyboard: NSStoryboard){
+        self.analysis = newAnalysis
+        super.init(coder: coder)
+        /*contentViewController = storyboard.instantiateController(identifier: NSStoryboard.SceneIdentifier("mainViewController")) {
+            aDecoder in MainViewController(coder: aDecoder, newAnalysis: newAnalysis)
+        }*/
+        //analysis = newAnalysis
+        //shouldCascadeWindows = true
     }
     
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
+    @IBSegueAction func createMainViewController(_ coder: NSCoder) -> MainViewController? {
+        let mainViewController = MainViewController(coder: coder)
+        mainViewController?.analysis = analysis
+        return mainViewController
+    }
+        
     override func windowDidLoad() {
         super.windowDidLoad()
         //showHidePanesControl.setImage(NSImage(named: "smallSegmentedCell"), forSegment: 0)
@@ -45,6 +58,8 @@ class MainWindowController: NSWindowController, NSToolbarDelegate {
             }
         }
         DistributedNotificationCenter.default.addObserver(self, selector: #selector(self.completeAnalysis), name: .didFinishRunningAnalysis, object: nil)
+        self.window!.standardWindowButton(NSWindow.ButtonType.closeButton)!.isHidden = true
+
         // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
     }
     
@@ -66,8 +81,9 @@ class MainWindowController: NSWindowController, NSToolbarDelegate {
     
     func processOutputs(){
         guard let textOutputView = viewController.textOutputView else {return}
-        guard let plotViewController = viewController.mainSplitViewController.outputsViewController.outputSplitViewController?.plotViewController else { return }
-
+        guard let outputSplitVC = viewController.mainSplitViewController.outputsViewController.outputSplitViewController else { return }
+        guard let plotViewController = outputSplitVC.plotViewController else { return }
+        
         textOutputView.string = ""
         plotViewController.plotViews = []
         for curOutput in analysis.plots {
@@ -81,6 +97,8 @@ class MainWindowController: NSWindowController, NSToolbarDelegate {
                 plotViewController.createPlot(plot: curOutput as! TZPlot)
             }
         }
+        let plotTabViewIndex = outputSplitVC.viewerTabViewController.tabView.indexOfTabViewItem(withIdentifier: "plotterTabViewItem")
+        outputSplitVC.viewerTabViewController.tabView.selectTabViewItem(at: plotTabViewIndex)
     }
     
     @objc func completeAnalysis(notification: Notification){ // Runs when the analysis has terminated
@@ -91,7 +109,8 @@ class MainWindowController: NSWindowController, NSToolbarDelegate {
         if analysis.returnCode > 0 { //Nominal successfull completion
             processOutputs()}
         else { //TODO: make different error codes for analysis run
-            viewController.textOutputView?.string.append("Not enough inputs to make analysis fully defined!")
+            processOutputs()
+            //viewController.textOutputView?.string.append("Not enough inputs to make analysis fully defined!")
         }
     }
     

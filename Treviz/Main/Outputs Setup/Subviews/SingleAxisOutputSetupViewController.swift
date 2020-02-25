@@ -22,9 +22,7 @@ class SingleAxisOutputSetupViewController: AddOutputViewController {
         //if condIndex>=0 { newOutput.condition = analysis.conditions[condIndex] }
         return newOutput
     }
-    
-    override func headerTitle() -> String { return NSLocalizedString("Single Axis", comment: "") }
-    
+        
     override func viewDidLoad() {
         let storyboard = NSStoryboard(name: "VariableSelector", bundle: nil)
         variableSelectorViewController = (storyboard.instantiateController(withIdentifier: "variableSelectorViewController") as! VariableSelectorViewController)

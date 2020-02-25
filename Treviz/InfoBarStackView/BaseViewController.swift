@@ -20,7 +20,7 @@ class BaseViewController : TZViewController, StackItemBody {
     weak var parentStackView: CustomStackView?
     
     // Subclasses determine the header title.
-    func headerTitle() -> String { return "" }
+    func getHeaderTitle() -> String { return "" }
     
     // MARK: - View Controller Lifecycle
     
@@ -46,8 +46,8 @@ class BaseViewController : TZViewController, StackItemBody {
         guard let header = storyboard.instantiateController(withIdentifier: storyboardIdentifier) as? HeaderViewController else {
             return .none
         }
-        header.title = self.headerTitle()
-            
+        header.title = self.getHeaderTitle()
+        
         return StackItemContainer(header: header, body: self, state: self.disclosureState)
     }()
     

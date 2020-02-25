@@ -91,7 +91,7 @@ class TZPlotView: NSObject, CPTScatterPlotDelegate, CPTScatterPlotDataSource, CP
         xaxis.labelingPolicy = .automatic
         yaxis.labelingPolicy = .automatic
         if plot.var1?.units == plot.var2?.units {
-            let sortedAxes = [xaxis, yaxis].sorted(by: { (axis1: CPTAxis, axis2: CPTAxis) in
+            _ = [xaxis, yaxis].sorted(by: { (axis1: CPTAxis, axis2: CPTAxis) in
                 return axis1.majorTickLength > axis2.majorTickLength
             })
         }

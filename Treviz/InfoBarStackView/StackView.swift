@@ -177,7 +177,7 @@ class CustomStackView : NSStackView, StackItemHost {
     func addViewController(_ viewController : BaseViewController) {
         
         // Check if we stored the disclosure state from a previous launch (default state is open).
-        if let defaultDisclosureState = UserDefaults().value(forKey: viewController.headerTitle()) {
+        if let defaultDisclosureState = UserDefaults().value(forKey: viewController.getHeaderTitle() ) {
             if defaultDisclosureState as! Int != 0 {
                 viewController.disclosureState = .closed
             }
