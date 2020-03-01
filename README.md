@@ -1,7 +1,7 @@
 # TREVIZ
 ### _Trajectory Evaluation and Visualization_
 Treviz is an application for Mac that enables design, analysis, and visualization of flight vehicle trajectories and missions. It is intended for students, researchers, and anyone interested in the performance of air and space vehicles. The name comes from Golan Trevize, a character from Isaac Asimov's _Foundation_ series who had a special computer that let him see paths through the stars. I hope that this app can make spaceflight analysis easy and fun.
-![Example Analysis](/Screenshot Example.png)
+![Example Analysis](https://github.com/tyanderson91/Treviz/blob/master/ScreenshotExample.png)
 ## Installation
 Treviz currently exists as a project built for Xcode 11 and MacOS Catalina. Plans for the future include hosting for free on the Mac App store.
 ## Structure
