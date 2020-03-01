@@ -63,6 +63,7 @@
 		CDA549F123CC3C5400933C6B /* ConditionsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA549F023CC3C5400933C6B /* ConditionsTableView.swift */; };
 		CDA7FD75236FE9CC009CDFAF /* InitVarSettings.yaml in Resources */ = {isa = PBXBuildFile; fileRef = CDA7FD74236FE9CC009CDFAF /* InitVarSettings.yaml */; };
 		CDA7FD7A23715399009CDFAF /* AnalysisSettings.yaml in Resources */ = {isa = PBXBuildFile; fileRef = CDA7FD7923715399009CDFAF /* AnalysisSettings.yaml */; };
+		CDB3D80E240B7447004942E3 /* ScreenshotExample.png in Resources */ = {isa = PBXBuildFile; fileRef = CDB3D80D240B7446004942E3 /* ScreenshotExample.png */; };
 		CDB457B52383E19B004F13AA /* TrevizTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0F011223656B7200C920AA /* TrevizTests.swift */; };
 		CDB457BB2384FA09004F13AA /* InitStateHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB7C73B2352B58300BC50F1 /* InitStateHeader.swift */; };
 		CDB457C0238508B6004F13AA /* ConditionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB457BF238508B6004F13AA /* ConditionTests.swift */; };
@@ -194,6 +195,7 @@
 		CDA549F023CC3C5400933C6B /* ConditionsTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionsTableView.swift; sourceTree = "<group>"; };
 		CDA7FD74236FE9CC009CDFAF /* InitVarSettings.yaml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = InitVarSettings.yaml; sourceTree = "<group>"; };
 		CDA7FD7923715399009CDFAF /* AnalysisSettings.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = AnalysisSettings.yaml; path = Treviz/AnalysisSettings.yaml; sourceTree = SOURCE_ROOT; };
+		CDB3D80D240B7446004942E3 /* ScreenshotExample.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ScreenshotExample.png; sourceTree = "<group>"; };
 		CDB457BF238508B6004F13AA /* ConditionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionTests.swift; sourceTree = "<group>"; };
 		CDB7C7392352B03100BC50F1 /* Parameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Parameter.swift; path = Treviz/Model/Parameter.swift; sourceTree = SOURCE_ROOT; };
 		CDB7C73B2352B58300BC50F1 /* InitStateHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitStateHeader.swift; sourceTree = "<group>"; };
@@ -452,6 +454,7 @@
 			isa = PBXGroup;
 			children = (
 				CD715E7F23EBE70400E31F97 /* README.md */,
+				CDB3D80D240B7446004942E3 /* ScreenshotExample.png */,
 				CD8A81D423F7CF1100EBF19A /* AppIcon.icns */,
 				CDD5049422252AF900B29751 /* Treviz */,
 				CD0F011123656B7200C920AA /* TrevizTests */,
@@ -666,6 +669,7 @@
 				CD3F5E5822EE4DCD00E4CF20 /* Conditions.storyboard in Resources */,
 				CDA7FD7A23715399009CDFAF /* AnalysisSettings.yaml in Resources */,
 				CD2D0DBB224385580012978E /* OutputSetup.storyboard in Resources */,
+				CDB3D80E240B7447004942E3 /* ScreenshotExample.png in Resources */,
 				CD11FA9323433096001A3695 /* PlotTypes.plist in Resources */,
 				CD59C54623E79476001D98D5 /* Outputs.storyboard in Resources */,
 				CD715E8023EBE70400E31F97 /* README.md in Resources */,
