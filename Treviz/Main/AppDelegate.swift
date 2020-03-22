@@ -47,20 +47,4 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             initVars.append(newVar)
         }
     }
-    
-    func loadPlotTypes(from plist: String){
-        guard let plotFilePath = Bundle.main.path(forResource: plist, ofType: "plist") else {return}
-        
-        guard let inputList = NSArray.init(contentsOfFile: plotFilePath) else {
-            self.plotTypes = nil
-            return}
-        var initPlotTypes : [TZPlotType] = []
-        for thisPlot in inputList {
-            guard let dict = thisPlot as? NSDictionary else {return}
-            let newPlot = TZPlotType(dict["id"] as! String, name: dict["name"] as! String, requiresCondition: dict["condition"] as! Bool, nAxis: dict["naxis"] as! Int, nVars: dict["nvar"] as! Int)
-            initPlotTypes.append(newPlot)
-        }
-        self.plotTypes = initPlotTypes
-        TZPlotType.allPlotTypes = initPlotTypes
-    }    
 }

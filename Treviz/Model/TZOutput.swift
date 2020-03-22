@@ -97,7 +97,7 @@ class TZOutput : NSObject, NSCoding {
         coder.encode(var3, forKey: "var3")
         coder.encode(categoryVar, forKey: "categoryVar")
         coder.encode(condition, forKey: "condition")
-        coder.encode(plotType, forKey: "plotType")
+        coder.encode(plotType.name, forKey: "plotType")
     }
     
     required init?(coder: NSCoder) {
@@ -108,7 +108,9 @@ class TZOutput : NSObject, NSCoding {
         var3 = coder.decodeObject(forKey: "var3") as? Variable ?? nil
         categoryVar = coder.decodeObject(forKey: "categoryVar") as? Parameter ?? nil
         condition = coder.decodeObject(forKey: "condition") as? Condition
-        plotType = coder.decodeObject(forKey: "plotType") as! TZPlotType
+        let plotTypeName = coder.decodeObject(forKey: "plotType") as? String
+        plotType = TZPlotType.getPlotTypeByName(plotTypeName!)!
+        
         super.init()
     }
     

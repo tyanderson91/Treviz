@@ -18,6 +18,10 @@ class TwoAxisOutputSetupViewController: AddOutputViewController {
 
     @IBOutlet weak var plottingStackView: NSStackView!
 
+    @objc var var1ViewController: VariableSelectorViewController!
+    @objc var var2ViewController: VariableSelectorViewController!
+    @objc var var3ViewController: VariableSelectorViewController!
+    
     override func createOutput()->TZOutput? {// TODO : expand for all plot types
         /*
         if let plotType = plotTypeDropDown.selectedItem?.title{
@@ -34,17 +38,17 @@ class TwoAxisOutputSetupViewController: AddOutputViewController {
     
     override func viewDidLoad() {
         let storyboard = NSStoryboard(name: "VariableSelector", bundle: nil)
-        let var1ViewController = storyboard.instantiateController(withIdentifier: "variableSelectorViewController") as! VariableSelectorViewController
+        var1ViewController = (storyboard.instantiateController(withIdentifier: "variableSelectorViewController") as! VariableSelectorViewController)
         var1ViewController.representedObject = self.analysis
         self.addChild(var1ViewController)
         variableGridView.cell(atColumnIndex: 1, rowIndex: 0).contentView = var1ViewController.view
         
-        let var2ViewController = storyboard.instantiateController(withIdentifier: "variableSelectorViewController") as! VariableSelectorViewController
+        var2ViewController = (storyboard.instantiateController(withIdentifier: "variableSelectorViewController") as! VariableSelectorViewController)
         var2ViewController.representedObject = self.analysis
         self.addChild(var2ViewController)
         variableGridView.cell(atColumnIndex: 1, rowIndex: 1).contentView = var2ViewController.view
         
-        let var3ViewController = storyboard.instantiateController(withIdentifier: "variableSelectorViewController") as! VariableSelectorViewController
+        var3ViewController = (storyboard.instantiateController(withIdentifier: "variableSelectorViewController") as! VariableSelectorViewController)
         var3ViewController.representedObject = self.analysis
         self.addChild(var3ViewController)
         variableGridView.cell(atColumnIndex: 1, rowIndex: 2).contentView = var3ViewController.view
@@ -58,6 +62,20 @@ class TwoAxisOutputSetupViewController: AddOutputViewController {
         setWidth(component: var1ViewController, width: varSelectorWidth)
         setWidth(component: var2ViewController, width: varSelectorWidth)
         setWidth(component: var3ViewController, width: varSelectorWidth)*/
+    }
+    
+    override func loadAnalysis(_ analysis: Analysis?) {
+        super.loadAnalysis(analysis)
+        if analysis != nil {
+            for varname in ["var1", "var2", "var3"] {
+                if let vc = self.value(forKey: varname + "ViewController") as? VariableSelectorViewController {
+                    vc.representedObject = analysis!
+                    vc.selectedVariable = representedOutput.value(forKey: varname) as? Variable ?? nil
+                    vc.variableSelectorArrayController.content = analysis?.varList
+                    vc.variableSelectorPopup.bind(.selectedObject, to: representedOutput as Any, withKeyPath: varname, options: nil)
+                }
+            }
+        }
     }
     
     override func populateWithOutput(text: TZTextOutput?, plot: TZPlot?){ //Should be overwritten by each subclass

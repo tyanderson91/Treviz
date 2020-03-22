@@ -92,7 +92,7 @@ extension AnalysisDoc {
     func initOutput(fromYaml yamlObj: [String: Any]) -> TZOutput? {
         var outputDict = yamlObj
         if let plotTypeStr = yamlObj["plot type"] as? String{
-            outputDict["plot type"] = plotTypes.first(where: {$0.name == plotTypeStr}) ?? ""
+            outputDict["plot type"] = TZPlotType.allPlotTypes.first(where: {$0.name == plotTypeStr}) ?? ""
         }
         if let idInt = yamlObj["id"] as? Int {
             outputDict["id"] = idInt

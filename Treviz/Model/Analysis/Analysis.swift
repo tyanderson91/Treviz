@@ -31,7 +31,6 @@ class Analysis: NSObject, NSCoding {
     //AppDelegate variables
     @objc var varList : [Variable]!// {return appDelegate.initVars}
     var initStateGroups : InitStateHeader!
-    var plotTypes : [TZPlotType]!// {return appDelegate.plotTypes}
     
     // Analysis-specific data and configs (read/writing functions in AnalysisData.swift)
     var name : String = ""

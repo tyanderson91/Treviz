@@ -42,7 +42,17 @@ class OutputSetupViewController: TZViewController{//}, NSTableViewDelegate, NSTa
     }
     
     func addOutputView(with output: TZOutput){
-        let newOutputVC = stack.addViewController(fromStoryboardId: "OutputSetup", withIdentifier: "SingleAxisOutputSetupViewController") as! SingleAxisOutputSetupViewController
+        var newOutputVC: AddOutputViewController
+        switch output.plotType {
+        case .singleValue, .boxplot, .histogram:
+            newOutputVC = stack.addViewController(fromStoryboardId: "OutputSetup", withIdentifier: "SingleAxisOutputSetupViewController") as! SingleAxisOutputSetupViewController
+        case .multiLine2d, .multiPoint2d, .multiPointCat2d, .contour2d, .oneLine2d:
+            newOutputVC = stack.addViewController(fromStoryboardId: "OutputSetup", withIdentifier: "TwoAxisOutputSetupViewController") as! TwoAxisOutputSetupViewController
+        case .multiLine3d, .multiPoint3d, .multiPointCat3d, .surface3d, .oneLine3d:
+            newOutputVC = stack.addViewController(fromStoryboardId: "OutputSetup", withIdentifier: "ThreeAxisOutputSetupViewController") as! ThreeAxisOutputSetupViewController
+        default:
+            return
+        }
         newOutputVC.representedOutput = output
         newOutputVC.outputSetupViewController = self
         newOutputVC.loadAnalysis(self.analysis)

@@ -18,7 +18,6 @@ class AnalysisDoc: NSDocument {
     var appDelegate : AppDelegate!
     var windowController : MainWindowController! //Implicit optional, should always be assigned after initialization
     var viewController : MainViewController!
-    var plotTypes : [TZPlotType]! = nil
     var initVars : [Variable]! = nil
     
     override init() {
@@ -74,7 +73,6 @@ class AnalysisDoc: NSDocument {
     override func read(from data: Data, ofType typeName: String) throws {
         // Insert code here to read your document from the given data of the specified type, throwing an error in case of failure.
         // Alternatively, you could remove this method and override read(from:ofType:) instead.  If you do, you should also override isEntireFileLoaded to return false if the contents are lazily loaded.
-        loadPlotTypes(from: "PlotTypes")
         setupConstants()
         switch typeName {
         case "public.yaml":
@@ -131,7 +129,6 @@ class AnalysisDoc: NSDocument {
         loadVars(from: "InitVars")
         initVars = State.sortVarIndices(initVars)
         
-        analysis.plotTypes = plotTypes
         analysis.varList = initVars
         loadVarGroups(from: "InitStateStructure")
     }
@@ -147,22 +144,6 @@ class AnalysisDoc: NSDocument {
             newVar.value = [0]
             initVars.append(newVar)
         }
-    }
-    
-    func loadPlotTypes(from plist: String){
-        guard let plotFilePath = Bundle.main.path(forResource: plist, ofType: "plist") else {return}
-        
-        guard let inputList = NSArray.init(contentsOfFile: plotFilePath) else {
-            self.plotTypes = nil
-            return}
-        var initPlotTypes : [TZPlotType] = []
-        for thisPlot in inputList {
-            guard let dict = thisPlot as? NSDictionary else {return}
-            let newPlot = TZPlotType(dict["id"] as! String, name: dict["name"] as! String, requiresCondition: dict["condition"] as! Bool, nAxis: dict["naxis"] as! Int, nVars: dict["nvar"] as! Int)
-            initPlotTypes.append(newPlot)
-        }
-        self.plotTypes = initPlotTypes
-        TZPlotType.allPlotTypes = initPlotTypes
     }
     
     /**

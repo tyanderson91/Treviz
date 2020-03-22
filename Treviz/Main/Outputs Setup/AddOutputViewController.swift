@@ -28,8 +28,7 @@ class AddOutputViewController: BaseViewController { //TODO : Add a way to add va
     @IBOutlet weak var plotTypePopupButton: NSPopUpButton!
     var plotTypeArrayController = NSArrayController()
     @objc var plotTypes: [TZPlotType]? {
-        guard let allPlotTypes = analysis?.plotTypes else {return nil}
-        return allPlotTypes.filter { plotTypeSelector($0) }
+        return TZPlotType.allPlotTypes.filter { plotTypeSelector($0) }
     }
     
     @IBOutlet weak var addRemoveOutputButton: NSButton!
