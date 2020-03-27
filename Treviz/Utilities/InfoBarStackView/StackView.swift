@@ -173,6 +173,19 @@ class CustomStackView : NSStackView, StackItemHost {
         self.addViewController(viewController)
         return viewController
     }
+    /*
+    func addViewController(fromStoryboardId storyboardid:String, withIdentifier identifier: String, creator: ((NSViewController)->(NSViewController)) ) ->BaseViewController? {
+        
+        let storyboard = NSStoryboard(name: storyboardid, bundle: nil)
+        //let viewController = storyboard.instantiateController(withIdentifier: identifier) as! BaseViewController//, creator: creator) as! BaseViewController
+        let viewController = storyboard.instantiateController(identifier: NSStoryboard.SceneIdentifier(identifier) ) {
+            aDecoder in
+            let bvc = BaseViewController(coder: aDecoder)
+            return creator(bvc)
+        } as! BaseViewController
+        self.addViewController(viewController)
+        return viewController
+    }*/
     
     func addViewController(_ viewController : BaseViewController) {
         

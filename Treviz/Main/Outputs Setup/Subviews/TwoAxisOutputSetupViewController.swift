@@ -14,7 +14,7 @@ class TwoAxisOutputSetupViewController: AddOutputViewController {
     override func plotTypeSelector(_ plotType: TZPlotType)->(Bool){ return plotType.nAxis == 2 }
 
     @IBOutlet weak var gridView: CollapsibleGridView!
-    @IBOutlet weak var variableGridView: NSGridView!
+    @IBOutlet weak var variableGridView: CollapsibleGridView!
 
     @IBOutlet weak var plottingStackView: NSStackView!
 
@@ -54,9 +54,6 @@ class TwoAxisOutputSetupViewController: AddOutputViewController {
         variableGridView.cell(atColumnIndex: 1, rowIndex: 2).contentView = var3ViewController.view
         
         super.viewDidLoad()
-        var1ViewController.selectedVariable = self.representedOutput.var1
-        var2ViewController.selectedVariable = self.representedOutput.var2
-        var3ViewController.selectedVariable = self.representedOutput.var3
 
         /*
         setWidth(component: var1ViewController, width: varSelectorWidth)
@@ -79,6 +76,14 @@ class TwoAxisOutputSetupViewController: AddOutputViewController {
     }
     
     override func populateWithOutput(text: TZTextOutput?, plot: TZPlot?){ //Should be overwritten by each subclass
+        var1ViewController.selectedVariable = self.representedOutput.var1
+        var2ViewController.selectedVariable = self.representedOutput.var2
+        var3ViewController.selectedVariable = self.representedOutput.var3
+
+        if representedOutput.plotType.nVars == 2 {
+            let vg = variableGridView
+            vg!.showHide(.hide, .row, index: [2])
+        }
         return
     }
     

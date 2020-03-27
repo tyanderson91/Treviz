@@ -56,7 +56,7 @@ class AddOutputViewController: BaseViewController { //TODO : Add a way to add va
         displayOutputStackView.isHidden = true
         editingOutputStackView.isHidden = false
         
-        representedOutput = TZOutput(id: 0, plotType: TZPlotType.allPlotTypes[0])
+        //representedOutput = TZOutput(id: 0, plotType: TZPlotType.allPlotTypes[0])
         //if analysis.conditions.count > 0 { representedOutput.condition = }
         objectController.content = representedOutput
         
