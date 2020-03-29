@@ -50,7 +50,7 @@
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIconFile</key>
-	<string></string>
+	<string>/Users/TylerAnderson/Coding/Swift/Treviz/Resources/Vehicles/Ship_topdown.png</string>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -83,7 +83,7 @@
 			<key>UTTypeDescription</key>
 			<string>Analysis</string>
 			<key>UTTypeIconFile</key>
-			<string>AppIcon</string>
+			<string></string>
 			<key>UTTypeIdentifier</key>
 			<string>com.TylerAnderson.Treviz.Analysis</string>
 			<key>UTTypeTagSpecification</key>
@@ -100,6 +100,8 @@
 		<dict>
 			<key>UTTypeDescription</key>
 			<string>YAML</string>
+			<key>UTTypeIconFile</key>
+			<string>/Users/TylerAnderson/Coding/Swift/Treviz/Resources/Vehicles/Ship_topdown.png</string>
 			<key>UTTypeIdentifier</key>
 			<string>public.yaml</string>
 			<key>UTTypeTagSpecification</key>
