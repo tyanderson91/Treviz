@@ -23,7 +23,7 @@ class TZPlotType : NSObject {//, NSCoding {
     var requiresCondition : Bool = false
     var nAxis : Int = 0
     var nVars : Int = 0
-    
+    @objc var icon : NSImage?
     //static var allPlotTypes : [TZPlotType] = []  // TODO: Replace with class members
     
     init(_ id: String, name: String, requiresCondition: Bool, nAxis: Int, nVars: Int) {
@@ -32,6 +32,7 @@ class TZPlotType : NSObject {//, NSCoding {
         self.requiresCondition = requiresCondition
         self.nAxis = nAxis
         self.nVars = nVars
+        self.icon = NSImage(named: id)
     }
     
     /*
@@ -105,14 +106,14 @@ class TZPlotType : NSObject {//, NSCoding {
     static var boxplot = TZPlotType("boxplot", name: "Box Plot", requiresCondition: true, nAxis: 1, nVars: 1)
     static var histogram = TZPlotType("histogram", name: "Histogram", requiresCondition: true, nAxis: 1, nVars: 1)
     static var oneLine2d = TZPlotType("1line2d", name: "2 Var, along Trajectory", requiresCondition: false, nAxis: 2, nVars: 2)
-    static var multiLine2d = TZPlotType("multiline2d", name: "2 Var w/ Category, along Trajectory", requiresCondition: false, nAxis: 2, nVars: 3)
-    static var multiPoint2d = TZPlotType("multipoint2d", name: "2 Var, at Condition", requiresCondition: true, nAxis: 2, nVars: 2)
-    static var multiPointCat2d = TZPlotType("multimultipoint2d", name: "2 Var w/ Category, at Condition", requiresCondition: true, nAxis: 2, nVars: 3)
+    static var multiLine2d = TZPlotType("nline2d", name: "2 Var w/ Category, along Trajectory", requiresCondition: false, nAxis: 2, nVars: 3)
+    static var multiPoint2d = TZPlotType("npoint2d", name: "2 Var, at Condition", requiresCondition: true, nAxis: 2, nVars: 2)
+    static var multiPointCat2d = TZPlotType("multinpoint2d", name: "2 Var w/ Category, at Condition", requiresCondition: true, nAxis: 2, nVars: 3)
     static var contour2d = TZPlotType("contour2d", name: "3 Var Contour", requiresCondition: true, nAxis: 2, nVars: 3)
     static var oneLine3d = TZPlotType("1line3d", name: "3 Var, along trajectory", requiresCondition: false, nAxis: 3, nVars: 3)
-    static var multiLine3d = TZPlotType("multiline3d", name: "3 Var w/ Category, along Trajectory", requiresCondition: false, nAxis: 3, nVars: 4)
-    static var multiPoint3d = TZPlotType("multipoint3d", name: "3 Var, at Condition", requiresCondition: true, nAxis: 3, nVars: 3)
-    static var multiPointCat3d = TZPlotType("multimultipoint3d", name: "3 Var w/ Category, at Condition", requiresCondition: true, nAxis: 3, nVars: 4)
+    static var multiLine3d = TZPlotType("nline3d", name: "3 Var w/ Category, along Trajectory", requiresCondition: false, nAxis: 3, nVars: 4)
+    static var multiPoint3d = TZPlotType("npoint3d", name: "3 Var, at Condition", requiresCondition: true, nAxis: 3, nVars: 3)
+    static var multiPointCat3d = TZPlotType("multinpoint3d", name: "3 Var w/ Category, at Condition", requiresCondition: true, nAxis: 3, nVars: 4)
     static var surface3d = TZPlotType("surface3d", name: "3 Var Surface", requiresCondition: true, nAxis: 3, nVars: 3)
     
     static var allPlotTypes : [TZPlotType] = [.singleValue, .boxplot, .histogram, .oneLine2d, .multiLine2d, .multiPoint2d, .multiPointCat2d, .contour2d, .oneLine3d, .multiLine3d, .multiPointCat3d, .surface3d]

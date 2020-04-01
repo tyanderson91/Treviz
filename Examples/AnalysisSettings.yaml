@@ -23,6 +23,7 @@ Conditions:
     conditions:
     - TerminalTest
     - Too far
+  - Apogee: y is local max
     
 Terminal Condition:
   union: or
@@ -55,5 +56,11 @@ Outputs:
     variable2: t
     plot type: 2 Var, along Trajectory
     output type: plot
+  - id: 5
+    title: Apogee range
+    variable1: x
+    plot type: Single Value
+    output type: text
+    condition: Apogee
 
 

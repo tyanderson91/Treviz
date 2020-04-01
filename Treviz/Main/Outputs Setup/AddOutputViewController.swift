@@ -26,7 +26,7 @@ class AddOutputViewController: BaseViewController { //TODO : Add a way to add va
     @IBOutlet weak var titleTextFieldConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var plotTypePopupButton: NSPopUpButton!
-    var plotTypeArrayController = NSArrayController()
+    var plotTypeArrayController = NSArrayController() // TODO: Replace array controller with custom creating menu items so that plot icons can be added
     @objc var plotTypes: [TZPlotType]? {
         return TZPlotType.allPlotTypes.filter { plotTypeSelector($0) }
     }

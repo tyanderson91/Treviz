@@ -42,7 +42,6 @@ class MainSplitViewController: TZSplitViewController {
             //if let newWidth = UserDefaults.standard.value(forKey: itemKey + ".width") as? Float
             //{ splitViewItem.
             //TODO: implement resizing on startup
-            
         }
     }
     

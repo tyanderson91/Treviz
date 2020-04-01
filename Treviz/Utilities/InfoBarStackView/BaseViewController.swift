@@ -17,6 +17,7 @@ class BaseViewController : TZViewController, StackItemBody {
     
     var savedDefaultHeight: CGFloat = 0
     var disclosureState: StackItemContainer.DisclosureState = .open
+    var customCreator: ((BaseViewController)->BaseViewController)?
     weak var parentStackView: CustomStackView?
     
     // Subclasses determine the header title.

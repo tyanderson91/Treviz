@@ -29,7 +29,9 @@ class AnalysisDoc: NSDocument {
     override func makeWindowControllers() {
         // Returns the Storyboard that contains your Document window.
         let storyboard = NSStoryboard(name: NSStoryboard.Name("Main"), bundle: nil)
-        //self.windowController = (storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier("Analysis Window Controller")) as! MainWindowController)
+        
+        #if STORYBOARD_WINDOW_CONTROLLER
+        windowController = (storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier("Analysis Window Controller")) as! MainWindowController)
         /*if #available(OSX 10.15, *) {
             let mainViewController = storyboard.instantiateController(identifier: NSStoryboard.SceneIdentifier("mainViewController"), creator: { (aDecoder: NSCoder)->MainViewController in
                 MainViewController(coder: aDecoder, newAnalysis: self.analysis)!
@@ -44,10 +46,24 @@ class AnalysisDoc: NSDocument {
             }
             self.windowController = mainWindowController
         }*/
-        let mainWindowController = storyboard.instantiateController(withIdentifier: "Analysis Window Controller") as! MainWindowController
-        self.windowController = mainWindowController
+        //let mainWindowController = storyboard.instantiateController(withIdentifier: "Analysis Window Controller") as! MainWindowController
+        //self.windowController = mainWindowController
+        #else
+        if let mainVC = storyboard.instantiateController(withIdentifier: "mainViewController") as? MainViewController {
+            let window = NSWindow(contentViewController: mainVC)
+            
+            //window.contentViewController = mainVC
+            window.contentView = mainVC.view
+            window.titleVisibility = .visible
+            windowController = MainWindowController(window: window)
+            windowController.createToolbar()
+            DistributedNotificationCenter.default.addObserver(windowController as Any, selector: #selector(windowController.completeAnalysis), name: .didFinishRunningAnalysis, object: nil)
+            window.standardWindowButton(NSWindow.ButtonType.closeButton)!.isHidden = true
+            
+        }
+        #endif
         
-        windowController.analysis = analysis
+        self.windowController.analysis = analysis
         self.addWindowController(windowController)
         self.viewController = (windowController.contentViewController as! MainViewController)
         self.viewController.representedObject = analysis

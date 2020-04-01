@@ -8,9 +8,10 @@
 
 import Cocoa
 
-class MainWindowController: NSWindowController, NSToolbarDelegate {
+class MainWindowController: NSWindowController {
 
-    @IBOutlet weak var toolbar: NSToolbar!
+    //@IBOutlet weak var toolbar: NSToolbar!
+    weak var toolbar: TZToolbar!
     @IBOutlet weak var showHidePanesControl: NSSegmentedControl!
     @IBOutlet weak var runButton: NSButton!
     /*var analysis: Analysis! {
@@ -29,6 +30,10 @@ class MainWindowController: NSWindowController, NSToolbarDelegate {
         }*/
         //analysis = newAnalysis
         //shouldCascadeWindows = true
+    }
+    
+    override init(window: NSWindow?) {
+        super.init(window: window)
     }
     
     required init?(coder: NSCoder) {
@@ -64,21 +69,6 @@ class MainWindowController: NSWindowController, NSToolbarDelegate {
     }
     
     
-    @IBAction func runAnalysisClicked(_ sender: Any) {
-        if let asys = self.contentViewController?.representedObject as? Analysis {
-            if asys.isRunning{
-                runButton.title = "►"
-                asys.isRunning = false
-                DistributedNotificationCenter.default().post(name: .didFinishRunningAnalysis, object: nil)
-            }
-            else {
-                runButton.title = "■"
-                viewController.analysisProgressBar.doubleValue = analysis.pctComplete
-                _ = asys.runAnalysis()
-            }
-        }
-    }
-    
     func processOutputs(){
         guard let textOutputView = viewController.textOutputView else {return}
         guard let outputSplitVC = viewController.mainSplitViewController.outputsViewController.outputSplitViewController else { return }
@@ -104,6 +94,7 @@ class MainWindowController: NSWindowController, NSToolbarDelegate {
     @objc func completeAnalysis(notification: Notification){ // Runs when the analysis has terminated
         analysis.isRunning = false
         runButton.title = "►"
+        // toolbar.toggleAnalysisRun.title = "►"
         let progressBar = viewController.analysisProgressBar!
         progressBar.doubleValue = 0
         if analysis.returnCode > 0 { //Nominal successfull completion
@@ -111,36 +102,6 @@ class MainWindowController: NSWindowController, NSToolbarDelegate {
         else { //TODO: make different error codes for analysis run
             processOutputs()
             //viewController.textOutputView?.string.append("Not enough inputs to make analysis fully defined!")
-        }
-    }
-    
-    @IBAction func conditionsClicked(_ sender: Any) {
-        DispatchQueue.main.async {
-            self.performSegue(withIdentifier: "conditionsPopupSegue", sender: self)
-        }
-    }
-    
-    
-    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
-        if segue.identifier == "conditionsPopupSegue" {
-            let conditionsVC = segue.destinationController as! ConditionsViewController
-            conditionsVC.analysis = self.viewController.analysis
-        }
-    }
-    
-    
-    @IBAction func showHidePanesClicked(_ sender: Any) {
-        guard let button = sender as? NSSegmentedControl else {return}
-        let curIndex = button.indexOfSelectedItem
-        let shouldCollapse = !button.isSelected(forSegment: curIndex)
-        let splitViewController = viewController.mainSplitViewController!
-        _ = splitViewController.setSectionCollapse(shouldCollapse, forSection: curIndex)
-        
-        for i in 0...2 { // If there is one button left, disable it so user cannot collapse everything
-            let enableButton = (splitViewController.numActiveViews == 1 && button.isSelected(forSegment: i)) ? false : true
-            button.setEnabled(enableButton, forSegment: i)
-            UserDefaults().set(button.isEnabled(forSegment: i), forKey: "mainSplitViewDiscloseButton\(i)Enabled")
-            UserDefaults().set(button.isSelected(forSegment: i), forKey: "mainSplitViewDiscloseButton\(i)Selected")
         }
     }
 }

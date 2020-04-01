@@ -293,7 +293,7 @@ public class Condition : NSObject, EvaluateCondition {
             let conditionName = yamlObj.keys.first!
             guard let valstr = yamlObj.values.first as? String else {return nil}
            
-            let capturestr = #"(?:(?<lowerBound>[0-9\.-]+) ?(?<lowerSign>[\<\>]))?(?<varID>[\w ]+)(?<sign>[\<\>]|=|is) ?(?<upperBound>[0-9\.-]+|[a-zA-Z]+)"#
+            let capturestr = #"(?:(?<lowerBound>[0-9\.-]+) ?(?<lowerSign>[\<\>]))?(?<varID>[\w ]+)(?<sign>[\<\>]|=| is ) ?(?<upperBound>[0-9\.-]+|[a-zA-Z ]+)"#
             guard let regex = try? NSRegularExpression(pattern: capturestr, options: []) else { return nil }
             let match = regex.firstMatch(in: valstr, options: [], range: NSRange(valstr.startIndex..<valstr.endIndex, in: valstr))
             guard match != nil else { return nil } // No match found
@@ -326,7 +326,7 @@ public class Condition : NSObject, EvaluateCondition {
                 newSingleCondition.lbound = VarValue(ub)
             case "=":
                 newSingleCondition.equality = VarValue(ub)
-            case "is":
+            case " is ":
                 if let specialCond = SpecialConditionType.fromStr(ub){
                     newSingleCondition.specialCondition = specialCond
                 } else {return nil}

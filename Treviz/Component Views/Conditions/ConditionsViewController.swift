@@ -57,6 +57,15 @@ class ConditionsViewController: TZViewController {
         super.viewDidLoad()
     }
     
+    init?(coder: NSCoder, analysis anAnalysis: Analysis){
+        super.init(coder: coder)
+        analysis = anAnalysis
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
     @IBAction func addRemoveConditionButtonClicked(_ sender: Any) {
         
         if addConditionButton.title == "Add New" {

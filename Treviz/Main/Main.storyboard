@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15705"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16096"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -702,24 +701,10 @@
                         <windowPositionMask key="initialPositionMask" leftStrut="YES"/>
                         <rect key="contentRect" x="0.0" y="0.0" width="800" height="600"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
-                        <toolbar key="toolbar" implicitIdentifier="99EF4609-EB63-466D-9855-35ED2BA88456" explicitIdentifier="MainToolbar" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="gC3-LF-Jn5">
+                        <toolbar key="toolbar" implicitIdentifier="99EF4609-EB63-466D-9855-35ED2BA88456" explicitIdentifier="MainToolbar" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="gC3-LF-Jn5" customClass="TZToolbar" customModule="Treviz" customModuleProvider="target">
                             <allowedToolbarItems>
                                 <toolbarItem implicitItemIdentifier="NSToolbarShowColorsItem" id="Ndh-jH-KXn"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarShowFontsItem" id="aaV-pA-eJz"/>
-                                <toolbarItem implicitItemIdentifier="2147365F-2DD7-4C62-A655-FAF13FA8F180" label="Run Analysis" paletteLabel="Run Analysis" sizingBehavior="auto" id="ClC-Qq-Amg">
-                                    <nil key="toolTip"/>
-                                    <button key="view" verticalHuggingPriority="750" id="k0d-C9-zla">
-                                        <rect key="frame" x="22" y="14" width="31" height="25"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="roundTextured" title="▶︎" alternateTitle="Run Analysis" bezelStyle="texturedRounded" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ytv-0c-3b4">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="menu" size="11"/>
-                                        </buttonCell>
-                                    </button>
-                                    <connections>
-                                        <action selector="runAnalysisClicked:" target="jGA-0Y-lOj" id="8Mu-sl-U61"/>
-                                    </connections>
-                                </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="9637223E-3C3E-4B26-B650-92E6DE94E1D2" label="View Panes" paletteLabel="View Panes" sizingBehavior="auto" selectable="YES" id="EUF-yc-cUN">
                                     <nil key="toolTip"/>
                                     <segmentedControl key="view" wantsLayer="YES" verticalHuggingPriority="750" id="bbn-UQ-slb">
@@ -788,6 +773,20 @@
                                             <font key="font" size="13" name="STIXGeneral-Regular"/>
                                         </buttonCell>
                                     </button>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="2147365F-2DD7-4C62-A655-FAF13FA8F180" label="Run Analysis" paletteLabel="Run Analysis" sizingBehavior="auto" id="ClC-Qq-Amg">
+                                    <nil key="toolTip"/>
+                                    <button key="view" verticalHuggingPriority="750" id="k0d-C9-zla">
+                                        <rect key="frame" x="22" y="14" width="31" height="25"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="roundTextured" title="▶︎" alternateTitle="Run Analysis" bezelStyle="texturedRounded" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ytv-0c-3b4">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="label" size="11"/>
+                                        </buttonCell>
+                                    </button>
+                                    <connections>
+                                        <action selector="runAnalysisClicked:" target="jGA-0Y-lOj" id="8Mu-sl-U61"/>
+                                    </connections>
                                 </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>

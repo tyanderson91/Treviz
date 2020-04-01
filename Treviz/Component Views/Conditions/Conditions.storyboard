@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="9UX-jO-cEV">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="9UX-jO-cEV">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15705"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16096"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Conditions View Controller-->
+        <!--Conditions-->
         <scene sceneID="sv2-0Z-Cuc">
             <objects>
-                <viewController id="9UX-jO-cEV" customClass="ConditionsViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Conditions" storyboardIdentifier="conditionsViewController" id="9UX-jO-cEV" customClass="ConditionsViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="oXY-Ta-MDe">
                         <rect key="frame" x="0.0" y="0.0" width="372" height="339"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -28,7 +28,6 @@
                                             <tableColumns>
                                                 <tableColumn identifier="VarNameColumn" width="118" minWidth="40" maxWidth="1000" id="viH-5m-MSV">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Condition Name">
-                                                        <font key="font" metaFont="controlContent" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -64,7 +63,6 @@
                                                 </tableColumn>
                                                 <tableColumn identifier="DescriptionColumn" width="246" minWidth="40" maxWidth="1000" id="vHF-HC-1Ya">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Description">
-                                                        <font key="font" metaFont="controlContent" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
