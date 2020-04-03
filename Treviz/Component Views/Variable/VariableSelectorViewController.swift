@@ -25,6 +25,7 @@ class VariableSelectorViewController: TZViewController {
                 variableSelectorPopup.addItem(withTitle: thisVariable.name)
             }
         }*/
+        initLoadVars()
     }
 
     

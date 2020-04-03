@@ -47,6 +47,14 @@ class AddOutputViewController: BaseViewController { //TODO : Add a way to add va
     
     @objc var representedOutput: TZOutput!
     
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    convenience init?(coder: NSCoder, analysis curAnalysis: Analysis, output: TZOutput){
+        self.init(coder: coder, analysis: curAnalysis)
+        representedOutput = output
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(self.conditionsChanged(_:)), name: .didAddCondition, object: nil)
@@ -60,7 +68,10 @@ class AddOutputViewController: BaseViewController { //TODO : Add a way to add va
         //if analysis.conditions.count > 0 { representedOutput.condition = }
         objectController.content = representedOutput
         
-        loadAnalysis(analysis)
+        //loadAnalysis(analysis)
+        conditionsArrayController.content = conditions
+        plotTypeArrayController.content = plotTypes
+        
         //conditionsArrayController.content = conditions
         conditionsPopupButton.bind(.content, to: conditionsArrayController, withKeyPath: "arrangedObjects", options: nil)
         conditionsPopupButton.bind(.contentValues, to: conditionsArrayController, withKeyPath: "arrangedObjects.name", options: nil)
@@ -71,6 +82,8 @@ class AddOutputViewController: BaseViewController { //TODO : Add a way to add va
         plotTypePopupButton.bind(.contentValues, to: plotTypeArrayController, withKeyPath: "arrangedObjects.name", options: nil)
         plotTypePopupButton.bind(.selectedObject, to: objectController!, withKeyPath: "selection.plotType")
         self.bind(.title, to: objectController!, withKeyPath: "selection.title")
+        
+        
     }
     
     /*

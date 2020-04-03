@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="BWH-wW-vxd">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="BWH-wW-vxd">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15705"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16096"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -10,28 +10,27 @@
             <objects>
                 <viewController title="Initial State" storyboardIdentifier="InitStateViewController" id="QV5-fD-s1c" customClass="InitStateViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="WGY-9i-iLe">
-                        <rect key="frame" x="0.0" y="0.0" width="348" height="252"/>
+                        <rect key="frame" x="0.0" y="0.0" width="349" height="252"/>
                         <autoresizingMask key="autoresizingMask" heightSizable="YES"/>
                         <subviews>
                             <customView horizontalHuggingPriority="800" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="500" translatesAutoresizingMaskIntoConstraints="NO" id="Hmv-lq-0J5">
-                                <rect key="frame" x="0.0" y="0.0" width="348" height="252"/>
+                                <rect key="frame" x="0.0" y="0.0" width="349" height="252"/>
                                 <subviews>
                                     <scrollView horizontalHuggingPriority="800" placeholderIntrinsicWidth="572" placeholderIntrinsicHeight="200" verifyAmbiguity="ignoreSizes" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IJ7-Zw-yB3">
-                                        <rect key="frame" x="0.0" y="1" width="348" height="250"/>
+                                        <rect key="frame" x="0.0" y="1" width="349" height="250"/>
                                         <clipView key="contentView" id="CLe-47-xth">
-                                            <rect key="frame" x="1" y="0.0" width="346" height="249"/>
+                                            <rect key="frame" x="1" y="0.0" width="347" height="249"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnReordering="NO" multipleSelection="NO" emptySelection="NO" autosaveName="initStateOutlineView" rowSizeStyle="automatic" headerView="31c-TF-9un" viewBased="YES" indentationPerLevel="11" autosaveExpandedItems="YES" autoresizesOutlineColumn="YES" outlineTableColumn="azQ-xe-zxX" id="o6P-Kz-ADk">
-                                                    <rect key="frame" x="0.0" y="0.0" width="346" height="224"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="347" height="224"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <size key="intercellSpacing" width="3" height="2"/>
                                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                     <tableColumns>
-                                                        <tableColumn identifier="NameColumn" width="187.5" minWidth="40" maxWidth="1000" id="azQ-xe-zxX" userLabel="Name">
+                                                        <tableColumn identifier="NameColumn" width="188" minWidth="40" maxWidth="1000" id="azQ-xe-zxX" userLabel="Name">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Name">
-                                                                <font key="font" metaFont="menu" size="11"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                             </tableHeaderCell>
@@ -129,9 +128,8 @@
                                                                 </tableCellView>
                                                             </prototypeCellViews>
                                                         </tableColumn>
-                                                        <tableColumn identifier="InitStateValueColumn" width="50" minWidth="40" maxWidth="1000" id="qWa-Ie-HJJ" userLabel="Value">
+                                                        <tableColumn identifier="InitStateValueColumn" width="50.5" minWidth="40" maxWidth="1000" id="qWa-Ie-HJJ" userLabel="Value">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Value">
-                                                                <font key="font" metaFont="menu" size="11"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                             </tableHeaderCell>
@@ -174,7 +172,6 @@
                                                         </tableColumn>
                                                         <tableColumn identifier="UnitsColumn" width="43" minWidth="40" maxWidth="1000" id="CMX-bt-7R9" userLabel="Units">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Units">
-                                                                <font key="font" metaFont="menu" size="11"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                             </tableHeaderCell>
@@ -218,7 +215,6 @@
                                                         </tableColumn>
                                                         <tableColumn identifier="InitStateParameterColumn" width="53.5" minWidth="40" maxWidth="1000" id="KA9-aC-fyg" userLabel="Parameter">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Parameter?">
-                                                                <font key="font" metaFont="menu" size="11"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                             </tableHeaderCell>
@@ -230,7 +226,7 @@
                                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                             <prototypeCellViews>
                                                                 <button identifier="initStateParamCheckBoxView" verticalHuggingPriority="750" id="Q4p-6L-kwQ" userLabel="Value check">
-                                                                    <rect key="frame" x="291" y="1" width="53" height="18"/>
+                                                                    <rect key="frame" x="291" y="1" width="54" height="18"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                     <buttonCell key="cell" type="check" title="Check" bezelStyle="regularSquare" imagePosition="only" alignment="center" inset="2" id="926-Li-fLp">
                                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -241,7 +237,7 @@
                                                                     </connections>
                                                                 </button>
                                                                 <tableCellView identifier="initStateHasParamCellView" wantsLayer="YES" id="Mlb-wb-KFY" userLabel="Has Params Cell View">
-                                                                    <rect key="frame" x="291" y="21" width="53" height="17"/>
+                                                                    <rect key="frame" x="291" y="21" width="54" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
                                                                         <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="w35-en-TRi">
@@ -279,7 +275,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
                                         <tableHeaderView key="headerView" id="31c-TF-9un">
-                                            <rect key="frame" x="0.0" y="0.0" width="346" height="25"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="347" height="25"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableHeaderView>
                                     </scrollView>
@@ -455,7 +451,6 @@
                                                     <tableColumns>
                                                         <tableColumn width="116" minWidth="40" maxWidth="1000" id="8pr-PT-JX1">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
-                                                                <font key="font" metaFont="menu" size="11"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                             </tableHeaderCell>
@@ -488,7 +483,6 @@
                                                         </tableColumn>
                                                         <tableColumn width="245" minWidth="40" maxWidth="1000" id="aiz-hU-5V2">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
-                                                                <font key="font" metaFont="menu" size="11"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                             </tableHeaderCell>
@@ -585,7 +579,6 @@
                                             <tableColumns>
                                                 <tableColumn identifier="NameColumn" width="126.5" minWidth="40" maxWidth="1000" id="AbC-Hg-Ysp">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Parameter Name">
-                                                        <font key="font" metaFont="menu" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -597,7 +590,7 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView identifier="NameCellView" id="14g-p8-M8q" userLabel="Name Cell View">
-                                                            <rect key="frame" x="1" y="1" width="127" height="20"/>
+                                                            <rect key="frame" x="1" y="1" width="126" height="20"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <button horizontalHuggingPriority="150" verticalHuggingPriority="150" horizontalCompressionResistancePriority="1" verticalCompressionResistancePriority="1" translatesAutoresizingMaskIntoConstraints="NO" id="DIh-Dl-t0k">
@@ -610,9 +603,12 @@
                                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                         <font key="font" metaFont="menu" size="11"/>
                                                                     </buttonCell>
+                                                                    <connections>
+                                                                        <action selector="removeParamPressed:" target="hM9-90-DLw" id="K3Q-08-Wvu"/>
+                                                                    </connections>
                                                                 </button>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bNd-Sl-WlH">
-                                                                    <rect key="frame" x="25" y="3" width="102" height="17"/>
+                                                                    <rect key="frame" x="25" y="3" width="101" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Name" id="FlU-zL-kky">
                                                                         <font key="font" metaFont="system"/>
@@ -633,7 +629,6 @@
                                                 </tableColumn>
                                                 <tableColumn identifier="ParamValueColumn" width="56.5" minWidth="40" maxWidth="1000" id="dmT-5h-h5R">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Values">
-                                                        <font key="font" metaFont="menu" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -645,11 +640,11 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView identifier="paramValueCellView" id="XMw-Qv-d7Z">
-                                                            <rect key="frame" x="131" y="1" width="56" height="20"/>
+                                                            <rect key="frame" x="130" y="1" width="57" height="20"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DqV-CQ-wcx">
-                                                                    <rect key="frame" x="0.0" y="3" width="56" height="17"/>
+                                                                    <rect key="frame" x="0.0" y="3" width="57" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="Val" id="JLr-u2-Eac">
                                                                         <font key="font" metaFont="system"/>
@@ -669,7 +664,6 @@
                                                 </tableColumn>
                                                 <tableColumn identifier="UnitsColumn" width="56" minWidth="40" maxWidth="1000" id="Zaw-V9-cti">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Units">
-                                                        <font key="font" metaFont="menu" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>

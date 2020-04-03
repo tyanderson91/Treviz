@@ -25,18 +25,15 @@ class ThreeAxisOutputSetupViewController: AddOutputViewController {
     override func viewDidLoad() {
         
         let storyboard = NSStoryboard(name: "VariableSelector", bundle: nil)
-        var1ViewController = (storyboard.instantiateController(withIdentifier: "variableSelectorViewController") as! VariableSelectorViewController)
-        var1ViewController.representedObject = self.analysis
+        var1ViewController = storyboard.instantiateController(identifier: "variableSelectorViewController") { aDecoder in VariableSelectorViewController(coder: aDecoder, analysis: self.analysis) }
         self.addChild(var1ViewController)
         variableGridView.cell(atColumnIndex: 1, rowIndex: 0).contentView = var1ViewController.view
         
-        var2ViewController = (storyboard.instantiateController(withIdentifier: "variableSelectorViewController") as! VariableSelectorViewController)
-        var2ViewController.representedObject = self.analysis
+        var2ViewController = storyboard.instantiateController(identifier: "variableSelectorViewController") { aDecoder in VariableSelectorViewController(coder: aDecoder, analysis: self.analysis) }
         self.addChild(var2ViewController)
         variableGridView.cell(atColumnIndex: 1, rowIndex: 1).contentView = var2ViewController.view
         
-        var3ViewController = (storyboard.instantiateController(withIdentifier: "variableSelectorViewController") as! VariableSelectorViewController)
-        var3ViewController.representedObject = self.analysis
+        var3ViewController = storyboard.instantiateController(identifier: "variableSelectorViewController") { aDecoder in VariableSelectorViewController(coder: aDecoder, analysis: self.analysis) }
         self.addChild(var3ViewController)
         variableGridView.cell(atColumnIndex: 1, rowIndex: 2).contentView = var3ViewController.view
         

@@ -50,6 +50,7 @@
 		CD63AEA623E7EA26006502F2 /* Condition.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD63AEA223E7EA26006502F2 /* Condition.swift */; };
 		CD63AEA723E7EA26006502F2 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD63AEA323E7EA26006502F2 /* State.swift */; };
 		CD6E0B9E2431BAC5008D1656 /* TZToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6E0B9D2431BAC5008D1656 /* TZToolbar.swift */; };
+		CD6E0BA22436DEC7008D1656 /* TZStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6E0BA12436DEC7008D1656 /* TZStoryboard.swift */; };
 		CD715E8023EBE70400E31F97 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = CD715E7F23EBE70400E31F97 /* README.md */; };
 		CDA0F87F2257398F003C62E6 /* NotificationCenterSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA0F87E2257398F003C62E6 /* NotificationCenterSetup.swift */; };
 		CDA0F88122587E05003C62E6 /* ParamTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA0F88022587E05003C62E6 /* ParamTableViewController.swift */; };
@@ -179,6 +180,7 @@
 		CD63AEA323E7EA26006502F2 /* State.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		CD63AEC523E7EBE8006502F2 /* CorePlot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CorePlot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD6E0B9D2431BAC5008D1656 /* TZToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TZToolbar.swift; sourceTree = "<group>"; };
+		CD6E0BA12436DEC7008D1656 /* TZStoryboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TZStoryboard.swift; sourceTree = "<group>"; };
 		CD715E7F23EBE70400E31F97 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		CDA0F87E2257398F003C62E6 /* NotificationCenterSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NotificationCenterSetup.swift; path = Treviz/Main/NotificationCenterSetup.swift; sourceTree = SOURCE_ROOT; };
 		CDA0F88022587E05003C62E6 /* ParamTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParamTableViewController.swift; sourceTree = "<group>"; };
@@ -196,7 +198,6 @@
 		CDD5049222252AF900B29751 /* Treviz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Treviz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDD5049522252AF900B29751 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CDD5049722252AFA00B29751 /* InputsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputsViewController.swift; sourceTree = "<group>"; };
-		CDD5049C22252AFA00B29751 /* Document.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Document.xcdatamodel; sourceTree = "<group>"; };
 		CDD5049E22252AFD00B29751 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		CDD504A322252AFD00B29751 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CDD504A422252AFD00B29751 /* Treviz.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Treviz.entitlements; sourceTree = "<group>"; };
@@ -307,6 +308,7 @@
 				CDD5049522252AF900B29751 /* AppDelegate.swift */,
 				CDA0F87E2257398F003C62E6 /* NotificationCenterSetup.swift */,
 				CDF3D1A5225057270064D70C /* TZViewController.swift */,
+				CD6E0BA12436DEC7008D1656 /* TZStoryboard.swift */,
 				CD9F2041223B7CBF005BFDCB /* Inputs Setup */,
 				CD9F2040223B7C95005BFDCB /* Outputs Setup */,
 				CD05E3BB225491A100906EB0 /* Outputs */,
@@ -465,7 +467,6 @@
 				CDD5049E22252AFD00B29751 /* Images.xcassets */,
 				CDD504A322252AFD00B29751 /* Info.plist */,
 				CDD504A422252AFD00B29751 /* Treviz.entitlements */,
-				CDD5049B22252AFA00B29751 /* Document.xcdatamodeld */,
 				CD05E3BA2254916500906EB0 /* Utilities */,
 				CD59C53E23E79336001D98D5 /* Component Views */,
 				CD05E3B9225490C500906EB0 /* Main */,
@@ -785,6 +786,7 @@
 				CD4656B2224C6F3500C587CC /* SettingsViewController.swift in Sources */,
 				CDF2338F242DCD8100B8EF40 /* HeaderViewController.swift in Sources */,
 				CDB7C73A2352B03100BC50F1 /* Parameter.swift in Sources */,
+				CD6E0BA22436DEC7008D1656 /* TZStoryboard.swift in Sources */,
 				CD0F010923654ED400C920AA /* AnalysisRunFunctions.swift in Sources */,
 				CD4AD70D23BD4C0C00FC815F /* TZPlotType.swift in Sources */,
 				CD63AEA623E7EA26006502F2 /* Condition.swift in Sources */,
@@ -1009,7 +1011,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = STORYBOARD_WINDOW_CONTROLLER;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "";
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OBJC_BRIDGING_HEADER = "Treviz/Treviz-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -1194,19 +1196,6 @@
 			productName = Yams;
 		};
 /* End XCSwiftPackageProductDependency section */
-
-/* Begin XCVersionGroup section */
-		CDD5049B22252AFA00B29751 /* Document.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				CDD5049C22252AFA00B29751 /* Document.xcdatamodel */,
-			);
-			currentVersion = CDD5049C22252AFA00B29751 /* Document.xcdatamodel */;
-			path = Document.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = CDD5048A22252AF900B29751 /* Project object */;
 }

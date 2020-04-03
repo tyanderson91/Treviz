@@ -104,8 +104,6 @@ class TZToolbar: NSToolbar {
 
 extension MainWindowController: NSToolbarDelegate {
     
-    
-    
     #if !STORYBOARD_WINDOW_CONTROLLER
     func createToolbar(){
         let toolbar = TZToolbar()

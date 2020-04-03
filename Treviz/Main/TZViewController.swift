@@ -12,6 +12,18 @@ class TZViewController: NSViewController {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        for child in self.children {
+            if child is TZViewController {
+                (child as! TZViewController).analysis = analysis
+            } else if child is TZSplitViewController {
+                (child as! TZSplitViewController).analysis = analysis
+            }
+        }
+    }
+    
+    convenience init?(coder: NSCoder, analysis curAnalysis: Analysis) {
+        self.init(coder: coder)
+        analysis = curAnalysis
     }
     
     override var representedObject: Any? {
@@ -41,6 +53,23 @@ class TZViewController: NSViewController {
 
 
 class TZSplitViewController: NSSplitViewController {
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        for child in self.children {
+            if child is TZViewController {
+                (child as! TZViewController).analysis = analysis
+            } else if child is TZSplitViewController {
+                (child as! TZSplitViewController).analysis = analysis
+            }
+        }
+    }
+    
+    convenience init?(coder: NSCoder, analysis curAnalysis: Analysis) {
+        self.init(coder: coder)
+        analysis = curAnalysis
+    }
+    
     override var representedObject: Any? {
         didSet {
             // Pass down the represented object to all of the child view controllers.

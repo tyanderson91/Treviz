@@ -17,10 +17,14 @@ class InitStateViewController: BaseViewController, NSOutlineViewDelegate, NSOutl
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        NotificationCenter.default.addObserver(self, selector: #selector(self.loadData(_:)), name: .didLoadAnalysisData, object: analysis)
-        //NotificationCenter.default.addObserver(self, selector: #selector(self.loadData(_:)), name: .didSetParam, object: nil)
+        outlineView.autosaveExpandedItems = false  // TODO: Implement functions that allow this
+        NotificationCenter.default.addObserver(self, selector: #selector(self.reloadData(_:)), name: .didSetParam, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.reloadData(_:)), name: .didChangeUnits, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.reloadData(_:)), name: .didChangeValue, object: nil)
+        //Load data
+        inputVarStructure = analysis.initStateGroups
+        inputVars = analysis.inputSettings
+        outlineView.reloadData()
     }
     
     override func viewDidAppear() {
@@ -35,15 +39,12 @@ class InitStateViewController: BaseViewController, NSOutlineViewDelegate, NSOutl
     override func didDisclose() {
     }
     
-    @objc func loadData(_ notification: Notification){        
-        inputVarStructure = analysis.initStateGroups
-        inputVars = analysis.inputSettings
-        outlineView.reloadData()
-    }
     @objc func reloadData(_ notification: Notification){
         outlineView.reloadData()
     }
     
+    
+    //MARK: Outline View Datasource and Delegate
     func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
         if item is InitStateHeader {
             let children = (item as! InitStateHeader).children
@@ -129,6 +130,15 @@ class InitStateViewController: BaseViewController, NSOutlineViewDelegate, NSOutl
         }
         return nil
     }
+    /*
+    func outlineView(_ outlineView: NSOutlineView, persistentObjectForItem item: Any?) -> Any? {
+        do {
+            return try NSKeyedArchiver.archivedData(withRootObject: item as Any, requiringSecureCoding: false) } catch {return nil}
+    }
+    func outlineView(_ outlineView: NSOutlineView, itemForPersistentObject object: Any) -> Any? {
+        do {
+        return try NSKeyedUnarchiver.unarchivedObject(ofClass: Parameter, from: object as! Data) ?? nil
+    }*/
 
     @IBAction func setParams(_ sender: Any) {
         guard let button = sender as? NSButton else {return}

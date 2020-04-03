@@ -22,6 +22,7 @@ class AnalysisDoc: NSDocument {
     
     override init() {
         super.init()
+        setupConstants() // TODO: load variables for new analylsis
     }
     
     // MARK: NSDocument setup and read/write methods
@@ -50,6 +51,7 @@ class AnalysisDoc: NSDocument {
         //self.windowController = mainWindowController
         #else
         if let mainVC = storyboard.instantiateController(withIdentifier: "mainViewController") as? MainViewController {
+            mainVC.analysis = analysis
             let window = NSWindow(contentViewController: mainVC)
             
             //window.contentViewController = mainVC
@@ -68,9 +70,6 @@ class AnalysisDoc: NSDocument {
         self.viewController = (windowController.contentViewController as! MainViewController)
         self.viewController.representedObject = analysis
         self.viewController.analysis = analysis
-        // Required to inform all the view controllers that analysis is ready to display
-        // TODO: Make sure all view controllers can just read the analysis upon initialization
-        NotificationCenter.default.post(name: .didLoadAnalysisData, object: analysis)
     }
     
     override func windowControllerDidLoadNib(_ aController: NSWindowController) {
@@ -117,27 +116,6 @@ class AnalysisDoc: NSDocument {
     override class var autosavesInPlace: Bool {
         return false
     }
-    
-    /*
-    func initReadData(){ //TODO: override with persistent data, last opened analysis, etc.
-        // For now, this is just a test configuration
-        
-        analysis.name = "Test Analysis"
-        analysis.defaultTimestep = 0.1
-        analysis.vehicle = Vehicle()
-
-        analysis.traj = State(variables: analysis.varList)
-        for thisVar in analysis.inputSettings {
-            analysis.traj[thisVar.id, 0] = (thisVar as! Variable)[0]
-        }
-        analysis.traj["mtot",0] = 10.0
-        
-        do {
-            let data = try Data(contentsOf: URL(fileReferenceLiteralResourceName: "AnalysisSettings"))
-            readSettings(data: data)
-        } catch {}
-        NotificationCenter.default.post(name: .didLoadAnalysisData, object: nil)
-    }*/
     
     // MARK: Initial analysis setup functions and constants
     

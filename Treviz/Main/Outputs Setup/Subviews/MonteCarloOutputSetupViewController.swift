@@ -10,6 +10,7 @@ import Cocoa
 
 class MonteCarloOutputSetupViewController: AddOutputViewController {
     
+    var var1ViewController : VariableSelectorViewController!
     override func plotTypeSelector(_ plotType: TZPlotType)->(Bool){ return plotType.nAxis == 1 }
 
     @IBOutlet weak var gridView: CollapsibleGridView!
@@ -20,8 +21,7 @@ class MonteCarloOutputSetupViewController: AddOutputViewController {
         super.viewDidLoad()
 
         let storyboard = NSStoryboard(name: "VariableSelector", bundle: nil)
-        let var1ViewController = storyboard.instantiateController(withIdentifier: "variableSelectorViewController") as! VariableSelectorViewController
-        var1ViewController.representedObject = self.analysis
+        var1ViewController = storyboard.instantiateController(withIdentifier: "variableSelectorViewController") as! VariableSelectorViewController
         super.viewDidLoad()
 
         var1ViewController.selectedVariable = representedOutput.var1

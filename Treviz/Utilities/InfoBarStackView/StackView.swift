@@ -174,10 +174,10 @@ class CustomStackView : NSStackView, StackItemHost {
         return viewController
     }
     
-    func addViewController(fromStoryboardId storyboardid:String, withIdentifier identifier: String, customCreator: ((NSViewController)->NSViewController) )->BaseViewController? {
+    func addViewController(fromStoryboardId storyboardid:String, withIdentifier identifier: String, analysis: Analysis)->BaseViewController? { // TODO: Try to make this function work by inputing a user-defined subtype of TZViewController (like for Inputs View Controller)
         
         let storyboard = NSStoryboard(name: storyboardid, bundle: nil)
-        let viewController = storyboard.instantiateController(withIdentifier: identifier) as! BaseViewController//, creator: creator) as! BaseViewController
+        let viewController = storyboard.initViewController(identifier: identifier, with: analysis) as! BaseViewController
         self.addViewController(viewController)
         return viewController
     }

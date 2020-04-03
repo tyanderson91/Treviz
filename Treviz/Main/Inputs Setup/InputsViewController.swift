@@ -28,9 +28,19 @@ class InputsViewController: TZViewController, NSTableViewDataSource, NSTableView
         //stack.setHuggingPriority(NSLayoutConstraint.Priority.defaultHigh, for: .horizontal)
         
         // Load and install all the view controllers from our storyboard in the following order.
-        settingsViewController = (stack.addViewController(fromStoryboardId: "Inputs", withIdentifier: "SettingsViewController") as! SettingsViewController)
+        let storyboard = NSStoryboard(name: "Inputs", bundle: nil)
+        settingsViewController = storyboard.instantiateController(identifier: "SettingsViewController") { aCoder in
+            SettingsViewController(coder: aCoder, analysis: self.analysis)
+        }
+        stack.addViewController(settingsViewController)
+        //let settingsViewController = (stack.addViewController(fromStoryboardId: "Inputs", withIdentifier: "SettingsViewController", analysis: analysis) as! SettingsViewController)
         //environmentsViewController = (stack.addViewController(fromStoryboardId: "Inputs", withIdentifier: "EnvironmentViewController") as! EnvironmentViewController)
-        initStateViewController = (stack.addViewController(fromStoryboardId: "Inputs", withIdentifier: "InitStateViewController") as! InitStateViewController)
+        //initStateViewController = (stack.addViewController(fromStoryboardId: "Inputs", withIdentifier: "InitStateViewController", analysis: analysis) as! InitStateViewController)
+        initStateViewController = storyboard.instantiateController(identifier: "InitStateViewController") { aCoder in
+            InitStateViewController(coder: aCoder, analysis: self.analysis)
+        }
+        stack.addViewController(initStateViewController)
+        
         for thisController in [settingsViewController,
                                //environmentsViewController,
                                initStateViewController]{
@@ -43,6 +53,7 @@ class InputsViewController: TZViewController, NSTableViewDataSource, NSTableView
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         if segue.identifier == .paramTableViewSegue as NSStoryboardSegue.Identifier{
             self.tableViewController = segue.destinationController as? ParamTableViewController
+            self.tableViewController.analysis = analysis
         }
     }
 }

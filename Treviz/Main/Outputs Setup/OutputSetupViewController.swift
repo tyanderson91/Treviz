@@ -29,7 +29,12 @@ class OutputSetupViewController: TZViewController{//}, NSTableViewDelegate, NSTa
         // Have the stackView strongly hug the sides of the views it contains.
         stack.parent = self
         stack.setHuggingPriority(NSLayoutConstraint.Priority.defaultHigh, for: .horizontal)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.refreshTable(_:)), name: .didLoadAnalysisData, object: nil)
+        
+        for thisOutput in analysis.plots {
+            addOutputView(with: thisOutput)
+        }
+        self.outputsArrayController.content = allPlots
+        self.tableView.bind(.content, to: outputsArrayController!, withKeyPath: "arrangedObjects", options: nil)
     }
     
     
@@ -43,19 +48,28 @@ class OutputSetupViewController: TZViewController{//}, NSTableViewDelegate, NSTa
     
     func addOutputView(with output: TZOutput){
         var newOutputVC: AddOutputViewController
+        let storyboard = NSStoryboard(name: "OutputSetup", bundle: nil)
         switch output.plotType {
         case .singleValue, .boxplot, .histogram:
-            newOutputVC = stack.addViewController(fromStoryboardId: "OutputSetup", withIdentifier: "SingleAxisOutputSetupViewController") as! SingleAxisOutputSetupViewController
+            newOutputVC = storyboard.instantiateController(identifier: "SingleAxisOutputSetupViewController") { aDecoder in
+                SingleAxisOutputSetupViewController(coder: aDecoder, analysis: self.analysis, output: output)
+            } //stack.addViewController(fromStoryboardId: "OutputSetup", withIdentifier: "SingleAxisOutputSetupViewController") as! SingleAxisOutputSetupViewController
         case .multiLine2d, .multiPoint2d, .multiPointCat2d, .contour2d, .oneLine2d:
-            newOutputVC = stack.addViewController(fromStoryboardId: "OutputSetup", withIdentifier: "TwoAxisOutputSetupViewController") as! TwoAxisOutputSetupViewController
+            newOutputVC = storyboard.instantiateController(identifier: "TwoAxisOutputSetupViewController") { aDecoder in
+                TwoAxisOutputSetupViewController(coder: aDecoder, analysis: self.analysis, output: output)
+            }//stack.addViewController(fromStoryboardId: "OutputSetup", withIdentifier: "TwoAxisOutputSetupViewController") as! TwoAxisOutputSetupViewController
         case .multiLine3d, .multiPoint3d, .multiPointCat3d, .surface3d, .oneLine3d:
-            newOutputVC = stack.addViewController(fromStoryboardId: "OutputSetup", withIdentifier: "ThreeAxisOutputSetupViewController") as! ThreeAxisOutputSetupViewController
+            newOutputVC = storyboard.instantiateController(identifier: "ThreeAxisOutputSetupViewController") { aDecoder in
+                ThreeAxisOutputSetupViewController(coder: aDecoder, analysis: self.analysis, output: output)
+            }
+            //newOutputVC = stack.addViewController(fromStoryboardId: "OutputSetup", withIdentifier: "ThreeAxisOutputSetupViewController") as! ThreeAxisOutputSetupViewController
         default:
             return
         }
+        stack.addViewController(newOutputVC)
         newOutputVC.representedOutput = output
         newOutputVC.outputSetupViewController = self
-        newOutputVC.loadAnalysis(self.analysis)
+        //newOutputVC.loadAnalysis(self.analysis)
         //newOutputVC.representedOutput = output
         //newOutputVC.conditionsArrayController.content = analysis.conditions
         //newOutputVC.plotTypeArrayController.content = newOutputVC.plotTypes
@@ -92,26 +106,26 @@ class OutputSetupViewController: TZViewController{//}, NSTableViewDelegate, NSTa
     
     
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
-        if ["add1AxisSegue", "add2AxisSegue", "add3AxisSegue", "addMCSegue"].contains(segue.identifier) {
-            let target = segue.destinationController as! AddOutputViewController
-            target.analysis = self.analysis
-            target.outputSetupViewController = self
-            target.title = "Add Output"
+        guard ["add1AxisSegue", "add2AxisSegue", "add3AxisSegue", "addMCSegue"].contains(segue.identifier) else { return }
+        let target = segue.destinationController as! AddOutputViewController
+        var newOutput: TZOutput!
+        switch segue.identifier {
+        case "add1AxisSegue":
+            newOutput = TZOutput(id: 0, plotType: .singleValue)
+        case "add2AxisSegue":
+            newOutput = TZOutput(id: 0, plotType: .oneLine2d)
+        case "add3AxisSegue":
+            newOutput = TZOutput(id: 0, plotType: .oneLine3d)
+        case "addMCSegue":
+            return
+        default:
+            return
         }
+        target.analysis = self.analysis
+        target.outputSetupViewController = self
+        target.title = "Add Output"
+        target.representedOutput = newOutput
     }
-    
-    
-    @objc func refreshTable(_ notification: Notification){
-        if notification.object as? Analysis == analysis { // This is required to prevent running twice for two different open windows.
-            //TODO: Get rid of this design pattern by initializing with analysis object
-            for thisOutput in analysis.plots {
-                addOutputView(with: thisOutput)
-            }
-        }
-        self.outputsArrayController.content = allPlots
-        self.tableView.bind(.content, to: outputsArrayController!, withKeyPath: "arrangedObjects", options: nil)
-    }
-    
     
     override func keyDown(with event: NSEvent) {
         if event.keyCode == 51 {//NSDeleteCharacter {
