@@ -82,6 +82,7 @@ class ConditionsViewController: TZViewController {
             canAddSubCondition = true
             conditionNameTextBox.isHidden = false
             conditionNameTextBox.becomeFirstResponder()
+            NotificationCenter.default.post(name: .didAddCondition, object: nil)
         } else if addConditionButton.title == "Delete" {
             if let conditionIndex = analysis.conditions.firstIndex(of: curCondition)
             { deleteCondition(at: conditionIndex) }
@@ -202,22 +203,25 @@ class ConditionsViewController: TZViewController {
     func showConditionView(condition: EvaluateCondition){
         var viewController: AddConditionViewController!
         let storyboard = NSStoryboard(name: "Conditions", bundle: nil)
-        var storyboardID = ""
+        var storyboardID : String!
         
         if condition is SingleCondition {
             storyboardID = "addNewConditionViewController"
+            viewController = storyboard.instantiateController(identifier: storyboardID) { aDecoder in
+                AddNewConditionViewController(coder: aDecoder, analysis: self.analysis, condition: condition)
+            }
         } else if condition is Condition {
             storyboardID = "addExistingConditionViewController"
+            viewController = storyboard.instantiateController(identifier: storyboardID) { aDecoder in
+                AddExistingConditionViewController(coder: aDecoder, analysis: self.analysis, condition: condition)
+            }
         }
-        viewController = storyboard.instantiateController(withIdentifier: storyboardID) as? AddConditionViewController
-        viewController.analysis = analysis
-        viewController.representedCondition = condition
         newConditionStackView.addArrangedSubview(viewController.view)
         self.addChild(viewController)
-        viewController.initLoadAll()
+        viewController.subConditionIndex = newConditionStackView.arrangedSubviews.count - 1
+        //viewController.initLoadAll()
         formatConditionEditor()
-        
-        viewController.populateWithCondition(condition)
+        //viewController.populateWithCondition(condition)
     }
     
     /*

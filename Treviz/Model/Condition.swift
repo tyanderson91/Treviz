@@ -60,7 +60,7 @@ enum SpecialConditionType : Int {
     }
     
     func asString()->String{
-        let returnDict : Dictionary<SpecialConditionType, String> = [.globalMax: "Max", .globalMin: "Min", .localMax: "Local Max", .localMin: "Local Min"]
+        let returnDict : Dictionary<SpecialConditionType, String> = [.globalMax: "Global Max", .globalMin: "Global Min", .localMax: "Local Max", .localMin: "Local Min"]
         return returnDict[self]!
     }
 }

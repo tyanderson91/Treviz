@@ -135,7 +135,7 @@
                                     <outlet property="menu" destination="nkl-c5-Pdx" id="7qJ-CN-LAl"/>
                                 </connections>
                             </button>
-                            <stackView wantsLayer="YES" distribution="fill" orientation="vertical" alignment="centerX" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="737-7k-yH7">
+                            <stackView wantsLayer="YES" distribution="fill" orientation="vertical" alignment="leading" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="737-7k-yH7">
                                 <rect key="frame" x="10" y="25" width="352" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" placeholder="YES" id="vKz-MD-0rb"/>
@@ -343,7 +343,7 @@
                             <stackView distribution="equalSpacing" orientation="horizontal" alignment="bottom" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" horizontalHuggingPriority="50" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fd5-Ma-hzJ" userLabel="Condition Input Stack View" customClass="CollapsibleStackView" customModule="Treviz" customModuleProvider="target">
                                 <rect key="frame" x="127" y="30" width="463" height="21"/>
                                 <subviews>
-                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="500" translatesAutoresizingMaskIntoConstraints="NO" id="Y9N-df-bvC">
+                                    <textField horizontalHuggingPriority="150" verticalHuggingPriority="750" horizontalCompressionResistancePriority="500" translatesAutoresizingMaskIntoConstraints="NO" id="Y9N-df-bvC">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="width" priority="850" constant="50" id="BfP-EC-U45"/>
@@ -388,7 +388,7 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="500" translatesAutoresizingMaskIntoConstraints="NO" id="pJp-kY-69n">
+                                    <textField horizontalHuggingPriority="150" verticalHuggingPriority="750" horizontalCompressionResistancePriority="500" translatesAutoresizingMaskIntoConstraints="NO" id="pJp-kY-69n">
                                         <rect key="frame" x="413" y="0.0" width="50" height="21"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="kHz-J5-GTk">
                                             <font key="font" metaFont="system"/>
@@ -399,17 +399,17 @@
                                             <action selector="upperBoundWasSet:" target="MME-Yq-Esp" id="OOj-sc-2i1"/>
                                         </connections>
                                     </textField>
-                                    <popUpButton identifier="Custom Choice Popup" hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="35G-qS-zXJ" userLabel="Custom Type Popup">
-                                        <rect key="frame" x="-2" y="-3" width="99" height="25"/>
-                                        <popUpButtonCell key="cell" type="push" title="Max" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="NX5-i0-o6Z" id="K5r-1P-GvT">
+                                    <popUpButton identifier="Custom Choice Popup" hidden="YES" horizontalHuggingPriority="150" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="35G-qS-zXJ" userLabel="Custom Type Popup">
+                                        <rect key="frame" x="-2" y="-3" width="106" height="25"/>
+                                        <popUpButtonCell key="cell" type="push" title="Local Max" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="RJW-G3-eeF" id="K5r-1P-GvT">
                                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                             <menu key="menu" id="bav-KK-vz7">
                                                 <items>
-                                                    <menuItem title="Max" state="on" id="NX5-i0-o6Z" userLabel="Max"/>
-                                                    <menuItem title="Min" id="qLH-0K-b5W" userLabel="Min"/>
-                                                    <menuItem title="Local Max" id="RJW-G3-eeF" userLabel="Local Max"/>
+                                                    <menuItem title="Local Max" state="on" id="RJW-G3-eeF" userLabel="Local Max"/>
                                                     <menuItem title="Local Min" id="Hb0-PJ-soo" userLabel="Local Min"/>
+                                                    <menuItem title="Global Max" id="NX5-i0-o6Z" userLabel="Max"/>
+                                                    <menuItem title="Global Min" id="qLH-0K-b5W" userLabel="Min"/>
                                                 </items>
                                             </menu>
                                         </popUpButtonCell>
@@ -460,6 +460,8 @@
                         <outlet property="lowerBoundTextField" destination="Y9N-df-bvC" id="2Bh-uw-TPM"/>
                         <outlet property="removeConditionButton" destination="ydx-Wx-M9w" id="Jlp-0F-O4D"/>
                         <outlet property="singleConditionObjectController" destination="MyE-R9-vTc" id="c6c-Fh-531"/>
+                        <outlet property="specialTypePopup" destination="35G-qS-zXJ" id="Y16-DQ-n7d"/>
+                        <outlet property="specialTypeRadioButton" destination="Zla-QZ-eW6" id="7Ee-Vh-zOR"/>
                         <outlet property="upperBoundTextField" destination="pJp-kY-69n" id="gLw-Bg-whh"/>
                     </connections>
                 </viewController>
@@ -474,7 +476,7 @@
                 <controllerPlaceholder storyboardIdentifier="VariableSelector" storyboardName="VariableSelector" id="d9P-Ko-S8e" sceneMemberID="viewController"/>
                 <customObject id="1dA-kn-9sr" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-241" y="289"/>
+            <point key="canvasLocation" x="-57" y="312"/>
         </scene>
         <!--Add Existing Condition View Controller-->
         <scene sceneID="w8E-xr-ekH">

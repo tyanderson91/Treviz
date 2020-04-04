@@ -49,7 +49,7 @@ class TZToolbar: NSToolbar {
     var showWindowPanes = NSToolbarItem(itemIdentifier: .showWindowPanes)
     var showHidePanesControl : NSSegmentedControl!
     
-    var defaultItemIdentifiers : [NSToolbarItem.Identifier] = [.space, .runAnalysis, .conditions, .variables, .vectors, .csys, .flexibleSpace, .showWindowPanes]
+    var defaultItemIdentifiers : [NSToolbarItem.Identifier] = [.runAnalysis, .conditions, .variables, .vectors, .csys, .flexibleSpace, .showWindowPanes]
     var defaultItems : [NSToolbarItem] { [toggleAnalysisRun, conditionsButton, variablesButton, vectorsButton, csysButton, showWindowPanes] }
     
     override init(identifier: NSToolbar.Identifier) {
@@ -185,9 +185,10 @@ extension MainWindowController: NSToolbarDelegate {
     }
     #else
     @IBAction func conditionsClicked(_ sender: Any) {
-        DispatchQueue.main.async {
+        self.performSegue(withIdentifier: "conditionsPopupSegue", sender: self)
+        /*DispatchQueue.main.async {
             self.performSegue(withIdentifier: "conditionsPopupSegue", sender: self)
-        }
+        }*/
     }
     
     

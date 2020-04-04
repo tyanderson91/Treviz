@@ -25,7 +25,7 @@ class SingleAxisOutputSetupViewController: AddOutputViewController {
         
     override func viewDidLoad() {
         let storyboard = NSStoryboard(name: "VariableSelector", bundle: nil)
-        variableSelectorViewController = storyboard.instantiateController(identifier: "variableSelectorViewController") { aDecoder in VariableSelectorViewController(coder: aDecoder, analysis: self.analysis) } as! VariableSelectorViewController
+        variableSelectorViewController = storyboard.instantiateController(identifier: "variableSelectorViewController") { aDecoder in VariableSelectorViewController(coder: aDecoder, analysis: self.analysis) }
         variableSelectorViewController.representedObject = self.analysis
         //variableSelectorViewController.selectedVariable = self.representedOutput.var1? ?? nil
         self.addChild(variableSelectorViewController)

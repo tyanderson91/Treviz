@@ -26,6 +26,9 @@ class VariableSelectorViewController: TZViewController {
             }
         }*/
         initLoadVars()
+        if selectedVariable != nil {
+            variableSelectorPopup.selectItem(at: varList?.firstIndex(of: selectedVariable!) ?? 0)
+        }
     }
 
     

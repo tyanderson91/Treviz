@@ -21,7 +21,7 @@ class MonteCarloOutputSetupViewController: AddOutputViewController {
         super.viewDidLoad()
 
         let storyboard = NSStoryboard(name: "VariableSelector", bundle: nil)
-        var1ViewController = storyboard.instantiateController(withIdentifier: "variableSelectorViewController") as! VariableSelectorViewController
+        var1ViewController = storyboard.instantiateController(identifier: "variableSelectorViewController") { aDecoder in VariableSelectorViewController(coder: aDecoder, analysis: self.analysis) }
         super.viewDidLoad()
 
         var1ViewController.selectedVariable = representedOutput.var1
