@@ -18,17 +18,7 @@ class MainViewController: TZViewController {
     var mainSplitViewController : MainSplitViewController!
     var textOutputView : NSTextView? {
         return mainSplitViewController.outputsViewController.outputSplitViewController?.textOutputView
-    }
-    
-    init?(coder aDecoder: NSCoder, newAnalysis: Analysis){
-        super.init(coder: aDecoder)
-        analysis = newAnalysis
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-    
+    }    
     
     override func viewDidLoad() {
         super.viewDidLoad()

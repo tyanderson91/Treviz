@@ -10,6 +10,11 @@
 
 import Cocoa
 
+
+extension NSStoryboardSegue.Identifier{
+    static let loggerViewSegue = "loggerViewSegue"
+}
+
 class TextOutputContainerViewController: TZViewController{
     @IBOutlet weak var textOutputSplitView: NSView!
     override func viewDidLoad() {
@@ -18,20 +23,36 @@ class TextOutputContainerViewController: TZViewController{
     }
 }
 
-class TextOutputSplitViewController: NSSplitViewController{
+class TextOutputSplitViewController: TZSplitViewController{
     
-}
-
-class TextLogViewController: TZViewController{
+    @IBOutlet weak var textOutputSplitViewItem: NSSplitViewItem!
+    @IBOutlet weak var messageLoggerSplitViewItem: NSSplitViewItem!
+    var textOutputViewController: TextOutputsViewController! {
+        return textOutputSplitViewItem.viewController as? TextOutputsViewController ?? nil
+    }
+    var textOutputView: NSTextView! {
+        return textOutputViewController!.textOutputView
+    }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do view setup here.
+    }
+    /*
+    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
+        if segue.identifier == .loggerViewSegue {
+            let vc = segue.destinationController as? TZMessageLoggerViewController
+            vc?.analysis = analysis
+        }
+    }*/
 }
 
 class TextOutputsViewController: TZViewController {
 
-    @IBOutlet var textView: NSTextView!
+    @IBOutlet var textOutputView: NSTextView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        textView.string.append("Analysis results will be shown below \n")
+        textOutputView.string.append("Analysis results will be shown below \n")
         // Do view setup here.
     }
     

@@ -11,7 +11,7 @@ Parameters:
   
 Conditions:
   - Ground Impact: y<-0.1
-  - Final time: t>10
+  - Final time: t=10
   - Too far: x>100
   - TerminalTest:
     union: and
@@ -35,31 +35,31 @@ Outputs:
   - id: 1
     title: X pos
     variable: x
-    plot type: Single Value
+    plot type: Value at Condition
     condition: terminal
     output type: text
   - id: 2
     title: Final time
     variable: t
-    plot type: Single Value
+    plot type: Value at Condition
     condition: terminal
     output type: text
   - id: 3
-    title: Traj
-    variable1: x
-    variable2: y
-    plot type: 2 Var, along Trajectory
-    output type: plot
-  - id: 4
     title: Traj2
     variable1: y
     variable2: t
-    plot type: 2 Var, along Trajectory
+    plot type: 2 Var along Trajectory
+    output type: plot
+  - id: 4
+    title: Traj
+    variable1: x
+    variable2: y
+    plot type: 2 Var along Trajectory
     output type: plot
   - id: 5
     title: Apogee range
     variable1: x
-    plot type: Single Value
+    plot type: Value at Condition
     output type: text
     condition: Apogee
 

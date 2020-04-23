@@ -32,33 +32,31 @@ class AnalysisDoc: NSDocument {
         let storyboard = NSStoryboard(name: NSStoryboard.Name("Main"), bundle: nil)
         
         #if STORYBOARD_WINDOW_CONTROLLER
+        
         windowController = (storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier("Analysis Window Controller")) as! MainWindowController)
-        /*if #available(OSX 10.15, *) {
-            let mainViewController = storyboard.instantiateController(identifier: NSStoryboard.SceneIdentifier("mainViewController"), creator: { (aDecoder: NSCoder)->MainViewController in
-                MainViewController(coder: aDecoder, newAnalysis: self.analysis)!
-            })
-            let mainWindow = NSWindow(contentViewController: mainViewController)
-            self.windowController = MainWindowController(window: mainWindow)
-        }*/
-        /*
-        if #available(OSX 10.15, *) {
-            let mainWindowController = storyboard.instantiateController(identifier: NSStoryboard.SceneIdentifier("Analysis Window Controller")) { aDecoder in
-                return MainWindowController(coder: aDecoder, newAnalysis: self.analysis, storyboard: storyboard)
-            }
-            self.windowController = mainWindowController
-        }*/
-        //let mainWindowController = storyboard.instantiateController(withIdentifier: "Analysis Window Controller") as! MainWindowController
-        //self.windowController = mainWindowController
+        
+        let window = windowController.window!
+        
+        let mainVC = storyboard.instantiateController(identifier: "mainViewController") { aDecoder in
+            return MainViewController(coder: aDecoder, analysis: self.analysis)
+        }
+        windowController.contentViewController = mainVC
+        window.contentView = mainVC.view
+        
+        DistributedNotificationCenter.default.addObserver(windowController as Any, selector: #selector(windowController.completeAnalysis), name: .didFinishRunningAnalysis, object: nil)
+        window.standardWindowButton(NSWindow.ButtonType.closeButton)!.isHidden = true
+
         #else
         if let mainVC = storyboard.instantiateController(withIdentifier: "mainViewController") as? MainViewController {
             mainVC.analysis = analysis
-            let window = NSWindow(contentViewController: mainVC)
             
+            let window = NSWindow(contentViewController: mainVC)
             //window.contentViewController = mainVC
             window.contentView = mainVC.view
             window.titleVisibility = .visible
             windowController = MainWindowController(window: window)
             windowController.createToolbar()
+            
             DistributedNotificationCenter.default.addObserver(windowController as Any, selector: #selector(windowController.completeAnalysis), name: .didFinishRunningAnalysis, object: nil)
             window.standardWindowButton(NSWindow.ButtonType.closeButton)!.isHidden = true
             

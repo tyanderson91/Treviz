@@ -699,7 +699,7 @@
                     <window key="window" identifier="mainWindow" title="Treviz" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="mainWindow" animationBehavior="default" id="Ckk-yw-fiv">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES"/>
-                        <rect key="contentRect" x="0.0" y="0.0" width="800" height="600"/>
+                        <rect key="contentRect" x="0.0" y="0.0" width="800" height="359"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
                         <toolbar key="toolbar" implicitIdentifier="99EF4609-EB63-466D-9855-35ED2BA88456" explicitIdentifier="MainToolbar" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="gC3-LF-Jn5" customClass="TZToolbar" customModule="Treviz" customModuleProvider="target">
                             <allowedToolbarItems>
@@ -719,9 +719,6 @@
                                             </segments>
                                         </segmentedCell>
                                     </segmentedControl>
-                                    <connections>
-                                        <action selector="showHidePanesClicked:" target="jGA-0Y-lOj" id="L54-Op-As4"/>
-                                    </connections>
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="NSToolbarPrintItem" id="iNF-nm-hs1"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="9m0-eV-BGQ"/>
@@ -737,7 +734,6 @@
                                         </buttonCell>
                                     </button>
                                     <connections>
-                                        <action selector="conditionsClicked:" target="jGA-0Y-lOj" id="xSZ-jt-drV"/>
                                         <segue destination="JQf-0b-2JY" kind="popover" identifier="conditionsPopupSegue" popoverAnchorView="w9Z-vw-qxw" popoverBehavior="t" preferredEdge="maxY" id="AFX-Cu-IWl"/>
                                     </connections>
                                 </toolbarItem>
@@ -781,11 +777,11 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                                         <buttonCell key="cell" type="roundTextured" title="▶︎" alternateTitle="Run Analysis" bezelStyle="texturedRounded" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ytv-0c-3b4">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="label" size="11"/>
+                                            <font key="font" metaFont="message" size="11"/>
                                         </buttonCell>
                                     </button>
                                     <connections>
-                                        <action selector="runAnalysisClicked:" target="jGA-0Y-lOj" id="8Mu-sl-U61"/>
+                                        <action selector="storyboardRunAnalysisClicked:" target="jGA-0Y-lOj" id="U7A-ZI-qAf"/>
                                     </connections>
                                 </toolbarItem>
                             </allowedToolbarItems>
@@ -812,12 +808,12 @@
                         <outlet property="runButton" destination="k0d-C9-zla" id="uZg-AK-X7S"/>
                         <outlet property="showHidePanesControl" destination="bbn-UQ-slb" id="dOK-1f-tVj"/>
                         <outlet property="toolbar" destination="gC3-LF-Jn5" id="h5O-LV-3cg"/>
-                        <segue destination="PzM-8h-kXr" kind="relationship" relationship="window.shadowedContentViewController" id="sfB-bW-bv0"/>
+                        <segue destination="RNZ-Kf-TSs" kind="relationship" relationship="window.shadowedContentViewController" id="GCr-yb-nHt"/>
                     </connections>
                 </windowController>
                 <customObject id="6f7-a7-6o1" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-637" y="559"/>
+            <point key="canvasLocation" x="-637" y="438.5"/>
         </scene>
         <!--Main Split View Controller-->
         <scene sceneID="fLq-qX-0gB">
@@ -848,6 +844,19 @@
                 <customObject id="WEA-Dx-jp5" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="129.5" y="552.5"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="lAM-fm-Rjs">
+            <objects>
+                <viewController id="RNZ-Kf-TSs" sceneMemberID="viewController">
+                    <view key="view" id="0N6-At-evu">
+                        <rect key="frame" x="0.0" y="0.0" width="125" height="45"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                </viewController>
+                <customObject id="vQq-9O-88w" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-772" y="1028"/>
         </scene>
         <!--MainViewController-->
         <scene sceneID="hGV-gs-ruu">
@@ -903,7 +912,7 @@
                 </viewController>
                 <customObject id="WVM-5U-vTl" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-469" y="1115.5"/>
+            <point key="canvasLocation" x="-422" y="1234"/>
         </scene>
         <!--Inputs-->
         <scene sceneID="PXu-5S-D46">

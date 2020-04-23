@@ -2,31 +2,28 @@
 //  Variable.swift
 //  Treviz
 //
-//  Variable is a class that defines a single changeable numerical property of a vehicle, including name, unit information, and value
-//  Used to display input state and output information
-//
 //  Created by Tyler Anderson on 3/6/19.
 //  Copyright © 2019 Tyler Anderson. All rights reserved.
 //
 
 import Cocoa
-//import Foundation
 import simd
 
 typealias VariableID = String
 typealias VarValue = Float
 
-class Variable : NSObject, Parameter, NSCopying, NSCoding {
+/**
+Variable is a class that defines a single changeable numerical property of a vehicle, including name, unit information, and value. Used to display input state and output information
+ */
+class Variable : NSObject, Parameter, NSCopying, NSCoding { //TODO: reconsider whether this could be a struct
     
     let id: VariableID
     @objc let name: String
     let symbol: String!
     var units: String //TODO: Turn units into a separate type
     var value: [VarValue] = []
-    
     var isValid: Bool = true
     var hasParams: Bool {return isParam}
-    
     var isParam: Bool = false
     
     func encode(with coder: NSCoder) {
@@ -63,7 +60,7 @@ class Variable : NSObject, Parameter, NSCopying, NSCoding {
         newVar.isParam = self.isParam
         return newVar
     }
-    func copyAtIndex(_ index: Int) -> Variable?{
+    func copy(atIndex index: Int) -> Variable?{
         guard index < self.value.count else {return nil}
         let newVar = Variable(id, named: name, symbol: symbol, units: units)
         newVar.value = [self[index]!]

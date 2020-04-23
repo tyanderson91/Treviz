@@ -302,7 +302,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="360" height="132"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <customView verticalHuggingPriority="900" translatesAutoresizingMaskIntoConstraints="NO" id="LCY-Xe-aHU">
+                            <customView horizontalHuggingPriority="50" verticalHuggingPriority="900" translatesAutoresizingMaskIntoConstraints="NO" id="LCY-Xe-aHU">
                                 <rect key="frame" x="0.0" y="0.0" width="360" height="132"/>
                                 <subviews>
                                     <gridView verticalCompressionResistancePriority="1" xPlacement="center" yPlacement="fill" rowAlignment="none" rowSpacing="10" columnSpacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="0r4-fO-Bow" customClass="CollapsibleGridView" customModule="Treviz" customModuleProvider="target">
@@ -535,7 +535,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="482" height="180"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <customView verticalHuggingPriority="900" translatesAutoresizingMaskIntoConstraints="NO" id="vwC-Zq-dxd">
+                            <customView horizontalHuggingPriority="50" verticalHuggingPriority="900" translatesAutoresizingMaskIntoConstraints="NO" id="vwC-Zq-dxd">
                                 <rect key="frame" x="0.0" y="0.0" width="482" height="180"/>
                                 <subviews>
                                     <gridView xPlacement="center" yPlacement="center" rowAlignment="none" rowSpacing="10" columnSpacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="BZU-Nh-SXi" customClass="CollapsibleGridView" customModule="Treviz" customModuleProvider="target">
@@ -837,7 +837,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="465" height="174"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <customView verticalHuggingPriority="900" translatesAutoresizingMaskIntoConstraints="NO" id="yNk-X1-3h2">
+                            <customView horizontalHuggingPriority="50" verticalHuggingPriority="900" translatesAutoresizingMaskIntoConstraints="NO" id="yNk-X1-3h2">
                                 <rect key="frame" x="0.0" y="0.0" width="465" height="174"/>
                                 <subviews>
                                     <gridView xPlacement="center" yPlacement="center" rowAlignment="none" rowSpacing="10" columnSpacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="RGc-FN-Usb" customClass="CollapsibleGridView" customModule="Treviz" customModuleProvider="target">
@@ -1138,7 +1138,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="338" height="190"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <customView verticalHuggingPriority="900" translatesAutoresizingMaskIntoConstraints="NO" id="WoK-fr-giZ">
+                            <customView horizontalHuggingPriority="50" verticalHuggingPriority="900" translatesAutoresizingMaskIntoConstraints="NO" id="WoK-fr-giZ">
                                 <rect key="frame" x="0.0" y="0.0" width="338" height="190"/>
                                 <subviews>
                                     <gridView xPlacement="fill" yPlacement="center" rowAlignment="firstBaseline" rowSpacing="10" columnSpacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Yti-Eb-oA3" customClass="CollapsibleGridView" customModule="Treviz" customModuleProvider="target">

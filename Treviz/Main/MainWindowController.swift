@@ -22,7 +22,11 @@ class MainWindowController: NSWindowController {
         
     var viewController: MainViewController! { return contentViewController as? MainViewController ?? nil}
         
-    func processOutputs(){
+    @IBAction func storyboardRunAnalysisClicked(_ sender: Any) {
+        runAnalysisClicked(sender)
+    }
+    
+    func processOutputs(){ //TODO: Move out of window controller
         guard let textOutputView = viewController.textOutputView else {return}
         guard let outputSplitVC = viewController.mainSplitViewController.outputsViewController.outputSplitViewController else { return }
         guard let plotViewController = outputSplitVC.plotViewController else { return }
@@ -30,14 +34,27 @@ class MainWindowController: NSWindowController {
         textOutputView.string = ""
         plotViewController.plotViews = []
         for curOutput in analysis.plots {
+            do { try curOutput.assertValid() }
+            catch {
+                analysis.logMessage(error.localizedDescription)
+                continue
+            }
             curOutput.curTrajectory = analysis.traj
             if curOutput is TZTextOutput {
-                let newText = (curOutput as! TZTextOutput).getText()
-                textOutputView.textStorage?.append(newText)
-                textOutputView.textStorage?.append(NSAttributedString(string: "\n\n"))
+                do {
+                    let newText = try (curOutput as! TZTextOutput).getText()
+                    textOutputView.textStorage?.append(newText)
+                    textOutputView.textStorage?.append(NSAttributedString(string: "\n\n"))
+                } catch {
+                    analysis.logMessage("Error in output set '\(curOutput.title)': \(error.localizedDescription)")
+                }
             }
             else if curOutput is TZPlot {
-                plotViewController.createPlot(plot: curOutput as! TZPlot)
+                do {
+                    try plotViewController.createPlot(plot: curOutput as! TZPlot)
+                } catch {
+                    analysis.logMessage("Error in plot '\(curOutput.title)': \(error.localizedDescription)")
+                }
             }
         }
         let plotTabViewIndex = outputSplitVC.viewerTabViewController.tabView.indexOfTabViewItem(withIdentifier: "plotterTabViewItem")

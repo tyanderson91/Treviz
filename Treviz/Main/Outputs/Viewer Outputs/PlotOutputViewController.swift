@@ -25,8 +25,8 @@ class PlotOutputViewController: TZViewController, NSTableViewDelegate, NSTableVi
         tableView.rowHeight = 100
     }
     
-    func createPlot(plot: TZPlot){
-        let newGraph = TZPlotView(with: plot)
+    func createPlot(plot: TZPlot) throws {
+        let newGraph = try TZPlotView(with: plot)
         plotViews.append(newGraph)
         //graph.defaultPlotSpace?.allowsUserInteraction = true
         graphHostingView.hostedGraph = newGraph.graph

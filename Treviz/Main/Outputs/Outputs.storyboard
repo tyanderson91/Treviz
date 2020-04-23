@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="Pa4-gg-nuF">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="Pa4-gg-nuF">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15705"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16096"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -33,7 +33,7 @@
                 </viewController>
                 <customObject id="e4Y-DN-6gQ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="433" y="-209"/>
+            <point key="canvasLocation" x="449" y="-260"/>
         </scene>
         <!--Outputs Split View Controller-->
         <scene sceneID="ooh-00-C22">
@@ -41,7 +41,7 @@
                 <splitViewController identifier="outputsSplitViewRestoration" storyboardIdentifier="outputsSplitView" id="N6o-UD-So8" customClass="OutputsSplitViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
                     <splitViewItems>
                         <splitViewItem id="r8c-ry-S8W"/>
-                        <splitViewItem id="z53-zv-CfF" userLabel="Text Output Split View Item"/>
+                        <splitViewItem id="Iwo-kV-OnZ"/>
                     </splitViewItems>
                     <splitView key="splitView" autosaveName="outputsSplitView" dividerStyle="paneSplitter" id="Jhy-ME-60a">
                         <rect key="frame" x="0.0" y="0.0" width="350" height="166"/>
@@ -51,15 +51,92 @@
                         </connections>
                     </splitView>
                     <connections>
-                        <outlet property="textOutputSplitViewItem" destination="z53-zv-CfF" id="3s4-cU-7to"/>
+                        <outlet property="textOutputSplitViewItem" destination="Iwo-kV-OnZ" id="uT4-Nx-kcd"/>
                         <outlet property="viewerOutputSplitViewItem" destination="r8c-ry-S8W" id="hof-KV-0W6"/>
                         <segue destination="mOM-Iz-vf6" kind="relationship" relationship="splitItems" id="Swl-rw-7If"/>
-                        <segue destination="C1c-ub-Xf2" kind="relationship" relationship="splitItems" id="OdY-5w-5C9"/>
+                        <segue destination="sLd-Sg-0iF" kind="relationship" relationship="splitItems" id="0Jo-xz-UJp"/>
                     </connections>
                 </splitViewController>
                 <customObject id="RZF-nk-gcm" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="505" y="79"/>
+            <point key="canvasLocation" x="556" y="110"/>
+        </scene>
+        <!--Text Output Split View Controller-->
+        <scene sceneID="5dO-Vj-cK7">
+            <objects>
+                <splitViewController id="sLd-Sg-0iF" customClass="TextOutputSplitViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
+                    <splitViewItems>
+                        <splitViewItem id="Egm-VD-iRm"/>
+                        <splitViewItem id="XaY-f7-w6D"/>
+                    </splitViewItems>
+                    <splitView key="splitView" autosaveName="textOutputsSplitView" vertical="YES" id="e6g-Q4-soo">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <connections>
+                            <outlet property="delegate" destination="sLd-Sg-0iF" id="OFV-hQ-pwm"/>
+                        </connections>
+                    </splitView>
+                    <connections>
+                        <outlet property="messageLoggerSplitViewItem" destination="XaY-f7-w6D" id="Kuh-Zi-Z1H"/>
+                        <outlet property="splitView" destination="e6g-Q4-soo" id="opx-9i-TLO"/>
+                        <outlet property="textOutputSplitViewItem" destination="Egm-VD-iRm" id="DGb-rW-MCf"/>
+                        <segue destination="C1c-ub-Xf2" kind="relationship" relationship="splitItems" id="9NB-8w-S2L"/>
+                        <segue destination="DQk-QT-ZbX" kind="relationship" relationship="splitItems" id="Fpr-7P-tQK"/>
+                    </connections>
+                </splitViewController>
+                <customObject id="W19-Jc-uHi" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="519" y="503"/>
+        </scene>
+        <!--Message Logger View Controller-->
+        <scene sceneID="vPN-Ox-zBp">
+            <objects>
+                <viewController id="DQk-QT-ZbX" customClass="TZMessageLoggerViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="gVq-OI-Psa">
+                        <rect key="frame" x="0.0" y="0.0" width="236" height="157"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <scrollView appearanceType="aqua" borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" translatesAutoresizingMaskIntoConstraints="NO" id="47s-6k-MTR">
+                                <rect key="frame" x="0.0" y="0.0" width="236" height="157"/>
+                                <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="kLX-PJ-g5z">
+                                    <rect key="frame" x="0.0" y="0.0" width="236" height="157"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <textView editable="NO" verticallyResizable="YES" findStyle="bar" allowsDocumentBackgroundColorChange="YES" smartInsertDelete="YES" id="WoE-QL-2pN">
+                                            <rect key="frame" x="0.0" y="0.0" width="236" height="157"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            <size key="minSize" width="236" height="157"/>
+                                            <size key="maxSize" width="457" height="10000000"/>
+                                            <color key="insertionPointColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                        </textView>
+                                    </subviews>
+                                </clipView>
+                                <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="kfd-lb-qCm">
+                                    <rect key="frame" x="-100" y="-100" width="240" height="16"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                                <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="Omz-iC-dCQ">
+                                    <rect key="frame" x="220" y="0.0" width="16" height="157"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                            </scrollView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="47s-6k-MTR" secondAttribute="bottom" id="125-f5-DtI"/>
+                            <constraint firstItem="47s-6k-MTR" firstAttribute="top" secondItem="gVq-OI-Psa" secondAttribute="top" id="2cc-hI-aHe"/>
+                            <constraint firstAttribute="trailing" secondItem="47s-6k-MTR" secondAttribute="trailing" id="51V-mf-Gmo"/>
+                            <constraint firstItem="47s-6k-MTR" firstAttribute="leading" secondItem="gVq-OI-Psa" secondAttribute="leading" id="GTc-mY-gsT"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="messageLoggerTextView" destination="WoE-QL-2pN" id="yp2-op-kil"/>
+                    </connections>
+                </viewController>
+                <customObject id="LbO-ju-PMA" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="958" y="574.5"/>
         </scene>
         <!--Viewer Tab View Controller-->
         <scene sceneID="7dg-bH-2ZR">
@@ -88,7 +165,7 @@
                 </tabViewController>
                 <customObject id="Kum-Q4-fOu" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="896" y="-625"/>
+            <point key="canvasLocation" x="1025" y="-314"/>
         </scene>
         <!--Plot Output View Controller-->
         <scene sceneID="Beb-V0-0iB">
@@ -116,7 +193,6 @@
                                             <tableColumns>
                                                 <tableColumn editable="NO" width="94" minWidth="40" maxWidth="1000" id="CLG-sb-9dB" userLabel="Plot Thumbnail column">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center">
-                                                        <font key="font" metaFont="menu" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -127,12 +203,12 @@
                                                             <rect key="frame" x="1" y="1" width="94" height="94"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
-                                                                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BLe-Nn-Wf1">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="94" height="94"/>
+                                                                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" placeholderIntrinsicWidth="91" placeholderIntrinsicHeight="88" translatesAutoresizingMaskIntoConstraints="NO" id="BLe-Nn-Wf1">
+                                                                    <rect key="frame" x="0.0" y="3" width="91" height="88"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" secondItem="BLe-Nn-Wf1" secondAttribute="height" multiplier="1:1" id="THS-aJ-uhK"/>
                                                                     </constraints>
-                                                                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="NSComputer" id="B0s-jW-ClV"/>
+                                                                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="nline3d" id="B0s-jW-ClV"/>
                                                                 </imageView>
                                                             </subviews>
                                                             <constraints>
@@ -185,18 +261,18 @@
                 </viewController>
                 <customObject id="yZO-iK-8Az" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1443" y="-636.5"/>
+            <point key="canvasLocation" x="1511" y="-726.5"/>
         </scene>
         <!--visualizerOutputViewController-->
         <scene sceneID="X15-YZ-sea">
             <objects>
                 <viewController title="visualizerOutputViewController" identifier="visualizerOutputRestoration" storyboardIdentifier="visualizerOutput" id="kWr-Ah-mB4" customClass="VisualizerViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="kVX-fw-nPv">
-                        <rect key="frame" x="0.0" y="0.0" width="2048" height="351"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="351"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="100" verticalCompressionResistancePriority="100" translatesAutoresizingMaskIntoConstraints="NO" id="dVC-90-yCV">
-                                <rect key="frame" x="0.0" y="0.0" width="2048" height="351"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="351"/>
                                 <imageCell key="cell" selectable="YES" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="globe_picture" id="z1w-gs-roZ"/>
                             </imageView>
                         </subviews>
@@ -213,7 +289,7 @@
                 </viewController>
                 <customObject id="Ofl-UG-cIh" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="488" y="-732"/>
+            <point key="canvasLocation" x="1542" y="-209"/>
         </scene>
         <!--Text Outputs View Controller-->
         <scene sceneID="9HR-bL-jxG">
@@ -229,16 +305,16 @@
                                     <rect key="frame" x="0.0" y="0.0" width="215" height="188"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <textView editable="NO" verticallyResizable="YES" findStyle="bar" allowsDocumentBackgroundColorChange="YES" spellingCorrection="YES" smartInsertDelete="YES" id="mKh-do-hrr">
+                                        <textView editable="NO" verticallyResizable="YES" findStyle="bar" allowsDocumentBackgroundColorChange="YES" smartInsertDelete="YES" id="mKh-do-hrr">
                                             <rect key="frame" x="0.0" y="0.0" width="215" height="188"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <size key="minSize" width="215" height="188"/>
                                             <size key="maxSize" width="663" height="10000000"/>
-                                            <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="insertionPointColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                         </textView>
                                     </subviews>
-                                    <color key="backgroundColor" name="windowFrameTextColor" catalog="System" colorSpace="catalog"/>
                                 </clipView>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="30" id="epJ-iu-m8T"/>
@@ -261,17 +337,17 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="textView" destination="mKh-do-hrr" id="3sU-9l-c3Y"/>
+                        <outlet property="textOutputView" destination="mKh-do-hrr" id="3sU-9l-c3Y"/>
                     </connections>
                 </viewController>
                 <customObject id="h1w-o3-RXn" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="954" y="236"/>
+            <point key="canvasLocation" x="959" y="330"/>
         </scene>
     </scenes>
     <resources>
         <image name="CSYS" width="20" height="20"/>
-        <image name="NSComputer" width="32" height="32"/>
         <image name="globe_picture" width="2048" height="2048"/>
+        <image name="nline3d" width="606" height="518"/>
     </resources>
 </document>

@@ -7,28 +7,27 @@
 
 import Cocoa
 
-/**
- The Analysis class is the subclass of NSDocument that controls all the analysis document information and methods
- Data reading and writing occurs in AnalysisData and is passed to this class
- Data configurations common to all analyses (e.g. plot types) lives in the App Delegate
- In the Model-View-Controller paradigm, Analysis is the model that brings together all other models for a single document.
- In addition, this class contains class-level functions such as initiating the analysis run
- * Output sets: set of all output objects (text, plot, animation) and output configurations
- * Initial State: fully defined initial state
- * Environment: data defining the planet, atmosphere, and physics to run
- * Vehicle: Vehicle config information, including mass and aerodynamic configuration and Guidance, Navigation, and Control data
- * Conditions: All conditions for use in outputs and terminal condition
- * Terminal condition: The final condition or set of conditions that ends the simulation
- * Run settings: things like default timestep, propagator, etc.
- */
 enum PropagatorType {
     case explicit
     case rungeKutta4
 }
 
+/**
+The Analysis class is the subclass of NSDocument that controls all the analysis document information and methods
+Data reading and writing occurs in AnalysisData and is passed to this class
+Data configurations common to all analyses (e.g. plot types) lives in the App Delegate
+In the Model-View-Controller paradigm, Analysis is the model that brings together all other models for a single document.
+In addition, this class contains class-level functions such as initiating the analysis run
+* Output sets: set of all output objects (text, plot, animation) and output configurations
+* Initial State: fully defined initial state
+* Environment: data defining the planet, atmosphere, and physics to run
+* Vehicle: Vehicle config information, including mass and aerodynamic configuration and Guidance, Navigation, and Control data
+* Conditions: All conditions for use in outputs and terminal condition
+* Terminal condition: The final condition or set of conditions that ends the simulation
+* Run settings: things like default timestep, propagator, etc.
+*/
 class Analysis: NSObject, NSCoding {
     
-    //AppDelegate variables
     @objc var varList : [Variable]!// {return appDelegate.initVars}
     var initStateGroups : InitStateHeader!
     
@@ -50,7 +49,18 @@ class Analysis: NSObject, NSCoding {
     // Run tracking
     var isRunning = false
     var returnCode : Int = 0
-
+    
+    // Logging
+    private var _bufferLog = NSAttributedString() // This string is used to store any logs prior to the initialization of the log message text view
+    var logMessageView: TZLogger? {
+        didSet {
+            if _bufferLog.string != "" {
+                logMessageView?.logMessage(_bufferLog)
+                _bufferLog = NSAttributedString()
+            }
+        }
+    }
+    
     override init(){
         super.init()
     }

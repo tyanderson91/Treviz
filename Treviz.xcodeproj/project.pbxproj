@@ -25,6 +25,7 @@
 		CD3C187E23E2B03800E72EFF /* TZPlotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3C187D23E2B03700E72EFF /* TZPlotView.swift */; };
 		CD3F5E5822EE4DCD00E4CF20 /* Conditions.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD3F5E5722EE4DCD00E4CF20 /* Conditions.storyboard */; };
 		CD3F5E5A22EE4FFE00E4CF20 /* ConditionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3F5E5922EE4FFE00E4CF20 /* ConditionsViewController.swift */; };
+		CD410CF72444239700AB49DE /* CorePlotExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD410CF62444239700AB49DE /* CorePlotExtensions.swift */; };
 		CD42E0AA22FD05F600A0F9A1 /* CollapsibleStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD42E0A922FD05F600A0F9A1 /* CollapsibleStackView.swift */; };
 		CD4656B2224C6F3500C587CC /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4656B1224C6F3500C587CC /* SettingsViewController.swift */; };
 		CD4656B4224C6F8C00C587CC /* EnvironmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4656B3224C6F8C00C587CC /* EnvironmentViewController.swift */; };
@@ -39,7 +40,6 @@
 		CD590D4223E7AC5A000897C2 /* TZTextOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD60A902345BF5C00249987 /* TZTextOutput.swift */; };
 		CD590D4323E7AC5D000897C2 /* TZPlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD280F49233B45670004263F /* TZPlot.swift */; };
 		CD590D4423E7AC5F000897C2 /* TZPlotType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4AD70C23BD4C0C00FC815F /* TZPlotType.swift */; };
-		CD590D4523E7AC62000897C2 /* TZPlotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3C187D23E2B03700E72EFF /* TZPlotView.swift */; };
 		CD59C53B23E79295001D98D5 /* VariableSelector.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD59C53A23E79295001D98D5 /* VariableSelector.storyboard */; };
 		CD59C54023E793E3001D98D5 /* VariableSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD59C53F23E793E3001D98D5 /* VariableSelectorViewController.swift */; };
 		CD59C54323E79449001D98D5 /* InitVars.plist in Resources */ = {isa = PBXBuildFile; fileRef = CD59C54123E79449001D98D5 /* InitVars.plist */; };
@@ -49,9 +49,13 @@
 		CD63AEA523E7EA26006502F2 /* Variable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD63AEA123E7EA26006502F2 /* Variable.swift */; };
 		CD63AEA623E7EA26006502F2 /* Condition.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD63AEA223E7EA26006502F2 /* Condition.swift */; };
 		CD63AEA723E7EA26006502F2 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD63AEA323E7EA26006502F2 /* State.swift */; };
+		CD6CCF3A244BB5720051F76D /* TZPlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD280F49233B45670004263F /* TZPlot.swift */; };
+		CD6CCF3C244CCC960051F76D /* OutputDataSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6CCF3B244CCC960051F76D /* OutputDataSet.swift */; };
+		CD6CCF3D244D2FFB0051F76D /* OutputDataSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6CCF3B244CCC960051F76D /* OutputDataSet.swift */; };
 		CD6E0B9E2431BAC5008D1656 /* TZToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6E0B9D2431BAC5008D1656 /* TZToolbar.swift */; };
 		CD6E0BA22436DEC7008D1656 /* TZStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6E0BA12436DEC7008D1656 /* TZStoryboard.swift */; };
 		CD715E8023EBE70400E31F97 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = CD715E7F23EBE70400E31F97 /* README.md */; };
+		CD92D6B92442302800483B8E /* TZLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD92D6B82442302800483B8E /* TZLogger.swift */; };
 		CDA0F87F2257398F003C62E6 /* NotificationCenterSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA0F87E2257398F003C62E6 /* NotificationCenterSetup.swift */; };
 		CDA0F88122587E05003C62E6 /* ParamTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA0F88022587E05003C62E6 /* ParamTableViewController.swift */; };
 		CDA0F888225C5D47003C62E6 /* InputsCellViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA0F887225C5D47003C62E6 /* InputsCellViews.swift */; };
@@ -68,6 +72,7 @@
 		CDC1F5372233978500D1BB25 /* OutputsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC1F5352233978500D1BB25 /* OutputsViewController.swift */; };
 		CDC1F53C2234874000D1BB25 /* MainSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC1F53B2234874000D1BB25 /* MainSplitViewController.swift */; };
 		CDC1F54022363DDB00D1BB25 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC1F53F22363DDB00D1BB25 /* MainViewController.swift */; };
+		CDC25616243D9E86007EBE8A /* TZMessageLoggerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC25615243D9E86007EBE8A /* TZMessageLoggerViewController.swift */; };
 		CDD5049622252AF900B29751 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD5049522252AF900B29751 /* AppDelegate.swift */; };
 		CDD5049822252AFA00B29751 /* InputsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD5049722252AFA00B29751 /* InputsViewController.swift */; };
 		CDD5049F22252AFD00B29751 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDD5049E22252AFD00B29751 /* Images.xcassets */; };
@@ -96,7 +101,6 @@
 		CDFAD0FA23EA84FE00CE7424 /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0F010A2365595700C920AA /* Vehicle.swift */; };
 		CDFAD0FB23EA84FE00CE7424 /* TZOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD60A962345C5AE00249987 /* TZOutput.swift */; };
 		CDFAD0FC23EA84FE00CE7424 /* TZTextOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD60A902345BF5C00249987 /* TZTextOutput.swift */; };
-		CDFAD0FD23EA84FE00CE7424 /* TZPlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD280F49233B45670004263F /* TZPlot.swift */; };
 		CDFAD0FE23EA84FE00CE7424 /* TZPlotType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4AD70C23BD4C0C00FC815F /* TZPlotType.swift */; };
 		CDFAD10623EA876900CE7424 /* TrajectoryAnalysis.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDFAD0E923EA84EB00CE7424 /* TrajectoryAnalysis.framework */; };
 		CDFAD10723EA877600CE7424 /* TrajectoryAnalysis.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CDFAD0E923EA84EB00CE7424 /* TrajectoryAnalysis.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -160,6 +164,9 @@
 		CD3C187D23E2B03700E72EFF /* TZPlotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TZPlotView.swift; sourceTree = "<group>"; };
 		CD3F5E5722EE4DCD00E4CF20 /* Conditions.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Conditions.storyboard; sourceTree = "<group>"; };
 		CD3F5E5922EE4FFE00E4CF20 /* ConditionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionsViewController.swift; sourceTree = "<group>"; };
+		CD410CF12444211500AB49DE /* CorePlot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CorePlot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD410CF4244421A400AB49DE /* CorePlot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CorePlot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD410CF62444239700AB49DE /* CorePlotExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CorePlotExtensions.swift; path = Treviz/Main/Outputs/CorePlotExtensions.swift; sourceTree = SOURCE_ROOT; };
 		CD42E0A922FD05F600A0F9A1 /* CollapsibleStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollapsibleStackView.swift; sourceTree = "<group>"; };
 		CD4656B1224C6F3500C587CC /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		CD4656B3224C6F8C00C587CC /* EnvironmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentViewController.swift; sourceTree = "<group>"; };
@@ -179,9 +186,13 @@
 		CD63AEA223E7EA26006502F2 /* Condition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Condition.swift; sourceTree = "<group>"; };
 		CD63AEA323E7EA26006502F2 /* State.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		CD63AEC523E7EBE8006502F2 /* CorePlot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CorePlot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD6CCF38244BB3830051F76D /* CorePlot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CorePlot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD6CCF3B244CCC960051F76D /* OutputDataSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputDataSet.swift; sourceTree = "<group>"; };
 		CD6E0B9D2431BAC5008D1656 /* TZToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TZToolbar.swift; sourceTree = "<group>"; };
 		CD6E0BA12436DEC7008D1656 /* TZStoryboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TZStoryboard.swift; sourceTree = "<group>"; };
 		CD715E7F23EBE70400E31F97 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		CD7CE5E22443E1B80090D18F /* CorePlot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CorePlot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD92D6B82442302800483B8E /* TZLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TZLogger.swift; sourceTree = "<group>"; };
 		CDA0F87E2257398F003C62E6 /* NotificationCenterSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NotificationCenterSetup.swift; path = Treviz/Main/NotificationCenterSetup.swift; sourceTree = SOURCE_ROOT; };
 		CDA0F88022587E05003C62E6 /* ParamTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParamTableViewController.swift; sourceTree = "<group>"; };
 		CDA0F887225C5D47003C62E6 /* InputsCellViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputsCellViews.swift; sourceTree = "<group>"; };
@@ -195,6 +206,7 @@
 		CDC1F5352233978500D1BB25 /* OutputsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputsViewController.swift; sourceTree = "<group>"; };
 		CDC1F53B2234874000D1BB25 /* MainSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSplitViewController.swift; sourceTree = "<group>"; };
 		CDC1F53F22363DDB00D1BB25 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		CDC25615243D9E86007EBE8A /* TZMessageLoggerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TZMessageLoggerViewController.swift; sourceTree = "<group>"; };
 		CDD5049222252AF900B29751 /* Treviz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Treviz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDD5049522252AF900B29751 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CDD5049722252AFA00B29751 /* InputsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputsViewController.swift; sourceTree = "<group>"; };
@@ -259,6 +271,10 @@
 		5D2C1C606B2E6BDC836FE371 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CD6CCF38244BB3830051F76D /* CorePlot.framework */,
+				CD410CF4244421A400AB49DE /* CorePlot.framework */,
+				CD410CF12444211500AB49DE /* CorePlot.framework */,
+				CD7CE5E22443E1B80090D18F /* CorePlot.framework */,
 				CDFAD10323EA856F00CE7424 /* CorePlot.framework */,
 				CD63AEC523E7EBE8006502F2 /* CorePlot.framework */,
 				5AE63A207D59BC03E0AD95A7 /* Pods_Treviz.framework */,
@@ -277,10 +293,10 @@
 				CD63AEA123E7EA26006502F2 /* Variable.swift */,
 				CD0F010A2365595700C920AA /* Vehicle.swift */,
 				CDD60A962345C5AE00249987 /* TZOutput.swift */,
+				CD6CCF3B244CCC960051F76D /* OutputDataSet.swift */,
 				CDD60A902345BF5C00249987 /* TZTextOutput.swift */,
 				CD280F49233B45670004263F /* TZPlot.swift */,
 				CD4AD70C23BD4C0C00FC815F /* TZPlotType.swift */,
-				CD3C187D23E2B03700E72EFF /* TZPlotView.swift */,
 				CD01037623E78EED00D336C2 /* Analysis */,
 			);
 			path = Model;
@@ -291,6 +307,7 @@
 			children = (
 				CDF3D1A0225025AF0064D70C /* Analysis.swift */,
 				CD0F010823654ED400C920AA /* AnalysisRunFunctions.swift */,
+				CD92D6B82442302800483B8E /* TZLogger.swift */,
 			);
 			path = Analysis;
 			sourceTree = "<group>";
@@ -330,10 +347,13 @@
 			isa = PBXGroup;
 			children = (
 				CDFE81FA23E14AD10013945F /* Viewer Outputs */,
+				CD3C187D23E2B03700E72EFF /* TZPlotView.swift */,
+				CD410CF62444239700AB49DE /* CorePlotExtensions.swift */,
 				CD59C54523E79476001D98D5 /* Outputs.storyboard */,
-				CD11FA9223433096001A3695 /* PlotTypes.plist */,
+				CDC25615243D9E86007EBE8A /* TZMessageLoggerViewController.swift */,
 				CDC1F5352233978500D1BB25 /* OutputsViewController.swift */,
 				CDBEA0A522447A9C00D3159C /* TextOutputsViewController.swift */,
+				CD11FA9223433096001A3695 /* PlotTypes.plist */,
 			);
 			path = Outputs;
 			sourceTree = "<group>";
@@ -755,7 +775,6 @@
 			files = (
 				CD590D4123E7AC57000897C2 /* TZOutput.swift in Sources */,
 				CDB457B52383E19B004F13AA /* TrevizTests.swift in Sources */,
-				CD590D4523E7AC62000897C2 /* TZPlotView.swift in Sources */,
 				CDB457C0238508B6004F13AA /* ConditionTests.swift in Sources */,
 				CD590D4423E7AC5F000897C2 /* TZPlotType.swift in Sources */,
 				CDB457BB2384FA09004F13AA /* InitStateHeader.swift in Sources */,
@@ -779,22 +798,26 @@
 				CD63AEA723E7EA26006502F2 /* State.swift in Sources */,
 				CD2D0DB42243836F0012978E /* ThreeAxisOutputSetupViewController.swift in Sources */,
 				CD2D0DB52243836F0012978E /* TwoAxisOutputSetupViewController.swift in Sources */,
+				CD92D6B92442302800483B8E /* TZLogger.swift in Sources */,
 				CD2D0DB62243836F0012978E /* MonteCarloOutputSetupViewController.swift in Sources */,
 				CD280F4A233B45670004263F /* TZPlot.swift in Sources */,
 				CD2D0DB82243836F0012978E /* SingleAxisOutputSetupViewController.swift in Sources */,
 				CD4656B4224C6F8C00C587CC /* EnvironmentViewController.swift in Sources */,
 				CD4656B2224C6F3500C587CC /* SettingsViewController.swift in Sources */,
 				CDF2338F242DCD8100B8EF40 /* HeaderViewController.swift in Sources */,
+				CD410CF72444239700AB49DE /* CorePlotExtensions.swift in Sources */,
 				CDB7C73A2352B03100BC50F1 /* Parameter.swift in Sources */,
 				CD6E0BA22436DEC7008D1656 /* TZStoryboard.swift in Sources */,
 				CD0F010923654ED400C920AA /* AnalysisRunFunctions.swift in Sources */,
 				CD4AD70D23BD4C0C00FC815F /* TZPlotType.swift in Sources */,
 				CD63AEA623E7EA26006502F2 /* Condition.swift in Sources */,
+				CDC25616243D9E86007EBE8A /* TZMessageLoggerViewController.swift in Sources */,
 				CD0F010B2365595700C920AA /* Vehicle.swift in Sources */,
 				CD63AEA523E7EA26006502F2 /* Variable.swift in Sources */,
 				CDF1670C2237A10400CD9590 /* MainWindowController.swift in Sources */,
 				CD3C187E23E2B03800E72EFF /* TZPlotView.swift in Sources */,
 				CDC1F53C2234874000D1BB25 /* MainSplitViewController.swift in Sources */,
+				CD6CCF3C244CCC960051F76D /* OutputDataSet.swift in Sources */,
 				CDFE81F923E147060013945F /* PlotOutputViewController.swift in Sources */,
 				CDFE81FC23E14B730013945F /* ViewerTabViewController.swift in Sources */,
 				CDC1F54022363DDB00D1BB25 /* MainViewController.swift in Sources */,
@@ -829,15 +852,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD6CCF3A244BB5720051F76D /* TZPlot.swift in Sources */,
 				CDFAD0F523EA84FE00CE7424 /* Parameter.swift in Sources */,
 				CDFAD0F623EA84FE00CE7424 /* Condition.swift in Sources */,
 				CDFAD0F723EA84FE00CE7424 /* State.swift in Sources */,
 				CDFAD0F823EA84FE00CE7424 /* StateArray.swift in Sources */,
+				CD6CCF3D244D2FFB0051F76D /* OutputDataSet.swift in Sources */,
 				CDFAD0F923EA84FE00CE7424 /* Variable.swift in Sources */,
 				CDFAD0FA23EA84FE00CE7424 /* Vehicle.swift in Sources */,
 				CDFAD0FB23EA84FE00CE7424 /* TZOutput.swift in Sources */,
 				CDFAD0FC23EA84FE00CE7424 /* TZTextOutput.swift in Sources */,
-				CDFAD0FD23EA84FE00CE7424 /* TZPlot.swift in Sources */,
 				CDFAD0FE23EA84FE00CE7424 /* TZPlotType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -863,6 +887,7 @@
 			baseConfigurationReference = 27A3F7FA6A6A0DBD2D916439 /* Pods-TrevizTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = QD374MRFUS;
@@ -884,6 +909,7 @@
 			baseConfigurationReference = 769BD7D250FD37ECAE0EDE76 /* Pods-TrevizTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = QD374MRFUS;
@@ -1078,7 +1104,7 @@
 		CDFAD0F323EA84EB00CE7424 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1109,7 +1135,7 @@
 		CDFAD0F423EA84EB00CE7424 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;

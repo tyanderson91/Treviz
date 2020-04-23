@@ -168,7 +168,7 @@ class ConditionsViewController: TZViewController {
             curCondition = analysis.conditions[tableRow]
             eraseView()
             conditionNameTextBox.stringValue = curCondition.name
-            unionTypeDropdown.selectItem(withTitle: curCondition.unionType.stringValue())
+            unionTypeDropdown.selectItem(withTitle: String(describing: curCondition.unionType))
             for thisCondition in curCondition.conditions {
                 showConditionView(condition: thisCondition)
             }
@@ -219,9 +219,7 @@ class ConditionsViewController: TZViewController {
         newConditionStackView.addArrangedSubview(viewController.view)
         self.addChild(viewController)
         viewController.subConditionIndex = newConditionStackView.arrangedSubviews.count - 1
-        //viewController.initLoadAll()
         formatConditionEditor()
-        //viewController.populateWithCondition(condition)
     }
     
     /*

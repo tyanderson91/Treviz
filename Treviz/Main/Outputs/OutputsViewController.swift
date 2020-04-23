@@ -12,6 +12,9 @@ import Cocoa
 
 extension NSStoryboardSegue.Identifier{
     static let outputSplitViewSegue = "outputSplitViewSegue"
+    static let textOutputSplitViewSegue = "textOutputsSplitViewSegue"
+    static let viewerOutputSplitViewSegue = "viewerOutputSplitViewSegue"
+    //static let textOutputViewSegue = "textOutputViewSegue"
 }
 
 class OutputsViewController: TZViewController {
@@ -28,32 +31,9 @@ class OutputsViewController: TZViewController {
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         if segue.identifier == .outputSplitViewSegue {
             self.outputSplitViewController =  segue.destinationController as? OutputsSplitViewController
+            self.outputSplitViewController?.analysis = analysis
         }
     }
-    /*
-    func processOutputs(){
-        guard let curAnalysis = self.representedObject as? Analysis else { return }
-        let outputSet = curAnalysis.plots
-        
-        let textOutputSplitViewItem = outputSplitViewController!.textOutputSplitViewItem
-        let textOutputViewController = textOutputSplitViewItem!.viewController as! TextOutputsViewController
-        
-        let plotViewController = outputSplitViewController!.plotViewController
-        
-        let textOutputView = textOutputViewController.textView!
-                
-        textOutputView.string = ""
-        for curOutput in outputSet {
-            curOutput.curTrajectory = curAnalysis.traj
-            if curOutput is TZTextOutput {
-                let newText = (curOutput as! TZTextOutput).getText()
-                textOutputView.textStorage?.append(newText)
-            } else if curOutput is TZPlot {
-                plotViewController!.createPlot(plot: curOutput as! TZPlot)
-            }
-        }
-    }*/
-    
 }
 
 
@@ -67,17 +47,15 @@ class OutputsSplitViewController: TZSplitViewController {
         return viewerOutputSplitViewItem.viewController as! ViewerTabViewController
     }
     
-    var textOutputViewController: TextOutputsViewController! {
-        if let _textOutputViewVC = textOutputSplitViewItem.viewController as? TextOutputsViewController { return _textOutputViewVC }
+    var textOutputViewController: TextOutputSplitViewController! {
+        if let _textOutputViewVC = textOutputSplitViewItem.viewController as? TextOutputSplitViewController { return _textOutputViewVC }
         else {return nil}
     }
     var textOutputView: NSTextView! {
-        if let _textOutputView = (textOutputSplitViewItem.viewController as? TextOutputsViewController)?.textView { return _textOutputView }
-        else {return nil}
+        return textOutputViewController?.textOutputView
     }
     var visualizerViewController: VisualizerViewController! { return viewerTabViewController.visualizerTabViewItem.viewController as? VisualizerViewController ?? nil }
     var plotViewController: PlotOutputViewController! { return viewerTabViewController.plotTabViewItem.viewController as? PlotOutputViewController ?? nil }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
