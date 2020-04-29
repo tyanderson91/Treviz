@@ -45,6 +45,21 @@
 		CD59C54323E79449001D98D5 /* InitVars.plist in Resources */ = {isa = PBXBuildFile; fileRef = CD59C54123E79449001D98D5 /* InitVars.plist */; };
 		CD59C54423E79449001D98D5 /* InitStateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD59C54223E79449001D98D5 /* InitStateViewController.swift */; };
 		CD59C54623E79476001D98D5 /* Outputs.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD59C54523E79476001D98D5 /* Outputs.storyboard */; };
+		CD5F4E9024550FD700823E43 /* Condition.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD63AEA223E7EA26006502F2 /* Condition.swift */; };
+		CD5F4E9124550FE600823E43 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD63AEA323E7EA26006502F2 /* State.swift */; };
+		CD5F4E9224550FEB00823E43 /* StateArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD63AEA023E7EA26006502F2 /* StateArray.swift */; };
+		CD5F4E9324550FED00823E43 /* Variable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD63AEA123E7EA26006502F2 /* Variable.swift */; };
+		CD5F4E9424550FF400823E43 /* OutputDataSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6CCF3B244CCC960051F76D /* OutputDataSet.swift */; };
+		CD5F4E962455100400823E43 /* AnalysisProgressReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF255F7245294880097F995 /* AnalysisProgressReporter.swift */; };
+		CD5F4E972455100600823E43 /* AnalysisProgressReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF255F7245294880097F995 /* AnalysisProgressReporter.swift */; };
+		CD5F4E982455100900823E43 /* Analysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF3D1A0225025AF0064D70C /* Analysis.swift */; };
+		CD5F4E992455100A00823E43 /* Analysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF3D1A0225025AF0064D70C /* Analysis.swift */; };
+		CD5F4E9A2455101000823E43 /* TZLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD92D6B82442302800483B8E /* TZLogger.swift */; };
+		CD5F4E9B2455101100823E43 /* TZLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD92D6B82442302800483B8E /* TZLogger.swift */; };
+		CD5F4E9C2455101400823E43 /* AnalysisRunFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0F010823654ED400C920AA /* AnalysisRunFunctions.swift */; };
+		CD5F4E9D2455101500823E43 /* AnalysisRunFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0F010823654ED400C920AA /* AnalysisRunFunctions.swift */; };
+		CD5F4E9E2455105300823E43 /* InitStateHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB7C73B2352B58300BC50F1 /* InitStateHeader.swift */; };
+		CD5F4E9F2455109E00823E43 /* InitStateHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB7C73B2352B58300BC50F1 /* InitStateHeader.swift */; };
 		CD63AEA423E7EA26006502F2 /* StateArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD63AEA023E7EA26006502F2 /* StateArray.swift */; };
 		CD63AEA523E7EA26006502F2 /* Variable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD63AEA123E7EA26006502F2 /* Variable.swift */; };
 		CD63AEA623E7EA26006502F2 /* Condition.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD63AEA223E7EA26006502F2 /* Condition.swift */; };
@@ -56,14 +71,12 @@
 		CD6E0BA22436DEC7008D1656 /* TZStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6E0BA12436DEC7008D1656 /* TZStoryboard.swift */; };
 		CD715E8023EBE70400E31F97 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = CD715E7F23EBE70400E31F97 /* README.md */; };
 		CD92D6B92442302800483B8E /* TZLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD92D6B82442302800483B8E /* TZLogger.swift */; };
-		CDA0F87F2257398F003C62E6 /* NotificationCenterSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA0F87E2257398F003C62E6 /* NotificationCenterSetup.swift */; };
 		CDA0F88122587E05003C62E6 /* ParamTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA0F88022587E05003C62E6 /* ParamTableViewController.swift */; };
 		CDA0F888225C5D47003C62E6 /* InputsCellViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA0F887225C5D47003C62E6 /* InputsCellViews.swift */; };
 		CDA549EF23CC254B00933C6B /* AddConditionViewControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA549EE23CC254B00933C6B /* AddConditionViewControllers.swift */; };
 		CDA549F123CC3C5400933C6B /* ConditionsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA549F023CC3C5400933C6B /* ConditionsTableView.swift */; };
 		CDA7FD75236FE9CC009CDFAF /* InitVarSettings.yaml in Resources */ = {isa = PBXBuildFile; fileRef = CDA7FD74236FE9CC009CDFAF /* InitVarSettings.yaml */; };
 		CDB457B52383E19B004F13AA /* TrevizTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0F011223656B7200C920AA /* TrevizTests.swift */; };
-		CDB457BB2384FA09004F13AA /* InitStateHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB7C73B2352B58300BC50F1 /* InitStateHeader.swift */; };
 		CDB457C0238508B6004F13AA /* ConditionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB457BF238508B6004F13AA /* ConditionTests.swift */; };
 		CDB7C73A2352B03100BC50F1 /* Parameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB7C7392352B03100BC50F1 /* Parameter.swift */; };
 		CDB7C73C2352B58300BC50F1 /* InitStateHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB7C73B2352B58300BC50F1 /* InitStateHeader.swift */; };
@@ -89,6 +102,7 @@
 		CDF23390242DCD8100B8EF40 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = CDF23388242DCD8000B8EF40 /* LICENSE.txt */; };
 		CDF23391242DCD8100B8EF40 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDF23389242DCD8000B8EF40 /* Info.plist */; };
 		CDF23396242DCF3100B8EF40 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDF23395242DCF0F00B8EF40 /* Main.storyboard */; };
+		CDF255F8245294880097F995 /* AnalysisProgressReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF255F7245294880097F995 /* AnalysisProgressReporter.swift */; };
 		CDF3D1A1225025B00064D70C /* Analysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF3D1A0225025AF0064D70C /* Analysis.swift */; };
 		CDF3D1A6225057270064D70C /* TZViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF3D1A5225057270064D70C /* TZViewController.swift */; };
 		CDF3D1A822505A000064D70C /* AnalysisDoc.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF3D1A722505A000064D70C /* AnalysisDoc.swift */; };
@@ -193,7 +207,6 @@
 		CD715E7F23EBE70400E31F97 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		CD7CE5E22443E1B80090D18F /* CorePlot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CorePlot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD92D6B82442302800483B8E /* TZLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TZLogger.swift; sourceTree = "<group>"; };
-		CDA0F87E2257398F003C62E6 /* NotificationCenterSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NotificationCenterSetup.swift; path = Treviz/Main/NotificationCenterSetup.swift; sourceTree = SOURCE_ROOT; };
 		CDA0F88022587E05003C62E6 /* ParamTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParamTableViewController.swift; sourceTree = "<group>"; };
 		CDA0F887225C5D47003C62E6 /* InputsCellViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputsCellViews.swift; sourceTree = "<group>"; };
 		CDA549EE23CC254B00933C6B /* AddConditionViewControllers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddConditionViewControllers.swift; sourceTree = "<group>"; };
@@ -227,6 +240,7 @@
 		CDF23388242DCD8000B8EF40 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		CDF23389242DCD8000B8EF40 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CDF23395242DCF0F00B8EF40 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Main.storyboard; path = /Users/TylerAnderson/Coding/Swift/Treviz/Treviz/Main/Main.storyboard; sourceTree = "<absolute>"; };
+		CDF255F7245294880097F995 /* AnalysisProgressReporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisProgressReporter.swift; sourceTree = "<group>"; };
 		CDF3D1A0225025AF0064D70C /* Analysis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Analysis.swift; sourceTree = "<group>"; };
 		CDF3D1A5225057270064D70C /* TZViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TZViewController.swift; sourceTree = "<group>"; };
 		CDF3D1A722505A000064D70C /* AnalysisDoc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisDoc.swift; sourceTree = "<group>"; };
@@ -297,6 +311,7 @@
 				CDD60A902345BF5C00249987 /* TZTextOutput.swift */,
 				CD280F49233B45670004263F /* TZPlot.swift */,
 				CD4AD70C23BD4C0C00FC815F /* TZPlotType.swift */,
+				CDB7C73B2352B58300BC50F1 /* InitStateHeader.swift */,
 				CD01037623E78EED00D336C2 /* Analysis */,
 			);
 			path = Model;
@@ -305,6 +320,7 @@
 		CD01037623E78EED00D336C2 /* Analysis */ = {
 			isa = PBXGroup;
 			children = (
+				CDF255F7245294880097F995 /* AnalysisProgressReporter.swift */,
 				CDF3D1A0225025AF0064D70C /* Analysis.swift */,
 				CD0F010823654ED400C920AA /* AnalysisRunFunctions.swift */,
 				CD92D6B82442302800483B8E /* TZLogger.swift */,
@@ -323,7 +339,6 @@
 				CDF1670B2237A10400CD9590 /* MainWindowController.swift */,
 				CD6E0B9D2431BAC5008D1656 /* TZToolbar.swift */,
 				CDD5049522252AF900B29751 /* AppDelegate.swift */,
-				CDA0F87E2257398F003C62E6 /* NotificationCenterSetup.swift */,
 				CDF3D1A5225057270064D70C /* TZViewController.swift */,
 				CD6E0BA12436DEC7008D1656 /* TZStoryboard.swift */,
 				CD9F2041223B7CBF005BFDCB /* Inputs Setup */,
@@ -366,7 +381,6 @@
 				CDE0795A2249EC7400815E7F /* InitStateStructure.plist */,
 				CD500336234DA64F00D71099 /* InitVarSettings.plist */,
 				CDA7FD74236FE9CC009CDFAF /* InitVarSettings.yaml */,
-				CDB7C73B2352B58300BC50F1 /* InitStateHeader.swift */,
 			);
 			path = "Init State";
 			sourceTree = "<group>";
@@ -624,7 +638,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1110;
-				LastUpgradeCheck = 1130;
+				LastUpgradeCheck = 1140;
 				ORGANIZATIONNAME = "Tyler Anderson";
 				TargetAttributes = {
 					CD0F010F23656B7200C920AA = {
@@ -773,16 +787,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD5F4E9024550FD700823E43 /* Condition.swift in Sources */,
+				CD5F4E9324550FED00823E43 /* Variable.swift in Sources */,
 				CD590D4123E7AC57000897C2 /* TZOutput.swift in Sources */,
+				CD5F4E9C2455101400823E43 /* AnalysisRunFunctions.swift in Sources */,
 				CDB457B52383E19B004F13AA /* TrevizTests.swift in Sources */,
+				CD5F4E9224550FEB00823E43 /* StateArray.swift in Sources */,
+				CD5F4E982455100900823E43 /* Analysis.swift in Sources */,
+				CD5F4E962455100400823E43 /* AnalysisProgressReporter.swift in Sources */,
 				CDB457C0238508B6004F13AA /* ConditionTests.swift in Sources */,
 				CD590D4423E7AC5F000897C2 /* TZPlotType.swift in Sources */,
-				CDB457BB2384FA09004F13AA /* InitStateHeader.swift in Sources */,
 				CD4AD70A23BD404000FC815F /* OutputSetupViewTest.swift in Sources */,
 				CD590D3C23E7AC47000897C2 /* Parameter.swift in Sources */,
+				CD5F4E9F2455109E00823E43 /* InitStateHeader.swift in Sources */,
 				CD590D4323E7AC5D000897C2 /* TZPlot.swift in Sources */,
+				CD5F4E9A2455101000823E43 /* TZLogger.swift in Sources */,
 				CD590D4023E7AC55000897C2 /* Vehicle.swift in Sources */,
+				CD5F4E9424550FF400823E43 /* OutputDataSet.swift in Sources */,
 				CD590D4223E7AC5A000897C2 /* TZTextOutput.swift in Sources */,
+				CD5F4E9124550FE600823E43 /* State.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -791,7 +814,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDF3D1A6225057270064D70C /* TZViewController.swift in Sources */,
-				CDA0F87F2257398F003C62E6 /* NotificationCenterSetup.swift in Sources */,
 				CD3F5E5A22EE4FFE00E4CF20 /* ConditionsViewController.swift in Sources */,
 				CD59C54023E793E3001D98D5 /* VariableSelectorViewController.swift in Sources */,
 				CDF3D1A822505A000064D70C /* AnalysisDoc.swift in Sources */,
@@ -827,6 +849,7 @@
 				CD42E0AA22FD05F600A0F9A1 /* CollapsibleStackView.swift in Sources */,
 				CDA549EF23CC254B00933C6B /* AddConditionViewControllers.swift in Sources */,
 				CDC1F5372233978500D1BB25 /* OutputsViewController.swift in Sources */,
+				CDF255F8245294880097F995 /* AnalysisProgressReporter.swift in Sources */,
 				CD6E0B9E2431BAC5008D1656 /* TZToolbar.swift in Sources */,
 				CDA549F123CC3C5400933C6B /* ConditionsTableView.swift in Sources */,
 				CDF2338C242DCD8100B8EF40 /* StackView.swift in Sources */,
@@ -853,6 +876,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD6CCF3A244BB5720051F76D /* TZPlot.swift in Sources */,
+				CD5F4E992455100A00823E43 /* Analysis.swift in Sources */,
+				CD5F4E972455100600823E43 /* AnalysisProgressReporter.swift in Sources */,
 				CDFAD0F523EA84FE00CE7424 /* Parameter.swift in Sources */,
 				CDFAD0F623EA84FE00CE7424 /* Condition.swift in Sources */,
 				CDFAD0F723EA84FE00CE7424 /* State.swift in Sources */,
@@ -861,7 +886,10 @@
 				CDFAD0F923EA84FE00CE7424 /* Variable.swift in Sources */,
 				CDFAD0FA23EA84FE00CE7424 /* Vehicle.swift in Sources */,
 				CDFAD0FB23EA84FE00CE7424 /* TZOutput.swift in Sources */,
+				CD5F4E9D2455101500823E43 /* AnalysisRunFunctions.swift in Sources */,
+				CD5F4E9B2455101100823E43 /* TZLogger.swift in Sources */,
 				CDFAD0FC23EA84FE00CE7424 /* TZTextOutput.swift in Sources */,
+				CD5F4E9E2455105300823E43 /* InitStateHeader.swift in Sources */,
 				CDFAD0FE23EA84FE00CE7424 /* TZPlotType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

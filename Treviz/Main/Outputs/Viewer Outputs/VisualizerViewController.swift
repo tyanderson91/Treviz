@@ -14,6 +14,8 @@ class VisualizerViewController: TZViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.wantsLayer = true
+        view.layer?.backgroundColor = NSColor.black.cgColor
         //placeholderImageView.image = nil
         // Do view setup here.
     }

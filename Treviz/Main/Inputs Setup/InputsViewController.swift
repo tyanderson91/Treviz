@@ -10,6 +10,12 @@
 
 import Cocoa
 
+extension NSNotification.Name {
+    static let didSetParam = Notification.Name("didSetParam")
+    static let didChangeUnits = Notification.Name("didChangeUnits")
+    static let didChangeValue = Notification.Name("didChangeValue")
+}
+
 class InputsViewController: TZViewController, NSTableViewDataSource, NSTableViewDelegate {
     
     //var parentSplitViewController : MainSplitViewController? = nil

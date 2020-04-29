@@ -8,6 +8,10 @@
 
 import Cocoa
 
+/**
+ Structure to contain the number sets that feed into text and plot outputs
+ Format varies depending on whether categories and conditions are used
+ */
 protocol OutputDataSet {
 }
 struct OutputDataSetLines: OutputDataSet {

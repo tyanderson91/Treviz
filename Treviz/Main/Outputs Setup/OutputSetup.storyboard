@@ -14,13 +14,13 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView verticalHuggingPriority="900" verticalCompressionResistancePriority="50" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X3z-Eb-GAM" userLabel="Output Setup Custom Scroll View">
-                                <rect key="frame" x="0.0" y="115" width="513" height="123"/>
+                                <rect key="frame" x="0.0" y="100" width="513" height="138"/>
                                 <clipView key="contentView" id="iZT-XH-WJ0">
-                                    <rect key="frame" x="1" y="1" width="496" height="106"/>
+                                    <rect key="frame" x="1" y="1" width="511" height="136"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <stackView distribution="fill" orientation="vertical" alignment="trailing" spacing="1" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" verticalClippingResistancePriority="900" verticalHuggingPriority="900" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gfp-GI-MP9" customClass="CustomStackView" customModule="Treviz" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="106" width="496" height="0.0"/>
+                                            <rect key="frame" x="0.0" y="136" width="511" height="0.0"/>
                                         </stackView>
                                     </subviews>
                                     <constraints>
@@ -33,11 +33,11 @@
                                     <constraint firstAttribute="height" priority="50" constant="400" placeholder="YES" id="sXx-O9-x1F"/>
                                 </constraints>
                                 <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="kBx-UO-78b">
-                                    <rect key="frame" x="1" y="107" width="496" height="15"/>
+                                    <rect key="frame" x="1" y="121" width="511" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="39l-sD-gFI">
-                                    <rect key="frame" x="497" y="1" width="15" height="106"/>
+                                    <rect key="frame" x="496" y="1" width="16" height="136"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
@@ -272,7 +272,7 @@
                             <constraint firstItem="uyZ-oY-mbV" firstAttribute="centerX" secondItem="fmw-WQ-uxs" secondAttribute="centerX" id="Pfh-VI-b6b"/>
                             <constraint firstItem="2VV-N6-yqy" firstAttribute="leading" secondItem="fmw-WQ-uxs" secondAttribute="leading" constant="15" id="Xda-KE-xsX"/>
                             <constraint firstItem="uyZ-oY-mbV" firstAttribute="top" secondItem="fmw-WQ-uxs" secondAttribute="top" constant="15" id="bLO-MT-0jf"/>
-                            <constraint firstItem="AVK-iS-hVV" firstAttribute="top" secondItem="X3z-Eb-GAM" secondAttribute="bottom" constant="15" id="bwn-Um-KQM"/>
+                            <constraint firstItem="AVK-iS-hVV" firstAttribute="top" secondItem="X3z-Eb-GAM" secondAttribute="bottom" id="bwn-Um-KQM"/>
                             <constraint firstItem="X3z-Eb-GAM" firstAttribute="top" secondItem="uyZ-oY-mbV" secondAttribute="bottom" constant="15" id="fqu-72-r27"/>
                             <constraint firstAttribute="trailing" secondItem="AVK-iS-hVV" secondAttribute="trailing" id="gA3-Fo-9Yh"/>
                             <constraint firstItem="X3z-Eb-GAM" firstAttribute="leading" secondItem="fmw-WQ-uxs" secondAttribute="leading" id="ygV-rX-6oW"/>
@@ -298,11 +298,11 @@
         <scene sceneID="hxV-f7-wcq">
             <objects>
                 <viewController title="Single Axis" storyboardIdentifier="SingleAxisOutputSetupViewController" id="msL-sn-tpe" userLabel="SingleAxisViewController" customClass="SingleAxisOutputSetupViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="UbK-im-XsI">
+                    <view key="view" id="UbK-im-XsI" customClass="StackBaseView" customModule="Treviz" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="360" height="132"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <customView horizontalHuggingPriority="50" verticalHuggingPriority="900" translatesAutoresizingMaskIntoConstraints="NO" id="LCY-Xe-aHU">
+                            <customView horizontalHuggingPriority="50" verticalHuggingPriority="900" translatesAutoresizingMaskIntoConstraints="NO" id="LCY-Xe-aHU" customClass="StackBaseView" customModule="Treviz" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="360" height="132"/>
                                 <subviews>
                                     <gridView verticalCompressionResistancePriority="1" xPlacement="center" yPlacement="fill" rowAlignment="none" rowSpacing="10" columnSpacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="0r4-fO-Bow" customClass="CollapsibleGridView" customModule="Treviz" customModuleProvider="target">
@@ -363,6 +363,7 @@
                                                         <font key="font" metaFont="system"/>
                                                         <menu key="menu" id="sRr-BJ-KH0"/>
                                                     </popUpButtonCell>
+                                                    <color key="contentTintColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                     <connections>
                                                         <action selector="plotTypeWasSelected:" target="msL-sn-tpe" id="c7H-ag-T95"/>
                                                         <outlet property="nextKeyView" destination="EiP-JF-MF9" id="x47-JY-s6s"/>
@@ -512,6 +513,7 @@
                         <outlet property="includePlotCheckbox" destination="EiP-JF-MF9" id="SPz-rJ-IdD"/>
                         <outlet property="includeTextCheckbox" destination="EGk-rV-djV" id="c2b-l3-d5A"/>
                         <outlet property="objectController" destination="LfK-KG-5a7" id="KyL-Rt-Xc5"/>
+                        <outlet property="plotTypeCell" destination="5oH-1r-Bdz" id="Am5-wv-JXG"/>
                         <outlet property="plotTypePopupButton" destination="ZYv-Vs-iDV" id="omT-KW-3Jl"/>
                         <outlet property="selectedOutputTypeLabel" destination="tTs-jD-7Ds" id="lib-M6-6zw"/>
                         <outlet property="titleTextField" destination="hiN-Ca-1vZ" id="pUP-AZ-M25"/>

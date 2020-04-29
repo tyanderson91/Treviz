@@ -22,6 +22,7 @@ class AddOutputViewController: BaseViewController { //TODO : Add a way to add va
         if let asys = analysis { return asys.conditions } else { return nil }
     }
     
+    @IBOutlet weak var plotTypeCell: NSPopUpButtonCell!
     @IBOutlet weak var titleTextField: NSTextField!
     @IBOutlet weak var titleTextFieldConstraint: NSLayoutConstraint!
     
@@ -83,19 +84,21 @@ class AddOutputViewController: BaseViewController { //TODO : Add a way to add va
         plotTypePopupButton.bind(.selectedObject, to: objectController!, withKeyPath: "selection.plotType")
         self.bind(.title, to: objectController!, withKeyPath: "selection.title")
         
-        
+        //plotTypePopupButton.wantsLayer = true
+        //plotTypePopupButton.layer!.backgroundColor = NSColor.controlBackgroundColor.cgColor
+        //plotTypeCell.backgroundColor = NSColor.controlBackgroundColor.cgColor
+        // plotTypePopupButton.layer!.tex
     }
-    
     /*
     func setWidth(component: Any, width: CGFloat){
         let conditionWidth = NSLayoutConstraint(item: component, attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute,multiplier: 1, constant: width)
         self.view.addConstraint(conditionWidth)
     }*/
     override func getHeaderTitle() -> String { return representedOutput?.title ?? "New Output" }
-    
+    /*
     override func viewWillAppear() {
         self.view.appearance = NSAppearance(named: .darkAqua)
-    }
+    }*/
     
     func loadAnalysis(_ analysis: Analysis?){
         if analysis != nil {

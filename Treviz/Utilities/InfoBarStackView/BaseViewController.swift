@@ -31,11 +31,6 @@ class BaseViewController : TZViewController, StackItemBody {
 
         // Remember the default height for disclosing later (subclasses can determine this value in their own viewDidLoad).
         savedDefaultHeight = view.bounds.height
-        
-        view.wantsLayer = true
-        view.layer?.backgroundColor = BaseViewController.StackItemBackgroundColor.cgColor
-        // view.layer?.borderColor = BaseViewController.StackItemBackgroundColor.cgColor
-        // view.layer?.borderWidth = 0.5
     }
     
     // MARK: - StackItemBody
@@ -61,5 +56,12 @@ class BaseViewController : TZViewController, StackItemBody {
     
     func didDisclose(){
         // Function to be overridden. Runs after each disclosure
+    }
+}
+
+class StackBaseView : NSView {
+    override func draw(_ dirtyRect: NSRect) {
+        super.draw(dirtyRect)
+        //self.clear
     }
 }

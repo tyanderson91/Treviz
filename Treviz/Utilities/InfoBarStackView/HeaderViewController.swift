@@ -24,12 +24,6 @@ class HeaderViewController : NSViewController, StackItemHeader {
         //textEditor = NSText(frame: headerTextField.bounds)
         headerTextField.stringValue = title!
         
-        // We want the header's color to be different color than its associated stack item.
-        view.wantsLayer = true
-        view.layer?.backgroundColor = NSColor.windowBackgroundColor.cgColor
-        // view.layer?.borderColor = NSColor.controlBackgroundColor.cgColor
-        // view.layer?.borderWidth = 1
-
         //#if !DisclosureTriangleAppearance
         // Track the mouse movement so we can show/hide the disclosure button.
         let trackingArea = NSTrackingArea(rect: self.view.bounds,
@@ -41,7 +35,7 @@ class HeaderViewController : NSViewController, StackItemHeader {
     
         // For the non-triangle disclosure button header, we want the button to auto hide/show on mouse tracking.
         view.addTrackingArea(trackingArea)
-//#endif
+        //#endif
     }
     
     // MARK: - Actions
@@ -50,23 +44,19 @@ class HeaderViewController : NSViewController, StackItemHeader {
     }
     
     // MARK: - Mouse tracking
-    
     override func mouseEntered(with theEvent: NSEvent) {
-        
         // Mouse entered the header area, show disclosure button.
         super.mouseEntered(with: theEvent)
         showHideButton.isHidden = false
     }
     
     override func mouseExited(with theEvent: NSEvent) {
-        
         // Mouse exited the header area, hide disclosure button.
         super.mouseExited(with: theEvent)
         showHideButton.isHidden = true
     }
     
     // MARK: - StackItemHeader Procotol
-
     func update(toDisclosureState: StackItemContainer.DisclosureState) {
         
         switch toDisclosureState {
@@ -80,4 +70,12 @@ class HeaderViewController : NSViewController, StackItemHeader {
         UserDefaults().set(toDisclosureState.rawValue, forKey: headerTextField.stringValue)
     }
     
+}
+
+class StackHeaderView: NSView {
+    override func draw(_ dirtyRect: NSRect) {
+        super.draw(dirtyRect)
+        // We want the header's color to be different color than its associated stack item.
+        self.layer?.backgroundColor = NSColor.windowBackgroundColor.cgColor
+    }
 }

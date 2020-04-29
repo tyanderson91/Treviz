@@ -62,6 +62,9 @@ class AnalysisDoc: NSDocument {
             
         }
         #endif
+        // Make window clear
+        //self.windowController.window!.isOpaque = false
+        //windowController.window!.backgroundColor = NSColor.init(calibratedRed: 0.5, green: 0.5, blue: 0.5, alpha: 0.8)
         
         self.windowController.analysis = analysis
         self.addWindowController(windowController)
@@ -69,11 +72,11 @@ class AnalysisDoc: NSDocument {
         self.viewController.representedObject = analysis
         self.viewController.analysis = analysis
     }
-    
+    /*
     override func windowControllerDidLoadNib(_ aController: NSWindowController) {
         super.windowControllerDidLoadNib(aController)
         // Add any code here that needs to be executed once the windowController has loaded the document's window.
-    }
+    }*/
 
     override func data(ofType typeName: String) throws -> Data {
         // Insert code here to write your document to data of the specified type, throwing an error in case of failure.

@@ -24,6 +24,8 @@ import Cocoa
     func reset(initialState: StateArray?)
     var meetsCondition : [Bool]? {get set}
     @objc var summary : String {get}
+    func isValid() -> Bool
+    //func isEqual(_ object: Any?) -> Bool
     // var isSinglePoint : Bool {get set}// Boolean to tell whether the condition should return a single point per trajectory (such as terminal condition, max/min, etc
 }
 
@@ -77,6 +79,11 @@ enum SpecialConditionType : Int, CustomStringConvertible {
     }
 }
 
+extension NSNotification.Name {
+    static let didAddCondition = Notification.Name("didAddCondition")
+    static let didRemoveCondition = Notification.Name("didRemoveCondition")
+}
+
 /**
  A SingleCondition is the basic unit of condition evaluations. It provides a mechanism to determine if an individual variable meets some numerical condition, either at a single point in a trajectory or at all points
  */
@@ -125,16 +132,8 @@ class SingleCondition: NSObject, EvaluateCondition {
     
     private var previousState : VarValue! // For use in equality type or special case lookups
     private var nextState: VarValue! // For use in special case lookups, e.g. local min
-    var tests : [(VarValue)->Bool] {
+    var tests : [(VarValue)->Bool] { // TODO: This is computed on every iteration. Make it so the test is only calculated once
         var _tests : [(VarValue)->Bool] = []
-        if let lower = lbound {
-            _tests.append {$0 > lower }
-        }; if let upper = ubound {
-            _tests.append {$0 < upper }
-        }
-        if let eq = equality {
-            _tests = [{ ($0-eq).sign != (self.previousState-eq).sign }]
-        }
         if let spc = specialCondition {
             if spc == .localMin {
                 _tests = [{ $0 < self.nextState && $0 < self.previousState }]
@@ -143,6 +142,14 @@ class SingleCondition: NSObject, EvaluateCondition {
             if spc == .localMax {
                 _tests = [{ $0 > self.nextState && $0 > self.previousState }]
                 //_tests = [{ self.nextState > $0 && self.nextState > self.previousState}]
+            }
+        } else if let eq = equality {
+            _tests = [{ ($0-eq).sign != (self.previousState-eq).sign }]
+        } else {
+            if let lower = lbound {
+                _tests.append {$0 > lower }
+            }; if let upper = ubound {
+                _tests.append {$0 < upper }
             }
         }
         return _tests
@@ -207,16 +214,16 @@ class SingleCondition: NSObject, EvaluateCondition {
         else {
             var i = 0
             for thisVal in thisVariable.value {
+                if equality != nil || specialCondition != nil {
+                    previousState = (i > 0) ? thisVariable[i-1] : thisVal
+                    nextState = (i < thisVariable.value.count - 1) ? thisVariable[i+1] : thisVal
+                }
                 var isCondition : Bool = true
                 for thisTest in tests {
                     isCondition = isCondition && thisTest(thisVal)
                 }
                 if isCondition {
                     meetsCondition![i] = true
-                }
-                if equality != nil || specialCondition != nil {
-                    previousState = thisVal
-                    nextState = (i < thisVariable.value.count - 1) ? thisVariable[i+1] : thisVal
                 }
                 i+=1
             }
@@ -226,8 +233,18 @@ class SingleCondition: NSObject, EvaluateCondition {
         if varPosition == nil {varPosition = State.stateVarPositions.firstIndex(where: {$0 == varID} ) }
         let thisVal = singleState[varPosition!]
         var isCondition = true
-        for thisTest in tests {
-            isCondition = isCondition && thisTest(thisVal)
+        
+        if specialCondition == .localMin || specialCondition == .localMax {
+            let oldState = nextState!
+            nextState = thisVal
+            isCondition = tests[0](oldState)
+        } else if equality != nil {
+            isCondition = isCondition && tests[0](thisVal)
+            previousState = thisVal
+        } else {
+            for thisTest in tests {
+                isCondition = isCondition && thisTest(thisVal)
+            }
         }
         return isCondition
     }
@@ -241,12 +258,38 @@ class SingleCondition: NSObject, EvaluateCondition {
         }
         meetsCondition = nil
     }
+    
+    func isValid() -> Bool {
+        guard varID != nil else { return false }
+        if equality != nil {
+            return ubound == nil && lbound == nil && specialCondition == nil
+        } else if specialCondition != nil {
+            return ubound == nil && lbound == nil && equality == nil
+        } else if ubound != nil || lbound != nil {
+            return equality == nil && specialCondition == nil
+        } else { return false }
+    }
+    
+     // TODO: This is only used in testing, delete if it serves no other purpose
+    /*
+    override func isEqual(_ object: Any?) -> Bool {
+        guard let object = object as? SingleCondition else { return false }
+        var eq = true
+        eq = eq && object.varID == self.varID
+        eq = eq && object.equality == self.equality
+        eq = eq && object.ubound == self.ubound
+        eq = eq && object.lbound == self.lbound
+        eq = eq && object.specialCondition == self.specialCondition
+
+        return eq
+    }*/
+    
 }
 
 /**
 The Condition class provides teh mechanism to combine multiple SingleConditions or Conditions into one composite condition according to various boolean comparisons.
 */
-public class Condition : NSObject, EvaluateCondition {
+class Condition : NSObject, EvaluateCondition {
     
     @objc var name : String = ""
     var conditions : [EvaluateCondition] = []
@@ -299,8 +342,18 @@ public class Condition : NSObject, EvaluateCondition {
         super.init()
     }
     
-    init(_ varid: VariableID, upperBound: VarValue? = nil, lowerBound: VarValue? = nil, equality: VarValue? = nil){
-        let newCondition = SingleCondition(varid, upperBound: upperBound, lowerBound: lowerBound, equality: equality)
+    init(_ varid: VariableID, upperBound: VarValue? = nil, lowerBound: VarValue? = nil){
+        let newCondition = SingleCondition(varid, upperBound: upperBound, lowerBound: lowerBound)
+        conditions = [newCondition]
+        super.init()
+    }
+    init(_ varid: VariableID, equality: VarValue){
+        let newCondition = SingleCondition(varid, equality: equality)
+        conditions = [newCondition]
+        super.init()
+    }
+    init(_ varid: VariableID, specialCondition: SpecialConditionType){
+        let newCondition = SingleCondition(varid, specialCondition: specialCondition)
         conditions = [newCondition]
         super.init()
     }
@@ -441,6 +494,28 @@ public class Condition : NSObject, EvaluateCondition {
         }
     }
     
+    func isValid() -> Bool {
+        guard name != "" else { return false }
+        guard conditions.count > 0 else { return false }
+        var valid = true
+        for thisCond in conditions {
+            valid = valid && thisCond.isValid()
+        }
+        return valid
+    }
+    
+    /*
+    override func isEqual(_ object: Any?) -> Bool {
+        guard let object = object as? Condition else { return false }
+        guard object.name == self.name else { return false }
+        guard object.unionType == self.unionType else { return false }
+        guard object.conditions.count == self.conditions.count else { return false }
+        var conditionsEqual = true
+        for i in Array(0...conditions.count - 1) {
+            conditionsEqual = conditionsEqual && conditions[i].isEqual(object.conditions[i])
+        }
+        return conditionsEqual
+    }*/
     /**
      Used to determine whether a given Condition or SingleCondition is a child of the current condition. Recursively searches sub-conditions
      */

@@ -69,7 +69,7 @@
                         <splitViewItem id="Egm-VD-iRm"/>
                         <splitViewItem id="XaY-f7-w6D"/>
                     </splitViewItems>
-                    <splitView key="splitView" autosaveName="textOutputsSplitView" vertical="YES" id="e6g-Q4-soo">
+                    <splitView key="splitView" autosaveName="textOutputsSplitView" dividerStyle="paneSplitter" vertical="YES" id="e6g-Q4-soo">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <connections>
@@ -172,20 +172,20 @@
             <objects>
                 <viewController id="BcX-Kn-pAr" customClass="PlotOutputViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="v8a-8N-YZw">
-                        <rect key="frame" x="0.0" y="0.0" width="446" height="315"/>
+                        <rect key="frame" x="0.0" y="0.0" width="446" height="324"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <customView horizontalHuggingPriority="50" horizontalCompressionResistancePriority="800" translatesAutoresizingMaskIntoConstraints="NO" id="q6x-sP-SB5" customClass="CPTGraphHostingView">
-                                <rect key="frame" x="100" y="0.0" width="346" height="315"/>
+                                <rect key="frame" x="100" y="0.0" width="346" height="324"/>
                             </customView>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="96" horizontalPageScroll="10" verticalLineScroll="96" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fAb-Rd-ex3" userLabel="Plot Selector Scroll View">
-                                <rect key="frame" x="0.0" y="0.0" width="100" height="315"/>
+                                <rect key="frame" x="0.0" y="0.0" width="100" height="324"/>
                                 <clipView key="contentView" id="TRb-Z1-rrT">
-                                    <rect key="frame" x="1" y="1" width="98" height="313"/>
+                                    <rect key="frame" x="1" y="1" width="98" height="322"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="none" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="94" rowSizeStyle="automatic" viewBased="YES" id="UWb-kI-vO6">
-                                            <rect key="frame" x="0.0" y="0.0" width="98" height="313"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="98" height="322"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -203,8 +203,8 @@
                                                             <rect key="frame" x="1" y="1" width="94" height="94"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
-                                                                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" placeholderIntrinsicWidth="91" placeholderIntrinsicHeight="88" translatesAutoresizingMaskIntoConstraints="NO" id="BLe-Nn-Wf1">
-                                                                    <rect key="frame" x="0.0" y="3" width="91" height="88"/>
+                                                                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="91" placeholderIntrinsicHeight="88" translatesAutoresizingMaskIntoConstraints="NO" id="BLe-Nn-Wf1">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="94" height="94"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" secondItem="BLe-Nn-Wf1" secondAttribute="height" multiplier="1:1" id="THS-aJ-uhK"/>
                                                                     </constraints>

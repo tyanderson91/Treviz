@@ -19,14 +19,14 @@ class MainWindowController: NSWindowController {
         set { (contentViewController as? TZViewController)?.analysis = newValue }
     }*/
     var analysis : Analysis!
-        
+    
     var viewController: MainViewController! { return contentViewController as? MainViewController ?? nil}
         
     @IBAction func storyboardRunAnalysisClicked(_ sender: Any) {
         runAnalysisClicked(sender)
     }
     
-    func processOutputs(){ //TODO: Move out of window controller
+    private func processOutputs() {
         guard let textOutputView = viewController.textOutputView else {return}
         guard let outputSplitVC = viewController.mainSplitViewController.outputsViewController.outputSplitViewController else { return }
         guard let plotViewController = outputSplitVC.plotViewController else { return }
@@ -64,8 +64,8 @@ class MainWindowController: NSWindowController {
     @objc func completeAnalysis(notification: Notification){ // Runs when the analysis has terminated
         analysis.isRunning = false
         toolbar.toggleAnalysisRun.title = "►"
-        let progressBar = viewController.analysisProgressBar!
-        progressBar.doubleValue = 0
+        analysis.progressReporter?.endProgressTracking()
+
         if analysis.returnCode > 0 { //Nominal successfull completion
             processOutputs()}
         else { //TODO: make different error codes for analysis run

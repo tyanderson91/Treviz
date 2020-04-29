@@ -5,6 +5,16 @@
       location = "group:Treviz.xcodeproj">
    </FileRef>
    <Group
+      location = "group:/Users/TylerAnderson/Coding/Swift/Treviz/Examples"
+      name = "Examples">
+      <FileRef
+         location = "group:AnalysisSettings.yaml">
+      </FileRef>
+      <FileRef
+         location = "group:AnalysisSettings.asys">
+      </FileRef>
+   </Group>
+   <Group
       location = "group:Playgrounds"
       name = "Playgrounds">
       <FileRef

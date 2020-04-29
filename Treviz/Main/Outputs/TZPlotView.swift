@@ -65,13 +65,14 @@ class TZPlotView: NSObject, CPTScatterPlotDelegate, CPTScatterPlotDataSource, CP
         plotSpace.delegate = self
         // plotSpace.scale(toFitEntirePlots: [scatterPlot])
         plotSpace.allowsMomentum = true
-
+        
         graph.add(scatterPlot)
         graph.paddingRight = 0
         graph.paddingTop = 0
         graph.paddingLeft = 60
         graph.paddingBottom = 60
         graph.plotAreaFrame?.masksToBorder = false
+        //graph.plotAreaFrame?.backgroundColor = NSColor.windowBackgroundColor.cgColor
         
         
         let majorGridLineStyle = CPTMutableLineStyle(plot.majorGridLineStyle)

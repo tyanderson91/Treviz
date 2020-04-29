@@ -14,7 +14,6 @@ extension NSUserInterfaceItemIdentifier {
 
 class PlotOutputViewController: TZViewController, NSTableViewDelegate, NSTableViewDataSource {//}, CPTScatterPlotDelegate, CPTScatterPlotDataSource, CPTPlotSpaceDelegate  {
 
-    
     @IBOutlet weak var tableView: NSTableView!
     @IBOutlet weak var graphHostingView: CPTGraphHostingView!
     

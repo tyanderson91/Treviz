@@ -54,7 +54,12 @@ extension State {
         if let index = stateVarPositions.firstIndex(where: { $0 == varID }){
             return state[index]
         } else {return nil}
-    }
+    }/*
+    subscript(varID: VariableID) -> [VarValue]? {
+        if let index = State.stateVarPositions.firstIndex(where: { $0 == varID }){
+            return self[index]
+        } else {return nil}
+    }*/
     
     subscript(index: Int) -> [VarValue] {
         get {

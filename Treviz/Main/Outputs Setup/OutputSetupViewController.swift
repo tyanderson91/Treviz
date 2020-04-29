@@ -78,6 +78,7 @@ class OutputSetupViewController: TZViewController{//}, NSTableViewDelegate, NSTa
         // GUI changes
         newOutputVC.titleTextField.isHidden = true
         newOutputVC.titleTextFieldConstraint.constant = 0
+        //newOutputVC.view.appearance = NSAppearance(named: .darkAqua)
         
         outputsArrayController.content = analysis.plots
         newOutputVC.addRemoveOutputButton.image = NSImage(named: NSImage.removeTemplateName)

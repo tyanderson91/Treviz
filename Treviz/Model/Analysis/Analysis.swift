@@ -33,8 +33,9 @@ class Analysis: NSObject, NSCoding {
     
     // Analysis-specific data and configs (read/writing functions in AnalysisData.swift)
     var name : String = ""
-    @objc weak var terminalCondition : Condition!
+    weak var terminalCondition : Condition!
     var traj: State!
+    var initState: StateArray { return traj[0] }
     @objc var conditions : [Condition] = []
     var inputSettings : [Parameter] = []
     var parameters : [Parameter] { //TODO: this should contain more than just input settings
@@ -49,6 +50,8 @@ class Analysis: NSObject, NSCoding {
     // Run tracking
     var isRunning = false
     var returnCode : Int = 0
+    let analysisDispatchQueue = DispatchQueue(label: "analysisRunQueue", qos: .utility)
+    var progressReporter: AnalysisProgressReporter?
     
     // Logging
     private var _bufferLog = NSAttributedString() // This string is used to store any logs prior to the initialization of the log message text view

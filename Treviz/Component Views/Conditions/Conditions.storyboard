@@ -142,7 +142,7 @@
                                 </constraints>
                             </stackView>
                             <textField horizontalHuggingPriority="700" verticalHuggingPriority="750" horizontalCompressionResistancePriority="700" translatesAutoresizingMaskIntoConstraints="NO" id="SQ2-n5-0je">
-                                <rect key="frame" x="10" y="85" width="153" height="21"/>
+                                <rect key="frame" x="10" y="85" width="168" height="21"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Condition Name" id="dY9-nJ-NVR">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -153,7 +153,7 @@
                                 </connections>
                             </textField>
                             <stackView hidden="YES" distribution="fill" orientation="horizontal" alignment="centerY" spacing="7" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ije-r1-bnx">
-                                <rect key="frame" x="178" y="85" width="99" height="21"/>
+                                <rect key="frame" x="193" y="85" width="99" height="21"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="900" translatesAutoresizingMaskIntoConstraints="NO" id="do3-sK-dT1">
                                         <rect key="frame" x="-2" y="3" width="38" height="16"/>
@@ -197,12 +197,12 @@
                                 </customSpacing>
                             </stackView>
                             <button horizontalHuggingPriority="700" verticalHuggingPriority="750" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" translatesAutoresizingMaskIntoConstraints="NO" id="BVe-vE-dVP" userLabel="Add Condition Button">
-                                <rect key="frame" x="286" y="76" width="82" height="36"/>
+                                <rect key="frame" x="301" y="76" width="67" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="HCO-Yh-THg"/>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="70" id="yOj-gW-Mcg"/>
                                 </constraints>
-                                <buttonCell key="cell" type="push" title="Add New" alternateTitle="Add Condition" bezelStyle="rounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" inset="2" id="G2U-TQ-n5Q">
+                                <buttonCell key="cell" type="push" title="New" alternateTitle="Add Condition" bezelStyle="rounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" inset="2" id="G2U-TQ-n5Q">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>

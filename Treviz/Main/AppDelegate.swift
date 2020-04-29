@@ -27,7 +27,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             }
         }
         
-        NotificationCenter.default.post(name: .didLoadAppDelegate, object: nil)
+        //NotificationCenter.default.post(name: .didLoadAppDelegate, object: nil)
         // Insert code here to initialize your application
     }
     

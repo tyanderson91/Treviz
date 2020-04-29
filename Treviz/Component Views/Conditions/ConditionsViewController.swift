@@ -68,24 +68,33 @@ class ConditionsViewController: TZViewController {
     
     @IBAction func addRemoveConditionButtonClicked(_ sender: Any) {
         
-        if addConditionButton.title == "Add New" {
+        if addConditionButton.title == "New" {
             curCondition = Condition()
-            analysis.conditions.append(curCondition)
-            allConditionsArrayController.addObject(curCondition)
+            curCondition.name = "Condition \(analysis.conditions.count)"
             
             let newCondition = SingleCondition()
             newCondition.varID = "t"
             curCondition.conditions.append(newCondition)
             showConditionView(condition: newCondition)
-            tableView.reloadData()
-            tableView.selectRowIndexes([(analysis.conditions.firstIndex(of: curCondition) ?? analysis.conditions.count)], byExtendingSelection: false)
             canAddSubCondition = true
             conditionNameTextBox.isHidden = false
+            conditionNameTextBox.placeholderString = curCondition.name
             conditionNameTextBox.becomeFirstResponder()
-            NotificationCenter.default.post(name: .didAddCondition, object: nil)
+            addConditionButton.title = "Add"
         } else if addConditionButton.title == "Delete" {
             if let conditionIndex = analysis.conditions.firstIndex(of: curCondition)
             { deleteCondition(at: conditionIndex) }
+        } else if addConditionButton.title == "Add" {
+            guard curCondition.isValid() else {
+                analysis.logMessage("Condition is invalid. Please fill in all required fields")
+                return
+            }
+            allConditionsArrayController.addObject(curCondition)
+            analysis.conditions.append(curCondition)
+            tableView.reloadData()
+            tableView.selectRowIndexes([(analysis.conditions.firstIndex(of: curCondition) ?? analysis.conditions.count)], byExtendingSelection: false)
+            NotificationCenter.default.post(name: .didAddCondition, object: nil)
+            addConditionButton.title = "Delete"
         }
     }
     
@@ -122,7 +131,7 @@ class ConditionsViewController: TZViewController {
             methodStackView.isHidden = true
         } else if newConditionStackView.arrangedSubviews.count == 0 {
             canAddSubCondition = false
-            addConditionButton.title = "Add New"
+            addConditionButton.title = "New"
             conditionNameTextBox.isHidden = true
             methodStackView.isHidden = true
         }
@@ -150,7 +159,14 @@ class ConditionsViewController: TZViewController {
     }
     
     @IBAction func conditionNameTextFieldChanged(_ sender: Any) {
-        curCondition.name = (sender as! NSTextField).stringValue
+        guard let textField = sender as? NSTextField else { return }
+        let thisName = textField.stringValue
+        if thisName == "" {
+            curCondition.name = textField.placeholderString ?? ""
+        } else {
+            curCondition.name = thisName
+        }
+        NotificationCenter.default.post(name: .didAddCondition, object: nil)
         tableView.reloadData()
     }
     @IBAction func joinTypePopupButtonClicked(_ sender: Any) {
