@@ -110,21 +110,51 @@ class Analysis: NSObject, Codable {
         case inputSettings
         case plots
     }
+
     
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         name = try container.decode(String.self, forKey: .name)
         inputSettings = try container.decode(Array<Variable>.self, forKey: .inputSettings)
-        plots = try container.decode(Array<TZOutput>.self, forKey: .plots)
-        terminalCondition = try container.decode(Condition.self, forKey: .terminalCondition)
+        //plots = try container.decode(Array<TZOutput>.self, forKey: .plots)
+        //
         conditions = try container.decode(Array<Condition>.self, forKey: .conditions)
+        do {
+            let terminalConditionName = try container.decode(String.self, forKey: .terminalCondition)
+            terminalCondition = conditions.first { $0.name == terminalConditionName }
+        }
+        
+        
+        var allTZOutputs = try container.nestedUnkeyedContainer(forKey: .plots)
+        var plotsTemp = allTZOutputs
+        while(!allTZOutputs.isAtEnd)
+        {
+            let output = try allTZOutputs.nestedContainer(keyedBy: TZOutput.CustomCoderType.self)
+            let type = try output.decode(TZOutput.OutputType.self, forKey: TZOutput.CustomCoderType.type)
+            var newOutput : TZOutput
+            switch type {
+            case .text:
+                newOutput = try plotsTemp.decode(TZTextOutput.self)
+            case .plot:
+                newOutput = try plotsTemp.decode(TZPlot.self)
+            }
+            do {
+                if newOutput.plotType.requiresCondition {
+                    let conditionName = try output.decode(String.self, forKey: TZOutput.CustomCoderType.condition)
+                    newOutput.condition = conditions.first { $0.name == conditionName }
+                }
+            }
+            plots.append(newOutput)
+        }
+        //
+
     }
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(name, forKey: .name)
-        try container.encode(terminalCondition, forKey: .terminalCondition)
         try container.encode(conditions, forKey: .conditions)
+        try container.encode(terminalCondition.name, forKey: .terminalCondition)
         try container.encode(inputSettings as? [Variable], forKey: .inputSettings)
         try container.encode(plots, forKey: .plots)
     }

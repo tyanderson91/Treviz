@@ -11,11 +11,12 @@ import Cocoa
 /**
 TZTextOutput is the object that contains formatting information for outputs printed to the text console. Nearly every output that can be shown in a graph can also have its information printed to the console for use in other programs.
 */
-class TZTextOutput: TZOutput {
+final class TZTextOutput: TZOutput {
     
     override func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingsKeys.self)
         try container.encode("text", forKey: .outputType)
+        try super.encode(to: encoder)
     }
     /**
      Takes the output configuration stored in the TZOutput instance and renders it as a block of text suitable for displaying in a text view

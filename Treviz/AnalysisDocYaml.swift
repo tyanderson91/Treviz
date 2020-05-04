@@ -55,12 +55,16 @@ extension AnalysisDoc {
                 } // TODO: else print error
             }
         }
-        if let terminalConditionDict = yamlDict["Terminal Condition"] as? [String: Any] {
+        if let terminalConditionName = yamlDict["Terminal Condition"] as? String {
+            if let cond = analysis.conditions.first(where: { $0.name == terminalConditionName }) {
+                analysis.terminalCondition = cond
+            }
+            /*
             if let newCond = Condition(fromYaml: terminalConditionDict, inputConditions: analysis.conditions) {
                 newCond.name = "Terminal"
                 analysis.conditions.append(newCond)
                 analysis.terminalCondition = newCond
-            }
+            }*/
         }
         if let outputList = yamlDict["Outputs"] as? [[String: Any]] {
             analysis.plots = []
@@ -123,14 +127,14 @@ extension AnalysisDoc {
             }
         }
         
-        if let outputTypeStr = yamlObj["output type"] as? String{
-            switch outputTypeStr {
-            case "plot":
+        if let outputType = yamlObj["output type"] as? String {
+            switch TZOutput.OutputType(rawValue: outputType) {
+            case .plot:
                 return TZPlot(with: outputDict)
-            case "text":
+            case .text:
                 return TZTextOutput(with: outputDict)
             default:
-                return nil
+                return TZPlot(with: outputDict)
             }
         } else {
             return TZPlot(with: outputDict)

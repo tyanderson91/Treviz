@@ -36,7 +36,7 @@ extension TZOutputError : LocalizedError {
 /** This is the superclass for all plots, text output, and any other output sets for an analysis.
  An output contains all the configuration data required to present the requested data. Details about the implementation of the data display are handled by subclasses (TZTextOutput, TZPlot)
  */
-class TZOutput : NSObject, NSCoding, Codable {
+class TZOutput : NSObject, Codable {
     
     @objc var displayName: String {
         var name = ""
@@ -101,6 +101,7 @@ class TZOutput : NSObject, NSCoding, Codable {
     }
     
     // MARK: NSCoding implementation
+    /*
     func encode(with coder: NSCoder) {
         coder.encode(id, forKey: "id")
         coder.encode(title, forKey: "title")
@@ -111,7 +112,6 @@ class TZOutput : NSObject, NSCoding, Codable {
         coder.encode(condition, forKey: "condition")
         coder.encode(plotType.name, forKey: "plotType")
     }
-    
     required init?(coder: NSCoder) {
         id = coder.decodeInteger(forKey: "id")
         title = coder.decodeObject(forKey: "title") as? String ?? ""
@@ -125,7 +125,7 @@ class TZOutput : NSObject, NSCoding, Codable {
         else { return nil } // TODO: throw error message that the plot type name can't be found
         
         super.init()
-    }
+    }*/
     
     // MARK: Codable implementation
     enum CodingsKeys: CodingKey {
@@ -140,6 +140,19 @@ class TZOutput : NSObject, NSCoding, Codable {
         case outputType
     }
     
+    enum OutputType: String, Codable {
+        case text = "text"
+        case plot = "plot"
+    }
+    enum CustomCoderType: String, CodingKey {
+        case type = "outputType"
+        case condition = "condition"
+    }
+    
+    convenience init(from decoder: Decoder, referencing Conditions: [Condition]) throws {
+        try self.init(from: decoder)
+    }
+    
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingsKeys.self)
         id = try container.decode(Int.self, forKey: .id)
@@ -150,9 +163,6 @@ class TZOutput : NSObject, NSCoding, Codable {
             plotType = TZPlotType.allPlotTypes.first { $0.id == plotTypeID }!
         } catch { throw TZPlotTypeError.InvalidPlotType }
         
-        if plotType.requiresCondition {
-            condition = try container.decode(Condition.self, forKey: .condition)
-        }
         if true {
             var1 = try container.decode(Variable.self, forKey: .var1)
         }
@@ -174,7 +184,10 @@ class TZOutput : NSObject, NSCoding, Codable {
         try container.encode(var1, forKey: .var1)
         try container.encode(var2, forKey: .var2)
         try container.encode(var3, forKey: .var3)
-        try container.encode(condition, forKey: .condition)
+        //try container.encode(var1?.id, forKey: .var1)
+        //try container.encode(var2?.id, forKey: .var2)
+        //try container.encode(var3?.id, forKey: .var3)
+        try container.encode(condition?.name, forKey: .condition)
         try container.encode(plotType.id, forKey: .plotTypeID)
     }
     

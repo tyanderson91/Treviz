@@ -64,14 +64,16 @@ struct TZPlotSymbol {
 /**
  A TZPlot contains all the information required to render a plot in a TZPlotView. TZPlot is a subclass of TZOutput. The subclassing allows TZPlot to include configuration options specifically related to the plot, such as colors, axes options, and other options related to the appearance of the plot view
  */
-class TZPlot: TZOutput {
+final class TZPlot: TZOutput {
     var majorGridLineStyle = TZLineStyle(color: CGColor(gray: 0.9, alpha: 1), lineWidth: 1)
     var minorGridLineStyle = TZLineStyle(color: CGColor(gray: 0.5, alpha: 1), lineWidth: 0.5)
     var isInteractive = true
     var plotSymbol : TZPlotSymbol = .circle
     
+    
     override func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingsKeys.self)
         try container.encode("plot", forKey: .outputType)
+        try super.encode(to: encoder)
     }
 }
