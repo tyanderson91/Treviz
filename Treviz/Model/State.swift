@@ -44,14 +44,6 @@ class State: NSObject, NSCoding {
         variables = varsIn
         super.init()
     }
-    
-    func copy(atIndex index: Int)->State{ //TODO: Accomplish this with a simple subscript
-        let newState = State()
-        for thisVar in self.variables{
-            if let newVar = thisVar.copy(atIndex: index) { newState.variables.append(newVar) }
-        }
-        return newState
-    }
 
     // Subscripts by variable
     subscript(_ varID: VariableID) -> Variable {

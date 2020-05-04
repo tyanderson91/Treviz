@@ -13,6 +13,10 @@ TZTextOutput is the object that contains formatting information for outputs prin
 */
 class TZTextOutput: TZOutput {
     
+    override func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingsKeys.self)
+        try container.encode("text", forKey: .outputType)
+    }
     /**
      Takes the output configuration stored in the TZOutput instance and renders it as a block of text suitable for displaying in a text view
      */

@@ -12,7 +12,7 @@ import Cocoa
 /**
  EvaluateCondition is a protocol that is adopted by bothe the Condition and SingleCondition classes. The basic feature is that it can read a state and determine whether it meets a given condition based on some predefined rules
  */
-@objc protocol EvaluateCondition : NSCoding {
+protocol EvaluateCondition : NSCoding, Codable {
     /**
      Evaluate a trajectory (state) by the condition. Stores the result in the condition's "meetsCondition"
      */
@@ -23,7 +23,7 @@ import Cocoa
      */
     func reset(initialState: StateArray?)
     var meetsCondition : [Bool]? {get set}
-    @objc var summary : String {get}
+    var summary : String {get}
     func isValid() -> Bool
     //func isEqual(_ object: Any?) -> Bool
     // var isSinglePoint : Bool {get set}// Boolean to tell whether the condition should return a single point per trajectory (such as terminal condition, max/min, etc
@@ -33,7 +33,7 @@ import Cocoa
  Booltype represents the different ways that conditions can be combined
  Raw value is set to index to allow for easy integration with dropdown menus
 */
-enum BoolType : Int {
+enum BoolType : Int, Codable {
     case single = 0
     case and = 1
     case or = 2
@@ -57,7 +57,7 @@ enum BoolType : Int {
  Rawvalue is set to int to allow for easy integration with dropdown menus
  Note that local max and local min can be evaluated during a trajectory, which makes them suitable for use as terminal conditions in an analysis. Global Max and Global Min require a complete trajectory to be known, so they can only be used in output plots
 */
-enum SpecialConditionType : Int, CustomStringConvertible {
+enum SpecialConditionType : Int, CustomStringConvertible, Codable {
     
     case localMax = 0
     case localMin = 1
@@ -87,7 +87,7 @@ extension NSNotification.Name {
 /**
  A SingleCondition is the basic unit of condition evaluations. It provides a mechanism to determine if an individual variable meets some numerical condition, either at a single point in a trajectory or at all points
  */
-class SingleCondition: NSObject, EvaluateCondition {
+class SingleCondition: NSObject, EvaluateCondition, Codable {
     var varID : VariableID!
     // A SingleCondition should take one of three forms: Interval (lower bound and/or upper bound), equality, or special (see above). If type is set, then unset the others
     var lbound : VarValue? { didSet { if lbound != nil {
@@ -174,6 +174,7 @@ class SingleCondition: NSObject, EvaluateCondition {
     }
     
     // MARK: NSCoding implementation
+    
     func encode(with coder: NSCoder) {
         coder.encode(varID, forKey: "varid")
         coder.encode(lbound, forKey: "lbound")
@@ -191,6 +192,41 @@ class SingleCondition: NSObject, EvaluateCondition {
             specialCondition = SpecialConditionType(rawValue: scint) ?? nil }
         super.init()
     }
+    
+    // MARK: Codable implementation
+    enum CodingKeys: String, CodingKey {
+        case lbound
+        case ubound
+        case equality
+        case specialCondition
+        case varID
+    }
+    /*
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        name = try container.decode(String.self, forKey: .name)
+        let Conditions = try container.decode(Condition.self, forKey: .Conditions)
+        let singleConditions = try container.decode(SingleCondition.self, forKey: .singleConditions)
+        conditions = Array<EvaluateCondition>()
+        conditions.append(Conditions)
+        conditions.append(singleConditions)
+        unionType = try container.decode(BoolType.self, forKey: .unionType)
+        do { _summary = try container.decode(String.self, forKey: ._summary)
+        } catch { _summary = "" }
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(name, forKey: .name)
+        try container.encode(unionType, forKey: .unionType)
+        if _summary != "" {
+            try container.encode(_summary, forKey: ._summary)
+        }
+        let singleConditions = conditions.filter { $0 is SingleCondition } as? [SingleCondition]
+        let Conditions = conditions.filter { $0 is Condition } as? [Condition]
+        try container.encode(singleConditions, forKey: .singleConditions)
+        try container.encode(Conditions, forKey: .Conditions)
+    }*/
     
     // Evaluation functions
     func evaluateState(_ state: State){
@@ -289,7 +325,7 @@ class SingleCondition: NSObject, EvaluateCondition {
 /**
 The Condition class provides teh mechanism to combine multiple SingleConditions or Conditions into one composite condition according to various boolean comparisons.
 */
-class Condition : NSObject, EvaluateCondition {
+class Condition : NSObject, EvaluateCondition, Codable {
     
     @objc var name : String = ""
     var conditions : [EvaluateCondition] = []
@@ -327,6 +363,7 @@ class Condition : NSObject, EvaluateCondition {
         super.init()
     }
     
+    // MARK: NSCoding
     public func encode(with coder: NSCoder) {
         coder.encode(name, forKey: "name")
         coder.encode(conditions, forKey: "conditions")
@@ -342,6 +379,42 @@ class Condition : NSObject, EvaluateCondition {
         super.init()
     }
     
+    // MARK: Codable implementation
+    enum CodingKeys: String, CodingKey {
+        case name
+        case Conditions
+        case singleConditions
+        case unionType
+        case _summary
+    }
+    
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        name = try container.decode(String.self, forKey: .name)
+        let Conditions = try container.decode(Array<Condition>.self, forKey: .Conditions)
+        let singleConditions = try container.decode(Array<SingleCondition>.self, forKey: .singleConditions)
+        conditions = Array<EvaluateCondition>()
+        conditions.append(contentsOf: Conditions)
+        conditions.append(contentsOf: singleConditions)
+        unionType = try container.decode(BoolType.self, forKey: .unionType)
+        do { _summary = try container.decode(String.self, forKey: ._summary)
+        } catch { _summary = "" }
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(name, forKey: .name)
+        try container.encode(unionType, forKey: .unionType)
+        if _summary != "" {
+            try container.encode(_summary, forKey: ._summary)
+        }
+        let singleConditions = conditions.filter { $0 is SingleCondition } as? [SingleCondition]
+        let Conditions = conditions.filter { $0 is Condition } as? [Condition]
+        try container.encode(singleConditions, forKey: .singleConditions)
+        try container.encode(Conditions, forKey: .Conditions)
+    }
+    
+    // MARK: Inits
     init(_ varid: VariableID, upperBound: VarValue? = nil, lowerBound: VarValue? = nil){
         let newCondition = SingleCondition(varid, upperBound: upperBound, lowerBound: lowerBound)
         conditions = [newCondition]

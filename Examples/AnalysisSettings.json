@@ -1,0 +1,1001 @@
+{
+  "terminalCondition" : {
+    "unionType" : 2,
+    "singleConditions" : [
+
+    ],
+    "Conditions" : [
+      {
+        "unionType" : 0,
+        "singleConditions" : [
+          {
+            "varID" : "y",
+            "ubound" : -0.10000000149011612
+          }
+        ],
+        "Conditions" : [
+
+        ],
+        "name" : "Ground Impact"
+      },
+      {
+        "unionType" : 0,
+        "singleConditions" : [
+          {
+            "varID" : "t",
+            "equality" : 10
+          }
+        ],
+        "Conditions" : [
+
+        ],
+        "name" : "Final time"
+      }
+    ],
+    "name" : "Terminal"
+  },
+  "inputSettings" : [
+    {
+      "symbol" : "𝑡",
+      "id" : "t",
+      "isParam" : true,
+      "units" : "time",
+      "isValid" : true,
+      "value" : [
+        0
+      ],
+      "name" : "Time"
+    },
+    {
+      "symbol" : "𝑋",
+      "id" : "x",
+      "isParam" : true,
+      "units" : "distance",
+      "isValid" : true,
+      "value" : [
+        10
+      ],
+      "name" : "X pos"
+    },
+    {
+      "symbol" : "𝑌",
+      "id" : "y",
+      "isParam" : false,
+      "units" : "distance",
+      "isValid" : true,
+      "value" : [
+        0
+      ],
+      "name" : "Y pos"
+    },
+    {
+      "symbol" : "𝑍",
+      "id" : "z",
+      "isParam" : false,
+      "units" : "distance",
+      "isValid" : true,
+      "value" : [
+        0
+      ],
+      "name" : "Z pos"
+    },
+    {
+      "symbol" : "𝑑𝑋\/𝑑𝑡",
+      "id" : "dx",
+      "isParam" : false,
+      "units" : "velocity",
+      "isValid" : true,
+      "value" : [
+        100
+      ],
+      "name" : "X vel"
+    },
+    {
+      "symbol" : "𝑑𝑌\/𝑑𝑡",
+      "id" : "dy",
+      "isParam" : true,
+      "units" : "velocity",
+      "isValid" : true,
+      "value" : [
+        30
+      ],
+      "name" : "Y vel"
+    },
+    {
+      "symbol" : "𝑑𝑍\/𝑑𝑡",
+      "id" : "dz",
+      "isParam" : false,
+      "units" : "velocity",
+      "isValid" : true,
+      "value" : [
+        0
+      ],
+      "name" : "Z vel"
+    },
+    {
+      "symbol" : "𝑚tot",
+      "id" : "mtot",
+      "isParam" : false,
+      "units" : "mass",
+      "isValid" : true,
+      "value" : [
+        0
+      ],
+      "name" : "Total mass"
+    },
+    {
+      "symbol" : "𝑞₀",
+      "id" : "q0",
+      "isParam" : false,
+      "units" : "none",
+      "isValid" : true,
+      "value" : [
+        0
+      ],
+      "name" : "Quaternion"
+    },
+    {
+      "symbol" : "𝑞₁",
+      "id" : "q1",
+      "isParam" : false,
+      "units" : "none",
+      "isValid" : true,
+      "value" : [
+        0
+      ],
+      "name" : "Quaternion"
+    },
+    {
+      "symbol" : "𝑞₂",
+      "id" : "q2",
+      "isParam" : false,
+      "units" : "none",
+      "isValid" : true,
+      "value" : [
+        0
+      ],
+      "name" : "Quaternion"
+    },
+    {
+      "symbol" : "𝑞₃",
+      "id" : "q3",
+      "isParam" : false,
+      "units" : "none",
+      "isValid" : true,
+      "value" : [
+        0
+      ],
+      "name" : "Quaternion"
+    },
+    {
+      "symbol" : "𝑑𝑞₀",
+      "id" : "dq0",
+      "isParam" : false,
+      "units" : "none",
+      "isValid" : true,
+      "value" : [
+        0
+      ],
+      "name" : "Quaternion"
+    },
+    {
+      "symbol" : "𝑑𝑞₁",
+      "id" : "dq1",
+      "isParam" : false,
+      "units" : "none",
+      "isValid" : true,
+      "value" : [
+        0
+      ],
+      "name" : "Quaternion"
+    },
+    {
+      "symbol" : "𝑑𝑞₂",
+      "id" : "dq2",
+      "isParam" : false,
+      "units" : "none",
+      "isValid" : true,
+      "value" : [
+        0
+      ],
+      "name" : "Quaternion"
+    },
+    {
+      "symbol" : "𝑑𝑞₃",
+      "id" : "dq3",
+      "isParam" : false,
+      "units" : "none",
+      "isValid" : true,
+      "value" : [
+        0
+      ],
+      "name" : "Quaternion"
+    },
+    {
+      "symbol" : "𝑟𝑛",
+      "id" : "rn",
+      "isParam" : false,
+      "units" : "distance",
+      "isValid" : true,
+      "value" : [
+        0
+      ],
+      "name" : "Nose radius"
+    },
+    {
+      "symbol" : "𝐴𝑟𝑒𝑓",
+      "id" : "aref",
+      "isParam" : false,
+      "units" : "area",
+      "isValid" : true,
+      "value" : [
+        0
+      ],
+      "name" : "Reference area"
+    },
+    {
+      "symbol" : "𝐿\/𝐷",
+      "id" : "lod",
+      "isParam" : false,
+      "units" : "none",
+      "isValid" : true,
+      "value" : [
+        0
+      ],
+      "name" : "Lift-to-drag ration"
+    },
+    {
+      "symbol" : "𝐶𝑙",
+      "id" : "cl",
+      "isParam" : false,
+      "units" : "none",
+      "isValid" : true,
+      "value" : [
+        0
+      ],
+      "name" : "Lift coefficient"
+    },
+    {
+      "symbol" : "𝐶𝑑",
+      "id" : "cd",
+      "isParam" : false,
+      "units" : "none",
+      "isValid" : true,
+      "value" : [
+        0
+      ],
+      "name" : "Drag coefficient"
+    },
+    {
+      "symbol" : "𝐼𝑆𝑃",
+      "id" : "isp",
+      "isParam" : false,
+      "units" : "time",
+      "isValid" : true,
+      "value" : [
+        0
+      ],
+      "name" : "Specific impulse"
+    },
+    {
+      "symbol" : "𝑇",
+      "id" : "thrust",
+      "isParam" : false,
+      "units" : "force",
+      "isValid" : true,
+      "value" : [
+        0
+      ],
+      "name" : "Thrust"
+    },
+    {
+      "symbol" : "𝛽",
+      "id" : "ballcoef",
+      "isParam" : false,
+      "units" : "none",
+      "isValid" : true,
+      "value" : [
+        0
+      ],
+      "name" : "Ballistic coefficient"
+    },
+    {
+      "symbol" : "𝑃𝑀𝐹",
+      "id" : "pmf",
+      "isParam" : false,
+      "units" : "percent",
+      "isValid" : true,
+      "value" : [
+        0
+      ],
+      "name" : "Propellant Mass Fraction"
+    },
+    {
+      "symbol" : "𝑚prop",
+      "id" : "mprop",
+      "isParam" : false,
+      "units" : "mass",
+      "isValid" : true,
+      "value" : [
+        0
+      ],
+      "name" : "Propellant mass"
+    },
+    {
+      "symbol" : "𝑚dry",
+      "id" : "mdry",
+      "isParam" : false,
+      "units" : "mass",
+      "isValid" : true,
+      "value" : [
+        0
+      ],
+      "name" : "Dry mass"
+    },
+    {
+      "symbol" : "𝑑𝜓\/𝑑𝑡",
+      "id" : "dyaw",
+      "isParam" : false,
+      "units" : "angle\/time",
+      "isValid" : true,
+      "value" : [
+        0
+      ],
+      "name" : "Yaw rate"
+    },
+    {
+      "symbol" : "𝑑𝜃\/𝑑𝑡",
+      "id" : "dpitch",
+      "isParam" : false,
+      "units" : "angle\/time",
+      "isValid" : true,
+      "value" : [
+        0
+      ],
+      "name" : "Pitch rate"
+    },
+    {
+      "symbol" : "𝑑𝜑\/𝑑𝑡",
+      "id" : "droll",
+      "isParam" : false,
+      "units" : "angle\/time",
+      "isValid" : true,
+      "value" : [
+        0
+      ],
+      "name" : "Roll rate"
+    },
+    {
+      "symbol" : "𝜓",
+      "id" : "yaw",
+      "isParam" : false,
+      "units" : "angle",
+      "isValid" : true,
+      "value" : [
+        0
+      ],
+      "name" : "Yaw angle"
+    },
+    {
+      "symbol" : "𝜃",
+      "id" : "pitch",
+      "isParam" : false,
+      "units" : "angle",
+      "isValid" : true,
+      "value" : [
+        0
+      ],
+      "name" : "Pitch angle"
+    },
+    {
+      "symbol" : "𝜑",
+      "id" : "roll",
+      "isParam" : false,
+      "units" : "angle",
+      "isValid" : true,
+      "value" : [
+        0
+      ],
+      "name" : "Roll angle"
+    },
+    {
+      "symbol" : "𝜎",
+      "id" : "bank",
+      "isParam" : false,
+      "units" : "angle",
+      "isValid" : true,
+      "value" : [
+        0
+      ],
+      "name" : "Bank angle"
+    },
+    {
+      "symbol" : "𝛽",
+      "id" : "b",
+      "isParam" : false,
+      "units" : "angle",
+      "isValid" : true,
+      "value" : [
+        0
+      ],
+      "name" : "Sideslip angle"
+    },
+    {
+      "symbol" : "𝛼",
+      "id" : "alpha",
+      "isParam" : false,
+      "units" : "angle",
+      "isValid" : true,
+      "value" : [
+        0
+      ],
+      "name" : "Angle-of-attack"
+    },
+    {
+      "symbol" : "𝜆",
+      "id" : "lon",
+      "isParam" : false,
+      "units" : "angle",
+      "isValid" : true,
+      "value" : [
+        0
+      ],
+      "name" : "Longitude"
+    },
+    {
+      "symbol" : "𝜑",
+      "id" : "lat",
+      "isParam" : false,
+      "units" : "angle",
+      "isValid" : true,
+      "value" : [
+        0
+      ],
+      "name" : "Latitude"
+    },
+    {
+      "symbol" : "ℎ",
+      "id" : "h",
+      "isParam" : false,
+      "units" : "angle",
+      "isValid" : true,
+      "value" : [
+        0
+      ],
+      "name" : "altitude"
+    },
+    {
+      "symbol" : "𝛾",
+      "id" : "gamma",
+      "isParam" : false,
+      "units" : "angle",
+      "isValid" : true,
+      "value" : [
+        0
+      ],
+      "name" : "Flight-path angle"
+    },
+    {
+      "symbol" : "𝜓",
+      "id" : "hangle",
+      "isParam" : false,
+      "units" : "angle",
+      "isValid" : true,
+      "value" : [
+        0
+      ],
+      "name" : "Heading angle"
+    },
+    {
+      "symbol" : "𝜽",
+      "id" : "th",
+      "isParam" : false,
+      "units" : "angle",
+      "isValid" : true,
+      "value" : [
+        0
+      ],
+      "name" : "True anomaly"
+    },
+    {
+      "symbol" : "𝜔",
+      "id" : "w",
+      "isParam" : false,
+      "units" : "angle",
+      "isValid" : true,
+      "value" : [
+        0
+      ],
+      "name" : "Argument of Periapsis"
+    },
+    {
+      "symbol" : "𝛺",
+      "id" : "om",
+      "isParam" : false,
+      "units" : "angle",
+      "isValid" : true,
+      "value" : [
+        0
+      ],
+      "name" : "Longitude of Ascending Node"
+    },
+    {
+      "symbol" : "𝑖",
+      "id" : "i",
+      "isParam" : false,
+      "units" : "angle",
+      "isValid" : true,
+      "value" : [
+        0
+      ],
+      "name" : "Inclination"
+    },
+    {
+      "symbol" : "𝑒",
+      "id" : "e",
+      "isParam" : false,
+      "units" : "none",
+      "isValid" : true,
+      "value" : [
+        0
+      ],
+      "name" : "Eccentricity"
+    },
+    {
+      "symbol" : "𝑎",
+      "id" : "a",
+      "isParam" : false,
+      "units" : "distance",
+      "isValid" : true,
+      "value" : [
+        0
+      ],
+      "name" : "Semi-major axis"
+    },
+    {
+      "symbol" : "𝜆v",
+      "id" : "elv",
+      "isParam" : false,
+      "units" : "angle",
+      "isValid" : true,
+      "value" : [
+        0
+      ],
+      "name" : "Elevation (velocity)"
+    },
+    {
+      "symbol" : "𝛼v",
+      "id" : "azv",
+      "isParam" : false,
+      "units" : "angle",
+      "isValid" : true,
+      "value" : [
+        0
+      ],
+      "name" : "Azimuth (velocity)"
+    },
+    {
+      "symbol" : "𝜆",
+      "id" : "elp",
+      "isParam" : false,
+      "units" : "angle",
+      "isValid" : true,
+      "value" : [
+        0
+      ],
+      "name" : "Elevation (position)"
+    },
+    {
+      "symbol" : "𝛼",
+      "id" : "azp",
+      "isParam" : false,
+      "units" : "angle",
+      "isValid" : true,
+      "value" : [
+        0
+      ],
+      "name" : "Azimuth (position)"
+    },
+    {
+      "symbol" : "𝑅",
+      "id" : "r",
+      "isParam" : false,
+      "units" : "distance",
+      "isValid" : true,
+      "value" : [
+        0
+      ],
+      "name" : "Distance"
+    },
+    {
+      "symbol" : "𝑉",
+      "id" : "v",
+      "isParam" : false,
+      "units" : "velocity",
+      "isValid" : true,
+      "value" : [
+        0
+      ],
+      "name" : "Velocity"
+    }
+  ],
+  "name" : "YAML Document",
+  "conditions" : [
+    {
+      "unionType" : 0,
+      "singleConditions" : [
+        {
+          "varID" : "y",
+          "ubound" : -0.10000000149011612
+        }
+      ],
+      "Conditions" : [
+
+      ],
+      "name" : "Ground Impact"
+    },
+    {
+      "unionType" : 0,
+      "singleConditions" : [
+        {
+          "varID" : "t",
+          "equality" : 10
+        }
+      ],
+      "Conditions" : [
+
+      ],
+      "name" : "Final time"
+    },
+    {
+      "unionType" : 0,
+      "singleConditions" : [
+        {
+          "varID" : "x",
+          "lbound" : 100
+        }
+      ],
+      "Conditions" : [
+
+      ],
+      "name" : "Too far"
+    },
+    {
+      "unionType" : 1,
+      "singleConditions" : [
+
+      ],
+      "Conditions" : [
+        {
+          "unionType" : 0,
+          "singleConditions" : [
+            {
+              "varID" : "y",
+              "ubound" : -0.10000000149011612
+            }
+          ],
+          "Conditions" : [
+
+          ],
+          "name" : "Ground Impact"
+        },
+        {
+          "unionType" : 0,
+          "singleConditions" : [
+            {
+              "varID" : "t",
+              "equality" : 10
+            }
+          ],
+          "Conditions" : [
+
+          ],
+          "name" : "Final time"
+        }
+      ],
+      "name" : "TerminalTest"
+    },
+    {
+      "unionType" : 4,
+      "singleConditions" : [
+
+      ],
+      "Conditions" : [
+        {
+          "unionType" : 1,
+          "singleConditions" : [
+
+          ],
+          "Conditions" : [
+            {
+              "unionType" : 0,
+              "singleConditions" : [
+                {
+                  "varID" : "y",
+                  "ubound" : -0.10000000149011612
+                }
+              ],
+              "Conditions" : [
+
+              ],
+              "name" : "Ground Impact"
+            },
+            {
+              "unionType" : 0,
+              "singleConditions" : [
+                {
+                  "varID" : "t",
+                  "equality" : 10
+                }
+              ],
+              "Conditions" : [
+
+              ],
+              "name" : "Final time"
+            }
+          ],
+          "name" : "TerminalTest"
+        },
+        {
+          "unionType" : 0,
+          "singleConditions" : [
+            {
+              "varID" : "x",
+              "lbound" : 100
+            }
+          ],
+          "Conditions" : [
+
+          ],
+          "name" : "Too far"
+        }
+      ],
+      "name" : "NestedTest"
+    },
+    {
+      "unionType" : 0,
+      "singleConditions" : [
+        {
+          "varID" : "y",
+          "specialCondition" : 0
+        }
+      ],
+      "Conditions" : [
+
+      ],
+      "name" : "Apogee"
+    },
+    {
+      "unionType" : 2,
+      "singleConditions" : [
+
+      ],
+      "Conditions" : [
+        {
+          "unionType" : 0,
+          "singleConditions" : [
+            {
+              "varID" : "y",
+              "ubound" : -0.10000000149011612
+            }
+          ],
+          "Conditions" : [
+
+          ],
+          "name" : "Ground Impact"
+        },
+        {
+          "unionType" : 0,
+          "singleConditions" : [
+            {
+              "varID" : "t",
+              "equality" : 10
+            }
+          ],
+          "Conditions" : [
+
+          ],
+          "name" : "Final time"
+        }
+      ],
+      "name" : "Terminal"
+    }
+  ],
+  "plots" : [
+    {
+      "var2" : null,
+      "condition" : {
+        "unionType" : 2,
+        "singleConditions" : [
+
+        ],
+        "Conditions" : [
+          {
+            "unionType" : 0,
+            "singleConditions" : [
+              {
+                "varID" : "y",
+                "ubound" : -0.10000000149011612
+              }
+            ],
+            "Conditions" : [
+
+            ],
+            "name" : "Ground Impact"
+          },
+          {
+            "unionType" : 0,
+            "singleConditions" : [
+              {
+                "varID" : "t",
+                "equality" : 10
+              }
+            ],
+            "Conditions" : [
+
+            ],
+            "name" : "Final time"
+          }
+        ],
+        "name" : "Terminal"
+      },
+      "id" : 1,
+      "plotTypeID" : "singlevalue",
+      "title" : "X pos",
+      "var3" : null,
+      "var1" : {
+        "symbol" : "𝑋",
+        "id" : "x",
+        "isParam" : false,
+        "units" : "distance",
+        "isValid" : true,
+        "value" : [
+          0
+        ],
+        "name" : "X pos"
+      }
+    },
+    {
+      "var2" : null,
+      "condition" : {
+        "unionType" : 2,
+        "singleConditions" : [
+
+        ],
+        "Conditions" : [
+          {
+            "unionType" : 0,
+            "singleConditions" : [
+              {
+                "varID" : "y",
+                "ubound" : -0.10000000149011612
+              }
+            ],
+            "Conditions" : [
+
+            ],
+            "name" : "Ground Impact"
+          },
+          {
+            "unionType" : 0,
+            "singleConditions" : [
+              {
+                "varID" : "t",
+                "equality" : 10
+              }
+            ],
+            "Conditions" : [
+
+            ],
+            "name" : "Final time"
+          }
+        ],
+        "name" : "Terminal"
+      },
+      "id" : 2,
+      "plotTypeID" : "singlevalue",
+      "title" : "Final time",
+      "var3" : null,
+      "var1" : {
+        "symbol" : "𝑡",
+        "id" : "t",
+        "isParam" : false,
+        "units" : "time",
+        "isValid" : true,
+        "value" : [
+          0
+        ],
+        "name" : "Time"
+      }
+    },
+    {
+      "var2" : {
+        "symbol" : "𝑡",
+        "id" : "t",
+        "isParam" : false,
+        "units" : "time",
+        "isValid" : true,
+        "value" : [
+          0
+        ],
+        "name" : "Time"
+      },
+      "condition" : null,
+      "id" : 3,
+      "plotTypeID" : "1line2d",
+      "title" : "Traj2",
+      "var3" : null,
+      "var1" : {
+        "symbol" : "𝑌",
+        "id" : "y",
+        "isParam" : false,
+        "units" : "distance",
+        "isValid" : true,
+        "value" : [
+          0
+        ],
+        "name" : "Y pos"
+      }
+    },
+    {
+      "var2" : {
+        "symbol" : "𝑌",
+        "id" : "y",
+        "isParam" : false,
+        "units" : "distance",
+        "isValid" : true,
+        "value" : [
+          0
+        ],
+        "name" : "Y pos"
+      },
+      "condition" : null,
+      "id" : 4,
+      "plotTypeID" : "1line2d",
+      "title" : "Traj",
+      "var3" : null,
+      "var1" : {
+        "symbol" : "𝑋",
+        "id" : "x",
+        "isParam" : false,
+        "units" : "distance",
+        "isValid" : true,
+        "value" : [
+          0
+        ],
+        "name" : "X pos"
+      }
+    },
+    {
+      "var2" : null,
+      "condition" : {
+        "unionType" : 0,
+        "singleConditions" : [
+          {
+            "varID" : "y",
+            "specialCondition" : 0
+          }
+        ],
+        "Conditions" : [
+
+        ],
+        "name" : "Apogee"
+      },
+      "id" : 5,
+      "plotTypeID" : "singlevalue",
+      "title" : "Apogee range",
+      "var3" : null,
+      "var1" : {
+        "symbol" : "𝑋",
+        "id" : "x",
+        "isParam" : false,
+        "units" : "distance",
+        "isValid" : true,
+        "value" : [
+          0
+        ],
+        "name" : "X pos"
+      }
+    }
+  ]
+}

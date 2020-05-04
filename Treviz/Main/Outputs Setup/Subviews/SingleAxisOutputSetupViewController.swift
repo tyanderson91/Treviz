@@ -16,7 +16,7 @@ class SingleAxisOutputSetupViewController: AddOutputViewController {
     
     override func createOutput() -> TZOutput? {// TODO : expand for all plot types
         guard let plotType = plotTypePopupButton.selectedItem?.title else {return nil}
-        let var1 = variableSelectorViewController?.getSelectedItem()
+        let var1 = variableSelectorViewController?.selectedVariable
         let newOutput = TZOutput(id: maxPlotID+1, vars: [var1!], plotType: TZPlotType.getPlotTypeByName(plotType)!)
         //let condIndex = conditionsComboBox.indexOfSelectedItem
         //if condIndex>=0 { newOutput.condition = analysis.conditions[condIndex] }
@@ -42,11 +42,17 @@ class SingleAxisOutputSetupViewController: AddOutputViewController {
         if analysis != nil {
             variableSelectorViewController.representedObject = analysis!
             variableSelectorViewController.selectedVariable = representedOutput.var1
-            variableSelectorViewController.variableSelectorArrayController.content = analysis?.varList
-            variableSelectorViewController.variableSelectorPopup.bind(.selectedObject, to: representedOutput as Any, withKeyPath: "var1", options: nil)
+            //variableSelectorViewController.variableSelectorArrayController.content = analysis?.varList
+            //variableSelectorViewController.variableSelectorPopup.bind(.selectedObject, to: representedOutput as Any, withKeyPath: "var1", options: nil)
         }
     }
 
+    override func variableDidChange(_ sender: VariableSelectorViewController) {
+        if sender === variableSelectorViewController {
+            representedOutput.var1 = sender.selectedVariable
+        }
+    }
+    
     override func populateWithOutput(text: TZTextOutput?, plot: TZPlot?){ //Should be overwritten by each subclass
         // let output = text == nil ? plot : text as! TZOutput
         // variableSelectorViewController.selectedVariable = output

@@ -69,4 +69,9 @@ class TZPlot: TZOutput {
     var minorGridLineStyle = TZLineStyle(color: CGColor(gray: 0.5, alpha: 1), lineWidth: 0.5)
     var isInteractive = true
     var plotSymbol : TZPlotSymbol = .circle
+    
+    override func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingsKeys.self)
+        try container.encode("plot", forKey: .outputType)
+    }
 }

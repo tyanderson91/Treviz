@@ -19,7 +19,7 @@ extension NSUserInterfaceItemIdentifier {
     static let descripCellView = NSUserInterfaceItemIdentifier.init("DescriptionCellView")
 }
 
-class ConditionsViewController: TZViewController {
+class ConditionsViewController: TZViewController, VariableGetter {
 
     @objc var curCondition = Condition()
     @objc var allConditions : [Condition]?
@@ -136,6 +136,10 @@ class ConditionsViewController: TZViewController {
             methodStackView.isHidden = true
         }
     }
+    
+    func variableDidChange(_ sender: VariableSelectorViewController) {
+        tableView.reloadData()
+    }
 
     func eraseView(){
         for thisVC in self.children {
@@ -207,7 +211,9 @@ class ConditionsViewController: TZViewController {
         eraseView()
         tableView.selectRowIndexes([], byExtendingSelection: false)
         formatConditionEditor()
+        tableView.reloadData()
     }
+    
     override func keyDown(with event: NSEvent) {
         if event.keyCode == 51 {//NSDeleteCharacter {
             if tableView.selectedRow != -1 {

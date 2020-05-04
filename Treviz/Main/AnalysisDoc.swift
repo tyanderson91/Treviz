@@ -81,8 +81,20 @@ class AnalysisDoc: NSDocument {
     override func data(ofType typeName: String) throws -> Data {
         // Insert code here to write your document to data of the specified type, throwing an error in case of failure.
         // Alternatively, you could remove this method and override fileWrapper(ofType:), write(to:ofType:), or write(to:ofType:for:originalContentsURL:) instead.
-        let asysData = try NSKeyedArchiver.archivedData(withRootObject: analysis as Any, requiringSecureCoding: false)
-        return asysData
+        //let asysData = try NSKeyedArchiver.archivedData(withRootObject: analysis as Any, requiringSecureCoding: false)
+        switch typeName {
+        case "com.tyleranderson.treviz.analysis":
+            let encoder = JSONEncoder()
+            let asysData = try encoder.encode(analysis)
+            return asysData
+        case "public.json":
+            let encoder = JSONEncoder()
+            encoder.outputFormatting = .prettyPrinted
+            let asysData = try encoder.encode(analysis)
+            return asysData
+        default:
+            return Data()
+        }
         //throw NSError(domain: NSOSStatusErrorDomain, code: unimpErr, userInfo: nil)
     }
     
@@ -92,11 +104,17 @@ class AnalysisDoc: NSDocument {
         setupConstants()
         switch typeName {
         case "public.yaml":
-            analysis.inputSettings = analysis.varList.compactMap { ($0.copy() as! Parameter) } // TODO: Better way to copy?
+            analysis.inputSettings = analysis.varList//.compactMap { ($0.copy() as! Parameter) } // TODO: Better way to copy?
             readFromYaml(data: data)
             analysis.name = "YAML Document"
         case "com.tyleranderson.treviz.analysis":
-            analysis = try (NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? Analysis)!
+            let decoder = JSONDecoder()
+            analysis = try decoder.decode(Analysis.self, from: data)
+            //analysis = try (NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? Analysis)!
+            analysis.name = "Analysis Document"
+        case "public.json":
+            let decoder = JSONDecoder()
+            analysis = try decoder.decode(Analysis.self, from: data)
             analysis.name = "Analysis Document"
         default:
             return

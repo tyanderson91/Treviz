@@ -26,7 +26,7 @@ In addition, this class contains class-level functions such as initiating the an
 * Terminal condition: The final condition or set of conditions that ends the simulation
 * Run settings: things like default timestep, propagator, etc.
 */
-class Analysis: NSObject, NSCoding {
+class Analysis: NSObject, Codable {
     
     @objc var varList : [Variable]!// {return appDelegate.initVars}
     var initStateGroups : InitStateHeader!
@@ -86,6 +86,7 @@ class Analysis: NSObject, NSCoding {
     }
     
     // MARK: NSCoding implementation
+    /*
     func encode(with coder: NSCoder) {
         coder.encode(terminalCondition, forKey: "terminalCondition")
         coder.encode(conditions, forKey: "conditions")
@@ -99,5 +100,32 @@ class Analysis: NSObject, NSCoding {
         plots = coder.decodeObject(forKey: "plots") as? [TZOutput] ?? []
         inputSettings = coder.decodeObject(forKey: "inputSettings") as? [Parameter] ?? []
         super.init()
+    }*/
+    
+    // MARK: Codable implementation
+    enum CodingKeys: String, CodingKey {
+        case name
+        case terminalCondition
+        case conditions
+        case inputSettings
+        case plots
+    }
+    
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        name = try container.decode(String.self, forKey: .name)
+        inputSettings = try container.decode(Array<Variable>.self, forKey: .inputSettings)
+        plots = try container.decode(Array<TZOutput>.self, forKey: .plots)
+        terminalCondition = try container.decode(Condition.self, forKey: .terminalCondition)
+        conditions = try container.decode(Array<Condition>.self, forKey: .conditions)
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(name, forKey: .name)
+        try container.encode(terminalCondition, forKey: .terminalCondition)
+        try container.encode(conditions, forKey: .conditions)
+        try container.encode(inputSettings as? [Variable], forKey: .inputSettings)
+        try container.encode(plots, forKey: .plots)
     }
 }

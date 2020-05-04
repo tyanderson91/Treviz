@@ -32,10 +32,11 @@ extension TZOutputError : LocalizedError {
         }
     }
 }
+
 /** This is the superclass for all plots, text output, and any other output sets for an analysis.
  An output contains all the configuration data required to present the requested data. Details about the implementation of the data display are handled by subclasses (TZTextOutput, TZPlot)
  */
-class TZOutput : NSObject, NSCoding {
+class TZOutput : NSObject, NSCoding, Codable {
     
     @objc var displayName: String {
         var name = ""
@@ -124,6 +125,57 @@ class TZOutput : NSObject, NSCoding {
         else { return nil } // TODO: throw error message that the plot type name can't be found
         
         super.init()
+    }
+    
+    // MARK: Codable implementation
+    enum CodingsKeys: CodingKey {
+        case id
+        case title
+        case var1
+        case var2
+        case var3
+        case catVar
+        case condition
+        case plotTypeID
+        case outputType
+    }
+    
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingsKeys.self)
+        id = try container.decode(Int.self, forKey: .id)
+        title = try container.decode(String.self, forKey: .title)
+        var plotTypeID = ""
+        do {
+            plotTypeID = try container.decode(String.self, forKey: .plotTypeID)
+            plotType = TZPlotType.allPlotTypes.first { $0.id == plotTypeID }!
+        } catch { throw TZPlotTypeError.InvalidPlotType }
+        
+        if plotType.requiresCondition {
+            condition = try container.decode(Condition.self, forKey: .condition)
+        }
+        if true {
+            var1 = try container.decode(Variable.self, forKey: .var1)
+        }
+        if plotType.nAxis >= 2 {
+            var2 = try container.decode(Variable.self, forKey: .var2)
+        }
+        if plotType.nAxis >= 3 {
+            var3 = try container.decode(Variable.self, forKey: .var3)
+        }
+        if (plotType.nVars > plotType.nAxis) && (plotTypeID != "contour2d ") {
+            categoryVar = try container.decode(Variable.self, forKey: .catVar)
+        }
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingsKeys.self)
+        try container.encode(id, forKey: .id)
+        try container.encode(title, forKey: .title)
+        try container.encode(var1, forKey: .var1)
+        try container.encode(var2, forKey: .var2)
+        try container.encode(var3, forKey: .var3)
+        try container.encode(condition, forKey: .condition)
+        try container.encode(plotType.id, forKey: .plotTypeID)
     }
     
     // MARK: Check validity

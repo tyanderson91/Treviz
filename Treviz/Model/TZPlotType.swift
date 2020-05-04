@@ -11,6 +11,10 @@ import Cocoa
 /**
  This class defines all the unique configurations and requirements for various plot types. All possible types are stored as static class variables
  */
+enum TZPlotTypeError : Error {
+    case InvalidPlotType
+}
+
 class TZPlotType : NSObject {
     //TODO : This should probably be in a struct. Get rid of bindings
     

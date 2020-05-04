@@ -14,7 +14,10 @@ enum outputLocation{
     case plot, text
 }
 
-class AddOutputViewController: BaseViewController { //TODO : Add a way to add variable selectors and associated logic
+class AddOutputViewController: BaseViewController, VariableGetter {
+    func variableDidChange(_ sender: VariableSelectorViewController) {
+    }
+    //TODO : Add a way to add variable selectors and associated logic
     
     @IBOutlet weak var conditionsPopupButton: NSPopUpButton!
     var conditionsArrayController = NSArrayController()

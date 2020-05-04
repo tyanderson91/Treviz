@@ -143,7 +143,7 @@ class InitStateViewController: BaseViewController, NSOutlineViewDelegate, NSOutl
     @IBAction func setParams(_ sender: Any) {
         guard let button = sender as? NSButton else {return}
         let row = outlineView.row(for: button)
-        if let thisParam = outlineView.item(atRow: row) as? Parameter {
+        if var thisParam = outlineView.item(atRow: row) as? Parameter {
             thisParam.isParam = button.state == NSControl.StateValue.on
             NotificationCenter.default.post(name: .didSetParam, object: nil)
         }

@@ -77,7 +77,7 @@ class ParamTableViewController: TZViewController , NSTableViewDelegate, NSTableV
     @IBAction func removeParamPressed(_ sender: Any) {
         let button = sender as! NSView
         let row = tableView.row(for: button)
-        let thisParam = params[row]
+        var thisParam = params[row]
         thisParam.isParam = false
         tableView.reloadData()
         NotificationCenter.default.post(name: .didSetParam, object: nil)

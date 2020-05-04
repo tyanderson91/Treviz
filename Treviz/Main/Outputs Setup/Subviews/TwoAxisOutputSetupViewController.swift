@@ -59,6 +59,12 @@ class TwoAxisOutputSetupViewController: AddOutputViewController {
         setWidth(component: var3ViewController, width: varSelectorWidth)*/
     }
     
+    override func variableDidChange(_ sender: VariableSelectorViewController) {
+        representedOutput.var1 = var1ViewController.selectedVariable
+        representedOutput.var2 = var2ViewController.selectedVariable
+        representedOutput.var3 = var3ViewController.selectedVariable
+    }
+    
     override func loadAnalysis(_ analysis: Analysis?) {
         super.loadAnalysis(analysis)
         if analysis != nil {
@@ -66,8 +72,8 @@ class TwoAxisOutputSetupViewController: AddOutputViewController {
                 if let vc = self.value(forKey: varname + "ViewController") as? VariableSelectorViewController {
                     vc.representedObject = analysis!
                     vc.selectedVariable = representedOutput.value(forKey: varname) as? Variable ?? nil
-                    vc.variableSelectorArrayController.content = analysis?.varList
-                    vc.variableSelectorPopup.bind(.selectedObject, to: representedOutput as Any, withKeyPath: varname, options: nil)
+                    //vc.variableSelectorArrayController.content = analysis?.varList
+                    //vc.variableSelectorPopup.bind(.selectedObject, to: representedOutput as Any, withKeyPath: varname, options: nil)
                 }
             }
         }

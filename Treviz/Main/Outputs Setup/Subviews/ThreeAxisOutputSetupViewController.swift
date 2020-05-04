@@ -48,6 +48,12 @@ class ThreeAxisOutputSetupViewController: AddOutputViewController {
         setWidth(component: var3ViewController!, width: varSelectorWidth)*/
     }
     
+    override func variableDidChange(_ sender: VariableSelectorViewController) {
+        representedOutput.var1 = var1ViewController.selectedVariable
+        representedOutput.var2 = var2ViewController.selectedVariable
+        representedOutput.var3 = var3ViewController.selectedVariable
+    }
+    
     override func createOutput()->TZOutput? {// TODO : expand for all plot types
         //TODO : Allow 3 variables
         

@@ -509,9 +509,6 @@
                                 </popUpButtonCell>
                                 <connections>
                                     <action selector="didChangeSelection:" target="VaL-7R-GMm" id="w07-GU-hvc"/>
-                                    <binding destination="tOx-oj-xE1" name="content" keyPath="arrangedObjects" id="iqu-oB-L5a"/>
-                                    <binding destination="tOx-oj-xE1" name="contentValues" keyPath="arrangedObjects.name" previousBinding="iqu-oB-L5a" id="BCC-Tu-cY7"/>
-                                    <binding destination="VaL-7R-GMm" name="selectedObject" keyPath="self.representedCondition" previousBinding="BCC-Tu-cY7" id="WiC-sX-U0B"/>
                                 </connections>
                             </popUpButton>
                         </subviews>
@@ -532,11 +529,7 @@
                     </connections>
                 </viewController>
                 <customObject id="4Cv-sq-H80" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <arrayController objectClassName="Condition" id="tOx-oj-xE1">
-                    <connections>
-                        <binding destination="VaL-7R-GMm" name="contentArray" keyPath="self.existingConditions" id="rCH-m8-9T0"/>
-                    </connections>
-                </arrayController>
+                <arrayController objectClassName="Condition" id="tOx-oj-xE1"/>
             </objects>
             <point key="canvasLocation" x="-270" y="421"/>
         </scene>

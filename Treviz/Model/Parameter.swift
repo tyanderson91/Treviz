@@ -11,7 +11,7 @@ import Cocoa
 /**
  This protocol is adopted by every class used as a input parameter or plotting variable. The standard Variable class adopts this protocol for all numerical variable, but it can also be adopted by categorical parameters, such as integrator type, or physics model
  */
-protocol Parameter: NSCoding {
+protocol Parameter: Codable { //NSCoding {
     //associatedtype VarType
     
     var hashValue: Int {get}
