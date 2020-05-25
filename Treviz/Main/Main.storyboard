@@ -824,9 +824,9 @@
                         <splitViewItem id="7OF-1a-Fl7" userLabel="Outputs Split View Item"/>
                         <splitViewItem holdingPriority="249" id="vb0-La-d8P"/>
                     </splitViewItems>
-                    <splitView key="splitView" autosaveName="mainSplitView" dividerStyle="thin" vertical="YES" id="Bmt-by-9O5">
-                        <rect key="frame" x="0.0" y="0.0" width="449" height="199"/>
-                        <autoresizingMask key="autoresizingMask"/>
+                    <splitView key="splitView" autosaveName="mainSplitView" dividerStyle="thin" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bmt-by-9O5">
+                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="199"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                         <connections>
                             <outlet property="delegate" destination="cNr-ot-ed2" id="k8f-ze-e9u"/>
                         </connections>

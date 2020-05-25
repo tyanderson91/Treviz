@@ -12,7 +12,7 @@ import Cocoa
 /**
  EvaluateCondition is a protocol that is adopted by bothe the Condition and SingleCondition classes. The basic feature is that it can read a state and determine whether it meets a given condition based on some predefined rules
  */
-protocol EvaluateCondition : NSCoding, Codable {
+protocol EvaluateCondition : Codable {
     /**
      Evaluate a trajectory (state) by the condition. Stores the result in the condition's "meetsCondition"
      */
@@ -364,7 +364,7 @@ class Condition : NSObject, EvaluateCondition, Codable {
     }
     
     // MARK: NSCoding
-    public func encode(with coder: NSCoder) {
+    /*public func encode(with coder: NSCoder) {
         coder.encode(name, forKey: "name")
         coder.encode(conditions, forKey: "conditions")
         coder.encode(unionType.rawValue, forKey: "unionType")
@@ -377,12 +377,12 @@ class Condition : NSObject, EvaluateCondition, Codable {
         unionType = BoolType(rawValue: coder.decodeInteger(forKey: "unionType")) ?? .single
         _summary = coder.decodeObject(forKey: "summary") as? String ?? ""
         super.init()
-    }
+    }*/
     
     // MARK: Codable implementation
     enum CodingKeys: String, CodingKey {
         case name
-        case Conditions
+        case Conditions // TODO: This shouldn't be uppercase
         case singleConditions
         case unionType
         case _summary
@@ -391,11 +391,13 @@ class Condition : NSObject, EvaluateCondition, Codable {
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         name = try container.decode(String.self, forKey: .name)
-        let Conditions = try container.decode(Array<Condition>.self, forKey: .Conditions)
-        let singleConditions = try container.decode(Array<SingleCondition>.self, forKey: .singleConditions)
         conditions = Array<EvaluateCondition>()
-        conditions.append(contentsOf: Conditions)
-        conditions.append(contentsOf: singleConditions)
+        do {
+            // let Conditions = try container.decode(Array<Condition>.self, forKey: .Conditions)
+            let singleConditions = try container.decode(Array<SingleCondition>.self, forKey: .singleConditions)
+            // conditions.append(contentsOf: Conditions) // handle this in factory initializer
+            conditions.append(contentsOf: singleConditions)
+        } catch { conditions = [] }
         unionType = try container.decode(BoolType.self, forKey: .unionType)
         do { _summary = try container.decode(String.self, forKey: ._summary)
         } catch { _summary = "" }
@@ -409,9 +411,10 @@ class Condition : NSObject, EvaluateCondition, Codable {
             try container.encode(_summary, forKey: ._summary)
         }
         let singleConditions = conditions.filter { $0 is SingleCondition } as? [SingleCondition]
-        let Conditions = conditions.filter { $0 is Condition } as? [Condition]
+        let conds = conditions.filter { $0 is Condition } as? [Condition]
+        let conditionNames = conds?.compactMap({$0.name})
         try container.encode(singleConditions, forKey: .singleConditions)
-        try container.encode(Conditions, forKey: .Conditions)
+        try container.encode(conditionNames, forKey: .Conditions)
     }
     
     // MARK: Inits
@@ -594,10 +597,13 @@ class Condition : NSObject, EvaluateCondition, Codable {
      */
     func containsCondition(_ inputCondition: EvaluateCondition)->Bool{
         // if self === inputCondition { return true }
-        for curCondition in self.conditions {
-            if curCondition === inputCondition { return true }
-            else if curCondition is Condition {
-                if (curCondition as! Condition).containsCondition(inputCondition) { return true }
+        for curEvaluateCondition in self.conditions {
+            if let curCondition = curEvaluateCondition as? Condition {
+                if curCondition === (inputCondition as? Condition) { return true }
+                else if curCondition.containsCondition(inputCondition) { return true }
+            }
+            else if let curSingleCondition = curEvaluateCondition as? SingleCondition {
+                if curSingleCondition === (inputCondition as? SingleCondition) { return true }
             }
         }
         return false

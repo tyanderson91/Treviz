@@ -13,7 +13,7 @@ import Cocoa
  Used to read input state, write output state, parse outputs, and create derived states.
  Converts into an array of Double values before being processed by the propagator
  */
-class State: NSObject, NSCoding {
+class State: NSObject {
     
     var variables : [Variable] = []
     /**
@@ -30,7 +30,7 @@ class State: NSObject, NSCoding {
     override init() {
         super.init()
     }
-    
+    /*
     func encode(with coder: NSCoder) {
         coder.encode(variables, forKey: "variables")
     }
@@ -38,7 +38,7 @@ class State: NSObject, NSCoding {
     required init?(coder: NSCoder) {
         variables = coder.decodeObject(forKey: "variables") as? [Variable] ?? [Variable]()
         super.init()
-    }
+    }*/
     
     init(variables varsIn: [Variable]) {
         variables = varsIn

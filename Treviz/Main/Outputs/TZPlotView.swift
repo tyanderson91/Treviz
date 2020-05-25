@@ -85,12 +85,17 @@ class TZPlotView: NSObject, CPTScatterPlotDelegate, CPTScatterPlotDataSource, CP
         
         xaxis.majorGridLineStyle = minorGridLineStyle
         xaxis.minorGridLineStyle = majorGridLineStyle
+        xaxis.title = "\(String(describing: plot.var1!.name)) (\(String(describing: plot.var1!.units)))"
+        xaxis.titleOffset = graph.titleTextStyle!.fontSize * CGFloat(3)
+
         
         let yaxis = axisSet.axes![1] as! CPTXYAxis
         yaxis.labelingPolicy = .automatic
         yaxis.axisConstraints = CPTConstraints(relativeOffset: 0.00)
         yaxis.majorGridLineStyle = minorGridLineStyle
         yaxis.minorGridLineStyle = majorGridLineStyle
+        yaxis.title = "\(String(describing: plot.var2!.name)) (\(String(describing: plot.var2!.units)))"
+        yaxis.titleOffset = graph.titleTextStyle!.fontSize * CGFloat(3)
         
         if plot.var1?.units == plot.var2?.units { //TODO: fix this so that axes of the same length show up square
             let axesSorted = [xaxis, yaxis].sorted(by: { (axis1: CPTAxis, axis2: CPTAxis) in

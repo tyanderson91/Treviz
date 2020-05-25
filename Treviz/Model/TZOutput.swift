@@ -100,33 +100,6 @@ class TZOutput : NSObject, Codable {
         curTrajectory = output.curTrajectory
     }
     
-    // MARK: NSCoding implementation
-    /*
-    func encode(with coder: NSCoder) {
-        coder.encode(id, forKey: "id")
-        coder.encode(title, forKey: "title")
-        coder.encode(var1, forKey: "var1")
-        coder.encode(var2, forKey: "var2")
-        coder.encode(var3, forKey: "var3")
-        coder.encode(categoryVar, forKey: "categoryVar")
-        coder.encode(condition, forKey: "condition")
-        coder.encode(plotType.name, forKey: "plotType")
-    }
-    required init?(coder: NSCoder) {
-        id = coder.decodeInteger(forKey: "id")
-        title = coder.decodeObject(forKey: "title") as? String ?? ""
-        var1 = coder.decodeObject(forKey: "var1") as? Variable ?? nil
-        var2 = coder.decodeObject(forKey: "var2") as? Variable ?? nil
-        var3 = coder.decodeObject(forKey: "var3") as? Variable ?? nil
-        categoryVar = coder.decodeObject(forKey: "categoryVar") as? Parameter ?? nil
-        condition = coder.decodeObject(forKey: "condition") as? Condition
-        let plotTypeName = coder.decodeObject(forKey: "plotType") as? String
-        if let curPlotType = TZPlotType.getPlotTypeByName(plotTypeName!) { plotType = curPlotType }
-        else { return nil } // TODO: throw error message that the plot type name can't be found
-        
-        super.init()
-    }*/
-    
     // MARK: Codable implementation
     enum CodingsKeys: CodingKey {
         case id
@@ -162,31 +135,20 @@ class TZOutput : NSObject, Codable {
             plotTypeID = try container.decode(String.self, forKey: .plotTypeID)
             plotType = TZPlotType.allPlotTypes.first { $0.id == plotTypeID }!
         } catch { throw TZPlotTypeError.InvalidPlotType }
-        
-        if true {
-            var1 = try container.decode(Variable.self, forKey: .var1)
-        }
-        if plotType.nAxis >= 2 {
-            var2 = try container.decode(Variable.self, forKey: .var2)
-        }
-        if plotType.nAxis >= 3 {
-            var3 = try container.decode(Variable.self, forKey: .var3)
-        }
-        if (plotType.nVars > plotType.nAxis) && (plotTypeID != "contour2d ") {
-            categoryVar = try container.decode(Variable.self, forKey: .catVar)
-        }
+        // Assigning of variables and conditions is done in the analysis-level factory initializer
     }
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingsKeys.self)
         try container.encode(id, forKey: .id)
         try container.encode(title, forKey: .title)
-        try container.encode(var1, forKey: .var1)
-        try container.encode(var2, forKey: .var2)
-        try container.encode(var3, forKey: .var3)
-        //try container.encode(var1?.id, forKey: .var1)
-        //try container.encode(var2?.id, forKey: .var2)
-        //try container.encode(var3?.id, forKey: .var3)
+        //try container.encode(var1, forKey: .var1)
+        //try container.encode(var2, forKey: .var2)
+        //try container.encode(var3, forKey: .var3)
+        try container.encode(var1?.id, forKey: .var1)
+        try container.encode(var2?.id, forKey: .var2)
+        try container.encode(var3?.id, forKey: .var3)
+        try container.encode(categoryVar?.id, forKey: .catVar)
         try container.encode(condition?.name, forKey: .condition)
         try container.encode(plotType.id, forKey: .plotTypeID)
     }
@@ -211,30 +173,6 @@ class TZOutput : NSObject, Codable {
         //return condValid && var1Valid && var2Valid && var3Valid && catVarValid
     }
     
-    /*
-    // MARK: collect data
-    private static func outputDataType(for plotType: TZPlotType)->OutputDataSet{
-        let plotTypeOutputDict : Dictionary<TZPlotType, OutputDataSet> = [
-            .singleValue: OutputDataSetLines(),
-            //.multiValue:
-            //.boxplot: OutputDataSetLines(),
-            //.multiBoxplot,
-            //.histogram: OutputDataSetLines
-            .oneLine2d: OutputDataSetLines(),
-            //.multiLine2d:
-            .multiPoint2d: OutputDataSetPoints(),
-            //.multiPointCat2d:
-            //.contour2d:
-            .oneLine3d: OutputDataSetLines(),
-            //.multiLine3d,
-            .multiPoint3d: OutputDataSetPoints()
-            //multiPointCat3d:
-            //.surface3d
-        ]
-        let outputData = plotTypeOutputDict[plotType] ?? OutputDataSetSingle()
-        return outputData
-    }*/
-    
     func getData() throws -> Any? {
         guard let curTraj = curTrajectory else { throw TZOutputError.MissingTrajectoryError }
         if plotType.requiresCondition {
@@ -252,13 +190,6 @@ class TZOutput : NSObject, Codable {
             if var3 != nil { lineSet.var3 = curTraj[var3!.id].value }
             return lineSet
         } else { return nil } // TODO: Implement category variables
-        /*
-        guard let thisVar = self.var1 else { throw TZOutputError.MissingVariableError }
-        guard let varDoubleValues = curTraj[thisVar, condition!] else { throw TZOutputError.UnmatchedConditionError }
-        guard varDoubleValues.count >= 1 else { throw TZOutputError.MissingPointsError }
-        
-        outputSet.var1 = varDoubleValues
-        */
     }
 
 }

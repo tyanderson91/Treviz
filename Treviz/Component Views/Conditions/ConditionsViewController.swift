@@ -192,6 +192,11 @@ class ConditionsViewController: TZViewController, VariableGetter {
             for thisCondition in curCondition.conditions {
                 showConditionView(condition: thisCondition)
             }
+            if curCondition.conditions.count == 1 {
+                for child in self.children {
+                    if let vc = child as? AddConditionViewController { vc.removeConditionButton.isHidden = true }
+                }
+            }
             tableView.selectRowIndexes(IndexSet(integer: tableRow), byExtendingSelection: false)  // TODO: find out why rows sometimes get deselected without this
             canAddSubCondition = true
             addConditionButton.title = "Delete"
@@ -222,7 +227,7 @@ class ConditionsViewController: TZViewController, VariableGetter {
         }
     }
     
-    func showConditionView(condition: EvaluateCondition){
+    func showConditionView(condition: EvaluateCondition) {
         var viewController: AddConditionViewController!
         let storyboard = NSStoryboard(name: "Conditions", bundle: nil)
         var storyboardID : String!

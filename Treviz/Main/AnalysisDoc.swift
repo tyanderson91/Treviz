@@ -83,11 +83,7 @@ class AnalysisDoc: NSDocument {
         // Alternatively, you could remove this method and override fileWrapper(ofType:), write(to:ofType:), or write(to:ofType:for:originalContentsURL:) instead.
         //let asysData = try NSKeyedArchiver.archivedData(withRootObject: analysis as Any, requiringSecureCoding: false)
         switch typeName {
-        case "com.tyleranderson.treviz.analysis":
-            let encoder = JSONEncoder()
-            let asysData = try encoder.encode(analysis)
-            return asysData
-        case "public.json":
+        case "public.json", "com.tyleranderson.treviz.analysis":
             let encoder = JSONEncoder()
             encoder.outputFormatting = .prettyPrinted
             let asysData = try encoder.encode(analysis)
@@ -107,12 +103,7 @@ class AnalysisDoc: NSDocument {
             analysis.inputSettings = analysis.varList//.compactMap { ($0.copy() as! Parameter) } // TODO: Better way to copy?
             readFromYaml(data: data)
             analysis.name = "YAML Document"
-        case "com.tyleranderson.treviz.analysis":
-            let decoder = JSONDecoder()
-            analysis = try decoder.decode(Analysis.self, from: data)
-            //analysis = try (NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? Analysis)!
-            analysis.name = "Analysis Document"
-        case "public.json":
+        case "public.json", "com.tyleranderson.treviz.analysis":
             let decoder = JSONDecoder()
             analysis = try decoder.decode(Analysis.self, from: data)
             analysis.name = "Analysis Document"
@@ -137,7 +128,7 @@ class AnalysisDoc: NSDocument {
     }
     
     // MARK: Initial analysis setup functions and constants
-    
+    //TODO: All of the below was moved into an Analysis extension. remove it from here and the YAML read functions
     func setupConstants(){
         loadVars(from: "InitVars")
         initVars = State.sortVarIndices(initVars)

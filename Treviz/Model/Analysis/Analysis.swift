@@ -36,7 +36,7 @@ class Analysis: NSObject, Codable {
     weak var terminalCondition : Condition!
     var traj: State!
     var initState: StateArray { return traj[0] }
-    @objc var conditions : [Condition] = []
+    @objc var conditions : [Condition] = [] // TODO: Turn this into a set instead of an array
     var inputSettings : [Parameter] = []
     var parameters : [Parameter] { //TODO: this should contain more than just input settings
         return inputSettings.filter {$0.isParam}
@@ -54,12 +54,12 @@ class Analysis: NSObject, Codable {
     var progressReporter: AnalysisProgressReporter?
     
     // Logging
-    private var _bufferLog = NSAttributedString() // This string is used to store any logs prior to the initialization of the log message text view
+    var _bufferLog = NSMutableAttributedString() // This string is used to store any logs prior to the initialization of the log message text view
     var logMessageView: TZLogger? {
         didSet {
             if _bufferLog.string != "" {
                 logMessageView?.logMessage(_bufferLog)
-                _bufferLog = NSAttributedString()
+                _bufferLog = NSMutableAttributedString()
             }
         }
     }
@@ -113,12 +113,18 @@ class Analysis: NSObject, Codable {
 
     
     required init(from decoder: Decoder) throws {
+        super.init()
         let container = try decoder.container(keyedBy: CodingKeys.self)
         name = try container.decode(String.self, forKey: .name)
         inputSettings = try container.decode(Array<Variable>.self, forKey: .inputSettings)
-        //plots = try container.decode(Array<TZOutput>.self, forKey: .plots)
-        //
-        conditions = try container.decode(Array<Condition>.self, forKey: .conditions)
+        setupConstants()
+        //conditions = try container.decode(Array<Condition>.self, forKey: .conditions)
+        var allConds = try container.nestedUnkeyedContainer(forKey: .conditions)
+        while(!allConds.isAtEnd){
+            let decoder = try allConds.superDecoder()
+            if let thisCond = Condition(decoder: decoder, referencing: self) { conditions.append(thisCond) }
+        }
+        
         do {
             let terminalConditionName = try container.decode(String.self, forKey: .terminalCondition)
             terminalCondition = conditions.first { $0.name == terminalConditionName }
@@ -131,20 +137,25 @@ class Analysis: NSObject, Codable {
         {
             let output = try allTZOutputs.nestedContainer(keyedBy: TZOutput.CustomCoderType.self)
             let type = try output.decode(TZOutput.OutputType.self, forKey: TZOutput.CustomCoderType.type)
-            var newOutput : TZOutput
+            var newOutput : TZOutput?
+            let decoder = try plotsTemp.superDecoder()
+            //let decoder = try output.superDecoder()
             switch type {
             case .text:
-                newOutput = try plotsTemp.decode(TZTextOutput.self)
+                //newOutput = try plotsTemp.decode(TZTextOutput.self)
+                newOutput = TZTextOutput(decoder: decoder, referencing: self)
             case .plot:
-                newOutput = try plotsTemp.decode(TZPlot.self)
+                //newOutput = try plotsTemp.decode(TZPlot.self)
+                newOutput = TZPlot(decoder: decoder, referencing: self)
             }
+            /*
             do {
-                if newOutput.plotType.requiresCondition {
+                if newOutput!.plotType.requiresCondition {
                     let conditionName = try output.decode(String.self, forKey: TZOutput.CustomCoderType.condition)
-                    newOutput.condition = conditions.first { $0.name == conditionName }
+                    newOutput!.condition = conditions.first { $0.name == conditionName }
                 }
-            }
-            plots.append(newOutput)
+            }*/
+            if newOutput != nil { plots.append(newOutput!) }
         }
         //
 

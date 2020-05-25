@@ -21,19 +21,27 @@ class AddConditionViewController: TZViewController {
     var subConditionIndex: Int = -1
     func initLoadAll(){}
     
+    override func viewDidLoad() {
+        //removeConditionButton.isHidden = true
+        super.viewDidLoad()
+    }
+    
     @IBAction func removeConditionButtonClicked(_ sender: Any)
     {
         let parent = self.parent as! ConditionsViewController
         if parent.newConditionStackView.arrangedSubviews.count == 1 {return}
-        else { deleteView()
-            parent.curCondition.conditions.removeAll { $0 === self.representedCondition }
+        else {
+            deleteView()
+            parent.curCondition.conditions.removeAll { $0.summary == representedCondition.summary }
         }
         if parent.newConditionStackView.arrangedSubviews.count == 1 {
             let lastVC = parent.children[0] as! AddConditionViewController
             lastVC.removeConditionButton.isHidden = true
+            //lastVC.removeConditionButton.image = NSImage(named: "contour2d")
             parent.newConditionStackView.layer?.borderWidth = 0
             parent.methodStackView.isHidden = true
         }
+        parent.tableView.reloadData()
     }
     
     func deleteView(){
