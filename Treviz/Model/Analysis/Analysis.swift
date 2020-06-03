@@ -85,22 +85,6 @@ class Analysis: NSObject, Codable {
         return checks.allSatisfy { $0 }
     }
     
-    // MARK: NSCoding implementation
-    /*
-    func encode(with coder: NSCoder) {
-        coder.encode(terminalCondition, forKey: "terminalCondition")
-        coder.encode(conditions, forKey: "conditions")
-        coder.encode(plots, forKey: "plots")
-        coder.encode(inputSettings, forKey: "inputSettings")
-    }
-    
-    required init?(coder: NSCoder) {
-        conditions = coder.decodeObject(forKey: "conditions") as? [Condition] ?? []
-        terminalCondition = coder.decodeObject(forKey: "terminalCondition") as? Condition ?? nil
-        plots = coder.decodeObject(forKey: "plots") as? [TZOutput] ?? []
-        inputSettings = coder.decodeObject(forKey: "inputSettings") as? [Parameter] ?? []
-        super.init()
-    }*/
     
     // MARK: Codable implementation
     enum CodingKeys: String, CodingKey {
@@ -118,18 +102,19 @@ class Analysis: NSObject, Codable {
         name = try container.decode(String.self, forKey: .name)
         inputSettings = try container.decode(Array<Variable>.self, forKey: .inputSettings)
         setupConstants()
-        //conditions = try container.decode(Array<Condition>.self, forKey: .conditions)
+
         var allConds = try container.nestedUnkeyedContainer(forKey: .conditions)
         while(!allConds.isAtEnd){
             let decoder = try allConds.superDecoder()
-            if let thisCond = Condition(decoder: decoder, referencing: self) { conditions.append(thisCond) }
+            if let thisCond = Condition(decoder: decoder, referencing: self) {
+                conditions.append(thisCond)
+            }
         }
         
         do {
             let terminalConditionName = try container.decode(String.self, forKey: .terminalCondition)
             terminalCondition = conditions.first { $0.name == terminalConditionName }
         }
-        
         
         var allTZOutputs = try container.nestedUnkeyedContainer(forKey: .plots)
         var plotsTemp = allTZOutputs
@@ -139,26 +124,16 @@ class Analysis: NSObject, Codable {
             let type = try output.decode(TZOutput.OutputType.self, forKey: TZOutput.CustomCoderType.type)
             var newOutput : TZOutput?
             let decoder = try plotsTemp.superDecoder()
-            //let decoder = try output.superDecoder()
+
             switch type {
             case .text:
-                //newOutput = try plotsTemp.decode(TZTextOutput.self)
                 newOutput = TZTextOutput(decoder: decoder, referencing: self)
             case .plot:
-                //newOutput = try plotsTemp.decode(TZPlot.self)
                 newOutput = TZPlot(decoder: decoder, referencing: self)
             }
-            /*
-            do {
-                if newOutput!.plotType.requiresCondition {
-                    let conditionName = try output.decode(String.self, forKey: TZOutput.CustomCoderType.condition)
-                    newOutput!.condition = conditions.first { $0.name == conditionName }
-                }
-            }*/
+
             if newOutput != nil { plots.append(newOutput!) }
         }
-        //
-
     }
     
     func encode(to encoder: Encoder) throws {
@@ -166,7 +141,8 @@ class Analysis: NSObject, Codable {
         try container.encode(name, forKey: .name)
         try container.encode(conditions, forKey: .conditions)
         try container.encode(terminalCondition.name, forKey: .terminalCondition)
-        try container.encode(inputSettings as? [Variable], forKey: .inputSettings)
+        let nonzerovars = (inputSettings as? [Variable])?.filter({$0.value[0] != 0})
+        try container.encode(nonzerovars, forKey: .inputSettings)
         try container.encode(plots, forKey: .plots)
     }
 }

@@ -13,8 +13,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     @IBOutlet weak var application: NSApplication!
     
-    var plotTypes : [TZPlotType]! = nil
-    var initVars : [Variable]! = nil
+    //var plotTypes : [TZPlotType]! = nil
+    //var initVars : [Variable]! = nil
     
     func applicationWillFinishLaunching(_ notification: Notification) {
     }
@@ -34,7 +34,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
     }
-    
+    /*
     func loadVars(from plist: String){
         guard let varFilePath = Bundle.main.path(forResource: plist, ofType: "plist") else {return}
         guard let inputList = NSArray.init(contentsOfFile: varFilePath) else {return}//return empty if filename not found
@@ -46,5 +46,5 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             newVar.value = [0]
             initVars.append(newVar)
         }
-    }
+    }*/
 }
