@@ -19,7 +19,7 @@ Variable is a class that defines a single changeable numerical property of a veh
  - get rid of NSCopying and NSCoding
  - create static typess
  */
-class Variable : NSObject, Parameter, Codable { //TODO: reconsider whether this could be a struct
+struct Variable : Parameter, Codable { //TODO: reconsider whether this could be a struct
     
     let id: VariableID
     let name: String
@@ -35,7 +35,7 @@ class Variable : NSObject, Parameter, Codable { //TODO: reconsider whether this 
         name = nameIn
         symbol = symbolIn
         units = unitsIn
-        super.init()
+        //super.init()
     }
     
     // Subscripts to get value data

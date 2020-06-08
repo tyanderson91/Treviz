@@ -28,7 +28,7 @@ In addition, this class contains class-level functions such as initiating the an
 */
 class Analysis: NSObject, Codable {
     
-    @objc var varList : [Variable]!// {return appDelegate.initVars}
+    var varList : [Variable]!// {return appDelegate.initVars}
     var initStateGroups : InitStateHeader!
     
     // Analysis-specific data and configs (read/writing functions in AnalysisData.swift)

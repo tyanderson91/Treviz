@@ -24,7 +24,7 @@ extension Analysis {
         var initVars = Array<Variable>()
         for thisVar in inputList {
             guard let dict = thisVar as? NSDictionary else {return []}
-            let newVar = Variable(dict["id"] as! VariableID, named: dict["name"] as! String, symbol: dict["symbol"] as! String)
+            var newVar = Variable(dict["id"] as! VariableID, named: dict["name"] as! String, symbol: dict["symbol"] as! String)
             newVar.units = dict["units"] as! String
             newVar.value = [0]
             initVars.append(newVar)
@@ -35,14 +35,15 @@ extension Analysis {
     /**
      This function reads in the current physics model and pre-populates all the required initial states with 0 values
      */
+    /*
     func defaultInitSettings()->[Variable] { //TODO: vary depending on the physics type
         var varList = [Variable]()
         for thisVar in varList {
-            guard let newVar = thisVar.copy() as? Variable else {continue}
+            let newVar = thssVar.copy() as? Variable else {continue}
             varList.append(newVar)
         }
         return varList
-    }
+    }*/
     
     func loadVarGroups(from plist: String){
          guard let varFilePath = Bundle.main.path(forResource: plist, ofType: "plist") else {return}

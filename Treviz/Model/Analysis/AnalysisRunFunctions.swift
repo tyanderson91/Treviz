@@ -21,11 +21,20 @@ extension Analysis {
         guard self.isValid() else { return }  // TODO: error code for this case
         
         // Setup
+        /*
         for thisVar in self.traj.variables { // Delete all data except for initial state
             if thisVar.value.count > 1 { thisVar.value.removeLast(thisVar.value.count - 1) }
             if let existingVar = inputSettings.first(where: { (var1: Parameter)->Bool in return var1.id == thisVar.id }) {
                 thisVar.value[0] = (existingVar as? Variable)?.value[0] ?? 0
             }
+        }*/
+        self.traj.variables = self.traj.variables.compactMap {
+            var newVar = $0
+            if let existingVar = inputSettings.first(where: { (var1: Parameter)->Bool in return var1.id == newVar.id }) {
+                newVar.value[0] = (existingVar as? Variable)?.value[0] ?? 0
+            } else { newVar.value = [0] }
+            //newVar.value = [$0.value[0]]
+            return newVar
         }
         self.traj.sortVarIndices() // Ensure that time is the first variable, x is second, etc.
         let dt : VarValue = defaultTimestep
@@ -55,7 +64,8 @@ extension Analysis {
                 // var pctComplete = 0.0
                 // self.isRunning = !self.terminalCondition.evaluateSingle(self.traj.copyAtIndex(i))
                 // Only use this if ALL state variable can be represented in array form
-                self.isRunning = !self.terminalCondition.evaluateStateArray(self.traj![i])
+                let curtraj = self.traj![i]
+                self.isRunning = !self.terminalCondition.evaluateStateArray(curtraj)
                 
                 if !self.isRunning {
                     self.returnCode = 1

@@ -39,7 +39,8 @@ extension Analysis {
             for paramSet in inputList {
                 for thisKey in paramSet.keys { //TODO: better way to do this
                     let curVarID = thisKey
-                    let thisVar =  inputSettings.first(where: { $0.id == curVarID }) as! Variable
+                    guard let thisVarIndex = inputSettings.firstIndex(where: { $0.id == curVarID }) else { continue }
+                    var thisVar = inputSettings[thisVarIndex] as! Variable
                     thisVar.value = [VarValue(truncating: paramSet[curVarID] as! NSNumber)]
                     thisVar.isParam = true
                 }
@@ -82,9 +83,12 @@ extension Analysis {
        - Parameter yamlObj: a Dictionary of the type [String: Any] read from a yaml file.
        */
     func initVar(varID: VariableID, varStr: Any) -> Variable? {
-        guard let thisVar = inputSettings.first(where: { $0.id == varID}) as? Variable else {return nil}
+        //guard var thisVar = inputSettings.first(where: { $0.id == varID}) as? Variable else {return nil}
+        guard let thisVarIndex = inputSettings.firstIndex(where: { $0.id == varID}) else {return nil}
+        guard var thisVar = inputSettings[thisVarIndex] as? Variable else {return nil}
         if let val = varStr as? NSNumber {
             thisVar.value = [VarValue(truncating: val)]
+            inputSettings[thisVarIndex] = thisVar
             return thisVar
         } else {return nil}
     }

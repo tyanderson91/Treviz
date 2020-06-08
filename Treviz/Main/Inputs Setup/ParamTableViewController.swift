@@ -86,7 +86,7 @@ class ParamTableViewController: TZViewController , NSTableViewDelegate, NSTableV
     
     @IBAction func editUnits(_ sender: NSTextField) {
         let curRow = tableView.row(for: sender)
-        if let thisParam = analysis.parameters[curRow] as? Variable{
+        if var thisParam = analysis.parameters[curRow] as? Variable{
             thisParam.units = sender.stringValue
             NotificationCenter.default.post(name: .didChangeUnits, object: nil)
         }
@@ -94,7 +94,7 @@ class ParamTableViewController: TZViewController , NSTableViewDelegate, NSTableV
     
     @IBAction func editValues(_ sender: NSTextField) {
         let curRow = tableView.row(for: sender)
-        if let thisParam = analysis.parameters[curRow] as? Variable{
+        if var thisParam = analysis.parameters[curRow] as? Variable{
             if let value = VarValue(sender.stringValue) {
                 thisParam.value[0] = value}
             NotificationCenter.default.post(name: .didChangeValue, object: nil)

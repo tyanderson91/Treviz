@@ -18,9 +18,9 @@ class TwoAxisOutputSetupViewController: AddOutputViewController {
 
     @IBOutlet weak var plottingStackView: NSStackView!
 
-    @objc var var1ViewController: VariableSelectorViewController!
-    @objc var var2ViewController: VariableSelectorViewController!
-    @objc var var3ViewController: VariableSelectorViewController!
+    var var1ViewController: VariableSelectorViewController!
+    var var2ViewController: VariableSelectorViewController!
+    var var3ViewController: VariableSelectorViewController!
     
     override func createOutput()->TZOutput? {// TODO : expand for all plot types
         /*
@@ -31,7 +31,18 @@ class TwoAxisOutputSetupViewController: AddOutputViewController {
             newPlot.setName()
             return newPlot
         }*/
-        return nil
+        guard let plotType = plotTypePopupButton.selectedItem?.title else {return nil}
+        var var1 : Variable?
+        var var2 : Variable?
+        guard let var1Name = var1ViewController.variableSelectorPopup.selectedItem?.title else {return nil}
+        guard let var2Name = var2ViewController.variableSelectorPopup.selectedItem?.title else {return nil}
+        var1 = analysis.varList.first(where: {$0.name == var1Name} )
+        var2 = analysis.varList.first(where: {$0.name == var2Name} )
+        
+        let newPlot = TZPlot(id: maxPlotID+1, vars: [var1!, var2!], plotType: TZPlotType.getPlotTypeByName(plotType)!)
+        //newPlot.setName()
+        return newPlot
+        //return nil
     }
     
     override func getHeaderTitle() -> String { return NSLocalizedString("Two Axis", comment: "") }
@@ -50,8 +61,11 @@ class TwoAxisOutputSetupViewController: AddOutputViewController {
         self.addChild(var3ViewController)
         variableGridView.cell(atColumnIndex: 1, rowIndex: 2).contentView = var3ViewController.view
         
-        loadAnalysis(analysis)
         super.viewDidLoad()
+
+        var1ViewController.selectedVariable = self.representedOutput.var1
+        var2ViewController.selectedVariable = self.representedOutput.var2
+        var3ViewController.selectedVariable = self.representedOutput.var3
 
         /*
         setWidth(component: var1ViewController, width: varSelectorWidth)

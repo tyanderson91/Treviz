@@ -51,6 +51,10 @@ class State: NSObject {
             let thisVar = variables.first(where: {$0.id == varID})!
             return thisVar
         }
+        set {
+            let index = variables.firstIndex(where: {$0.id == varID})!
+            variables[index] = newValue
+        }
     }
     
     subscript(_ varID: VariableID, index: Int) -> VarValue? {
@@ -60,7 +64,7 @@ class State: NSObject {
             else{return nil}
         }
         set (newVal) {
-            let thisVar = self[varID]
+            var thisVar = self[varID]
             if newVal != nil {thisVar[index] = newVal}
         }
     }

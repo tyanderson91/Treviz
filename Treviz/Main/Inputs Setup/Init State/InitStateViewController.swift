@@ -151,7 +151,7 @@ class InitStateViewController: BaseViewController, NSOutlineViewDelegate, NSOutl
     
     @IBAction func editUnits(_ sender: NSTextField) {
         let curRow = outlineView.row(for: sender)
-        if let thisParam = outlineView.item(atRow: curRow) as? Variable{
+        if var thisParam = outlineView.item(atRow: curRow) as? Variable{
             thisParam.units = sender.stringValue
             NotificationCenter.default.post(name: .didChangeUnits, object: nil)
         }
@@ -159,7 +159,7 @@ class InitStateViewController: BaseViewController, NSOutlineViewDelegate, NSOutl
     
     @IBAction func editValues(_ sender: NSTextField) {
         let curRow = outlineView.row(for: sender)
-        if let thisParam = outlineView.item(atRow: curRow) as? Variable{
+        if var thisParam = outlineView.item(atRow: curRow) as? Variable{
             if let value = VarValue(sender.stringValue) {
                 thisParam.value[0] = value}
             NotificationCenter.default.post(name: .didChangeValue, object: nil)

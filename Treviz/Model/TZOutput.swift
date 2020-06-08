@@ -49,9 +49,9 @@ class TZOutput : NSObject, Codable {
     @objc var id : Int
     @objc var title : String = ""
     @objc var plotType : TZPlotType
-    @objc var var1 : Variable?
-    @objc var var2 : Variable?
-    @objc var var3 : Variable?
+    var var1 : Variable?
+    var var2 : Variable?
+    var var3 : Variable?
     var categoryVar : Parameter?
     @objc weak var condition : Condition?
     var curTrajectory : State?
@@ -80,7 +80,7 @@ class TZOutput : NSObject, Codable {
         var title = ""
         for thisVar in vars{
             title += thisVar.name
-            if thisVar != vars.last {title += " vs "} // TODO: vary this for the different plot types
+            if thisVar.name != vars.last?.name {title += " vs "} // TODO: vary this for the different plot types
         }
         self.init(id: id, plotType: plotType)
         if vars.count >= 1 { var1 = vars[0] }
