@@ -34,6 +34,7 @@ extension Analysis {
                 _ = initVar(varID: curVarID, varStr: curVarVal)// { inputSettings.append(thisVar) }
             }
         }
+        setupConstants()
         
         if let inputList = yamlDict["Parameters"] as? [[String: Any]] {
             for paramSet in inputList {
@@ -43,6 +44,7 @@ extension Analysis {
                     var thisVar = inputSettings[thisVarIndex] as! Variable
                     thisVar.value = [VarValue(truncating: paramSet[curVarID] as! NSNumber)]
                     thisVar.isParam = true
+                    inputSettings[thisVarIndex] = thisVar
                 }
             }
         }

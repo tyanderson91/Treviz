@@ -21,7 +21,7 @@ class AnalysisDoc: NSDocument {
     
     override init() {
         super.init()
-        analysis.setupConstants() // TODO: load variables for new analylsis
+        analysis.setupConstants() // TODO: load variables for new analysis
     }
     
     // MARK: NSDocument setup and read/write methods

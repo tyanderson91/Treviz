@@ -173,6 +173,14 @@ class TZOutput : NSObject, Codable {
         //return condValid && var1Valid && var2Valid && var3Valid && catVarValid
     }
     
+    func loadVars(analysis: Analysis){
+        let varlist = analysis.traj.variables
+        if var1 != nil { var1 = varlist.first(where: {$0.id == var1!.id})}
+        if var2 != nil { var2 = varlist.first(where: {$0.id == var2!.id})}
+        if var3 != nil { var3 = varlist.first(where: {$0.id == var3!.id})}
+        if categoryVar != nil { categoryVar = varlist.first(where: {$0.id == categoryVar!.id})}
+    }
+    
     func getData() throws -> Any? {
         guard let curTraj = curTrajectory else { throw TZOutputError.MissingTrajectoryError }
         if plotType.requiresCondition {

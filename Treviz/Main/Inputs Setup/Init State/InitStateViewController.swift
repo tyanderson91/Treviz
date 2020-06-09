@@ -82,14 +82,14 @@ class InitStateViewController: BaseViewController, NSOutlineViewDelegate, NSOutl
                 return InputsViewController.inputHeaderParamCellView(view: outlineView, thisInput: curItem)
             default: return nil}
         }
-        else if let curItem = item as? Parameter {
+        else if let curItem = item as? Variable {
             switch tableColumn?.identifier{
             case NSUserInterfaceItemIdentifier.nameColumn:
                 return InputsViewController.nameCellView(view: outlineView, thisInput: curItem)
             case NSUserInterfaceItemIdentifier.initStateValueColumn:
-                return InputsViewController.inputValueCellView(view: outlineView, inputVar: curItem as? Variable)
+                return InputsViewController.inputValueCellView(view: outlineView, inputVar: curItem)
             case NSUserInterfaceItemIdentifier.unitsColumn:
-                return InputsViewController.unitsCellView(view: outlineView, thisInput: curItem as? Variable)
+                return InputsViewController.unitsCellView(view: outlineView, thisInput: curItem)
             case NSUserInterfaceItemIdentifier.initStateParamColumn:
                 return InputsViewController.inputParamCellView(view: outlineView, thisInput: curItem)
             default:
@@ -140,7 +140,7 @@ class InitStateViewController: BaseViewController, NSOutlineViewDelegate, NSOutl
         return try NSKeyedUnarchiver.unarchivedObject(ofClass: Parameter, from: object as! Data) ?? nil
     }*/
 
-    @IBAction func setParams(_ sender: Any) {
+    @IBAction func setParams(_ sender: Any) { // TODO: Make setting and getting params work with Variable as a struct
         guard let button = sender as? NSButton else {return}
         let row = outlineView.row(for: button)
         if var thisParam = outlineView.item(atRow: row) as? Parameter {

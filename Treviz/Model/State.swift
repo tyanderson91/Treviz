@@ -64,8 +64,7 @@ class State: NSObject {
             else{return nil}
         }
         set (newVal) {
-            var thisVar = self[varID]
-            if newVal != nil {thisVar[index] = newVal}
+            if newVal != nil {self[varID][index] = newVal}
         }
     }
     

@@ -34,6 +34,7 @@ class MainWindowController: NSWindowController {
         textOutputView.string = ""
         plotViewController.plotViews = []
         for curOutput in analysis.plots {
+            curOutput.loadVars(analysis: analysis)
             do { try curOutput.assertValid() }
             catch {
                 analysis.logMessage(error.localizedDescription)
