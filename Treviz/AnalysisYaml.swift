@@ -41,7 +41,7 @@ extension Analysis {
                 for thisKey in paramSet.keys { //TODO: better way to do this
                     let curVarID = thisKey
                     guard let thisVarIndex = inputSettings.firstIndex(where: { $0.id == curVarID }) else { continue }
-                    var thisVar = inputSettings[thisVarIndex] as! Variable
+                    let thisVar = inputSettings[thisVarIndex] as! Variable
                     thisVar.value = [VarValue(truncating: paramSet[curVarID] as! NSNumber)]
                     thisVar.isParam = true
                     inputSettings[thisVarIndex] = thisVar
@@ -87,7 +87,7 @@ extension Analysis {
     func initVar(varID: VariableID, varStr: Any) -> Variable? {
         //guard var thisVar = inputSettings.first(where: { $0.id == varID}) as? Variable else {return nil}
         guard let thisVarIndex = inputSettings.firstIndex(where: { $0.id == varID}) else {return nil}
-        guard var thisVar = inputSettings[thisVarIndex] as? Variable else {return nil}
+        guard let thisVar = inputSettings[thisVarIndex] as? Variable else {return nil}
         if let val = varStr as? NSNumber {
             thisVar.value = [VarValue(truncating: val)]
             inputSettings[thisVarIndex] = thisVar

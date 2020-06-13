@@ -24,7 +24,7 @@ extension Analysis {
         var initVars = Array<Variable>()
         for thisVar in inputList {
             guard let dict = thisVar as? NSDictionary else {return []}
-            var newVar = Variable(dict["id"] as! VariableID, named: dict["name"] as! String, symbol: dict["symbol"] as! String)
+            let newVar = Variable(dict["id"] as! VariableID, named: dict["name"] as! String, symbol: dict["symbol"] as! String)
             newVar.units = dict["units"] as! String
             newVar.value = [0]
             initVars.append(newVar)
@@ -61,6 +61,8 @@ extension Analysis {
              if itemType == "var"{
                  if let newVar = inputSettings.first(where: {$0.id == itemID}) as? Variable {
                     input.variables.append(newVar)
+                 } else if let defaultVar = varList.first(where: {$0.id == itemID}) {
+                    input.variables.append(defaultVar)
                  }
                  continue
              } else {

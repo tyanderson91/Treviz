@@ -141,7 +141,7 @@ class Analysis: NSObject, Codable {
         try container.encode(name, forKey: .name)
         try container.encode(conditions, forKey: .conditions)
         try container.encode(terminalCondition.name, forKey: .terminalCondition)
-        let nonzerovars = (inputSettings as? [Variable])?.filter({$0.value[0] != 0})
+        let nonzerovars = (inputSettings as? [Variable])?.filter({$0.value[0] != 0 || $0.isParam})
         try container.encode(nonzerovars, forKey: .inputSettings)
         try container.encode(plots, forKey: .plots)
     }

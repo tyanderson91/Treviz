@@ -1,6 +1,17 @@
 {
   "terminalCondition" : "Terminal",
   "inputSettings" : [
+      {
+        "symbol" : "t",
+        "id" : "t",
+        "isParam" : true,
+        "units" : "time",
+        "isValid" : true,
+        "value" : [
+          0
+        ],
+        "name" : "Time"
+    },
     {
       "symbol" : "𝑋",
       "id" : "x",

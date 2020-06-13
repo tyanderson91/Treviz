@@ -29,7 +29,7 @@ extension Analysis {
             }
         }*/
         self.traj.variables = self.traj.variables.compactMap {
-            var newVar = $0
+            let newVar = $0
             if let existingVar = inputSettings.first(where: { (var1: Parameter)->Bool in return var1.id == newVar.id }) {
                 newVar.value[0] = (existingVar as? Variable)?.value[0] ?? 0
             } else { newVar.value = [0] }

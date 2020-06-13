@@ -75,7 +75,7 @@ extension State {
             var i = 0
             for thisValue in newArray {
                 let varID = State.stateVarPositions[i]
-                var thisVar = self[varID]
+                let thisVar = self[varID]
                 thisVar[index] = thisValue
                 self[varID] = thisVar
                 i += 1
