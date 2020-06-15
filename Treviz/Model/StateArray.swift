@@ -74,10 +74,11 @@ extension State {
         set (newArray) {
             var i = 0
             for thisValue in newArray {
-                let varID = State.stateVarPositions[i]
-                let thisVar = self[varID]
+                let thisVar = self[State.stateVarPositions[i]]
+                //let varID = State.stateVarPositions[i]
+                //let thisVar = self[varID]
                 thisVar[index] = thisValue
-                self[varID] = thisVar
+                //self[varID] = thisVar
                 i += 1
             }
         }

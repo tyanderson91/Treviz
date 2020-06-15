@@ -43,7 +43,7 @@ class AnalysisDoc: NSDocument {
         window.contentView = mainVC.view
         
         DistributedNotificationCenter.default.addObserver(windowController as Any, selector: #selector(windowController.completeAnalysis), name: .didFinishRunningAnalysis, object: nil)
-        window.standardWindowButton(NSWindow.ButtonType.closeButton)!.isHidden = true
+        //window.standardWindowButton(NSWindow.ButtonType.closeButton)!.isHidden = true
 
         #else
         if let mainVC = storyboard.instantiateController(withIdentifier: "mainViewController") as? MainViewController {
@@ -57,7 +57,7 @@ class AnalysisDoc: NSDocument {
             windowController.createToolbar()
             
             DistributedNotificationCenter.default.addObserver(windowController as Any, selector: #selector(windowController.completeAnalysis), name: .didFinishRunningAnalysis, object: nil)
-            window.standardWindowButton(NSWindow.ButtonType.closeButton)!.isHidden = true
+            //window.standardWindowButton(NSWindow.ButtonType.closeButton)!.isHidden = true
             
         }
         #endif

@@ -1,13 +1,13 @@
 //
-//  AnalysisDocYaml.swift
+//  AnalysisYaml.swift
 //  
 //  This file contains an extension to AnalysisDoc that handles all operations with Yaml file reading and writing
 //  Created by Tyler Anderson on 2/18/20.
 //
 
 import Foundation
+//import CYaml
 import Yams
-
 //typealias YamlString = String
 
 extension Analysis {
@@ -44,7 +44,7 @@ extension Analysis {
                     let thisVar = inputSettings[thisVarIndex] as! Variable
                     thisVar.value = [VarValue(truncating: paramSet[curVarID] as! NSNumber)]
                     thisVar.isParam = true
-                    //inputSettings[thisVarIndex] = thisVar
+                    inputSettings[thisVarIndex] = thisVar
                 }
             }
         }
@@ -90,7 +90,7 @@ extension Analysis {
         guard let thisVar = inputSettings[thisVarIndex] as? Variable else {return nil}
         if let val = varStr as? NSNumber {
             thisVar.value = [VarValue(truncating: val)]
-            //inputSettings[thisVarIndex] = thisVar
+            inputSettings[thisVarIndex] = thisVar
             return thisVar
         } else {return nil}
     }
