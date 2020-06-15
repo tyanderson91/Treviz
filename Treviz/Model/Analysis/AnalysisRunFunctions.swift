@@ -10,10 +10,6 @@
 
 import Cocoa
 
-extension NSNotification.Name {
-    static let didFinishRunningAnalysis = Notification.Name("didFinishRunningAnalysis")
-}
-    
 extension Analysis {
         
     func runAnalysis() {
@@ -79,7 +75,10 @@ extension Analysis {
                     self.progressReporter?.updateProgress(at: curState)
                 }
             }
-            DistributedNotificationCenter.default.post(name: .didFinishRunningAnalysis, object: nil)
+
+            DispatchQueue.main.async {
+                self.progressReporter?.completeAnalysis()
+            }
         }
     }
     

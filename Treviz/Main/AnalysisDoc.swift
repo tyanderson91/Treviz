@@ -56,9 +56,7 @@ class AnalysisDoc: NSDocument {
             windowController = MainWindowController(window: window)
             windowController.createToolbar()
             
-            DistributedNotificationCenter.default.addObserver(windowController as Any, selector: #selector(windowController.completeAnalysis), name: .didFinishRunningAnalysis, object: nil)
             //window.standardWindowButton(NSWindow.ButtonType.closeButton)!.isHidden = true
-            
         }
         #endif
         // Make window clear
@@ -121,6 +119,7 @@ class AnalysisDoc: NSDocument {
         default:
             return
         }
+        analysis.name = "Analysis (\(typeName))"
         analysis.defaultTimestep = 0.1
         
         // TODO: Definitely find a more robust way to handle this
