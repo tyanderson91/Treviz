@@ -20,17 +20,14 @@ class AddOutputViewController: BaseViewController, VariableGetter {
     //TODO : Add a way to add variable selectors and associated logic
     
     @IBOutlet weak var conditionsPopupButton: NSPopUpButton!
-    var conditions: [Condition]? {
-        if let asys = analysis { return asys.conditions } else { return nil }
-    }
     
-    @IBOutlet weak var plotTypeCell: NSPopUpButtonCell!
     @IBOutlet weak var titleTextField: NSTextField!
     @IBOutlet weak var titleTextFieldConstraint: NSLayoutConstraint!
+    @IBOutlet weak var plotTypeCell: NSPopUpButtonCell!
     
     @IBOutlet weak var plotTypePopupButton: NSPopUpButton!
-    var plotTypeArrayController = NSArrayController() // TODO: Replace array controller with custom creating menu items so that plot icons can be added
-    @objc var plotTypes: [TZPlotType]? {
+
+    var plotTypes: [TZPlotType]? {
         return TZPlotType.allPlotTypes.filter { plotTypeSelector($0) }
     }
     
@@ -67,11 +64,13 @@ class AddOutputViewController: BaseViewController, VariableGetter {
         editingOutputStackView.isHidden = false
         
         objectController.content = representedOutput
-        plotTypeArrayController.content = plotTypes
         
-        plotTypePopupButton.bind(.content, to: plotTypeArrayController, withKeyPath: "arrangedObjects", options: nil)
-        plotTypePopupButton.bind(.contentValues, to: plotTypeArrayController, withKeyPath: "arrangedObjects.name", options: nil)
-        plotTypePopupButton.bind(.selectedObject, to: objectController!, withKeyPath: "selection.plotType")
+        //plotTypePopupButton.imageHugsTitle = false
+        for thisPlotType in plotTypes ?? []{
+            let menuItem = NSMenuItem.init(title: thisPlotType.name, action: nil, keyEquivalent: "")
+            menuItem.image = thisPlotType.icon
+            plotTypePopupButton.menu?.addItem(menuItem)
+        }
         self.bind(.title, to: objectController!, withKeyPath: "selection.title")
         
         conditionsPopupButton.addItems(withTitles: analysis.conditions.compactMap({$0.name}))

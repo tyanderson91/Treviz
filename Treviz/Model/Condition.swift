@@ -168,25 +168,6 @@ class SingleCondition: EvaluateCondition, Codable {
         specialCondition = spc
     }
     
-    // MARK: NSCoding implementation
-    
-    func encode(with coder: NSCoder) {
-        coder.encode(varID, forKey: "varid")
-        coder.encode(lbound, forKey: "lbound")
-        coder.encode(ubound, forKey: "ubound")
-        coder.encode(equality, forKey: "equality")
-        coder.encode(specialCondition?.rawValue, forKey: "specialCondition")
-    }
-    
-    required init?(coder: NSCoder) {
-        varID = coder.decodeObject(forKey: "varid") as? VariableID ?? ""
-        lbound = coder.decodeObject(forKey: "lbound") as? VarValue ?? nil
-        ubound = coder.decodeObject(forKey: "ubound") as? VarValue ?? nil
-        equality = coder.decodeObject(forKey: "equality") as? VarValue ?? nil
-        if let scint = coder.decodeObject(forKey: "specialCondition") as? Int {
-            specialCondition = SpecialConditionType(rawValue: scint) ?? nil }
-    }
-    
     // MARK: Codable implementation
     enum CodingKeys: String, CodingKey {
         case lbound

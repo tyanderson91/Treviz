@@ -31,7 +31,9 @@ class TZPlotType : NSObject {
         self.requiresCondition = requiresCondition
         self.nAxis = nAxis
         self.nVars = nVars
-        self.icon = NSImage(named: id)
+        if let fullImage = NSImage(named: id) {
+            self.icon = fullImage
+        }
     }
     
     /**
