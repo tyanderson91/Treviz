@@ -24,13 +24,14 @@ Conditions:
     - TerminalTest
     - Too far
   - Apogee: y is local max
+  - Terminal:
+    union: or
+    conditions:
+    - Ground Impact
+    - Final time
     
-Terminal Condition:
-  union: or
-  conditions:
-  - Ground Impact
-  - Final time
-  
+Terminal Condition: Terminal
+
 Outputs:
   - id: 1
     title: X pos

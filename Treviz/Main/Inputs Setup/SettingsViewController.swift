@@ -42,7 +42,7 @@ class SettingsViewController: BaseViewController {
     @objc func didChangeCondition(_ notification: Notification){
         terminalConditionArrayController.content = analysis!.conditions
         if analysis.terminalCondition == nil {return}
-        if !analysis.conditions.contains(analysis.terminalCondition) {
+        if !analysis.conditions.contains(where: {$0 === analysis.terminalCondition} ) {
             analysis.terminalCondition = nil
             terminalConditionPopupButton.bind(.selectedObject, to: analysis!, withKeyPath: "terminalCondition", options: nil)
         }
@@ -51,7 +51,7 @@ class SettingsViewController: BaseViewController {
     
     @objc func didChangeCondition1(_ notification: Notification){
         if analysis.terminalCondition == nil {}
-        else if !analysis.conditions.contains(analysis.terminalCondition) {
+        else if !analysis.conditions.contains(where: {$0 === analysis.terminalCondition}) {
             analysis.terminalCondition = nil
         }
         getPopupOptions()

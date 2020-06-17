@@ -13,7 +13,7 @@ import Cocoa
  Used to read input state, write output state, parse outputs, and create derived states.
  Converts into an array of Double values before being processed by the propagator
  */
-class State: NSObject, NSCoding {
+class State: NSObject {
     
     var variables : [Variable] = []
     /**
@@ -30,7 +30,7 @@ class State: NSObject, NSCoding {
     override init() {
         super.init()
     }
-    
+    /*
     func encode(with coder: NSCoder) {
         coder.encode(variables, forKey: "variables")
     }
@@ -38,19 +38,11 @@ class State: NSObject, NSCoding {
     required init?(coder: NSCoder) {
         variables = coder.decodeObject(forKey: "variables") as? [Variable] ?? [Variable]()
         super.init()
-    }
+    }*/
     
     init(variables varsIn: [Variable]) {
         variables = varsIn
         super.init()
-    }
-    
-    func copy(atIndex index: Int)->State{ //TODO: Accomplish this with a simple subscript
-        let newState = State()
-        for thisVar in self.variables{
-            if let newVar = thisVar.copy(atIndex: index) { newState.variables.append(newVar) }
-        }
-        return newState
     }
 
     // Subscripts by variable
@@ -58,6 +50,10 @@ class State: NSObject, NSCoding {
         get {
             let thisVar = variables.first(where: {$0.id == varID})!
             return thisVar
+        }
+        set {
+            let index = variables.firstIndex(where: {$0.id == varID})!
+            variables[index] = newValue
         }
     }
     
@@ -68,8 +64,7 @@ class State: NSObject, NSCoding {
             else{return nil}
         }
         set (newVal) {
-            let thisVar = self[varID]
-            if newVal != nil {thisVar[index] = newVal}
+            if newVal != nil {self[varID][index] = newVal}
         }
     }
     

@@ -20,13 +20,14 @@ extension Analysis: TZLogger {
     func logMessage(_ message: NSAttributedString) {
         if let messageView = logMessageView {
             messageView.logMessage(message)
+        } else {
+            _bufferLog.append(message)
+            _bufferLog.append(NSAttributedString(string: "\n"))
         }
     }
     
     func logMessage(_ message: String) {
-        if let messageView = logMessageView {
-            messageView.logMessage(message)
-        }
+        logMessage(NSAttributedString(string: message))
     }
     
 

@@ -23,6 +23,7 @@ class ConditionsTableView: NSTableView {
     }
 
     override func keyDown(with event: NSEvent) {
+        super.keyDown(with: event)
 
         if event.characters?.count == 1 {
             let character = event.keyCode
@@ -32,10 +33,8 @@ class ConditionsTableView: NSTableView {
             case UInt16(125):
                 tableSelector!(self)
             default:
-                super.keyDown(with: event)
+                break
             }
         }
-        super.keyDown(with: event)
     }
-    
 }

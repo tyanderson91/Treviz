@@ -174,7 +174,7 @@ extension MainWindowController: NSToolbarDelegate {
             if asys.isRunning{
                 toolbar.toggleAnalysisRun.title = "►"
                 asys.isRunning = false
-                DistributedNotificationCenter.default().post(name: .didFinishRunningAnalysis, object: nil)
+                self.completeAnalysis()
             }
             else {
                 toolbar.toggleAnalysisRun.title = "■"

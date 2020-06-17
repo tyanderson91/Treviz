@@ -14,11 +14,13 @@ enum outputLocation{
     case plot, text
 }
 
-class AddOutputViewController: BaseViewController { //TODO : Add a way to add variable selectors and associated logic
+class AddOutputViewController: BaseViewController, VariableGetter {
+    func variableDidChange(_ sender: VariableSelectorViewController) {
+    }
+    //TODO : Add a way to add variable selectors and associated logic
     
     @IBOutlet weak var conditionsPopupButton: NSPopUpButton!
-    var conditionsArrayController = NSArrayController()
-    @objc var conditions: [Condition]? {
+    var conditions: [Condition]? {
         if let asys = analysis { return asys.conditions } else { return nil }
     }
     
@@ -60,58 +62,25 @@ class AddOutputViewController: BaseViewController { //TODO : Add a way to add va
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(self.conditionsChanged(_:)), name: .didAddCondition, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.conditionsChanged(_:)), name: .didRemoveCondition, object: nil)
-        // NotificationCenter.default.addObserver(self, selector: #selector(self.populatePlotTypes(_:)), name: .didLoadAppDelegate, object: nil)
-        //populatePlotTypes()
+
         displayOutputStackView.isHidden = true
         editingOutputStackView.isHidden = false
         
-        //representedOutput = TZOutput(id: 0, plotType: TZPlotType.allPlotTypes[0])
-        //if analysis.conditions.count > 0 { representedOutput.condition = }
         objectController.content = representedOutput
-        
-        //loadAnalysis(analysis)
-        conditionsArrayController.content = conditions
         plotTypeArrayController.content = plotTypes
         
-        //conditionsArrayController.content = conditions
-        conditionsPopupButton.bind(.content, to: conditionsArrayController, withKeyPath: "arrangedObjects", options: nil)
-        conditionsPopupButton.bind(.contentValues, to: conditionsArrayController, withKeyPath: "arrangedObjects.name", options: nil)
-        conditionsPopupButton.bind(.selectedObject, to: objectController!, withKeyPath: "selection.condition", options: nil)
-        //let a = analysis
-        //let b = representedOutput
         plotTypePopupButton.bind(.content, to: plotTypeArrayController, withKeyPath: "arrangedObjects", options: nil)
         plotTypePopupButton.bind(.contentValues, to: plotTypeArrayController, withKeyPath: "arrangedObjects.name", options: nil)
         plotTypePopupButton.bind(.selectedObject, to: objectController!, withKeyPath: "selection.plotType")
         self.bind(.title, to: objectController!, withKeyPath: "selection.title")
         
-        //plotTypePopupButton.wantsLayer = true
-        //plotTypePopupButton.layer!.backgroundColor = NSColor.controlBackgroundColor.cgColor
-        //plotTypeCell.backgroundColor = NSColor.controlBackgroundColor.cgColor
-        // plotTypePopupButton.layer!.tex
-    }
-    /*
-    func setWidth(component: Any, width: CGFloat){
-        let conditionWidth = NSLayoutConstraint(item: component, attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute,multiplier: 1, constant: width)
-        self.view.addConstraint(conditionWidth)
-    }*/
-    override func getHeaderTitle() -> String { return representedOutput?.title ?? "New Output" }
-    /*
-    override func viewWillAppear() {
-        self.view.appearance = NSAppearance(named: .darkAqua)
-    }*/
-    
-    func loadAnalysis(_ analysis: Analysis?){
-        if analysis != nil {
-            self.analysis = analysis
+        conditionsPopupButton.addItems(withTitles: analysis.conditions.compactMap({$0.name}))
+        if let curCond = representedOutput.condition {
+            conditionsPopupButton.selectItem(withTitle: curCond.name)
         }
-        conditionsArrayController.content = conditions
-        plotTypeArrayController.content = plotTypes
-        
-        plotTypePopupButton.bind(.content, to: plotTypeArrayController, withKeyPath: "arrangedObjects", options: nil)
-        plotTypePopupButton.bind(.contentValues, to: plotTypeArrayController, withKeyPath: "arrangedObjects.name", options: nil)
-        plotTypePopupButton.bind(.selectedObject, to: objectController!, withKeyPath: "selection.plotType")
-        self.bind(.title, to: objectController!, withKeyPath: "selection.title")
     }
+    
+    override func getHeaderTitle() -> String { return representedOutput?.title ?? "New Output" }
     
     func createOutput()-> TZOutput?{ //Should be overwritten by each subclass
         return nil
@@ -121,13 +90,17 @@ class AddOutputViewController: BaseViewController { //TODO : Add a way to add va
     }
     
     @objc func conditionsChanged(_ notification: Notification){
-        conditionsArrayController.content = analysis.conditions
         guard representedOutput.condition != nil else { return }
-        if !analysis.conditions.contains(representedOutput.condition!) {
+        conditionsPopupButton.removeAllItems()
+        conditionsPopupButton.addItems(withTitles: analysis.conditions.compactMap({$0.name}))
+        if !analysis.conditions.contains(where: {$0 === representedOutput.condition!}) {
             representedOutput.condition = nil
             conditionsPopupButton.select(nil)
-            conditionsPopupButton.bind(.contentValues, to: conditionsArrayController, withKeyPath: "arrangedObjects.name", options: nil)
+            conditionsPopupButton.removeAllItems()
+            conditionsPopupButton.addItems(withTitles: analysis.conditions.compactMap({$0.name}))
+            conditionsPopupButton.select(nil)
         }
+        else { conditionsPopupButton.selectItem(withTitle: representedOutput.condition?.name ?? "")}
     }
     @IBAction func includeTextCheckboxClicked(_ sender: Any) {
         setOutputType(type: .text)
@@ -168,5 +141,14 @@ class AddOutputViewController: BaseViewController { //TODO : Add a way to add va
             outputSetupViewController.removeOutput(representedOutput)
         }
     }
+    
+    @IBAction func didChangeCondition(_ sender: Any) {
+        guard let senderButton = sender as? NSPopUpButton else { return }
+        guard let selectedConditionName = senderButton.selectedItem?.title else {return}
+        if let selectedCondition = analysis.conditions.first(where: {$0.name == selectedConditionName}) {
+            representedOutput.condition = selectedCondition
+        }
+    }
+    
 
 }

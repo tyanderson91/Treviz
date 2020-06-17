@@ -18,11 +18,10 @@ class AnalysisDoc: NSDocument {
     var appDelegate : AppDelegate!
     var windowController : MainWindowController! //Implicit optional, should always be assigned after initialization
     var viewController : MainViewController!
-    var initVars : [Variable]! = nil
     
     override init() {
         super.init()
-        setupConstants() // TODO: load variables for new analylsis
+        analysis.setupConstants() // TODO: load variables for new analysis
     }
     
     // MARK: NSDocument setup and read/write methods
@@ -44,7 +43,7 @@ class AnalysisDoc: NSDocument {
         window.contentView = mainVC.view
         
         DistributedNotificationCenter.default.addObserver(windowController as Any, selector: #selector(windowController.completeAnalysis), name: .didFinishRunningAnalysis, object: nil)
-        window.standardWindowButton(NSWindow.ButtonType.closeButton)!.isHidden = true
+        //window.standardWindowButton(NSWindow.ButtonType.closeButton)!.isHidden = true
 
         #else
         if let mainVC = storyboard.instantiateController(withIdentifier: "mainViewController") as? MainViewController {
@@ -57,9 +56,7 @@ class AnalysisDoc: NSDocument {
             windowController = MainWindowController(window: window)
             windowController.createToolbar()
             
-            DistributedNotificationCenter.default.addObserver(windowController as Any, selector: #selector(windowController.completeAnalysis), name: .didFinishRunningAnalysis, object: nil)
-            window.standardWindowButton(NSWindow.ButtonType.closeButton)!.isHidden = true
-            
+            //window.standardWindowButton(NSWindow.ButtonType.closeButton)!.isHidden = true
         }
         #endif
         // Make window clear
@@ -81,27 +78,48 @@ class AnalysisDoc: NSDocument {
     override func data(ofType typeName: String) throws -> Data {
         // Insert code here to write your document to data of the specified type, throwing an error in case of failure.
         // Alternatively, you could remove this method and override fileWrapper(ofType:), write(to:ofType:), or write(to:ofType:for:originalContentsURL:) instead.
-        let asysData = try NSKeyedArchiver.archivedData(withRootObject: analysis as Any, requiringSecureCoding: false)
-        return asysData
+        //let asysData = try NSKeyedArchiver.archivedData(withRootObject: analysis as Any, requiringSecureCoding: false)
+        switch typeName {
+        case "public.json":
+            let encoder = JSONEncoder()
+            encoder.outputFormatting = .prettyPrinted
+            let asysData = try encoder.encode(analysis)
+            return asysData
+        case "com.TylerAnderson.Treviz.Analysis":
+            do {
+                let archiver = NSKeyedArchiver(requiringSecureCoding: false)
+                try archiver.encodeEncodable(analysis, forKey: NSKeyedArchiveRootObjectKey)
+                return archiver.encodedData
+            } catch { analysis.logMessage("Error when saving file")
+                throw error
+            }
+        default:
+            analysis.logMessage("Could not save file")
+            return Data()
+            // TODO: throw error
+        }
         //throw NSError(domain: NSOSStatusErrorDomain, code: unimpErr, userInfo: nil)
     }
     
     override func read(from data: Data, ofType typeName: String) throws {
         // Insert code here to read your document from the given data of the specified type, throwing an error in case of failure.
         // Alternatively, you could remove this method and override read(from:ofType:) instead.  If you do, you should also override isEntireFileLoaded to return false if the contents are lazily loaded.
-        setupConstants()
         switch typeName {
         case "public.yaml":
-            analysis.inputSettings = analysis.varList.compactMap { ($0.copy() as! Parameter) } // TODO: Better way to copy?
-            readFromYaml(data: data)
+            analysis.inputSettings = analysis.varList//.compactMap { ($0.copy() as! Parameter) } // TODO: Better way to copy?
+            analysis.readFromYaml(data: data)
             analysis.name = "YAML Document"
-        case "com.tyleranderson.treviz.analysis":
-            analysis = try (NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? Analysis)!
+        case "public.json":
+            let decoder = JSONDecoder()
+            analysis = try decoder.decode(Analysis.self, from: data)
             analysis.name = "Analysis Document"
+        case "com.tyleranderson.treviz.analysis":
+            let unarchiver = try NSKeyedUnarchiver(forReadingFrom: data)
+            analysis = unarchiver.decodeDecodable(Analysis.self, forKey: NSKeyedArchiveRootObjectKey)!
         default:
             return
         }
-        setupConstants()
+        analysis.name = "Analysis (\(typeName))"
         analysis.defaultTimestep = 0.1
         
         // TODO: Definitely find a more robust way to handle this
@@ -118,72 +136,4 @@ class AnalysisDoc: NSDocument {
         return false
     }
     
-    // MARK: Initial analysis setup functions and constants
-    
-    func setupConstants(){
-        loadVars(from: "InitVars")
-        initVars = State.sortVarIndices(initVars)
-        
-        analysis.varList = initVars
-        loadVarGroups(from: "InitStateStructure")
-    }
-    
-    func loadVars(from plist: String){
-        guard let varFilePath = Bundle.main.path(forResource: plist, ofType: "plist") else {return}
-        guard let inputList = NSArray.init(contentsOfFile: varFilePath) else {return}//return empty if filename not found
-        initVars = []
-        for thisVar in inputList {
-            guard let dict = thisVar as? NSDictionary else {return}
-            let newVar = Variable(dict["id"] as! VariableID, named: dict["name"] as! String, symbol: dict["symbol"] as! String)
-            newVar.units = dict["units"] as! String
-            newVar.value = [0]
-            initVars.append(newVar)
-        }
-    }
-    
-    /**
-     This function reads in the current physics model and pre-populates all the required initial states with 0 values
-     */
-    func defaultInitSettings()->[Variable] { //TODO: vary depending on the physics type
-        var varList = [Variable]()
-        for thisVar in analysis.varList {
-            guard let newVar = thisVar.copy() as? Variable else {continue}
-            varList.append(newVar)
-        }
-        return varList
-    }
-    
-    func loadVarGroups(from plist: String){
-         guard let varFilePath = Bundle.main.path(forResource: plist, ofType: "plist") else {return}
-         guard let inputList = NSArray.init(contentsOfFile: varFilePath) else {return} //return empty if filename not found
-         analysis.initStateGroups = InitStateHeader(id: "default")
-         loadVarGroupsRecurs(input: analysis.initStateGroups, withList: inputList as! [NSDictionary])
-     }
-     
-     private func loadVarGroupsRecurs(input: InitStateHeader, withList list: [NSDictionary]){
-         for dict in list {
-             guard let itemType = dict["itemType"] as? String else { return }
-             guard let itemID = dict["id"] as? VariableID else { return }
-             let name = dict["name"] as? String
-             
-             if itemType == "var"{
-                 if let newVar = analysis.inputSettings.first(where: {$0.id == itemID}) as? Variable {
-                    input.variables.append(newVar)
-                 }
-                 continue
-             } else {
-                 var newHeader = InitStateHeader(id: "")
-                 if itemType == "header" {
-                     newHeader = InitStateHeader(id: itemID)}
-                 else if itemType == "subHeader" {
-                     newHeader = InitStateSubHeader(id: itemID)}
-                 else {return}
-                 newHeader.name = name!
-                 input.subheaders.append(newHeader)
-                 if let children = dict["items"] as? NSArray {
-                     loadVarGroupsRecurs(input: newHeader, withList: children as! [NSDictionary])
-                 }
-             }
-         }
-     }
 }

@@ -18,20 +18,21 @@ class TwoAxisOutputSetupViewController: AddOutputViewController {
 
     @IBOutlet weak var plottingStackView: NSStackView!
 
-    @objc var var1ViewController: VariableSelectorViewController!
-    @objc var var2ViewController: VariableSelectorViewController!
-    @objc var var3ViewController: VariableSelectorViewController!
+    var var1ViewController: VariableSelectorViewController!
+    var var2ViewController: VariableSelectorViewController!
+    var var3ViewController: VariableSelectorViewController!
     
     override func createOutput()->TZOutput? {// TODO : expand for all plot types
-        /*
-        if let plotType = plotTypeDropDown.selectedItem?.title{
-            let newPlot = TZPlot1line2d()
-            newPlot.plotType = PlotType(rawValue: plotType)!
-            //newPlot.var1 = variableSelectorViewController?.getSelectedItem()
-            newPlot.setName()
-            return newPlot
-        }*/
-        return nil
+        guard let plotType = plotTypePopupButton.selectedItem?.title else {return nil}
+        var var1 : Variable?
+        var var2 : Variable?
+        guard let var1Name = var1ViewController.variableSelectorPopup.selectedItem?.title else {return nil}
+        guard let var2Name = var2ViewController.variableSelectorPopup.selectedItem?.title else {return nil}
+        var1 = analysis.varList.first(where: {$0.name == var1Name} )
+        var2 = analysis.varList.first(where: {$0.name == var2Name} )
+        
+        let newPlot = TZPlot(id: maxPlotID+1, vars: [var1!, var2!], plotType: TZPlotType.getPlotTypeByName(plotType)!)
+        return newPlot
     }
     
     override func getHeaderTitle() -> String { return NSLocalizedString("Two Axis", comment: "") }
@@ -50,27 +51,17 @@ class TwoAxisOutputSetupViewController: AddOutputViewController {
         self.addChild(var3ViewController)
         variableGridView.cell(atColumnIndex: 1, rowIndex: 2).contentView = var3ViewController.view
         
-        loadAnalysis(analysis)
         super.viewDidLoad()
 
-        /*
-        setWidth(component: var1ViewController, width: varSelectorWidth)
-        setWidth(component: var2ViewController, width: varSelectorWidth)
-        setWidth(component: var3ViewController, width: varSelectorWidth)*/
+        var1ViewController.selectedVariable = self.representedOutput.var1
+        var2ViewController.selectedVariable = self.representedOutput.var2
+        var3ViewController.selectedVariable = self.representedOutput.var3
     }
     
-    override func loadAnalysis(_ analysis: Analysis?) {
-        super.loadAnalysis(analysis)
-        if analysis != nil {
-            for varname in ["var1", "var2", "var3"] {
-                if let vc = self.value(forKey: varname + "ViewController") as? VariableSelectorViewController {
-                    vc.representedObject = analysis!
-                    vc.selectedVariable = representedOutput.value(forKey: varname) as? Variable ?? nil
-                    vc.variableSelectorArrayController.content = analysis?.varList
-                    vc.variableSelectorPopup.bind(.selectedObject, to: representedOutput as Any, withKeyPath: varname, options: nil)
-                }
-            }
-        }
+    override func variableDidChange(_ sender: VariableSelectorViewController) {
+        representedOutput.var1 = var1ViewController.selectedVariable
+        representedOutput.var2 = var2ViewController.selectedVariable
+        representedOutput.var3 = var3ViewController.selectedVariable
     }
     
     override func populateWithOutput(text: TZTextOutput?, plot: TZPlot?){ //Should be overwritten by each subclass

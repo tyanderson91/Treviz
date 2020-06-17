@@ -16,24 +16,32 @@ enum singleConditionType : String {
 
 class AddConditionViewController: TZViewController {
     @IBOutlet weak var removeConditionButton: NSButton!
-    @objc var representedCondition: EvaluateCondition!
+    var representedCondition: EvaluateCondition!
     func populateWithCondition(_ thisCondition: EvaluateCondition){}
     var subConditionIndex: Int = -1
     func initLoadAll(){}
+    
+    override func viewDidLoad() {
+        //removeConditionButton.isHidden = true
+        super.viewDidLoad()
+    }
     
     @IBAction func removeConditionButtonClicked(_ sender: Any)
     {
         let parent = self.parent as! ConditionsViewController
         if parent.newConditionStackView.arrangedSubviews.count == 1 {return}
-        else { deleteView()
-            parent.curCondition.conditions.removeAll { $0 === self.representedCondition }
+        else {
+            deleteView()
+            parent.curCondition.conditions.removeAll { $0.summary == representedCondition.summary }
         }
         if parent.newConditionStackView.arrangedSubviews.count == 1 {
             let lastVC = parent.children[0] as! AddConditionViewController
             lastVC.removeConditionButton.isHidden = true
+            //lastVC.removeConditionButton.image = NSImage(named: "contour2d")
             parent.newConditionStackView.layer?.borderWidth = 0
             parent.methodStackView.isHidden = true
         }
+        parent.tableView.reloadData()
     }
     
     func deleteView(){
@@ -46,9 +54,8 @@ class AddConditionViewController: TZViewController {
 
 class AddExistingConditionViewController: AddConditionViewController {
     @IBOutlet weak var conditionSelectorPopup: NSPopUpButton!
-    @IBOutlet var existingConditionsArrayController: NSArrayController!
-    @objc var existingConditions: [Condition]!
-    @objc var menuConditions: [Condition] { return existingConditions.filter { !$0.containsCondition(representedCondition) }
+    var existingConditions: [Condition]!
+    var menuConditions: [Condition] { return existingConditions.filter { !$0.containsCondition(representedCondition) }
     }
     
     required init?(coder: NSCoder) {
@@ -63,15 +70,22 @@ class AddExistingConditionViewController: AddConditionViewController {
     override func viewDidLoad() {
         if let condition = representedCondition as? Condition { // Should always be the case
             existingConditions = analysis.conditions
-            existingConditionsArrayController.content = menuConditions
+            //existingConditionsArrayController.content = menuConditions
+            
+            conditionSelectorPopup.addItems(withTitles: menuConditions.compactMap { $0.name })
+            guard menuConditions.contains(where: {$0 === representedCondition as! Condition}) else { return }
+            
             conditionSelectorPopup.selectItem(withTitle: condition.name)
+            
             //let menuItem = conditionSelectorPopup.itemArray.first(where: { $0.representedObject === condition })
         }
         super.viewDidLoad()
     }
     
     @IBAction func didChangeSelection(_ sender: Any) {
-        representedCondition = conditionSelectorPopup.selectedItem?.representedObject as! Condition
+        let selectedTitle = conditionSelectorPopup.selectedItem?.title
+        guard let selectedCondition = existingConditions.first(where: { $0.name == selectedTitle }) else { return }
+        representedCondition = selectedCondition
         if let parent = self.parent as? ConditionsViewController {
             // TODO: Maybe only need the reload data?
             let curConditionArray = parent.curCondition.conditions
@@ -84,8 +98,8 @@ class AddExistingConditionViewController: AddConditionViewController {
 
 }
 
-class AddNewConditionViewController: AddConditionViewController {
-
+class AddNewConditionViewController: AddConditionViewController, VariableGetter {
+    
     @IBOutlet weak var intervalTypeRadioButton: NSButton!
     @IBOutlet weak var equalityTypeRadioButton: NSButton!
     @IBOutlet weak var specialTypeRadioButton: NSButton!
@@ -95,15 +109,12 @@ class AddNewConditionViewController: AddConditionViewController {
     @IBOutlet weak var upperBoundTextField: NSControl!//NSTextField!
     @IBOutlet weak var specialTypePopup: NSPopUpButton!
     var selectedType : singleConditionType = .interval
-    @objc var representedSingleCondition : SingleCondition { return representedCondition as! SingleCondition }
+    var representedSingleCondition : SingleCondition { return representedCondition as! SingleCondition }
     var varObservation : NSKeyValueObservation!
     var conditionViewController : ConditionsViewController?
-    { return self.parent as? ConditionsViewController ?? nil }
-    
-    @objc var variableSelectorViewController : VariableSelectorViewController?
-    @objc var selectedVariable: Variable!
-    @IBOutlet var singleConditionObjectController: NSObjectController!
-    
+    { return self.parent as? ConditionsViewController ?? nil }    
+    var variableSelectorViewController : VariableSelectorViewController?
+   
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
@@ -114,9 +125,6 @@ class AddNewConditionViewController: AddConditionViewController {
     }
     
     override func viewDidLoad() {
-        //representedCondition = SingleCondition()
-        singleConditionObjectController.bind(.content, to: self, withKeyPath: "representedSingleCondition", options: nil)
-        
         if representedSingleCondition.lbound != nil {
             lowerBoundTextField.stringValue = "\(representedSingleCondition.lbound!)"
             intervalTypeRadioButton.state = .on
@@ -142,6 +150,13 @@ class AddNewConditionViewController: AddConditionViewController {
         super.viewDidLoad()
     }
 
+    func variableDidChange(_ sender: VariableSelectorViewController) {
+        representedSingleCondition.varID = sender.selectedVariable?.id
+        if let parent = parent as? ConditionsViewController {
+            parent.variableDidChange(sender)
+        }
+    }
+    
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         if segue.identifier == "variableSelectorSegue" {
             guard let viewController = segue.destinationController as? VariableSelectorViewController else {return}
@@ -149,11 +164,12 @@ class AddNewConditionViewController: AddConditionViewController {
             variableSelectorViewController!.analysis = analysis
 
             variableSelectorViewController?.selectedVariable = analysis.varList.first { $0.id == representedSingleCondition.varID }
+            /* TODO: handle observing some other way
             self.varObservation = variableSelectorViewController!.observe(\.selectedVariable?, changeHandler: {
                 (varVC, change) in
                 if let varID = varVC.selectedVariable?.id { self.representedSingleCondition.varID = varID }
                 self.conditionViewController!.tableView.reloadData()
-            })
+            })*/
         }
     }
     

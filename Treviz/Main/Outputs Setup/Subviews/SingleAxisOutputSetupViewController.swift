@@ -16,7 +16,7 @@ class SingleAxisOutputSetupViewController: AddOutputViewController {
     
     override func createOutput() -> TZOutput? {// TODO : expand for all plot types
         guard let plotType = plotTypePopupButton.selectedItem?.title else {return nil}
-        let var1 = variableSelectorViewController?.getSelectedItem()
+        let var1 = variableSelectorViewController?.selectedVariable
         let newOutput = TZOutput(id: maxPlotID+1, vars: [var1!], plotType: TZPlotType.getPlotTypeByName(plotType)!)
         //let condIndex = conditionsComboBox.indexOfSelectedItem
         //if condIndex>=0 { newOutput.condition = analysis.conditions[condIndex] }
@@ -27,26 +27,20 @@ class SingleAxisOutputSetupViewController: AddOutputViewController {
         let storyboard = NSStoryboard(name: "VariableSelector", bundle: nil)
         variableSelectorViewController = storyboard.instantiateController(identifier: "variableSelectorViewController") { aDecoder in VariableSelectorViewController(coder: aDecoder, analysis: self.analysis) }
         variableSelectorViewController.representedObject = self.analysis
-        //variableSelectorViewController.selectedVariable = self.representedOutput.var1? ?? nil
+        variableSelectorViewController.selectedVariable = self.representedOutput.var1
         self.addChild(variableSelectorViewController)
         gridView.cell(atColumnIndex: 0, rowIndex: 1).contentView = variableSelectorViewController.view
         self.variableSelectorViewController.view.becomeFirstResponder()
         
         super.viewDidLoad()
-        
-        loadAnalysis(analysis)
-    }
-    
-    override func loadAnalysis(_ analysis: Analysis?) {
-        super.loadAnalysis(analysis)
-        if analysis != nil {
-            variableSelectorViewController.representedObject = analysis!
-            variableSelectorViewController.selectedVariable = representedOutput.var1
-            variableSelectorViewController.variableSelectorArrayController.content = analysis?.varList
-            variableSelectorViewController.variableSelectorPopup.bind(.selectedObject, to: representedOutput as Any, withKeyPath: "var1", options: nil)
-        }
     }
 
+    override func variableDidChange(_ sender: VariableSelectorViewController) {
+        if sender === variableSelectorViewController {
+            representedOutput.var1 = sender.selectedVariable
+        }
+    }
+    
     override func populateWithOutput(text: TZTextOutput?, plot: TZPlot?){ //Should be overwritten by each subclass
         // let output = text == nil ? plot : text as! TZOutput
         // variableSelectorViewController.selectedVariable = output

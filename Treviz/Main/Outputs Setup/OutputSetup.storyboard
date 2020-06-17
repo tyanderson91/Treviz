@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="FMf-NL-ufc">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="FMf-NL-ufc">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16096"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -9,18 +9,18 @@
         <scene sceneID="pk8-NG-Akl">
             <objects>
                 <viewController identifier="outputSetupRestoration" storyboardIdentifier="outputSetup" id="FMf-NL-ufc" customClass="OutputSetupViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="fmw-WQ-uxs">
-                        <rect key="frame" x="0.0" y="0.0" width="513" height="289"/>
+                    <view key="view" misplaced="YES" id="fmw-WQ-uxs">
+                        <rect key="frame" x="0.0" y="0.0" width="513" height="93"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView verticalHuggingPriority="900" verticalCompressionResistancePriority="50" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X3z-Eb-GAM" userLabel="Output Setup Custom Scroll View">
-                                <rect key="frame" x="0.0" y="100" width="513" height="138"/>
+                                <rect key="frame" x="0.0" y="100" width="513" height="2"/>
                                 <clipView key="contentView" id="iZT-XH-WJ0">
-                                    <rect key="frame" x="1" y="1" width="511" height="136"/>
+                                    <rect key="frame" x="1" y="1" width="511" height="0.0"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <stackView distribution="fill" orientation="vertical" alignment="trailing" spacing="1" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" verticalClippingResistancePriority="900" verticalHuggingPriority="900" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gfp-GI-MP9" customClass="CustomStackView" customModule="Treviz" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="136" width="511" height="0.0"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="511" height="0.0"/>
                                         </stackView>
                                     </subviews>
                                     <constraints>
@@ -33,16 +33,16 @@
                                     <constraint firstAttribute="height" priority="50" constant="400" placeholder="YES" id="sXx-O9-x1F"/>
                                 </constraints>
                                 <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="kBx-UO-78b">
-                                    <rect key="frame" x="1" y="121" width="511" height="16"/>
+                                    <rect key="frame" x="1" y="-15" width="511" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="39l-sD-gFI">
-                                    <rect key="frame" x="496" y="1" width="16" height="136"/>
+                                    <rect key="frame" x="496" y="1" width="16" height="0.0"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2VV-N6-yqy">
-                                <rect key="frame" x="13" y="248" width="52" height="32"/>
+                                <rect key="frame" x="13" y="112" width="52" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="48" id="b4k-k1-kdx"/>
                                 </constraints>
@@ -206,7 +206,7 @@
                                 </tableHeaderView>
                             </scrollView>
                             <stackView distribution="fillEqually" orientation="horizontal" alignment="top" spacing="1" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uyZ-oY-mbV">
-                                <rect key="frame" x="78" y="253" width="357" height="21"/>
+                                <rect key="frame" x="78" y="117" width="357" height="21"/>
                                 <subviews>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vQy-oS-3AV">
                                         <rect key="frame" x="-6" y="-7" width="101" height="32"/>
@@ -292,7 +292,7 @@
                     </connections>
                 </arrayController>
             </objects>
-            <point key="canvasLocation" x="-108.5" y="860.5"/>
+            <point key="canvasLocation" x="-108.5" y="762.5"/>
         </scene>
         <!--SingleAxisViewController-->
         <scene sceneID="hxV-f7-wcq">
@@ -378,6 +378,9 @@
                                                         <font key="font" metaFont="system"/>
                                                         <menu key="menu" id="kIu-sP-SCl"/>
                                                     </popUpButtonCell>
+                                                    <connections>
+                                                        <action selector="didChangeCondition:" target="msL-sn-tpe" id="6vj-J3-qDs"/>
+                                                    </connections>
                                                 </popUpButton>
                                             </gridCell>
                                         </gridCells>
@@ -751,6 +754,9 @@
                                                         <font key="font" metaFont="system"/>
                                                         <menu key="menu" id="FC9-BZ-bJW"/>
                                                     </popUpButtonCell>
+                                                    <connections>
+                                                        <action selector="didChangeCondition:" target="Rjj-aS-ILt" id="BTt-yk-ezb"/>
+                                                    </connections>
                                                 </popUpButton>
                                             </gridCell>
                                         </gridCells>
@@ -1053,6 +1059,9 @@
                                                         <font key="font" metaFont="system"/>
                                                         <menu key="menu" id="04r-al-afl"/>
                                                     </popUpButtonCell>
+                                                    <connections>
+                                                        <action selector="didChangeCondition:" target="fdO-ej-2qj" id="e6z-nA-hwX"/>
+                                                    </connections>
                                                 </popUpButton>
                                             </gridCell>
                                         </gridCells>
@@ -1214,6 +1223,9 @@
                                                         <font key="font" metaFont="system"/>
                                                         <menu key="menu" id="yN6-JM-aW4"/>
                                                     </popUpButtonCell>
+                                                    <connections>
+                                                        <action selector="didChangeCondition:" target="zkJ-3F-i9f" id="b2d-UM-6as"/>
+                                                    </connections>
                                                 </popUpButton>
                                             </gridCell>
                                             <gridCell row="JYp-au-9eT" column="gRV-LD-uQh" id="d7I-rO-p3w">

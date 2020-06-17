@@ -24,7 +24,7 @@ class MainSplitViewController: TZSplitViewController {
         for thisView in splitViewItemList { numViews += (thisView.isCollapsed ? 0 : 1) }
         return numViews}
     let splitViewNames = ["inputs", "outputs", "outputSetup"]
-
+    let holdingPriorites : Dictionary<String, Int> = ["inputs": 300, "outputs":10, "outputSetup": 350]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +39,7 @@ class MainSplitViewController: TZSplitViewController {
             if let shouldCollapseView = UserDefaults().value(forKey: itemKey + ".isCollapsed") as? Bool {
                 splitViewItem.isCollapsed = shouldCollapseView
             }
+            splitViewItem.holdingPriority = NSLayoutConstraint.Priority(rawValue: NSLayoutConstraint.Priority.RawValue(holdingPriorites[splitViewName]!))
             //if let newWidth = UserDefaults.standard.value(forKey: itemKey + ".width") as? Float
             //{ splitViewItem.
             //TODO: implement resizing on startup

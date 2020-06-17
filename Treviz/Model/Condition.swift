@@ -12,7 +12,7 @@ import Cocoa
 /**
  EvaluateCondition is a protocol that is adopted by bothe the Condition and SingleCondition classes. The basic feature is that it can read a state and determine whether it meets a given condition based on some predefined rules
  */
-@objc protocol EvaluateCondition : NSCoding {
+protocol EvaluateCondition : Codable {
     /**
      Evaluate a trajectory (state) by the condition. Stores the result in the condition's "meetsCondition"
      */
@@ -23,17 +23,15 @@ import Cocoa
      */
     func reset(initialState: StateArray?)
     var meetsCondition : [Bool]? {get set}
-    @objc var summary : String {get}
+    var summary : String {get}
     func isValid() -> Bool
-    //func isEqual(_ object: Any?) -> Bool
-    // var isSinglePoint : Bool {get set}// Boolean to tell whether the condition should return a single point per trajectory (such as terminal condition, max/min, etc
 }
 
 /**
  Booltype represents the different ways that conditions can be combined
  Raw value is set to index to allow for easy integration with dropdown menus
 */
-enum BoolType : Int {
+enum BoolType : Int, Codable {
     case single = 0
     case and = 1
     case or = 2
@@ -57,7 +55,7 @@ enum BoolType : Int {
  Rawvalue is set to int to allow for easy integration with dropdown menus
  Note that local max and local min can be evaluated during a trajectory, which makes them suitable for use as terminal conditions in an analysis. Global Max and Global Min require a complete trajectory to be known, so they can only be used in output plots
 */
-enum SpecialConditionType : Int, CustomStringConvertible {
+enum SpecialConditionType : Int, CustomStringConvertible, Codable {
     
     case localMax = 0
     case localMin = 1
@@ -87,7 +85,7 @@ extension NSNotification.Name {
 /**
  A SingleCondition is the basic unit of condition evaluations. It provides a mechanism to determine if an individual variable meets some numerical condition, either at a single point in a trajectory or at all points
  */
-class SingleCondition: NSObject, EvaluateCondition {
+class SingleCondition: EvaluateCondition, Codable {
     var varID : VariableID!
     // A SingleCondition should take one of three forms: Interval (lower bound and/or upper bound), equality, or special (see above). If type is set, then unset the others
     var lbound : VarValue? { didSet { if lbound != nil {
@@ -155,13 +153,11 @@ class SingleCondition: NSObject, EvaluateCondition {
         return _tests
     }
     
-    override init(){
-        super.init()
+    init(){
     }
     
     init(_ vid: VariableID){
         varID = vid
-        super.init()
     }
     
     init(_ vid: VariableID, upperBound: VarValue? = nil, lowerBound: VarValue? = nil, equality eq: VarValue? = nil, specialCondition spc: SpecialConditionType? = nil){
@@ -170,10 +166,10 @@ class SingleCondition: NSObject, EvaluateCondition {
         ubound = upperBound
         equality = eq
         specialCondition = spc
-        super.init()
     }
     
     // MARK: NSCoding implementation
+    
     func encode(with coder: NSCoder) {
         coder.encode(varID, forKey: "varid")
         coder.encode(lbound, forKey: "lbound")
@@ -189,7 +185,15 @@ class SingleCondition: NSObject, EvaluateCondition {
         equality = coder.decodeObject(forKey: "equality") as? VarValue ?? nil
         if let scint = coder.decodeObject(forKey: "specialCondition") as? Int {
             specialCondition = SpecialConditionType(rawValue: scint) ?? nil }
-        super.init()
+    }
+    
+    // MARK: Codable implementation
+    enum CodingKeys: String, CodingKey {
+        case lbound
+        case ubound
+        case equality
+        case specialCondition
+        case varID
     }
     
     // Evaluation functions
@@ -269,27 +273,12 @@ class SingleCondition: NSObject, EvaluateCondition {
             return equality == nil && specialCondition == nil
         } else { return false }
     }
-    
-     // TODO: This is only used in testing, delete if it serves no other purpose
-    /*
-    override func isEqual(_ object: Any?) -> Bool {
-        guard let object = object as? SingleCondition else { return false }
-        var eq = true
-        eq = eq && object.varID == self.varID
-        eq = eq && object.equality == self.equality
-        eq = eq && object.ubound == self.ubound
-        eq = eq && object.lbound == self.lbound
-        eq = eq && object.specialCondition == self.specialCondition
-
-        return eq
-    }*/
-    
 }
 
 /**
 The Condition class provides teh mechanism to combine multiple SingleConditions or Conditions into one composite condition according to various boolean comparisons.
 */
-class Condition : NSObject, EvaluateCondition {
+class Condition : EvaluateCondition, Codable {
     
     @objc var name : String = ""
     var conditions : [EvaluateCondition] = []
@@ -323,46 +312,65 @@ class Condition : NSObject, EvaluateCondition {
     }
     
 
-    override init(){
-        super.init()
+    init(){
     }
     
-    public func encode(with coder: NSCoder) {
-        coder.encode(name, forKey: "name")
-        coder.encode(conditions, forKey: "conditions")
-        coder.encode(unionType.rawValue, forKey: "unionType")
-        if _summary != "" { coder.encode(_summary, forKey: "summary") }
+    // MARK: Codable implementation
+    enum CodingKeys: String, CodingKey {
+        case name
+        case Conditions // TODO: This shouldn't be uppercase
+        case singleConditions
+        case unionType
+        case _summary
     }
     
-    required public init?(coder: NSCoder) {
-        name = coder.decodeObject(forKey: "name") as? String ?? ""
-        conditions = coder.decodeObject(forKey: "conditions") as? [EvaluateCondition] ?? [SingleCondition]()
-        unionType = BoolType(rawValue: coder.decodeInteger(forKey: "unionType")) ?? .single
-        _summary = coder.decodeObject(forKey: "summary") as? String ?? ""
-        super.init()
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        name = try container.decode(String.self, forKey: .name)
+        conditions = Array<EvaluateCondition>()
+        do {
+            // let Conditions = try container.decode(Array<Condition>.self, forKey: .Conditions)
+            let singleConditions = try container.decode(Array<SingleCondition>.self, forKey: .singleConditions)
+            // conditions.append(contentsOf: Conditions) // handle this in factory initializer
+            conditions.append(contentsOf: singleConditions)
+        } catch { conditions = [] }
+        unionType = try container.decode(BoolType.self, forKey: .unionType)
+        do { _summary = try container.decode(String.self, forKey: ._summary)
+        } catch { _summary = "" }
     }
     
+    func encode(to encoder: Encoder) throws { 
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(name, forKey: .name)
+        try container.encode(unionType, forKey: .unionType)
+        if _summary != "" {
+            try container.encode(_summary, forKey: ._summary)
+        }
+        let singleConditions = conditions.filter { $0 is SingleCondition } as? [SingleCondition]
+        let conds = conditions.filter { $0 is Condition } as? [Condition]
+        let conditionNames = conds?.compactMap({$0.name})
+        try container.encode(singleConditions, forKey: .singleConditions)
+        try container.encode(conditionNames, forKey: .Conditions)
+    }
+    
+    // MARK: Inits
     init(_ varid: VariableID, upperBound: VarValue? = nil, lowerBound: VarValue? = nil){
         let newCondition = SingleCondition(varid, upperBound: upperBound, lowerBound: lowerBound)
         conditions = [newCondition]
-        super.init()
     }
     init(_ varid: VariableID, equality: VarValue){
         let newCondition = SingleCondition(varid, equality: equality)
         conditions = [newCondition]
-        super.init()
     }
     init(_ varid: VariableID, specialCondition: SpecialConditionType){
         let newCondition = SingleCondition(varid, specialCondition: specialCondition)
         conditions = [newCondition]
-        super.init()
     }
     
     init(conditions condIn: [EvaluateCondition], unionType unTypeIn: BoolType, name nameIn: String) {
         conditions = condIn
         unionType = unTypeIn
         name = nameIn
-        super.init()
     }
 
     /**
@@ -504,27 +512,18 @@ class Condition : NSObject, EvaluateCondition {
         return valid
     }
     
-    /*
-    override func isEqual(_ object: Any?) -> Bool {
-        guard let object = object as? Condition else { return false }
-        guard object.name == self.name else { return false }
-        guard object.unionType == self.unionType else { return false }
-        guard object.conditions.count == self.conditions.count else { return false }
-        var conditionsEqual = true
-        for i in Array(0...conditions.count - 1) {
-            conditionsEqual = conditionsEqual && conditions[i].isEqual(object.conditions[i])
-        }
-        return conditionsEqual
-    }*/
     /**
      Used to determine whether a given Condition or SingleCondition is a child of the current condition. Recursively searches sub-conditions
      */
     func containsCondition(_ inputCondition: EvaluateCondition)->Bool{
         // if self === inputCondition { return true }
-        for curCondition in self.conditions {
-            if curCondition === inputCondition { return true }
-            else if curCondition is Condition {
-                if (curCondition as! Condition).containsCondition(inputCondition) { return true }
+        for curEvaluateCondition in self.conditions {
+            if let curCondition = curEvaluateCondition as? Condition {
+                if curCondition === (inputCondition as? Condition) { return true }
+                else if curCondition.containsCondition(inputCondition) { return true }
+            }
+            else if let curSingleCondition = curEvaluateCondition as? SingleCondition {
+                if curSingleCondition === (inputCondition as? SingleCondition) { return true }
             }
         }
         return false

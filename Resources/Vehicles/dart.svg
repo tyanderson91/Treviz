@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   sodipodi:docname="dart.svg"
+   inkscape:version="1.0beta2 (2b71d25, 2019-12-03)"
+   id="svg8"
+   version="1.1"
+   viewBox="0 0 210 297"
+   height="297mm"
+   width="210mm">
+  <defs
+     id="defs2">
+    <filter
+       height="1.2616472"
+       y="-0.1308236"
+       width="1.6390374"
+       x="-0.31951868"
+       id="filter879"
+       style="color-interpolation-filters:sRGB;"
+       inkscape:menu-tooltip="Smooth drop-like bevel with metallic finish"
+       inkscape:menu="Bevels"
+       inkscape:label="Metal Casting">
+      <feColorMatrix
+         id="feColorMatrix869"
+         result="result1"
+         in="SourceGraphic"
+         type="saturate"
+         values="0.37" />
+      <feGaussianBlur
+         id="feGaussianBlur871"
+         in="SourceAlpha"
+         stdDeviation="2.7387348" />
+      <feSpecularLighting
+         id="feSpecularLighting875"
+         surfaceScale="10"
+         specularConstant="3.88"
+         specularExponent="8">
+        <feDistantLight
+           id="feDistantLight873"
+           elevation="17"
+           azimuth="225" />
+      </feSpecularLighting>
+      <feComposite
+         id="feComposite877"
+         operator="atop"
+         in2="result1" />
+    </filter>
+    <filter
+       height="1.2616472"
+       y="-0.1308236"
+       width="1.6390337"
+       x="-0.31951686"
+       id="filter891"
+       style="color-interpolation-filters:sRGB;"
+       inkscape:menu-tooltip="Smooth drop-like bevel with metallic finish"
+       inkscape:menu="Bevels"
+       inkscape:label="Metal Casting">
+      <feColorMatrix
+         id="feColorMatrix881"
+         result="result1"
+         in="SourceGraphic"
+         type="saturate"
+         values="0.37" />
+      <feGaussianBlur
+         id="feGaussianBlur883"
+         in="SourceAlpha"
+         stdDeviation="2.7387348" />
+      <feSpecularLighting
+         id="feSpecularLighting887"
+         surfaceScale="10"
+         specularConstant="3.88"
+         specularExponent="8">
+        <feDistantLight
+           id="feDistantLight885"
+           elevation="17"
+           azimuth="225" />
+      </feSpecularLighting>
+      <feComposite
+         id="feComposite889"
+         operator="atop"
+         in2="result1" />
+    </filter>
+    <filter
+       height="1.0480327"
+       y="-0.024016369"
+       width="2.1705682"
+       x="-0.5852841"
+       id="filter903"
+       style="color-interpolation-filters:sRGB;"
+       inkscape:menu-tooltip="Smooth drop-like bevel with metallic finish"
+       inkscape:menu="Bevels"
+       inkscape:label="Metal Casting">
+      <feColorMatrix
+         id="feColorMatrix893"
+         result="result1"
+         in="SourceGraphic"
+         type="saturate"
+         values="0.37" />
+      <feGaussianBlur
+         id="feGaussianBlur895"
+         in="SourceAlpha"
+         stdDeviation="2.7387348" />
+      <feSpecularLighting
+         id="feSpecularLighting899"
+         surfaceScale="10"
+         specularConstant="3.88"
+         specularExponent="8">
+        <feDistantLight
+           id="feDistantLight897"
+           elevation="17"
+           azimuth="225" />
+      </feSpecularLighting>
+      <feComposite
+         id="feComposite901"
+         operator="atop"
+         in2="result1" />
+    </filter>
+    <filter
+       height="1.2060942"
+       y="-0.10304708"
+       width="1.556371"
+       x="-0.27818549"
+       id="filter915"
+       style="color-interpolation-filters:sRGB;"
+       inkscape:menu-tooltip="Smooth drop-like bevel with metallic finish"
+       inkscape:menu="Bevels"
+       inkscape:label="Metal Casting">
+      <feColorMatrix
+         id="feColorMatrix905"
+         result="result1"
+         in="SourceGraphic"
+         type="saturate"
+         values="0.37" />
+      <feGaussianBlur
+         id="feGaussianBlur907"
+         in="SourceAlpha"
+         stdDeviation="2.7387348" />
+      <feSpecularLighting
+         id="feSpecularLighting911"
+         surfaceScale="10"
+         specularConstant="3.88"
+         specularExponent="8">
+        <feDistantLight
+           id="feDistantLight909"
+           elevation="17"
+           azimuth="225" />
+      </feSpecularLighting>
+      <feComposite
+         id="feComposite913"
+         operator="atop"
+         in2="result1" />
+    </filter>
+    <filter
+       height="1.2060942"
+       y="-0.10304708"
+       width="1.5563679"
+       x="-0.27818394"
+       id="filter927"
+       style="color-interpolation-filters:sRGB;"
+       inkscape:menu-tooltip="Smooth drop-like bevel with metallic finish"
+       inkscape:menu="Bevels"
+       inkscape:label="Metal Casting">
+      <feColorMatrix
+         id="feColorMatrix917"
+         result="result1"
+         in="SourceGraphic"
+         type="saturate"
+         values="0.37" />
+      <feGaussianBlur
+         id="feGaussianBlur919"
+         in="SourceAlpha"
+         stdDeviation="2.7387348" />
+      <feSpecularLighting
+         id="feSpecularLighting923"
+         surfaceScale="10"
+         specularConstant="3.88"
+         specularExponent="8">
+        <feDistantLight
+           id="feDistantLight921"
+           elevation="17"
+           azimuth="225" />
+      </feSpecularLighting>
+      <feComposite
+         id="feComposite925"
+         operator="atop"
+         in2="result1" />
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     inkscape:snap-nodes="false"
+     inkscape:window-maximized="0"
+     inkscape:window-y="23"
+     inkscape:window-x="0"
+     inkscape:window-height="711"
+     inkscape:window-width="1280"
+     showgrid="false"
+     inkscape:document-rotation="0"
+     inkscape:current-layer="layer1"
+     inkscape:document-units="mm"
+     inkscape:cy="853.08426"
+     inkscape:cx="819.66286"
+     inkscape:zoom="0.27726127"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1"
+     inkscape:groupmode="layer"
+     inkscape:label="Layer 1">
+    <path
+       id="path863"
+       style="opacity:1;fill:#b3b3b3;stroke:#666666;stroke-width:1;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:18.8976;stroke-opacity:1;filter:url(#filter879)"
+       d="m 77.880666,251.47051 20.571453,-30.39732 v 38.16676 l -20.571453,12.07619 z"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc" />
+    <path
+       sodipodi:nodetypes="ccccc"
+       inkscape:connector-curvature="0"
+       d="m 125.43978,251.47051 -20.57157,-30.39732 v 38.16676 l 20.57157,12.07619 z"
+       style="opacity:1;fill:#b3b3b3;stroke:#666666;stroke-width:1;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:18.8976;stroke-opacity:1;filter:url(#filter891)"
+       id="path861" />
+    <path
+       sodipodi:nodetypes="szsccs"
+       inkscape:connector-curvature="0"
+       d="m 96.114859,77.699757 c 0,-23.281415 2.022179,-69.4163345 5.615191,-69.4163345 3.59301,0 5.61519,46.1349195 5.61519,69.4163345 V 281.97023 c -3.74346,1.8948 -7.486921,1.76522 -11.230381,0 z"
+       style="opacity:1;fill:#b3b3b3;stroke:#666666;stroke-width:1;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:18.8976;stroke-opacity:1;filter:url(#filter903)"
+       id="rect833" />
+    <path
+       sodipodi:nodetypes="ccccc"
+       inkscape:connector-curvature="0"
+       d="m 75.262568,264.72462 23.627988,-40.9917 v 49.91554 l -23.627988,13.87048 z"
+       style="opacity:1;fill:#b3b3b3;stroke:#666666;stroke-width:1;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:18.8976;stroke-opacity:1;filter:url(#filter915)"
+       id="rect854" />
+    <path
+       id="path857"
+       style="opacity:1;fill:#b3b3b3;stroke:#666666;stroke-width:1;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:18.8976;stroke-opacity:1;filter:url(#filter927)"
+       d="m 127.9949,264.72462 -23.62812,-40.9917 v 49.91554 l 23.62812,13.87048 z"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc" />
+  </g>
+</svg>

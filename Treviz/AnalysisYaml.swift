@@ -10,7 +10,7 @@ import Yams
 
 //typealias YamlString = String
 
-extension AnalysisDoc {
+extension Analysis {
 
     func readFromYaml(data: Data){
         var yamlObj: Any?
@@ -34,14 +34,17 @@ extension AnalysisDoc {
                 _ = initVar(varID: curVarID, varStr: curVarVal)// { inputSettings.append(thisVar) }
             }
         }
+        setupConstants()
         
         if let inputList = yamlDict["Parameters"] as? [[String: Any]] {
             for paramSet in inputList {
                 for thisKey in paramSet.keys { //TODO: better way to do this
                     let curVarID = thisKey
-                    let thisVar =  analysis.inputSettings.first(where: { $0.id == curVarID }) as! Variable
+                    guard let thisVarIndex = inputSettings.firstIndex(where: { $0.id == curVarID }) else { continue }
+                    let thisVar = inputSettings[thisVarIndex] as! Variable
                     thisVar.value = [VarValue(truncating: paramSet[curVarID] as! NSNumber)]
                     thisVar.isParam = true
+                    //inputSettings[thisVarIndex] = thisVar
                 }
             }
         }
@@ -49,28 +52,32 @@ extension AnalysisDoc {
         if let conditionList = yamlDict["Conditions"] as? [[String: Any]] {
             // self.conditions = []
             for thisConditionDict in conditionList {
-                if let newCond = Condition(fromYaml: thisConditionDict, inputConditions: analysis.conditions) {
+                if let newCond = Condition(fromYaml: thisConditionDict, inputConditions: conditions) {
                     //initCondition(fromYaml: thisConditionDict) {
-                    analysis.conditions.append(newCond)
+                    conditions.append(newCond)
                 } // TODO: else print error
             }
         }
-        if let terminalConditionDict = yamlDict["Terminal Condition"] as? [String: Any] {
+        if let terminalConditionName = yamlDict["Terminal Condition"] as? String {
+            if let cond = conditions.first(where: { $0.name == terminalConditionName }) {
+                terminalCondition = cond
+            }
+            /*
             if let newCond = Condition(fromYaml: terminalConditionDict, inputConditions: analysis.conditions) {
                 newCond.name = "Terminal"
                 analysis.conditions.append(newCond)
                 analysis.terminalCondition = newCond
-            }
+            }*/
         }
         if let outputList = yamlDict["Outputs"] as? [[String: Any]] {
-            analysis.plots = []
+            plots = []
             for thisOutputDict in outputList {
                 if let newOutput = initOutput(fromYaml: thisOutputDict) {
-                    analysis.plots.append(newOutput)
+                    plots.append(newOutput)
                 }
             }
         }
-        analysis.traj = State(variables: analysis.varList)
+        traj = State(variables: varList)
     }
     
     /**
@@ -78,9 +85,12 @@ extension AnalysisDoc {
        - Parameter yamlObj: a Dictionary of the type [String: Any] read from a yaml file.
        */
     func initVar(varID: VariableID, varStr: Any) -> Variable? {
-        guard let thisVar = analysis.inputSettings.first(where: { $0.id == varID}) as? Variable else {return nil}
+        //guard var thisVar = inputSettings.first(where: { $0.id == varID}) as? Variable else {return nil}
+        guard let thisVarIndex = inputSettings.firstIndex(where: { $0.id == varID}) else {return nil}
+        guard let thisVar = inputSettings[thisVarIndex] as? Variable else {return nil}
         if let val = varStr as? NSNumber {
             thisVar.value = [VarValue(truncating: val)]
+            //inputSettings[thisVarIndex] = thisVar
             return thisVar
         } else {return nil}
     }
@@ -97,40 +107,40 @@ extension AnalysisDoc {
         if let idInt = yamlObj["id"] as? Int {
             outputDict["id"] = idInt
         } else {
-            let newID = ((analysis.plots.compactMap {$0.id}).max() ?? 0) + 1
+            let newID = ((plots.compactMap {$0.id}).max() ?? 0) + 1
             outputDict["id"] = newID
         }
         if let titlestr = yamlObj["title"] as? String{
             outputDict["title"] = titlestr
         }
         if let varstr = yamlObj["variable1"] as? VariableID{
-            outputDict["variable1"] = initVars.first(where: {$0.id == varstr}) ?? ""
+            outputDict["variable1"] = varList.first(where: {$0.id == varstr}) ?? ""
         }
         else if let varstr = yamlObj["variable"] as? VariableID{
-            outputDict["variable1"] = initVars.first(where: {$0.id == varstr}) ?? ""
+            outputDict["variable1"] = varList.first(where: {$0.id == varstr}) ?? ""
         }
         if let varstr = yamlObj["variable2"] as? VariableID{
-            outputDict["variable2"] = initVars.first(where: {$0.id == varstr}) ?? ""
+            outputDict["variable2"] = varList.first(where: {$0.id == varstr}) ?? ""
         }
         if let varstr = yamlObj["variable3"] as? VariableID{
-            outputDict["variable3"] = initVars.first(where: {$0.id == varstr}) ?? ""
+            outputDict["variable3"] = varList.first(where: {$0.id == varstr}) ?? ""
         }
         if let condstr = yamlObj["condition"] as? String{
             if condstr == "terminal" {
-                outputDict["condition"] = analysis.terminalCondition
-            } else if let thisCondition = analysis.conditions.first(where: {$0.name == condstr}) {
+                outputDict["condition"] = terminalCondition
+            } else if let thisCondition = conditions.first(where: {$0.name == condstr}) {
                 outputDict["condition"] = thisCondition
             }
         }
         
-        if let outputTypeStr = yamlObj["output type"] as? String{
-            switch outputTypeStr {
-            case "plot":
+        if let outputType = yamlObj["output type"] as? String {
+            switch TZOutput.OutputType(rawValue: outputType) {
+            case .plot:
                 return TZPlot(with: outputDict)
-            case "text":
+            case .text:
                 return TZTextOutput(with: outputDict)
             default:
-                return nil
+                return TZPlot(with: outputDict)
             }
         } else {
             return TZPlot(with: outputDict)

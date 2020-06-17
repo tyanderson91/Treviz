@@ -26,9 +26,9 @@ In addition, this class contains class-level functions such as initiating the an
 * Terminal condition: The final condition or set of conditions that ends the simulation
 * Run settings: things like default timestep, propagator, etc.
 */
-class Analysis: NSObject, NSCoding {
+class Analysis: NSObject, Codable {
     
-    @objc var varList : [Variable]!// {return appDelegate.initVars}
+    var varList : [Variable]!// {return appDelegate.initVars}
     var initStateGroups : InitStateHeader!
     
     // Analysis-specific data and configs (read/writing functions in AnalysisData.swift)
@@ -36,7 +36,7 @@ class Analysis: NSObject, NSCoding {
     weak var terminalCondition : Condition!
     var traj: State!
     var initState: StateArray { return traj[0] }
-    @objc var conditions : [Condition] = []
+    var conditions : [Condition] = [] // TODO: Turn this into a set instead of an array
     var inputSettings : [Parameter] = []
     var parameters : [Parameter] { //TODO: this should contain more than just input settings
         return inputSettings.filter {$0.isParam}
@@ -54,12 +54,12 @@ class Analysis: NSObject, NSCoding {
     var progressReporter: AnalysisProgressReporter?
     
     // Logging
-    private var _bufferLog = NSAttributedString() // This string is used to store any logs prior to the initialization of the log message text view
+    var _bufferLog = NSMutableAttributedString() // This string is used to store any logs prior to the initialization of the log message text view
     var logMessageView: TZLogger? {
         didSet {
             if _bufferLog.string != "" {
                 logMessageView?.logMessage(_bufferLog)
-                _bufferLog = NSAttributedString()
+                _bufferLog = NSMutableAttributedString()
             }
         }
     }
@@ -85,19 +85,64 @@ class Analysis: NSObject, NSCoding {
         return checks.allSatisfy { $0 }
     }
     
-    // MARK: NSCoding implementation
-    func encode(with coder: NSCoder) {
-        coder.encode(terminalCondition, forKey: "terminalCondition")
-        coder.encode(conditions, forKey: "conditions")
-        coder.encode(plots, forKey: "plots")
-        coder.encode(inputSettings, forKey: "inputSettings")
+    
+    // MARK: Codable implementation
+    enum CodingKeys: String, CodingKey {
+        case name
+        case terminalCondition
+        case conditions
+        case inputSettings
+        case plots
+    }
+
+    
+    required init(from decoder: Decoder) throws {
+        super.init()
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        name = try container.decode(String.self, forKey: .name)
+        inputSettings = try container.decode(Array<Variable>.self, forKey: .inputSettings)
+        setupConstants()
+
+        var allConds = try container.nestedUnkeyedContainer(forKey: .conditions)
+        while(!allConds.isAtEnd){
+            let decoder = try allConds.superDecoder()
+            if let thisCond = Condition(decoder: decoder, referencing: self) {
+                conditions.append(thisCond)
+            }
+        }
+        
+        do {
+            let terminalConditionName = try container.decode(String.self, forKey: .terminalCondition)
+            terminalCondition = conditions.first { $0.name == terminalConditionName }
+        }
+        
+        var allTZOutputs = try container.nestedUnkeyedContainer(forKey: .plots)
+        var plotsTemp = allTZOutputs
+        while(!allTZOutputs.isAtEnd)
+        {
+            let output = try allTZOutputs.nestedContainer(keyedBy: TZOutput.CustomCoderType.self)
+            let type = try output.decode(TZOutput.OutputType.self, forKey: TZOutput.CustomCoderType.type)
+            var newOutput : TZOutput?
+            let decoder = try plotsTemp.superDecoder()
+
+            switch type {
+            case .text:
+                newOutput = TZTextOutput(decoder: decoder, referencing: self)
+            case .plot:
+                newOutput = TZPlot(decoder: decoder, referencing: self)
+            }
+
+            if newOutput != nil { plots.append(newOutput!) }
+        }
     }
     
-    required init?(coder: NSCoder) {
-        conditions = coder.decodeObject(forKey: "conditions") as? [Condition] ?? []
-        terminalCondition = coder.decodeObject(forKey: "terminalCondition") as? Condition ?? nil
-        plots = coder.decodeObject(forKey: "plots") as? [TZOutput] ?? []
-        inputSettings = coder.decodeObject(forKey: "inputSettings") as? [Parameter] ?? []
-        super.init()
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(name, forKey: .name)
+        try container.encode(conditions, forKey: .conditions)
+        try container.encode(terminalCondition.name, forKey: .terminalCondition)
+        let nonzerovars = (inputSettings as? [Variable])?.filter({$0.value[0] != 0 || $0.isParam})
+        try container.encode(nonzerovars, forKey: .inputSettings)
+        try container.encode(plots, forKey: .plots)
     }
 }

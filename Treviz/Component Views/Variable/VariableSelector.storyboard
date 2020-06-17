@@ -25,9 +25,7 @@
                                     <menu key="menu" id="9gx-rd-RcJ"/>
                                 </popUpButtonCell>
                                 <connections>
-                                    <binding destination="Zwe-wM-tJU" name="content" keyPath="arrangedObjects" id="PT2-4D-h5K"/>
-                                    <binding destination="Zwe-wM-tJU" name="contentValues" keyPath="arrangedObjects.name" previousBinding="PT2-4D-h5K" id="oy6-9L-Qwf"/>
-                                    <binding destination="Fkm-Ad-vik" name="selectedObject" keyPath="self.selectedVariable" previousBinding="oy6-9L-Qwf" id="IPI-Ic-98y"/>
+                                    <action selector="didSelectVar:" target="Fkm-Ad-vik" id="fci-HZ-BoA"/>
                                 </connections>
                             </popUpButton>
                         </subviews>
@@ -39,21 +37,10 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="variableSelectorArrayController" destination="Zwe-wM-tJU" id="nOj-vh-xl9"/>
                         <outlet property="variableSelectorPopup" destination="8Bi-7w-Z95" id="dux-IB-Ykc"/>
                     </connections>
                 </viewController>
                 <customObject id="rhV-XW-xKk" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <arrayController objectClassName="Variable" id="Zwe-wM-tJU">
-                    <connections>
-                        <binding destination="Fkm-Ad-vik" name="contentArray" keyPath="self.varList" id="RN8-Gr-yBW"/>
-                    </connections>
-                </arrayController>
-                <objectController objectClassName="Variable" id="hzV-u9-tpe">
-                    <connections>
-                        <binding destination="Fkm-Ad-vik" name="contentObject" keyPath="self.selectedVariable" id="2ib-Lx-V66"/>
-                    </connections>
-                </objectController>
             </objects>
             <point key="canvasLocation" x="-239" y="14.5"/>
         </scene>
