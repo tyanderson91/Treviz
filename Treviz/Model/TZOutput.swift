@@ -53,7 +53,7 @@ class TZOutput : NSObject, Codable {
     var var2 : Variable?
     var var3 : Variable?
     var categoryVar : Parameter?
-    @objc weak var condition : Condition?
+    weak var condition : Condition?
     var curTrajectory : State?
     
     init(id : Int, plotType : TZPlotType){// TODO: come up with a way to automatically enforce unique IDs

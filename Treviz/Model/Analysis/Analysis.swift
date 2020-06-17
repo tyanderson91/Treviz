@@ -36,7 +36,7 @@ class Analysis: NSObject, Codable {
     weak var terminalCondition : Condition!
     var traj: State!
     var initState: StateArray { return traj[0] }
-    @objc var conditions : [Condition] = [] // TODO: Turn this into a set instead of an array
+    var conditions : [Condition] = [] // TODO: Turn this into a set instead of an array
     var inputSettings : [Parameter] = []
     var parameters : [Parameter] { //TODO: this should contain more than just input settings
         return inputSettings.filter {$0.isParam}

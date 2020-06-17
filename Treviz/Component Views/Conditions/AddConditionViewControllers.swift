@@ -54,9 +54,8 @@ class AddConditionViewController: TZViewController {
 
 class AddExistingConditionViewController: AddConditionViewController {
     @IBOutlet weak var conditionSelectorPopup: NSPopUpButton!
-    @IBOutlet var existingConditionsArrayController: NSArrayController!
     var existingConditions: [Condition]!
-    @objc var menuConditions: [Condition] { return existingConditions.filter { !$0.containsCondition(representedCondition) }
+    var menuConditions: [Condition] { return existingConditions.filter { !$0.containsCondition(representedCondition) }
     }
     
     required init?(coder: NSCoder) {
@@ -74,7 +73,7 @@ class AddExistingConditionViewController: AddConditionViewController {
             //existingConditionsArrayController.content = menuConditions
             
             conditionSelectorPopup.addItems(withTitles: menuConditions.compactMap { $0.name })
-            guard menuConditions.contains(representedCondition as! Condition) else { return }
+            guard menuConditions.contains(where: {$0 === representedCondition as! Condition}) else { return }
             
             conditionSelectorPopup.selectItem(withTitle: condition.name)
             
@@ -110,14 +109,12 @@ class AddNewConditionViewController: AddConditionViewController, VariableGetter 
     @IBOutlet weak var upperBoundTextField: NSControl!//NSTextField!
     @IBOutlet weak var specialTypePopup: NSPopUpButton!
     var selectedType : singleConditionType = .interval
-    @objc var representedSingleCondition : SingleCondition { return representedCondition as! SingleCondition }
+    var representedSingleCondition : SingleCondition { return representedCondition as! SingleCondition }
     var varObservation : NSKeyValueObservation!
     var conditionViewController : ConditionsViewController?
     { return self.parent as? ConditionsViewController ?? nil }    
     var variableSelectorViewController : VariableSelectorViewController?
-
-    @IBOutlet var singleConditionObjectController: NSObjectController!
-    
+   
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
@@ -128,9 +125,6 @@ class AddNewConditionViewController: AddConditionViewController, VariableGetter 
     }
     
     override func viewDidLoad() {
-        //representedCondition = SingleCondition()
-        singleConditionObjectController.bind(.content, to: self, withKeyPath: "representedSingleCondition", options: nil)
-        
         if representedSingleCondition.lbound != nil {
             lowerBoundTextField.stringValue = "\(representedSingleCondition.lbound!)"
             intervalTypeRadioButton.state = .on

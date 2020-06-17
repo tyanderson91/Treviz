@@ -13,18 +13,18 @@ extension NSUserInterfaceItemIdentifier {
     static let singleConditionTypeSelectorEqual = NSUserInterfaceItemIdentifier.init("singleConditionTypeSelector.equal")
     static let singleConditionTypeSelectorOther = NSUserInterfaceItemIdentifier.init("singleConditionTypeSelector.other")
 
-    static let varNameColumn = NSUserInterfaceItemIdentifier.init("VarNameColumn")
-    static let descripColumn = NSUserInterfaceItemIdentifier.init("DescriptionColumn")
-    static let varNameCellView = NSUserInterfaceItemIdentifier.init("VarNameCellView")
-    static let descripCellView = NSUserInterfaceItemIdentifier.init("DescriptionCellView")
+    static let conditionNameColumn = NSUserInterfaceItemIdentifier.init("ConditionNameColumn")
+    static let conditionDescripColumn = NSUserInterfaceItemIdentifier.init("DescriptionColumn")
+    static let conditionNameCellView = NSUserInterfaceItemIdentifier.init("ConditionNameCellView")
+    static let conditionDescripCellView = NSUserInterfaceItemIdentifier.init("DescriptionCellView")
 }
 
-class ConditionsViewController: TZViewController, VariableGetter {
+class ConditionsViewController: TZViewController, VariableGetter, NSTableViewDelegate, NSTableViewDataSource {
 
-    @objc var curCondition = Condition()
-    @objc var allConditions : [Condition]?
-    @objc var selectedConditionIndices = IndexSet()
-    var curConditionObjectController = NSObjectController()
+    var curCondition = Condition()
+    var allConditions : [Condition] { return analysis.conditions }
+    //@objc var selectedConditionIndices = IndexSet()
+    //var curConditionObjectController = NSObjectController()
     private var canAddSubCondition = false
     //var initVars : [Variable] = []
     
@@ -35,14 +35,13 @@ class ConditionsViewController: TZViewController, VariableGetter {
     @IBOutlet weak var newConditionStackView: NSStackView!
     @IBOutlet weak var methodStackView: NSStackView!
     @IBOutlet weak var conditionNameTextBox: NSTextField!
-    @IBOutlet var allConditionsArrayController: NSArrayController!
+    //@IBOutlet var allConditionsArrayController: NSArrayController!
     @IBOutlet var addConditionTypeMenu: NSMenu!
     @IBOutlet var comparisonLabel: NSButton!
     
     override func viewDidLoad() {
         // Do view setup here.
-        allConditions = analysis?.conditions
-        allConditionsArrayController.content = allConditions
+        // allConditionsArrayController.content = allConditions
         conditionNameTextBox.isHidden = true
         
         let trackingArea = NSTrackingArea(rect: self.compoundConditionButton.bounds,
@@ -52,7 +51,7 @@ class ConditionsViewController: TZViewController, VariableGetter {
                                                     ],
                                           owner: self, userInfo: nil)
         view.addTrackingArea(trackingArea)
-        curConditionObjectController.bind(.content, to: self, withKeyPath: "curCondition", options: nil)
+        //curConditionObjectController.bind(.content, to: self, withKeyPath: "curCondition", options: nil)
         tableView.tableSelector = self.tableViewSelected
         super.viewDidLoad()
     }
@@ -82,17 +81,18 @@ class ConditionsViewController: TZViewController, VariableGetter {
             conditionNameTextBox.becomeFirstResponder()
             addConditionButton.title = "Add"
         } else if addConditionButton.title == "Delete" {
-            if let conditionIndex = analysis.conditions.firstIndex(of: curCondition)
+            if let conditionIndex = analysis.conditions.firstIndex(where: {$0 === curCondition})
             { deleteCondition(at: conditionIndex) }
         } else if addConditionButton.title == "Add" {
             guard curCondition.isValid() else {
                 analysis.logMessage("Condition is invalid. Please fill in all required fields")
+                NSSound.beep()
                 return
             }
-            allConditionsArrayController.addObject(curCondition)
+            //allConditionsArrayController.addObject(curCondition)
             analysis.conditions.append(curCondition)
             tableView.reloadData()
-            tableView.selectRowIndexes([(analysis.conditions.firstIndex(of: curCondition) ?? analysis.conditions.count)], byExtendingSelection: false)
+            tableView.selectRowIndexes([(analysis.conditions.firstIndex(where: {$0 === curCondition}) ?? analysis.conditions.count)], byExtendingSelection: false)
             NotificationCenter.default.post(name: .didAddCondition, object: nil)
             addConditionButton.title = "Delete"
         }
@@ -208,9 +208,15 @@ class ConditionsViewController: TZViewController, VariableGetter {
     }
     
     func deleteCondition(at index: Int) {
-        //let conditionToRemove = analysis.conditions[index]
+        let conditionToRemove = analysis.conditions[index]
+        let parentConditions = analysis.conditions.filter( {$0.containsCondition(conditionToRemove) })
+        guard parentConditions.count == 0 else {
+            analysis.logMessage("Cannot delete condition '\(conditionToRemove.name)'. It is being referenced by the following conditions: \n\t\(parentConditions.compactMap({$0.name}).joined(separator: "\n\t"))")
+            NSSound.beep()
+            return
+        }
         analysis.conditions.remove(at: index)
-        allConditionsArrayController.remove(atArrangedObjectIndex: index)
+        //allConditionsArrayController.remove(atArrangedObjectIndex: index)
         //conditionToRemove.deinit()
         NotificationCenter.default.post(name: .didRemoveCondition, object: nil)
         eraseView()
@@ -220,7 +226,8 @@ class ConditionsViewController: TZViewController, VariableGetter {
     }
     
     override func keyDown(with event: NSEvent) {
-        if event.keyCode == 51 {//NSDeleteCharacter {
+        let kc = event.keyCode
+        if kc == 117 || kc == 51 {//NSDeleteCharacter {
             if tableView.selectedRow != -1 {
                 deleteCondition(at: tableView.selectedRow)
             }
@@ -249,30 +256,16 @@ class ConditionsViewController: TZViewController, VariableGetter {
         formatConditionEditor()
     }
     
-    /*
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        let thisCondition = analysis.conditions[row]
+        let thisCondition = allConditions[row]
         switch tableColumn?.identifier {
-        case NSUserInterfaceItemIdentifier.varNameColumn:
-            let newView = tableView.makeView(withIdentifier: .varNameCellView, owner: self) as? NSTableCellView
+        case NSUserInterfaceItemIdentifier.conditionNameColumn:
+            let newView = tableView.makeView(withIdentifier: .conditionNameCellView, owner: self) as? NSTableCellView
             newView?.textField?.stringValue = thisCondition.name
             return newView
-        case NSUserInterfaceItemIdentifier.descripColumn:
-            let newView = tableView.makeView(withIdentifier: .descripCellView, owner: self) as? NSTableCellView
-            var dstring = ""
-            for thisCond in thisCondition.conditions {
-                if let singleCond = thisCond as? SingleCondition {
-                    if singleCond.equality != nil {
-                        dstring += "\(singleCond.varID)=\(singleCond.equality ?? 0)"
-                    }
-                    else {
-                        let lbstr = singleCond.lbound == nil ? "" : "\(singleCond.lbound!) < "
-                        let ubstr = singleCond.ubound == nil ? "" : " < \(singleCond.ubound!)"
-                        dstring += lbstr + "\(singleCond.varID)" + ubstr
-                    }
-                }
-            }
-            newView?.textField?.stringValue = dstring
+        case NSUserInterfaceItemIdentifier.conditionDescripColumn:
+            let newView = tableView.makeView(withIdentifier: .conditionDescripCellView, owner: self) as? NSTableCellView
+            newView?.textField?.stringValue = thisCondition.summary
             return newView
         default:
             let newView : NSView? = nil
@@ -282,5 +275,5 @@ class ConditionsViewController: TZViewController, VariableGetter {
     
     func numberOfRows(in tableView: NSTableView) -> Int {
         return analysis.conditions.count
-    }*/
+    }
 }

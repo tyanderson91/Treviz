@@ -23,14 +23,6 @@ class TwoAxisOutputSetupViewController: AddOutputViewController {
     var var3ViewController: VariableSelectorViewController!
     
     override func createOutput()->TZOutput? {// TODO : expand for all plot types
-        /*
-        if let plotType = plotTypeDropDown.selectedItem?.title{
-            let newPlot = TZPlot1line2d()
-            newPlot.plotType = PlotType(rawValue: plotType)!
-            //newPlot.var1 = variableSelectorViewController?.getSelectedItem()
-            newPlot.setName()
-            return newPlot
-        }*/
         guard let plotType = plotTypePopupButton.selectedItem?.title else {return nil}
         var var1 : Variable?
         var var2 : Variable?
@@ -40,9 +32,7 @@ class TwoAxisOutputSetupViewController: AddOutputViewController {
         var2 = analysis.varList.first(where: {$0.name == var2Name} )
         
         let newPlot = TZPlot(id: maxPlotID+1, vars: [var1!, var2!], plotType: TZPlotType.getPlotTypeByName(plotType)!)
-        //newPlot.setName()
         return newPlot
-        //return nil
     }
     
     override func getHeaderTitle() -> String { return NSLocalizedString("Two Axis", comment: "") }
@@ -66,31 +56,12 @@ class TwoAxisOutputSetupViewController: AddOutputViewController {
         var1ViewController.selectedVariable = self.representedOutput.var1
         var2ViewController.selectedVariable = self.representedOutput.var2
         var3ViewController.selectedVariable = self.representedOutput.var3
-
-        /*
-        setWidth(component: var1ViewController, width: varSelectorWidth)
-        setWidth(component: var2ViewController, width: varSelectorWidth)
-        setWidth(component: var3ViewController, width: varSelectorWidth)*/
     }
     
     override func variableDidChange(_ sender: VariableSelectorViewController) {
         representedOutput.var1 = var1ViewController.selectedVariable
         representedOutput.var2 = var2ViewController.selectedVariable
         representedOutput.var3 = var3ViewController.selectedVariable
-    }
-    
-    override func loadAnalysis(_ analysis: Analysis?) {
-        super.loadAnalysis(analysis)
-        if analysis != nil {
-            for varname in ["var1", "var2", "var3"] {
-                if let vc = self.value(forKey: varname + "ViewController") as? VariableSelectorViewController {
-                    vc.representedObject = analysis!
-                    vc.selectedVariable = representedOutput.value(forKey: varname) as? Variable ?? nil
-                    //vc.variableSelectorArrayController.content = analysis?.varList
-                    //vc.variableSelectorPopup.bind(.selectedObject, to: representedOutput as Any, withKeyPath: varname, options: nil)
-                }
-            }
-        }
     }
     
     override func populateWithOutput(text: TZTextOutput?, plot: TZPlot?){ //Should be overwritten by each subclass

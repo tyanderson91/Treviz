@@ -68,7 +68,7 @@ class MainWindowController: NSWindowController, AnalysisProgressReporter {
         analysisProgressBar?.doubleValue = pComplete
     }
     func startProgressTracking(){
-        self.terminalCondition = analysis.terminalCondition.copy() as! Condition // TODO: if Condition is a struct, remove the copy
+        self.terminalCondition = analysis.terminalCondition! // TODO: if Condition is a struct, remove the copy
         analysisProgressBar?.isHidden = false
     }
     func endProgressTracking(){

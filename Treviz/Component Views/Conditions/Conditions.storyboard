@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="9UX-jO-cEV">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="9UX-jO-cEV">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16096"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Conditions-->
+        <!--ConditionsViewController-->
         <scene sceneID="sv2-0Z-Cuc">
             <objects>
-                <viewController title="Conditions" storyboardIdentifier="conditionsViewController" id="9UX-jO-cEV" customClass="ConditionsViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Conditions" storyboardIdentifier="conditionsViewController" id="9UX-jO-cEV" userLabel="ConditionsViewController" customClass="ConditionsViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="oXY-Ta-MDe">
                         <rect key="frame" x="0.0" y="0.0" width="372" height="339"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -26,7 +26,7 @@
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn identifier="VarNameColumn" width="118" minWidth="40" maxWidth="1000" id="viH-5m-MSV">
+                                                <tableColumn identifier="ConditionNameColumn" width="118" minWidth="40" maxWidth="1000" id="viH-5m-MSV">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Condition Name">
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -38,7 +38,7 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
-                                                        <tableCellView id="jdg-mM-Lrr">
+                                                        <tableCellView identifier="ConditionNameCellView" id="jdg-mM-Lrr">
                                                             <rect key="frame" x="1" y="1" width="118" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -73,7 +73,7 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
-                                                        <tableCellView id="dRa-n5-KEU">
+                                                        <tableCellView identifier="DescriptionCellView" id="dRa-n5-KEU">
                                                             <rect key="frame" x="122" y="1" width="246" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -99,8 +99,8 @@
                                             </tableColumns>
                                             <connections>
                                                 <action selector="tableViewSelected:" target="9UX-jO-cEV" id="esJ-xB-SIq"/>
-                                                <binding destination="HY2-fb-T9E" name="content" keyPath="arrangedObjects" id="b7y-YG-mnX"/>
-                                                <binding destination="HY2-fb-T9E" name="selectionIndexes" keyPath="selectionIndexes" previousBinding="b7y-YG-mnX" id="ysl-xc-zY2"/>
+                                                <outlet property="dataSource" destination="9UX-jO-cEV" id="Qhy-z7-Xvy"/>
+                                                <outlet property="delegate" destination="9UX-jO-cEV" id="LOE-g4-T5f"/>
                                             </connections>
                                         </tableView>
                                     </subviews>
@@ -234,7 +234,6 @@
                     <connections>
                         <outlet property="addConditionButton" destination="BVe-vE-dVP" id="xad-jq-q6N"/>
                         <outlet property="addConditionTypeMenu" destination="nkl-c5-Pdx" id="zfr-vE-IIL"/>
-                        <outlet property="allConditionsArrayController" destination="HY2-fb-T9E" id="hXM-H3-Rop"/>
                         <outlet property="comparisonLabel" destination="BVe-vE-dVP" id="mth-yk-08A"/>
                         <outlet property="compoundConditionButton" destination="sDY-AO-yAc" id="gKE-XR-QFK"/>
                         <outlet property="conditionNameTextBox" destination="SQ2-n5-0je" id="1tK-K1-DiR"/>
@@ -261,12 +260,6 @@
                         </menuItem>
                     </items>
                 </menu>
-                <arrayController objectClassName="Condition" id="HY2-fb-T9E">
-                    <connections>
-                        <binding destination="9UX-jO-cEV" name="contentArray" keyPath="self.allConditions" id="1Wm-HU-cq6"/>
-                        <binding destination="9UX-jO-cEV" name="selectionIndexes" keyPath="self.selectedConditionIndices" id="W0e-Dk-wPc"/>
-                    </connections>
-                </arrayController>
             </objects>
             <point key="canvasLocation" x="-244" y="-135.5"/>
         </scene>
@@ -459,14 +452,12 @@
                         <outlet property="intervalTypeRadioButton" destination="oKn-JL-0JT" id="YRQ-W7-MCv"/>
                         <outlet property="lowerBoundTextField" destination="Y9N-df-bvC" id="2Bh-uw-TPM"/>
                         <outlet property="removeConditionButton" destination="ydx-Wx-M9w" id="Jlp-0F-O4D"/>
-                        <outlet property="singleConditionObjectController" destination="MyE-R9-vTc" id="c6c-Fh-531"/>
                         <outlet property="specialTypePopup" destination="35G-qS-zXJ" id="Y16-DQ-n7d"/>
                         <outlet property="specialTypeRadioButton" destination="Zla-QZ-eW6" id="7Ee-Vh-zOR"/>
                         <outlet property="upperBoundTextField" destination="pJp-kY-69n" id="gLw-Bg-whh"/>
                     </connections>
                 </viewController>
                 <customObject id="yhl-MY-06M" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <objectController objectClassName="SingleCondition" id="MyE-R9-vTc"/>
             </objects>
             <point key="canvasLocation" x="-223.5" y="143"/>
         </scene>
@@ -524,12 +515,10 @@
                     </view>
                     <connections>
                         <outlet property="conditionSelectorPopup" destination="kEa-eP-MTI" id="KlO-TR-wxd"/>
-                        <outlet property="existingConditionsArrayController" destination="tOx-oj-xE1" id="bat-uK-Gic"/>
                         <outlet property="removeConditionButton" destination="1xf-GZ-url" id="53R-rk-Wei"/>
                     </connections>
                 </viewController>
                 <customObject id="4Cv-sq-H80" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <arrayController objectClassName="Condition" id="tOx-oj-xE1"/>
             </objects>
             <point key="canvasLocation" x="-270" y="421"/>
         </scene>
