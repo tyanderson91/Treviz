@@ -64,7 +64,7 @@ class TZPlotType : NSObject {
     static var multiPointCat3d = TZPlotType("multinpoint3d", name: "3 Var at Condition, by Category", requiresCondition: true, nAxis: 3, nVars: 4)
     static var surface3d = TZPlotType("surface3d", name: "3 Var Surface", requiresCondition: true, nAxis: 3, nVars: 3)
     
-    static var allPlotTypes : [TZPlotType] = [.singleValue, .multiValue, .boxplot, .multiBoxplot, .histogram, .oneLine2d, .multiLine2d, .multiPoint2d, .multiPointCat2d, .contour2d, .oneLine3d, .multiLine3d, .multiPointCat3d, .surface3d]
+    static var allPlotTypes : [TZPlotType] = [.singleValue, .multiValue, .boxplot, .multiBoxplot, .histogram, .oneLine2d, .multiLine2d, .multiPoint2d, .multiPointCat2d, .contour2d, .oneLine3d, .multiLine3d, .multiPoint3d, .multiPointCat3d, .surface3d]
     
     // TODO: figure out how to implement Monte-Carlo run statistics
  }
