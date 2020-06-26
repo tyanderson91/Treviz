@@ -10,7 +10,16 @@
 import Foundation
 import Cocoa
 
-
+enum AnalysisDocError: Error, LocalizedError {
+    case UnknownDataTypeError
+    
+    public var errorDescription: String? {
+        switch self {
+        case .UnknownDataTypeError:
+            return "Could not save file. Unknown data type"
+        }
+    }
+}
 class AnalysisDoc: NSDocument {
 
     var analysis = Analysis()
@@ -21,7 +30,7 @@ class AnalysisDoc: NSDocument {
     
     override init() {
         super.init()
-        analysis.setupConstants() // TODO: load variables for new analysis
+        analysis.setupConstants()
     }
     
     // MARK: NSDocument setup and read/write methods
@@ -94,9 +103,9 @@ class AnalysisDoc: NSDocument {
                 throw error
             }
         default:
-            analysis.logMessage("Could not save file")
-            return Data()
-            // TODO: throw error
+            let dataError = AnalysisDocError.UnknownDataTypeError
+            analysis.logMessage(dataError.errorDescription!)
+            throw dataError
         }
         //throw NSError(domain: NSOSStatusErrorDomain, code: unimpErr, userInfo: nil)
     }
@@ -122,13 +131,6 @@ class AnalysisDoc: NSDocument {
         analysis.name = "Analysis (\(typeName))"
         analysis.defaultTimestep = 0.1
         
-        // TODO: Definitely find a more robust way to handle this
-        for plot in analysis.plots {
-            plot.var1 = analysis.varList.first(where: { $0.id == plot.var1?.id })
-            plot.var2 = analysis.varList.first(where: { $0.id == plot.var2?.id })
-            plot.var3 = analysis.varList.first(where: { $0.id == plot.var3?.id })
-            plot.categoryVar = analysis.varList.first(where: { $0.id == plot.categoryVar?.id })
-        }
         analysis.traj = State(variables: analysis.varList)
     }
 

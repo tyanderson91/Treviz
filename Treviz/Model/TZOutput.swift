@@ -17,6 +17,7 @@ enum TZOutputError: Error {
     case MissingTrajectoryError
     case MissingPointsError
     case UnmatchedConditionError
+    case DuplicateIDError
 }
 extension TZOutputError : LocalizedError {
     public var errorDescription: String? {
@@ -29,6 +30,8 @@ extension TZOutputError : LocalizedError {
             return NSLocalizedString("No points could be found", comment: "")
         case .UnmatchedConditionError:
             return NSLocalizedString("No matching points found for condition", comment: "")
+        case .DuplicateIDError:
+            return NSLocalizedString("Tried to create new output with existing output ID. Skipping", comment: "")
         }
     }
 }
@@ -48,7 +51,7 @@ class TZOutput : NSObject, Codable {
     }
     @objc var id : Int
     @objc var title : String = ""
-    @objc var plotType : TZPlotType
+    var plotType : TZPlotType
     var var1 : Variable?
     var var2 : Variable?
     var var3 : Variable?
@@ -56,7 +59,7 @@ class TZOutput : NSObject, Codable {
     weak var condition : Condition?
     var curTrajectory : State?
     
-    init(id : Int, plotType : TZPlotType){// TODO: come up with a way to automatically enforce unique IDs
+    init(id : Int, plotType : TZPlotType){
         self.id = id
         self.plotType = plotType
         super.init()
@@ -78,15 +81,23 @@ class TZOutput : NSObject, Codable {
     
     convenience init(id : Int, vars : [Variable], plotType : TZPlotType) {
         var title = ""
-        for thisVar in vars{
-            title += thisVar.name
-            if thisVar.name != vars.last?.name {title += " vs "} // TODO: vary this for the different plot types
-        }
         self.init(id: id, plotType: plotType)
-        if vars.count >= 1 { var1 = vars[0] }
-        if vars.count >= 2 { var2 = vars[1] }
-        if vars.count >= 3 { var3 = vars[2] }
-        if vars.count >= 4 { categoryVar = vars[4] }
+        if vars.count >= 1 {
+            var1 = vars[0]
+            title += var1!.name
+        }
+        if vars.count >= 2 {
+            var2 = vars[1]
+            title += " vs \(var2!.name)"
+        }
+        if vars.count >= 3 {
+            var3 = vars[2]
+            title += " vs \(var3!.name)"
+        }
+        if vars.count >= 4 {
+            categoryVar = vars[4]
+            title += " by \(categoryVar!.name)"
+        }
     }
     
     convenience init(id: Int, with output : TZOutput) {

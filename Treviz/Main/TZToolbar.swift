@@ -86,8 +86,8 @@ class TZToolbar: NSToolbar {
         showHidePanesControl.setImageScaling(.scaleProportionallyUpOrDown, forSegment: 0)
         showHidePanesControl.setImageScaling(.scaleProportionallyUpOrDown, forSegment: 1)
         showHidePanesControl.setImageScaling(.scaleProportionallyUpOrDown, forSegment: 2)
-
-        for i in 0...2 { // TODO: handle this all with restoration IDs
+        
+        for i in 0...2 {
             if let isEnabled = UserDefaults().value(forKey: "mainSplitViewDiscloseButton\(i)Enabled") as? Bool {
                 showHidePanesControl.setEnabled(isEnabled, forSegment: i)
             }

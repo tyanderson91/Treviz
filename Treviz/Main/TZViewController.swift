@@ -5,8 +5,6 @@ This is a custom subclass that passes the Analysis document data to all child vi
 */
 
 import Cocoa
-//TODO: turn this into some kind of extension on top of NSViewController
-
 
 class TZViewController: NSViewController {
     

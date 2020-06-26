@@ -37,11 +37,8 @@ class OutputSetupViewController: TZViewController{//}, NSTableViewDelegate, NSTa
         self.tableView.bind(.content, to: outputsArrayController!, withKeyPath: "arrangedObjects", options: nil)
     }
     
-    
     func addOutput(_ newOutput : TZOutput){
         newOutput.curTrajectory = self.analysis.traj
-        //newOutput.title = "New Output Title"
-        // let numPlots = allPlots.count
         outputsArrayController.insert(newOutput, atArrangedObjectIndex: allPlots.count)
         addOutputView(with: newOutput)
     }

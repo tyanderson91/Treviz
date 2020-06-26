@@ -15,27 +15,11 @@ extension NSStoryboardSegue.Identifier{
 class ParamTableViewController: TZViewController , NSTableViewDelegate, NSTableViewDataSource {
     
     @IBOutlet weak var tableView: NSTableView!
-    var params : [Parameter] = []
+    var params : [Parameter] { return analysis.parameters }
+    var inputsViewController: InputsViewController?
     
     override func viewDidLoad() {
-        super.viewDidLoad() // TODO: Figure out which of these I actually need
-        NotificationCenter.default.addObserver(self, selector: #selector(self.getAllParams(_:)), name: .didSetParam, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.updateTable(_:)), name: .didChangeUnits, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.updateTable(_:)), name: .didChangeValue, object: nil)
-
-        // Set parameters
-        self.params = self.analysis.parameters
-        tableView.reloadData()
-    }
-    
-    @objc func getAllParams(_ notification: Notification){
-        // let asys = self.analysis
-        self.params = self.analysis.parameters
-        tableView.reloadData()
-    }
-
-    @objc func updateTable(_ notification: Notification){
-        tableView.reloadData()
+        super.viewDidLoad()
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
@@ -79,8 +63,7 @@ class ParamTableViewController: TZViewController , NSTableViewDelegate, NSTableV
         let row = tableView.row(for: button)
         var thisParam = params[row]
         thisParam.isParam = false
-        tableView.reloadData()
-        NotificationCenter.default.post(name: .didSetParam, object: nil)
+        inputsViewController?.reloadParams()
     }
     
     
@@ -88,7 +71,7 @@ class ParamTableViewController: TZViewController , NSTableViewDelegate, NSTableV
         let curRow = tableView.row(for: sender)
         if let thisParam = analysis.parameters[curRow] as? Variable{
             thisParam.units = sender.stringValue
-            NotificationCenter.default.post(name: .didChangeUnits, object: nil)
+            inputsViewController?.reloadParams()
         }
     }
     
@@ -97,7 +80,7 @@ class ParamTableViewController: TZViewController , NSTableViewDelegate, NSTableV
         if let thisParam = analysis.parameters[curRow] as? Variable{
             if let value = VarValue(sender.stringValue) {
                 thisParam.value[0] = value}
-            NotificationCenter.default.post(name: .didChangeValue, object: nil)
+            inputsViewController?.reloadParams()
         }
     }
 }

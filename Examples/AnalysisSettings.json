@@ -1,16 +1,16 @@
 {
   "terminalCondition" : "Terminal",
   "inputSettings" : [
-      {
-        "symbol" : "t",
-        "id" : "t",
-        "isParam" : true,
-        "units" : "time",
-        "isValid" : true,
-        "value" : [
-          0
-        ],
-        "name" : "Time"
+    {
+      "symbol" : "𝑡",
+      "id" : "t",
+      "isParam" : true,
+      "units" : "time",
+      "isValid" : true,
+      "value" : [
+        0
+      ],
+      "name" : "Time"
     },
     {
       "symbol" : "𝑋",
@@ -46,7 +46,7 @@
       "name" : "Y vel"
     }
   ],
-  "name" : "YAML Document",
+  "name" : "Analysis (com.tyleranderson.treviz.analysis)",
   "conditions" : [
     {
       "unionType" : 0,
@@ -56,10 +56,10 @@
           "ubound" : -0.10000000149011612
         }
       ],
-      "Conditions" : [
+      "name" : "Ground Impact",
+      "conditions" : [
 
-      ],
-      "name" : "Ground Impact"
+      ]
     },
     {
       "unionType" : 0,
@@ -69,10 +69,10 @@
           "equality" : 10
         }
       ],
-      "Conditions" : [
+      "name" : "Final time",
+      "conditions" : [
 
-      ],
-      "name" : "Final time"
+      ]
     },
     {
       "unionType" : 0,
@@ -82,32 +82,32 @@
           "lbound" : 100
         }
       ],
-      "Conditions" : [
+      "name" : "Too far",
+      "conditions" : [
 
-      ],
-      "name" : "Too far"
+      ]
     },
     {
       "unionType" : 1,
       "singleConditions" : [
 
       ],
-      "Conditions" : [
+      "name" : "TerminalTest",
+      "conditions" : [
         "Ground Impact",
         "Final time"
-      ],
-      "name" : "TerminalTest"
+      ]
     },
     {
       "unionType" : 4,
       "singleConditions" : [
 
       ],
-      "Conditions" : [
+      "name" : "NestedTest",
+      "conditions" : [
         "TerminalTest",
         "Too far"
-      ],
-      "name" : "NestedTest"
+      ]
     },
     {
       "unionType" : 0,
@@ -117,21 +117,21 @@
           "specialCondition" : 0
         }
       ],
-      "Conditions" : [
+      "name" : "Apogee",
+      "conditions" : [
 
-      ],
-      "name" : "Apogee"
+      ]
     },
     {
       "unionType" : 2,
       "singleConditions" : [
 
       ],
-      "Conditions" : [
+      "name" : "Terminal",
+      "conditions" : [
         "Ground Impact",
         "Final time"
-      ],
-      "name" : "Terminal"
+      ]
     }
   ],
   "plots" : [

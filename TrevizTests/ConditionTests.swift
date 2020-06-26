@@ -44,7 +44,7 @@ class ConditionsTest: XCTestCase {
                 if let newCond = Condition(fromYaml: thisConditionDict, inputConditions: readConditions) {
                     //initCondition(fromYaml: thisConditionDict) {
                     readConditions.append(newCond)
-                } // TODO: else print error
+                }
             }
         }
         let groundImpact = readConditions[0]

@@ -91,20 +91,24 @@ class SingleCondition: EvaluateCondition, Codable {
     var lbound : VarValue? { didSet { if lbound != nil {
             equality = nil
             specialCondition = nil
+            setTests()
         } } }
     var ubound : VarValue?  { didSet { if ubound != nil {
                 equality = nil
                 specialCondition = nil
+                setTests()
         } } }
     var equality : VarValue?  { didSet { if equality != nil {
                 ubound = nil
                 lbound = nil
                 specialCondition = nil
+                setTests()
         } } }
     var specialCondition : SpecialConditionType?  { didSet { if specialCondition != nil {
                 equality = nil
                 lbound = nil
                 ubound = nil
+                setTests()
            } } }
     var meetsCondition : [Bool]?
     var varPosition : Int? // Position of the current variable in the index of StateVarPositions (automatically assigned, speeds up performance)
@@ -130,27 +134,32 @@ class SingleCondition: EvaluateCondition, Codable {
     
     private var previousState : VarValue! // For use in equality type or special case lookups
     private var nextState: VarValue! // For use in special case lookups, e.g. local min
-    var tests : [(VarValue)->Bool] { // TODO: This is computed on every iteration. Make it so the test is only calculated once
-        var _tests : [(VarValue)->Bool] = []
+    private var tests: [(VarValue, VarValue, VarValue)->Bool] = []// Takes in current value, next value, and previous value in that order and ouputs a bool saying whether that point meets the condition
+    func setTests(){
+        self.tests = []
         if let spc = specialCondition {
             if spc == .localMin {
-                _tests = [{ $0 < self.nextState && $0 < self.previousState }]
+                tests = [{ $0 < $1 && $0 < $2 }]
                 //_tests = [{ self.nextState < $0 && self.nextState < self.previousState}]
             }
             if spc == .localMax {
-                _tests = [{ $0 > self.nextState && $0 > self.previousState }]
+                tests = [{ $0 > $1 && $0 > $2 }]
                 //_tests = [{ self.nextState > $0 && self.nextState > self.previousState}]
             }
         } else if let eq = equality {
-            _tests = [{ ($0-eq).sign != (self.previousState-eq).sign }]
+            tests = [{ ($0-eq).sign != ($2-eq).sign }]
         } else {
             if let lower = lbound {
-                _tests.append {$0 > lower }
-            }; if let upper = ubound {
-                _tests.append {$0 < upper }
+                tests.append({(curVal: VarValue, prevVal: VarValue, nextVal: VarValue)->Bool in
+                return curVal > lower
+                })
+            }
+            if let upper = ubound {
+                tests.append({(curVal: VarValue, prevVal: VarValue, nextVal: VarValue)->Bool in
+                return curVal < upper
+                })
             }
         }
-        return _tests
     }
     
     init(){
@@ -166,15 +175,26 @@ class SingleCondition: EvaluateCondition, Codable {
         ubound = upperBound
         equality = eq
         specialCondition = spc
+        //setTests()
     }
     
     // MARK: Codable implementation
-    enum CodingKeys: String, CodingKey {
+    enum CodingKeys: CodingKey {
         case lbound
         case ubound
         case equality
         case specialCondition
         case varID
+    }
+    
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        do {lbound = try container.decode(VarValue.self, forKey: .lbound)} catch {lbound = nil}
+        do {ubound = try container.decode(VarValue.self, forKey: .ubound)} catch {ubound = nil}
+        do {equality = try container.decode(VarValue.self, forKey: .equality)} catch {equality = nil}
+        do {specialCondition = try container.decode(SpecialConditionType.self, forKey: .specialCondition)} catch {specialCondition = nil}
+        varID = try container.decode(VariableID.self, forKey: .varID)
+        setTests()
     }
     
     // Evaluation functions
@@ -205,7 +225,7 @@ class SingleCondition: EvaluateCondition, Codable {
                 }
                 var isCondition : Bool = true
                 for thisTest in tests {
-                    isCondition = isCondition && thisTest(thisVal)
+                    isCondition = isCondition && thisTest(thisVal, self.nextState, self.previousState)
                 }
                 if isCondition {
                     meetsCondition![i] = true
@@ -222,13 +242,13 @@ class SingleCondition: EvaluateCondition, Codable {
         if specialCondition == .localMin || specialCondition == .localMax {
             let oldState = nextState!
             nextState = thisVal
-            isCondition = tests[0](oldState)
+            isCondition = tests[0](oldState, self.nextState, self.previousState)
         } else if equality != nil {
-            isCondition = isCondition && tests[0](thisVal)
+            isCondition = isCondition && tests[0](thisVal, self.nextState, self.previousState)
             previousState = thisVal
         } else {
             for thisTest in tests {
-                isCondition = isCondition && thisTest(thisVal)
+                isCondition = isCondition && thisTest(thisVal, self.nextState, self.previousState)
             }
         }
         return isCondition
@@ -299,7 +319,7 @@ class Condition : EvaluateCondition, Codable {
     // MARK: Codable implementation
     enum CodingKeys: String, CodingKey {
         case name
-        case Conditions // TODO: This shouldn't be uppercase
+        case conditions
         case singleConditions
         case unionType
         case _summary
@@ -310,9 +330,7 @@ class Condition : EvaluateCondition, Codable {
         name = try container.decode(String.self, forKey: .name)
         conditions = Array<EvaluateCondition>()
         do {
-            // let Conditions = try container.decode(Array<Condition>.self, forKey: .Conditions)
             let singleConditions = try container.decode(Array<SingleCondition>.self, forKey: .singleConditions)
-            // conditions.append(contentsOf: Conditions) // handle this in factory initializer
             conditions.append(contentsOf: singleConditions)
         } catch { conditions = [] }
         unionType = try container.decode(BoolType.self, forKey: .unionType)
@@ -331,7 +349,7 @@ class Condition : EvaluateCondition, Codable {
         let conds = conditions.filter { $0 is Condition } as? [Condition]
         let conditionNames = conds?.compactMap({$0.name})
         try container.encode(singleConditions, forKey: .singleConditions)
-        try container.encode(conditionNames, forKey: .Conditions)
+        try container.encode(conditionNames, forKey: .conditions)
     }
     
     // MARK: Inits

@@ -38,13 +38,13 @@ extension Analysis {
         
         if let inputList = yamlDict["Parameters"] as? [[String: Any]] {
             for paramSet in inputList {
-                for thisKey in paramSet.keys { //TODO: better way to do this
+                for thisKey in paramSet.keys {
                     let curVarID = thisKey
                     guard let thisVarIndex = inputSettings.firstIndex(where: { $0.id == curVarID }) else { continue }
                     let thisVar = inputSettings[thisVarIndex] as! Variable
                     thisVar.value = [VarValue(truncating: paramSet[curVarID] as! NSNumber)]
                     thisVar.isParam = true
-                    //inputSettings[thisVarIndex] = thisVar
+                    inputSettings[thisVarIndex] = thisVar
                 }
             }
         }
@@ -53,9 +53,10 @@ extension Analysis {
             // self.conditions = []
             for thisConditionDict in conditionList {
                 if let newCond = Condition(fromYaml: thisConditionDict, inputConditions: conditions) {
-                    //initCondition(fromYaml: thisConditionDict) {
                     conditions.append(newCond)
-                } // TODO: else print error
+                } else {
+                    self.logMessage("Error initiating condition")
+                }
             }
         }
         if let terminalConditionName = yamlDict["Terminal Condition"] as? String {
@@ -86,6 +87,7 @@ extension Analysis {
        */
     func initVar(varID: VariableID, varStr: Any) -> Variable? {
         //guard var thisVar = inputSettings.first(where: { $0.id == varID}) as? Variable else {return nil}
+        //TODO: convert inputSettings to just a reference to varList for variables
         guard let thisVarIndex = inputSettings.firstIndex(where: { $0.id == varID}) else {return nil}
         guard let thisVar = inputSettings[thisVarIndex] as? Variable else {return nil}
         if let val = varStr as? NSNumber {

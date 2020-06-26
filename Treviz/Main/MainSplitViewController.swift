@@ -40,9 +40,6 @@ class MainSplitViewController: TZSplitViewController {
                 splitViewItem.isCollapsed = shouldCollapseView
             }
             splitViewItem.holdingPriority = NSLayoutConstraint.Priority(rawValue: NSLayoutConstraint.Priority.RawValue(holdingPriorites[splitViewName]!))
-            //if let newWidth = UserDefaults.standard.value(forKey: itemKey + ".width") as? Float
-            //{ splitViewItem.
-            //TODO: implement resizing on startup
         }
     }
     

@@ -12,15 +12,19 @@ import Cocoa
  InitStateCheck consists of any class that can serve as an initial state setting. This includes variables like initial state, run settings, environment, vehicle, etc.
  An InitStateCheck may have children (if it is a headen or subheader), can be checked for validity before running, and can be a parameter or contain parameters
  */
-protocol InitStateCheck{
+protocol InitStateCheck {
     var name: String {get}
     var isValid: Bool {get}
     var hasParams: Bool {get}
     var children: [InitStateCheck] {get}
+    func getChild(named inputName: String)->InitStateCheck?
 }
 
 extension Variable: InitStateCheck {
     var children: [InitStateCheck] { return [] }
+    func getChild(named inputName: String)->InitStateCheck? {
+        return self.name == inputName ? self : nil
+    }
 }
 
 class InitStateHeader: InitStateCheck{
@@ -48,8 +52,15 @@ class InitStateHeader: InitStateCheck{
         self.subheaders = subheaders
         self.variables = variables
     }
+    
+    func getChild(named inputName: String)->InitStateCheck?{
+        if self.name == inputName { return self }
+        for thisChild in children {
+            if let match = thisChild.getChild(named: inputName) { return match }
+        }
+        return nil
+    }
 }
 
 class InitStateSubHeader: InitStateHeader{
-
 }

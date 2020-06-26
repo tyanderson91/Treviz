@@ -9,8 +9,8 @@
         <scene sceneID="pk8-NG-Akl">
             <objects>
                 <viewController identifier="outputSetupRestoration" storyboardIdentifier="outputSetup" id="FMf-NL-ufc" customClass="OutputSetupViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" misplaced="YES" id="fmw-WQ-uxs">
-                        <rect key="frame" x="0.0" y="0.0" width="513" height="93"/>
+                    <view key="view" id="fmw-WQ-uxs">
+                        <rect key="frame" x="0.0" y="0.0" width="513" height="153"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView verticalHuggingPriority="900" verticalCompressionResistancePriority="50" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X3z-Eb-GAM" userLabel="Output Setup Custom Scroll View">

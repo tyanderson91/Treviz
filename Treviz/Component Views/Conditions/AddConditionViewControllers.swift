@@ -87,7 +87,6 @@ class AddExistingConditionViewController: AddConditionViewController {
         guard let selectedCondition = existingConditions.first(where: { $0.name == selectedTitle }) else { return }
         representedCondition = selectedCondition
         if let parent = self.parent as? ConditionsViewController {
-            // TODO: Maybe only need the reload data?
             let curConditionArray = parent.curCondition.conditions
             if (subConditionIndex < curConditionArray.count && subConditionIndex >= 0) {
                 parent.curCondition.conditions[subConditionIndex] = representedCondition
@@ -164,12 +163,6 @@ class AddNewConditionViewController: AddConditionViewController, VariableGetter 
             variableSelectorViewController!.analysis = analysis
 
             variableSelectorViewController?.selectedVariable = analysis.varList.first { $0.id == representedSingleCondition.varID }
-            /* TODO: handle observing some other way
-            self.varObservation = variableSelectorViewController!.observe(\.selectedVariable?, changeHandler: {
-                (varVC, change) in
-                if let varID = varVC.selectedVariable?.id { self.representedSingleCondition.varID = varID }
-                self.conditionViewController!.tableView.reloadData()
-            })*/
         }
     }
     

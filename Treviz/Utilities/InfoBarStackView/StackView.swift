@@ -54,7 +54,7 @@ extension StackItemHost {
         stackItem.header.update(toDisclosureState: stackItem.state)
         
         if let base = stackItem.body as? BaseViewController {
-            base.disclosureState = stackItem.state // TODO : Figure out the best way to handle this
+            base.disclosureState = stackItem.state
             base.didDisclose()
         }
     }
@@ -175,7 +175,7 @@ class CustomStackView : NSStackView, StackItemHost {
         return viewController
     }
     
-    func addViewController(fromStoryboardId storyboardid:String, withIdentifier identifier: String, analysis: Analysis)->BaseViewController? { // TODO: Try to make this function work by inputing a user-defined subtype of TZViewController (like for Inputs View Controller)
+    func addViewController(fromStoryboardId storyboardid:String, withIdentifier identifier: String, analysis: Analysis)->BaseViewController? {
         
         let storyboard = NSStoryboard(name: storyboardid, bundle: nil)
         let viewController = storyboard.initViewController(identifier: identifier, with: analysis) as! BaseViewController

@@ -68,7 +68,7 @@ class MainWindowController: NSWindowController, AnalysisProgressReporter {
         analysisProgressBar?.doubleValue = pComplete
     }
     func startProgressTracking(){
-        self.terminalCondition = analysis.terminalCondition! // TODO: if Condition is a struct, remove the copy
+        self.terminalCondition = analysis.terminalCondition!
         analysisProgressBar?.isHidden = false
     }
     func endProgressTracking(){
@@ -82,9 +82,8 @@ class MainWindowController: NSWindowController, AnalysisProgressReporter {
 
         if analysis.returnCode > 0 { //Nominal successfull completion
             processOutputs()}
-        else { //TODO: make different error codes for analysis run
+        else {
             processOutputs()
-            //viewController.textOutputView?.string.append("Not enough inputs to make analysis fully defined!")
         }
     }
     /**

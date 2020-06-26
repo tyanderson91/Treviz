@@ -474,7 +474,7 @@
             <objects>
                 <viewController storyboardIdentifier="addExistingConditionViewController" id="VaL-7R-GMm" customClass="AddExistingConditionViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="eTB-0O-VNL">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="43"/>
+                        <rect key="frame" x="0.0" y="0.0" width="167" height="43"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                         <subviews>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1xf-GZ-url" userLabel="Remove Condition Button">
@@ -492,7 +492,7 @@
                                 </connections>
                             </button>
                             <popUpButton horizontalHuggingPriority="1" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kEa-eP-MTI">
-                                <rect key="frame" x="38" y="8" width="400" height="25"/>
+                                <rect key="frame" x="38" y="8" width="117" height="25"/>
                                 <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="GfH-wc-x1P">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -520,7 +520,7 @@
                 </viewController>
                 <customObject id="4Cv-sq-H80" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-270" y="421"/>
+            <point key="canvasLocation" x="-411.5" y="420.5"/>
         </scene>
     </scenes>
     <resources>

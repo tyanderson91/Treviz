@@ -197,7 +197,6 @@ class ConditionsViewController: TZViewController, VariableGetter, NSTableViewDel
                     if let vc = child as? AddConditionViewController { vc.removeConditionButton.isHidden = true }
                 }
             }
-            tableView.selectRowIndexes(IndexSet(integer: tableRow), byExtendingSelection: false)  // TODO: find out why rows sometimes get deselected without this
             canAddSubCondition = true
             addConditionButton.title = "Delete"
             conditionNameTextBox.isHidden = false

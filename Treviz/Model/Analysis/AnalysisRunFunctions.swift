@@ -14,11 +14,17 @@ extension Analysis {
         
     func runAnalysis() {
         //Check if enough inputs are defined
-        guard self.isValid() else { return }  // TODO: error code for this case
+        do { try self.isValid() }
+        catch {
+            self.logMessage("Cannot run analysis due to error in input settings: \(error.localizedDescription)")
+            return
+        }
         
         // Setup
         
         for thisVar in self.traj.variables { // Delete all data except for initial state
+            //let initVal = thisVar.value[0]
+            //thisVar.value = [initVal]
             if thisVar.value.count > 1 { thisVar.value.removeLast(thisVar.value.count - 1) }
             if let existingVar = inputSettings.first(where: { (var1: Parameter)->Bool in return var1.id == thisVar.id }) {
                 thisVar.value[0] = (existingVar as? Variable)?.value[0] ?? 0

@@ -51,16 +51,24 @@ class InputsViewController: TZViewController, NSTableViewDataSource, NSTableView
                                //environmentsViewController,
                                initStateViewController]{
             self.addChild(thisController!)
-            thisController?.analysis = self.analysis
+            //thisController?.analysis = self.analysis
             //thisController?.representedObject = self.representedObject
         }
+        
+        initStateViewController.inputsViewController = self
     }
     
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         if segue.identifier == .paramTableViewSegue as NSStoryboardSegue.Identifier{
             self.tableViewController = segue.destinationController as? ParamTableViewController
             self.tableViewController.analysis = analysis
+            tableViewController.inputsViewController = self
         }
+    }
+    
+    func reloadParams(){
+        tableViewController.tableView.reloadData()
+        initStateViewController.outlineView.reloadData()
     }
 }
 

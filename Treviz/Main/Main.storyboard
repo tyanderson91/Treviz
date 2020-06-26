@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16096"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -825,7 +825,7 @@
                         <splitViewItem holdingPriority="249" id="vb0-La-d8P"/>
                     </splitViewItems>
                     <splitView key="splitView" autosaveName="mainSplitView" dividerStyle="thin" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bmt-by-9O5">
-                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="199"/>
+                        <rect key="frame" x="0.0" y="0.0" width="193" height="199"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                         <connections>
                             <outlet property="delegate" destination="cNr-ot-ed2" id="k8f-ze-e9u"/>
@@ -843,7 +843,7 @@
                 </splitViewController>
                 <customObject id="WEA-Dx-jp5" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="129.5" y="552.5"/>
+            <point key="canvasLocation" x="225.5" y="552.5"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="lAM-fm-Rjs">

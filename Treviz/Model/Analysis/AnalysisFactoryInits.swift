@@ -16,7 +16,7 @@ extension Condition {
         do {
             try self.init(from: decoder)
             let container = try decoder.container(keyedBy: Condition.CodingKeys.self)
-            let conditionNames = try container.decode(Array<String>.self, forKey: .Conditions)
+            let conditionNames = try container.decode(Array<String>.self, forKey: .conditions)
             for thisConditionName in conditionNames {
                 if let thisCondition = analysis.conditions.first(where: {$0.name == thisConditionName} ) {
                     self.conditions.append(thisCondition)
@@ -36,6 +36,8 @@ extension TZOutput {
     convenience init?(decoder: Decoder, referencing analysis: Analysis) {
         do {
             try self.init(from: decoder)
+            let existingIDs = analysis.plots.compactMap {$0.id}
+            if existingIDs.contains(self.id) { throw TZOutputError.DuplicateIDError }
             let container = try decoder.container(keyedBy: TZOutput.CodingsKeys.self)
             
             if true {
@@ -65,7 +67,7 @@ extension TZOutput {
                 }
             }
         } catch {
-            analysis.logMessage("Error when reading output")
+            analysis.logMessage("Error when reading output: \(error.localizedDescription)")
             return nil
         }
     }

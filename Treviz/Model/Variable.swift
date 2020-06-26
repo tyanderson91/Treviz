@@ -14,12 +14,8 @@ typealias VarValue = Float
 
 /**
 Variable is a class that defines a single changeable numerical property of a vehicle, including name, unit information, and value. Used to display input state and output information
- 
- TODO for turning into struct:
- - get rid of NSCopying and NSCoding
- - create static typess
  */
-class Variable : Parameter, Codable { //TODO: reconsider whether this could be a struct
+class Variable : Parameter, Codable {
     
     let id: VariableID
     let name: String

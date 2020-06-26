@@ -94,6 +94,8 @@
 		CDD5049F22252AFD00B29751 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDD5049E22252AFD00B29751 /* Images.xcassets */; };
 		CDD60A912345BF5C00249987 /* TZTextOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD60A902345BF5C00249987 /* TZTextOutput.swift */; };
 		CDD60A972345C5AE00249987 /* TZOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD60A962345C5AE00249987 /* TZOutput.swift */; };
+		CDDFF28324A5ABE200E8BC31 /* StateDict.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDFF28224A5ABE200E8BC31 /* StateDict.swift */; };
+		CDDFF28424A5ABE200E8BC31 /* StateDict.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDFF28224A5ABE200E8BC31 /* StateDict.swift */; };
 		CDE078F4224806EF00815E7F /* Inputs.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDE078F3224806EF00815E7F /* Inputs.storyboard */; };
 		CDE2A5182471F27700DB2B45 /* AnalysisFactoryInits.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE2A5172471F27700DB2B45 /* AnalysisFactoryInits.swift */; };
 		CDF1670C2237A10400CD9590 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF1670B2237A10400CD9590 /* MainWindowController.swift */; };
@@ -233,6 +235,7 @@
 		CDD504A422252AFD00B29751 /* Treviz.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Treviz.entitlements; sourceTree = "<group>"; };
 		CDD60A902345BF5C00249987 /* TZTextOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TZTextOutput.swift; sourceTree = "<group>"; };
 		CDD60A962345C5AE00249987 /* TZOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TZOutput.swift; sourceTree = "<group>"; };
+		CDDFF28224A5ABE200E8BC31 /* StateDict.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateDict.swift; sourceTree = "<group>"; };
 		CDE078F3224806EF00815E7F /* Inputs.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Inputs.storyboard; sourceTree = "<group>"; };
 		CDE0795A2249EC7400815E7F /* InitStateStructure.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = InitStateStructure.plist; sourceTree = "<group>"; };
 		CDE2A5172471F27700DB2B45 /* AnalysisFactoryInits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisFactoryInits.swift; sourceTree = "<group>"; };
@@ -309,6 +312,7 @@
 				CD63AEA223E7EA26006502F2 /* Condition.swift */,
 				CD63AEA323E7EA26006502F2 /* State.swift */,
 				CD63AEA023E7EA26006502F2 /* StateArray.swift */,
+				CDDFF28224A5ABE200E8BC31 /* StateDict.swift */,
 				CD63AEA123E7EA26006502F2 /* Variable.swift */,
 				CDB7C7392352B03100BC50F1 /* Parameter.swift */,
 				CD0F010A2365595700C920AA /* Vehicle.swift */,
@@ -858,6 +862,7 @@
 				CDD60A912345BF5C00249987 /* TZTextOutput.swift in Sources */,
 				CD42E0AA22FD05F600A0F9A1 /* CollapsibleStackView.swift in Sources */,
 				CDA549EF23CC254B00933C6B /* AddConditionViewControllers.swift in Sources */,
+				CDDFF28324A5ABE200E8BC31 /* StateDict.swift in Sources */,
 				CDC1F5372233978500D1BB25 /* OutputsViewController.swift in Sources */,
 				CDF255F8245294880097F995 /* AnalysisProgressReporter.swift in Sources */,
 				CD6E0B9E2431BAC5008D1656 /* TZToolbar.swift in Sources */,
@@ -886,6 +891,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD6CCF3A244BB5720051F76D /* TZPlot.swift in Sources */,
+				CDDFF28424A5ABE200E8BC31 /* StateDict.swift in Sources */,
 				CD5F4E992455100A00823E43 /* Analysis.swift in Sources */,
 				CD5F4E972455100600823E43 /* AnalysisProgressReporter.swift in Sources */,
 				CDFAD0F523EA84FE00CE7424 /* Parameter.swift in Sources */,

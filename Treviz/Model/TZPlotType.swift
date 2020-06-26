@@ -15,15 +15,17 @@ enum TZPlotTypeError : Error {
     case InvalidPlotType
 }
 
-class TZPlotType : NSObject {
-    //TODO : This should probably be in a struct. Get rid of bindings
+struct TZPlotType : Equatable {
+    static func == (lhs: TZPlotType, rhs: TZPlotType) -> Bool {
+        return lhs.id == rhs.id
+    }
     
     var id : String = ""
-    @objc var name : String = ""
+    var name : String = ""
     var requiresCondition : Bool = false
     var nAxis : Int = 0
     var nVars : Int = 0
-    @objc var icon : NSImage?
+    var icon : NSImage?
     
     init(_ id: String, name: String, requiresCondition: Bool, nAxis: Int, nVars: Int) {
         self.id = id

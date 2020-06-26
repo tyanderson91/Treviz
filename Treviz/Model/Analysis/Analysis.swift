@@ -12,6 +12,20 @@ enum PropagatorType {
     case rungeKutta4
 }
 
+enum AnalysisError: Error {
+    case NoTerminalCondition
+    case TimeStepError
+}
+extension AnalysisError: LocalizedError {
+    public var errorDescription: String? {
+        switch self {
+        case .NoTerminalCondition:
+            return NSLocalizedString("Missing terminal condition", comment: "")
+        case .TimeStepError:
+            return NSLocalizedString("Unset timestep settings", comment: "")
+        }
+    }
+}
 /**
 The Analysis class is the subclass of NSDocument that controls all the analysis document information and methods
 Data reading and writing occurs in AnalysisData and is passed to this class
@@ -36,7 +50,7 @@ class Analysis: NSObject, Codable {
     weak var terminalCondition : Condition!
     var traj: State!
     var initState: StateArray { return traj[0] }
-    var conditions : [Condition] = [] // TODO: Turn this into a set instead of an array
+    var conditions : [Condition] = []
     var inputSettings : [Parameter] = []
     var parameters : [Parameter] { //TODO: this should contain more than just input settings
         return inputSettings.filter {$0.isParam}
@@ -70,19 +84,15 @@ class Analysis: NSObject, Codable {
     // Validity check prior to running
     /**
      Check whether the analysis has enough inputs defined in order to run
-     If this function does not return true, the analysis cannot be run
-     - TODO: point out which inputs need to be fixed
+     If this function throws an error, the analysis cannot be run
      */
-    func isValid()->Bool{
-        var checks : [Bool] = [] // Array of booleans for each individual condition that must be satisfied
+    func isValid() throws {
+        /*
         for _ in self.initStateGroups.subheaders {
-            checks.append(true) // thisSet.isValid
-        }
-        checks.append(contentsOf: [
-            self.terminalCondition != nil,
-            self.defaultTimestep > 0
-        ])
-        return checks.allSatisfy { $0 }
+            let thisValid = true
+        }*/
+        if self.terminalCondition == nil { throw AnalysisError.NoTerminalCondition }
+        if self.defaultTimestep <= 0 { throw AnalysisError.TimeStepError }
     }
     
     
@@ -101,6 +111,7 @@ class Analysis: NSObject, Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         name = try container.decode(String.self, forKey: .name)
         inputSettings = try container.decode(Array<Variable>.self, forKey: .inputSettings)
+        //TODO: convert inputSettings to just a reference to varList for variables
         setupConstants()
 
         var allConds = try container.nestedUnkeyedContainer(forKey: .conditions)

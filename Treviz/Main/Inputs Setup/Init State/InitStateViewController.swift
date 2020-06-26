@@ -14,35 +14,27 @@ class InitStateViewController: BaseViewController, NSOutlineViewDelegate, NSOutl
     var inputVars : [Parameter] = []
     var inputVarStructure : InitStateHeader?
     override func getHeaderTitle() -> String { return NSLocalizedString("Initial State", comment: "") }
-
+    var inputsViewController: InputsViewController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         outlineView.autosaveExpandedItems = false  // TODO: Implement functions that allow this
-        NotificationCenter.default.addObserver(self, selector: #selector(self.reloadData(_:)), name: .didSetParam, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.reloadData(_:)), name: .didChangeUnits, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.reloadData(_:)), name: .didChangeValue, object: nil)
+        outlineView.autosaveName = "initStateOutlineView"
         //Load data
         inputVarStructure = analysis.initStateGroups
         inputVars = analysis.inputSettings
         outlineView.reloadData()
+        
     }
     
     override func viewDidAppear() {
-        // outlineView.wantsLayer = true
-        // outlineView.layer?.backgroundColor = NSColor.red.cgColor
     }
     
     func outlineViewColumnDidResize(_ notification: Notification) {
-        //TODO: enforce width constraints
     }
     
     override func didDisclose() {
-    }
-    
-    @objc func reloadData(_ notification: Notification){
-        outlineView.reloadData()
-    }
-    
+    }   
     
     //MARK: Outline View Datasource and Delegate
     func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
@@ -130,22 +122,14 @@ class InitStateViewController: BaseViewController, NSOutlineViewDelegate, NSOutl
         }
         return nil
     }
-    /*
-    func outlineView(_ outlineView: NSOutlineView, persistentObjectForItem item: Any?) -> Any? {
-        do {
-            return try NSKeyedArchiver.archivedData(withRootObject: item as Any, requiringSecureCoding: false) } catch {return nil}
-    }
-    func outlineView(_ outlineView: NSOutlineView, itemForPersistentObject object: Any) -> Any? {
-        do {
-        return try NSKeyedUnarchiver.unarchivedObject(ofClass: Parameter, from: object as! Data) ?? nil
-    }*/
-
-    @IBAction func setParams(_ sender: Any) { // TODO: Make setting and getting params work with Variable as a struct
+    
+    @IBAction func setParams(_ sender: Any) {
         guard let button = sender as? NSButton else {return}
         let row = outlineView.row(for: button)
         if var thisParam = outlineView.item(atRow: row) as? Parameter {
             thisParam.isParam = button.state == NSControl.StateValue.on
-            NotificationCenter.default.post(name: .didSetParam, object: nil)
+            //inputsViewController?.tableViewController.params = analysis.parameters
+            inputsViewController?.reloadParams()
         }
     }
     
@@ -153,7 +137,7 @@ class InitStateViewController: BaseViewController, NSOutlineViewDelegate, NSOutl
         let curRow = outlineView.row(for: sender)
         if let thisParam = outlineView.item(atRow: curRow) as? Variable{
             thisParam.units = sender.stringValue
-            NotificationCenter.default.post(name: .didChangeUnits, object: nil)
+            inputsViewController?.reloadParams()
         }
     }
     
@@ -162,7 +146,7 @@ class InitStateViewController: BaseViewController, NSOutlineViewDelegate, NSOutl
         if let thisParam = outlineView.item(atRow: curRow) as? Variable{
             if let value = VarValue(sender.stringValue) {
                 thisParam.value[0] = value}
-            NotificationCenter.default.post(name: .didChangeValue, object: nil)
+            inputsViewController?.reloadParams()
         }
     }
     
