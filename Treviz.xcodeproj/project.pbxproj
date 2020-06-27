@@ -47,7 +47,6 @@
 		CD59C54623E79476001D98D5 /* Outputs.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD59C54523E79476001D98D5 /* Outputs.storyboard */; };
 		CD5F4E9024550FD700823E43 /* Condition.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD63AEA223E7EA26006502F2 /* Condition.swift */; };
 		CD5F4E9124550FE600823E43 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD63AEA323E7EA26006502F2 /* State.swift */; };
-		CD5F4E9224550FEB00823E43 /* StateArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD63AEA023E7EA26006502F2 /* StateArray.swift */; };
 		CD5F4E9324550FED00823E43 /* Variable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD63AEA123E7EA26006502F2 /* Variable.swift */; };
 		CD5F4E9424550FF400823E43 /* OutputDataSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6CCF3B244CCC960051F76D /* OutputDataSet.swift */; };
 		CD5F4E962455100400823E43 /* AnalysisProgressReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF255F7245294880097F995 /* AnalysisProgressReporter.swift */; };
@@ -60,7 +59,6 @@
 		CD5F4E9D2455101500823E43 /* AnalysisRunFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0F010823654ED400C920AA /* AnalysisRunFunctions.swift */; };
 		CD5F4E9E2455105300823E43 /* InitStateHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB7C73B2352B58300BC50F1 /* InitStateHeader.swift */; };
 		CD5F4E9F2455109E00823E43 /* InitStateHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB7C73B2352B58300BC50F1 /* InitStateHeader.swift */; };
-		CD63AEA423E7EA26006502F2 /* StateArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD63AEA023E7EA26006502F2 /* StateArray.swift */; };
 		CD63AEA523E7EA26006502F2 /* Variable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD63AEA123E7EA26006502F2 /* Variable.swift */; };
 		CD63AEA623E7EA26006502F2 /* Condition.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD63AEA223E7EA26006502F2 /* Condition.swift */; };
 		CD63AEA723E7EA26006502F2 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD63AEA323E7EA26006502F2 /* State.swift */; };
@@ -116,7 +114,6 @@
 		CDFAD0F523EA84FE00CE7424 /* Parameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB7C7392352B03100BC50F1 /* Parameter.swift */; };
 		CDFAD0F623EA84FE00CE7424 /* Condition.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD63AEA223E7EA26006502F2 /* Condition.swift */; };
 		CDFAD0F723EA84FE00CE7424 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD63AEA323E7EA26006502F2 /* State.swift */; };
-		CDFAD0F823EA84FE00CE7424 /* StateArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD63AEA023E7EA26006502F2 /* StateArray.swift */; };
 		CDFAD0F923EA84FE00CE7424 /* Variable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD63AEA123E7EA26006502F2 /* Variable.swift */; };
 		CDFAD0FA23EA84FE00CE7424 /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0F010A2365595700C920AA /* Vehicle.swift */; };
 		CDFAD0FB23EA84FE00CE7424 /* TZOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD60A962345C5AE00249987 /* TZOutput.swift */; };
@@ -201,7 +198,6 @@
 		CD59C54123E79449001D98D5 /* InitVars.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = InitVars.plist; sourceTree = "<group>"; };
 		CD59C54223E79449001D98D5 /* InitStateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitStateViewController.swift; sourceTree = "<group>"; };
 		CD59C54523E79476001D98D5 /* Outputs.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Outputs.storyboard; sourceTree = "<group>"; };
-		CD63AEA023E7EA26006502F2 /* StateArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateArray.swift; sourceTree = "<group>"; };
 		CD63AEA123E7EA26006502F2 /* Variable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Variable.swift; sourceTree = "<group>"; };
 		CD63AEA223E7EA26006502F2 /* Condition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Condition.swift; sourceTree = "<group>"; };
 		CD63AEA323E7EA26006502F2 /* State.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
@@ -311,7 +307,6 @@
 			children = (
 				CD63AEA223E7EA26006502F2 /* Condition.swift */,
 				CD63AEA323E7EA26006502F2 /* State.swift */,
-				CD63AEA023E7EA26006502F2 /* StateArray.swift */,
 				CDDFF28224A5ABE200E8BC31 /* StateDict.swift */,
 				CD63AEA123E7EA26006502F2 /* Variable.swift */,
 				CDB7C7392352B03100BC50F1 /* Parameter.swift */,
@@ -804,7 +799,6 @@
 				CD590D4123E7AC57000897C2 /* TZOutput.swift in Sources */,
 				CD5F4E9C2455101400823E43 /* AnalysisRunFunctions.swift in Sources */,
 				CDB457B52383E19B004F13AA /* TrevizTests.swift in Sources */,
-				CD5F4E9224550FEB00823E43 /* StateArray.swift in Sources */,
 				CD5F4E982455100900823E43 /* Analysis.swift in Sources */,
 				CD5F4E962455100400823E43 /* AnalysisProgressReporter.swift in Sources */,
 				CDB457C0238508B6004F13AA /* ConditionTests.swift in Sources */,
@@ -874,7 +868,6 @@
 				CDB7C73C2352B58300BC50F1 /* InitStateHeader.swift in Sources */,
 				CDF2338A242DCD8100B8EF40 /* EditableHeaderTextField.swift in Sources */,
 				CDF2338B242DCD8100B8EF40 /* BaseViewController.swift in Sources */,
-				CD63AEA423E7EA26006502F2 /* StateArray.swift in Sources */,
 				CDA0F888225C5D47003C62E6 /* InputsCellViews.swift in Sources */,
 				CDF3D1A1225025B00064D70C /* Analysis.swift in Sources */,
 				CDBEA0A622447A9C00D3159C /* TextOutputsViewController.swift in Sources */,
@@ -898,7 +891,6 @@
 				CDFAD0F623EA84FE00CE7424 /* Condition.swift in Sources */,
 				CD656F71248771D500BB5CBC /* AnalysisStartupFuncs.swift in Sources */,
 				CDFAD0F723EA84FE00CE7424 /* State.swift in Sources */,
-				CDFAD0F823EA84FE00CE7424 /* StateArray.swift in Sources */,
 				CD6CCF3D244D2FFB0051F76D /* OutputDataSet.swift in Sources */,
 				CDFAD0F923EA84FE00CE7424 /* Variable.swift in Sources */,
 				CDFAD0FA23EA84FE00CE7424 /* Vehicle.swift in Sources */,

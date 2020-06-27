@@ -7,70 +7,84 @@
 //
 
 import Cocoa
-/*
+
 enum StateError: Error, LocalizedError {
     case UnmatchingVarLength
 }
 
-struct StateDictArray : Dictionary<VariableID, Array<VarValue>> {
+typealias StateDictArray = Dictionary<VariableID, Array<VarValue>>
+typealias StateDictSingle = Dictionary<VariableID, VarValue>
+
+/**
+ A StateDictArray is a dictionary of var values. The Keys are VarIDs, and the values are the values associated with that VarID (in standard metric units). This provides a convenient data structure to pass around trajectory information without the overhead associated with full Variable objects
+ */
+extension StateDictArray {
     init(from state: State) throws {
-        var curLen = 0
-        for thisVar in state.variables {
-            if curLen == 0 { curlen = thisVar.value.count }
-            else if curlen != thisVar.value.count { throw StateError.UnmatchingVarLength }
+        //var curLen : Int?
+        self.init()
+        for thisVar in state {
+            //if curLen == nil { curlen = thisVar.value.count }
+            //else if curlen! != thisVar.value.count { throw StateError.UnmatchingVarLength }
+            self[thisVar.id] = thisVar.value
         } // All variables in the input State should have the same number of entries
-        let fullIndexSet = IndexSet(integersIn: 0...curLen)
-        self.init(from: state, at: fullIndexSet)
     }
-    
-    init(from state: State, at indices: IndexSet) {
+    /*
+    init(from state: State, at indices: [Int]) {
         for thisVar in state.variables {
             // TODO: Once Units are implemented, assert that all input variables use standard metric units
-            self[thisVar.id] = thisVar.value[indices]
+            self[thisVar.id] = thisVar
+        }
+    }*/
+    init(from state: State, at index: Int) {
+        self.init()
+        var i: Int!
+        if index == -1 { i = state[0].value.count - 1}
+        else { i = index }
+        for thisVar in state {
+            // TODO: Once Units are implemented, assert that all input variables use standard metric units
+            self[thisVar.id] = [thisVar.value[i]]
         }
     }
+}
+
+/**
+A StateDictSingle is just like a StateDictArray, but only contains data for a single point in a trajectory. This is useful for, say, evaluating a condition at a particular point in the trajectory
+*/
+extension StateDictSingle {
     init(from state: State, at index: Int) {
-        self.init(from: state, at: [index])
+        self.init()
+        var i: Int!
+        if index == -1 { i = state[0].value.count - 1}
+        else { i = index }
+        for thisVar in state {
+            // TODO: Once Units are implemented, assert that all input variables use standard metric units
+            self[thisVar.id] = thisVar.value[i]
+        }
+    }
+    init(lastestFromState state: State) {
+        self.init()
+        let index = state[0].value.count - 1
+        for thisVar in state {
+            // TODO: Once Units are implemented, assert that all input variables use standard metric units
+            self[thisVar.id] = thisVar.value[index]
+        }
     }
 }
 
 extension State {
-    /**
-     Sorting algorithm puts variables in their proper position according to StateVarPositions, otherwise throws them to the end. Useful for automatically extracting by position when running analysis
-     */
-    static func getValue(_ varID : VariableID, _ state: StateArray)->VarValue?{
-        if let index = stateVarPositions.firstIndex(where: { $0 == varID }){
-            return state[index]
-        } else {return nil}
-    }/*
-    subscript(varID: VariableID) -> [VarValue]? {
-        if let index = State.stateVarPositions.firstIndex(where: { $0 == varID }){
-            return self[index]
-        } else {return nil}
-    }*/
-    
-    subscript(index: Int) -> [VarValue] {
+    subscript(index: Int) -> StateDictSingle {
         get {
-            var stateArray = StateArray()
-            for thisVarID in State.stateVarPositions {
-                if let thisVal = self[thisVarID, index] {
-                    stateArray.append(thisVal)
-                }
-            }
-            return stateArray
+            return StateDictSingle(from: self, at: index)
         }
-        set (newArray) {
+        set (newDict) {
             var i = 0
-            for thisValue in newArray {
-                let thisVar = self[State.stateVarPositions[i]]
-                //let varID = State.stateVarPositions[i]
-                //let thisVar = self[varID]
-                thisVar[index] = thisValue
-                //self[varID] = thisVar
-                i += 1
+            for (thisKey, thisVal) in newDict {
+                if let thisVar = self.first(where: { $0.id == thisKey }){
+                    thisVar[index] = thisVal
+                    i += 1
+                }
             }
         }
     }
     
 }
-*/

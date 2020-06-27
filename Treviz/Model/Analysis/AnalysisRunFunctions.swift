@@ -22,7 +22,7 @@ extension Analysis {
         
         // Setup
         
-        for thisVar in self.traj.variables { // Delete all data except for initial state
+        for thisVar in self.traj { // Delete all data except for initial state
             //let initVal = thisVar.value[0]
             //thisVar.value = [initVal]
             if thisVar.value.count > 1 { thisVar.value.removeLast(thisVar.value.count - 1) }
@@ -40,10 +40,16 @@ extension Analysis {
             //newVar.value = [$0.value[0]]
             return $0//newVar
         }*/
-        self.traj.sortVarIndices() // Ensure that time is the first variable, x is second, etc.
+        //self.traj.sortVarIndices() // Ensure that time is the first variable, x is second, etc.
         let dt : VarValue = defaultTimestep
 
         // let outputTextView = self.viewController.textOutputView!
+        
+        var reducedTraj = [Variable]()
+        for thisVar in traj {
+            if self.requiredVars.contains(thisVar.id) { reducedTraj.append(thisVar) }
+        }
+        traj = reducedTraj
         
         self.terminalCondition.reset(initialState: traj[0])
         
@@ -55,7 +61,7 @@ extension Analysis {
             // let initState = self.traj[0]
             while self.isRunning {
                 let curstate = self.traj[i]
-                var newState = StateArray()
+                var newState = StateDictSingle()
                 switch self.propagatorType {
                 case .explicit:
                     newState = self.equationsOfMotion(curState: curstate, dt: dt)
@@ -91,14 +97,14 @@ extension Analysis {
     /**
      This is the primary wrapper function for determining the next state based on the current state. It is called by the propagator at least once per timestep, and calls all the functions that determine the forces, moments, and subsequent motion of a vehicle
      */
-    func equationsOfMotion(curState: StateArray, dt: VarValue)->StateArray { //TODO: Move calculation of forces and moments to separate function
+    func equationsOfMotion(curState: StateDictSingle, dt: VarValue)->StateDictSingle { //TODO: Move calculation of forces and moments to separate function
         
-        var x = curState[State.ix]
-        var y = curState[State.iy]
-        var dx = curState[State.idx]
-        var dy = curState[State.idy]
-        var t = curState[State.it]
-        var m = curState[State.imtot]
+        var x = curState["x"]!
+        var y = curState["y"]!
+        var dx = curState["dx"]!
+        var dy = curState["dy"]!
+        var t = curState["t"]!
+        var m = curState["mtot"]!
         
         let F_g = -9.81*m
         let a_y = F_g/m
@@ -110,7 +116,7 @@ extension Analysis {
         dx += a_x*dt
         x += dx*dt
         m += 0
-        let newState : Array<VarValue> = [t, x, y, 0, dx, dy, 0, m]
+        let newState : StateDictSingle = ["t":t, "x":x, "y":y, "z":0, "dx":dx, "dy":dy, "dz":0, "mtot":m]
         
         return newState
     }

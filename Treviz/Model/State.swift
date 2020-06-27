@@ -9,51 +9,22 @@
 import Cocoa
 
 /**
- State is an object containing a collection of Variable objects that combined should fully define the state of a vehicle at any point in time
+ State is a struct containing a collection of Variable objects that, when combined should fully define the state of a vehicle at any point in time
  Used to read input state, write output state, parse outputs, and create derived states.
  Converts into an array of Double values before being processed by the propagator
  */
-class State: NSObject {
-    
-    var variables : [Variable] = []
-    /**
-     Number of data points contained in the trajectory
-     */
-    var length : Int {
-        var curlen = -1
-        for thisVar in variables {
-            curlen = max(curlen, thisVar.value.count)
-        }
-        return curlen
-    }
-    
-    override init() {
-        super.init()
-    }
-    /*
-    func encode(with coder: NSCoder) {
-        coder.encode(variables, forKey: "variables")
-    }
-    
-    required init?(coder: NSCoder) {
-        variables = coder.decodeObject(forKey: "variables") as? [Variable] ?? [Variable]()
-        super.init()
-    }*/
-    
-    init(variables varsIn: [Variable]) {
-        variables = varsIn
-        super.init()
-    }
+typealias State = Array<Variable>
+extension State {
 
     // Subscripts by variable
     subscript(_ varID: VariableID) -> Variable {
         get {
-            let thisVar = variables.first(where: {$0.id == varID})!
+            let thisVar = self.first(where: {$0.id == varID})!
             return thisVar
         }
         set {
-            let index = variables.firstIndex(where: {$0.id == varID})!
-            variables[index] = newValue
+            let index = self.firstIndex(where: {$0.id == varID})!
+            self[index] = newValue
         }
     }
     
@@ -102,7 +73,7 @@ class State: NSObject {
         return self[varID, condition]
     }
     subscript(condition: Condition)->[VariableID: [VarValue]]?{
-        return self[self.variables, condition]
+        return self[self, condition]
     }
     
 }

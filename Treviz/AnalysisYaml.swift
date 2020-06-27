@@ -78,7 +78,7 @@ extension Analysis {
                 }
             }
         }
-        traj = State(variables: varList)
+        traj = State(varList)
     }
     
     /**

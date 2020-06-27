@@ -61,9 +61,9 @@ class MainWindowController: NSWindowController, AnalysisProgressReporter {
         
     // MARK: AnalysisProgressReporter implementation
     var terminalCondition = Condition()
-    var initialState: StateArray { return analysis.initState }
+    var initialState: StateDictSingle { return analysis.initState }
     
-    func updateProgress(at currentState: StateArray) {
+    func updateProgress(at currentState: StateDictSingle) {
         let pComplete = pctComplete(curState: currentState)
         analysisProgressBar?.doubleValue = pComplete
     }
@@ -95,13 +95,13 @@ class MainWindowController: NSWindowController, AnalysisProgressReporter {
      - returns:
         pctComplete: Double, a number between 0 and 1 representing the estimated completion
      */
-    private func pctComplete(curState: StateArray)->Double{
+    private func pctComplete(curState: StateDictSingle)->Double{
         var tempPctComplete = 0.0
         for thisCond in terminalCondition.conditions {
             var curPctComplete = 0.0
             if let thisCond1 = thisCond as? SingleCondition {
-                let thisVar = State.getValue(thisCond1.varID, curState)!
-                let initVar = State.getValue(thisCond1.varID, initialState)!
+                let thisVar = curState[thisCond1.varID]!//2State.getValue(thisCond1.varID, curState)!
+                let initVar = initialState[thisCond1.varID]!//State.getValue(thisCond1.varID, initialState)!
                 if thisCond1.equality != nil {
                     let finalVar = thisCond1.equality!
                     curPctComplete = Double((thisVar-initVar) / (finalVar-initVar))

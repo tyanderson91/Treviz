@@ -131,7 +131,7 @@ class AnalysisDoc: NSDocument {
         analysis.name = "Analysis (\(typeName))"
         analysis.defaultTimestep = 0.1
         
-        analysis.traj = State(variables: analysis.varList)
+        analysis.traj = State(analysis.varList)
     }
 
     override class var autosavesInPlace: Bool {

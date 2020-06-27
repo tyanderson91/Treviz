@@ -15,7 +15,7 @@ typealias VarValue = Float
 /**
 Variable is a class that defines a single changeable numerical property of a vehicle, including name, unit information, and value. Used to display input state and output information
  */
-class Variable : Parameter, Codable {
+class Variable : Parameter, Codable, Hashable {
     
     let id: VariableID
     let name: String
@@ -25,13 +25,20 @@ class Variable : Parameter, Codable {
     var isValid: Bool = true
     var hasParams: Bool {return isParam}
     var isParam: Bool = false
-    
+
+    static func ==(lhs: Variable, rhs: Variable) -> Bool {
+        return lhs.id == rhs.id && lhs.units == rhs.units && lhs.value == rhs.value
+    }
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+        hasher.combine(units)
+        hasher.combine(value)
+    }
     init(_ idIn: VariableID, named nameIn:String = "", symbol symbolIn: String = "", units unitsIn: String = ""){
         id = idIn
         name = nameIn
         symbol = symbolIn
         units = unitsIn
-        //super.init()
     }
     
     // Subscripts to get value data

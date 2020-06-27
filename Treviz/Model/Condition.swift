@@ -12,16 +12,16 @@ import Cocoa
 /**
  EvaluateCondition is a protocol that is adopted by bothe the Condition and SingleCondition classes. The basic feature is that it can read a state and determine whether it meets a given condition based on some predefined rules
  */
-protocol EvaluateCondition : Codable {
+protocol EvaluateCondition : Codable, NSCopying {
     /**
      Evaluate a trajectory (state) by the condition. Stores the result in the condition's "meetsCondition"
      */
     func evaluateState(_ state: State)
-    func evaluateStateArray(_ singleState: StateArray)->Bool
+    func evaluateStateArray(_ singleState: StateDictSingle)->Bool
     /**
      Reset all temporary variables to prepare condition to be used at the start of an analysis
      */
-    func reset(initialState: StateArray?)
+    func reset(initialState: StateDictSingle?)
     var meetsCondition : [Bool]? {get set}
     var summary : String {get}
     func isValid() -> Bool
@@ -86,8 +86,10 @@ extension NSNotification.Name {
  A SingleCondition is the basic unit of condition evaluations. It provides a mechanism to determine if an individual variable meets some numerical condition, either at a single point in a trajectory or at all points
  */
 class SingleCondition: EvaluateCondition, Codable {
+    
     var varID : VariableID!
     // A SingleCondition should take one of three forms: Interval (lower bound and/or upper bound), equality, or special (see above). If type is set, then unset the others
+    // TODO: Allow for specification of units
     var lbound : VarValue? { didSet { if lbound != nil {
             equality = nil
             specialCondition = nil
@@ -111,7 +113,6 @@ class SingleCondition: EvaluateCondition, Codable {
                 setTests()
            } } }
     var meetsCondition : [Bool]?
-    var varPosition : Int? // Position of the current variable in the index of StateVarPositions (automatically assigned, speeds up performance)
     var summary: String {
         var dstring = ""
         if equality != nil {
@@ -234,9 +235,8 @@ class SingleCondition: EvaluateCondition, Codable {
             }
         }
     }
-    @objc func evaluateStateArray(_ singleState: StateArray)->Bool{ // TODO: get rid of this, it cant handle derived states like AoA
-        if varPosition == nil {varPosition = State.stateVarPositions.firstIndex(where: {$0 == varID} ) }
-        let thisVal = singleState[varPosition!]
+    @objc func evaluateStateArray(_ singleState: StateDictSingle)->Bool{ // TODO: figure out exactly which versions are being used
+        let thisVal = singleState[varID]!
         var isCondition = true
         
         if specialCondition == .localMin || specialCondition == .localMax {
@@ -254,10 +254,9 @@ class SingleCondition: EvaluateCondition, Codable {
         return isCondition
     }
 
-    func reset(initialState: StateArray? = nil){
-        if varPosition == nil {varPosition = State.stateVarPositions.firstIndex(where: {$0 == varID} ) }
+    func reset(initialState: StateDictSingle? = nil){
         if initialState != nil {
-            let thisVal = initialState![varPosition!]
+            let thisVal = initialState![varID]
             previousState = thisVal
             nextState = thisVal
         }
@@ -273,6 +272,12 @@ class SingleCondition: EvaluateCondition, Codable {
         } else if ubound != nil || lbound != nil {
             return equality == nil && specialCondition == nil
         } else { return false }
+    }
+    // MARK: NSCopying
+    func copy(with zone: NSZone? = nil) -> Any {
+        let copy = SingleCondition(self.varID, upperBound: self.ubound, lowerBound: self.lbound, equality: self.equality, specialCondition: self.specialCondition)
+        //copy.setTests()
+        return copy
     }
 }
 
@@ -485,7 +490,7 @@ class Condition : EvaluateCondition, Codable {
         }
     }
 
-    @objc func evaluateStateArray(_ singleState: StateArray)->Bool { //Only use this if ALL states can be put into the State Array
+    @objc func evaluateStateArray(_ singleState: StateDictSingle)->Bool { //Only use this if ALL states can be put into the State Array
         var curMeetsCondition = conditions[0].evaluateStateArray(singleState)
         for thisCondition in conditions.dropFirst(){
             let thisMeetsCondition = thisCondition.evaluateStateArray(singleState)
@@ -494,7 +499,7 @@ class Condition : EvaluateCondition, Codable {
         return curMeetsCondition
     }
 
-    func reset(initialState: StateArray? = nil){
+    func reset(initialState: StateDictSingle? = nil){
         meetsCondition = nil
         for thisCondition in conditions {
             thisCondition.reset(initialState: initialState)
@@ -541,6 +546,15 @@ class Condition : EvaluateCondition, Codable {
             }
         }
         return false
+    }
+    
+    // MARK: NSCopying
+    func copy(with zone: NSZone? = nil) -> Any {
+        let copy = Condition(conditions: [], unionType: self.unionType, name: self.name)
+        for thisCond in self.conditions {
+            copy.conditions.append(thisCond.copy(with: zone) as! EvaluateCondition)
+        }
+        return copy
     }
 }
 

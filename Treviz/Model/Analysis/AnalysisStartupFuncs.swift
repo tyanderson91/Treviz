@@ -12,9 +12,7 @@ import Cocoa
 
 extension Analysis {
     func setupConstants(){
-        var initVars = loadVars(from: "InitVars")
-        initVars = State.sortVarIndices(initVars)
-        varList = initVars
+        varList = loadVars(from: "InitVars")
         loadVarGroups(from: "InitStateStructure")
     }
     

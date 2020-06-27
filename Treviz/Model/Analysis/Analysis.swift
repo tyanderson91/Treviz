@@ -47,21 +47,24 @@ class Analysis: NSObject, Codable {
     
     // Analysis-specific data and configs (read/writing functions in AnalysisData.swift)
     var name : String = ""
-    weak var terminalCondition : Condition!
-    var traj: State!
-    var initState: StateArray { return traj[0] }
     var conditions : [Condition] = []
-    var inputSettings : [Parameter] = []
     var parameters : [Parameter] { //TODO: this should contain more than just input settings
         return inputSettings.filter {$0.isParam}
     }
     @objc var plots : [TZOutput] = []
-    var defaultTimestep : VarValue = 0.01
+    let requiredVars : [VariableID] = ["t", "x", "y", "z", "dx", "dy", "dz", "mtot"]  // All variables that are required to be computed at each step of the trajectory
+    
+    // Phase variables
     var vehicle : Vehicle!
     var propagatorType : PropagatorType = .explicit
-    var pctComplete: Double = 0
-
+    var defaultTimestep : VarValue = 0.01
+    var inputSettings : [Parameter] = []
+    var initState: StateDictSingle { return traj[0] }
+    weak var terminalCondition : Condition!
+    var traj: State!
+    
     // Run tracking
+    var pctComplete: Double = 0
     var isRunning = false
     var returnCode : Int = 0
     let analysisDispatchQueue = DispatchQueue(label: "analysisRunQueue", qos: .utility)
