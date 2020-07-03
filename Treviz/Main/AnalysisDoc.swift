@@ -30,7 +30,7 @@ class AnalysisDoc: NSDocument {
     
     override init() {
         super.init()
-        analysis.setupConstants()
+        //analysis.loadVars("InitVars")
     }
     
     // MARK: NSDocument setup and read/write methods
@@ -114,8 +114,9 @@ class AnalysisDoc: NSDocument {
         // Insert code here to read your document from the given data of the specified type, throwing an error in case of failure.
         // Alternatively, you could remove this method and override read(from:ofType:) instead.  If you do, you should also override isEntireFileLoaded to return false if the contents are lazily loaded.
         switch typeName {
+            
         case "public.yaml":
-            analysis.inputSettings = analysis.varList//.compactMap { ($0.copy() as! Parameter) } // TODO: Better way to copy?
+            //analysis.phase[0].inputSettings = analysis.varList//.compactMap { ($0.copy() as! Parameter) } // TODO: Better way to copy?
             analysis.readFromYaml(data: data)
             analysis.name = "YAML Document"
         case "public.json":
@@ -124,14 +125,14 @@ class AnalysisDoc: NSDocument {
             analysis.name = "Analysis Document"
         case "com.tyleranderson.treviz.analysis":
             let unarchiver = try NSKeyedUnarchiver(forReadingFrom: data)
-            analysis = unarchiver.decodeDecodable(Analysis.self, forKey: NSKeyedArchiveRootObjectKey)!
+            //analysis = unarchiver.decodeDecodable(Analysis.self, forKey: NSKeyedArchiveRootObjectKey)!
         default:
             return
         }
         analysis.name = "Analysis (\(typeName))"
         analysis.defaultTimestep = 0.1
         
-        analysis.traj = State(analysis.varList)
+        //analysis.traj = State(analysis.varList)
     }
 
     override class var autosavesInPlace: Bool {

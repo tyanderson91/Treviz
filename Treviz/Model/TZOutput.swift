@@ -12,14 +12,15 @@ import Cocoa
 import Foundation
 
 
-enum TZOutputError: Error {
+enum TZOutputError: Error, LocalizedError {
     case MissingVariableError
     case MissingTrajectoryError
     case MissingPointsError
     case UnmatchedConditionError
     case DuplicateIDError
-}
-extension TZOutputError : LocalizedError {
+    case IncorrectConditionSettingError
+    case IncorrectVarSettingError
+
     public var errorDescription: String? {
         switch self {
         case .MissingVariableError:
@@ -32,6 +33,10 @@ extension TZOutputError : LocalizedError {
             return NSLocalizedString("No matching points found for condition", comment: "")
         case .DuplicateIDError:
             return NSLocalizedString("Tried to create new output with existing output ID. Skipping", comment: "")
+        case .IncorrectConditionSettingError:
+            return NSLocalizedString("Condition setting is invalid for this plot type", comment: "")
+        case .IncorrectVarSettingError:
+            return NSLocalizedString("One or more variables are set incorrectly for this plot type", comment: "")
         }
     }
 }
@@ -176,12 +181,11 @@ class TZOutput : NSObject, Codable {
         } else {
             catVarValid = (categoryVar != nil) == (plotType.nVars > plotType.nAxis) // If there are more categories than axes, then one var must be a category (except for with contours)
         }
-        assert(condValid, "Output \(title) condition setting is invalid")
-        assert(var1Valid, "Output \(title) var1 setting is invalid")
-        assert(var2Valid, "Output \(title) var2 setting is invalid")
-        assert(var3Valid, "Output \(title) var3 setting is invalid")
-        assert(catVarValid, "Output \(title) category var setting is invalid")
-        //return condValid && var1Valid && var2Valid && var3Valid && catVarValid
+        guard condValid else { throw TZOutputError.IncorrectConditionSettingError }
+        guard var1Valid else { throw TZOutputError.IncorrectVarSettingError }
+        guard var2Valid else { throw TZOutputError.IncorrectVarSettingError }
+        guard var3Valid else { throw TZOutputError.IncorrectVarSettingError }
+        guard catVarValid else { throw TZOutputError.IncorrectVarSettingError }
     }
     /*
     func loadVars(analysis: Analysis){

@@ -43,7 +43,7 @@ class InputsViewController: TZViewController, NSTableViewDataSource, NSTableView
         //environmentsViewController = (stack.addViewController(fromStoryboardId: "Inputs", withIdentifier: "EnvironmentViewController") as! EnvironmentViewController)
         //initStateViewController = (stack.addViewController(fromStoryboardId: "Inputs", withIdentifier: "InitStateViewController", analysis: analysis) as! InitStateViewController)
         initStateViewController = storyboard.instantiateController(identifier: "InitStateViewController") { aCoder in
-            InitStateViewController(coder: aCoder, analysis: self.analysis)
+            InitStateViewController(coder: aCoder, analysis: self.analysis, phase: self.analysis.phases[0])
         }
         stack.addViewController(initStateViewController)
         

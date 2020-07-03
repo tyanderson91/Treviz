@@ -1,7 +1,7 @@
 //
 //  AnalysisDocYaml.swift
 //  
-//  This file contains an extension to AnalysisDoc that handles all operations with Yaml file reading and writing
+//  This file contains an extension to Analysis that handles all operations with Yaml file reading and writing
 //  Created by Tyler Anderson on 2/18/20.
 //
 
@@ -26,16 +26,6 @@ extension Analysis {
         //guard let yamlList: [[String:Any]] = getYamlObject(from: file) as? [[String : Any]] else {return}
         //for thisYaml in yamlList {
         
-        if let inputList = yamlDict["Initial Variables"] as? [String: Any] {
-            for (curVarID, curVarVal) in inputList {
-                //let thisVar =  self.initVars.first(where: { $0.id == curVarID})!
-                //let val = inputList[thisVarID]
-                //thisVar.value = [Double(truncating: val!)]
-                _ = initVar(varID: curVarID, varStr: curVarVal)// { inputSettings.append(thisVar) }
-            }
-        }
-        setupConstants()
-        
         if let inputList = yamlDict["Parameters"] as? [[String: Any]] {
             for paramSet in inputList {
                 for thisKey in paramSet.keys {
@@ -59,17 +49,19 @@ extension Analysis {
                 }
             }
         }
-        if let terminalConditionName = yamlDict["Terminal Condition"] as? String {
-            if let cond = conditions.first(where: { $0.name == terminalConditionName }) {
-                terminalCondition = cond
+        
+        phases = []
+        if let phaseList = yamlDict["Phases"] as? [[String: Any]] {
+            for curPhaseDict in phaseList {
+                let newPhase = TZPhase.init(yamlDict: curPhaseDict, analysis: self)
+                phases.append(newPhase)
             }
-            /*
-            if let newCond = Condition(fromYaml: terminalConditionDict, inputConditions: analysis.conditions) {
-                newCond.name = "Terminal"
-                analysis.conditions.append(newCond)
-                analysis.terminalCondition = newCond
-            }*/
+        } else { // If no phase information is input, assume only 1 phase
+            let curPhaseDict = yamlDict
+            let newPhase = TZPhase.init(yamlDict: curPhaseDict, analysis: self)
+            phases.append(newPhase)
         }
+        
         if let outputList = yamlDict["Outputs"] as? [[String: Any]] {
             plots = []
             for thisOutputDict in outputList {
@@ -78,6 +70,7 @@ extension Analysis {
                 }
             }
         }
+        
         traj = State(varList)
     }
     

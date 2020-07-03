@@ -73,3 +73,18 @@ extension TZOutput {
     }
 }
 
+extension TZPhase {
+    convenience init?(decoder: Decoder, referencing analysis: Analysis) {
+        do {
+            try self.init(from: decoder)
+            self.analysis = analysis
+            let container = try decoder.container(keyedBy: TZPhase.CodingKeys.self)
+            let vehicleID = try container.decode(String.self, forKey: .vehicleID)
+            self.vehicle = self.analysis.vehicles.first(where: {$0.id == vehicleID})
+        } catch {
+            analysis.logMessage("Error when reading phase")
+            return nil
+        }
+    }
+}
+

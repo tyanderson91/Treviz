@@ -39,7 +39,6 @@ class OutputsViewController: TZViewController {
 
 class OutputsSplitViewController: TZSplitViewController {
     
-    
     @IBOutlet weak var viewerOutputSplitViewItem: NSSplitViewItem!
     @IBOutlet weak var textOutputSplitViewItem: NSSplitViewItem!
     

@@ -1,5 +1,5 @@
 //
-//  AnalysisStartupFuncs.swift
+//  PhaseStartupFuncs.swift
 //  Treviz
 //
 //  Various functions called during the analysis setup process
@@ -10,39 +10,28 @@
 
 import Cocoa
 
-extension Analysis {
+extension TZPhase {
     func setupConstants(){
-        varList = loadVars(from: "InitVars")
+        loadVars(from: "InitVars")
         loadVarGroups(from: "InitStateStructure")
     }
     
-    func loadVars(from plist: String)->[Variable] {
-        guard let varFilePath = Bundle.main.path(forResource: plist, ofType: "plist") else {return []}
-        guard let inputList = NSArray.init(contentsOfFile: varFilePath) else {return []}//return empty if filename not found
-        var initVars = Array<Variable>()
+    func loadVars(from plist: String) {
+        guard let varFilePath = Bundle.main.path(forResource: plist, ofType: "plist") else { return }
+        guard let inputList = NSArray.init(contentsOfFile: varFilePath) else { return }//return empty if filename not found
+        varList = Array<Variable>()
         for thisVar in inputList {
-            guard let dict = thisVar as? NSDictionary else {return []}
-            let newVar = Variable(dict["id"] as! VariableID, named: dict["name"] as! String, symbol: dict["symbol"] as! String)
-            newVar.units = dict["units"] as! String
-            newVar.value = [0]
-            initVars.append(newVar)
+            guard let dict = thisVar as? NSDictionary else { return }
+            guard let varid = dict["id"] as? VariableID else { continue }
+            if requiredVarIDs.contains(varid) {
+                let newVar = Variable(varid, named: dict["name"] as! String, symbol: dict["symbol"] as! String)
+                newVar.units = dict["units"] as! String
+                newVar.value = [0]
+                varList.append(newVar)
+            }
         }
-        return initVars
     }
-    
-    /**
-     This function reads in the current physics model and pre-populates all the required initial states with 0 values
-     */
-    /*
-    func defaultInitSettings()->[Variable] { //TODO: vary depending on the physics type
-        var varList = [Variable]()
-        for thisVar in varList {
-            let newVar = thssVar.copy() as? Variable else {continue}
-            varList.append(newVar)
-        }
-        return varList
-    }*/
-    
+
     func loadVarGroups(from plist: String){
          guard let varFilePath = Bundle.main.path(forResource: plist, ofType: "plist") else {return}
          guard let inputList = NSArray.init(contentsOfFile: varFilePath) else {return} //return empty if filename not found
@@ -59,8 +48,6 @@ extension Analysis {
              if itemType == "var"{
                  if let newVar = inputSettings.first(where: {$0.id == itemID}) as? Variable {
                     input.variables.append(newVar)
-                 } else if let defaultVar = varList.first(where: {$0.id == itemID}) {
-                    input.variables.append(defaultVar)
                  }
                  continue
              } else {

@@ -7,11 +7,6 @@
 
 import Cocoa
 
-enum PropagatorType {
-    case explicit
-    case rungeKutta4
-}
-
 enum AnalysisError: Error {
     case NoTerminalCondition
     case TimeStepError
@@ -42,8 +37,7 @@ In addition, this class contains class-level functions such as initiating the an
 */
 class Analysis: NSObject, Codable {
     
-    var varList : [Variable]!// {return appDelegate.initVars}
-    var initStateGroups : InitStateHeader!
+    var varList : [Variable]! { return phases[0].varList }
     
     // Analysis-specific data and configs (read/writing functions in AnalysisData.swift)
     var name : String = ""
@@ -52,15 +46,19 @@ class Analysis: NSObject, Codable {
         return inputSettings.filter {$0.isParam}
     }
     @objc var plots : [TZOutput] = []
-    let requiredVars : [VariableID] = ["t", "x", "y", "z", "dx", "dy", "dz", "mtot"]  // All variables that are required to be computed at each step of the trajectory
     
     // Phase variables
-    var vehicle : Vehicle!
+    var phases = [TZPhase(id: "phase1")]
+    var vehicles = [Vehicle()]
     var propagatorType : PropagatorType = .explicit
     var defaultTimestep : VarValue = 0.01
     var inputSettings : [Parameter] = []
     var initState: StateDictSingle { return traj[0] }
-    weak var terminalCondition : Condition!
+    weak var terminalCondition : Condition! {
+        get { return phases[0].terminalCondition }
+        //set { phases[0].}
+    }
+    
     var traj: State!
     
     // Run tracking
@@ -106,16 +104,15 @@ class Analysis: NSObject, Codable {
         case conditions
         case inputSettings
         case plots
+        case phases
     }
 
-    
     required init(from decoder: Decoder) throws {
         super.init()
         let container = try decoder.container(keyedBy: CodingKeys.self)
         name = try container.decode(String.self, forKey: .name)
         inputSettings = try container.decode(Array<Variable>.self, forKey: .inputSettings)
         //TODO: convert inputSettings to just a reference to varList for variables
-        setupConstants()
 
         var allConds = try container.nestedUnkeyedContainer(forKey: .conditions)
         while(!allConds.isAtEnd){
@@ -124,11 +121,11 @@ class Analysis: NSObject, Codable {
                 conditions.append(thisCond)
             }
         }
-        
+        /*
         do {
             let terminalConditionName = try container.decode(String.self, forKey: .terminalCondition)
             terminalCondition = conditions.first { $0.name == terminalConditionName }
-        }
+        }*/
         
         var allTZOutputs = try container.nestedUnkeyedContainer(forKey: .plots)
         var plotsTemp = allTZOutputs
@@ -148,6 +145,14 @@ class Analysis: NSObject, Codable {
 
             if newOutput != nil { plots.append(newOutput!) }
         }
+        
+        var allPhases = try container.nestedUnkeyedContainer(forKey: .phases)
+        while(!allPhases.isAtEnd){
+            let decoder = try allPhases.superDecoder()
+            if let thisPhase = TZPhase(decoder: decoder, referencing: self) {
+                phases.append(thisPhase)
+            }
+        }
     }
     
     func encode(to encoder: Encoder) throws {
@@ -158,5 +163,19 @@ class Analysis: NSObject, Codable {
         let nonzerovars = (inputSettings as? [Variable])?.filter({$0.value[0] != 0 || $0.isParam})
         try container.encode(nonzerovars, forKey: .inputSettings)
         try container.encode(plots, forKey: .plots)
+    }
+    
+    func loadVars(from plist: String)->[Variable] {
+        guard let varFilePath = Bundle.main.path(forResource: plist, ofType: "plist") else {return []}
+        guard let inputList = NSArray.init(contentsOfFile: varFilePath) else {return []}//return empty if filename not found
+        var initVars = Array<Variable>()
+        for thisVar in inputList {
+            guard let dict = thisVar as? NSDictionary else {return []}
+            let newVar = Variable(dict["id"] as! VariableID, named: dict["name"] as! String, symbol: dict["symbol"] as! String)
+            newVar.units = dict["units"] as! String
+            newVar.value = [0]
+            initVars.append(newVar)
+        }
+        return initVars
     }
 }

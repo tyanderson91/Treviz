@@ -8,7 +8,7 @@
 import Cocoa
 import Foundation
 
-class InitStateViewController: BaseViewController, NSOutlineViewDelegate, NSOutlineViewDataSource {
+class InitStateViewController: PhasedViewController, NSOutlineViewDelegate, NSOutlineViewDataSource {
 
     @IBOutlet weak var outlineView: NSOutlineView!
     var inputVars : [Parameter] = []
@@ -21,7 +21,7 @@ class InitStateViewController: BaseViewController, NSOutlineViewDelegate, NSOutl
         outlineView.autosaveExpandedItems = false  // TODO: Implement functions that allow this
         outlineView.autosaveName = "initStateOutlineView"
         //Load data
-        inputVarStructure = analysis.initStateGroups
+        inputVarStructure = phase.initStateGroups
         inputVars = analysis.inputSettings
         outlineView.reloadData()
         

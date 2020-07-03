@@ -10,7 +10,7 @@
 
 import Cocoa
 
-class SettingsViewController: BaseViewController {
+class SettingsViewController: PhasedViewController {
 
     @IBOutlet weak var terminalConditionPopupButton: NSPopUpButton!
     let terminalConditionArrayController = NSArrayController()
@@ -43,7 +43,7 @@ class SettingsViewController: BaseViewController {
         terminalConditionArrayController.content = analysis!.conditions
         if analysis.terminalCondition == nil {return}
         if !analysis.conditions.contains(where: {$0 === analysis.terminalCondition} ) {
-            analysis.terminalCondition = nil
+            phase.terminalCondition = nil
             terminalConditionPopupButton.bind(.selectedObject, to: analysis!, withKeyPath: "terminalCondition", options: nil)
         }
     }
@@ -52,7 +52,7 @@ class SettingsViewController: BaseViewController {
     @objc func didChangeCondition1(_ notification: Notification){
         if analysis.terminalCondition == nil {}
         else if !analysis.conditions.contains(where: {$0 === analysis.terminalCondition}) {
-            analysis.terminalCondition = nil
+            phase.terminalCondition = nil
         }
         getPopupOptions()
         setSelection()
@@ -60,7 +60,7 @@ class SettingsViewController: BaseViewController {
     // MARK: Non-binding implementation
     @IBAction func didChangeSelection(_ sender: Any) {
         if let curCondition = analysis.conditions.first(where: { $0.name == terminalConditionPopupButton.titleOfSelectedItem }) {
-            analysis.terminalCondition = curCondition
+            phase.terminalCondition = curCondition
         }
     }
     
