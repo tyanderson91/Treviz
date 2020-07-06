@@ -22,7 +22,7 @@ class MainWindowController: NSWindowController, AnalysisProgressReporter {
     @IBAction func storyboardRunAnalysisClicked(_ sender: Any) {
         runAnalysisClicked(sender)
     }
-    
+    /*
     private func processOutputs() {
         guard let textOutputView = viewController.textOutputView else {return}
         guard let outputSplitVC = viewController.mainSplitViewController.outputsViewController.outputSplitViewController else { return }
@@ -37,7 +37,7 @@ class MainWindowController: NSWindowController, AnalysisProgressReporter {
                 analysis.logMessage(error.localizedDescription)
                 continue
             }
-            curOutput.curTrajectory = analysis.traj
+            curOutput.curTrajectory = analysis.varList
             if curOutput is TZTextOutput {
                 do {
                     let newText = try (curOutput as! TZTextOutput).getText()
@@ -57,7 +57,7 @@ class MainWindowController: NSWindowController, AnalysisProgressReporter {
         }
         let plotTabViewIndex = outputSplitVC.viewerTabViewController.tabView.indexOfTabViewItem(withIdentifier: "plotterTabViewItem")
         outputSplitVC.viewerTabViewController.tabView.selectTabViewItem(at: plotTabViewIndex)
-    }
+    }*/
         
     // MARK: AnalysisProgressReporter implementation
     var terminalCondition = Condition()
@@ -70,6 +70,7 @@ class MainWindowController: NSWindowController, AnalysisProgressReporter {
     func startProgressTracking(){
         self.terminalCondition = analysis.terminalCondition!
         analysisProgressBar?.isHidden = false
+        toolbar.toggleAnalysisRun.title = "■"
     }
     func endProgressTracking(){
         analysisProgressBar?.isHidden = true
@@ -78,14 +79,12 @@ class MainWindowController: NSWindowController, AnalysisProgressReporter {
     func completeAnalysis(){ // Runs when the analysis has terminated
         analysis.isRunning = false
         toolbar.toggleAnalysisRun.title = "►"
-        analysis.progressReporter?.endProgressTracking()
-
-        if analysis.returnCode > 0 { //Nominal successfull completion
-            processOutputs()}
-        else {
-            processOutputs()
-        }
+        
+        guard let outputSplitVC = viewController.mainSplitViewController.outputsViewController.outputSplitViewController else { return }
+        let plotTabViewIndex = outputSplitVC.viewerTabViewController.tabView.indexOfTabViewItem(withIdentifier: "plotterTabViewItem")
+        outputSplitVC.viewerTabViewController.tabView.selectTabViewItem(at: plotTabViewIndex)
     }
+
     /**
      Provide an estimate for the percentage completion of the analysis based on the initial state, current state, and terminal conditions
       - parameters:

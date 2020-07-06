@@ -11,7 +11,7 @@ extension TZPhase {
     
     func runAnalysis() {
         //Check if enough inputs are defined
-        traj = self.varList
+        traj = self.varList.compactMap({$0.stripPhase()})
         for thisVar in self.traj { // Delete all data except for initial state
             //let initVal = thisVar.value[0]
             //thisVar.value = [initVal]
@@ -35,14 +35,16 @@ extension TZPhase {
 
         // let outputTextView = self.viewController.textOutputView!
         
+        /*
         var reducedTraj = [Variable]()
         for thisVar in traj {
             if self.requiredVarIDs.contains(thisVar.id) { reducedTraj.append(thisVar) }
         }
-        traj = reducedTraj
+        traj = reducedTraj*/
         
         let initState = StateDictSingle(from: traj, at: 0)
         self.terminalCondition.reset(initialState: initState)
+        self.returnCode = .NotStarted
         
         traj["mtot",0] = 10.0
         isRunning = true
@@ -68,7 +70,7 @@ extension TZPhase {
             self.isRunning = !self.terminalCondition.evaluateStateArray(curtraj)
             
             if !self.isRunning {
-                self.returnCode = 1
+                self.returnCode = .Success
             }
             
             DispatchQueue.main.async {
@@ -79,8 +81,8 @@ extension TZPhase {
         }
 
         DispatchQueue.main.async {
+            self.varList = self.traj.compactMap({$0.copyToPhase(phaseid: self.id)})
             self.analysis.processPhase(self)
-            self.progressReporter?.completeAnalysis()
         }
     }
     

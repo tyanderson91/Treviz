@@ -13,13 +13,14 @@ import Cocoa
 extension TZPhase {
     func setupConstants(){
         loadVars(from: "InitVars")
+        varList = varList.compactMap({$0.copyToPhase(phaseid: self.id)})
         loadVarGroups(from: "InitStateStructure")
     }
     
     func loadVars(from plist: String) {
         guard let varFilePath = Bundle.main.path(forResource: plist, ofType: "plist") else { return }
         guard let inputList = NSArray.init(contentsOfFile: varFilePath) else { return }//return empty if filename not found
-        varList = Array<Variable>()
+        var tempVarList = Array<Variable>()
         for thisVar in inputList {
             guard let dict = thisVar as? NSDictionary else { return }
             guard let varid = dict["id"] as? VariableID else { continue }
@@ -27,9 +28,10 @@ extension TZPhase {
                 let newVar = Variable(varid, named: dict["name"] as! String, symbol: dict["symbol"] as! String)
                 newVar.units = dict["units"] as! String
                 newVar.value = [0]
-                varList.append(newVar)
+                tempVarList.append(newVar)
             }
         }
+        varList = tempVarList
     }
 
     func loadVarGroups(from plist: String){

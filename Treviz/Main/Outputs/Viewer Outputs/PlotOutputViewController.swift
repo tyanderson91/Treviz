@@ -12,7 +12,7 @@ extension NSUserInterfaceItemIdentifier {
     static let plotThumbnailTableCellView = NSUserInterfaceItemIdentifier(rawValue: "plotThumbnailTableCellView")
 }
 
-class PlotOutputViewController: TZViewController, NSTableViewDelegate, NSTableViewDataSource {//}, CPTScatterPlotDelegate, CPTScatterPlotDataSource, CPTPlotSpaceDelegate  {
+class PlotOutputViewController: TZViewController, NSTableViewDelegate, NSTableViewDataSource, TZPlotOutputViewer {//}, CPTScatterPlotDelegate, CPTScatterPlotDataSource, CPTPlotSpaceDelegate  {
 
     @IBOutlet weak var tableView: NSTableView!
     @IBOutlet weak var graphHostingView: CPTGraphHostingView!
@@ -24,6 +24,9 @@ class PlotOutputViewController: TZViewController, NSTableViewDelegate, NSTableVi
         tableView.rowHeight = 100
     }
     
+    func clearPlots() {
+        plotViews = []
+    }
     func createPlot(plot: TZPlot) throws {
         let newGraph = try TZPlotView(with: plot)
         plotViews.append(newGraph)

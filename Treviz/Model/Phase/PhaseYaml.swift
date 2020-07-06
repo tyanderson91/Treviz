@@ -13,7 +13,9 @@ import Cocoa
 extension TZPhase {
 
     convenience init(yamlDict: [String: Any], analysis: Analysis) {
-        self.init(id: "Phase1")
+        if let phasename = yamlDict["Name"] as? String {
+            self.init(id: phasename)
+        } else { self.init(id: "default") }
         self.analysis = analysis
         
         loadVars(from: "InitVars")
@@ -27,6 +29,7 @@ extension TZPhase {
                 else if let floatval = curVarVal as? VarValue { thisVar.value = [floatval] }
             }
         }
+        varList = varList.compactMap({$0.copyToPhase(phaseid: self.id)})
         
         if let terminalConditionName = yamlDict["Terminal Condition"] as? String {
             if let cond = analysis.conditions.first(where: { $0.name == terminalConditionName }) {

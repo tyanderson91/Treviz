@@ -58,6 +58,7 @@ class OutputsSplitViewController: TZSplitViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.analysis.plotOutputViewer = plotViewController
     }
     
 }

@@ -53,7 +53,18 @@ class TextOutputsViewController: TZViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         textOutputView.string.append("Analysis results will be shown below \n")
+        self.analysis.textOutputViewer = self
         // Do view setup here.
     }
     
+}
+extension TextOutputsViewController: TZTextOutputViewer {
+    func clearOutput() {
+        self.textOutputView.string = ""
+    }
+    func printOutput(curOutput: TZTextOutput) throws {
+        let newText = try curOutput.getText()
+        textOutputView.textStorage?.append(newText)
+        textOutputView.textStorage?.append(NSAttributedString(string: "\n\n"))
+    }
 }

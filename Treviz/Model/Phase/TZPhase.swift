@@ -12,6 +12,37 @@ enum PropagatorType: String {
     case explicit
     case rungeKutta4
 }
+
+extension Variable {
+    func copyToPhase(phaseid: String)->Variable {
+        var newID: VariableID = ""
+        if !self.id.contains(".") {
+            newID = phaseid + "." + self.id
+        } else {
+            newID = phaseid + "." + self.id.baseVarID()
+        }
+        let newVar = Variable(newID, named: name, symbol: symbol, units: units)
+        newVar.value = value
+        return newVar
+    }
+    func stripPhase()->Variable {
+        var newID: VariableID = ""
+        if self.id.contains(".") {
+            newID = self.id.baseVarID()
+        } else {
+            newID = self.id
+        }
+        let newVar = Variable(newID, named: name, symbol: symbol, units: units)
+        newVar.value = value
+        return newVar
+    }
+}
+
+enum ReturnCode: Int {
+    case NotStarted = 0
+    case Success = 1
+    case Failure = 2
+}
 /**
  A TZPhase is a defined section of an Analysis. It contains an initial condition (or delta-initial condition from the previous phase), a terminal condition, and all vehicle and runtime settings required to propagate
  */
@@ -28,7 +59,7 @@ class TZPhase: Codable {
     var requestedVarIDs: [VariableID] = []
     var progressReporter: AnalysisProgressReporter?
     var isRunning = false
-    var returnCode : Int = 0
+    var returnCode : ReturnCode = .NotStarted
     var analysis: Analysis!
     var varList: [Variable]!
     var initStateGroups : InitStateHeader!
@@ -51,8 +82,8 @@ class TZPhase: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decode(String.self, forKey: .id)
         propagatorType = try PropagatorType(rawValue: container.decode(String.self, forKey: .propagatorType))!
-        inputSettings = try container.decode(Array<Variable>.self, forKey: .inputSettings)
-        //TODO: convert inputSettings to just a reference to varList for variables
+        let tempInputSettings = try container.decode(Array<Variable>.self, forKey: .inputSettings)
+        inputSettings = tempInputSettings.compactMap({$0.copyToPhase(phaseid: self.id)})
         setupConstants()
         do {
             let terminalConditionName = try container.decode(String.self, forKey: .terminalCondition)

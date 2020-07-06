@@ -37,7 +37,14 @@ In addition, this class contains class-level functions such as initiating the an
 */
 class Analysis: NSObject, Codable {
     
-    var varList : [Variable]! { return phases[0].varList }
+    var varList : [Variable]! {
+        if phases.count == 1 {
+            let onlyPhase = phases[0]
+            var summaryVars = onlyPhase.varList.compactMap({$0.stripPhase()})
+            summaryVars.append(contentsOf: onlyPhase.varList)
+            return summaryVars
+        } else { return [] }
+    }
     
     // Analysis-specific data and configs (read/writing functions in AnalysisData.swift)
     var name : String = ""
@@ -48,7 +55,7 @@ class Analysis: NSObject, Codable {
     @objc var plots : [TZOutput] = []
     
     // Phase variables
-    var phases = [TZPhase(id: "phase1")]
+    var phases = [TZPhase(id: "default")]
     var vehicles = [Vehicle()]
     var propagatorType : PropagatorType = .explicit
     var defaultTimestep : VarValue = 0.01
@@ -78,6 +85,9 @@ class Analysis: NSObject, Codable {
             }
         }
     }
+    // Outputs
+    var textOutputViewer: TZTextOutputViewer?
+    var plotOutputViewer: TZPlotOutputViewer?
     
     override init(){
         super.init()

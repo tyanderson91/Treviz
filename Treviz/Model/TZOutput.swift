@@ -198,8 +198,8 @@ class TZOutput : NSObject, Codable {
     
     func getData() throws -> Any? {
         guard let curTraj = curTrajectory else { throw TZOutputError.MissingTrajectoryError }
+        var lineSet = OutputDataSetLines()
         if plotType.requiresCondition {
-            var lineSet = OutputDataSetLines()
             guard let condStates = curTraj[condition!] else {
                 throw TZOutputError.UnmatchedConditionError }
             if var1 != nil { lineSet.var1 = condStates[var1!.id]! }
@@ -207,7 +207,6 @@ class TZOutput : NSObject, Codable {
             if var3 != nil { lineSet.var3 = condStates[var3!.id]! }
             return lineSet
         } else if categoryVar == nil {
-            var lineSet = OutputDataSetLines()
             if var1 != nil { lineSet.var1 = curTraj[var1!.id].value }
             if var2 != nil { lineSet.var2 = curTraj[var2!.id].value }
             if var3 != nil { lineSet.var3 = curTraj[var3!.id].value }

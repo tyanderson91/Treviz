@@ -40,7 +40,7 @@ class TZPlotView: NSObject, CPTScatterPlotDelegate, CPTScatterPlotDataSource, CP
     }
     
     func numberOfRecords(for plot: CPTPlot) -> UInt {
-        let numRecords = representedPlot.var1?.value.count
+        let numRecords = _plotData.var1?.count
         return UInt(numRecords!)
     }
     

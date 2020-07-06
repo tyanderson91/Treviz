@@ -24,6 +24,44 @@ extension Analysis {
      Called by a phase once it is finished running. This function takes care of processing the phase and kicking off any new phases, or ending the analysis once all phases are complete
      */
     func processPhase(_ phase: TZPhase) {
-        self.progressReporter?.completeAnalysis()
+        let returnCodes = phases.compactMap({$0.returnCode})
+        
+        if returnCodes.allSatisfy({$0.rawValue > 0}){ // If all phases have been run
+            self.progressReporter?.endProgressTracking()
+            self.isRunning = false
+            progressReporter?.completeAnalysis()
+            processOutputs()
+        }
     }
+    
+    func processOutputs() {
+        self.textOutputViewer?.clearOutput()
+        self.plotOutputViewer?.clearPlots()
+
+        for curOutput in plots {
+            //curOutput.loadVars(analysis: analysis)
+            do { try curOutput.assertValid() }
+            catch {
+                logMessage(error.localizedDescription)
+                continue
+            }
+            curOutput.curTrajectory = varList
+            if curOutput is TZTextOutput {
+                do {
+                    try self.textOutputViewer?.printOutput(curOutput: curOutput as! TZTextOutput)
+                } catch {
+                    logMessage("Error in output set '\(curOutput.title)': \(error.localizedDescription)")
+                }
+            }
+            else if curOutput is TZPlot {
+                do {
+                    try plotOutputViewer?.createPlot(plot: curOutput as! TZPlot)
+                } catch {
+                    logMessage("Error in plot '\(curOutput.title)': \(error.localizedDescription)")
+                }
+            }
+        }
+    }
+    
+    
 }

@@ -135,28 +135,28 @@ class SingleCondition: EvaluateCondition, Codable {
     
     private var previousState : VarValue! // For use in equality type or special case lookups
     private var nextState: VarValue! // For use in special case lookups, e.g. local min
-    private var tests: [(VarValue, VarValue, VarValue)->Bool] = []// Takes in current value, next value, and previous value in that order and ouputs a bool saying whether that point meets the condition
+    private var tests: [(VarValue, VarValue?, VarValue?)->Bool] = []// Takes in current value, next value, and previous value in that order and ouputs a bool saying whether that point meets the condition
     func setTests(){
         self.tests = []
         if let spc = specialCondition {
             if spc == .localMin {
-                tests = [{ $0 < $1 && $0 < $2 }]
+                tests = [{ $0 < $1! && $0 < $2! }]
                 //_tests = [{ self.nextState < $0 && self.nextState < self.previousState}]
             }
             if spc == .localMax {
-                tests = [{ $0 > $1 && $0 > $2 }]
+                tests = [{ $0 > $1! && $0 > $2! }]
                 //_tests = [{ self.nextState > $0 && self.nextState > self.previousState}]
             }
         } else if let eq = equality {
-            tests = [{ ($0-eq).sign != ($2-eq).sign }]
+            tests = [{ ($0-eq).sign != ($2!-eq).sign }]
         } else {
             if let lower = lbound {
-                tests.append({(curVal: VarValue, prevVal: VarValue, nextVal: VarValue)->Bool in
+                tests.append({(curVal: VarValue, prevVal: VarValue?, nextVal: VarValue?)->Bool in
                 return curVal > lower
                 })
             }
             if let upper = ubound {
-                tests.append({(curVal: VarValue, prevVal: VarValue, nextVal: VarValue)->Bool in
+                tests.append({(curVal: VarValue, prevVal: VarValue?, nextVal: VarValue?)->Bool in
                 return curVal < upper
                 })
             }
@@ -226,7 +226,11 @@ class SingleCondition: EvaluateCondition, Codable {
                 }
                 var isCondition : Bool = true
                 for thisTest in tests {
-                    isCondition = isCondition && thisTest(thisVal, self.nextState, self.previousState)
+                    let curTest = thisTest
+                    let tv = thisVal
+                    let ns = self.nextState
+                    let ps = self.previousState
+                    isCondition = isCondition && curTest(tv, ns ?? nil, ps)//thisTest(thisVal, self.nextState, self.previousState)
                 }
                 if isCondition {
                     meetsCondition![i] = true
@@ -490,7 +494,7 @@ class Condition : EvaluateCondition, Codable {
         }
     }
 
-    @objc func evaluateStateArray(_ singleState: StateDictSingle)->Bool { //Only use this if ALL states can be put into the State Array
+    @objc func evaluateStateArray(_ singleState: StateDictSingle)->Bool {
         var curMeetsCondition = conditions[0].evaluateStateArray(singleState)
         for thisCondition in conditions.dropFirst(){
             let thisMeetsCondition = thisCondition.evaluateStateArray(singleState)

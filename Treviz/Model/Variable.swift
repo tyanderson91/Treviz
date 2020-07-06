@@ -11,6 +11,19 @@ import simd
 
 typealias VariableID = String
 typealias VarValue = Float
+extension VariableID {
+    /**
+     Return the part of the varID that describes its function (i.e. t, x, y) by removing phase and vehicle information
+     */
+    func baseVarID()->VariableID{
+        let strparts = self.split(separator: ".")
+        return String(strparts[strparts.count-1])
+    }
+    func phasename()->String{
+        let strparts = self.split(separator: ".")
+        return String(strparts[0])
+    }
+}
 
 /**
 Variable is a class that defines a single changeable numerical property of a vehicle, including name, unit information, and value. Used to display input state and output information
