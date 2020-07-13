@@ -11,15 +11,16 @@ extension TZPhase {
     
     func runAnalysis() {
         //Check if enough inputs are defined
-        traj = self.varList.compactMap({$0.stripPhase()})
-        for thisVar in self.traj { // Delete all data except for initial state
+        for thisVar in self.varList { // Delete all data except for initial state
             //let initVal = thisVar.value[0]
             //thisVar.value = [initVal]
             if thisVar.value.count > 1 { thisVar.value.removeLast(thisVar.value.count - 1) }
-            if let existingVar = inputSettings.first(where: { (var1: Parameter)->Bool in return var1.id == thisVar.id }) {
-                thisVar.value[0] = (existingVar as? Variable)?.value[0] ?? 0
-            }
+            //if let existingVar = inputSettings.first(where: { (var1: Parameter)->Bool in return var1.id == thisVar.id }) {
+            //    thisVar.value[0] = (existingVar as? Variable)?.value[0] ?? 0
+            //}
         } // TODO: make this a bit cleaner, using something like the below
+        traj = self.varList.compactMap({$0.stripPhase()})
+        traj = traj.filter({self.requiredVarIDs.contains($0.id)})
         /*
         self.traj.variables = self.traj.variables.compactMap {
             $0.value = [$0.value[0]]
@@ -81,7 +82,7 @@ extension TZPhase {
         }
 
         DispatchQueue.main.async {
-            self.varList = self.traj.compactMap({$0.copyToPhase(phaseid: self.id)})
+            self.varList.updateFromDict(traj: self.traj)
             self.analysis.processPhase(self)
         }
     }

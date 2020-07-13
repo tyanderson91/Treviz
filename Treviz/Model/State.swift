@@ -76,4 +76,12 @@ extension State {
         return self[self, condition]
     }
     
+    func updateFromDict(traj: State){
+        for trajVar in traj {
+            if let thisVar = self.first(where: {$0.id.baseVarID() == trajVar.id}) {
+                thisVar.value = trajVar.value
+            }
+        }
+    }
+    
 }

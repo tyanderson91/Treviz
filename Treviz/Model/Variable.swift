@@ -11,17 +11,29 @@ import simd
 
 typealias VariableID = String
 typealias VarValue = Float
+extension VarValue {
+    init?(numeric input: Any){
+        if input is Int { self.init(integerLiteral: Int64(input as! Int))}
+        else if input is Double { self.init(exactly: input as! Double) }
+        else if input is Float { self.init(exactly: input as! Float) }
+        else { return nil }
+    }
+}
+
 extension VariableID {
     /**
      Return the part of the varID that describes its function (i.e. t, x, y) by removing phase and vehicle information
      */
-    func baseVarID()->VariableID{
+    func baseVarID()->VariableID {
         let strparts = self.split(separator: ".")
         return String(strparts[strparts.count-1])
     }
-    func phasename()->String{
+    func phasename()->String {
         let strparts = self.split(separator: ".")
         return String(strparts[0])
+    }
+    func atPhase(_ phase: String)->String {
+        return phase + "." + self
     }
 }
 
@@ -74,5 +86,29 @@ class Variable : Parameter, Codable, Hashable {
             output.append(self.value[thisIndex])
         }
         return output
+    }
+    
+    func copyToPhase(phaseid: String)->Variable {
+        var newID: VariableID = ""
+        if !self.id.contains(".") {
+            newID = phaseid + "." + self.id
+        } else {
+            newID = phaseid + "." + self.id.baseVarID()
+        }
+        let newVar = Variable(newID, named: name, symbol: symbol, units: units)
+        newVar.value = value
+        return newVar
+    }
+    
+    func stripPhase()->Variable {
+        var newID: VariableID = ""
+        if self.id.contains(".") {
+            newID = self.id.baseVarID()
+        } else {
+            newID = self.id
+        }
+        let newVar = Variable(newID, named: name, symbol: symbol, units: units)
+        newVar.value = value
+        return newVar
     }
 }

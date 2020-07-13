@@ -93,6 +93,12 @@
 					</dict>
 					<dict>
 						<key>id</key>
+						<string>v</string>
+						<key>itemType</key>
+						<string>var</string>
+					</dict>
+					<dict>
+						<key>id</key>
 						<string>azv</string>
 						<key>itemType</key>
 						<string>var</string>

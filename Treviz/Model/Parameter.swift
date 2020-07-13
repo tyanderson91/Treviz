@@ -19,5 +19,3 @@ protocol Parameter: Codable {
     var isParam : Bool {get set} // Defines whether the parameter is used as a 'parameter' in the current analysis; that is, whether it is varied as an input across multiple analysis runs
     //var value: VarType {get set}
 }
-
-

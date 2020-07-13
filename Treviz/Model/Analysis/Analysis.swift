@@ -45,6 +45,7 @@ class Analysis: NSObject, Codable {
             return summaryVars
         } else { return [] }
     }
+    var calculatedVarTemplates: [StateCalcVariable] = []
     
     // Analysis-specific data and configs (read/writing functions in AnalysisData.swift)
     var name : String = ""
@@ -59,7 +60,13 @@ class Analysis: NSObject, Codable {
     var vehicles = [Vehicle()]
     var propagatorType : PropagatorType = .explicit
     var defaultTimestep : VarValue = 0.01
-    var inputSettings : [Parameter] = []
+    var inputSettings : [Parameter] {
+        var tempSettings = [Parameter]()
+        for thisPhase in phases {
+            tempSettings.append(contentsOf: thisPhase.inputSettings)
+        }
+        return tempSettings
+    }
     var initState: StateDictSingle { return traj[0] }
     weak var terminalCondition : Condition! {
         get { return phases[0].terminalCondition }
@@ -105,8 +112,6 @@ class Analysis: NSObject, Codable {
         if self.terminalCondition == nil { throw AnalysisError.NoTerminalCondition }
         if self.defaultTimestep <= 0 { throw AnalysisError.TimeStepError }
     }
-    
-    
     // MARK: Codable implementation
     enum CodingKeys: String, CodingKey {
         case name
@@ -121,7 +126,7 @@ class Analysis: NSObject, Codable {
         super.init()
         let container = try decoder.container(keyedBy: CodingKeys.self)
         name = try container.decode(String.self, forKey: .name)
-        inputSettings = try container.decode(Array<Variable>.self, forKey: .inputSettings)
+        //inputSettings = try container.decode(Array<Variable>.self, forKey: .inputSettings)
         //TODO: convert inputSettings to just a reference to varList for variables
 
         var allConds = try container.nestedUnkeyedContainer(forKey: .conditions)
@@ -170,11 +175,11 @@ class Analysis: NSObject, Codable {
         try container.encode(name, forKey: .name)
         try container.encode(conditions, forKey: .conditions)
         try container.encode(terminalCondition.name, forKey: .terminalCondition)
-        let nonzerovars = (inputSettings as? [Variable])?.filter({$0.value[0] != 0 || $0.isParam})
-        try container.encode(nonzerovars, forKey: .inputSettings)
+        //let nonzerovars = (inputSettings as? [Variable])?.filter({$0.value[0] != 0 || $0.isParam})
+        //try container.encode(nonzerovars, forKey: .inputSettings)
         try container.encode(plots, forKey: .plots)
     }
-    
+    /*
     func loadVars(from plist: String)->[Variable] {
         guard let varFilePath = Bundle.main.path(forResource: plist, ofType: "plist") else {return []}
         guard let inputList = NSArray.init(contentsOfFile: varFilePath) else {return []}//return empty if filename not found
@@ -187,5 +192,5 @@ class Analysis: NSObject, Codable {
             initVars.append(newVar)
         }
         return initVars
-    }
+    }*/
 }

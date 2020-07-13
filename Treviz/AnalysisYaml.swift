@@ -26,19 +26,6 @@ extension Analysis {
         //guard let yamlList: [[String:Any]] = getYamlObject(from: file) as? [[String : Any]] else {return}
         //for thisYaml in yamlList {
         
-        if let inputList = yamlDict["Parameters"] as? [[String: Any]] {
-            for paramSet in inputList {
-                for thisKey in paramSet.keys {
-                    let curVarID = thisKey
-                    guard let thisVarIndex = inputSettings.firstIndex(where: { $0.id == curVarID }) else { continue }
-                    let thisVar = inputSettings[thisVarIndex] as! Variable
-                    thisVar.value = [VarValue(truncating: paramSet[curVarID] as! NSNumber)]
-                    thisVar.isParam = true
-                    inputSettings[thisVarIndex] = thisVar
-                }
-            }
-        }
-        
         if let conditionList = yamlDict["Conditions"] as? [[String: Any]] {
             // self.conditions = []
             for thisConditionDict in conditionList {
@@ -62,6 +49,22 @@ extension Analysis {
             phases.append(newPhase)
         }
         
+        
+        if let inputList = yamlDict["Parameters"] as? [[String: Any]] {
+            for paramSet in inputList {
+                for (thisKey, thisVal) in paramSet {
+                    let curVarID = self.phases.count == 1 ? thisKey.atPhase(self.phases[0].id) : thisKey
+                    let curSettings = inputSettings
+                    guard let thisVarIndex = curSettings.firstIndex(where: { $0.id == curVarID }) else { continue }
+                    if let thisVar = inputSettings[thisVarIndex] as? Variable {
+                        guard let startVal = VarValue(numeric: thisVal) else { continue }
+                        thisVar.isParam = true
+                        thisVar.value[0] = startVal
+                    }
+                }
+            }
+        }
+        
         if let outputList = yamlDict["Outputs"] as? [[String: Any]] {
             plots = []
             for thisOutputDict in outputList {
@@ -78,6 +81,7 @@ extension Analysis {
        Returns a variable described by the yaml input key using the value(s) in the yaml value
        - Parameter yamlObj: a Dictionary of the type [String: Any] read from a yaml file.
        */
+    /*
     func initVar(varID: VariableID, varStr: Any) -> Variable? {
         //guard var thisVar = inputSettings.first(where: { $0.id == varID}) as? Variable else {return nil}
         //TODO: convert inputSettings to just a reference to varList for variables
@@ -88,7 +92,7 @@ extension Analysis {
             //inputSettings[thisVarIndex] = thisVar
             return thisVar
         } else {return nil}
-    }
+    }*/
 
     /**
      Creates a single Output from a Dictionary of the type that a yaml file can read. keys can include name (plot name), variable (variable id), type (plot type), condition, and output type (Plot by default)

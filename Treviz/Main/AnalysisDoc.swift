@@ -125,7 +125,7 @@ class AnalysisDoc: NSDocument {
             analysis.name = "Analysis Document"
         case "com.tyleranderson.treviz.analysis":
             let unarchiver = try NSKeyedUnarchiver(forReadingFrom: data)
-            //analysis = unarchiver.decodeDecodable(Analysis.self, forKey: NSKeyedArchiveRootObjectKey)!
+            analysis = unarchiver.decodeDecodable(Analysis.self, forKey: NSKeyedArchiveRootObjectKey)!
         default:
             return
         }

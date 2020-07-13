@@ -69,6 +69,8 @@
 		CD6E0B9E2431BAC5008D1656 /* TZToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6E0B9D2431BAC5008D1656 /* TZToolbar.swift */; };
 		CD6E0BA22436DEC7008D1656 /* TZStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6E0BA12436DEC7008D1656 /* TZStoryboard.swift */; };
 		CD715E8023EBE70400E31F97 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = CD715E7F23EBE70400E31F97 /* README.md */; };
+		CD870F3424B448D7004A4D42 /* MathFuncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD870F3324B448D7004A4D42 /* MathFuncs.swift */; };
+		CD870F3524B448D7004A4D42 /* MathFuncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD870F3324B448D7004A4D42 /* MathFuncs.swift */; };
 		CD92D6B92442302800483B8E /* TZLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD92D6B82442302800483B8E /* TZLogger.swift */; };
 		CDA0F88122587E05003C62E6 /* ParamTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA0F88022587E05003C62E6 /* ParamTableViewController.swift */; };
 		CDA0F888225C5D47003C62E6 /* InputsCellViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA0F887225C5D47003C62E6 /* InputsCellViews.swift */; };
@@ -97,13 +99,17 @@
 		CDD60A972345C5AE00249987 /* TZOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD60A962345C5AE00249987 /* TZOutput.swift */; };
 		CDDA8F1E24AD989E002936E6 /* PhaseVars.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDA8F1C24AD989D002936E6 /* PhaseVars.swift */; };
 		CDDA8F2024AD98A0002936E6 /* PhaseVars.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDA8F1C24AD989D002936E6 /* PhaseVars.swift */; };
+		CDDA8F2224AEE386002936E6 /* CalculatedVariable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDA8F2124AEE386002936E6 /* CalculatedVariable.swift */; };
+		CDDA8F2424B2C8B4002936E6 /* Output Handling Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDA8F2324B2C8B4002936E6 /* Output Handling Protocols.swift */; };
+		CDDA8F2524B2C8B4002936E6 /* Output Handling Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDA8F2324B2C8B4002936E6 /* Output Handling Protocols.swift */; };
+		CDDA8F2724B44213002936E6 /* DefaultCalculatedVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDA8F2624B44213002936E6 /* DefaultCalculatedVariables.swift */; };
+		CDDA8F2824B44213002936E6 /* DefaultCalculatedVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDA8F2624B44213002936E6 /* DefaultCalculatedVariables.swift */; };
+		CDDA8F2924B4451F002936E6 /* CalculatedVariable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDA8F2124AEE386002936E6 /* CalculatedVariable.swift */; };
 		CDDFF28324A5ABE200E8BC31 /* StateDict.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDFF28224A5ABE200E8BC31 /* StateDict.swift */; };
 		CDDFF28424A5ABE200E8BC31 /* StateDict.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDFF28224A5ABE200E8BC31 /* StateDict.swift */; };
 		CDE078F4224806EF00815E7F /* Inputs.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDE078F3224806EF00815E7F /* Inputs.storyboard */; };
 		CDE2A5182471F27700DB2B45 /* AnalysisFactoryInits.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE2A5172471F27700DB2B45 /* AnalysisFactoryInits.swift */; };
 		CDF09AB724AC473B0068BE4B /* PhasedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF09AB624AC473B0068BE4B /* PhasedViewController.swift */; };
-		CDF09AB924AC4BBB0068BE4B /* PhaseYaml.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF09AB824AC4BBB0068BE4B /* PhaseYaml.swift */; };
-		CDF09ABA24AC4BBB0068BE4B /* PhaseYaml.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF09AB824AC4BBB0068BE4B /* PhaseYaml.swift */; };
 		CDF1670C2237A10400CD9590 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF1670B2237A10400CD9590 /* MainWindowController.swift */; };
 		CDF2338A242DCD8100B8EF40 /* EditableHeaderTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF23382242DCD8000B8EF40 /* EditableHeaderTextField.swift */; };
 		CDF2338B242DCD8100B8EF40 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF23383242DCD8000B8EF40 /* BaseViewController.swift */; };
@@ -217,6 +223,7 @@
 		CD6E0BA12436DEC7008D1656 /* TZStoryboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TZStoryboard.swift; sourceTree = "<group>"; };
 		CD715E7F23EBE70400E31F97 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		CD7CE5E22443E1B80090D18F /* CorePlot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CorePlot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD870F3324B448D7004A4D42 /* MathFuncs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MathFuncs.swift; path = Treviz/Model/MathFuncs.swift; sourceTree = SOURCE_ROOT; };
 		CD92D6B82442302800483B8E /* TZLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TZLogger.swift; sourceTree = "<group>"; };
 		CDA0F88022587E05003C62E6 /* ParamTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParamTableViewController.swift; sourceTree = "<group>"; };
 		CDA0F887225C5D47003C62E6 /* InputsCellViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputsCellViews.swift; sourceTree = "<group>"; };
@@ -242,12 +249,14 @@
 		CDD60A902345BF5C00249987 /* TZTextOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TZTextOutput.swift; sourceTree = "<group>"; };
 		CDD60A962345C5AE00249987 /* TZOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TZOutput.swift; sourceTree = "<group>"; };
 		CDDA8F1C24AD989D002936E6 /* PhaseVars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhaseVars.swift; sourceTree = "<group>"; };
+		CDDA8F2124AEE386002936E6 /* CalculatedVariable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatedVariable.swift; sourceTree = "<group>"; };
+		CDDA8F2324B2C8B4002936E6 /* Output Handling Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Output Handling Protocols.swift"; path = "Treviz/Model/Analysis/Output Handling Protocols.swift"; sourceTree = SOURCE_ROOT; };
+		CDDA8F2624B44213002936E6 /* DefaultCalculatedVariables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCalculatedVariables.swift; sourceTree = "<group>"; };
 		CDDFF28224A5ABE200E8BC31 /* StateDict.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateDict.swift; sourceTree = "<group>"; };
 		CDE078F3224806EF00815E7F /* Inputs.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Inputs.storyboard; sourceTree = "<group>"; };
 		CDE0795A2249EC7400815E7F /* InitStateStructure.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = InitStateStructure.plist; sourceTree = "<group>"; };
 		CDE2A5172471F27700DB2B45 /* AnalysisFactoryInits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisFactoryInits.swift; sourceTree = "<group>"; };
 		CDF09AB624AC473B0068BE4B /* PhasedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PhasedViewController.swift; path = "Treviz/Main/Inputs Setup/PhasedViewController.swift"; sourceTree = SOURCE_ROOT; };
-		CDF09AB824AC4BBB0068BE4B /* PhaseYaml.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhaseYaml.swift; sourceTree = "<group>"; };
 		CDF1670B2237A10400CD9590 /* MainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
 		CDF23382242DCD8000B8EF40 /* EditableHeaderTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditableHeaderTextField.swift; sourceTree = "<group>"; };
 		CDF23383242DCD8000B8EF40 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -322,6 +331,7 @@
 				CD63AEA323E7EA26006502F2 /* State.swift */,
 				CDDFF28224A5ABE200E8BC31 /* StateDict.swift */,
 				CD63AEA123E7EA26006502F2 /* Variable.swift */,
+				CDDA8F2124AEE386002936E6 /* CalculatedVariable.swift */,
 				CDB7C7392352B03100BC50F1 /* Parameter.swift */,
 				CD0F010A2365595700C920AA /* Vehicle.swift */,
 				CDD60A962345C5AE00249987 /* TZOutput.swift */,
@@ -330,6 +340,7 @@
 				CD280F49233B45670004263F /* TZPlot.swift */,
 				CD4AD70C23BD4C0C00FC815F /* TZPlotType.swift */,
 				CDB7C73B2352B58300BC50F1 /* InitStateHeader.swift */,
+				CD870F3324B448D7004A4D42 /* MathFuncs.swift */,
 				CD01037623E78EED00D336C2 /* Analysis */,
 				CDAF398D24A7209200309CA9 /* Phase */,
 			);
@@ -339,6 +350,7 @@
 		CD01037623E78EED00D336C2 /* Analysis */ = {
 			isa = PBXGroup;
 			children = (
+				CDDA8F2324B2C8B4002936E6 /* Output Handling Protocols.swift */,
 				CDF255F7245294880097F995 /* AnalysisProgressReporter.swift */,
 				CDF3D1A0225025AF0064D70C /* Analysis.swift */,
 				CDE2A5172471F27700DB2B45 /* AnalysisFactoryInits.swift */,
@@ -478,8 +490,8 @@
 		CD9F2041223B7CBF005BFDCB /* Inputs Setup */ = {
 			isa = PBXGroup;
 			children = (
-				CDF09AB624AC473B0068BE4B /* PhasedViewController.swift */,
 				CD05E3BC225491D900906EB0 /* Init State */,
+				CDF09AB624AC473B0068BE4B /* PhasedViewController.swift */,
 				CDD5049722252AFA00B29751 /* InputsViewController.swift */,
 				CDA0F887225C5D47003C62E6 /* InputsCellViews.swift */,
 				CDA0F88022587E05003C62E6 /* ParamTableViewController.swift */,
@@ -493,11 +505,11 @@
 		CDAF398D24A7209200309CA9 /* Phase */ = {
 			isa = PBXGroup;
 			children = (
+				CDDA8F2624B44213002936E6 /* DefaultCalculatedVariables.swift */,
 				CDAF398E24A7209200309CA9 /* TZPhase.swift */,
 				CDDA8F1C24AD989D002936E6 /* PhaseVars.swift */,
 				CDAF399124A7217500309CA9 /* PhaseRunFunctions.swift */,
 				CD656F6F248770A300BB5CBC /* PhaseStartupFuncs.swift */,
-				CDF09AB824AC4BBB0068BE4B /* PhaseYaml.swift */,
 			);
 			path = Phase;
 			sourceTree = "<group>";
@@ -859,10 +871,10 @@
 				CD4656B4224C6F8C00C587CC /* EnvironmentViewController.swift in Sources */,
 				CDDA8F1E24AD989E002936E6 /* PhaseVars.swift in Sources */,
 				CD4656B2224C6F3500C587CC /* SettingsViewController.swift in Sources */,
+				CDDA8F2224AEE386002936E6 /* CalculatedVariable.swift in Sources */,
 				CDF2338F242DCD8100B8EF40 /* HeaderViewController.swift in Sources */,
 				CD410CF72444239700AB49DE /* CorePlotExtensions.swift in Sources */,
 				CDB7C73A2352B03100BC50F1 /* Parameter.swift in Sources */,
-				CDF09AB924AC4BBB0068BE4B /* PhaseYaml.swift in Sources */,
 				CD6E0BA22436DEC7008D1656 /* TZStoryboard.swift in Sources */,
 				CD0F010923654ED400C920AA /* AnalysisRunFunctions.swift in Sources */,
 				CD4AD70D23BD4C0C00FC815F /* TZPlotType.swift in Sources */,
@@ -895,7 +907,10 @@
 				CD1A5B5D23FD1E9A00BE3BFB /* AnalysisYaml.swift in Sources */,
 				CDD5049822252AFA00B29751 /* InputsViewController.swift in Sources */,
 				CDB7C73C2352B58300BC50F1 /* InitStateHeader.swift in Sources */,
+				CDDA8F2724B44213002936E6 /* DefaultCalculatedVariables.swift in Sources */,
 				CDF2338A242DCD8100B8EF40 /* EditableHeaderTextField.swift in Sources */,
+				CDDA8F2424B2C8B4002936E6 /* Output Handling Protocols.swift in Sources */,
+				CD870F3424B448D7004A4D42 /* MathFuncs.swift in Sources */,
 				CDF2338B242DCD8100B8EF40 /* BaseViewController.swift in Sources */,
 				CDA0F888225C5D47003C62E6 /* InputsCellViews.swift in Sources */,
 				CDF3D1A1225025B00064D70C /* Analysis.swift in Sources */,
@@ -922,13 +937,16 @@
 				CDAF399024A7209200309CA9 /* TZPhase.swift in Sources */,
 				CDDA8F2024AD98A0002936E6 /* PhaseVars.swift in Sources */,
 				CD656F71248771D500BB5CBC /* PhaseStartupFuncs.swift in Sources */,
+				CD870F3524B448D7004A4D42 /* MathFuncs.swift in Sources */,
+				CDDA8F2924B4451F002936E6 /* CalculatedVariable.swift in Sources */,
 				CDFAD0F723EA84FE00CE7424 /* State.swift in Sources */,
-				CDF09ABA24AC4BBB0068BE4B /* PhaseYaml.swift in Sources */,
 				CD6CCF3D244D2FFB0051F76D /* OutputDataSet.swift in Sources */,
 				CDFAD0F923EA84FE00CE7424 /* Variable.swift in Sources */,
 				CDFAD0FA23EA84FE00CE7424 /* Vehicle.swift in Sources */,
+				CDDA8F2824B44213002936E6 /* DefaultCalculatedVariables.swift in Sources */,
 				CDFAD0FB23EA84FE00CE7424 /* TZOutput.swift in Sources */,
 				CDAF399324A7217500309CA9 /* PhaseRunFunctions.swift in Sources */,
+				CDDA8F2524B2C8B4002936E6 /* Output Handling Protocols.swift in Sources */,
 				CD5F4E9D2455101500823E43 /* AnalysisRunFunctions.swift in Sources */,
 				CD5F4E9B2455101100823E43 /* TZLogger.swift in Sources */,
 				CDC789C3247B47A200A1DCED /* AnalysisFactoryInits.swift in Sources */,

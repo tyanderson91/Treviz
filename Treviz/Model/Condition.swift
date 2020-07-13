@@ -239,7 +239,7 @@ class SingleCondition: EvaluateCondition, Codable {
             }
         }
     }
-    @objc func evaluateStateArray(_ singleState: StateDictSingle)->Bool{ // TODO: figure out exactly which versions are being used
+    func evaluateStateArray(_ singleState: StateDictSingle)->Bool{ // TODO: figure out exactly which versions are being used
         let thisVal = singleState[varID]!
         var isCondition = true
         
@@ -494,7 +494,7 @@ class Condition : EvaluateCondition, Codable {
         }
     }
 
-    @objc func evaluateStateArray(_ singleState: StateDictSingle)->Bool {
+    func evaluateStateArray(_ singleState: StateDictSingle)->Bool {
         var curMeetsCondition = conditions[0].evaluateStateArray(singleState)
         for thisCondition in conditions.dropFirst(){
             let thisMeetsCondition = thisCondition.evaluateStateArray(singleState)

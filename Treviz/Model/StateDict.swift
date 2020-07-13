@@ -12,14 +12,56 @@ enum StateError: Error, LocalizedError {
     case UnmatchingVarLength
 }
 
-typealias StateDictArray = Dictionary<VariableID, Array<VarValue>>
-typealias StateDictSingle = Dictionary<VariableID, VarValue>
-
 /**
  A StateDictArray is a dictionary of var values. The Keys are VarIDs, and the values are the values associated with that VarID (in standard metric units). This provides a convenient data structure to pass around trajectory information without the overhead associated with full Variable objects
  */
-extension StateDictArray {
-    init(from state: State) throws {
+struct StateDictArray: Collection, ExpressibleByDictionaryLiteral {
+    //MARK: Stardard Dictionary functions
+    typealias DictionaryType = Dictionary<VariableID, [VarValue]>
+    typealias Index = DictionaryType.Index
+    typealias Element = DictionaryType.Element
+    typealias Key = VariableID
+    typealias Value = [VarValue]
+    
+    private var variables = DictionaryType()
+    var startIndex: Index { return variables.startIndex }
+    var endIndex: Index { return variables.endIndex }
+    
+    subscript(index: Index) -> Element {
+        get { return variables[index] }
+    }
+    subscript(varid: VariableID) -> [VarValue]? {
+        mutating get {
+            if variables.keys.contains(varid) { return variables[varid] ?? nil }
+            else {
+                guard let thisVarCalc = phase?.varCalculationsMultiple[varid] else {return nil}
+                let varValue = thisVarCalc(&self)
+                self[varid] = varValue
+                return varValue
+            }
+        }
+        set { variables[varid] = newValue }
+    }
+    func index(after i: DictionaryType.Index) -> DictionaryType.Index {
+        return variables.index(after: i)
+    }
+    
+    init(dictionaryLiteral elements: (VariableID, [VarValue])...) {
+        for (varid, varval) in elements {
+            variables[varid] = varval
+        }
+    }
+    
+    //MARK: Custom behavior
+    var phase: TZPhase?
+    var stateLen: Int {
+        let curlen = self.variables.values.first?.count ?? 0
+        return curlen
+    }
+    init(){
+        variables = DictionaryType()
+    }
+    init(from state: State) {//throws
         //var curLen : Int?
         self.init()
         for thisVar in state {
@@ -45,12 +87,51 @@ extension StateDictArray {
             self[thisVar.id] = [thisVar.value[i]]
         }
     }
+    
+    subscript(_ index: Int)->StateDictSingle {
+        var returnDict = StateDictSingle()
+        for (thisVarID, thisVarVal) in self {
+            // TODO: Once Units are implemented, assert that all input variables use standard metric units
+            returnDict[thisVarID] = thisVarVal[index]
+        }
+        return returnDict
+    }
 }
 
 /**
 A StateDictSingle is just like a StateDictArray, but only contains data for a single point in a trajectory. This is useful for, say, evaluating a condition at a particular point in the trajectory
 */
-extension StateDictSingle {
+struct StateDictSingle: Collection, ExpressibleByDictionaryLiteral {
+    // MARK: Standard Dictionary functions
+    typealias DictionaryType = Dictionary<VariableID, VarValue>
+    typealias Index = DictionaryType.Index
+    typealias Element = DictionaryType.Element
+    typealias Key = VariableID
+    typealias Value = VarValue
+    
+    private var variables = DictionaryType()
+    var startIndex: Index { return variables.startIndex }
+    var endIndex: Index { return variables.endIndex }
+    
+    subscript(index: Index) -> Element {
+        get { return variables[index] }
+    }
+    subscript(varid: VariableID) -> VarValue? {
+        get { return variables[varid] ?? nil }
+        set { variables[varid] = newValue }
+    }
+    func index(after i: DictionaryType.Index) -> DictionaryType.Index {
+        return variables.index(after: i)
+    }
+    
+    init(dictionaryLiteral elements: (VariableID, VarValue)...) {
+        for (varid, varval) in elements {
+            variables[varid] = varval
+        }
+    }
+    
+    //MARK: Custom behaviors
+    var phase: TZPhase?
     init(from state: State, at index: Int) {
         self.init()
         var i: Int!

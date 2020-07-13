@@ -11,8 +11,8 @@ import Foundation
 class InitStateViewController: PhasedViewController, NSOutlineViewDelegate, NSOutlineViewDataSource {
 
     @IBOutlet weak var outlineView: NSOutlineView!
-    var inputVars : [Parameter] = []
-    var inputVarStructure : InitStateHeader?
+    var inputVars : [Parameter] { phase.varList }
+    var inputVarStructure : InitStateHeader { return phase.initStateGroups }
     override func getHeaderTitle() -> String { return NSLocalizedString("Initial State", comment: "") }
     var inputsViewController: InputsViewController?
     
@@ -21,10 +21,8 @@ class InitStateViewController: PhasedViewController, NSOutlineViewDelegate, NSOu
         outlineView.autosaveExpandedItems = false  // TODO: Implement functions that allow this
         outlineView.autosaveName = "initStateOutlineView"
         //Load data
-        inputVarStructure = phase.initStateGroups
-        inputVars = analysis.inputSettings
+        //inputVarStructure = phase.initStateGroups
         outlineView.reloadData()
-        
     }
     
     override func viewDidAppear() {
@@ -44,7 +42,7 @@ class InitStateViewController: PhasedViewController, NSOutlineViewDelegate, NSOu
         } else if item is Variable {
             return 0
         } else {
-            return inputVarStructure?.children.count ?? 0
+            return inputVarStructure.children.count
         }
     }
     
@@ -55,8 +53,8 @@ class InitStateViewController: PhasedViewController, NSOutlineViewDelegate, NSOu
         } else if item is Variable {
             return 0
         } else {
-            let children = inputVarStructure?.children
-            return children?[index] ?? 0
+            let children = inputVarStructure.children
+            return children[index] 
         }
     }
     

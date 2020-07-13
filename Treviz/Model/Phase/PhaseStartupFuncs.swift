@@ -12,17 +12,18 @@ import Cocoa
 
 extension TZPhase {
     func setupConstants(){
-        loadVars(from: "InitVars")
-        varList = varList.compactMap({$0.copyToPhase(phaseid: self.id)})
+        let defaultVarList = loadVars(from: "InitVars")
+        varList = defaultVarList.compactMap({$0.copyToPhase(phaseid: self.id)})
         loadVarGroups(from: "InitStateStructure")
     }
     
-    func loadVars(from plist: String) {
-        guard let varFilePath = Bundle.main.path(forResource: plist, ofType: "plist") else { return }
-        guard let inputList = NSArray.init(contentsOfFile: varFilePath) else { return }//return empty if filename not found
+    func loadVars(from plist: String) -> [Variable]{
+        guard let varFilePath = Bundle.main.path(forResource: plist, ofType: "plist") else { return []}
+        guard let inputList = NSArray.init(contentsOfFile: varFilePath) else { return []}//return empty if filename not found
         var tempVarList = Array<Variable>()
+        loadCalculatedVars()
         for thisVar in inputList {
-            guard let dict = thisVar as? NSDictionary else { return }
+            guard let dict = thisVar as? NSDictionary else { return []}
             guard let varid = dict["id"] as? VariableID else { continue }
             if requiredVarIDs.contains(varid) {
                 let newVar = Variable(varid, named: dict["name"] as! String, symbol: dict["symbol"] as! String)
@@ -30,14 +31,23 @@ extension TZPhase {
                 newVar.value = [0]
                 tempVarList.append(newVar)
             }
+            else if requestedVarIDs.contains(varid) {
+                //let newVar = Variable(varid, named: dict["name"] as! String, symbol: dict["symbol"] as! String)
+                if let varCalculation = self.varCalculationsSingle[varid] {
+                    let newVar = StateCalcVariable(varid, named: dict["name"] as! String, symbol: dict["symbol"] as! String, units: dict["units"] as! String, calculation: varCalculation)
+                    newVar.units = dict["units"] as! String
+                    newVar.value = [0]
+                    tempVarList.append(newVar)
+                }
+            }
         }
-        varList = tempVarList
+        return tempVarList
     }
 
     func loadVarGroups(from plist: String){
          guard let varFilePath = Bundle.main.path(forResource: plist, ofType: "plist") else {return}
          guard let inputList = NSArray.init(contentsOfFile: varFilePath) else {return} //return empty if filename not found
-         initStateGroups = InitStateHeader(id: "default")
+         initStateGroups = InitStateHeader(id: "top")
          loadVarGroupsRecurs(input: initStateGroups, withList: inputList as! [NSDictionary])
      }
      
@@ -48,7 +58,7 @@ extension TZPhase {
              let name = dict["name"] as? String
              
              if itemType == "var"{
-                 if let newVar = inputSettings.first(where: {$0.id == itemID}) as? Variable {
+                if let newVar = varList.first(where: {$0.id.baseVarID() == itemID}) {
                     input.variables.append(newVar)
                  }
                  continue
@@ -63,8 +73,8 @@ extension TZPhase {
                  input.subheaders.append(newHeader)
                  if let children = dict["items"] as? NSArray {
                      loadVarGroupsRecurs(input: newHeader, withList: children as! [NSDictionary])
-                 }
-             }
-         }
-     }
+                }
+            }
+        }
+    }
 }

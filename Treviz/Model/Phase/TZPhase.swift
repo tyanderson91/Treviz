@@ -13,30 +13,6 @@ enum PropagatorType: String {
     case rungeKutta4
 }
 
-extension Variable {
-    func copyToPhase(phaseid: String)->Variable {
-        var newID: VariableID = ""
-        if !self.id.contains(".") {
-            newID = phaseid + "." + self.id
-        } else {
-            newID = phaseid + "." + self.id.baseVarID()
-        }
-        let newVar = Variable(newID, named: name, symbol: symbol, units: units)
-        newVar.value = value
-        return newVar
-    }
-    func stripPhase()->Variable {
-        var newID: VariableID = ""
-        if self.id.contains(".") {
-            newID = self.id.baseVarID()
-        } else {
-            newID = self.id
-        }
-        let newVar = Variable(newID, named: name, symbol: symbol, units: units)
-        newVar.value = value
-        return newVar
-    }
-}
 
 enum ReturnCode: Int {
     case NotStarted = 0
@@ -56,12 +32,15 @@ class TZPhase: Codable {
     weak var terminalCondition : Condition!
     var traj: State!
     var requiredVarIDs: [VariableID] = []
-    var requestedVarIDs: [VariableID] = []
+    var requestedVarIDs: [VariableID] = ["v", "a"]
     var progressReporter: AnalysisProgressReporter?
     var isRunning = false
     var returnCode : ReturnCode = .NotStarted
     var analysis: Analysis!
     var varList: [Variable]!
+    //var calculatedVars: [StateCalcVariable] = []
+    var varCalculationsSingle = Dictionary<VariableID,(inout StateDictSingle)->VarValue>()
+    var varCalculationsMultiple = Dictionary<VariableID,(inout StateDictArray)->[VarValue]>()
     var initStateGroups : InitStateHeader!
 
     init(id idIn: String){
@@ -82,9 +61,18 @@ class TZPhase: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decode(String.self, forKey: .id)
         propagatorType = try PropagatorType(rawValue: container.decode(String.self, forKey: .propagatorType))!
-        let tempInputSettings = try container.decode(Array<Variable>.self, forKey: .inputSettings)
-        inputSettings = tempInputSettings.compactMap({$0.copyToPhase(phaseid: self.id)})
         setupConstants()
+        
+        let tempInputSettings = try container.decode(Array<Variable>.self, forKey: .inputSettings)
+        tempInputSettings.forEach( { (thisParam: Parameter) in
+            if let thisVar = thisParam as? Variable {
+                let thisVar = thisVar.copyToPhase(phaseid: self.id)
+                let matchingVar = self.varList.first(where: {$0.id == thisVar.id})
+                matchingVar?[0] = thisVar.value[0]
+            }
+        } )
+        inputSettings = varList // TODO: When more settings are introduced, expand this
+        
         do {
             let terminalConditionName = try container.decode(String.self, forKey: .terminalCondition)
             terminalCondition = analysis.conditions.first { $0.name == terminalConditionName }
@@ -96,8 +84,38 @@ class TZPhase: Codable {
         try container.encode(id, forKey: .id)
         try container.encode(propagatorType.rawValue, forKey: .propagatorType)
         try container.encode(terminalCondition.name, forKey: .terminalCondition)
-        let nonzerovars = (inputSettings as? [Variable])?.filter({$0.value[0] != 0 || $0.isParam})
-        try container.encode(nonzerovars, forKey: .inputSettings)
+        if let nonzerovars = (varList)?.filter({$0.value[0] != 0 || $0.isParam}) {
+            let baseVars = nonzerovars.compactMap({$0.stripPhase()})
+            try container.encode(baseVars, forKey: .inputSettings)
+        }
         try container.encode(vehicle.id, forKey: .vehicleID)
+    }
+    
+    // MARK: Yaml initiation
+    convenience init(yamlDict: [String: Any], analysis: Analysis) {
+        if let phasename = yamlDict["Name"] as? String {
+            self.init(id: phasename)
+        } else { self.init(id: "default") }
+        self.analysis = analysis
+        
+        setupConstants()
+        if let inputList = yamlDict["Initial Variables"] as? [String: Any] {
+            for (curVarID, curVarVal) in inputList {
+                guard let thisVar = self.varList.first(where: { $0.id == curVarID.atPhase(self.id)}
+                    ) else {
+                    analysis.logMessage("Could not set value for unknown variable '\(curVarID)'")
+                    continue
+                }
+                if let startVal = VarValue(numeric: curVarVal) { thisVar.value = [startVal] }
+            }
+        }
+        // varList = varList.compactMap({$0.copyToPhase(phaseid: self.id)})
+        inputSettings = varList // TODO: When more settings are introduced, expand this
+        
+        if let terminalConditionName = yamlDict["Terminal Condition"] as? String {
+            if let cond = analysis.conditions.first(where: { $0.name == terminalConditionName }) {
+                terminalCondition = cond
+            }
+        }
     }
 }
