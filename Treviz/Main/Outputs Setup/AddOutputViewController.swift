@@ -70,6 +70,7 @@ class AddOutputViewController: BaseViewController, VariableGetter {
             menuItem.image = thisPlotType.icon
             plotTypePopupButton.menu?.addItem(menuItem)
         }
+        plotTypePopupButton.bezelStyle = .texturedSquare
         self.bind(.title, to: objectController!, withKeyPath: "selection.title")
         
         conditionsPopupButton.addItems(withTitles: analysis.conditions.compactMap({$0.name}))

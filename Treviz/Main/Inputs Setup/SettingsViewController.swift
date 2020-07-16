@@ -22,20 +22,11 @@ class SettingsViewController: PhasedViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //terminalConditionArrayController.content = analysis?.conditions
-        //terminalConditionPopupButton.bind(.content, to: terminalConditionArrayController, withKeyPath: "arrangedObjects", options: nil)
-        //terminalConditionPopupButton.bind(.contentValues, to: terminalConditionArrayController, withKeyPath: "arrangedObjects.name", options: nil)
         if analysis != nil {
-            //terminalConditionPopupButton.bind(.selectedObject, to: analysis!, withKeyPath: "terminalCondition")
         }
         NotificationCenter.default.addObserver(self, selector: #selector(self.didChangeCondition1(_:)), name: .didAddCondition, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.didChangeCondition1(_:)), name: .didRemoveCondition, object: nil)
-        
-        if analysis != nil {
-            //terminalConditionArrayController.content = analysis!.conditions
-            //terminalConditionPopupButton.bind(.selectedObject, to: analysis!, withKeyPath: "terminalCondition", options: nil)
-        }
-        // Do view setup here.
+
         getPopupOptions()
     }
     
@@ -47,7 +38,6 @@ class SettingsViewController: PhasedViewController {
             terminalConditionPopupButton.bind(.selectedObject, to: analysis!, withKeyPath: "terminalCondition", options: nil)
         }
     }
-    
     
     @objc func didChangeCondition1(_ notification: Notification){
         if analysis.terminalCondition == nil {}

@@ -17,9 +17,7 @@ extension NSNotification.Name {
 }
 
 class InputsViewController: TZViewController, NSTableViewDataSource, NSTableViewDelegate {
-    
-    //var parentSplitViewController : MainSplitViewController? = nil
-    //@IBOutlet weak var tableView: NSTableView!    
+     
     @IBOutlet weak var stack: CustomStackView!
     
     var tableViewController : ParamTableViewController!
@@ -51,8 +49,6 @@ class InputsViewController: TZViewController, NSTableViewDataSource, NSTableView
                                //environmentsViewController,
                                initStateViewController]{
             self.addChild(thisController!)
-            //thisController?.analysis = self.analysis
-            //thisController?.representedObject = self.representedObject
         }
         
         initStateViewController.inputsViewController = self

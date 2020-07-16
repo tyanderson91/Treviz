@@ -134,7 +134,7 @@
 	</dict>
 	<dict>
 		<key>id</key>
-		<string>a</string>
+		<string>sma</string>
 		<key>name</key>
 		<string>Semi-major axis</string>
 		<key>symbol</key>
@@ -533,6 +533,16 @@
 		<string>𝑟𝑛</string>
 		<key>units</key>
 		<string>distance</string>
+	</dict>
+	<dict>
+		<key>id</key>
+		<string>a</string>
+		<key>name</key>
+		<string>acceleration</string>
+		<key>symbol</key>
+		<string>𝑎</string>
+		<key>units</key>
+		<string>acceleration</string>
 	</dict>
 </array>
 </plist>

@@ -38,6 +38,10 @@ class StateCalcVariable: Variable {
             return newArray
         }
     }
+    init(_ idIn: VariableID, named nameIn: String = "", symbol symbolIn: String = "", units unitsIn: String = "", calculation calcIn: @escaping (inout StateDictArray)->[VarValue]) {
+        super.init(idIn, named: nameIn, symbol: symbolIn, units: unitsIn)
+        multiStateCalculation = calcIn
+    }
     
     override func copyToPhase(phaseid: String)->StateCalcVariable {
         var newID: VariableID = ""

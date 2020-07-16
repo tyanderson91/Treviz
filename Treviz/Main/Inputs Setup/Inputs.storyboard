@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="BWH-wW-vxd">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="BWH-wW-vxd">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097.2"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -9,24 +9,24 @@
         <scene sceneID="SDQ-LY-AHJ">
             <objects>
                 <viewController title="Initial State" storyboardIdentifier="InitStateViewController" id="QV5-fD-s1c" customClass="InitStateViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="WGY-9i-iLe">
+                    <view key="view" id="WGY-9i-iLe" customClass="StackBaseView" customModule="Treviz" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="349" height="481"/>
                         <autoresizingMask key="autoresizingMask" heightSizable="YES"/>
                         <subviews>
                             <customView horizontalHuggingPriority="800" verticalHuggingPriority="50" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="500" translatesAutoresizingMaskIntoConstraints="NO" id="Hmv-lq-0J5">
                                 <rect key="frame" x="0.0" y="0.0" width="349" height="481"/>
                                 <subviews>
-                                    <scrollView horizontalHuggingPriority="800" verticalHuggingPriority="50" placeholderIntrinsicWidth="572" placeholderIntrinsicHeight="200" verifyAmbiguity="ignoreSizes" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IJ7-Zw-yB3">
+                                    <scrollView horizontalHuggingPriority="800" verticalHuggingPriority="50" placeholderIntrinsicWidth="572" placeholderIntrinsicHeight="200" verifyAmbiguity="ignoreSizes" autohidesScrollers="YES" horizontalLineScroll="22" horizontalPageScroll="10" verticalLineScroll="22" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IJ7-Zw-yB3">
                                         <rect key="frame" x="0.0" y="80" width="349" height="400"/>
-                                        <clipView key="contentView" id="CLe-47-xth">
+                                        <clipView key="contentView" drawsBackground="NO" id="CLe-47-xth">
                                             <rect key="frame" x="1" y="0.0" width="347" height="399"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnReordering="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" autosaveName="initStateOutlineView" rowSizeStyle="automatic" headerView="31c-TF-9un" viewBased="YES" indentationPerLevel="11" autosaveExpandedItems="YES" autoresizesOutlineColumn="YES" outlineTableColumn="azQ-xe-zxX" id="o6P-Kz-ADk">
+                                                <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" selectionHighlightStyle="sourceList" columnReordering="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" autosaveName="initStateOutlineView" rowHeight="22" rowSizeStyle="automatic" headerView="31c-TF-9un" viewBased="YES" indentationPerLevel="14" autosaveExpandedItems="YES" outlineTableColumn="azQ-xe-zxX" id="o6P-Kz-ADk">
                                                     <rect key="frame" x="0.0" y="0.0" width="347" height="374"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                    <size key="intercellSpacing" width="3" height="2"/>
-                                                    <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    <size key="intercellSpacing" width="3" height="0.0"/>
+                                                    <color key="backgroundColor" name="_sourceListBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                     <tableColumns>
                                                         <tableColumn identifier="NameColumn" width="188" minWidth="40" maxWidth="1000" id="azQ-xe-zxX" userLabel="Name">
@@ -42,7 +42,7 @@
                                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                             <prototypeCellViews>
                                                                 <tableCellView identifier="initStateHeaderCellView" id="rmI-BO-63o" userLabel="Header Cell View">
-                                                                    <rect key="frame" x="1" y="1" width="188" height="17"/>
+                                                                    <rect key="frame" x="1" y="0.0" width="188" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
                                                                         <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ic4-SE-RRN">
@@ -77,7 +77,7 @@
                                                                     </connections>
                                                                 </tableCellView>
                                                                 <tableCellView identifier="initStateSubHeaderCellView" id="OlM-Kc-PPq" userLabel="SubHeader Cell View">
-                                                                    <rect key="frame" x="1" y="20" width="188" height="17"/>
+                                                                    <rect key="frame" x="1" y="17" width="188" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
                                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="6Xo-7l-f6U">
@@ -102,7 +102,7 @@
                                                                     </connections>
                                                                 </tableCellView>
                                                                 <tableCellView identifier="NameCellView" id="sal-K5-gNP" userLabel="Name Cell View">
-                                                                    <rect key="frame" x="1" y="39" width="188" height="17"/>
+                                                                    <rect key="frame" x="1" y="34" width="188" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
                                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="nib-0h-A2d">
@@ -141,7 +141,7 @@
                                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                             <prototypeCellViews>
                                                                 <tableCellView identifier="initStateValueCellView" id="6c2-Js-Hg1">
-                                                                    <rect key="frame" x="192" y="1" width="51" height="17"/>
+                                                                    <rect key="frame" x="192" y="0.0" width="51" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
                                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="O14-3P-80s">
@@ -183,7 +183,7 @@
                                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                             <prototypeCellViews>
                                                                 <tableCellView identifier="UnitsCellView" id="XMg-mg-lgj">
-                                                                    <rect key="frame" x="245.5" y="1" width="43" height="17"/>
+                                                                    <rect key="frame" x="245.5" y="0.0" width="43" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
                                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="iJs-bA-Yzx">
@@ -226,7 +226,7 @@
                                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                             <prototypeCellViews>
                                                                 <button identifier="initStateParamCheckBoxView" verticalHuggingPriority="750" id="Q4p-6L-kwQ" userLabel="Value check">
-                                                                    <rect key="frame" x="291.5" y="1" width="53" height="18"/>
+                                                                    <rect key="frame" x="291.5" y="0.0" width="53" height="18"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                     <buttonCell key="cell" type="check" title="Check" bezelStyle="regularSquare" imagePosition="only" alignment="center" inset="2" id="926-Li-fLp">
                                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -237,7 +237,7 @@
                                                                     </connections>
                                                                 </button>
                                                                 <tableCellView identifier="initStateHasParamCellView" wantsLayer="YES" id="Mlb-wb-KFY" userLabel="Has Params Cell View">
-                                                                    <rect key="frame" x="291.5" y="21" width="53" height="17"/>
+                                                                    <rect key="frame" x="291.5" y="18" width="53" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
                                                                         <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="w35-en-TRi">
@@ -262,6 +262,7 @@
                                                     </connections>
                                                 </outlineView>
                                             </subviews>
+                                            <nil key="backgroundColor"/>
                                         </clipView>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="400" id="6PU-9t-DXX"/>
@@ -308,7 +309,7 @@
         <scene sceneID="VOw-ih-bT1">
             <objects>
                 <viewController title="Settings" storyboardIdentifier="SettingsViewController" id="nO6-jD-DH1" customClass="SettingsViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="I4F-E2-8ug">
+                    <view key="view" id="I4F-E2-8ug" customClass="StackBaseView" customModule="Treviz" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="281" height="21"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
@@ -432,7 +433,7 @@
         <scene sceneID="4o4-RC-vSc">
             <objects>
                 <viewController title="Environment" storyboardIdentifier="EnvironmentViewController" id="k9D-27-yNr" customClass="EnvironmentViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="CLZ-B6-nDD">
+                    <view key="view" id="CLZ-B6-nDD" customClass="StackBaseView" customModule="Treviz" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="389" height="101"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
@@ -569,11 +570,11 @@
                         <subviews>
                             <scrollView horizontalHuggingPriority="900" verticalHuggingPriority="150" autohidesScrollers="YES" horizontalLineScroll="22" horizontalPageScroll="10" verticalLineScroll="22" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="puu-RH-hwt">
                                 <rect key="frame" x="0.0" y="0.0" width="250" height="100"/>
-                                <clipView key="contentView" ambiguous="YES" id="xMK-Uy-VZG">
+                                <clipView key="contentView" ambiguous="YES" drawsBackground="NO" id="xMK-Uy-VZG">
                                     <rect key="frame" x="1" y="0.0" width="248" height="99"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView verticalHuggingPriority="750" ambiguous="YES" allowsExpansionToolTips="YES" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" autosaveName="paramTableView" rowHeight="20" rowSizeStyle="automatic" headerView="zQ8-ST-pLq" viewBased="YES" id="eBv-48-PWs">
+                                        <tableView verticalHuggingPriority="750" ambiguous="YES" allowsExpansionToolTips="YES" selectionHighlightStyle="none" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" autosaveName="paramTableView" rowHeight="20" rowSizeStyle="automatic" headerView="zQ8-ST-pLq" viewBased="YES" id="eBv-48-PWs">
                                             <rect key="frame" x="0.0" y="0.0" width="248" height="74"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
@@ -604,7 +605,7 @@
                                                                     </constraints>
                                                                     <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSRemoveTemplate" imagePosition="only" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="SDM-P9-QAy">
                                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                                        <font key="font" metaFont="label" size="11"/>
+                                                                        <font key="font" metaFont="controlContent" size="11"/>
                                                                     </buttonCell>
                                                                     <connections>
                                                                         <action selector="removeParamPressed:" target="hM9-90-DLw" id="K3Q-08-Wvu"/>
@@ -707,6 +708,7 @@
                                             </connections>
                                         </tableView>
                                     </subviews>
+                                    <nil key="backgroundColor"/>
                                 </clipView>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="ohR-V1-B7h"/>

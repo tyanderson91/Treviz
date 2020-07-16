@@ -16,6 +16,7 @@ class TZMessageLoggerViewController: TZViewController, TZLogger {
         analysis.logMessageView = self
         // Do view setup here.
     }
+    
      //TZLogger implementation
     func logMessage(_ message: NSAttributedString) {
         self.messageLoggerTextView.textStorage?.append(message)

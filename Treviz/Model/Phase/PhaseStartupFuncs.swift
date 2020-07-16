@@ -32,9 +32,13 @@ extension TZPhase {
                 tempVarList.append(newVar)
             }
             else if requestedVarIDs.contains(varid) {
-                //let newVar = Variable(varid, named: dict["name"] as! String, symbol: dict["symbol"] as! String)
                 if let varCalculation = self.varCalculationsSingle[varid] {
                     let newVar = StateCalcVariable(varid, named: dict["name"] as! String, symbol: dict["symbol"] as! String, units: dict["units"] as! String, calculation: varCalculation)
+                    newVar.units = dict["units"] as! String
+                    newVar.value = [0]
+                    tempVarList.append(newVar)
+                } else if let varCalculationMulti = self.varCalculationsMultiple[varid] {
+                    let newVar = StateCalcVariable(varid, named: dict["name"] as! String, symbol: dict["symbol"] as! String, units: dict["units"] as! String, calculation: varCalculationMulti)
                     newVar.units = dict["units"] as! String
                     newVar.value = [0]
                     tempVarList.append(newVar)

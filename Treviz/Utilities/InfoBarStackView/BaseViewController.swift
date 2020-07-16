@@ -59,9 +59,14 @@ class BaseViewController : TZViewController, StackItemBody {
     }
 }
 
-class StackBaseView : NSView {
+class StackBaseView : NSVisualEffectView {
     override func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)
         //self.clear
+    }
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        material = .popover //.contentBackground
+        //blendingMode = .behindWindow
     }
 }

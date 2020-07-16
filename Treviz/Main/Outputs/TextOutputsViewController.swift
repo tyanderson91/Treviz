@@ -36,15 +36,7 @@ class TextOutputSplitViewController: TZSplitViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do view setup here.
     }
-    /*
-    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
-        if segue.identifier == .loggerViewSegue {
-            let vc = segue.destinationController as? TZMessageLoggerViewController
-            vc?.analysis = analysis
-        }
-    }*/
 }
 
 class TextOutputsViewController: TZViewController {
@@ -54,7 +46,6 @@ class TextOutputsViewController: TZViewController {
         super.viewDidLoad()
         textOutputView.string.append("Analysis results will be shown below \n")
         self.analysis.textOutputViewer = self
-        // Do view setup here.
     }
     
 }

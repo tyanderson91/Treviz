@@ -105,10 +105,6 @@ class Analysis: NSObject, Codable {
      If this function throws an error, the analysis cannot be run
      */
     func isValid() throws {
-        /*
-        for _ in self.initStateGroups.subheaders {
-            let thisValid = true
-        }*/
         if self.terminalCondition == nil { throw AnalysisError.NoTerminalCondition }
         if self.defaultTimestep <= 0 { throw AnalysisError.TimeStepError }
     }
@@ -126,8 +122,6 @@ class Analysis: NSObject, Codable {
         super.init()
         let container = try decoder.container(keyedBy: CodingKeys.self)
         name = try container.decode(String.self, forKey: .name)
-        //inputSettings = try container.decode(Array<Variable>.self, forKey: .inputSettings)
-        //TODO: convert inputSettings to just a reference to varList for variables
 
         var allConds = try container.nestedUnkeyedContainer(forKey: .conditions)
         while(!allConds.isAtEnd){
@@ -136,11 +130,6 @@ class Analysis: NSObject, Codable {
                 conditions.append(thisCond)
             }
         }
-        /*
-        do {
-            let terminalConditionName = try container.decode(String.self, forKey: .terminalCondition)
-            terminalCondition = conditions.first { $0.name == terminalConditionName }
-        }*/
         
         var allTZOutputs = try container.nestedUnkeyedContainer(forKey: .plots)
         var plotsTemp = allTZOutputs
@@ -175,22 +164,6 @@ class Analysis: NSObject, Codable {
         try container.encode(name, forKey: .name)
         try container.encode(conditions, forKey: .conditions)
         try container.encode(terminalCondition.name, forKey: .terminalCondition)
-        //let nonzerovars = (inputSettings as? [Variable])?.filter({$0.value[0] != 0 || $0.isParam})
-        //try container.encode(nonzerovars, forKey: .inputSettings)
         try container.encode(plots, forKey: .plots)
     }
-    /*
-    func loadVars(from plist: String)->[Variable] {
-        guard let varFilePath = Bundle.main.path(forResource: plist, ofType: "plist") else {return []}
-        guard let inputList = NSArray.init(contentsOfFile: varFilePath) else {return []}//return empty if filename not found
-        var initVars = Array<Variable>()
-        for thisVar in inputList {
-            guard let dict = thisVar as? NSDictionary else {return []}
-            let newVar = Variable(dict["id"] as! VariableID, named: dict["name"] as! String, symbol: dict["symbol"] as! String)
-            newVar.units = dict["units"] as! String
-            newVar.value = [0]
-            initVars.append(newVar)
-        }
-        return initVars
-    }*/
 }

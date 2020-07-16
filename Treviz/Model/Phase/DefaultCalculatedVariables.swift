@@ -11,13 +11,6 @@ import Foundation
 extension TZPhase {
     
 func loadCalculatedVars(){ //TODO: make dependent on physics type
-    /*
-    let v: StateCalcVariable = StateCalcVariable("v", named: "Velocity", symbol: "v", units: "speed", calculation: { (s: StateDictSingle) -> VarValue in
-        let x = s["dx"]!
-        let y = s["dy"]!
-        let z = s["dz"]!
-        return (x**2 + y**2 + z**2)**0.5
-    })*/
     //MARK: Single-state vars (Variables that can be calculated only with the value of other state variables at that single instance in time)
     var calcs = varCalculationsSingle
     calcs["v"] = { (s: inout StateDictSingle) -> VarValue in
@@ -62,5 +55,7 @@ func loadCalculatedVars(){ //TODO: make dependent on physics type
             mcalcs[varid] = defaultMultiCalc(varid)
         }
     }
+    
+    varCalculationsMultiple = mcalcs
 }
 }

@@ -22,12 +22,8 @@ extension Analysis {
         }
         
         guard let yamlDict = yamlObj as? [String: Any] else { return }
-        //if let inputList = try yamlListDict["Initial Variables"] as? [String: Int] {return}
-        //guard let yamlList: [[String:Any]] = getYamlObject(from: file) as? [[String : Any]] else {return}
-        //for thisYaml in yamlList {
         
         if let conditionList = yamlDict["Conditions"] as? [[String: Any]] {
-            // self.conditions = []
             for thisConditionDict in conditionList {
                 if let newCond = Condition(fromYaml: thisConditionDict, inputConditions: conditions) {
                     conditions.append(newCond)
@@ -76,23 +72,6 @@ extension Analysis {
         
         traj = State(varList)
     }
-    
-    /**
-       Returns a variable described by the yaml input key using the value(s) in the yaml value
-       - Parameter yamlObj: a Dictionary of the type [String: Any] read from a yaml file.
-       */
-    /*
-    func initVar(varID: VariableID, varStr: Any) -> Variable? {
-        //guard var thisVar = inputSettings.first(where: { $0.id == varID}) as? Variable else {return nil}
-        //TODO: convert inputSettings to just a reference to varList for variables
-        guard let thisVarIndex = inputSettings.firstIndex(where: { $0.id == varID}) else {return nil}
-        guard let thisVar = inputSettings[thisVarIndex] as? Variable else {return nil}
-        if let val = varStr as? NSNumber {
-            thisVar.value = [VarValue(truncating: val)]
-            //inputSettings[thisVarIndex] = thisVar
-            return thisVar
-        } else {return nil}
-    }*/
 
     /**
      Creates a single Output from a Dictionary of the type that a yaml file can read. keys can include name (plot name), variable (variable id), type (plot type), condition, and output type (Plot by default)

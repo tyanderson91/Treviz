@@ -38,7 +38,6 @@ class TZPhase: Codable {
     var returnCode : ReturnCode = .NotStarted
     var analysis: Analysis!
     var varList: [Variable]!
-    //var calculatedVars: [StateCalcVariable] = []
     var varCalculationsSingle = Dictionary<VariableID,(inout StateDictSingle)->VarValue>()
     var varCalculationsMultiple = Dictionary<VariableID,(inout StateDictArray)->[VarValue]>()
     var initStateGroups : InitStateHeader!
@@ -46,6 +45,7 @@ class TZPhase: Codable {
     init(id idIn: String){
         id = idIn
         setVars(physicsModel: "") // TODO: Replace with actual physics-based lookup
+        setupConstants()
     }
     
     // MARK: Codable implementation
@@ -109,7 +109,6 @@ class TZPhase: Codable {
                 if let startVal = VarValue(numeric: curVarVal) { thisVar.value = [startVal] }
             }
         }
-        // varList = varList.compactMap({$0.copyToPhase(phaseid: self.id)})
         inputSettings = varList // TODO: When more settings are introduced, expand this
         
         if let terminalConditionName = yamlDict["Terminal Condition"] as? String {

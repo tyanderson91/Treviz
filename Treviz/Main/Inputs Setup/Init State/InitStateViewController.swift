@@ -21,7 +21,6 @@ class InitStateViewController: PhasedViewController, NSOutlineViewDelegate, NSOu
         outlineView.autosaveExpandedItems = false  // TODO: Implement functions that allow this
         outlineView.autosaveName = "initStateOutlineView"
         //Load data
-        //inputVarStructure = phase.initStateGroups
         outlineView.reloadData()
     }
     
@@ -126,7 +125,6 @@ class InitStateViewController: PhasedViewController, NSOutlineViewDelegate, NSOu
         let row = outlineView.row(for: button)
         if var thisParam = outlineView.item(atRow: row) as? Parameter {
             thisParam.isParam = button.state == NSControl.StateValue.on
-            //inputsViewController?.tableViewController.params = analysis.parameters
             inputsViewController?.reloadParams()
         }
     }
