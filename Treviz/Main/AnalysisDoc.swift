@@ -22,7 +22,7 @@ enum AnalysisDocError: Error, LocalizedError {
 }
 class AnalysisDoc: NSDocument {
 
-    var analysis = Analysis()
+    var analysis : Analysis!
     // Connections to interface
     var appDelegate : AppDelegate!
     var windowController : MainWindowController! //Implicit optional, should always be assigned after initialization
@@ -31,6 +31,13 @@ class AnalysisDoc: NSDocument {
     override init() {
         super.init()
         //analysis.loadVars("InitVars")
+    }
+    
+    convenience init(type typeName: String) throws {
+        self.init()
+        let defaultPhase = TZPhase(id: "default")
+        analysis = Analysis(initPhase: defaultPhase)
+        // Rest of initialization code here
     }
     
     // MARK: NSDocument setup and read/write methods
@@ -117,7 +124,7 @@ class AnalysisDoc: NSDocument {
             
         case "public.yaml":
             //analysis.phase[0].inputSettings = analysis.varList//.compactMap { ($0.copy() as! Parameter) } // TODO: Better way to copy?
-            analysis.readFromYaml(data: data)
+            analysis = Analysis(fromYaml: data)
             analysis.name = "YAML Document"
         case "public.json":
             let decoder = JSONDecoder()

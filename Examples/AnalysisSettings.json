@@ -1,52 +1,54 @@
 {
+  "id" : "default",
   "terminalCondition" : "Terminal",
+  "propagatorType" : "explicit",
   "inputSettings" : [
-    {
-      "symbol" : "𝑡",
-      "id" : "t",
-      "isParam" : true,
-      "units" : "time",
-      "isValid" : true,
-      "value" : [
-        0
-      ],
-      "name" : "Time"
-    },
-    {
-      "symbol" : "𝑋",
-      "id" : "x",
-      "isParam" : true,
-      "units" : "distance",
-      "isValid" : true,
-      "value" : [
-        10
-      ],
-      "name" : "X pos"
-    },
-    {
-      "symbol" : "𝑑𝑋\/𝑑𝑡",
-      "id" : "dx",
-      "isParam" : false,
-      "units" : "velocity",
-      "isValid" : true,
-      "value" : [
-        100
-      ],
-      "name" : "X vel"
-    },
-    {
-      "symbol" : "𝑑𝑌\/𝑑𝑡",
-      "id" : "dy",
-      "isParam" : true,
-      "units" : "velocity",
-      "isValid" : true,
-      "value" : [
-        30
-      ],
-      "name" : "Y vel"
-    }
+	{
+	  "symbol" : "𝑡",
+	  "id" : "t",
+	  "isParam" : false,
+	  "units" : "time",
+	  "isValid" : true,
+	  "value" : [
+		0
+	  ],
+	  "name" : "Time"
+	},
+	{
+	  "symbol" : "𝑋",
+	  "id" : "x",
+	  "isParam" : false,
+	  "units" : "distance",
+	  "isValid" : true,
+	  "value" : [
+		10
+	  ],
+	  "name" : "X pos"
+	},
+	{
+	  "symbol" : "𝑑𝑋\/𝑑𝑡",
+	  "id" : "dx",
+	  "isParam" : false,
+	  "units" : "velocity",
+	  "isValid" : true,
+	  "value" : [
+		100
+	  ],
+	  "name" : "X vel"
+	},
+	{
+	  "symbol" : "𝑑𝑌\/𝑑𝑡",
+	  "id" : "dy",
+	  "isParam" : false,
+	  "units" : "velocity",
+	  "isValid" : true,
+	  "value" : [
+		30
+	  ],
+	  "name" : "Y vel"
+	}
   ],
-  "name" : "Analysis (com.tyleranderson.treviz.analysis)",
+  "name" : "Analysis (public.yaml)",
   "conditions" : [
     {
       "unionType" : 0,

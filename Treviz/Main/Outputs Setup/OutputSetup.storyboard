@@ -305,7 +305,7 @@
                             <customView horizontalHuggingPriority="50" verticalHuggingPriority="900" translatesAutoresizingMaskIntoConstraints="NO" id="LCY-Xe-aHU">
                                 <rect key="frame" x="0.0" y="0.0" width="360" height="132"/>
                                 <subviews>
-                                    <gridView xPlacement="fill" yPlacement="fill" rowAlignment="none" rowSpacing="10" columnSpacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="0r4-fO-Bow" customClass="CollapsibleGridView" customModule="Treviz" customModuleProvider="target">
+                                    <gridView horizontalHuggingPriority="500" xPlacement="fill" yPlacement="fill" rowAlignment="none" rowSpacing="10" columnSpacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="0r4-fO-Bow" customClass="CollapsibleGridView" customModule="Treviz" customModuleProvider="target">
                                         <rect key="frame" x="10" y="30" width="310" height="61"/>
                                         <rows>
                                             <gridRow id="xTk-LJ-TLb"/>
@@ -319,7 +319,7 @@
                                         <gridCells>
                                             <gridCell row="xTk-LJ-TLb" column="EoY-4L-tgo" id="fOb-6X-BMf">
                                                 <textField key="contentView" verticalHuggingPriority="750" horizontalCompressionResistancePriority="400" translatesAutoresizingMaskIntoConstraints="NO" id="mdG-QJ-vmH" userLabel="Variable label">
-                                                    <rect key="frame" x="-2" y="45" width="104" height="16"/>
+                                                    <rect key="frame" x="-2" y="45" width="145" height="16"/>
                                                     <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Variable" id="2gA-Lf-RTL">
                                                         <font key="font" metaFont="system"/>
                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -329,7 +329,7 @@
                                             </gridCell>
                                             <gridCell row="xTk-LJ-TLb" column="N7j-Oh-N6Z" id="5g0-fM-Epz">
                                                 <textField key="contentView" verticalHuggingPriority="750" horizontalCompressionResistancePriority="400" translatesAutoresizingMaskIntoConstraints="NO" id="Rgl-bL-86e" userLabel="Plot type label">
-                                                    <rect key="frame" x="118" y="45" width="95" height="16"/>
+                                                    <rect key="frame" x="159" y="45" width="54" height="16"/>
                                                     <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Plot type" id="A0H-24-9xi">
                                                         <font key="font" metaFont="system"/>
                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -349,7 +349,7 @@
                                             </gridCell>
                                             <gridCell row="aaj-xq-o1N" column="EoY-4L-tgo" id="l6z-Rw-DEs">
                                                 <containerView key="contentView" horizontalCompressionResistancePriority="50" translatesAutoresizingMaskIntoConstraints="NO" id="SXR-EZ-NMh">
-                                                    <rect key="frame" x="0.0" y="5" width="100" height="30"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="141" height="35"/>
                                                     <connections>
                                                         <outlet property="nextKeyView" destination="ZYv-Vs-iDV" id="fmX-L6-bwq"/>
                                                     </connections>
@@ -357,7 +357,7 @@
                                             </gridCell>
                                             <gridCell row="aaj-xq-o1N" column="N7j-Oh-N6Z" xPlacement="center" id="Ct3-0Z-ycF">
                                                 <popUpButton key="contentView" horizontalHuggingPriority="300" verticalHuggingPriority="750" horizontalCompressionResistancePriority="500" placeholderIntrinsicWidth="100" placeholderIntrinsicHeight="infinite" translatesAutoresizingMaskIntoConstraints="NO" id="ZYv-Vs-iDV">
-                                                    <rect key="frame" x="141" y="0.0" width="50" height="35"/>
+                                                    <rect key="frame" x="161" y="0.0" width="50" height="35"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="35" id="8f6-OT-eK4"/>
                                                         <constraint firstAttribute="width" constant="50" id="9Tr-vr-OdO"/>
@@ -546,7 +546,7 @@
                             <customView horizontalHuggingPriority="50" verticalHuggingPriority="900" translatesAutoresizingMaskIntoConstraints="NO" id="vwC-Zq-dxd">
                                 <rect key="frame" x="0.0" y="0.0" width="482" height="180"/>
                                 <subviews>
-                                    <gridView xPlacement="fill" yPlacement="center" rowAlignment="none" rowSpacing="10" columnSpacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="BZU-Nh-SXi" customClass="CollapsibleGridView" customModule="Treviz" customModuleProvider="target">
+                                    <gridView horizontalHuggingPriority="500" xPlacement="fill" yPlacement="center" rowAlignment="none" rowSpacing="10" columnSpacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="BZU-Nh-SXi" customClass="CollapsibleGridView" customModule="Treviz" customModuleProvider="target">
                                         <rect key="frame" x="10" y="16" width="432" height="123"/>
                                         <rows>
                                             <gridRow yPlacement="top" height="17" id="bE2-2R-GF6"/>
@@ -560,7 +560,7 @@
                                         <gridCells>
                                             <gridCell row="bE2-2R-GF6" column="YzB-gX-PfH" id="mFg-O9-zaY">
                                                 <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KPt-Sp-4fv" userLabel="Variable label">
-                                                    <rect key="frame" x="50" y="107" width="64" height="16"/>
+                                                    <rect key="frame" x="-2" y="107" width="134" height="16"/>
                                                     <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Variables" id="b1v-H3-Xv7">
                                                         <font key="font" metaFont="system"/>
                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -570,7 +570,7 @@
                                             </gridCell>
                                             <gridCell row="bE2-2R-GF6" column="WD8-XD-vb7" id="Qfe-Zg-j1d">
                                                 <textField key="contentView" horizontalHuggingPriority="241" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RzC-OP-BDh" userLabel="Plot type label">
-                                                    <rect key="frame" x="181" y="107" width="154" height="16"/>
+                                                    <rect key="frame" x="148" y="107" width="187" height="16"/>
                                                     <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Plot type" id="4aH-sC-AcP">
                                                         <font key="font" metaFont="system"/>
                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -590,7 +590,7 @@
                                             </gridCell>
                                             <gridCell row="pWB-9z-F1B" column="YzB-gX-PfH" xPlacement="fill" yPlacement="fill" id="0up-VI-khj">
                                                 <gridView key="contentView" horizontalHuggingPriority="200" horizontalCompressionResistancePriority="300" xPlacement="fill" yPlacement="fill" rowAlignment="none" rowSpacing="10" columnSpacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="Jko-dd-neg" userLabel="Variables grid view">
-                                                    <rect key="frame" x="0.0" y="0.0" width="163" height="96"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="130" height="96"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="130" id="HpF-DW-Dpg"/>
                                                     </constraints>
@@ -616,7 +616,7 @@
                                                         </gridCell>
                                                         <gridCell row="Si8-6o-BZs" column="pwm-8e-pyz" id="8Zg-Ts-FUz">
                                                             <containerView key="contentView" horizontalCompressionResistancePriority="50" verticalCompressionResistancePriority="800" placeholderIntrinsicWidth="100" placeholderIntrinsicHeight="23" translatesAutoresizingMaskIntoConstraints="NO" id="MLa-JO-9gj">
-                                                                <rect key="frame" x="67" y="73" width="96" height="23"/>
+                                                                <rect key="frame" x="67" y="73" width="63" height="23"/>
                                                             </containerView>
                                                         </gridCell>
                                                         <gridCell row="njf-yo-h5Y" column="Uib-WE-kTr" id="oTD-4f-feq">
@@ -631,7 +631,7 @@
                                                         </gridCell>
                                                         <gridCell row="njf-yo-h5Y" column="pwm-8e-pyz" id="HNJ-iy-sxH">
                                                             <containerView key="contentView" horizontalCompressionResistancePriority="50" translatesAutoresizingMaskIntoConstraints="NO" id="JdU-PF-wmP">
-                                                                <rect key="frame" x="67" y="33" width="96" height="30"/>
+                                                                <rect key="frame" x="67" y="33" width="63" height="30"/>
                                                             </containerView>
                                                         </gridCell>
                                                         <gridCell row="etw-kJ-k4f" column="Uib-WE-kTr" id="xbg-ld-i11">
@@ -646,7 +646,7 @@
                                                         </gridCell>
                                                         <gridCell row="etw-kJ-k4f" column="pwm-8e-pyz" id="Z55-Pe-5xw">
                                                             <containerView key="contentView" horizontalCompressionResistancePriority="50" translatesAutoresizingMaskIntoConstraints="NO" id="T2d-Uv-JIC">
-                                                                <rect key="frame" x="67" y="0.0" width="96" height="23"/>
+                                                                <rect key="frame" x="67" y="0.0" width="63" height="23"/>
                                                             </containerView>
                                                         </gridCell>
                                                     </gridCells>
@@ -654,10 +654,10 @@
                                             </gridCell>
                                             <gridCell row="pWB-9z-F1B" column="WD8-XD-vb7" xPlacement="center" id="PjV-2Y-K8y">
                                                 <stackView key="contentView" distribution="fill" orientation="vertical" alignment="centerX" spacing="7" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" verticalHuggingPriority="900" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f9M-PQ-Jth" userLabel="All plotting stack view">
-                                                    <rect key="frame" x="183" y="19" width="150" height="77"/>
+                                                    <rect key="frame" x="150" y="19" width="183" height="77"/>
                                                     <subviews>
                                                         <popUpButton horizontalHuggingPriority="200" verticalHuggingPriority="800" horizontalCompressionResistancePriority="500" placeholderIntrinsicWidth="100" placeholderIntrinsicHeight="20" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xFa-gE-G28">
-                                                            <rect key="frame" x="50" y="42" width="50" height="35"/>
+                                                            <rect key="frame" x="67" y="42" width="50" height="35"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="50" id="G0u-YW-Hb6"/>
                                                                 <constraint firstAttribute="height" constant="35" id="kKB-Gg-Aho"/>
@@ -672,10 +672,10 @@
                                                             </connections>
                                                         </popUpButton>
                                                         <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="7" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" horizontalCompressionResistancePriority="850" placeholderIntrinsicWidth="150" placeholderIntrinsicHeight="35" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="biz-TR-WrY" userLabel="Editing Output Stack View">
-                                                            <rect key="frame" x="0.0" y="0.0" width="150" height="35"/>
+                                                            <rect key="frame" x="17" y="0.0" width="150" height="35"/>
                                                             <subviews>
                                                                 <button horizontalHuggingPriority="300" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bwQ-2V-jgv" userLabel="Include Plot Checkbox">
-                                                                    <rect key="frame" x="29" y="19" width="93" height="18"/>
+                                                                    <rect key="frame" x="28" y="19" width="93" height="18"/>
                                                                     <buttonCell key="cell" type="check" title="Include plot" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="F8B-8g-wod">
                                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                         <font key="font" metaFont="system"/>
@@ -685,7 +685,7 @@
                                                                     </connections>
                                                                 </button>
                                                                 <button verticalHuggingPriority="750" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="700" translatesAutoresizingMaskIntoConstraints="NO" id="ddw-Ob-olS">
-                                                                    <rect key="frame" x="29" y="-2" width="93" height="18"/>
+                                                                    <rect key="frame" x="28" y="-2" width="93" height="18"/>
                                                                     <buttonCell key="cell" type="check" title="Include text" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="C6i-1Q-klT">
                                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                         <font key="font" metaFont="system"/>
@@ -852,7 +852,7 @@
                             <customView horizontalHuggingPriority="50" verticalHuggingPriority="900" translatesAutoresizingMaskIntoConstraints="NO" id="yNk-X1-3h2">
                                 <rect key="frame" x="0.0" y="0.0" width="465" height="174"/>
                                 <subviews>
-                                    <gridView xPlacement="center" yPlacement="center" rowAlignment="none" rowSpacing="10" columnSpacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="RGc-FN-Usb" customClass="CollapsibleGridView" customModule="Treviz" customModuleProvider="target">
+                                    <gridView horizontalHuggingPriority="500" xPlacement="center" yPlacement="center" rowAlignment="none" rowSpacing="10" columnSpacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="RGc-FN-Usb" customClass="CollapsibleGridView" customModule="Treviz" customModuleProvider="target">
                                         <rect key="frame" x="10" y="24" width="415" height="109"/>
                                         <rows>
                                             <gridRow yPlacement="top" height="17" id="UhG-kf-32J"/>
@@ -957,10 +957,10 @@
                                             </gridCell>
                                             <gridCell row="Ud2-GV-ViK" column="fTZ-d5-DS6" id="yxe-Ml-q5e">
                                                 <stackView key="contentView" distribution="fill" orientation="vertical" alignment="centerX" spacing="7" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" horizontalCompressionResistancePriority="300" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WnL-kd-uzN" userLabel="All plotting stack view">
-                                                    <rect key="frame" x="206" y="10" width="89" height="72"/>
+                                                    <rect key="frame" x="195" y="10" width="100" height="72"/>
                                                     <subviews>
                                                         <popUpButton horizontalHuggingPriority="300" verticalHuggingPriority="750" horizontalCompressionResistancePriority="50" placeholderIntrinsicWidth="70" placeholderIntrinsicHeight="20" translatesAutoresizingMaskIntoConstraints="NO" id="5aN-uW-9nW">
-                                                            <rect key="frame" x="0.0" y="42" width="50" height="30"/>
+                                                            <rect key="frame" x="25" y="42" width="50" height="30"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="50" id="AzM-6Z-5ML"/>
                                                                 <constraint firstAttribute="height" constant="30" id="iQy-Le-80Z"/>
@@ -975,7 +975,7 @@
                                                             </connections>
                                                         </popUpButton>
                                                         <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="7" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ckw-1G-5sF" userLabel="Editing Output Stack View">
-                                                            <rect key="frame" x="0.0" y="0.0" width="89" height="35"/>
+                                                            <rect key="frame" x="6" y="0.0" width="89" height="35"/>
                                                             <subviews>
                                                                 <button horizontalHuggingPriority="300" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YdW-9i-hAo" userLabel="Include Plot Checkbox">
                                                                     <rect key="frame" x="-2" y="19" width="93" height="18"/>
@@ -1040,10 +1040,6 @@
                                                             </customSpacing>
                                                         </stackView>
                                                     </subviews>
-                                                    <constraints>
-                                                        <constraint firstAttribute="trailing" secondItem="5aN-uW-9nW" secondAttribute="trailing" id="6fQ-Ra-XdV"/>
-                                                        <constraint firstItem="5aN-uW-9nW" firstAttribute="leading" secondItem="WnL-kd-uzN" secondAttribute="leading" id="wln-fm-1Xf"/>
-                                                    </constraints>
                                                     <visibilityPriorities>
                                                         <integer value="1000"/>
                                                         <integer value="1000"/>

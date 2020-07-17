@@ -11,7 +11,11 @@ import Yams
 //typealias YamlString = String
 
 extension Analysis {
-
+    convenience init(fromYaml yamldata: Data){
+        self.init()
+        self.readFromYaml(data: yamldata)
+    }
+    
     func readFromYaml(data: Data){
         var yamlObj: Any?
         do {

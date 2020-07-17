@@ -44,7 +44,6 @@ class TZPhase: Codable {
 
     init(id idIn: String){
         id = idIn
-        setVars(physicsModel: "") // TODO: Replace with actual physics-based lookup
         setupConstants()
     }
     
@@ -72,11 +71,11 @@ class TZPhase: Codable {
             }
         } )
         inputSettings = varList // TODO: When more settings are introduced, expand this
-        
+        /*
         do {
             let terminalConditionName = try container.decode(String.self, forKey: .terminalCondition)
             terminalCondition = analysis.conditions.first { $0.name == terminalConditionName }
-        }
+        }*/
     }
     
     func encode(to encoder: Encoder) throws {
@@ -88,7 +87,7 @@ class TZPhase: Codable {
             let baseVars = nonzerovars.compactMap({$0.stripPhase()})
             try container.encode(baseVars, forKey: .inputSettings)
         }
-        try container.encode(vehicle.id, forKey: .vehicleID)
+        //try container.encode(vehicle.id, forKey: .vehicleID)
     }
     
     // MARK: Yaml initiation

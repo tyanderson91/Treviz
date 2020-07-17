@@ -66,7 +66,7 @@ class StackBaseView : NSVisualEffectView {
     }
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        material = .popover //.contentBackground
+        material = .contentBackground
         //blendingMode = .behindWindow
     }
 }

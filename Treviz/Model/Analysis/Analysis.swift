@@ -56,7 +56,7 @@ class Analysis: NSObject, Codable {
     @objc var plots : [TZOutput] = []
     
     // Phase variables
-    var phases = [TZPhase(id: "default")]
+    var phases : [TZPhase] = []
     var vehicles = [Vehicle()]
     var propagatorType : PropagatorType = .explicit
     var defaultTimestep : VarValue = 0.01
@@ -98,7 +98,13 @@ class Analysis: NSObject, Codable {
     
     override init(){
         super.init()
+        phases = []
     }
+    init(initPhase phase: TZPhase){
+        super.init()
+        phases = [phase]
+    }
+    
     // Validity check prior to running
     /**
      Check whether the analysis has enough inputs defined in order to run
@@ -111,7 +117,6 @@ class Analysis: NSObject, Codable {
     // MARK: Codable implementation
     enum CodingKeys: String, CodingKey {
         case name
-        case terminalCondition
         case conditions
         case inputSettings
         case plots
@@ -128,6 +133,20 @@ class Analysis: NSObject, Codable {
             let decoder = try allConds.superDecoder()
             if let thisCond = Condition(decoder: decoder, referencing: self) {
                 conditions.append(thisCond)
+            }
+        }
+        
+        do {
+            var allPhases = try container.nestedUnkeyedContainer(forKey: .phases)
+            while(!allPhases.isAtEnd){
+                let decoder = try allPhases.superDecoder()
+                if let thisPhase = TZPhase(decoder: decoder, referencing: self) {
+                    phases.append(thisPhase)
+                }
+            }
+        } catch { // If there is only one phase assumed and its data is stored in the top level file
+            if let defaultPhase = TZPhase(decoder: decoder, referencing: self) {
+                phases = [defaultPhase]
             }
         }
         
@@ -149,21 +168,13 @@ class Analysis: NSObject, Codable {
 
             if newOutput != nil { plots.append(newOutput!) }
         }
-        
-        var allPhases = try container.nestedUnkeyedContainer(forKey: .phases)
-        while(!allPhases.isAtEnd){
-            let decoder = try allPhases.superDecoder()
-            if let thisPhase = TZPhase(decoder: decoder, referencing: self) {
-                phases.append(thisPhase)
-            }
-        }
     }
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(name, forKey: .name)
         try container.encode(conditions, forKey: .conditions)
-        try container.encode(terminalCondition.name, forKey: .terminalCondition)
         try container.encode(plots, forKey: .plots)
+        try container.encode(phases, forKey: .phases)
     }
 }
