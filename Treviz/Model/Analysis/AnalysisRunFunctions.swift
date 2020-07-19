@@ -24,9 +24,11 @@ extension Analysis {
      Called by a phase once it is finished running. This function takes care of processing the phase and kicking off any new phases, or ending the analysis once all phases are complete
      */
     func processPhase(_ phase: TZPhase) {
+        var trajArray = StateDictArray(from: phase.traj)
+        trajArray.phase = phase
         if let calcVars = phase.varList.filter({phase.requestedVarIDs.contains($0.id.baseVarID())}) as? [StateCalcVariable] {
             for thisVar in calcVars {
-                thisVar.calculate(from: phase.traj)
+                thisVar.calculate(from: &trajArray)
             }
         }
         
@@ -45,7 +47,6 @@ extension Analysis {
         self.plotOutputViewer?.clearPlots()
 
         for curOutput in plots {
-            //curOutput.loadVars(analysis: analysis)
             do { try curOutput.assertValid() }
             catch {
                 logMessage(error.localizedDescription)

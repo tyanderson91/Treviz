@@ -22,7 +22,7 @@ extension TZPhase {
         guard let varFilePath = Bundle.main.path(forResource: plist, ofType: "plist") else { return []}
         guard let inputList = NSArray.init(contentsOfFile: varFilePath) else { return []}//return empty if filename not found
         var tempVarList = Array<Variable>()
-        loadCalculatedVars()
+        loadVarCalculations()
         for thisVar in inputList {
             guard let dict = thisVar as? NSDictionary else { return []}
             guard let varid = dict["id"] as? VariableID else { continue }

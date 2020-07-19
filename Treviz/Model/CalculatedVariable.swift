@@ -12,14 +12,12 @@ import Cocoa
  This is a subclass of the Variable object that uses a State to calculate the variable values. This is the base type for any derived variables
  */
 class StateCalcVariable: Variable {
-    let temppid: String = "here"
     var singleStateCalculation: (inout StateDictSingle)->VarValue = {_ in return VarValue()}
     var multiStateCalculation: (inout StateDictArray)->[VarValue] = {_ in return [VarValue]()}
-    func calculate(from input: State) {
-        //do {
-            var array = StateDictArray(from: input)
-            value = multiStateCalculation(&array)
-        //} catch {}
+    func calculate(from input: inout StateDictArray) {
+        do {
+            value = multiStateCalculation(&input)
+        } //catch {}
     }
     
     required init(from decoder: Decoder) throws {
@@ -28,15 +26,7 @@ class StateCalcVariable: Variable {
     init(_ idIn: VariableID, named nameIn: String = "", symbol symbolIn: String = "", units unitsIn: String = "", calculation calcIn: @escaping (inout StateDictSingle)->VarValue) {
         super.init(idIn, named: nameIn, symbol: symbolIn, units: unitsIn)
         singleStateCalculation = calcIn
-        multiStateCalculation = { (stateIn: inout StateDictArray) in
-            let len = stateIn.stateLen
-            var newArray = Array(repeating: VarValue(0), count: len)
-            for i in 0...stateIn.stateLen - 1 {
-                var curState = stateIn[i]
-                newArray[i] = self.singleStateCalculation(&curState)
-            }
-            return newArray
-        }
+        multiStateCalculation = defaultMultiStateCalc(singleStateCalculation)
     }
     init(_ idIn: VariableID, named nameIn: String = "", symbol symbolIn: String = "", units unitsIn: String = "", calculation calcIn: @escaping (inout StateDictArray)->[VarValue]) {
         super.init(idIn, named: nameIn, symbol: symbolIn, units: unitsIn)
@@ -51,6 +41,7 @@ class StateCalcVariable: Variable {
             newID = phaseid + "." + self.id.baseVarID()
         }
         let newVar = StateCalcVariable(newID, named: name, symbol: symbol, units: units, calculation: singleStateCalculation)
+        newVar.multiStateCalculation = multiStateCalculation
         newVar.value = value
         return newVar
     }
