@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097.2"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -696,20 +696,20 @@
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController storyboardIdentifier="Analysis Window Controller" id="jGA-0Y-lOj" customClass="MainWindowController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
-                    <window key="window" identifier="mainWindow" title="Treviz" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="mainWindow" animationBehavior="default" id="Ckk-yw-fiv">
-                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+                    <window key="window" identifier="mainWindow" title="Treviz" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="mainWindow" animationBehavior="default" titlebarAppearsTransparent="YES" id="Ckk-yw-fiv">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" texturedBackground="YES" fullSizeContentView="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES"/>
-                        <rect key="contentRect" x="0.0" y="0.0" width="800" height="359"/>
+                        <rect key="contentRect" x="0.0" y="-63" width="800" height="422"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
-                        <toolbar key="toolbar" implicitIdentifier="99EF4609-EB63-466D-9855-35ED2BA88456" explicitIdentifier="MainToolbar" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="gC3-LF-Jn5" customClass="TZToolbar" customModule="Treviz" customModuleProvider="target">
+                        <toolbar key="toolbar" implicitIdentifier="99EF4609-EB63-466D-9855-35ED2BA88456" explicitIdentifier="MainToolbar" autosavesConfiguration="NO" showsBaselineSeparator="NO" displayMode="iconAndLabel" sizeMode="regular" id="gC3-LF-Jn5" customClass="TZToolbar" customModule="Treviz" customModuleProvider="target">
                             <allowedToolbarItems>
                                 <toolbarItem implicitItemIdentifier="NSToolbarShowColorsItem" id="Ndh-jH-KXn"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarShowFontsItem" id="aaV-pA-eJz"/>
                                 <toolbarItem implicitItemIdentifier="9637223E-3C3E-4B26-B650-92E6DE94E1D2" label="View Panes" paletteLabel="View Panes" sizingBehavior="auto" selectable="YES" id="EUF-yc-cUN">
                                     <nil key="toolTip"/>
                                     <segmentedControl key="view" wantsLayer="YES" verticalHuggingPriority="750" id="bbn-UQ-slb">
-                                        <rect key="frame" x="0.0" y="14" width="105" height="22"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <rect key="frame" x="0.0" y="14" width="83" height="20"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <segmentedCell key="cell" continuous="YES" refusesFirstResponder="YES" borderStyle="border" alignment="left" segmentDistribution="fillProportionally" style="roundRect" trackingMode="selectAny" id="2AJ-ws-GZa">
                                             <font key="font" metaFont="system" size="10"/>
                                             <segments>
@@ -726,8 +726,8 @@
                                 <toolbarItem implicitItemIdentifier="8D3393E5-C975-48A3-A5A2-A9165225D8F0" label="Conditions" paletteLabel="Conditions" sizingBehavior="auto" id="w9Z-vw-qxw">
                                     <nil key="toolTip"/>
                                     <button key="view" verticalHuggingPriority="750" id="nfV-d5-noY">
-                                        <rect key="frame" x="5" y="14" width="54" height="27"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <rect key="frame" x="11" y="14" width="42" height="23"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <buttonCell key="cell" type="roundTextured" title="(𝑥&lt;𝑦)" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="eyl-U4-WyX">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -740,8 +740,8 @@
                                 <toolbarItem implicitItemIdentifier="1084F476-9DE7-4161-ABCA-12DAACF8F1FC" label="CSYS" paletteLabel="CSYS" image="CSYS" sizingBehavior="auto" id="ErN-TL-gyx">
                                     <nil key="toolTip"/>
                                     <button key="view" verticalHuggingPriority="750" id="x3I-3P-jWu">
-                                        <rect key="frame" x="1" y="14" width="35" height="25"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <rect key="frame" x="6" y="14" width="26" height="23"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="CSYS" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="RhO-Tx-rVP">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" size="13" name="STIXGeneral-Regular"/>
@@ -751,8 +751,8 @@
                                 <toolbarItem implicitItemIdentifier="18578E62-C79C-4524-BDB2-6547F2266897" label="Vectors" paletteLabel="Vectors" sizingBehavior="auto" id="qt5-nR-d1k">
                                     <nil key="toolTip"/>
                                     <button key="view" verticalHuggingPriority="750" id="8Kr-nK-8Tr">
-                                        <rect key="frame" x="2" y="14" width="44" height="25"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <rect key="frame" x="13" y="14" width="23" height="23"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <buttonCell key="cell" type="roundTextured" title="↗︎" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="dBm-IX-ZyB">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" size="13" name="PingFangSC-Light"/>
@@ -762,8 +762,8 @@
                                 <toolbarItem implicitItemIdentifier="AE30FD21-EB34-403E-9B5B-102D4541E712" label="Variables" paletteLabel="Variables" sizingBehavior="auto" id="9xe-rC-K55" userLabel="Variables">
                                     <nil key="toolTip"/>
                                     <button key="view" verticalHuggingPriority="750" id="y45-d9-Yh4">
-                                        <rect key="frame" x="4" y="14" width="49" height="25"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <rect key="frame" x="17" y="14" width="22" height="23"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <buttonCell key="cell" type="roundTextured" title="𝒳" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="7mf-ck-s9H">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" size="13" name="STIXGeneral-Regular"/>
@@ -773,8 +773,8 @@
                                 <toolbarItem implicitItemIdentifier="2147365F-2DD7-4C62-A655-FAF13FA8F180" label="Run Analysis" paletteLabel="Run Analysis" sizingBehavior="auto" id="ClC-Qq-Amg">
                                     <nil key="toolTip"/>
                                     <button key="view" verticalHuggingPriority="750" id="k0d-C9-zla">
-                                        <rect key="frame" x="22" y="14" width="31" height="25"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
+                                        <rect key="frame" x="28" y="14" width="19" height="23"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <buttonCell key="cell" type="roundTextured" title="▶︎" alternateTitle="Run Analysis" bezelStyle="texturedRounded" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ytv-0c-3b4">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="message" size="11"/>
@@ -813,7 +813,7 @@
                 </windowController>
                 <customObject id="6f7-a7-6o1" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-637" y="438.5"/>
+            <point key="canvasLocation" x="-637" y="467"/>
         </scene>
         <!--Main Split View Controller-->
         <scene sceneID="fLq-qX-0gB">

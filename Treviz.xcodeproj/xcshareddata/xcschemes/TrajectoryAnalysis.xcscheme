@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1150"
+   LastUpgradeVersion = "1160"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "CDD5049122252AF900B29751"
-               BuildableName = "Treviz.app"
-               BlueprintName = "Treviz"
+               BlueprintIdentifier = "CDFAD0E823EA84EB00CE7424"
+               BuildableName = "TrajectoryAnalysis.framework"
+               BlueprintName = "TrajectoryAnalysis"
                ReferencedContainer = "container:Treviz.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -37,33 +37,8 @@
             BlueprintName = "TrajectoryAnalysis"
             ReferencedContainer = "container:Treviz.xcodeproj">
          </BuildableReference>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CDD5049122252AF900B29751"
-            BuildableName = "Treviz.app"
-            BlueprintName = "Treviz"
-            ReferencedContainer = "container:Treviz.xcodeproj">
-         </BuildableReference>
       </CodeCoverageTargets>
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "CD0F010F23656B7200C920AA"
-               BuildableName = "TrevizTests.xctest"
-               BlueprintName = "TrevizTests"
-               ReferencedContainer = "container:Treviz.xcodeproj">
-            </BuildableReference>
-            <SkippedTests>
-               <Test
-                  Identifier = "OutputSetupViewTest">
-               </Test>
-               <Test
-                  Identifier = "TrevizTests/testPerformanceExample()">
-               </Test>
-            </SkippedTests>
-         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
@@ -76,16 +51,6 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CDD5049122252AF900B29751"
-            BuildableName = "Treviz.app"
-            BlueprintName = "Treviz"
-            ReferencedContainer = "container:Treviz.xcodeproj">
-         </BuildableReference>
-      </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -93,16 +58,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CDD5049122252AF900B29751"
-            BuildableName = "Treviz.app"
-            BlueprintName = "Treviz"
+            BlueprintIdentifier = "CDFAD0E823EA84EB00CE7424"
+            BuildableName = "TrajectoryAnalysis.framework"
+            BlueprintName = "TrajectoryAnalysis"
             ReferencedContainer = "container:Treviz.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

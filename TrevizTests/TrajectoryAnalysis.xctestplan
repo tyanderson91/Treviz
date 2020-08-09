@@ -1,0 +1,30 @@
+{
+  "configurations" : [
+    {
+      "id" : "FFEB70C9-779F-491F-95CF-EA866FC6B81E",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "skippedTests" : [
+        "CalcsTest",
+        "OutputSetupViewTest",
+        "TrevizTests"
+      ],
+      "target" : {
+        "containerPath" : "container:Treviz.xcodeproj",
+        "identifier" : "CD0F010F23656B7200C920AA",
+        "name" : "TrevizTests"
+      }
+    }
+  ],
+  "version" : 1
+}

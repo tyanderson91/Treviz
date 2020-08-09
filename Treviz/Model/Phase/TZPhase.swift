@@ -28,9 +28,9 @@ class TZPhase: Codable {
     var propagatorType : PropagatorType = .explicit
     var defaultTimestep : VarValue = 0.1
     var inputSettings : [Parameter] = []
-    var initState: StateDictSingle { return traj[0] }
+    var initState: StateDictSingle { return varList[0] }
     weak var terminalCondition : Condition!
-    var traj: State!
+    var traj: StateDictArray!
     var requiredVarIDs: [VariableID] = []
     var requestedVarIDs: [VariableID] = ["v", "a"]
     var progressReporter: AnalysisProgressReporter?

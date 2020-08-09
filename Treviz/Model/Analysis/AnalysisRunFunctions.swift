@@ -24,8 +24,7 @@ extension Analysis {
      Called by a phase once it is finished running. This function takes care of processing the phase and kicking off any new phases, or ending the analysis once all phases are complete
      */
     func processPhase(_ phase: TZPhase) {
-        var trajArray = StateDictArray(from: phase.traj)
-        trajArray.phase = phase
+        var trajArray = phase.traj!
         if let calcVars = phase.varList.filter({phase.requestedVarIDs.contains($0.id.baseVarID())}) as? [StateCalcVariable] {
             for thisVar in calcVars {
                 thisVar.calculate(from: &trajArray)

@@ -89,12 +89,30 @@ struct StateDictArray: Collection, ExpressibleByDictionaryLiteral {
     }
     
     subscript(_ index: Int)->StateDictSingle {
-        var returnDict = StateDictSingle()
-        for (thisVarID, thisVarVal) in self {
-            // TODO: Once Units are implemented, assert that all input variables use standard metric units
-            returnDict[thisVarID] = thisVarVal[index]
+        get {
+            var returnDict = StateDictSingle()
+            for (thisVarID, thisVarVal) in self {
+                // TODO: Once Units are implemented, assert that all input variables use standard metric units
+                returnDict[thisVarID] = thisVarVal[index]
+            }
+            return returnDict
         }
-        return returnDict
+        set (newState) {
+            for (thisVarID, _) in self {
+                self[thisVarID, index] = newState[thisVarID]
+            }
+        }
+    }
+    subscript(_ varid: VariableID, index: Int)->VarValue? {
+        mutating get {
+            guard let thisVar = self[varid] else { return nil }
+            if index < thisVar.count { return thisVar[index] }
+            else { return nil }
+        }
+        set {
+            guard newValue != nil else {return}
+            self[varid]?.insert(newValue!, at: index)
+        }
     }
 }
 

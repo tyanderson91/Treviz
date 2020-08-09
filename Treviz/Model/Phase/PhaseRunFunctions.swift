@@ -14,16 +14,18 @@ extension TZPhase {
         for thisVar in self.varList { // Delete all data except for initial state
             if thisVar.value.count > 1 { thisVar.value.removeLast(thisVar.value.count - 1) }
         }
-        traj = self.varList.compactMap({$0.stripPhase()})
-        traj = traj.filter({self.requiredVarIDs.contains($0.id)})
+        let baseVars1 = self.varList.compactMap({$0.stripPhase()})
+        let baseVars = baseVars1.filter({self.requiredVarIDs.contains($0.id)})
+        //traj
+        traj = StateDictArray(from: baseVars, at: 0)
         
         let dt : VarValue = defaultTimestep
         
-        let initState = StateDictSingle(from: traj, at: 0)
+        let initState = traj[0]
         self.terminalCondition.reset(initialState: initState)
         self.returnCode = .NotStarted
         
-        traj["mtot",0] = 10.0
+        traj["mtot", 0] = 10.0
         isRunning = true
         var i = 0
         while self.isRunning {
@@ -39,16 +41,22 @@ extension TZPhase {
             self.traj[i] = newState
             
             let curtraj = self.traj![i]
-            self.isRunning = !self.terminalCondition.evaluateStateArray(curtraj)
+            do { self.isRunning = try !self.terminalCondition.evaluateSingleState(curtraj) }
+            catch {
+                self.isRunning = false
+                analysis.logMessage("Error trying to evaluate terminal condition: \(error)")
+            }
             
             if !self.isRunning {
                 self.returnCode = .Success
             }
             
             DispatchQueue.main.async {
-                let curIndex = self.traj["t"].value.count - 2
-                let curState = self.traj[curIndex]
-                self.progressReporter?.updateProgress(at: curState)
+                //let t = self.traj["t"]
+                //var curIndex = t!.count - 2
+                //curIndex = curIndex < 0 ? 0 : curIndex
+                //let curState = self.traj[curIndex]
+                //self.progressReporter?.updateProgress(at: curState)
             }
         }
 

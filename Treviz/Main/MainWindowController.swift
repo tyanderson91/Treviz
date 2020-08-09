@@ -70,7 +70,7 @@ class MainWindowController: NSWindowController, AnalysisProgressReporter {
     func startProgressTracking(){
         self.terminalCondition = analysis.terminalCondition!
         analysisProgressBar?.isHidden = false
-        toolbar.toggleAnalysisRun.title = "■"
+        toolbar.toggleAnalysisRun.image = NSImage(named: "stop.fill")
     }
     func endProgressTracking(){
         analysisProgressBar?.isHidden = true
@@ -78,8 +78,8 @@ class MainWindowController: NSWindowController, AnalysisProgressReporter {
     
     func completeAnalysis(){ // Runs when the analysis has terminated
         analysis.isRunning = false
-        toolbar.toggleAnalysisRun.title = "►"
-        
+        toolbar.toggleAnalysisRun.image = NSImage(named: "play.fill")
+
         guard let outputSplitVC = viewController.mainSplitViewController.outputsViewController.outputSplitViewController else { return }
         let plotTabViewIndex = outputSplitVC.viewerTabViewController.tabView.indexOfTabViewItem(withIdentifier: "plotterTabViewItem")
         outputSplitVC.viewerTabViewController.tabView.selectTabViewItem(at: plotTabViewIndex)

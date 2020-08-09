@@ -10,14 +10,14 @@ import Foundation
 import Cocoa
 
 /**
- EvaluateCondition is a protocol that is adopted by bothe the Condition and SingleCondition classes. The basic feature is that it can read a state and determine whether it meets a given condition based on some predefined rules
+ EvaluateCondition is a protocol that is adopted by both the Condition and SingleCondition classes. The basic feature is that it can read a state and determine whether it meets a given condition based on some predefined rules
  */
 protocol EvaluateCondition : Codable, NSCopying {
     /**
      Evaluate a trajectory (state) by the condition. Stores the result in the condition's "meetsCondition"
      */
     func evaluateState(_ state: State)
-    func evaluateStateArray(_ singleState: StateDictSingle)->Bool
+    func evaluateSingleState(_ singleState: StateDictSingle) throws->Bool
     /**
      Reset all temporary variables to prepare condition to be used at the start of an analysis
      */
@@ -46,7 +46,7 @@ enum BoolType : Int, Codable {
     init?(_ input: String) {
         let stringDict : Dictionary<String, BoolType> = ["single": .single, "and": .and, "or": .or, "nor": .nor, "nand": .nand, "xor": .xor, "xnor": .xnor]
         if let type = stringDict[input] { self = type }
-        else { return nil}
+        else { return nil }
     }
 }
 
@@ -112,17 +112,18 @@ class SingleCondition: EvaluateCondition, Codable {
                 ubound = nil
                 setTests()
            } } }
-    var meetsCondition : [Bool]?
+    var meetsCondition : [Bool]? // Temporary storage for the result of the condition evaluation
     var summary: String {
         var dstring = ""
+        let varstr =  "\(varID!)"
         if equality != nil {
-            dstring = "\(varID ?? "")=\(equality!)"
+            let eqstring = String(format: "%g", arguments: [equality!])
+            dstring = "\(varstr) = \(eqstring)"
         } else if let sc = specialCondition {
-            dstring = String(describing: sc) + " \(varID ?? "")"
+            dstring = String(describing: sc) + " \(varstr)"
         } else if lbound != nil || ubound != nil {
-            let varstr = "\(varID ?? "")"
-            let ubstr = ubound == nil ? "" : " < \(ubound!)"
-            let lbstr = lbound == nil ? "" : "\(lbound!)"
+            let ubstr = ubound == nil ? "" : " < \(String(format: "%g", arguments: [ubound!]))"
+            let lbstr = lbound == nil ? "" : "\(String(format: "%g", arguments: [lbound!]))"
             let lbCompareStr = lbstr == "" ? "" : " < "
             if ubstr == "" {
                 dstring = varstr + " > " + lbstr
@@ -141,11 +142,9 @@ class SingleCondition: EvaluateCondition, Codable {
         if let spc = specialCondition {
             if spc == .localMin {
                 tests = [{ $0 < $1! && $0 < $2! }]
-                //_tests = [{ self.nextState < $0 && self.nextState < self.previousState}]
             }
             if spc == .localMax {
                 tests = [{ $0 > $1! && $0 > $2! }]
-                //_tests = [{ self.nextState > $0 && self.nextState > self.previousState}]
             }
         } else if let eq = equality {
             tests = [{ ($0-eq).sign != ($2!-eq).sign }]
@@ -176,7 +175,7 @@ class SingleCondition: EvaluateCondition, Codable {
         ubound = upperBound
         equality = eq
         specialCondition = spc
-        //setTests()
+        setTests()
     }
     
     // MARK: Codable implementation
@@ -199,6 +198,7 @@ class SingleCondition: EvaluateCondition, Codable {
     }
     
     // Evaluation functions
+    
     func evaluateState(_ state: State){
         let thisVariable = state[varID]
         meetsCondition = Array(repeating: false, count: thisVariable.value.count)
@@ -230,7 +230,7 @@ class SingleCondition: EvaluateCondition, Codable {
                     let tv = thisVal
                     let ns = self.nextState
                     let ps = self.previousState
-                    isCondition = isCondition && curTest(tv, ns ?? nil, ps)//thisTest(thisVal, self.nextState, self.previousState)
+                    isCondition = isCondition && curTest(tv, ns ?? nil, ps)
                 }
                 if isCondition {
                     meetsCondition![i] = true
@@ -239,27 +239,37 @@ class SingleCondition: EvaluateCondition, Codable {
             }
         }
     }
-    func evaluateStateArray(_ singleState: StateDictSingle)->Bool{ // TODO: figure out exactly which versions are being used
+    
+    func evaluateSingleState(_ singleState: StateDictSingle) throws->Bool{
         let thisVal = singleState[varID]!
         var isCondition = true
-        
         if specialCondition == .localMin || specialCondition == .localMax {
+            guard previousState != nil else { throw ConditionError.unsetPreviousValue }
+            guard nextState != nil else { throw ConditionError.unsetNextValue }
             let oldState = nextState!
             nextState = thisVal
             isCondition = tests[0](oldState, self.nextState, self.previousState)
+            previousState = oldState
         } else if equality != nil {
+            guard previousState != nil else { throw ConditionError.unsetPreviousValue }
+            //guard nextState != nil else { throw ConditionError.unsetNextValue }
             isCondition = isCondition && tests[0](thisVal, self.nextState, self.previousState)
             previousState = thisVal
-        } else {
+        } else if ubound != nil || lbound != nil {
             for thisTest in tests {
                 isCondition = isCondition && thisTest(thisVal, self.nextState, self.previousState)
             }
+        } else if specialCondition == .globalMin || specialCondition == .globalMax {
+            throw ConditionError.singleGlobalEvaluation
         }
         return isCondition
     }
 
     func reset(initialState: StateDictSingle? = nil){
-        if initialState != nil {
+        if initialState == nil {
+            previousState = nil
+            nextState = nil
+        } else {
             let thisVal = initialState![varID]
             previousState = thisVal
             nextState = thisVal
@@ -280,7 +290,6 @@ class SingleCondition: EvaluateCondition, Codable {
     // MARK: NSCopying
     func copy(with zone: NSZone? = nil) -> Any {
         let copy = SingleCondition(self.varID, upperBound: self.ubound, lowerBound: self.lbound, equality: self.equality, specialCondition: self.specialCondition)
-        //copy.setTests()
         return copy
     }
 }
@@ -293,7 +302,7 @@ class Condition : EvaluateCondition, Codable {
     @objc var name : String = ""
     var conditions : [EvaluateCondition] = []
     var unionType : BoolType = .single
-    var meetsCondition : [Bool]? // TODO: Move this out of the Conditions object
+    var meetsCondition : [Bool]? // TODO: Move this out of the Conditions object?
     var meetsConditionIndex : [Int] { // Converts array of bools into indices
         var i = 0
         var indices = [Int]()
@@ -456,7 +465,6 @@ class Condition : EvaluateCondition, Codable {
         
     }
     
-    
     func comparator(_ num1: Bool, _ num2: Bool)->Bool {
         switch unionType {
         case .single: return num1
@@ -472,7 +480,7 @@ class Condition : EvaluateCondition, Codable {
     /**
      Compares two different boolean lists againts each other. These lists are representative of particular conditions being met across a trajectory. If only a single list is passed (list2), it simly returns that list
      */
-    func compareLists(_ list1: [Bool]?, _ list2: [Bool])->[Bool]{
+    private func compareLists(_ list1: [Bool]?, _ list2: [Bool])->[Bool]{
         if list1 == nil{  // If only one list is input (e.g.
             return list2
         }
@@ -494,13 +502,15 @@ class Condition : EvaluateCondition, Codable {
         }
     }
 
-    func evaluateStateArray(_ singleState: StateDictSingle)->Bool {
-        var curMeetsCondition = conditions[0].evaluateStateArray(singleState)
-        for thisCondition in conditions.dropFirst(){
-            let thisMeetsCondition = thisCondition.evaluateStateArray(singleState)
-            curMeetsCondition = comparator(curMeetsCondition, thisMeetsCondition)
-        }
-        return curMeetsCondition
+    func evaluateSingleState(_ singleState: StateDictSingle) throws->Bool {
+        do {
+            var curMeetsCondition = try conditions[0].evaluateSingleState(singleState)
+            for thisCondition in conditions.dropFirst(){
+                let thisMeetsCondition = try thisCondition.evaluateSingleState(singleState)
+                curMeetsCondition = comparator(curMeetsCondition, thisMeetsCondition)
+            }
+            return curMeetsCondition
+            } catch { throw error }
     }
 
     func reset(initialState: StateDictSingle? = nil){
@@ -564,4 +574,7 @@ class Condition : EvaluateCondition, Codable {
 
 enum ConditionError: Error {
     case InvalidComparison(_ message: String)
+    case unsetPreviousValue
+    case unsetNextValue
+    case singleGlobalEvaluation
 }

@@ -58,10 +58,10 @@ class TZToolbar: NSToolbar {
     
     init(){
         toggleAnalysisRun.label = "Run Analysis"
-        toggleAnalysisRun.title = "▶︎"
-        toggleAnalysisRun.button.font = NSFont(name: "Menu", size: 11)
+        toggleAnalysisRun.button.image = NSImage(named: "play.fill")
         
         conditionsButton.label = "Conditions"
+        conditionsButton.image = NSImage()
         conditionsButton.title = "(𝑥<𝑦)"
         
         variablesButton.label = "Variables"
@@ -97,6 +97,8 @@ class TZToolbar: NSToolbar {
         }
         showWindowPanes.view = showHidePanesControl
         showWindowPanes.label = "Show/Hide Panes"
+        
+        self.showsBaselineSeparator = false
     }
     
 }
@@ -114,6 +116,7 @@ extension MainWindowController: NSToolbarDelegate {
         toolbar.conditionsButton.action = #selector(self.showConditions(_:))
         toolbar.showHidePanesControl.target = self
         toolbar.showHidePanesControl.action = #selector(self.showHidePanesClicked1)
+        //
     }
     
     @objc func showConditions(_ sender: Any){
@@ -172,12 +175,12 @@ extension MainWindowController: NSToolbarDelegate {
     @objc func runAnalysisClicked(_ sender: Any) {
         if let asys = self.contentViewController?.representedObject as? Analysis {
             if asys.isRunning{
-                toolbar.toggleAnalysisRun.title = "►"
+                toolbar.toggleAnalysisRun.image = NSImage(named: "play.fill")
                 asys.isRunning = false
                 self.endProgressTracking()
             }
             else {
-                toolbar.toggleAnalysisRun.title = "■"
+                toolbar.toggleAnalysisRun.image = NSImage(named: "stop.fill")
                 viewController.analysisProgressBar.doubleValue = analysis.pctComplete
                 _ = asys.runAnalysis()
             }
@@ -224,12 +227,12 @@ extension MainWindowController: NSToolbarDelegate {
     @IBAction func runAnalysisClicked(_ sender: Any) {
         if let asys = self.contentViewController?.representedObject as? Analysis {
             if asys.isRunning{
-                runButton.title = "►"
+                runButton.image = NSImage(named: "play.fill")
                 asys.isRunning = false
-                DistributedNotificationCenter.default().post(name: .didFinishRunningAnalysis, object: nil)
+                /*DistributedNotificationCenter.default().post(name: .didFinishRunningAnalysis, object: nil)*/
             }
             else {
-                runButton.title = "■"
+                runButton.image = NSImage(named: "stop.fill")
                 viewController.analysisProgressBar.doubleValue = analysis.pctComplete
                 _ = asys.runAnalysis()
             }

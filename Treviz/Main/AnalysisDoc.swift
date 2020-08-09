@@ -57,8 +57,8 @@ class AnalysisDoc: NSDocument {
         }
         windowController.contentViewController = mainVC
         window.contentView = mainVC.view
-        
-        DistributedNotificationCenter.default.addObserver(windowController as Any, selector: #selector(windowController.completeAnalysis), name: .didFinishRunningAnalysis, object: nil)
+        /*
+        DistributedNotificationCenter.default.addObserver(windowController as Any, selector: #selector(windowController.completeAnalysis), name: .didFinishRunningAnalysis, object: nil)*/
         //window.standardWindowButton(NSWindow.ButtonType.closeButton)!.isHidden = true
 
         #else
@@ -69,6 +69,8 @@ class AnalysisDoc: NSDocument {
             //window.contentViewController = mainVC
             window.contentView = mainVC.view
             window.titleVisibility = .visible
+            //window.titlebarAppearsTransparent = true
+            //window.tat
             windowController = MainWindowController(window: window)
             windowController.createToolbar()
             

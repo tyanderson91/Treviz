@@ -40,6 +40,7 @@ extension State {
     }
     
     //Subscripts by condition
+    
     subscript(varIDs: [VariableID], condition: Condition) -> [VariableID: [VarValue]]? {
         // Note that this subscript take some time to collect, since by default it will evaluate the condition
         var output = [VariableID: [VarValue]]()
@@ -76,10 +77,10 @@ extension State {
         return self[self, condition]
     }
     
-    func updateFromDict(traj: State){
-        for trajVar in traj {
-            if let thisVar = self.first(where: {$0.id.baseVarID() == trajVar.id}) {
-                thisVar.value = trajVar.value
+    func updateFromDict(traj: StateDictArray){
+        for (varid, varval) in traj {
+            if let thisVar = self.first(where: {$0.id.baseVarID() == varid}) {
+                thisVar.value = varval
             }
         }
     }

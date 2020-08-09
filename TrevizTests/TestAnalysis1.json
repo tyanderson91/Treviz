@@ -1,0 +1,196 @@
+{
+  "id" : "default",
+  "terminalCondition" : "Terminal",
+  "propagatorType" : "explicit",
+  "inputSettings" : [
+	{
+	  "symbol" : "𝑡",
+	  "id" : "t",
+	  "isParam" : false,
+	  "units" : "time",
+	  "isValid" : true,
+	  "value" : [
+		0
+	  ],
+	  "name" : "Time"
+	},
+	{
+	  "symbol" : "𝑋",
+	  "id" : "x",
+	  "isParam" : false,
+	  "units" : "distance",
+	  "isValid" : true,
+	  "value" : [
+		10
+	  ],
+	  "name" : "X pos"
+	},
+	{
+	  "symbol" : "𝑑𝑋\/𝑑𝑡",
+	  "id" : "dx",
+	  "isParam" : false,
+	  "units" : "velocity",
+	  "isValid" : true,
+	  "value" : [
+		100
+	  ],
+	  "name" : "X vel"
+	},
+	{
+	  "symbol" : "𝑑𝑌\/𝑑𝑡",
+	  "id" : "dy",
+	  "isParam" : false,
+	  "units" : "velocity",
+	  "isValid" : true,
+	  "value" : [
+		30
+	  ],
+	  "name" : "Y vel"
+	}
+  ],
+  "name" : "Analysis (public.yaml)",
+  "conditions" : [
+    {
+      "unionType" : 0,
+      "singleConditions" : [
+        {
+          "varID" : "y",
+          "ubound" : -0.10000000149011612
+        }
+      ],
+      "name" : "Ground Impact",
+      "conditions" : [
+
+      ]
+    },
+    {
+      "unionType" : 0,
+      "singleConditions" : [
+        {
+          "varID" : "t",
+          "equality" : 10
+        }
+      ],
+      "name" : "Final time",
+      "conditions" : [
+
+      ]
+    },
+    {
+      "unionType" : 0,
+      "singleConditions" : [
+        {
+          "varID" : "x",
+          "lbound" : 100
+        }
+      ],
+      "name" : "Too far",
+      "conditions" : [
+
+      ]
+    },
+    {
+      "unionType" : 1,
+      "singleConditions" : [
+
+      ],
+      "name" : "TerminalTest",
+      "conditions" : [
+        "Ground Impact",
+        "Final time"
+      ]
+    },
+    {
+      "unionType" : 4,
+      "singleConditions" : [
+
+      ],
+      "name" : "NestedTest",
+      "conditions" : [
+        "TerminalTest",
+        "Too far"
+      ]
+    },
+    {
+      "unionType" : 0,
+      "singleConditions" : [
+        {
+          "varID" : "y",
+          "specialCondition" : 0
+        }
+      ],
+      "name" : "Apogee",
+      "conditions" : [
+
+      ]
+    },
+    {
+      "unionType" : 2,
+      "singleConditions" : [
+
+      ],
+      "name" : "Terminal",
+      "conditions" : [
+        "Ground Impact",
+        "Final time"
+      ]
+    }
+  ],
+  "plots" : [
+    {
+      "catVar" : null,
+      "var2" : null,
+      "outputType" : "text",
+      "id" : 1,
+      "condition" : "Terminal",
+      "title" : "X pos",
+      "var3" : null,
+      "plotTypeID" : "singlevalue",
+      "var1" : "x"
+    },
+    {
+      "catVar" : null,
+      "var2" : null,
+      "outputType" : "text",
+      "id" : 2,
+      "condition" : "Terminal",
+      "title" : "Final time",
+      "var3" : null,
+      "plotTypeID" : "singlevalue",
+      "var1" : "t"
+    },
+    {
+      "catVar" : null,
+      "var2" : "t",
+      "outputType" : "plot",
+      "id" : 3,
+      "condition" : null,
+      "title" : "Traj2",
+      "var3" : null,
+      "plotTypeID" : "1line2d",
+      "var1" : "y"
+    },
+    {
+      "catVar" : null,
+      "var2" : "y",
+      "outputType" : "plot",
+      "id" : 4,
+      "condition" : null,
+      "title" : "Traj",
+      "var3" : null,
+      "plotTypeID" : "1line2d",
+      "var1" : "x"
+    },
+    {
+      "catVar" : null,
+      "var2" : null,
+      "outputType" : "text",
+      "id" : 5,
+      "condition" : "Apogee",
+      "title" : "Apogee range",
+      "var3" : null,
+      "plotTypeID" : "singlevalue",
+      "var1" : "x"
+    }
+  ]
+}

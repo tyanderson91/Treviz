@@ -34,7 +34,7 @@ class InputsViewController: TZViewController, NSTableViewDataSource, NSTableView
         // Load and install all the view controllers from our storyboard in the following order.
         let storyboard = NSStoryboard(name: "Inputs", bundle: nil)
         settingsViewController = storyboard.instantiateController(identifier: "SettingsViewController") { aCoder in
-            SettingsViewController(coder: aCoder, analysis: self.analysis)
+            SettingsViewController(coder: aCoder, analysis: self.analysis, phase: self.analysis.phases[0])
         }
         stack.addViewController(settingsViewController)
         //let settingsViewController = (stack.addViewController(fromStoryboardId: "Inputs", withIdentifier: "SettingsViewController", analysis: analysis) as! SettingsViewController)

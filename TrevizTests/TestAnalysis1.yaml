@@ -46,15 +46,15 @@ Outputs:
     condition: terminal
     output type: text
   - id: 3
-    title: Traj
-    variable1: x
-    variable2: y
-    plot type: 2 Var along Trajectory
-    output type: plot
-  - id: 4
     title: Traj2
     variable1: y
     variable2: t
+    plot type: 2 Var along Trajectory
+    output type: plot
+  - id: 4
+    title: Traj
+    variable1: x
+    variable2: y
     plot type: 2 Var along Trajectory
     output type: plot
   - id: 5
