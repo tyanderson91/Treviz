@@ -112,6 +112,10 @@ struct StateDictArray: Collection, ExpressibleByDictionaryLiteral {
         set {
             guard newValue != nil else {return}
             self[varid]?.insert(newValue!, at: index)
+            /*guard let thisVar = self[varid] else {return}
+            if index < thisVar.count {
+                self[varid]!.insert(newValue!, at: index)
+            }*/
         }
     }
 }
@@ -168,22 +172,4 @@ struct StateDictSingle: Collection, ExpressibleByDictionaryLiteral {
             self[thisVar.id] = thisVar.value[index]
         }
     }
-}
-
-extension State {
-    subscript(index: Int) -> StateDictSingle {
-        get {
-            return StateDictSingle(from: self, at: index)
-        }
-        set (newDict) {
-            var i = 0
-            for (thisKey, thisVal) in newDict {
-                if let thisVar = self.first(where: { $0.id == thisKey }){
-                    thisVar[index] = thisVal
-                    i += 1
-                }
-            }
-        }
-    }
-    
 }

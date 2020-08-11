@@ -207,9 +207,9 @@ class TZOutput : NSObject, Codable {
             if var3 != nil { lineSet.var3 = condStates[var3!.id]! }
             return lineSet
         } else if categoryVar == nil {
-            if var1 != nil { lineSet.var1 = curTraj[var1!.id].value }
-            if var2 != nil { lineSet.var2 = curTraj[var2!.id].value }
-            if var3 != nil { lineSet.var3 = curTraj[var3!.id].value }
+            if var1 != nil { lineSet.var1 = curTraj[var1!.id]?.value }
+            if var2 != nil { lineSet.var2 = curTraj[var2!.id]?.value }
+            if var3 != nil { lineSet.var3 = curTraj[var3!.id]?.value }
             return lineSet
         } else { return nil } // TODO: Implement category variables
     }

@@ -30,7 +30,7 @@ extension VariableID {
     }
     func phasename()->String {
         let strparts = self.split(separator: ".")
-        return String(strparts[0])
+        return strparts.count >= 2 ? String(strparts[0]) : ""
     }
     func atPhase(_ phase: String)->String {
         return phase + "." + self
@@ -78,23 +78,13 @@ class Variable : Parameter, Codable, Hashable {
         }
     }
     
-    subscript(condition: Condition)->[VarValue]?{
-        var output : [VarValue] = []
-        let conditionIndices = condition.meetsConditionIndex
-        guard self.value.count == conditionIndices.count else {return nil}
-        for thisIndex in conditionIndices {
-            output.append(self.value[thisIndex])
-        }
-        return output
-    }
-    
     func copyToPhase(phaseid: String)->Variable {
         var newID: VariableID = ""
         if !self.id.contains(".") {
             newID = phaseid + "." + self.id
-        } else {
+        } /*else {
             newID = phaseid + "." + self.id.baseVarID()
-        }
+        }*/
         let newVar = Variable(newID, named: name, symbol: symbol, units: units)
         newVar.value = value
         return newVar

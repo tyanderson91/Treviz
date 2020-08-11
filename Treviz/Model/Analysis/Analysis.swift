@@ -67,7 +67,9 @@ class Analysis: NSObject, Codable {
         }
         return tempSettings
     }
-    var initState: StateDictSingle { return traj[0] }
+    var initState: StateDictSingle {
+        get { return StateDictSingle(from: self.traj, at: 0) }
+    }
     weak var terminalCondition : Condition! {
         get { return phases[0].terminalCondition }
         //set { phases[0].}

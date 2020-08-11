@@ -17,25 +17,31 @@ typealias State = Array<Variable>
 extension State {
 
     // Subscripts by variable
-    subscript(_ varID: VariableID) -> Variable {
+    subscript(_ varID: VariableID) -> Variable? {
         get {
-            let thisVar = self.first(where: {$0.id == varID})!
+            let thisVar = self.first(where: {$0.id == varID})
             return thisVar
+            //if let thisVar = self.first(where: {$0.id == varID})
+            //{ return thisVar } else { return nil }
         }
-        set {
-            let index = self.firstIndex(where: {$0.id == varID})!
-            self[index] = newValue
+        set (newVal) {
+            guard newVal != nil else { return }
+            if let index = self.firstIndex(where: {$0.id == varID})
+            { self[index] = newVal! } else { self.append(newVal!) }
         }
     }
     
     subscript(_ varID: VariableID, index: Int) -> VarValue? {
         get {
-            let thisVar = self[varID]
+            //let thisVar = self[varID]
+            guard let thisVar = self[varID] else {return nil}
             if let thisVal = thisVar[index] {return thisVal}
-            else{return nil}
+            else{ return nil }
         }
         set (newVal) {
-            if newVal != nil {self[varID][index] = newVal}
+            guard let thisVar = self[varID] else { return }
+            if newVal != nil { thisVar[index] = newVal }
+            // if newVal != nil && self[varID] != nil { self[varID]![index] = newVal }
         }
     }
     
@@ -48,33 +54,40 @@ extension State {
         let conditionIndex = condition.meetsConditionIndex
         guard conditionIndex.count > 0 else {return nil}
         for thisVarID in varIDs {
-            guard self[thisVarID].value.count == condition.meetsCondition?.count else { continue }
+            guard self[thisVarID]?.value.count == condition.meetsCondition?.count else { continue }
+            //guard self[thisVarID]?.value.count == condition.meetsCondition?.count else { continue }
             output[thisVarID] = [VarValue]()
         }
         for thisIndex in conditionIndex {
             for thisVarID in output.keys {
-                let thisVarValue = self[thisVarID].value[thisIndex]
-                output[thisVarID]!.append(thisVarValue)
+                if let thisVarValue = self[thisVarID, thisIndex]
+                { output[thisVarID]!.append(thisVarValue) }
+                // if let thisVarValue = self[thisVarID]?.value[thisIndex] {
+                // output[thisVarID]!.append(thisVarValue) }
             }
         }
         return output
     }
-    subscript(vars: [Variable], condition: Condition)->[VariableID: [VarValue]]?{
-        let varIDs = vars.map{ $0.id }
-        let output = self[varIDs, condition]
-        return output
-    }
+    
     subscript(varID: VariableID, condition: Condition)->[VarValue]?{
         if let output = self[[varID], condition]{
             return output[varID]}
         else {return nil}
     }
+    /*
+    subscript(vars: [Variable], condition: Condition)->[VariableID: [VarValue]]?{
+        let varIDs = vars.map{ $0.id }
+        let output = self[varIDs, condition]
+        return output
+    }
     subscript(variable: Variable, condition: Condition)->[VarValue]?{
         let varID = variable.id
         return self[varID, condition]
-    }
+    }*/
     subscript(condition: Condition)->[VariableID: [VarValue]]?{
-        return self[self, condition]
+        let varIDs = self.map{ $0.id }
+        let output = self[varIDs, condition]
+        return output
     }
     
     func updateFromDict(traj: StateDictArray){

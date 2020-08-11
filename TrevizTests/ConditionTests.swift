@@ -85,8 +85,6 @@ class ConditionsTest: XCTestCase {
             XCTAssertFalse(nestedCondition.containsCondition(nestedCondition))
             XCTAssertTrue(nestedCondition.containsCondition(terminalTest))
         }
-        
-        
     }
     
     func testResetType() {
@@ -148,7 +146,7 @@ class ConditionsTest: XCTestCase {
         
         XCTAssertEqual(state["t", cond1], [2, 4])
         XCTAssertEqual(state[["x"], cond2]?["x"], [12, 18])
-        XCTAssertEqual(state[y, cond3], [10])
+        //XCTAssertEqual(state[y, cond3], [10])
         XCTAssertEqual(state["y", cond4], [-5])
         XCTAssertEqual(state["t", cond1], state[["y", "x", "t"], cond1]?["t"])
         
@@ -232,6 +230,11 @@ class ConditionsTest: XCTestCase {
         XCTAssertFalse(cond4.isValid()) // Not valid because it doesn't have conditions
         cond5.name = ""
         XCTAssertFalse(cond5.isValid()) // Not valid because it doesn't have a name
+        
+        // Test subscript by condition
+        let newState = state[cond6]
+        let matchingState: Dictionary<VariableID, [VarValue]> = ["t": [7.0], "x": [14.0], "y": [-5.0]]
+        XCTAssertEqual(newState, matchingState)
     }
     
     // MARK: Enums related to condition

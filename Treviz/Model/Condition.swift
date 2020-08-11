@@ -200,7 +200,8 @@ class SingleCondition: EvaluateCondition, Codable {
     // Evaluation functions
     
     func evaluateState(_ state: State){
-        let thisVariable = state[varID]
+        //let thisVariable = state[varID]
+        guard let thisVariable = state[varID] else { return }
         meetsCondition = Array(repeating: false, count: thisVariable.value.count)
         previousState = thisVariable[0]
         nextState = thisVariable[1]
@@ -577,4 +578,5 @@ enum ConditionError: Error {
     case unsetPreviousValue
     case unsetNextValue
     case singleGlobalEvaluation
+    case variableNotFound
 }
