@@ -6,12 +6,12 @@ Initial Variables:
   
 Parameters:
   - t: 0
-  - x: 10
+  - x: 0
   - dy: 30
   
 Conditions:
   - Ground Impact: y<-0.1
-  - Final time: t=10
+  - Final time: t=100
   - Too far: x>100
   - TerminalTest:
     union: and
@@ -58,8 +58,8 @@ Outputs:
     plot type: 2 Var along Trajectory
     output type: plot
   - id: 5
-    title: Apogee range
-    variable1: x
+    title: Apogee height
+    variable1: y
     plot type: Value at Condition
     output type: text
     condition: Apogee

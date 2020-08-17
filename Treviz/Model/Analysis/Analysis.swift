@@ -11,6 +11,11 @@ enum AnalysisError: Error {
     case NoTerminalCondition
     case TimeStepError
 }
+
+enum AnalysisRunMode {
+    case serial
+    case parallel
+}
 extension AnalysisError: LocalizedError {
     public var errorDescription: String? {
         switch self {
@@ -77,13 +82,20 @@ class Analysis: NSObject, Codable {
     
     var traj: State!
     
-    // Run tracking
+    // Run settings
     var pctComplete: Double = 0
     var isRunning = false
     var returnCode : Int = 0
     let analysisDispatchQueue = DispatchQueue(label: "analysisRunQueue", qos: .utility)
     var progressReporter: AnalysisProgressReporter?
-    
+    var runMode = AnalysisRunMode.parallel {
+        didSet {
+            for thisPhase in self.phases {
+                thisPhase.runMode = self.runMode
+            }
+        }
+    }
+
     // Logging
     var _bufferLog = NSMutableAttributedString() // This string is used to store any logs prior to the initialization of the log message text view
     var logMessageView: TZLogger? {

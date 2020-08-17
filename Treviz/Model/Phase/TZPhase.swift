@@ -36,6 +36,7 @@ class TZPhase: Codable {
     var progressReporter: AnalysisProgressReporter?
     var isRunning = false
     var returnCode : ReturnCode = .NotStarted
+    var runMode : AnalysisRunMode = .parallel
     var analysis: Analysis!
     var varList: [Variable]!
     var varCalculationsSingle = Dictionary<VariableID,(inout StateDictSingle)->VarValue>()

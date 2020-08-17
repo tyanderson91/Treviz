@@ -10,9 +10,7 @@
 
 import Cocoa
 
-
 extension TZPhase {
-
     func setVars(physicsModel: String) {
         requiredVarIDs = ["t", "x", "y", "z", "dx", "dy", "dz", "mtot"] 
     }

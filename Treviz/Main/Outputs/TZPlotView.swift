@@ -33,7 +33,7 @@ class TZPlotView: NSObject, CPTScatterPlotDelegate, CPTScatterPlotDataSource, CP
         graph = (defaultTheme?.newGraph() as! CPTGraph)
         representedPlot = inputPlot
         do {
-            _plotData = try representedPlot.getData() as! OutputDataSetLines
+            _plotData = try representedPlot.getData()!
         } catch { throw error }
         super.init()
         create(with: representedPlot)

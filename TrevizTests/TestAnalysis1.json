@@ -21,7 +21,7 @@
 	  "units" : "distance",
 	  "isValid" : true,
 	  "value" : [
-		10
+		0
 	  ],
 	  "name" : "X pos"
 	},
@@ -55,7 +55,7 @@
       "singleConditions" : [
         {
           "varID" : "y",
-          "ubound" : -0.10000000149011612
+          "ubound" : -0.1
         }
       ],
       "name" : "Ground Impact",
@@ -68,7 +68,7 @@
       "singleConditions" : [
         {
           "varID" : "t",
-          "equality" : 10
+          "equality" : 100
         }
       ],
       "name" : "Final time",
@@ -187,10 +187,10 @@
       "outputType" : "text",
       "id" : 5,
       "condition" : "Apogee",
-      "title" : "Apogee range",
+      "title" : "Apogee height",
       "var3" : null,
       "plotTypeID" : "singlevalue",
-      "var1" : "x"
+      "var1" : "y"
     }
   ]
 }

@@ -13,8 +13,16 @@ import Cocoa
 extension Analysis {
         
     func runAnalysis() {
-        for thisPhase in self.phases {
-            analysisDispatchQueue.async {
+        switch runMode {
+        case .parallel:
+            for thisPhase in self.phases {
+                analysisDispatchQueue.async {
+                    thisPhase.progressReporter = self.progressReporter
+                    thisPhase.runAnalysis()
+                }
+            }
+        case .serial:
+            for thisPhase in self.phases {
                 thisPhase.progressReporter = self.progressReporter
                 thisPhase.runAnalysis()
             }

@@ -59,11 +59,11 @@ class StateCalcVariable: Variable {
 }
 
 class AggregateCalcVariable: Variable {
-    var calculation: ([TZPhase])->[VarValue] = {_ in return [VarValue]()}
-    func calculate(varid: VariableID, in phases: [TZPhase]){
-        var value = [VarValue]()
+    //var calculation: ([TZPhase])->[VarValue] = {_ in return [VarValue]()}
+    func calculate(from phases: [TZPhase]){
+        value = [VarValue]()
         for thisPhase in phases {
-            if let matchingVar = thisPhase.varList.first(where: {$0.id.baseVarID() == varid}) {
+            if let matchingVar = thisPhase.varList.first(where: {$0.id.baseVarID() == id}) {
                 value.append(contentsOf: matchingVar.value)
             }
         }

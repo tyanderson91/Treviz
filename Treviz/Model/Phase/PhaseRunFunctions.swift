@@ -25,7 +25,7 @@ extension TZPhase {
         self.terminalCondition.reset(initialState: initState)
         self.returnCode = .NotStarted
         
-        traj["mtot", 0] = 10.0
+        traj["mtot"] = [10.0]
         isRunning = true
         var i = 0
         while self.isRunning {
@@ -38,7 +38,7 @@ extension TZPhase {
                 newState = curstate
             }
             i += 1
-            self.traj[i] = newState
+            self.traj.append(newState)
             
             let curtraj = self.traj![i]
             do { self.isRunning = try !self.terminalCondition.evaluateSingleState(curtraj) }
@@ -50,17 +50,23 @@ extension TZPhase {
             if !self.isRunning {
                 self.returnCode = .Success
             }
-            
+            /*
             DispatchQueue.main.async {
-                //let t = self.traj["t"]
-                //var curIndex = t!.count - 2
-                //curIndex = curIndex < 0 ? 0 : curIndex
-                //let curState = self.traj[curIndex]
-                //self.progressReporter?.updateProgress(at: curState)
-            }
+                let t = self.traj["t"]
+                var curIndex = t!.count - 2
+                curIndex = curIndex < 0 ? 0 : curIndex
+                let curState = self.traj[curIndex]
+                self.progressReporter?.updateProgress(at: curState)
+            }*/
         }
 
-        DispatchQueue.main.async {
+        if self.runMode == .parallel {
+            DispatchQueue.main.async {
+                self.varList.updateFromDict(traj: self.traj)
+                self.analysis.processPhase(self)
+            }
+        }
+        else {
             self.varList.updateFromDict(traj: self.traj)
             self.analysis.processPhase(self)
         }

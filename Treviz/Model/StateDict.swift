@@ -55,8 +55,11 @@ struct StateDictArray: Collection, ExpressibleByDictionaryLiteral {
     //MARK: Custom behavior
     var phase: TZPhase?
     var stateLen: Int {
-        let curlen = self.variables.values.first?.count ?? 0
-        return curlen
+        for thisVar in self.variables {
+            let thisCount = thisVar.value.count
+            if thisCount > 0 { return thisCount }
+        }
+        return 0
     }
     init(){
         variables = DictionaryType()
@@ -111,11 +114,21 @@ struct StateDictArray: Collection, ExpressibleByDictionaryLiteral {
         }
         set {
             guard newValue != nil else {return}
-            self[varid]?.insert(newValue!, at: index)
+            if index < self[varid]?.count ?? 0 {
+                self[varid]?[index] = newValue!
+            }
             /*guard let thisVar = self[varid] else {return}
             if index < thisVar.count {
                 self[varid]!.insert(newValue!, at: index)
             }*/
+        }
+    }
+    
+    mutating func append(_ newState: StateDictSingle) {
+        for (thisVarID, _) in self {
+            if let matchingVar = newState[thisVarID] {
+                self[thisVarID]!.append(matchingVar)
+            }
         }
     }
 }
@@ -161,6 +174,7 @@ struct StateDictSingle: Collection, ExpressibleByDictionaryLiteral {
         else { i = index }
         for thisVar in state {
             // TODO: Once Units are implemented, assert that all input variables use standard metric units
+            if thisVar is StateCalcVariable { continue }
             self[thisVar.id] = thisVar.value[i]
         }
     }

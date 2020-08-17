@@ -46,7 +46,13 @@
 		CD6E0B9E2431BAC5008D1656 /* TZToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6E0B9D2431BAC5008D1656 /* TZToolbar.swift */; };
 		CD6E0BA22436DEC7008D1656 /* TZStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6E0BA12436DEC7008D1656 /* TZStoryboard.swift */; };
 		CD715E8023EBE70400E31F97 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = CD715E7F23EBE70400E31F97 /* README.md */; };
-		CD75951224E2638C00B79EF5 /* TestVariable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD75951124E2638C00B79EF5 /* TestVariable.swift */; };
+		CD75951224E2638C00B79EF5 /* VariableTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD75951124E2638C00B79EF5 /* VariableTest.swift */; };
+		CD75951624E51A3300B79EF5 /* TZOutputTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD75951524E51A3300B79EF5 /* TZOutputTest.swift */; };
+		CD75951E24E9A59F00B79EF5 /* TextOutputTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD75951924E9A56300B79EF5 /* TextOutputTest.swift */; };
+		CD75952024E9A5DF00B79EF5 /* PlotTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD75951F24E9A5DF00B79EF5 /* PlotTest.swift */; };
+		CD75952124E9A74A00B79EF5 /* PhaseVars.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDA8F1C24AD989D002936E6 /* PhaseVars.swift */; };
+		CD75952224E9A75F00B79EF5 /* PhaseVars.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDA8F1C24AD989D002936E6 /* PhaseVars.swift */; };
+		CD75952424E9AB2000B79EF5 /* AnalysisTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD75952324E9AB2000B79EF5 /* AnalysisTests.swift */; };
 		CD870F3524B448D7004A4D42 /* MathFuncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD870F3324B448D7004A4D42 /* MathFuncs.swift */; };
 		CD8896B024C8013F00610692 /* TestAnalysis1.yaml in Resources */ = {isa = PBXBuildFile; fileRef = CD8896AE24C8013300610692 /* TestAnalysis1.yaml */; };
 		CD8896B424C8104300610692 /* TestAnalysis1.json in Resources */ = {isa = PBXBuildFile; fileRef = CD8896B224C8103B00610692 /* TestAnalysis1.json */; };
@@ -69,7 +75,6 @@
 		CDD5049622252AF900B29751 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD5049522252AF900B29751 /* AppDelegate.swift */; };
 		CDD5049822252AFA00B29751 /* InputsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD5049722252AFA00B29751 /* InputsViewController.swift */; };
 		CDD5049F22252AFD00B29751 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDD5049E22252AFD00B29751 /* Images.xcassets */; };
-		CDDA8F2024AD98A0002936E6 /* PhaseVars.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDA8F1C24AD989D002936E6 /* PhaseVars.swift */; };
 		CDDA8F2524B2C8B4002936E6 /* Output Handling Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDA8F2324B2C8B4002936E6 /* Output Handling Protocols.swift */; };
 		CDDA8F2824B44213002936E6 /* DefaultVariableCalculations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDA8F2624B44213002936E6 /* DefaultVariableCalculations.swift */; };
 		CDDA8F2924B4451F002936E6 /* CalculatedVariable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDA8F2124AEE386002936E6 /* CalculatedVariable.swift */; };
@@ -77,7 +82,6 @@
 		CDE078F4224806EF00815E7F /* Inputs.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDE078F3224806EF00815E7F /* Inputs.storyboard */; };
 		CDE2B59D24C2C718002026E0 /* DefaultVariableCalculations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDA8F2624B44213002936E6 /* DefaultVariableCalculations.swift */; };
 		CDE2B59E24C2C718002026E0 /* TZPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDAF398E24A7209200309CA9 /* TZPhase.swift */; };
-		CDE2B59F24C2C718002026E0 /* PhaseVars.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDA8F1C24AD989D002936E6 /* PhaseVars.swift */; };
 		CDE2B5A024C2C718002026E0 /* PhaseRunFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDAF399124A7217500309CA9 /* PhaseRunFunctions.swift */; };
 		CDE2B5A124C2C718002026E0 /* PhaseStartupFuncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD656F6F248770A300BB5CBC /* PhaseStartupFuncs.swift */; };
 		CDE2B5A224C2C71D002026E0 /* Output Handling Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDA8F2324B2C8B4002936E6 /* Output Handling Protocols.swift */; };
@@ -211,7 +215,11 @@
 		CD6E0B9D2431BAC5008D1656 /* TZToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TZToolbar.swift; sourceTree = "<group>"; };
 		CD6E0BA12436DEC7008D1656 /* TZStoryboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TZStoryboard.swift; sourceTree = "<group>"; };
 		CD715E7F23EBE70400E31F97 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		CD75951124E2638C00B79EF5 /* TestVariable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestVariable.swift; sourceTree = "<group>"; };
+		CD75951124E2638C00B79EF5 /* VariableTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VariableTest.swift; sourceTree = "<group>"; };
+		CD75951524E51A3300B79EF5 /* TZOutputTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TZOutputTest.swift; path = TrevizTests/TZOutputTest.swift; sourceTree = SOURCE_ROOT; };
+		CD75951924E9A56300B79EF5 /* TextOutputTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TextOutputTest.swift; path = TrevizTests/TextOutputTest.swift; sourceTree = SOURCE_ROOT; };
+		CD75951F24E9A5DF00B79EF5 /* PlotTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlotTest.swift; sourceTree = "<group>"; };
+		CD75952324E9AB2000B79EF5 /* AnalysisTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisTests.swift; sourceTree = "<group>"; };
 		CD7CE5E22443E1B80090D18F /* CorePlot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CorePlot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD870F3324B448D7004A4D42 /* MathFuncs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MathFuncs.swift; path = Treviz/Model/MathFuncs.swift; sourceTree = SOURCE_ROOT; };
 		CD8896AE24C8013300610692 /* TestAnalysis1.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = TestAnalysis1.yaml; path = TrevizTests/TestAnalysis1.yaml; sourceTree = SOURCE_ROOT; };
@@ -414,14 +422,19 @@
 		CD0F011123656B7200C920AA /* TrevizTests */ = {
 			isa = PBXGroup;
 			children = (
+				CD75951924E9A56300B79EF5 /* TextOutputTest.swift */,
+				CD75951F24E9A5DF00B79EF5 /* PlotTest.swift */,
+				CDDA8F1C24AD989D002936E6 /* PhaseVars.swift */,
+				CD75951524E51A3300B79EF5 /* TZOutputTest.swift */,
 				CD8896B124C807F500610692 /* TrajectoryAnalysis.xctestplan */,
 				CD8896B224C8103B00610692 /* TestAnalysis1.json */,
 				CD8896AE24C8013300610692 /* TestAnalysis1.yaml */,
-				CD75951124E2638C00B79EF5 /* TestVariable.swift */,
+				CD75951124E2638C00B79EF5 /* VariableTest.swift */,
 				CDB457BF238508B6004F13AA /* ConditionTests.swift */,
 				CD31EFF224C13C7300ED435A /* CalcsTest.swift */,
 				CD0F011423656B7200C920AA /* Info.plist */,
 				CDB75E1E24E085CA008960C6 /* StateTests.swift */,
+				CD75952324E9AB2000B79EF5 /* AnalysisTests.swift */,
 			);
 			path = TrevizTests;
 			sourceTree = "<group>";
@@ -505,7 +518,6 @@
 			children = (
 				CDDA8F2624B44213002936E6 /* DefaultVariableCalculations.swift */,
 				CDAF398E24A7209200309CA9 /* TZPhase.swift */,
-				CDDA8F1C24AD989D002936E6 /* PhaseVars.swift */,
 				CDAF399124A7217500309CA9 /* PhaseRunFunctions.swift */,
 				CD656F6F248770A300BB5CBC /* PhaseStartupFuncs.swift */,
 			);
@@ -540,10 +552,10 @@
 			isa = PBXGroup;
 			children = (
 				CD01037523E78EC500D336C2 /* Model */,
-				CDFE81F423E0104A0013945F /* Treviz-Bridging-Header.h */,
 				CDD5049E22252AFD00B29751 /* Images.xcassets */,
 				CDD504A322252AFD00B29751 /* Info.plist */,
 				CDD504A422252AFD00B29751 /* Treviz.entitlements */,
+				CDFE81F423E0104A0013945F /* Treviz-Bridging-Header.h */,
 				CD05E3BA2254916500906EB0 /* Utilities */,
 				CD59C53E23E79336001D98D5 /* Component Views */,
 				CD05E3B9225490C500906EB0 /* Main */,
@@ -832,10 +844,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD75952024E9A5DF00B79EF5 /* PlotTest.swift in Sources */,
 				CDB75E1F24E085CA008960C6 /* StateTests.swift in Sources */,
 				CD31EFF324C13C7300ED435A /* CalcsTest.swift in Sources */,
 				CDB457C0238508B6004F13AA /* ConditionTests.swift in Sources */,
-				CD75951224E2638C00B79EF5 /* TestVariable.swift in Sources */,
+				CD75951224E2638C00B79EF5 /* VariableTest.swift in Sources */,
+				CD75952424E9AB2000B79EF5 /* AnalysisTests.swift in Sources */,
+				CD75951E24E9A59F00B79EF5 /* TextOutputTest.swift in Sources */,
+				CD75951624E51A3300B79EF5 /* TZOutputTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -855,6 +871,7 @@
 				CDE2B5A724C2C71D002026E0 /* AnalysisRunFunctions.swift in Sources */,
 				CD2D0DB42243836F0012978E /* ThreeAxisOutputSetupViewController.swift in Sources */,
 				CDE2B5B724C2C729002026E0 /* State.swift in Sources */,
+				CD75952224E9A75F00B79EF5 /* PhaseVars.swift in Sources */,
 				CD2D0DB52243836F0012978E /* TwoAxisOutputSetupViewController.swift in Sources */,
 				CDE2B5BC24C2C729002026E0 /* Vehicle.swift in Sources */,
 				CDE2B5C224C2C729002026E0 /* InitStateHeader.swift in Sources */,
@@ -879,7 +896,6 @@
 				CDE2B5B824C2C729002026E0 /* StateDict.swift in Sources */,
 				CDFE81FC23E14B730013945F /* ViewerTabViewController.swift in Sources */,
 				CDC1F54022363DDB00D1BB25 /* MainViewController.swift in Sources */,
-				CDE2B59F24C2C718002026E0 /* PhaseVars.swift in Sources */,
 				CD557437236EA14500DA53A1 /* VisualizerViewController.swift in Sources */,
 				CD42E0AA22FD05F600A0F9A1 /* CollapsibleStackView.swift in Sources */,
 				CDA549EF23CC254B00933C6B /* AddConditionViewControllers.swift in Sources */,
@@ -923,7 +939,6 @@
 				CDFAD0F523EA84FE00CE7424 /* Parameter.swift in Sources */,
 				CDFAD0F623EA84FE00CE7424 /* Condition.swift in Sources */,
 				CDAF399024A7209200309CA9 /* TZPhase.swift in Sources */,
-				CDDA8F2024AD98A0002936E6 /* PhaseVars.swift in Sources */,
 				CD656F71248771D500BB5CBC /* PhaseStartupFuncs.swift in Sources */,
 				CD870F3524B448D7004A4D42 /* MathFuncs.swift in Sources */,
 				CDDA8F2924B4451F002936E6 /* CalculatedVariable.swift in Sources */,
@@ -941,6 +956,7 @@
 				CDFAD0FC23EA84FE00CE7424 /* TZTextOutput.swift in Sources */,
 				CD5F4E9E2455105300823E43 /* InitStateHeader.swift in Sources */,
 				CDFAD0FE23EA84FE00CE7424 /* TZPlotType.swift in Sources */,
+				CD75952124E9A74A00B79EF5 /* PhaseVars.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

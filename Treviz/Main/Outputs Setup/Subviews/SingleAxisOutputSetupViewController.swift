@@ -17,10 +17,8 @@ class SingleAxisOutputSetupViewController: AddOutputViewController {
     override func createOutput() -> TZOutput? {// TODO : expand for all plot types
         guard let plotType = plotTypePopupButton.selectedItem?.title else {return nil}
         let var1 = variableSelectorViewController?.selectedVariable
-        let newOutput = TZOutput(id: maxPlotID+1, vars: [var1!], plotType: TZPlotType.getPlotTypeByName(plotType)!)
-        //let condIndex = conditionsComboBox.indexOfSelectedItem
-        //if condIndex>=0 { newOutput.condition = analysis.conditions[condIndex] }
-        return newOutput
+        do { let newOutput = try TZOutput(id: maxPlotID+1, vars: [var1!], plotType: TZPlotType.getPlotTypeByName(plotType)!)
+        return newOutput } catch { return nil }
     }
         
     override func viewDidLoad() {

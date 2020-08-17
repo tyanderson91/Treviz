@@ -65,10 +65,8 @@ class ThreeAxisOutputSetupViewController: AddOutputViewController {
         var1 = analysis.varList.first(where: {$0.name == var1Name} )
         var2 = analysis.varList.first(where: {$0.name == var2Name} )
         
-        let newPlot = TZPlot(id: maxPlotID+1, vars: [var1!, var2!], plotType: TZPlotType.getPlotTypeByName(plotType)!)
-        //newPlot.setName()
-        return newPlot
-        //return nil
+        do { let newPlot = try TZPlot(id: maxPlotID+1, vars: [var1!, var2!], plotType: TZPlotType.getPlotTypeByName(plotType)!)
+        return newPlot } catch { return nil }
     }
     
     override func populateWithOutput(text: TZTextOutput?, plot: TZPlot?){ //Should be overwritten by each subclass

@@ -83,9 +83,6 @@ extension Analysis {
      */
     func initOutput(fromYaml yamlObj: [String: Any]) -> TZOutput? {
         var outputDict = yamlObj
-        if let plotTypeStr = yamlObj["plot type"] as? String{
-            outputDict["plot type"] = TZPlotType.allPlotTypes.first(where: {$0.name == plotTypeStr}) ?? ""
-        }
         if let idInt = yamlObj["id"] as? Int {
             outputDict["id"] = idInt
         } else {
@@ -115,6 +112,25 @@ extension Analysis {
             }
         }
         
+        
+        do {
+            var output: TZOutput
+            if let outputType = yamlObj["output type"] as? String {
+                switch TZOutput.OutputType(rawValue: outputType) {
+                case .plot:
+                    output = try TZPlot(with: outputDict)
+                case .text:
+                    output = try TZTextOutput(with: outputDict)
+                default:
+                    output = try TZPlot(with: outputDict)
+                }
+            } else {
+                output = try TZPlot(with: outputDict)
+            }
+            return output
+        } catch { self.logMessage(error.localizedDescription); return nil}
+         
+        /*
         if let outputType = yamlObj["output type"] as? String {
             switch TZOutput.OutputType(rawValue: outputType) {
             case .plot:
@@ -126,6 +142,6 @@ extension Analysis {
             }
         } else {
             return TZPlot(with: outputDict)
-        }
+        }*/
     }
 }

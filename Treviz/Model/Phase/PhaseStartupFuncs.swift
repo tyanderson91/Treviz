@@ -12,7 +12,7 @@ import Cocoa
 
 extension TZPhase {
     func setupConstants(){
-        setVars(physicsModel: "") // TODO: Replace with actual physics-based lookup
+        self.setVars(physicsModel: "") // TODO: Replace with actual physics-based lookup
         let defaultVarList = loadVars(from: "InitVars")
         varList = defaultVarList.compactMap({$0.copyToPhase(phaseid: self.id)})
         loadVarGroups(from: "InitStateStructure")

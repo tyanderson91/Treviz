@@ -13,6 +13,8 @@ import Foundation
 
 
 enum TZOutputError: Error, LocalizedError {
+    case MissingIDError
+    case MissingPlotTypeError
     case MissingVariableError
     case MissingTrajectoryError
     case MissingPointsError
@@ -23,8 +25,12 @@ enum TZOutputError: Error, LocalizedError {
 
     public var errorDescription: String? {
         switch self {
+        case .MissingIDError:
+            return NSLocalizedString("Output missing ID assignment", comment: "")
+        case .MissingPlotTypeError:
+            return NSLocalizedString("Output missing plot type assignment", comment: "")
         case .MissingVariableError:
-            return NSLocalizedString("Missing variable assignment", comment: "")
+            return NSLocalizedString("Output missing variable assignment", comment: "")
         case .MissingTrajectoryError:
             return NSLocalizedString("Trajectory not assigned", comment: "")
         case .MissingPointsError:
@@ -70,39 +76,53 @@ class TZOutput : NSObject, Codable {
         super.init()
     }
     
-    init?(with dict: Dictionary<String,Any>){
-        if let id = dict["id"] as? Int {self.id = id} else {return nil}
-        if let plotType = dict["plot type"] as? TZPlotType {self.plotType = plotType} else {return nil}
+    /**
+     This is the initializer for outputs from Yaml. The raw Yaml must first be processed by the parent Analysis, since it must contain actual variables and conditions used in that analysis. See AnalysisYaml.swift to understand that process.
+    */
+    init(with dict: Dictionary<String,Any>) throws {
+        if let id = dict["id"] as? Int {self.id = id} else {throw TZOutputError.MissingIDError}
+        //plotType = .singleValue
+        if let plotTypeName = dict["plot type"] as? String {
+            guard let thisPlotType = TZPlotType.getPlotTypeByName(plotTypeName)
+                else { throw TZOutputError.MissingPlotTypeError }
+            plotType = thisPlotType
+        } else { // TODO: implement default detection of output type based on inputs
+            plotType = .singleValue
+            throw TZOutputError.MissingPlotTypeError
+        }
         super.init()
+        //TZPlotType {self.plotType = plotType} else {throw TZOutputError.MissingPlotTypeError}
         if let title = dict["title"] as? String {self.title = title}
         if let var1 = dict["variable1"] as? Variable {self.var1 = var1}
         if let var2 = dict["variable2"] as? Variable {self.var2 = var2}
         if let var3 = dict["variable3"] as? Variable {self.var3 = var3}
         if let categoryvar = dict["category"] as? Parameter {self.categoryVar = categoryvar}
-
-        
         if let condition = dict["condition"] as? Condition {self.condition = condition}
+            
+        try self.assertValid()
     }
     
-    convenience init(id : Int, vars : [Variable], plotType : TZPlotType) {
+    convenience init(id : Int, vars : [Variable?], plotType : TZPlotType, conditionIn: Condition? = nil) throws {
         var title = ""
         self.init(id: id, plotType: plotType)
         if vars.count >= 1 {
             var1 = vars[0]
-            title += var1!.name
+            if var1 != nil { title += var1!.name }
         }
         if vars.count >= 2 {
             var2 = vars[1]
-            title += " vs \(var2!.name)"
+            if var2 != nil { title += " vs \(var2!.name)" }
         }
         if vars.count >= 3 {
             var3 = vars[2]
-            title += " vs \(var3!.name)"
+            if var3 != nil { title += " vs \(var3!.name)" }
         }
         if vars.count >= 4 {
-            categoryVar = vars[4]
-            title += " by \(categoryVar!.name)"
+            categoryVar = vars[3]
+            if categoryVar != nil { title += " by \(categoryVar!.name)" }
         }
+        condition = conditionIn
+        try self.assertValid()
     }
     
     convenience init(id: Int, with output : TZOutput) {
@@ -138,16 +158,12 @@ class TZOutput : NSObject, Codable {
         case condition = "condition"
     }
     
-    convenience init(from decoder: Decoder, referencing Conditions: [Condition]) throws {
-        try self.init(from: decoder)
-    }
-    
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingsKeys.self)
         id = try container.decode(Int.self, forKey: .id)
         title = try container.decode(String.self, forKey: .title)
         var plotTypeID = ""
-        do {
+        do { // TODO: implement default detection of output type based on inputs
             plotTypeID = try container.decode(String.self, forKey: .plotTypeID)
             plotType = TZPlotType.allPlotTypes.first { $0.id == plotTypeID }!
         } catch { throw TZPlotTypeError.InvalidPlotType }
@@ -174,12 +190,14 @@ class TZOutput : NSObject, Codable {
         let condValid = (condition != nil) == (plotType.requiresCondition)
         let var1Valid = (var1 != nil) // == plotType.nAxis >= 1
         let var2Valid = (var2 != nil) == (plotType.nAxis >= 2)
-        let var3Valid = (var3 != nil) == (plotType.nAxis >= 3)
+        var var3Valid: Bool
         var catVarValid : Bool!
         if plotType.id == "contour2d" {
             catVarValid = categoryVar == nil
+            var3Valid = var3 != nil
         } else {
-            catVarValid = (categoryVar != nil) == (plotType.nVars > plotType.nAxis) // If there are more categories than axes, then one var must be a category (except for with contours)
+            catVarValid = (categoryVar != nil) == (plotType.nVars > plotType.nAxis) // If there are more vars than axes, then one var must be a category (except for with contours)
+            var3Valid = (var3 != nil) == (plotType.nAxis >= 3)
         }
         guard condValid else { throw TZOutputError.IncorrectConditionSettingError }
         guard var1Valid else { throw TZOutputError.IncorrectVarSettingError }
@@ -196,7 +214,7 @@ class TZOutput : NSObject, Codable {
         if categoryVar != nil { categoryVar = varlist.first(where: {$0.id == categoryVar!.id})}
     }*/
     
-    func getData() throws -> Any? {
+    func getData() throws -> OutputDataSetLines? {
         guard let curTraj = curTrajectory else { throw TZOutputError.MissingTrajectoryError }
         var lineSet = OutputDataSetLines()
         if plotType.requiresCondition {

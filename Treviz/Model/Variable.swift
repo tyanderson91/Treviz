@@ -10,7 +10,7 @@ import Cocoa
 import simd
 
 typealias VariableID = String
-typealias VarValue = Float
+typealias VarValue = Double
 extension VarValue {
     init?(numeric input: Any){
         if input is Int { self.init(integerLiteral: Int64(input as! Int))}
@@ -59,7 +59,7 @@ class Variable : Parameter, Codable, Hashable {
         hasher.combine(units)
         hasher.combine(value)
     }
-    init(_ idIn: VariableID, named nameIn:String = "", symbol symbolIn: String = "", units unitsIn: String = ""){
+    init(_ idIn: VariableID, named nameIn:String = "", symbol symbolIn: String = "", units unitsIn: String = "", value: [VarValue] = []){
         id = idIn
         name = nameIn
         symbol = symbolIn
@@ -82,9 +82,9 @@ class Variable : Parameter, Codable, Hashable {
         var newID: VariableID = ""
         if !self.id.contains(".") {
             newID = phaseid + "." + self.id
-        } /*else {
+        } else {
             newID = phaseid + "." + self.id.baseVarID()
-        }*/
+        }
         let newVar = Variable(newID, named: name, symbol: symbol, units: units)
         newVar.value = value
         return newVar
