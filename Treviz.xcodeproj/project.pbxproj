@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		29A63F34487C7A4A3CFF57F2 /* Pods_Treviz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AE63A207D59BC03E0AD95A7 /* Pods_Treviz.framework */; };
 		4DB08FC11410BCCCFA10D307 /* Pods_TrevizTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A89AF26E4296F559D5BACE4 /* Pods_TrevizTests.framework */; };
+		CD0F113D25048FE300C88B05 /* RunSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0F113C25048FE300C88B05 /* RunSettingsViewController.swift */; };
+		CD0F113F250560A700C88B05 /* TZRunSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0F113E250560A700C88B05 /* TZRunSettings.swift */; };
+		CD0F1140250560A700C88B05 /* TZRunSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0F113E250560A700C88B05 /* TZRunSettings.swift */; };
 		CD11FA8723408173001A3695 /* AddOutputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD11FA8623408173001A3695 /* AddOutputViewController.swift */; };
 		CD11FA9323433096001A3695 /* PlotTypes.plist in Resources */ = {isa = PBXBuildFile; fileRef = CD11FA9223433096001A3695 /* PlotTypes.plist */; };
 		CD28477722FF9C8800D192A9 /* CollapsibleGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD28477622FF9C8800D192A9 /* CollapsibleGridView.swift */; };
@@ -25,8 +28,7 @@
 		CD3F5E5A22EE4FFE00E4CF20 /* ConditionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3F5E5922EE4FFE00E4CF20 /* ConditionsViewController.swift */; };
 		CD410CF72444239700AB49DE /* CorePlotExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD410CF62444239700AB49DE /* CorePlotExtensions.swift */; };
 		CD42E0AA22FD05F600A0F9A1 /* CollapsibleStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD42E0A922FD05F600A0F9A1 /* CollapsibleStackView.swift */; };
-		CD4656B2224C6F3500C587CC /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4656B1224C6F3500C587CC /* SettingsViewController.swift */; };
-		CD4656B4224C6F8C00C587CC /* EnvironmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4656B3224C6F8C00C587CC /* EnvironmentViewController.swift */; };
+		CD4656B2224C6F3500C587CC /* PhysicsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4656B1224C6F3500C587CC /* PhysicsViewController.swift */; };
 		CD4AD70823A20EE200FC815F /* OutputSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4AD70723A20EE100FC815F /* OutputSetupViewController.swift */; };
 		CD500337234DA64F00D71099 /* InitVarSettings.plist in Resources */ = {isa = PBXBuildFile; fileRef = CD500336234DA64F00D71099 /* InitVarSettings.plist */; };
 		CD557437236EA14500DA53A1 /* VisualizerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD557436236EA14500DA53A1 /* VisualizerViewController.swift */; };
@@ -58,6 +60,7 @@
 		CD8896B424C8104300610692 /* TestAnalysis1.json in Resources */ = {isa = PBXBuildFile; fileRef = CD8896B224C8103B00610692 /* TestAnalysis1.json */; };
 		CDA0F88122587E05003C62E6 /* ParamTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA0F88022587E05003C62E6 /* ParamTableViewController.swift */; };
 		CDA0F888225C5D47003C62E6 /* InputsCellViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA0F887225C5D47003C62E6 /* InputsCellViews.swift */; };
+		CDA35CD524ECE5A0005BF24D /* PhaseSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA35CD424ECE5A0005BF24D /* PhaseSelectorViewController.swift */; };
 		CDA549EF23CC254B00933C6B /* AddConditionViewControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA549EE23CC254B00933C6B /* AddConditionViewControllers.swift */; };
 		CDA549F123CC3C5400933C6B /* ConditionsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA549F023CC3C5400933C6B /* ConditionsTableView.swift */; };
 		CDA7FD75236FE9CC009CDFAF /* InitVarSettings.yaml in Resources */ = {isa = PBXBuildFile; fileRef = CDA7FD74236FE9CC009CDFAF /* InitVarSettings.yaml */; };
@@ -175,6 +178,8 @@
 		CD0F010A2365595700C920AA /* Vehicle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vehicle.swift; sourceTree = "<group>"; };
 		CD0F011023656B7200C920AA /* TrevizTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrevizTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD0F011423656B7200C920AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CD0F113C25048FE300C88B05 /* RunSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunSettingsViewController.swift; sourceTree = "<group>"; };
+		CD0F113E250560A700C88B05 /* TZRunSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TZRunSettings.swift; sourceTree = "<group>"; };
 		CD11FA8623408173001A3695 /* AddOutputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOutputViewController.swift; sourceTree = "<group>"; };
 		CD11FA9223433096001A3695 /* PlotTypes.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = PlotTypes.plist; sourceTree = "<group>"; };
 		CD1A5B5C23FD1E9A00BE3BFB /* AnalysisYaml.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AnalysisYaml.swift; path = /Users/TylerAnderson/Coding/Swift/Treviz/Treviz/AnalysisYaml.swift; sourceTree = "<absolute>"; };
@@ -193,8 +198,7 @@
 		CD410CF4244421A400AB49DE /* CorePlot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CorePlot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD410CF62444239700AB49DE /* CorePlotExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CorePlotExtensions.swift; path = Treviz/Main/Outputs/CorePlotExtensions.swift; sourceTree = SOURCE_ROOT; };
 		CD42E0A922FD05F600A0F9A1 /* CollapsibleStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollapsibleStackView.swift; sourceTree = "<group>"; };
-		CD4656B1224C6F3500C587CC /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		CD4656B3224C6F8C00C587CC /* EnvironmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentViewController.swift; sourceTree = "<group>"; };
+		CD4656B1224C6F3500C587CC /* PhysicsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsViewController.swift; sourceTree = "<group>"; };
 		CD4AD70723A20EE100FC815F /* OutputSetupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutputSetupViewController.swift; sourceTree = "<group>"; };
 		CD4AD70C23BD4C0C00FC815F /* TZPlotType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TZPlotType.swift; sourceTree = "<group>"; };
 		CD500336234DA64F00D71099 /* InitVarSettings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = InitVarSettings.plist; sourceTree = "<group>"; };
@@ -228,6 +232,7 @@
 		CD92D6B82442302800483B8E /* TZLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TZLogger.swift; sourceTree = "<group>"; };
 		CDA0F88022587E05003C62E6 /* ParamTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParamTableViewController.swift; sourceTree = "<group>"; };
 		CDA0F887225C5D47003C62E6 /* InputsCellViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputsCellViews.swift; sourceTree = "<group>"; };
+		CDA35CD424ECE5A0005BF24D /* PhaseSelectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhaseSelectorViewController.swift; sourceTree = "<group>"; };
 		CDA549EE23CC254B00933C6B /* AddConditionViewControllers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddConditionViewControllers.swift; sourceTree = "<group>"; };
 		CDA549F023CC3C5400933C6B /* ConditionsTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionsTableView.swift; sourceTree = "<group>"; };
 		CDA7FD74236FE9CC009CDFAF /* InitVarSettings.yaml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = InitVarSettings.yaml; sourceTree = "<group>"; };
@@ -343,6 +348,7 @@
 				CD4AD70C23BD4C0C00FC815F /* TZPlotType.swift */,
 				CDB7C73B2352B58300BC50F1 /* InitStateHeader.swift */,
 				CD870F3324B448D7004A4D42 /* MathFuncs.swift */,
+				CD0F113E250560A700C88B05 /* TZRunSettings.swift */,
 				CD01037623E78EED00D336C2 /* Analysis */,
 				CDAF398D24A7209200309CA9 /* Phase */,
 			);
@@ -502,12 +508,13 @@
 			isa = PBXGroup;
 			children = (
 				CD05E3BC225491D900906EB0 /* Init State */,
+				CDA35CD424ECE5A0005BF24D /* PhaseSelectorViewController.swift */,
 				CDF09AB624AC473B0068BE4B /* PhasedViewController.swift */,
 				CDD5049722252AFA00B29751 /* InputsViewController.swift */,
 				CDA0F887225C5D47003C62E6 /* InputsCellViews.swift */,
 				CDA0F88022587E05003C62E6 /* ParamTableViewController.swift */,
-				CD4656B1224C6F3500C587CC /* SettingsViewController.swift */,
-				CD4656B3224C6F8C00C587CC /* EnvironmentViewController.swift */,
+				CD4656B1224C6F3500C587CC /* PhysicsViewController.swift */,
+				CD0F113C25048FE300C88B05 /* RunSettingsViewController.swift */,
 				CDE078F3224806EF00815E7F /* Inputs.storyboard */,
 			);
 			path = "Inputs Setup";
@@ -877,8 +884,8 @@
 				CDE2B5C224C2C729002026E0 /* InitStateHeader.swift in Sources */,
 				CD2D0DB62243836F0012978E /* MonteCarloOutputSetupViewController.swift in Sources */,
 				CD2D0DB82243836F0012978E /* SingleAxisOutputSetupViewController.swift in Sources */,
-				CD4656B4224C6F8C00C587CC /* EnvironmentViewController.swift in Sources */,
-				CD4656B2224C6F3500C587CC /* SettingsViewController.swift in Sources */,
+				CD4656B2224C6F3500C587CC /* PhysicsViewController.swift in Sources */,
+				CD0F113D25048FE300C88B05 /* RunSettingsViewController.swift in Sources */,
 				CDF2338F242DCD8100B8EF40 /* HeaderViewController.swift in Sources */,
 				CDE2B5A324C2C71D002026E0 /* AnalysisProgressReporter.swift in Sources */,
 				CD410CF72444239700AB49DE /* CorePlotExtensions.swift in Sources */,
@@ -920,6 +927,8 @@
 				CD28477722FF9C8800D192A9 /* CollapsibleGridView.swift in Sources */,
 				CDE2B5C124C2C729002026E0 /* TZPlotType.swift in Sources */,
 				CDE2B5BE24C2C729002026E0 /* OutputDataSet.swift in Sources */,
+				CD0F113F250560A700C88B05 /* TZRunSettings.swift in Sources */,
+				CDA35CD524ECE5A0005BF24D /* PhaseSelectorViewController.swift in Sources */,
 				CDE2B5C324C2C729002026E0 /* MathFuncs.swift in Sources */,
 				CDD5049622252AF900B29751 /* AppDelegate.swift in Sources */,
 				CDE2B5BF24C2C729002026E0 /* TZTextOutput.swift in Sources */,
@@ -938,6 +947,7 @@
 				CD31EFF824C15F9E00ED435A /* AnalysisYaml.swift in Sources */,
 				CDFAD0F523EA84FE00CE7424 /* Parameter.swift in Sources */,
 				CDFAD0F623EA84FE00CE7424 /* Condition.swift in Sources */,
+				CD0F1140250560A700C88B05 /* TZRunSettings.swift in Sources */,
 				CDAF399024A7209200309CA9 /* TZPhase.swift in Sources */,
 				CD656F71248771D500BB5CBC /* PhaseStartupFuncs.swift in Sources */,
 				CD870F3524B448D7004A4D42 /* MathFuncs.swift in Sources */,

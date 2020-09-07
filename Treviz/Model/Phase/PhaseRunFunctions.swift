@@ -19,7 +19,7 @@ extension TZPhase {
         //traj
         traj = StateDictArray(from: baseVars, at: 0)
         
-        let dt : VarValue = defaultTimestep
+        let dt : VarValue = runSettings.defaultTimestep
         
         let initState = traj[0]
         self.terminalCondition.reset(initialState: initState)

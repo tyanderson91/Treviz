@@ -21,9 +21,10 @@ class InputsViewController: TZViewController, NSTableViewDataSource, NSTableView
     @IBOutlet weak var stack: CustomStackView!
     
     var tableViewController : ParamTableViewController!
-    weak var settingsViewController: SettingsViewController!
-    weak var environmentsViewController: EnvironmentViewController!
+    weak var physicsViewController: PhysicsViewController!
     weak var initStateViewController: InitStateViewController!
+    weak var phaseSelectorViewController: PhaseSelectorViewController!
+    weak var runSettingsViewController: RunSettingsViewController!
     var params : [Parameter] = []
     
     override func viewDidLoad() {
@@ -33,20 +34,24 @@ class InputsViewController: TZViewController, NSTableViewDataSource, NSTableView
         
         // Load and install all the view controllers from our storyboard in the following order.
         let storyboard = NSStoryboard(name: "Inputs", bundle: nil)
-        settingsViewController = storyboard.instantiateController(identifier: "SettingsViewController") { aCoder in
-            SettingsViewController(coder: aCoder, analysis: self.analysis, phase: self.analysis.phases[0])
+
+        runSettingsViewController = storyboard.instantiateController(identifier: "RunSettingsViewController") { aCoder in
+            RunSettingsViewController(coder: aCoder, analysis: self.analysis, phase: self.analysis.phases[0])
         }
-        stack.addViewController(settingsViewController)
-        //let settingsViewController = (stack.addViewController(fromStoryboardId: "Inputs", withIdentifier: "SettingsViewController", analysis: analysis) as! SettingsViewController)
-        //environmentsViewController = (stack.addViewController(fromStoryboardId: "Inputs", withIdentifier: "EnvironmentViewController") as! EnvironmentViewController)
-        //initStateViewController = (stack.addViewController(fromStoryboardId: "Inputs", withIdentifier: "InitStateViewController", analysis: analysis) as! InitStateViewController)
+        /*physicsViewController = storyboard.instantiateController(identifier: "PhysicsViewController") { aCoder in
+            PhysicsViewController(coder: aCoder, analysis: self.analysis, phase: self.analysis.phases[0])
+        }
+        stack.addViewController(physicsViewController)*/
+        //let vehicleViewController = (stack.addViewController(fromStoryboardId: "Inputs", withIdentifier: "VehicleViewController", analysis: analysis) as! VehicleViewController)
         initStateViewController = storyboard.instantiateController(identifier: "InitStateViewController") { aCoder in
             InitStateViewController(coder: aCoder, analysis: self.analysis, phase: self.analysis.phases[0])
         }
+        stack.addViewController(runSettingsViewController)
         stack.addViewController(initStateViewController)
         
-        for thisController in [settingsViewController,
-                               //environmentsViewController,
+        for thisController in [runSettingsViewController,
+                               //physicsViewController,
+                               //vehicleViewController,
                                initStateViewController]{
             self.addChild(thisController!)
         }
@@ -59,6 +64,9 @@ class InputsViewController: TZViewController, NSTableViewDataSource, NSTableView
             self.tableViewController = segue.destinationController as? ParamTableViewController
             self.tableViewController.analysis = analysis
             tableViewController.inputsViewController = self
+        } else if segue.identifier == "PhaseSelectorSegue" {
+            self.phaseSelectorViewController = segue.destinationController as? PhaseSelectorViewController
+            self.phaseSelectorViewController.analysis = analysis
         }
     }
     
@@ -66,5 +74,7 @@ class InputsViewController: TZViewController, NSTableViewDataSource, NSTableView
         tableViewController.tableView.reloadData()
         initStateViewController.outlineView.reloadData()
     }
+    
+    
 }
 

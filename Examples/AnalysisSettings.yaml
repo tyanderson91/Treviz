@@ -32,6 +32,10 @@ Conditions:
     
 Terminal Condition: Terminal
 
+Run Settings:
+  propagator: explicit
+  timestep: 0.1
+
 Outputs:
   - id: 1
     title: X pos

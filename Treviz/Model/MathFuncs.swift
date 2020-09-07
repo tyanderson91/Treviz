@@ -22,3 +22,11 @@ func ** (_ base: Double, _ exp: Double) -> Double {
 func ** (_ base: Float, _ exp: Float) -> Float {
   return pow(base, exp)
 }
+
+let PI = 3.14159265
+func deg2rad(_ deg: VarValue)->VarValue{
+    return PI/180*deg
+}
+func rad2deg(_ rad: VarValue)->VarValue{
+    return 180/PI*rad
+}

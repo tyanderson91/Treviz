@@ -8,12 +8,6 @@
 
 import Cocoa
 
-enum PropagatorType: String {
-    case explicit
-    case rungeKutta4
-}
-
-
 enum ReturnCode: Int {
     case NotStarted = 0
     case Success = 1
@@ -26,8 +20,8 @@ class TZPhase: Codable {
     var id: String
     var vehicle : Vehicle!
     var propagatorType : PropagatorType = .explicit
-    var defaultTimestep : VarValue = 0.1
     var inputSettings : [Parameter] = []
+    let runSettings : TZRunSettings
     var initState: StateDictSingle { return StateDictSingle(from: varList, at: 0) }
     weak var terminalCondition : Condition!
     var traj: StateDictArray!
@@ -45,6 +39,12 @@ class TZPhase: Codable {
 
     init(id idIn: String){
         id = idIn
+        runSettings = TZRunSettings()
+        setupConstants()
+    }
+    init(id idIn: String, runSettings runSettingsIn: TZRunSettings){
+        id = idIn
+        runSettings = runSettingsIn
         setupConstants()
     }
     
@@ -55,12 +55,14 @@ class TZPhase: Codable {
         case inputSettings
         case vehicleID
         case terminalCondition
+        case runSettings
     }
 
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decode(String.self, forKey: .id)
         propagatorType = try PropagatorType(rawValue: container.decode(String.self, forKey: .propagatorType))!
+        runSettings = try container.decode(TZRunSettings.self, forKey: .runSettings)
         setupConstants()
         
         let tempInputSettings = try container.decode(Array<Variable>.self, forKey: .inputSettings)
@@ -72,11 +74,6 @@ class TZPhase: Codable {
             }
         } )
         inputSettings = varList // TODO: When more settings are introduced, expand this
-        /*
-        do {
-            let terminalConditionName = try container.decode(String.self, forKey: .terminalCondition)
-            terminalCondition = analysis.conditions.first { $0.name == terminalConditionName }
-        }*/
     }
     
     func encode(to encoder: Encoder) throws {
@@ -84,6 +81,7 @@ class TZPhase: Codable {
         try container.encode(id, forKey: .id)
         try container.encode(propagatorType.rawValue, forKey: .propagatorType)
         try container.encode(terminalCondition.name, forKey: .terminalCondition)
+        try container.encode(runSettings, forKey: .runSettings)
         if let nonzerovars = (varList)?.filter({$0.value[0] != 0 || $0.isParam}) {
             let baseVars = nonzerovars.compactMap({$0.stripPhase()})
             try container.encode(baseVars, forKey: .inputSettings)
@@ -93,9 +91,16 @@ class TZPhase: Codable {
     
     // MARK: Yaml initiation
     convenience init(yamlDict: [String: Any], analysis: Analysis) {
+        var curPhaseName: String
         if let phasename = yamlDict["Name"] as? String {
-            self.init(id: phasename)
-        } else { self.init(id: "default") }
+            curPhaseName = phasename
+        } else { curPhaseName = "default" }
+        
+        if let runSettingsDict = yamlDict["Run Settings"] as? [String: Any] {
+            let runSettingsIn = TZRunSettings(yamlDict: runSettingsDict)
+            self.init(id: curPhaseName, runSettings: runSettingsIn)
+        }
+        else { self.init(id: curPhaseName) }
         self.analysis = analysis
         
         setupConstants()

@@ -13,8 +13,13 @@ class InitStateViewController: PhasedViewController, NSOutlineViewDelegate, NSOu
     @IBOutlet weak var outlineView: NSOutlineView!
     var inputVars : [Parameter] { phase.varList }
     var inputVarStructure : InitStateHeader { return phase.initStateGroups }
-    override func getHeaderTitle() -> String { return NSLocalizedString("Initial State", comment: "") }
+    override func getHeaderTitle() -> String { return NSLocalizedString("Boundary States", comment: "") }
     var inputsViewController: InputsViewController?
+    // Terminal Condition variables
+    @IBOutlet weak var terminalConditionPopupButton: NSPopUpButton!
+    private var terminalConditionCandidates: [Condition] {
+        analysis.conditions.filter { !$0.containsGlobalCondition() }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +27,7 @@ class InitStateViewController: PhasedViewController, NSOutlineViewDelegate, NSOu
         outlineView.autosaveName = "initStateOutlineView"
         //Load data
         outlineView.reloadData()
+        getTerminalConditionPopupOptions()
     }
     
     override func viewDidAppear() {
@@ -146,5 +152,24 @@ class InitStateViewController: PhasedViewController, NSOutlineViewDelegate, NSOu
         }
     }
     
+    // MARK: Terminal Condition
+    @IBAction func didChangeSelection(_ sender: Any) {
+        if let curCondition = analysis.conditions.first(where: { $0.name == terminalConditionPopupButton.titleOfSelectedItem }) {
+            phase.terminalCondition = curCondition
+        }
+    }
+    
+    private func setSelection(){
+        if let curCondition = analysis.terminalCondition {
+            terminalConditionPopupButton.selectItem(withTitle: curCondition.name)
+        } else {terminalConditionPopupButton.selectItem(at: -1)}
+    }
+    
+    private func getTerminalConditionPopupOptions(){
+        let menuItemNames: [String] = terminalConditionCandidates.compactMap { $0.name }
+        terminalConditionPopupButton.removeAllItems()
+        terminalConditionPopupButton.addItems(withTitles: menuItemNames)
+        setSelection()
+    }
 }
 

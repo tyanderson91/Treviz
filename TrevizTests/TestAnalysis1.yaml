@@ -29,7 +29,14 @@ Conditions:
     conditions:
     - Ground Impact
     - Final time
-    
+
+Run Settings:
+  propagator: explicit
+  timestep: 0.123
+  min timestep: 0.1
+  max timestep: 0.5
+  adaptive timestep: true
+
 Terminal Condition: Terminal
 
 Outputs:
