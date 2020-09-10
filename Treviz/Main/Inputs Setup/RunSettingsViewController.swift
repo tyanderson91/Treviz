@@ -22,9 +22,14 @@ class RunSettingsViewController: PhasedViewController {
     @IBOutlet weak var box2NumberFormatter: NumberFormatter!
     @IBOutlet weak var maxTimestepStackView: NSStackView!
     var runSettings: TZRunSettings { return phase.runSettings }
-    
+    /*
+    @IBOutlet weak var parameterButton: ParameterSelectorButton!
+    @IBAction func parameterSetButton(_ sender: Any) {
+        parameterButton.state = .on
+    }*/
     override func viewDidLoad() {
         super.viewDidLoad()
+        box1NumberFormatter.maximumFractionDigits = 10
         setRunSettingUI()
         // Do view setup here.
     }
@@ -82,16 +87,18 @@ class RunSettingsViewController: PhasedViewController {
             let inputNum = VarValue(textBox.stringValue)
             else { return }
         
-        switch textBox.identifier?.rawValue {
-        case "timestepBox1":
-            if runSettings.useAdaptiveTimestep {
-                runSettings.minTimestep = inputNum
-            } else { runSettings.defaultTimestep = inputNum }
-        case "timestepBox2":
-            runSettings.maxTimestep = inputNum
-        default:
-            return
-        }
+        do {
+            switch textBox.identifier?.rawValue {
+            case "timestepBox1":
+                if runSettings.useAdaptiveTimestep {
+                    try runSettings.setMinTimeStep(inputNum)
+                } else { try runSettings.setDefaultTimeStep(inputNum) }
+            case "timestepBox2":
+                try runSettings.setMaxTimeStep(inputNum)
+            default:
+                return
+            }
+        } catch { phase.analysis.logMessage(error.localizedDescription) }
         setRunSettingUI()
     }
 }

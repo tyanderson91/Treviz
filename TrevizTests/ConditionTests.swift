@@ -30,15 +30,7 @@ class ConditionsTest: XCTestCase {
      */
     func testConditionIO() {
         // Yaml
-        var yamlObj: Any?
-        do {
-            let bundle = Bundle(for: type(of: self))
-            let filePath = bundle.url(forResource: "TestAnalysis1", withExtension: "yaml")!
-            let data = try Data(contentsOf: filePath)
-            let stryaml = String(data: data, encoding: String.Encoding.utf8)
-            yamlObj = try Yams.load(yaml: stryaml!)
-        } catch { XCTFail() }
-        yamlDict = yamlObj as? [String: Any]
+        yamlDict = getYamlDict(filename: "TestAnalysis1", self: self)
         
         var yamlConditions = [Condition]()
         if let conditionList = yamlDict!["Conditions"] as? [[String: Any]] {

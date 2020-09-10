@@ -23,7 +23,10 @@
 		CD31EFF324C13C7300ED435A /* CalcsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD31EFF224C13C7300ED435A /* CalcsTest.swift */; };
 		CD31EFF724C15F6F00ED435A /* Yams in Frameworks */ = {isa = PBXBuildFile; productRef = CD31EFF624C15F6F00ED435A /* Yams */; };
 		CD31EFF824C15F9E00ED435A /* AnalysisYaml.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1A5B5C23FD1E9A00BE3BFB /* AnalysisYaml.swift */; };
+		CD39717B2506F12D00A8047A /* RunSettingsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD39717A2506F12D00A8047A /* RunSettingsTest.swift */; };
+		CD39717D2506F2AC00A8047A /* TestHelperFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD39717C2506F2AC00A8047A /* TestHelperFunctions.swift */; };
 		CD3C187E23E2B03800E72EFF /* TZPlotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3C187D23E2B03700E72EFF /* TZPlotView.swift */; };
+		CD3E645225086399001F6C8F /* ParameterSelectorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3E645125086398001F6C8F /* ParameterSelectorButton.swift */; };
 		CD3F5E5822EE4DCD00E4CF20 /* Conditions.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD3F5E5722EE4DCD00E4CF20 /* Conditions.storyboard */; };
 		CD3F5E5A22EE4FFE00E4CF20 /* ConditionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3F5E5922EE4FFE00E4CF20 /* ConditionsViewController.swift */; };
 		CD410CF72444239700AB49DE /* CorePlotExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD410CF62444239700AB49DE /* CorePlotExtensions.swift */; };
@@ -191,7 +194,10 @@
 		CD2D0DAA224382F70012978E /* MonteCarloOutputSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonteCarloOutputSetupViewController.swift; sourceTree = "<group>"; };
 		CD2D0DAE224382F70012978E /* SingleAxisOutputSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleAxisOutputSetupViewController.swift; sourceTree = "<group>"; };
 		CD31EFF224C13C7300ED435A /* CalcsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalcsTest.swift; sourceTree = "<group>"; };
+		CD39717A2506F12D00A8047A /* RunSettingsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RunSettingsTest.swift; path = TrevizTests/RunSettingsTest.swift; sourceTree = SOURCE_ROOT; };
+		CD39717C2506F2AC00A8047A /* TestHelperFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelperFunctions.swift; sourceTree = "<group>"; };
 		CD3C187D23E2B03700E72EFF /* TZPlotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TZPlotView.swift; sourceTree = "<group>"; };
+		CD3E645125086398001F6C8F /* ParameterSelectorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ParameterSelectorButton.swift; path = Treviz/Utilities/ParameterSelectorButton.swift; sourceTree = SOURCE_ROOT; };
 		CD3F5E5722EE4DCD00E4CF20 /* Conditions.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Conditions.storyboard; sourceTree = "<group>"; };
 		CD3F5E5922EE4FFE00E4CF20 /* ConditionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionsViewController.swift; sourceTree = "<group>"; };
 		CD410CF12444211500AB49DE /* CorePlot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CorePlot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -344,11 +350,11 @@
 				CDD60A962345C5AE00249987 /* TZOutput.swift */,
 				CD6CCF3B244CCC960051F76D /* OutputDataSet.swift */,
 				CDD60A902345BF5C00249987 /* TZTextOutput.swift */,
-				CD280F49233B45670004263F /* TZPlot.swift */,
 				CD4AD70C23BD4C0C00FC815F /* TZPlotType.swift */,
 				CDB7C73B2352B58300BC50F1 /* InitStateHeader.swift */,
 				CD870F3324B448D7004A4D42 /* MathFuncs.swift */,
 				CD0F113E250560A700C88B05 /* TZRunSettings.swift */,
+				CD280F49233B45670004263F /* TZPlot.swift */,
 				CD01037623E78EED00D336C2 /* Analysis */,
 				CDAF398D24A7209200309CA9 /* Phase */,
 			);
@@ -392,6 +398,7 @@
 			isa = PBXGroup;
 			children = (
 				CDF23381242DCD8000B8EF40 /* InfoBarStackView */,
+				CD3E645125086398001F6C8F /* ParameterSelectorButton.swift */,
 				CD42E0A922FD05F600A0F9A1 /* CollapsibleStackView.swift */,
 				CD28477622FF9C8800D192A9 /* CollapsibleGridView.swift */,
 			);
@@ -428,6 +435,7 @@
 		CD0F011123656B7200C920AA /* TrevizTests */ = {
 			isa = PBXGroup;
 			children = (
+				CD39717A2506F12D00A8047A /* RunSettingsTest.swift */,
 				CD75951924E9A56300B79EF5 /* TextOutputTest.swift */,
 				CD75951F24E9A5DF00B79EF5 /* PlotTest.swift */,
 				CDDA8F1C24AD989D002936E6 /* PhaseVars.swift */,
@@ -437,6 +445,7 @@
 				CD8896AE24C8013300610692 /* TestAnalysis1.yaml */,
 				CD75951124E2638C00B79EF5 /* VariableTest.swift */,
 				CDB457BF238508B6004F13AA /* ConditionTests.swift */,
+				CD39717C2506F2AC00A8047A /* TestHelperFunctions.swift */,
 				CD31EFF224C13C7300ED435A /* CalcsTest.swift */,
 				CD0F011423656B7200C920AA /* Info.plist */,
 				CDB75E1E24E085CA008960C6 /* StateTests.swift */,
@@ -851,10 +860,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD39717B2506F12D00A8047A /* RunSettingsTest.swift in Sources */,
 				CD75952024E9A5DF00B79EF5 /* PlotTest.swift in Sources */,
 				CDB75E1F24E085CA008960C6 /* StateTests.swift in Sources */,
 				CD31EFF324C13C7300ED435A /* CalcsTest.swift in Sources */,
 				CDB457C0238508B6004F13AA /* ConditionTests.swift in Sources */,
+				CD39717D2506F2AC00A8047A /* TestHelperFunctions.swift in Sources */,
 				CD75951224E2638C00B79EF5 /* VariableTest.swift in Sources */,
 				CD75952424E9AB2000B79EF5 /* AnalysisTests.swift in Sources */,
 				CD75951E24E9A59F00B79EF5 /* TextOutputTest.swift in Sources */,
@@ -876,6 +887,7 @@
 				CDE2B5BB24C2C729002026E0 /* Parameter.swift in Sources */,
 				CDF3D1A822505A000064D70C /* AnalysisDoc.swift in Sources */,
 				CDE2B5A724C2C71D002026E0 /* AnalysisRunFunctions.swift in Sources */,
+				CD3E645225086399001F6C8F /* ParameterSelectorButton.swift in Sources */,
 				CD2D0DB42243836F0012978E /* ThreeAxisOutputSetupViewController.swift in Sources */,
 				CDE2B5B724C2C729002026E0 /* State.swift in Sources */,
 				CD75952224E9A75F00B79EF5 /* PhaseVars.swift in Sources */,

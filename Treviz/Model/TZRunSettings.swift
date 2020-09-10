@@ -13,13 +13,27 @@ enum PropagatorType: String {
     case rungeKutta4
 }
 
+enum TZRunSettingError: Error, LocalizedError {
+case minMaxError
+case negativeNumberError
+
+public var errorDescription: String? {
+    switch self {
+        case .minMaxError:
+            return NSLocalizedString("Maximum timestep must be greater than minimum", comment: "")
+        case .negativeNumberError:
+            return NSLocalizedString("Negative timesteps are not allowed", comment: "")
+        }
+    }
+}
+
 class TZRunSettings: Codable {
     var runMode: AnalysisRunMode!// Set automatically by the parent analysis
     var propagatorType: PropagatorType = .explicit
-    var defaultTimestep: VarValue = 0.1
+    private(set) var defaultTimestep: VarValue = 0.1
     var useAdaptiveTimestep: Bool = false
-    var minTimestep: VarValue = 0
-    var maxTimestep: VarValue = 100
+    private(set) var minTimestep: VarValue = 0
+    private(set) var maxTimestep: VarValue = 100
     
     init() {
         runMode = .parallel
@@ -33,6 +47,20 @@ class TZRunSettings: Codable {
         case minTimestep
         case maxTimestep
     }
+    func setMinTimeStep(_ minStep: VarValue) throws {
+        guard minStep >= 0.0 else { throw TZRunSettingError.negativeNumberError }
+        guard minStep < maxTimestep else { throw TZRunSettingError.minMaxError }
+        minTimestep = minStep
+    }
+    func setMaxTimeStep(_ maxStep: VarValue) throws {
+        guard maxStep > 0.0 else { throw TZRunSettingError.negativeNumberError }
+        guard maxStep > minTimestep else { throw TZRunSettingError.minMaxError }
+        maxTimestep = maxStep
+    }
+    func setDefaultTimeStep(_ defaultStep: VarValue) throws {
+        guard defaultStep > 0.0 else { throw TZRunSettingError.negativeNumberError }
+        defaultTimestep = defaultStep
+    }
     
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -41,27 +69,10 @@ class TZRunSettings: Codable {
         let adaptiveTimestep = try container.decode(Bool.self, forKey: .useAdaptiveTimestep)
         useAdaptiveTimestep = adaptiveTimestep
         if adaptiveTimestep {
-            minTimestep = try container.decode(VarValue.self, forKey: .minTimestep)
-            maxTimestep = try container.decode(VarValue.self, forKey: .maxTimestep)
-        }
-    }
-    
-    //MARK: YAML init
-    init(yamlDict: [String: Any]) {
-        if let propagator = yamlDict["propagator"] as? String {
-            propagatorType = PropagatorType(rawValue: propagator) ?? PropagatorType.explicit
-        }
-        if let adaptiveTimeStepIn = yamlDict["adaptive timestep"] as? Bool {
-            useAdaptiveTimestep = adaptiveTimeStepIn
-        }
-        if let timestepIn = yamlDict["timestep"] as? VarValue {
-            defaultTimestep = timestepIn
-        }
-        if let minTimeStepIn = yamlDict["min timestep"] as? VarValue {
-            minTimestep = minTimeStepIn
-        }
-        if let maxTimeStepIn = yamlDict["max timestep"] as? VarValue {
-            maxTimestep = maxTimeStepIn
+            let minTimestepIn = try container.decode(VarValue.self, forKey: .minTimestep)
+            let maxTimestepIn = try container.decode(VarValue.self, forKey: .maxTimestep)
+            try setMaxTimeStep(maxTimestepIn)
+            try setMinTimeStep(minTimestepIn)
         }
     }
     
@@ -76,4 +87,23 @@ class TZRunSettings: Codable {
         }
     }
 
+    //MARK: YAML init
+    init(yamlDict: [String: Any]) throws {
+        if let propagator = yamlDict["propagator"] as? String {
+            propagatorType = PropagatorType(rawValue: propagator) ?? PropagatorType.explicit
+        }
+        if let adaptiveTimeStepIn = yamlDict["adaptive timestep"] as? Bool {
+            useAdaptiveTimestep = adaptiveTimeStepIn
+        }
+        if let timestepIn = yamlDict["timestep"] as? VarValue {
+            try setDefaultTimeStep(timestepIn)
+        }
+        if let minTimeStepIn = yamlDict["min timestep"] as? VarValue {
+            try setMinTimeStep(minTimeStepIn)
+        }
+        if let maxTimeStepIn = yamlDict["max timestep"] as? VarValue {
+            try setMaxTimeStep(maxTimeStepIn)
+        }
+    }
+    
 }

@@ -34,7 +34,7 @@ class AnalysisTests: XCTestCase {
     }
 
     func testExample() throws {
-        analysis_2d.phases[0].defaultTimestep = 0.01
+        try analysis_2d.phases[0].runSettings.setDefaultTimeStep(0.01)
         analysis_2d.runAnalysis()
 
         let dy_init = analysis_2d.initState["dy"]!
@@ -48,7 +48,7 @@ class AnalysisTests: XCTestCase {
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
         let phase = analysis_2d.phases[0]
-        phase.defaultTimestep = 0.001
+        try phase.runSettings.setDefaultTimeStep(0.001)
         self.measure {
             analysis_2d.runAnalysis()
             // Put the code you want to measure the time of here.

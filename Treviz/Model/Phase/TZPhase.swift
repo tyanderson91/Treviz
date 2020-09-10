@@ -97,8 +97,13 @@ class TZPhase: Codable {
         } else { curPhaseName = "default" }
         
         if let runSettingsDict = yamlDict["Run Settings"] as? [String: Any] {
-            let runSettingsIn = TZRunSettings(yamlDict: runSettingsDict)
-            self.init(id: curPhaseName, runSettings: runSettingsIn)
+            do {
+                let runSettingsIn = try TZRunSettings(yamlDict: runSettingsDict)
+                self.init(id: curPhaseName, runSettings: runSettingsIn)
+            } catch {
+                analysis.logMessage(error.localizedDescription)
+                self.init(id: curPhaseName)
+            }
         }
         else { self.init(id: curPhaseName) }
         self.analysis = analysis

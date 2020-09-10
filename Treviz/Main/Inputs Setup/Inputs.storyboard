@@ -9,21 +9,21 @@
         <scene sceneID="SDQ-LY-AHJ">
             <objects>
                 <viewController title="Initial State" storyboardIdentifier="InitStateViewController" id="QV5-fD-s1c" customClass="InitStateViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" misplaced="YES" id="WGY-9i-iLe" customClass="StackBaseView" customModule="Treviz" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="359" height="481"/>
+                    <view key="view" id="WGY-9i-iLe" customClass="StackBaseView" customModule="Treviz" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="361" height="481"/>
                         <autoresizingMask key="autoresizingMask" heightSizable="YES"/>
                         <subviews>
                             <customView horizontalHuggingPriority="800" verticalHuggingPriority="50" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="500" translatesAutoresizingMaskIntoConstraints="NO" id="Hmv-lq-0J5">
                                 <rect key="frame" x="0.0" y="0.0" width="361" height="481"/>
                                 <subviews>
                                     <scrollView horizontalHuggingPriority="800" verticalHuggingPriority="50" placeholderIntrinsicWidth="572" placeholderIntrinsicHeight="200" verifyAmbiguity="ignoreSizes" autohidesScrollers="YES" horizontalLineScroll="20" horizontalPageScroll="10" verticalLineScroll="20" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IJ7-Zw-yB3">
-                                        <rect key="frame" x="0.0" y="47" width="349" height="375"/>
+                                        <rect key="frame" x="0.0" y="122" width="349" height="300"/>
                                         <clipView key="contentView" drawsBackground="NO" id="CLe-47-xth">
-                                            <rect key="frame" x="1" y="1" width="347" height="373"/>
+                                            <rect key="frame" x="1" y="1" width="347" height="298"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" selectionHighlightStyle="none" columnReordering="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" autosaveName="initStateOutlineView" rowSizeStyle="automatic" headerView="31c-TF-9un" viewBased="YES" indentationPerLevel="16" autosaveExpandedItems="YES" outlineTableColumn="azQ-xe-zxX" id="o6P-Kz-ADk">
-                                                    <rect key="frame" x="0.0" y="0.0" width="347" height="348"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="347" height="273"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <size key="intercellSpacing" width="2" height="3"/>
                                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -214,7 +214,7 @@
                                                             </prototypeCellViews>
                                                         </tableColumn>
                                                         <tableColumn identifier="InitStateParameterColumn" width="53.5" minWidth="40" maxWidth="1000" id="KA9-aC-fyg" userLabel="Parameter">
-                                                            <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Parameter?">
+                                                            <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="Parameter?">
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                             </tableHeaderCell>
@@ -225,8 +225,8 @@
                                                             </textFieldCell>
                                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                             <prototypeCellViews>
-                                                                <button identifier="initStateParamCheckBoxView" verticalHuggingPriority="750" id="Q4p-6L-kwQ" userLabel="Value check">
-                                                                    <rect key="frame" x="289" y="1" width="53" height="18"/>
+                                                                <button identifier="initStateParamCheckBoxView" verticalHuggingPriority="750" id="Q4p-6L-kwQ" userLabel="Value check" customClass="ParameterSelectorButton" customModule="Treviz" customModuleProvider="target">
+                                                                    <rect key="frame" x="289" y="1" width="54" height="18"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                     <buttonCell key="cell" type="check" title="Check" bezelStyle="regularSquare" imagePosition="only" alignment="center" inset="2" id="926-Li-fLp">
                                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -237,7 +237,7 @@
                                                                     </connections>
                                                                 </button>
                                                                 <tableCellView identifier="initStateHasParamCellView" wantsLayer="YES" id="Mlb-wb-KFY" userLabel="Has Params Cell View">
-                                                                    <rect key="frame" x="289" y="22" width="53" height="17"/>
+                                                                    <rect key="frame" x="289" y="22" width="54" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
                                                                         <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="w35-en-TRi">
@@ -292,7 +292,7 @@
                                         <rect key="frame" x="131" y="450" width="223" height="25"/>
                                         <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="X43-sH-do0" id="r5T-DY-PyT">
                                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
+                                            <font key="font" metaFont="menu"/>
                                             <menu key="menu" id="UOH-m7-hpM">
                                                 <items>
                                                     <menuItem title="Item 1" state="on" id="X43-sH-do0"/>
@@ -721,7 +721,7 @@
                                                         </tableCellView>
                                                     </prototypeCellViews>
                                                 </tableColumn>
-                                                <tableColumn identifier="ParamValueColumn" width="56.5" minWidth="40" maxWidth="1000" id="dmT-5h-h5R">
+                                                <tableColumn identifier="ParamValueColumn" width="55.5" minWidth="40" maxWidth="1000" id="dmT-5h-h5R">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Values">
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -837,25 +837,35 @@
             <objects>
                 <viewController identifier="RunSettingsViewController" storyboardIdentifier="RunSettingsViewController" id="hYm-K2-kci" customClass="RunSettingsViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="95e-ne-vRf">
-                        <rect key="frame" x="0.0" y="0.0" width="410" height="107"/>
+                        <rect key="frame" x="0.0" y="0.0" width="470" height="93"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="Etx-TI-iPt">
-                                <rect key="frame" x="0.0" y="0.0" width="410" height="107"/>
+                                <rect key="frame" x="0.0" y="0.0" width="470" height="93"/>
                                 <subviews>
-                                    <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="4" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" ambiguous="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="B9e-he-cl0">
-                                        <rect key="frame" x="10" y="76" width="241" height="21"/>
+                                    <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="6" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="B9e-he-cl0">
+                                        <rect key="frame" x="5" y="62" width="291" height="21"/>
                                         <subviews>
+                                            <button horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="100" translatesAutoresizingMaskIntoConstraints="NO" id="VgS-M5-hEf" customClass="ParameterSelectorButton" customModule="Treviz" customModuleProvider="target">
+                                                <rect key="frame" x="-2" y="2" width="18" height="18"/>
+                                                <buttonCell key="cell" type="check" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="Fp1-Ed-2w7">
+                                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="parameterButton:" target="hYm-K2-kci" id="HJQ-Lg-Uk7"/>
+                                                </connections>
+                                            </button>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hlD-tq-VMz">
-                                                <rect key="frame" x="-2" y="3" width="76" height="16"/>
+                                                <rect key="frame" x="18" y="3" width="76" height="16"/>
                                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Propagator:" id="5sV-LV-JKT">
                                                     <font key="font" usesAppearanceFont="YES"/>
                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                             </textField>
-                                            <popUpButton verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rLA-vi-YO8">
-                                                <rect key="frame" x="74" y="-3" width="170" height="25"/>
+                                            <popUpButton verticalHuggingPriority="750" horizontalCompressionResistancePriority="150" translatesAutoresizingMaskIntoConstraints="NO" id="rLA-vi-YO8">
+                                                <rect key="frame" x="96" y="-3" width="198" height="25"/>
                                                 <popUpButtonCell key="cell" type="push" title="Explicit" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="juy-zN-gKs" id="Ovi-WX-0cT">
                                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="menu"/>
@@ -874,17 +884,29 @@
                                         <visibilityPriorities>
                                             <integer value="1000"/>
                                             <integer value="1000"/>
+                                            <integer value="1000"/>
                                         </visibilityPriorities>
                                         <customSpacing>
+                                            <real value="3.4028234663852886e+38"/>
                                             <real value="3.4028234663852886e+38"/>
                                             <real value="3.4028234663852886e+38"/>
                                         </customSpacing>
                                     </stackView>
                                     <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="6" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fih-AT-QhU">
-                                        <rect key="frame" x="208" y="40" width="192" height="21"/>
+                                        <rect key="frame" x="233" y="26" width="227" height="21"/>
                                         <subviews>
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="y9U-Go-f1c" customClass="ParameterSelectorButton" customModule="Treviz" customModuleProvider="target">
+                                                <rect key="frame" x="-2" y="2" width="18" height="18"/>
+                                                <buttonCell key="cell" type="check" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="u1Q-rf-PPe">
+                                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="parameterButton:" target="hYm-K2-kci" id="vLY-sI-x6P"/>
+                                                </connections>
+                                            </button>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="abc-HI-qSl">
-                                                <rect key="frame" x="-2" y="3" width="86" height="16"/>
+                                                <rect key="frame" x="18" y="3" width="86" height="16"/>
                                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Max timestep" id="r2b-BW-voL">
                                                     <font key="font" usesAppearanceFont="YES"/>
                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -892,9 +914,11 @@
                                                 </textFieldCell>
                                             </textField>
                                             <textField identifier="timestepBox2" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="CgV-eV-Zzt">
-                                                <rect key="frame" x="88" y="0.0" width="91" height="21"/>
+                                                <rect key="frame" x="108" y="0.0" width="106" height="21"/>
                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="SL9-Pp-sD8">
-                                                    <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" formatWidth="-1" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="CNs-wz-uhH"/>
+                                                    <numberFormatter key="formatter" formatterBehavior="custom10_4" numberStyle="decimal" formatWidth="-1" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="9" id="CNs-wz-uhH">
+                                                        <real key="minimum" value="0.0"/>
+                                                    </numberFormatter>
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -904,7 +928,7 @@
                                                 </connections>
                                             </textField>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sqa-iF-nue">
-                                                <rect key="frame" x="183" y="3" width="11" height="16"/>
+                                                <rect key="frame" x="218" y="3" width="11" height="16"/>
                                                 <textFieldCell key="cell" lineBreakMode="clipping" title="s" id="dN0-8M-Jff">
                                                     <font key="font" usesAppearanceFont="YES"/>
                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -916,18 +940,30 @@
                                             <integer value="1000"/>
                                             <integer value="1000"/>
                                             <integer value="1000"/>
+                                            <integer value="1000"/>
                                         </visibilityPriorities>
                                         <customSpacing>
+                                            <real value="3.4028234663852886e+38"/>
                                             <real value="3.4028234663852886e+38"/>
                                             <real value="3.4028234663852886e+38"/>
                                             <real value="3.4028234663852886e+38"/>
                                         </customSpacing>
                                     </stackView>
                                     <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="6" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Z6H-UD-fgW">
-                                        <rect key="frame" x="10" y="40" width="183" height="21"/>
+                                        <rect key="frame" x="5" y="26" width="213" height="21"/>
                                         <subviews>
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Z3Y-ol-J0u" customClass="ParameterSelectorButton" customModule="Treviz" customModuleProvider="target">
+                                                <rect key="frame" x="-2" y="2" width="18" height="18"/>
+                                                <buttonCell key="cell" type="check" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="gkJ-Gl-rs3">
+                                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="parameterButton:" target="hYm-K2-kci" id="3sq-Ps-pbM"/>
+                                                </connections>
+                                            </button>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WVU-ej-iXy">
-                                                <rect key="frame" x="-2" y="3" width="108" height="16"/>
+                                                <rect key="frame" x="18" y="3" width="108" height="16"/>
                                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Default timestep:" id="gRg-Fs-tO1">
                                                     <font key="font" usesAppearanceFont="YES"/>
                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -935,9 +971,11 @@
                                                 </textFieldCell>
                                             </textField>
                                             <textField identifier="timestepBox1" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gHh-9A-GcC">
-                                                <rect key="frame" x="110" y="0.0" width="60" height="21"/>
+                                                <rect key="frame" x="130" y="0.0" width="70" height="21"/>
                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="zwg-m5-d7c">
-                                                    <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" formatWidth="-1" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="B3L-ce-uYp"/>
+                                                    <numberFormatter key="formatter" formatterBehavior="custom10_4" numberStyle="decimal" formatWidth="-1" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="9" id="B3L-ce-uYp">
+                                                        <real key="minimum" value="0.0"/>
+                                                    </numberFormatter>
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -947,7 +985,7 @@
                                                 </connections>
                                             </textField>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Raf-MB-9i8">
-                                                <rect key="frame" x="174" y="3" width="11" height="16"/>
+                                                <rect key="frame" x="204" y="3" width="11" height="16"/>
                                                 <textFieldCell key="cell" lineBreakMode="clipping" title="s" id="IWs-W6-lvJ">
                                                     <font key="font" usesAppearanceFont="YES"/>
                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -959,37 +997,65 @@
                                             <integer value="1000"/>
                                             <integer value="1000"/>
                                             <integer value="1000"/>
+                                            <integer value="1000"/>
                                         </visibilityPriorities>
                                         <customSpacing>
                                             <real value="3.4028234663852886e+38"/>
                                             <real value="3.4028234663852886e+38"/>
                                             <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
                                         </customSpacing>
                                     </stackView>
-                                    <button verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wd1-XN-Z9Y">
-                                        <rect key="frame" x="264" y="78" width="136" height="18"/>
-                                        <buttonCell key="cell" type="check" title="Adaptive timestep" bezelStyle="regularSquare" imagePosition="left" inset="2" id="cMP-eI-SYK">
-                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="didSetAdaptiveTimestep:" target="hYm-K2-kci" id="iVc-nc-IAR"/>
-                                        </connections>
-                                    </button>
+                                    <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="6" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CW9-cE-0RD">
+                                        <rect key="frame" x="306" y="65" width="154" height="16"/>
+                                        <subviews>
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5zR-80-LuX" customClass="ParameterSelectorButton" customModule="Treviz" customModuleProvider="target">
+                                                <rect key="frame" x="-2" y="-1" width="18" height="18"/>
+                                                <buttonCell key="cell" type="check" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="sSK-Tm-A93">
+                                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="parameterButton:" target="hYm-K2-kci" id="iu7-J5-ZLJ"/>
+                                                </connections>
+                                            </button>
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wd1-XN-Z9Y">
+                                                <rect key="frame" x="20" y="-1" width="136" height="18"/>
+                                                <buttonCell key="cell" type="check" title="Adaptive timestep" bezelStyle="regularSquare" imagePosition="right" inset="2" id="cMP-eI-SYK">
+                                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="didSetAdaptiveTimestep:" target="hYm-K2-kci" id="iVc-nc-IAR"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="154" id="MFh-t6-OGv"/>
+                                        </constraints>
+                                        <visibilityPriorities>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                        </visibilityPriorities>
+                                        <customSpacing>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                        </customSpacing>
+                                    </stackView>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="CW9-cE-0RD" firstAttribute="centerY" secondItem="B9e-he-cl0" secondAttribute="centerY" id="07n-wq-gse"/>
                                     <constraint firstAttribute="trailing" secondItem="fih-AT-QhU" secondAttribute="trailing" constant="10" id="30f-o6-HYt"/>
-                                    <constraint firstItem="Z6H-UD-fgW" firstAttribute="leading" secondItem="Etx-TI-iPt" secondAttribute="leading" constant="10" id="Ai3-9E-Crp"/>
-                                    <constraint firstItem="wd1-XN-Z9Y" firstAttribute="centerY" secondItem="hlD-tq-VMz" secondAttribute="centerY" id="HZm-8D-UnG"/>
-                                    <constraint firstAttribute="height" constant="107" id="Ir5-hM-jfj"/>
-                                    <constraint firstAttribute="trailing" secondItem="wd1-XN-Z9Y" secondAttribute="trailing" constant="10" id="MmI-f5-U4e"/>
+                                    <constraint firstItem="CW9-cE-0RD" firstAttribute="leading" secondItem="B9e-he-cl0" secondAttribute="trailing" constant="10" id="3aF-eR-kw0"/>
+                                    <constraint firstItem="Z6H-UD-fgW" firstAttribute="leading" secondItem="Etx-TI-iPt" secondAttribute="leading" constant="5" id="Ai3-9E-Crp"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" id="Ir5-hM-jfj"/>
                                     <constraint firstItem="Z6H-UD-fgW" firstAttribute="top" secondItem="B9e-he-cl0" secondAttribute="bottom" constant="15" id="Mrg-Fe-WTp"/>
-                                    <constraint firstItem="wd1-XN-Z9Y" firstAttribute="leading" secondItem="B9e-he-cl0" secondAttribute="trailing" constant="15" id="Sfr-Y7-ZkB"/>
                                     <constraint firstItem="fih-AT-QhU" firstAttribute="centerY" secondItem="Z6H-UD-fgW" secondAttribute="centerY" id="lDo-7z-hsd"/>
-                                    <constraint firstItem="B9e-he-cl0" firstAttribute="leading" secondItem="Etx-TI-iPt" secondAttribute="leading" constant="10" id="t3b-hQ-1jB"/>
+                                    <constraint firstItem="B9e-he-cl0" firstAttribute="leading" secondItem="Etx-TI-iPt" secondAttribute="leading" constant="5" id="t3b-hQ-1jB"/>
                                     <constraint firstItem="gHh-9A-GcC" firstAttribute="width" secondItem="CgV-eV-Zzt" secondAttribute="width" multiplier="0.659341" id="uZP-3a-NJq"/>
                                     <constraint firstItem="fih-AT-QhU" firstAttribute="leading" secondItem="Z6H-UD-fgW" secondAttribute="trailing" constant="15" id="v2r-Uw-TpE"/>
                                     <constraint firstItem="B9e-he-cl0" firstAttribute="top" secondItem="Etx-TI-iPt" secondAttribute="top" constant="10" id="vDQ-Fd-77z"/>
+                                    <constraint firstAttribute="trailing" secondItem="CW9-cE-0RD" secondAttribute="trailing" constant="10" id="z1S-gi-dCi"/>
                                 </constraints>
                             </customView>
                         </subviews>
@@ -1009,6 +1075,7 @@
                         <outlet property="firstTimestepUnitLabel" destination="Raf-MB-9i8" id="NJn-Ig-qtH"/>
                         <outlet property="heightConstraint" destination="Ir5-hM-jfj" id="Q2n-xJ-WRg"/>
                         <outlet property="maxTimestepStackView" destination="fih-AT-QhU" id="My0-IN-rDy"/>
+                        <outlet property="parameterButton" destination="VgS-M5-hEf" id="bjP-Mb-vKB"/>
                         <outlet property="propagatorPopupButton" destination="rLA-vi-YO8" id="YYC-Tk-i8I"/>
                         <outlet property="secondTimestepTextBox" destination="CgV-eV-Zzt" id="yXf-GE-GS3"/>
                         <outlet property="secondTimestepUnitLabel" destination="sqa-iF-nue" id="l3w-X5-iCa"/>
@@ -1016,7 +1083,7 @@
                 </viewController>
                 <customObject id="0J2-iu-V05" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="213" y="1186"/>
+            <point key="canvasLocation" x="213" y="1181.5"/>
         </scene>
     </scenes>
     <resources>

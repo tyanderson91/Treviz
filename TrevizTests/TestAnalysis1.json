@@ -2,6 +2,13 @@
   "id" : "default",
   "terminalCondition" : "Terminal",
   "propagatorType" : "explicit",
+  "runSettings" : {
+    "defaultTimestep" : 0.123,
+    "minTimeStep" : 0.1
+    "maxTimeStep" : 0.5
+    "useAdaptiveTimestep" : true,
+    "propagatorType" : "rungeKutta4"
+  },
   "inputSettings" : [
 	{
 	  "symbol" : "𝑡",
