@@ -38,19 +38,19 @@ class InputsViewController: TZViewController, NSTableViewDataSource, NSTableView
         runSettingsViewController = storyboard.instantiateController(identifier: "RunSettingsViewController") { aCoder in
             RunSettingsViewController(coder: aCoder, analysis: self.analysis, phase: self.analysis.phases[0])
         }
-        /*physicsViewController = storyboard.instantiateController(identifier: "PhysicsViewController") { aCoder in
+        physicsViewController = storyboard.instantiateController(identifier: "PhysicsViewController") { aCoder in
             PhysicsViewController(coder: aCoder, analysis: self.analysis, phase: self.analysis.phases[0])
         }
-        stack.addViewController(physicsViewController)*/
         //let vehicleViewController = (stack.addViewController(fromStoryboardId: "Inputs", withIdentifier: "VehicleViewController", analysis: analysis) as! VehicleViewController)
         initStateViewController = storyboard.instantiateController(identifier: "InitStateViewController") { aCoder in
             InitStateViewController(coder: aCoder, analysis: self.analysis, phase: self.analysis.phases[0])
         }
         stack.addViewController(runSettingsViewController)
+        stack.addViewController(physicsViewController)
         stack.addViewController(initStateViewController)
         
         for thisController in [runSettingsViewController,
-                               //physicsViewController,
+                               physicsViewController,
                                //vehicleViewController,
                                initStateViewController]{
             self.addChild(thisController!)

@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class ParameterSelectorButton: NSButton {
+@IBDesignable class ParameterSelectorButton: NSButton {
 
     private func rectInset(in rect: CGRect, by inset: CGFloat)->CGRect {
         let newRect = CGRect(x: rect.minX+inset, y: rect.minY+inset, width: rect.width-2*inset, height: rect.height-2*inset)

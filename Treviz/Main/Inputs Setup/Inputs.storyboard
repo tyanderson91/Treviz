@@ -226,7 +226,7 @@
                                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                             <prototypeCellViews>
                                                                 <button identifier="initStateParamCheckBoxView" verticalHuggingPriority="750" id="Q4p-6L-kwQ" userLabel="Value check" customClass="ParameterSelectorButton" customModule="Treviz" customModuleProvider="target">
-                                                                    <rect key="frame" x="289" y="1" width="54" height="18"/>
+                                                                    <rect key="frame" x="289" y="1" width="53" height="18"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                     <buttonCell key="cell" type="check" title="Check" bezelStyle="regularSquare" imagePosition="only" alignment="center" inset="2" id="926-Li-fLp">
                                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -237,7 +237,7 @@
                                                                     </connections>
                                                                 </button>
                                                                 <tableCellView identifier="initStateHasParamCellView" wantsLayer="YES" id="Mlb-wb-KFY" userLabel="Has Params Cell View">
-                                                                    <rect key="frame" x="289" y="22" width="54" height="17"/>
+                                                                    <rect key="frame" x="289" y="22" width="53" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
                                                                         <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="w35-en-TRi">
@@ -350,60 +350,285 @@
         <scene sceneID="VOw-ih-bT1">
             <objects>
                 <viewController title="Physics Model" storyboardIdentifier="PhysicsViewController" id="nO6-jD-DH1" customClass="PhysicsViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="I4F-E2-8ug" customClass="StackBaseView" customModule="Treviz" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="281" height="21"/>
+                    <view key="view" misplaced="YES" id="I4F-E2-8ug" customClass="StackBaseView" customModule="Treviz" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="356" height="233"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <customView horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="500" translatesAutoresizingMaskIntoConstraints="NO" id="AmF-w8-wse">
-                                <rect key="frame" x="0.0" y="0.0" width="281" height="21"/>
+                            <customView horizontalCompressionResistancePriority="500" translatesAutoresizingMaskIntoConstraints="NO" id="AmF-w8-wse">
+                                <rect key="frame" x="0.0" y="0.0" width="357" height="233"/>
                                 <subviews>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cih-oc-nIr">
-                                        <rect key="frame" x="51" y="3" width="92" height="16"/>
-                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Physics Model" id="yTr-yl-FDp">
-                                            <font key="font" usesAppearanceFont="YES"/>
-                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
+                                    <gridView xPlacement="leading" yPlacement="center" rowAlignment="none" rowSpacing="10" columnSpacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="tmg-lh-g64">
+                                        <rect key="frame" x="10" y="5" width="337" height="223"/>
+                                        <rows>
+                                            <gridRow yPlacement="center" rowAlignment="firstBaseline" id="bGb-Yk-LGd"/>
+                                            <gridRow id="9gt-2H-6jc"/>
+                                            <gridRow id="cPP-Pv-Xcu"/>
+                                            <gridRow id="QEq-93-GPG"/>
+                                            <gridRow id="lFD-Kk-oVn"/>
+                                            <gridRow id="hQI-Nn-MSz"/>
+                                            <gridRow id="8P3-0L-3VI"/>
+                                        </rows>
+                                        <columns>
+                                            <gridColumn xPlacement="fill" width="14" id="XLt-gP-m3k"/>
+                                            <gridColumn xPlacement="leading" width="119" id="AWm-sW-v97"/>
+                                            <gridColumn id="yXK-N6-hpP"/>
+                                        </columns>
+                                        <gridCells>
+                                            <gridCell row="bGb-Yk-LGd" column="XLt-gP-m3k" id="Tjs-bp-v1O">
+                                                <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fP1-Iz-oqM" customClass="ParameterSelectorButton" customModule="Treviz" customModuleProvider="target">
+                                                    <rect key="frame" x="-2" y="191" width="18" height="18"/>
+                                                    <buttonCell key="cell" type="check" bezelStyle="regularSquare" imagePosition="left" inset="2" id="feP-PT-AMp">
+                                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                        <font key="font" metaFont="system"/>
+                                                    </buttonCell>
+                                                </button>
+                                            </gridCell>
+                                            <gridCell row="bGb-Yk-LGd" column="AWm-sW-v97" id="Q6v-Pf-k5t">
+                                                <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cih-oc-nIr">
+                                                    <rect key="frame" x="17" y="190" width="95" height="16"/>
+                                                    <textFieldCell key="cell" lineBreakMode="clipping" title="Physics Model:" id="yTr-yl-FDp">
+                                                        <font key="font" usesAppearanceFont="YES"/>
+                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                </textField>
+                                            </gridCell>
+                                            <gridCell row="bGb-Yk-LGd" column="yXK-N6-hpP" yPlacement="top" id="qJc-hk-Hq6">
+                                                <popUpButton key="contentView" verticalHuggingPriority="230" verticalCompressionResistancePriority="800" translatesAutoresizingMaskIntoConstraints="NO" id="RTv-kH-GyD">
+                                                    <rect key="frame" x="143" y="175" width="27" height="33"/>
+                                                    <popUpButtonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="LWZ-fo-bZ0">
+                                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                        <font key="font" metaFont="menu"/>
+                                                        <menu key="menu" id="Tiz-NQ-vo4"/>
+                                                    </popUpButtonCell>
+                                                    <connections>
+                                                        <action selector="didChangeSelection:" target="nO6-jD-DH1" id="VSr-Do-NBP"/>
+                                                    </connections>
+                                                </popUpButton>
+                                            </gridCell>
+                                            <gridCell row="9gt-2H-6jc" column="XLt-gP-m3k" id="o2e-Mc-dBg">
+                                                <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZFR-Za-wyA" customClass="ParameterSelectorButton" customModule="Treviz" customModuleProvider="target">
+                                                    <rect key="frame" x="-2" y="147" width="18" height="18"/>
+                                                    <buttonCell key="cell" type="check" bezelStyle="regularSquare" imagePosition="left" inset="2" id="2z2-Y9-EpP">
+                                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                        <font key="font" metaFont="system"/>
+                                                    </buttonCell>
+                                                </button>
+                                            </gridCell>
+                                            <gridCell row="9gt-2H-6jc" column="AWm-sW-v97" id="awY-EN-axt">
+                                                <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tyB-kj-aIZ">
+                                                    <rect key="frame" x="17" y="148" width="87" height="16"/>
+                                                    <textFieldCell key="cell" lineBreakMode="clipping" title="Central Body:" id="NUX-oz-IgD">
+                                                        <font key="font" usesAppearanceFont="YES"/>
+                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                </textField>
+                                            </gridCell>
+                                            <gridCell row="9gt-2H-6jc" column="yXK-N6-hpP" id="mDr-0a-fgM">
+                                                <popUpButton key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Oak-fd-xrW">
+                                                    <rect key="frame" x="141" y="142" width="77" height="25"/>
+                                                    <popUpButtonCell key="cell" type="push" title="Earth" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="E3o-wp-HXd" id="mn9-CG-aGg">
+                                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                        <font key="font" metaFont="system"/>
+                                                        <menu key="menu" id="cY4-QX-40P">
+                                                            <items>
+                                                                <menuItem title="Earth" state="on" id="E3o-wp-HXd"/>
+                                                                <menuItem title="Venus" id="aJq-dG-nYt"/>
+                                                                <menuItem title="Mars" id="BJx-sd-YsC"/>
+                                                            </items>
+                                                        </menu>
+                                                    </popUpButtonCell>
+                                                </popUpButton>
+                                            </gridCell>
+                                            <gridCell row="cPP-Pv-Xcu" column="XLt-gP-m3k" id="aQY-yI-Ivv">
+                                                <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="QYJ-6g-vXA" customClass="ParameterSelectorButton" customModule="Treviz" customModuleProvider="target">
+                                                    <rect key="frame" x="-2" y="118" width="18" height="18"/>
+                                                    <buttonCell key="cell" type="check" bezelStyle="regularSquare" imagePosition="left" inset="2" id="Jut-As-J5F">
+                                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                        <font key="font" metaFont="system"/>
+                                                    </buttonCell>
+                                                </button>
+                                            </gridCell>
+                                            <gridCell row="cPP-Pv-Xcu" column="AWm-sW-v97" id="UL4-wu-T1W">
+                                                <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sGK-Jf-97k">
+                                                    <rect key="frame" x="17" y="119" width="106" height="16"/>
+                                                    <textFieldCell key="cell" lineBreakMode="clipping" title="Include Rotation:" id="dtb-EI-Lr4">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                </textField>
+                                            </gridCell>
+                                            <gridCell row="cPP-Pv-Xcu" column="yXK-N6-hpP" id="5v0-UM-hB8">
+                                                <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JkS-Wy-UHs">
+                                                    <rect key="frame" x="141" y="118" width="18" height="18"/>
+                                                    <buttonCell key="cell" type="check" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="vfZ-f4-uzo">
+                                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                        <font key="font" metaFont="system"/>
+                                                    </buttonCell>
+                                                </button>
+                                            </gridCell>
+                                            <gridCell row="QEq-93-GPG" column="XLt-gP-m3k" id="PGg-uG-8qi">
+                                                <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JWz-b2-udc" customClass="ParameterSelectorButton" customModule="Treviz" customModuleProvider="target">
+                                                    <rect key="frame" x="-2" y="90" width="18" height="18"/>
+                                                    <buttonCell key="cell" type="check" bezelStyle="regularSquare" imagePosition="left" inset="2" id="ePg-My-NGp">
+                                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                        <font key="font" metaFont="system"/>
+                                                    </buttonCell>
+                                                </button>
+                                            </gridCell>
+                                            <gridCell row="QEq-93-GPG" column="AWm-sW-v97" id="8KD-uJ-Iiy">
+                                                <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OQP-0F-Sdf">
+                                                    <rect key="frame" x="17" y="91" width="75" height="16"/>
+                                                    <textFieldCell key="cell" lineBreakMode="clipping" title="Base CSYS:" id="gza-eV-IFW">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                </textField>
+                                            </gridCell>
+                                            <gridCell row="QEq-93-GPG" column="yXK-N6-hpP" id="bX9-LA-eEE">
+                                                <popUpButton key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vie-Qg-23W">
+                                                    <rect key="frame" x="141" y="85" width="83" height="25"/>
+                                                    <popUpButtonCell key="cell" type="push" title="Default" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="yVQ-EE-QaP" id="2bU-Ln-yfE">
+                                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                        <font key="font" metaFont="system"/>
+                                                        <menu key="menu" id="Emn-RW-QZv">
+                                                            <items>
+                                                                <menuItem title="Default" state="on" id="yVQ-EE-QaP"/>
+                                                            </items>
+                                                        </menu>
+                                                    </popUpButtonCell>
+                                                </popUpButton>
+                                            </gridCell>
+                                            <gridCell row="lFD-Kk-oVn" column="XLt-gP-m3k" id="fhT-EJ-cUB">
+                                                <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xz5-kz-eDY" customClass="ParameterSelectorButton" customModule="Treviz" customModuleProvider="target">
+                                                    <rect key="frame" x="-2" y="59" width="18" height="18"/>
+                                                    <buttonCell key="cell" type="check" bezelStyle="regularSquare" imagePosition="left" inset="2" id="WD5-5v-g27">
+                                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                        <font key="font" metaFont="system"/>
+                                                    </buttonCell>
+                                                </button>
+                                            </gridCell>
+                                            <gridCell row="lFD-Kk-oVn" column="AWm-sW-v97" id="5Zy-nk-Fmr">
+                                                <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Pf2-a8-aPl">
+                                                    <rect key="frame" x="17" y="60" width="51" height="16"/>
+                                                    <textFieldCell key="cell" lineBreakMode="clipping" title="Gravity:" id="feh-Bx-emW">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                </textField>
+                                            </gridCell>
+                                            <gridCell row="lFD-Kk-oVn" column="yXK-N6-hpP" id="5Lu-bo-Gqz">
+                                                <popUpButton key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xYN-Bk-KCI">
+                                                    <rect key="frame" x="141" y="54" width="173" height="25"/>
+                                                    <popUpButtonCell key="cell" type="push" title="Constant Acceleration" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="DVB-9W-28j" id="L5t-5r-hdI">
+                                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                        <font key="font" metaFont="menu"/>
+                                                        <menu key="menu" id="1Fs-yz-Ayr">
+                                                            <items>
+                                                                <menuItem title="Constant Acceleration" state="on" id="DVB-9W-28j"/>
+                                                                <menuItem title="Point Mass" id="pc3-x8-3PB"/>
+                                                                <menuItem title="J2" id="YLm-ZO-8UF"/>
+                                                                <menuItem title="Three-Body" id="FAB-Ki-poD"/>
+                                                            </items>
+                                                        </menu>
+                                                    </popUpButtonCell>
+                                                </popUpButton>
+                                            </gridCell>
+                                            <gridCell row="hQI-Nn-MSz" column="XLt-gP-m3k" id="inK-0o-KYP">
+                                                <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YPk-SS-aIm" customClass="ParameterSelectorButton" customModule="Treviz" customModuleProvider="target">
+                                                    <rect key="frame" x="-2" y="28" width="18" height="18"/>
+                                                    <buttonCell key="cell" type="check" bezelStyle="regularSquare" imagePosition="left" inset="2" id="129-Sk-DaD">
+                                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                        <font key="font" metaFont="system"/>
+                                                    </buttonCell>
+                                                </button>
+                                            </gridCell>
+                                            <gridCell row="hQI-Nn-MSz" column="AWm-sW-v97" id="fF3-dg-KvN">
+                                                <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fK8-b3-58z">
+                                                    <rect key="frame" x="17" y="29" width="82" height="16"/>
+                                                    <textFieldCell key="cell" lineBreakMode="clipping" title="Atmosphere:" id="TMc-xO-Mgl">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                </textField>
+                                            </gridCell>
+                                            <gridCell row="hQI-Nn-MSz" column="yXK-N6-hpP" id="6wm-o9-CaU">
+                                                <popUpButton key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mdR-9i-Asi">
+                                                    <rect key="frame" x="141" y="23" width="194" height="25"/>
+                                                    <popUpButtonCell key="cell" type="push" title="None" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="Ovn-an-Gs6" id="yNj-jQ-Nta">
+                                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                        <font key="font" metaFont="menu"/>
+                                                        <menu key="menu" id="qe6-sy-oKH">
+                                                            <items>
+                                                                <menuItem title="None" state="on" id="Ovn-an-Gs6"/>
+                                                                <menuItem title="Exponential" id="DXX-9f-Obv"/>
+                                                                <menuItem title="Table lookup (no winds)" id="QVu-Pa-q6s"/>
+                                                                <menuItem title="Table lookup (with winds)" id="aK1-JR-vSj"/>
+                                                            </items>
+                                                        </menu>
+                                                    </popUpButtonCell>
+                                                </popUpButton>
+                                            </gridCell>
+                                            <gridCell row="8P3-0L-3VI" column="XLt-gP-m3k" id="2WK-nr-2i4">
+                                                <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eHN-i0-Ujf" customClass="ParameterSelectorButton" customModule="Treviz" customModuleProvider="target">
+                                                    <rect key="frame" x="-2" y="-1" width="18" height="18"/>
+                                                    <buttonCell key="cell" type="check" bezelStyle="regularSquare" imagePosition="left" inset="2" id="Zxj-Ib-Dr2">
+                                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                        <font key="font" metaFont="system"/>
+                                                    </buttonCell>
+                                                </button>
+                                            </gridCell>
+                                            <gridCell row="8P3-0L-3VI" column="AWm-sW-v97" id="XkS-B9-rXL">
+                                                <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="o3S-co-qCo">
+                                                    <rect key="frame" x="17" y="0.0" width="94" height="16"/>
+                                                    <textFieldCell key="cell" lineBreakMode="clipping" title="Vehicle Inertia:" id="wa3-0P-sfw">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                </textField>
+                                            </gridCell>
+                                            <gridCell row="8P3-0L-3VI" column="yXK-N6-hpP" id="vAE-jX-OBw">
+                                                <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Rd5-mD-L8T">
+                                                    <rect key="frame" x="141" y="-1" width="18" height="18"/>
+                                                    <buttonCell key="cell" type="check" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="FWE-t3-qCV">
+                                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                        <font key="font" metaFont="system"/>
+                                                    </buttonCell>
+                                                </button>
+                                            </gridCell>
+                                        </gridCells>
+                                    </gridView>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="tmg-lh-g64" firstAttribute="leading" secondItem="AmF-w8-wse" secondAttribute="leading" constant="10" id="Ga9-Du-t9D"/>
+                                    <constraint firstItem="tmg-lh-g64" firstAttribute="height" secondItem="AmF-w8-wse" secondAttribute="height" constant="-10" id="VRq-zg-Q84"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" id="cTS-5A-538"/>
-                                    <constraint firstItem="cih-oc-nIr" firstAttribute="trailing" secondItem="AmF-w8-wse" secondAttribute="centerX" id="jGY-wK-xQK"/>
-                                    <constraint firstItem="cih-oc-nIr" firstAttribute="centerY" secondItem="AmF-w8-wse" secondAttribute="centerY" id="zv6-6p-jPP"/>
+                                    <constraint firstAttribute="trailing" secondItem="tmg-lh-g64" secondAttribute="trailing" constant="10" id="kis-LW-D5o"/>
+                                    <constraint firstItem="tmg-lh-g64" firstAttribute="top" secondItem="AmF-w8-wse" secondAttribute="top" constant="5" id="lKo-IP-G5U"/>
                                 </constraints>
                             </customView>
-                            <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RTv-kH-GyD">
-                                <rect key="frame" x="149" y="-3" width="45" height="25"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40" id="YlX-7m-a52"/>
-                                </constraints>
-                                <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="LWZ-fo-bZ0">
-                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="menu"/>
-                                    <menu key="menu" id="Tiz-NQ-vo4"/>
-                                </popUpButtonCell>
-                                <connections>
-                                    <action selector="didChangeSelection:" target="nO6-jD-DH1" id="VSr-Do-NBP"/>
-                                </connections>
-                            </popUpButton>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="AmF-w8-wse" secondAttribute="trailing" id="CqL-0t-Ho0"/>
-                            <constraint firstItem="RTv-kH-GyD" firstAttribute="top" secondItem="I4F-E2-8ug" secondAttribute="top" id="K8y-qy-y88"/>
                             <constraint firstItem="AmF-w8-wse" firstAttribute="leading" secondItem="I4F-E2-8ug" secondAttribute="leading" id="SI2-gj-7ac"/>
                             <constraint firstAttribute="bottom" secondItem="AmF-w8-wse" secondAttribute="bottom" id="kv3-g4-4IB"/>
                             <constraint firstItem="AmF-w8-wse" firstAttribute="top" secondItem="I4F-E2-8ug" secondAttribute="top" id="nm8-ht-TFq"/>
-                            <constraint firstItem="RTv-kH-GyD" firstAttribute="leading" secondItem="cih-oc-nIr" secondAttribute="trailing" constant="10" id="vqv-8U-vOK"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="heightConstraint" destination="cTS-5A-538" id="xK8-5J-vvh"/>
-                        <outlet property="terminalConditionPopupButton" destination="RTv-kH-GyD" id="33G-LB-o2V"/>
+                        <outlet property="physicsSelectorPopupButton" destination="RTv-kH-GyD" id="33G-LB-o2V"/>
                     </connections>
                 </viewController>
                 <customObject id="W4Z-T9-kdE" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="227" y="884"/>
+            <point key="canvasLocation" x="323" y="824.5"/>
         </scene>
         <!--Phase-->
         <scene sceneID="C4I-xd-iuZ">
@@ -447,17 +672,17 @@
             <objects>
                 <viewController title="Inputs View Controller" identifier="inputsRestoration" storyboardIdentifier="inputs" id="BWH-wW-vxd" customClass="InputsViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="V9E-Gq-8Gm">
-                        <rect key="frame" x="0.0" y="0.0" width="400" height="436"/>
+                        <rect key="frame" x="0.0" y="0.0" width="485" height="436"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView horizontalHuggingPriority="500" verticalHuggingPriority="750" verticalCompressionResistancePriority="250" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="niT-kp-oja">
-                                <rect key="frame" x="0.0" y="117" width="400" height="250"/>
+                                <rect key="frame" x="0.0" y="117" width="485" height="250"/>
                                 <clipView key="contentView" id="KbV-Po-mOw">
-                                    <rect key="frame" x="1" y="1" width="398" height="248"/>
+                                    <rect key="frame" x="1" y="1" width="483" height="248"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <stackView identifier="Analysis Inputs Stack View" distribution="fill" orientation="vertical" alignment="centerX" spacing="1" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" verticalClippingResistancePriority="900" verticalHuggingPriority="750" verticalCompressionResistancePriority="250" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cz5-QM-gft" customClass="CustomStackView" customModule="Treviz" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="248" width="398" height="0.0"/>
+                                            <rect key="frame" x="0.0" y="248" width="483" height="0.0"/>
                                         </stackView>
                                     </subviews>
                                     <constraints>
@@ -471,16 +696,16 @@
                                     <constraint firstAttribute="height" constant="250" placeholder="YES" id="LQR-cc-ftu"/>
                                 </constraints>
                                 <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="c0b-x2-qE9">
-                                    <rect key="frame" x="1" y="233" width="398" height="16"/>
+                                    <rect key="frame" x="1" y="233" width="483" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="7nO-4f-o6V">
-                                    <rect key="frame" x="383" y="1" width="16" height="248"/>
+                                    <rect key="frame" x="468" y="1" width="16" height="248"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
                             <containerView horizontalHuggingPriority="500" verticalHuggingPriority="150" translatesAutoresizingMaskIntoConstraints="NO" id="LWo-gC-UYm">
-                                <rect key="frame" x="0.0" y="0.0" width="400" height="117"/>
+                                <rect key="frame" x="0.0" y="0.0" width="485" height="117"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" priority="900" constant="500" id="VPp-5e-8Mv"/>
                                 </constraints>
@@ -489,7 +714,7 @@
                                 </connections>
                             </containerView>
                             <containerView translatesAutoresizingMaskIntoConstraints="NO" id="L3y-BR-B63">
-                                <rect key="frame" x="0.0" y="366" width="400" height="70"/>
+                                <rect key="frame" x="0.0" y="366" width="485" height="70"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="70" id="uel-9I-ihq"/>
                                 </constraints>
@@ -517,7 +742,7 @@
                 </viewController>
                 <customObject id="ccH-Wh-n6o" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-205" y="654"/>
+            <point key="canvasLocation" x="-162.5" y="654"/>
         </scene>
         <!--Environment-->
         <scene sceneID="4o4-RC-vSc">
@@ -648,7 +873,7 @@
                 </viewController>
                 <customObject id="Nbg-fU-7Wu" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="151" y="1017"/>
+            <point key="canvasLocation" x="163" y="1038"/>
         </scene>
         <!--Param Table View-->
         <scene sceneID="HKS-bR-VCd">
@@ -734,11 +959,11 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView identifier="paramValueCellView" id="XMw-Qv-d7Z">
-                                                            <rect key="frame" x="131" y="1" width="56" height="20"/>
+                                                            <rect key="frame" x="131" y="1" width="55" height="20"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DqV-CQ-wcx">
-                                                                    <rect key="frame" x="0.0" y="3" width="56" height="17"/>
+                                                                    <rect key="frame" x="0.0" y="3" width="55" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="Val" id="JLr-u2-Eac">
                                                                         <font key="font" metaFont="system"/>
@@ -769,7 +994,7 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView identifier="UnitsCellView" id="I1m-ws-I6z">
-                                                            <rect key="frame" x="190" y="1" width="56" height="20"/>
+                                                            <rect key="frame" x="189" y="1" width="56" height="20"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Ig-M6-hiQ">
@@ -830,7 +1055,7 @@
                 </viewController>
                 <customObject id="Zbs-Qb-34c" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="307" y="720"/>
+            <point key="canvasLocation" x="254" y="602"/>
         </scene>
         <!--Run Settings View Controller-->
         <scene sceneID="qmf-V1-g4n">
@@ -852,9 +1077,6 @@
                                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
-                                                <connections>
-                                                    <action selector="parameterButton:" target="hYm-K2-kci" id="HJQ-Lg-Uk7"/>
-                                                </connections>
                                             </button>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hlD-tq-VMz">
                                                 <rect key="frame" x="18" y="3" width="76" height="16"/>
@@ -901,9 +1123,6 @@
                                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
-                                                <connections>
-                                                    <action selector="parameterButton:" target="hYm-K2-kci" id="vLY-sI-x6P"/>
-                                                </connections>
                                             </button>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="abc-HI-qSl">
                                                 <rect key="frame" x="18" y="3" width="86" height="16"/>
@@ -958,9 +1177,6 @@
                                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
-                                                <connections>
-                                                    <action selector="parameterButton:" target="hYm-K2-kci" id="3sq-Ps-pbM"/>
-                                                </connections>
                                             </button>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WVU-ej-iXy">
                                                 <rect key="frame" x="18" y="3" width="108" height="16"/>
@@ -1015,9 +1231,6 @@
                                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
-                                                <connections>
-                                                    <action selector="parameterButton:" target="hYm-K2-kci" id="iu7-J5-ZLJ"/>
-                                                </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wd1-XN-Z9Y">
                                                 <rect key="frame" x="20" y="-1" width="136" height="18"/>
@@ -1075,7 +1288,6 @@
                         <outlet property="firstTimestepUnitLabel" destination="Raf-MB-9i8" id="NJn-Ig-qtH"/>
                         <outlet property="heightConstraint" destination="Ir5-hM-jfj" id="Q2n-xJ-WRg"/>
                         <outlet property="maxTimestepStackView" destination="fih-AT-QhU" id="My0-IN-rDy"/>
-                        <outlet property="parameterButton" destination="VgS-M5-hEf" id="bjP-Mb-vKB"/>
                         <outlet property="propagatorPopupButton" destination="rLA-vi-YO8" id="YYC-Tk-i8I"/>
                         <outlet property="secondTimestepTextBox" destination="CgV-eV-Zzt" id="yXf-GE-GS3"/>
                         <outlet property="secondTimestepUnitLabel" destination="sqa-iF-nue" id="l3w-X5-iCa"/>
