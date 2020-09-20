@@ -33,8 +33,8 @@ class ParamTableViewController: TZViewController , NSTableViewDelegate, NSTableV
             return InputsViewController.nameCellView(view: tableView, thisInput: thisParam)
         case NSUserInterfaceItemIdentifier.paramValueColumn:
             return InputsViewController.paramValueCellView(view: tableView, thisInput: thisParam as? Variable)
-        case NSUserInterfaceItemIdentifier.unitsColumn:
-            return InputsViewController.unitsCellView(view: tableView, thisInput: thisParam as? Variable)
+        //case NSUserInterfaceItemIdentifier.paramTypeCellView:
+            //return InputsViewController.unitsCellView(view: tableView, thisInput: thisParam as? Variable)
         default:
             return nil
         }
@@ -45,7 +45,7 @@ class ParamTableViewController: TZViewController , NSTableViewDelegate, NSTableV
             switch tableColumn?.identifier{
             case NSUserInterfaceItemIdentifier.nameColumn: return thisSetting.name
             case NSUserInterfaceItemIdentifier.paramValueColumn: return thisSetting.value
-            case NSUserInterfaceItemIdentifier.unitsColumn: return thisSetting.units
+            //case NSUserInterfaceItemIdentifier.unitsColumn: return thisSetting.units
             default: return nil
             }
         }
@@ -64,15 +64,6 @@ class ParamTableViewController: TZViewController , NSTableViewDelegate, NSTableV
         var thisParam = params[row]
         thisParam.isParam = false
         inputsViewController?.reloadParams()
-    }
-    
-    
-    @IBAction func editUnits(_ sender: NSTextField) {
-        let curRow = tableView.row(for: sender)
-        if let thisParam = analysis.parameters[curRow] as? Variable{
-            thisParam.units = sender.stringValue
-            inputsViewController?.reloadParams()
-        }
     }
     
     @IBAction func editValues(_ sender: NSTextField) {

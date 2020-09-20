@@ -81,6 +81,7 @@
 		CDD5049622252AF900B29751 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD5049522252AF900B29751 /* AppDelegate.swift */; };
 		CDD5049822252AFA00B29751 /* InputsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD5049722252AFA00B29751 /* InputsViewController.swift */; };
 		CDD5049F22252AFD00B29751 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDD5049E22252AFD00B29751 /* Images.xcassets */; };
+		CDD77FC2250D475E007E90BF /* PhysicsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD77FC1250D475E007E90BF /* PhysicsModel.swift */; };
 		CDDA8F2524B2C8B4002936E6 /* Output Handling Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDA8F2324B2C8B4002936E6 /* Output Handling Protocols.swift */; };
 		CDDA8F2824B44213002936E6 /* DefaultVariableCalculations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDA8F2624B44213002936E6 /* DefaultVariableCalculations.swift */; };
 		CDDA8F2924B4451F002936E6 /* CalculatedVariable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDA8F2124AEE386002936E6 /* CalculatedVariable.swift */; };
@@ -111,6 +112,8 @@
 		CDE2B5C124C2C729002026E0 /* TZPlotType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4AD70C23BD4C0C00FC815F /* TZPlotType.swift */; };
 		CDE2B5C224C2C729002026E0 /* InitStateHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB7C73B2352B58300BC50F1 /* InitStateHeader.swift */; };
 		CDE2B5C324C2C729002026E0 /* MathFuncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD870F3324B448D7004A4D42 /* MathFuncs.swift */; };
+		CDE6CDD7250E7D7C0093C4E1 /* ParamSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE6CDD6250E7D7C0093C4E1 /* ParamSetting.swift */; };
+		CDE6CDD8250E7D7C0093C4E1 /* ParamSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE6CDD6250E7D7C0093C4E1 /* ParamSetting.swift */; };
 		CDF09AB724AC473B0068BE4B /* PhasedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF09AB624AC473B0068BE4B /* PhasedViewController.swift */; };
 		CDF1670C2237A10400CD9590 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF1670B2237A10400CD9590 /* MainWindowController.swift */; };
 		CDF2338A242DCD8100B8EF40 /* EditableHeaderTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF23382242DCD8000B8EF40 /* EditableHeaderTextField.swift */; };
@@ -261,6 +264,7 @@
 		CDD504A422252AFD00B29751 /* Treviz.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Treviz.entitlements; sourceTree = "<group>"; };
 		CDD60A902345BF5C00249987 /* TZTextOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TZTextOutput.swift; sourceTree = "<group>"; };
 		CDD60A962345C5AE00249987 /* TZOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TZOutput.swift; sourceTree = "<group>"; };
+		CDD77FC1250D475E007E90BF /* PhysicsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsModel.swift; sourceTree = "<group>"; };
 		CDDA8F1C24AD989D002936E6 /* PhaseVars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhaseVars.swift; sourceTree = "<group>"; };
 		CDDA8F2124AEE386002936E6 /* CalculatedVariable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatedVariable.swift; sourceTree = "<group>"; };
 		CDDA8F2324B2C8B4002936E6 /* Output Handling Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Output Handling Protocols.swift"; path = "Treviz/Model/Analysis/Output Handling Protocols.swift"; sourceTree = SOURCE_ROOT; };
@@ -269,6 +273,7 @@
 		CDE078F3224806EF00815E7F /* Inputs.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Inputs.storyboard; sourceTree = "<group>"; };
 		CDE0795A2249EC7400815E7F /* InitStateStructure.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = InitStateStructure.plist; sourceTree = "<group>"; };
 		CDE2A5172471F27700DB2B45 /* AnalysisFactoryInits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisFactoryInits.swift; sourceTree = "<group>"; };
+		CDE6CDD6250E7D7C0093C4E1 /* ParamSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParamSetting.swift; sourceTree = "<group>"; };
 		CDF09AB624AC473B0068BE4B /* PhasedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PhasedViewController.swift; path = "Treviz/Main/Inputs Setup/PhasedViewController.swift"; sourceTree = SOURCE_ROOT; };
 		CDF1670B2237A10400CD9590 /* MainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
 		CDF23382242DCD8000B8EF40 /* EditableHeaderTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditableHeaderTextField.swift; sourceTree = "<group>"; };
@@ -355,6 +360,7 @@
 				CD870F3324B448D7004A4D42 /* MathFuncs.swift */,
 				CD0F113E250560A700C88B05 /* TZRunSettings.swift */,
 				CD280F49233B45670004263F /* TZPlot.swift */,
+				CDD77FC1250D475E007E90BF /* PhysicsModel.swift */,
 				CD01037623E78EED00D336C2 /* Analysis */,
 				CDAF398D24A7209200309CA9 /* Phase */,
 			);
@@ -370,6 +376,7 @@
 				CDE2A5172471F27700DB2B45 /* AnalysisFactoryInits.swift */,
 				CD1A5B5C23FD1E9A00BE3BFB /* AnalysisYaml.swift */,
 				CD0F010823654ED400C920AA /* AnalysisRunFunctions.swift */,
+				CDE6CDD6250E7D7C0093C4E1 /* ParamSetting.swift */,
 				CD92D6B82442302800483B8E /* TZLogger.swift */,
 			);
 			path = Analysis;
@@ -494,6 +501,7 @@
 		CD727F3623446C26003E6368 /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
+				CD11FA8623408173001A3695 /* AddOutputViewController.swift */,
 				CD2D0DAE224382F70012978E /* SingleAxisOutputSetupViewController.swift */,
 				CD2D0DA9224382F70012978E /* TwoAxisOutputSetupViewController.swift */,
 				CD2D0D96224382F70012978E /* ThreeAxisOutputSetupViewController.swift */,
@@ -506,7 +514,6 @@
 			isa = PBXGroup;
 			children = (
 				CD727F3623446C26003E6368 /* Subviews */,
-				CD11FA8623408173001A3695 /* AddOutputViewController.swift */,
 				CD4AD70723A20EE100FC815F /* OutputSetupViewController.swift */,
 				CD2D0DA6224382F70012978E /* OutputSetup.storyboard */,
 			);
@@ -709,7 +716,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1110;
-				LastUpgradeCheck = 1150;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = "Tyler Anderson";
 				TargetAttributes = {
 					CD0F010F23656B7200C920AA = {
@@ -879,6 +886,7 @@
 			files = (
 				CDE2B5A624C2C71D002026E0 /* AnalysisYaml.swift in Sources */,
 				CDF3D1A6225057270064D70C /* TZViewController.swift in Sources */,
+				CDE6CDD7250E7D7C0093C4E1 /* ParamSetting.swift in Sources */,
 				CD3F5E5A22EE4FFE00E4CF20 /* ConditionsViewController.swift in Sources */,
 				CDE2B5A824C2C71D002026E0 /* TZLogger.swift in Sources */,
 				CDE2B5B924C2C729002026E0 /* Variable.swift in Sources */,
@@ -939,6 +947,7 @@
 				CD28477722FF9C8800D192A9 /* CollapsibleGridView.swift in Sources */,
 				CDE2B5C124C2C729002026E0 /* TZPlotType.swift in Sources */,
 				CDE2B5BE24C2C729002026E0 /* OutputDataSet.swift in Sources */,
+				CDD77FC2250D475E007E90BF /* PhysicsModel.swift in Sources */,
 				CD0F113F250560A700C88B05 /* TZRunSettings.swift in Sources */,
 				CDA35CD524ECE5A0005BF24D /* PhaseSelectorViewController.swift in Sources */,
 				CDE2B5C324C2C729002026E0 /* MathFuncs.swift in Sources */,
@@ -968,6 +977,7 @@
 				CD6CCF3D244D2FFB0051F76D /* OutputDataSet.swift in Sources */,
 				CDFAD0F923EA84FE00CE7424 /* Variable.swift in Sources */,
 				CDFAD0FA23EA84FE00CE7424 /* Vehicle.swift in Sources */,
+				CDE6CDD8250E7D7C0093C4E1 /* ParamSetting.swift in Sources */,
 				CDDA8F2824B44213002936E6 /* DefaultVariableCalculations.swift in Sources */,
 				CDFAD0FB23EA84FE00CE7424 /* TZOutput.swift in Sources */,
 				CDAF399324A7217500309CA9 /* PhaseRunFunctions.swift in Sources */,
@@ -1068,6 +1078,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1130,6 +1141,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;

@@ -10,6 +10,8 @@ import Foundation
 
 class InitStateViewController: PhasedViewController, NSOutlineViewDelegate, NSOutlineViewDataSource {
 
+    @IBOutlet weak var outlineScrollView: NSScrollView!
+    @IBOutlet weak var outlineClipView: NSClipView!
     @IBOutlet weak var outlineView: NSOutlineView!
     var inputVars : [Parameter] { phase.varList }
     var inputVarStructure : InitStateHeader { return phase.initStateGroups }
@@ -20,6 +22,7 @@ class InitStateViewController: PhasedViewController, NSOutlineViewDelegate, NSOu
     private var terminalConditionCandidates: [Condition] {
         analysis.conditions.filter { !$0.containsGlobalCondition() }
     }
+    @IBOutlet weak var outlineScrollViewHeightConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +31,22 @@ class InitStateViewController: PhasedViewController, NSOutlineViewDelegate, NSOu
         //Load data
         outlineView.reloadData()
         getTerminalConditionPopupOptions()
+        //outlineView.postsBoundsChangedNotifications = true
+        updateOutlineViewHeight()
+        //outlineScrollView.hasVerticalScroller = false
+        outlineScrollView.verticalScroller?.isEnabled = false
+        outlineScrollView.verticalScrollElasticity = .none
+        outlineScrollView.verticalScroller?.refusesFirstResponder = true
+    }
+    
+    func updateOutlineViewHeight() {
+        //outlineView.reloadData()
+        //outlineScrollViewHeightConstraint.constant = outlineView.intrinsicContentSize.height*1.1 + 30
+        //analysis.logMessage("newheight: \(outlineScrollViewHeightConstraint.constant)")
+    }
+    
+    @IBAction func outlineViewAction(_ sender: Any) {
+        updateOutlineViewHeight()
     }
     
     override func viewDidAppear() {
@@ -35,7 +54,13 @@ class InitStateViewController: PhasedViewController, NSOutlineViewDelegate, NSOu
     
     func outlineViewColumnDidResize(_ notification: Notification) {
     }
-    
+        
+    func outlineViewItemDidExpand(_ notification: Notification) {
+        updateOutlineViewHeight()
+    }
+    func outlineViewItemDidCollapse(_ notification: Notification) {
+        updateOutlineViewHeight()
+    }
     override func didDisclose() {
     }   
     
@@ -172,4 +197,3 @@ class InitStateViewController: PhasedViewController, NSOutlineViewDelegate, NSOu
         setSelection()
     }
 }
-

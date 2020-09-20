@@ -36,16 +36,19 @@ class TZPhase: Codable {
     var varCalculationsSingle = Dictionary<VariableID,(inout StateDictSingle)->VarValue>()
     var varCalculationsMultiple = Dictionary<VariableID,(inout StateDictArray)->[VarValue]>()
     var initStateGroups : InitStateHeader!
-
+    var allParams: [Parameter] = []
+    
     init(id idIn: String){
         id = idIn
         runSettings = TZRunSettings()
         setupConstants()
+        gatherParams()
     }
     init(id idIn: String, runSettings runSettingsIn: TZRunSettings){
         id = idIn
         runSettings = runSettingsIn
         setupConstants()
+        gatherParams()
     }
     
     // MARK: Codable implementation
@@ -126,5 +129,14 @@ class TZPhase: Codable {
                 terminalCondition = cond
             }
         }
+    }
+}
+
+
+extension TZPhase {
+    func gatherParams() {
+        allParams = []
+        allParams.append(contentsOf: varList)
+        //allParams.append()
     }
 }

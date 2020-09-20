@@ -96,6 +96,11 @@ class Analysis: NSObject, Codable {
         }
     }
 
+    // Run variant parameters
+    var runParams: [ParameterAnalysisSetting] = []
+    var useGroupedVariants: Bool = false
+    var numMonteCarloRuns: Int = 1
+    
     // Logging
     var _bufferLog = NSMutableAttributedString() // This string is used to store any logs prior to the initialization of the log message text view
     var logMessageView: TZLogger? {

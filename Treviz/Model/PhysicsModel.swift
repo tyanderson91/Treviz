@@ -8,19 +8,20 @@
 
 import Foundation
 
-struct PhysicsModel: StringRepresentable {
-    let name: String
+struct PhysicsModel: StringValue {
+    
+    var valuestr: String
     let id: String
     let icon: NSImage?
     
     init(id: String, name: String) {
         self.id = id
-        self.name = name
+        self.valuestr = name
         if let fullImage = NSImage(named: id) {
             self.icon = fullImage
         } else { self.icon = nil }
     }
-    
+
     static let flat2d = PhysicsModel(id: "flat2d", name: "Flat Surface, planar")
     static let flat3d = PhysicsModel(id: "flat3d", name: "Flat Surface, 3D")
     static let round2dSingle = PhysicsModel(id: "round2dSingle", name: "Round Body, planar")
@@ -29,4 +30,12 @@ struct PhysicsModel: StringRepresentable {
     static let round3dMulti = PhysicsModel(id: "round3dMulti", name: "Multi-Body, 3D")
     
     static let allPhysicsModels: [PhysicsModel] = [.flat2d, .flat3d, .round2dSingle, .round3dSingle, .round2dMulti, .round3dMulti]
+}
+
+class PhysicsParamAnalysisSetting: ParameterAnalysisSetting {
+    init(phase: String) {
+        let baseID = "physicsmodel"
+        super.init(param: baseID.atPhase(phase))
+        options = PhysicsModel.allPhysicsModels
+    }
 }

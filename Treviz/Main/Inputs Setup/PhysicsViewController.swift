@@ -23,7 +23,7 @@ class PhysicsViewController: PhasedViewController {
         if analysis != nil {
         }
         for thisPhysicsModel in physicsModels {
-            let menuItem = NSMenuItem.init(title: thisPhysicsModel.name, action: nil, keyEquivalent: "")
+            let menuItem = NSMenuItem.init(title: thisPhysicsModel.valuestr, action: nil, keyEquivalent: "")
             menuItem.image = thisPhysicsModel.icon
             physicsSelectorPopupButton.menu?.addItem(menuItem)
         }

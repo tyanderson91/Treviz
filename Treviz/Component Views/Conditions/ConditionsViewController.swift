@@ -118,7 +118,7 @@ class ConditionsViewController: TZViewController, VariableGetter, NSTableViewDel
             unionTypeDropdown.selectItem(withTitle: "and")
             curCondition.unionType = .and
         }
-        _ = showConditionView(condition: condition)
+        showConditionView(condition: condition)
     }
     
     private func formatConditionEditor(){

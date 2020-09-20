@@ -182,7 +182,7 @@ extension MainWindowController: NSToolbarDelegate {
             else {
                 toolbar.toggleAnalysisRun.image = NSImage(named: "stop.fill")
                 viewController.analysisProgressBar.doubleValue = analysis.pctComplete
-                _ = asys.runAnalysis()
+                asys.runAnalysis()
             }
         }
     }

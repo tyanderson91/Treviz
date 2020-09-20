@@ -29,6 +29,10 @@ extension NSUserInterfaceItemIdentifier{
     
     //Views in param view only
     static let paramValueColumn = NSUserInterfaceItemIdentifier.init("ParamValueColumn")
+    static let paramTypeColumn = NSUserInterfaceItemIdentifier.init("ParamVarTypeColumn")
+    static let paramSummaryColumn = NSUserInterfaceItemIdentifier.init("ParamSummaryColumn")
+    static let paramTypeCellView = NSUserInterfaceItemIdentifier.init("paramTypeCellView")
+    static let paramSummaryCellView = NSUserInterfaceItemIdentifier.init("paramSummaryCellView")
     static let paramValueCellView = NSUserInterfaceItemIdentifier.init("paramValueCellView")
 }
 
