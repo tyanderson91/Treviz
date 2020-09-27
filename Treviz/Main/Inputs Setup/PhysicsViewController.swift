@@ -15,7 +15,9 @@ class PhysicsViewController: PhasedViewController {
     @IBOutlet weak var physicsSelectorPopupButton: NSPopUpButton!
 
     let physicsModels = PhysicsModel.allPhysicsModels
-    
+    var curModelParam: EnumGroupParam { return phase.physicsModelParam }
+    var inputsViewController: InputsViewController? {return parent as? InputsViewController}
+
     override func getHeaderTitle() -> String { return NSLocalizedString("Physics Model", comment: "") }
     
     override func viewDidLoad() {
@@ -37,5 +39,12 @@ class PhysicsViewController: PhasedViewController {
     }
     
     private func getPopupOptions(){
+    }
+    @IBAction func didSetPhysicsModelParam(_ sender: Any) {
+        guard let senderButton = sender as? ParameterSelectorButton else { return }
+        if senderButton.state == .off {
+            analysis.enableParam(param: curModelParam)
+        } else { analysis.disableParam(param: curModelParam) }
+        inputsViewController?.reloadParams()
     }
 }

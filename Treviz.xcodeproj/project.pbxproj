@@ -25,6 +25,9 @@
 		CD31EFF824C15F9E00ED435A /* AnalysisYaml.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1A5B5C23FD1E9A00BE3BFB /* AnalysisYaml.swift */; };
 		CD39717B2506F12D00A8047A /* RunSettingsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD39717A2506F12D00A8047A /* RunSettingsTest.swift */; };
 		CD39717D2506F2AC00A8047A /* TestHelperFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD39717C2506F2AC00A8047A /* TestHelperFunctions.swift */; };
+		CD3B2218251FD05300218E44 /* StringValueProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3B2217251FD05300218E44 /* StringValueProtocol.swift */; };
+		CD3B2219251FD05300218E44 /* StringValueProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3B2217251FD05300218E44 /* StringValueProtocol.swift */; };
+		CD3B2220251FE4A400218E44 /* PhysicsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD77FC1250D475E007E90BF /* PhysicsModel.swift */; };
 		CD3C187E23E2B03800E72EFF /* TZPlotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3C187D23E2B03700E72EFF /* TZPlotView.swift */; };
 		CD3E645225086399001F6C8F /* ParameterSelectorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3E645125086398001F6C8F /* ParameterSelectorButton.swift */; };
 		CD3F5E5822EE4DCD00E4CF20 /* Conditions.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD3F5E5722EE4DCD00E4CF20 /* Conditions.storyboard */; };
@@ -61,7 +64,9 @@
 		CD870F3524B448D7004A4D42 /* MathFuncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD870F3324B448D7004A4D42 /* MathFuncs.swift */; };
 		CD8896B024C8013F00610692 /* TestAnalysis1.yaml in Resources */ = {isa = PBXBuildFile; fileRef = CD8896AE24C8013300610692 /* TestAnalysis1.yaml */; };
 		CD8896B424C8104300610692 /* TestAnalysis1.json in Resources */ = {isa = PBXBuildFile; fileRef = CD8896B224C8103B00610692 /* TestAnalysis1.json */; };
-		CDA0F88122587E05003C62E6 /* ParamTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA0F88022587E05003C62E6 /* ParamTableViewController.swift */; };
+		CD9465332517CBFA00DD7037 /* AnalysisParameterFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9465322517CBFA00DD7037 /* AnalysisParameterFunctions.swift */; };
+		CD9465342517CBFA00DD7037 /* AnalysisParameterFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9465322517CBFA00DD7037 /* AnalysisParameterFunctions.swift */; };
+		CDA0F88122587E05003C62E6 /* RunVariantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA0F88022587E05003C62E6 /* RunVariantViewController.swift */; };
 		CDA0F888225C5D47003C62E6 /* InputsCellViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA0F887225C5D47003C62E6 /* InputsCellViews.swift */; };
 		CDA35CD524ECE5A0005BF24D /* PhaseSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA35CD424ECE5A0005BF24D /* PhaseSelectorViewController.swift */; };
 		CDA549EF23CC254B00933C6B /* AddConditionViewControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA549EE23CC254B00933C6B /* AddConditionViewControllers.swift */; };
@@ -112,8 +117,8 @@
 		CDE2B5C124C2C729002026E0 /* TZPlotType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4AD70C23BD4C0C00FC815F /* TZPlotType.swift */; };
 		CDE2B5C224C2C729002026E0 /* InitStateHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB7C73B2352B58300BC50F1 /* InitStateHeader.swift */; };
 		CDE2B5C324C2C729002026E0 /* MathFuncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD870F3324B448D7004A4D42 /* MathFuncs.swift */; };
-		CDE6CDD7250E7D7C0093C4E1 /* ParamSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE6CDD6250E7D7C0093C4E1 /* ParamSetting.swift */; };
-		CDE6CDD8250E7D7C0093C4E1 /* ParamSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE6CDD6250E7D7C0093C4E1 /* ParamSetting.swift */; };
+		CDE6CDD7250E7D7C0093C4E1 /* RunVariant.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE6CDD6250E7D7C0093C4E1 /* RunVariant.swift */; };
+		CDE6CDD8250E7D7C0093C4E1 /* RunVariant.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE6CDD6250E7D7C0093C4E1 /* RunVariant.swift */; };
 		CDF09AB724AC473B0068BE4B /* PhasedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF09AB624AC473B0068BE4B /* PhasedViewController.swift */; };
 		CDF1670C2237A10400CD9590 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF1670B2237A10400CD9590 /* MainWindowController.swift */; };
 		CDF2338A242DCD8100B8EF40 /* EditableHeaderTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF23382242DCD8000B8EF40 /* EditableHeaderTextField.swift */; };
@@ -199,6 +204,7 @@
 		CD31EFF224C13C7300ED435A /* CalcsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalcsTest.swift; sourceTree = "<group>"; };
 		CD39717A2506F12D00A8047A /* RunSettingsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RunSettingsTest.swift; path = TrevizTests/RunSettingsTest.swift; sourceTree = SOURCE_ROOT; };
 		CD39717C2506F2AC00A8047A /* TestHelperFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelperFunctions.swift; sourceTree = "<group>"; };
+		CD3B2217251FD05300218E44 /* StringValueProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringValueProtocol.swift; sourceTree = "<group>"; };
 		CD3C187D23E2B03700E72EFF /* TZPlotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TZPlotView.swift; sourceTree = "<group>"; };
 		CD3E645125086398001F6C8F /* ParameterSelectorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ParameterSelectorButton.swift; path = Treviz/Utilities/ParameterSelectorButton.swift; sourceTree = SOURCE_ROOT; };
 		CD3F5E5722EE4DCD00E4CF20 /* Conditions.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Conditions.storyboard; sourceTree = "<group>"; };
@@ -239,7 +245,8 @@
 		CD8896B124C807F500610692 /* TrajectoryAnalysis.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = TrajectoryAnalysis.xctestplan; sourceTree = "<group>"; };
 		CD8896B224C8103B00610692 /* TestAnalysis1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = TestAnalysis1.json; path = TrevizTests/TestAnalysis1.json; sourceTree = SOURCE_ROOT; };
 		CD92D6B82442302800483B8E /* TZLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TZLogger.swift; sourceTree = "<group>"; };
-		CDA0F88022587E05003C62E6 /* ParamTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParamTableViewController.swift; sourceTree = "<group>"; };
+		CD9465322517CBFA00DD7037 /* AnalysisParameterFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisParameterFunctions.swift; sourceTree = "<group>"; };
+		CDA0F88022587E05003C62E6 /* RunVariantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunVariantViewController.swift; sourceTree = "<group>"; };
 		CDA0F887225C5D47003C62E6 /* InputsCellViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputsCellViews.swift; sourceTree = "<group>"; };
 		CDA35CD424ECE5A0005BF24D /* PhaseSelectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhaseSelectorViewController.swift; sourceTree = "<group>"; };
 		CDA549EE23CC254B00933C6B /* AddConditionViewControllers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddConditionViewControllers.swift; sourceTree = "<group>"; };
@@ -249,7 +256,7 @@
 		CDAF399124A7217500309CA9 /* PhaseRunFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PhaseRunFunctions.swift; path = Treviz/Model/Phase/PhaseRunFunctions.swift; sourceTree = SOURCE_ROOT; };
 		CDB457BF238508B6004F13AA /* ConditionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionTests.swift; sourceTree = "<group>"; };
 		CDB75E1E24E085CA008960C6 /* StateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateTests.swift; sourceTree = "<group>"; };
-		CDB7C7392352B03100BC50F1 /* Parameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Parameter.swift; path = Treviz/Model/Parameter.swift; sourceTree = SOURCE_ROOT; };
+		CDB7C7392352B03100BC50F1 /* Parameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Parameter.swift; path = "Treviz/Model/Run Variants/Parameter.swift"; sourceTree = SOURCE_ROOT; };
 		CDB7C73B2352B58300BC50F1 /* InitStateHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitStateHeader.swift; sourceTree = "<group>"; };
 		CDBEA0A522447A9C00D3159C /* TextOutputsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextOutputsViewController.swift; sourceTree = "<group>"; };
 		CDC1F5352233978500D1BB25 /* OutputsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputsViewController.swift; sourceTree = "<group>"; };
@@ -273,7 +280,7 @@
 		CDE078F3224806EF00815E7F /* Inputs.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Inputs.storyboard; sourceTree = "<group>"; };
 		CDE0795A2249EC7400815E7F /* InitStateStructure.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = InitStateStructure.plist; sourceTree = "<group>"; };
 		CDE2A5172471F27700DB2B45 /* AnalysisFactoryInits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisFactoryInits.swift; sourceTree = "<group>"; };
-		CDE6CDD6250E7D7C0093C4E1 /* ParamSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParamSetting.swift; sourceTree = "<group>"; };
+		CDE6CDD6250E7D7C0093C4E1 /* RunVariant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunVariant.swift; sourceTree = "<group>"; };
 		CDF09AB624AC473B0068BE4B /* PhasedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PhasedViewController.swift; path = "Treviz/Main/Inputs Setup/PhasedViewController.swift"; sourceTree = SOURCE_ROOT; };
 		CDF1670B2237A10400CD9590 /* MainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
 		CDF23382242DCD8000B8EF40 /* EditableHeaderTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditableHeaderTextField.swift; sourceTree = "<group>"; };
@@ -350,7 +357,6 @@
 				CDDFF28224A5ABE200E8BC31 /* StateDict.swift */,
 				CD63AEA123E7EA26006502F2 /* Variable.swift */,
 				CDDA8F2124AEE386002936E6 /* CalculatedVariable.swift */,
-				CDB7C7392352B03100BC50F1 /* Parameter.swift */,
 				CD0F010A2365595700C920AA /* Vehicle.swift */,
 				CDD60A962345C5AE00249987 /* TZOutput.swift */,
 				CD6CCF3B244CCC960051F76D /* OutputDataSet.swift */,
@@ -358,9 +364,10 @@
 				CD4AD70C23BD4C0C00FC815F /* TZPlotType.swift */,
 				CDB7C73B2352B58300BC50F1 /* InitStateHeader.swift */,
 				CD870F3324B448D7004A4D42 /* MathFuncs.swift */,
-				CD0F113E250560A700C88B05 /* TZRunSettings.swift */,
 				CD280F49233B45670004263F /* TZPlot.swift */,
 				CDD77FC1250D475E007E90BF /* PhysicsModel.swift */,
+				CD0F113E250560A700C88B05 /* TZRunSettings.swift */,
+				CD3B2216251FD00800218E44 /* Run Variants */,
 				CD01037623E78EED00D336C2 /* Analysis */,
 				CDAF398D24A7209200309CA9 /* Phase */,
 			);
@@ -376,7 +383,6 @@
 				CDE2A5172471F27700DB2B45 /* AnalysisFactoryInits.swift */,
 				CD1A5B5C23FD1E9A00BE3BFB /* AnalysisYaml.swift */,
 				CD0F010823654ED400C920AA /* AnalysisRunFunctions.swift */,
-				CDE6CDD6250E7D7C0093C4E1 /* ParamSetting.swift */,
 				CD92D6B82442302800483B8E /* TZLogger.swift */,
 			);
 			path = Analysis;
@@ -461,6 +467,17 @@
 			path = TrevizTests;
 			sourceTree = "<group>";
 		};
+		CD3B2216251FD00800218E44 /* Run Variants */ = {
+			isa = PBXGroup;
+			children = (
+				CDE6CDD6250E7D7C0093C4E1 /* RunVariant.swift */,
+				CDB7C7392352B03100BC50F1 /* Parameter.swift */,
+				CD3B2217251FD05300218E44 /* StringValueProtocol.swift */,
+				CD9465322517CBFA00DD7037 /* AnalysisParameterFunctions.swift */,
+			);
+			path = "Run Variants";
+			sourceTree = "<group>";
+		};
 		CD3F5E5622EE4D8C00E4CF20 /* Conditions */ = {
 			isa = PBXGroup;
 			children = (
@@ -528,9 +545,9 @@
 				CDF09AB624AC473B0068BE4B /* PhasedViewController.swift */,
 				CDD5049722252AFA00B29751 /* InputsViewController.swift */,
 				CDA0F887225C5D47003C62E6 /* InputsCellViews.swift */,
-				CDA0F88022587E05003C62E6 /* ParamTableViewController.swift */,
-				CD4656B1224C6F3500C587CC /* PhysicsViewController.swift */,
+				CDA0F88022587E05003C62E6 /* RunVariantViewController.swift */,
 				CD0F113C25048FE300C88B05 /* RunSettingsViewController.swift */,
+				CD4656B1224C6F3500C587CC /* PhysicsViewController.swift */,
 				CDE078F3224806EF00815E7F /* Inputs.storyboard */,
 			);
 			path = "Inputs Setup";
@@ -886,7 +903,7 @@
 			files = (
 				CDE2B5A624C2C71D002026E0 /* AnalysisYaml.swift in Sources */,
 				CDF3D1A6225057270064D70C /* TZViewController.swift in Sources */,
-				CDE6CDD7250E7D7C0093C4E1 /* ParamSetting.swift in Sources */,
+				CDE6CDD7250E7D7C0093C4E1 /* RunVariant.swift in Sources */,
 				CD3F5E5A22EE4FFE00E4CF20 /* ConditionsViewController.swift in Sources */,
 				CDE2B5A824C2C71D002026E0 /* TZLogger.swift in Sources */,
 				CDE2B5B924C2C729002026E0 /* Variable.swift in Sources */,
@@ -921,6 +938,7 @@
 				CDC1F53C2234874000D1BB25 /* MainSplitViewController.swift in Sources */,
 				CDFE81F923E147060013945F /* PlotOutputViewController.swift in Sources */,
 				CDE2B5B824C2C729002026E0 /* StateDict.swift in Sources */,
+				CD9465332517CBFA00DD7037 /* AnalysisParameterFunctions.swift in Sources */,
 				CDFE81FC23E14B730013945F /* ViewerTabViewController.swift in Sources */,
 				CDC1F54022363DDB00D1BB25 /* MainViewController.swift in Sources */,
 				CD557437236EA14500DA53A1 /* VisualizerViewController.swift in Sources */,
@@ -932,7 +950,8 @@
 				CDA549F123CC3C5400933C6B /* ConditionsTableView.swift in Sources */,
 				CDE2B59D24C2C718002026E0 /* DefaultVariableCalculations.swift in Sources */,
 				CDF2338C242DCD8100B8EF40 /* StackView.swift in Sources */,
-				CDA0F88122587E05003C62E6 /* ParamTableViewController.swift in Sources */,
+				CDA0F88122587E05003C62E6 /* RunVariantViewController.swift in Sources */,
+				CD3B2218251FD05300218E44 /* StringValueProtocol.swift in Sources */,
 				CDD5049822252AFA00B29751 /* InputsViewController.swift in Sources */,
 				CDE2B5BA24C2C729002026E0 /* CalculatedVariable.swift in Sources */,
 				CDF2338A242DCD8100B8EF40 /* EditableHeaderTextField.swift in Sources */,
@@ -971,13 +990,15 @@
 				CD0F1140250560A700C88B05 /* TZRunSettings.swift in Sources */,
 				CDAF399024A7209200309CA9 /* TZPhase.swift in Sources */,
 				CD656F71248771D500BB5CBC /* PhaseStartupFuncs.swift in Sources */,
+				CD9465342517CBFA00DD7037 /* AnalysisParameterFunctions.swift in Sources */,
 				CD870F3524B448D7004A4D42 /* MathFuncs.swift in Sources */,
+				CD3B2220251FE4A400218E44 /* PhysicsModel.swift in Sources */,
 				CDDA8F2924B4451F002936E6 /* CalculatedVariable.swift in Sources */,
 				CDFAD0F723EA84FE00CE7424 /* State.swift in Sources */,
 				CD6CCF3D244D2FFB0051F76D /* OutputDataSet.swift in Sources */,
 				CDFAD0F923EA84FE00CE7424 /* Variable.swift in Sources */,
 				CDFAD0FA23EA84FE00CE7424 /* Vehicle.swift in Sources */,
-				CDE6CDD8250E7D7C0093C4E1 /* ParamSetting.swift in Sources */,
+				CDE6CDD8250E7D7C0093C4E1 /* RunVariant.swift in Sources */,
 				CDDA8F2824B44213002936E6 /* DefaultVariableCalculations.swift in Sources */,
 				CDFAD0FB23EA84FE00CE7424 /* TZOutput.swift in Sources */,
 				CDAF399324A7217500309CA9 /* PhaseRunFunctions.swift in Sources */,
@@ -986,6 +1007,7 @@
 				CD5F4E9B2455101100823E43 /* TZLogger.swift in Sources */,
 				CDC789C3247B47A200A1DCED /* AnalysisFactoryInits.swift in Sources */,
 				CDFAD0FC23EA84FE00CE7424 /* TZTextOutput.swift in Sources */,
+				CD3B2219251FD05300218E44 /* StringValueProtocol.swift in Sources */,
 				CD5F4E9E2455105300823E43 /* InitStateHeader.swift in Sources */,
 				CDFAD0FE23EA84FE00CE7424 /* TZPlotType.swift in Sources */,
 				CD75952124E9A74A00B79EF5 /* PhaseVars.swift in Sources */,

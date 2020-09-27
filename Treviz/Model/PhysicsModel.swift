@@ -7,8 +7,9 @@
 //
 
 import Foundation
+import Cocoa
 
-struct PhysicsModel: StringValue {
+struct PhysicsModel {
     
     var valuestr: String
     let id: String
@@ -32,10 +33,11 @@ struct PhysicsModel: StringValue {
     static let allPhysicsModels: [PhysicsModel] = [.flat2d, .flat3d, .round2dSingle, .round3dSingle, .round2dMulti, .round3dMulti]
 }
 
-class PhysicsParamAnalysisSetting: ParameterAnalysisSetting {
-    init(phase: String) {
-        let baseID = "physicsmodel"
-        super.init(param: baseID.atPhase(phase))
-        options = PhysicsModel.allPhysicsModels
-    }
-}
+/*
+class PhysicsModelParam: Parameter {
+    var curModel: PhysicsModel = .flat2d
+    var id = "physicsModel"
+    var name: String { return curModel.valuestr }
+    var isParam = false
+    static var paramConstructor: (_ param: Parameter)->RunVariant? = EnumGroupRunVariant.init(param: )
+}*/

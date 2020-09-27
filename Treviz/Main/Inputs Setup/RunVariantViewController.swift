@@ -12,10 +12,11 @@ extension NSStoryboardSegue.Identifier{
     static let paramTableViewSegue = "ParamTableViewControllerSegue"
 }
 
-class ParamTableViewController: TZViewController , NSTableViewDelegate, NSTableViewDataSource {
+class RunVariantViewController: TZViewController , NSTableViewDelegate, NSTableViewDataSource {
     
     @IBOutlet weak var tableView: NSTableView!
     var params : [Parameter] { return analysis.parameters }
+    var paramSettings: [RunVariant] { return analysis.runVariants.filter({$0.isActive}) }
     var inputsViewController: InputsViewController?
     
     override func viewDidLoad() {
@@ -23,21 +24,26 @@ class ParamTableViewController: TZViewController , NSTableViewDelegate, NSTableV
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return params.count
+        return paramSettings.count
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        let thisParam = params[row]
+        //if row < paramSettings.count {
+        let thisParam = paramSettings[row]
         switch tableColumn?.identifier{
-        case NSUserInterfaceItemIdentifier.nameColumn:
-            return InputsViewController.nameCellView(view: tableView, thisInput: thisParam)
+        case NSUserInterfaceItemIdentifier.paramNameColumn:
+            return InputsViewController.nameCellView(view: tableView, thisInput: thisParam.parameter)
         case NSUserInterfaceItemIdentifier.paramValueColumn:
-            return InputsViewController.paramValueCellView(view: tableView, thisInput: thisParam as? Variable)
-        //case NSUserInterfaceItemIdentifier.paramTypeCellView:
-            //return InputsViewController.unitsCellView(view: tableView, thisInput: thisParam as? Variable)
+            return InputsViewController.paramValueCellView(view: tableView, thisInput: thisParam)
+        case NSUserInterfaceItemIdentifier.paramTypeColumn:
+            return InputsViewController.paramTypeCellView(view: tableView, thisInput: thisParam)
+        case NSUserInterfaceItemIdentifier.paramSummaryColumn:
+            return InputsViewController.paramSummaryCellView(view: tableView, thisInput: thisParam)
         default:
             return nil
         }
+        //}
+        //return nil
     }
     
     private func tableView(_ tableView: NSOutlineView, objectValueFor tableColumn: NSTableColumn?, byItem item: Any?) -> Any? {
@@ -51,7 +57,9 @@ class ParamTableViewController: TZViewController , NSTableViewDelegate, NSTableV
         }
         if let thisSetting = item as? Parameter{
             switch tableColumn?.identifier{
-            case NSUserInterfaceItemIdentifier.nameColumn: return thisSetting.name
+            case NSUserInterfaceItemIdentifier.nameColumn:
+                inputsViewController?.reloadParams()
+                return thisSetting.name
             default: return nil
             }
         }
@@ -61,8 +69,8 @@ class ParamTableViewController: TZViewController , NSTableViewDelegate, NSTableV
     @IBAction func removeParamPressed(_ sender: Any) {
         let button = sender as! NSView
         let row = tableView.row(for: button)
-        var thisParam = params[row]
-        thisParam.isParam = false
+        let thisParam = paramSettings[row]
+        analysis.disableParam(param: thisParam.parameter)
         inputsViewController?.reloadParams()
     }
     

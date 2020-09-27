@@ -97,7 +97,7 @@ class Analysis: NSObject, Codable {
     }
 
     // Run variant parameters
-    var runParams: [ParameterAnalysisSetting] = []
+    var runVariants: [RunVariant] = []
     var useGroupedVariants: Bool = false
     var numMonteCarloRuns: Int = 1
     

@@ -20,7 +20,7 @@ class InputsViewController: TZViewController, NSTableViewDataSource, NSTableView
      
     @IBOutlet weak var stack: CustomStackView!
     
-    var tableViewController : ParamTableViewController!
+    var runVariantViewController : RunVariantViewController!
     weak var physicsViewController: PhysicsViewController!
     weak var initStateViewController: InitStateViewController!
     weak var phaseSelectorViewController: PhaseSelectorViewController!
@@ -57,13 +57,14 @@ class InputsViewController: TZViewController, NSTableViewDataSource, NSTableView
         }
         
         initStateViewController.inputsViewController = self
+        //runSettingsViewController.inputsViewController = self
     }
     
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         if segue.identifier == .paramTableViewSegue as NSStoryboardSegue.Identifier{
-            self.tableViewController = segue.destinationController as? ParamTableViewController
-            self.tableViewController.analysis = analysis
-            tableViewController.inputsViewController = self
+            self.runVariantViewController = segue.destinationController as? RunVariantViewController
+            self.runVariantViewController.analysis = analysis
+            runVariantViewController.inputsViewController = self
         } else if segue.identifier == "PhaseSelectorSegue" {
             self.phaseSelectorViewController = segue.destinationController as? PhaseSelectorViewController
             self.phaseSelectorViewController.analysis = analysis
@@ -71,7 +72,7 @@ class InputsViewController: TZViewController, NSTableViewDataSource, NSTableView
     }
     
     func reloadParams(){
-        tableViewController.tableView.reloadData()
+        runVariantViewController.tableView.reloadData()
         initStateViewController.outlineView.reloadData()
     }
     

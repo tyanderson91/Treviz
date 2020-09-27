@@ -28,12 +28,15 @@ extension NSUserInterfaceItemIdentifier{
     static let initStateHasParamCellView = NSUserInterfaceItemIdentifier.init("initStateHasParamCellView")
     
     //Views in param view only
-    static let paramValueColumn = NSUserInterfaceItemIdentifier.init("ParamValueColumn")
-    static let paramTypeColumn = NSUserInterfaceItemIdentifier.init("ParamVarTypeColumn")
-    static let paramSummaryColumn = NSUserInterfaceItemIdentifier.init("ParamSummaryColumn")
+    static let paramNameColumn = NSUserInterfaceItemIdentifier.init("paramNameColumn")
+    static let paramValueColumn = NSUserInterfaceItemIdentifier.init("paramValueColumn")
+    static let paramTypeColumn = NSUserInterfaceItemIdentifier.init("paramVarTypeColumn")
+    static let paramSummaryColumn = NSUserInterfaceItemIdentifier.init("paramSummaryColumn")
     static let paramTypeCellView = NSUserInterfaceItemIdentifier.init("paramTypeCellView")
     static let paramSummaryCellView = NSUserInterfaceItemIdentifier.init("paramSummaryCellView")
     static let paramValueCellView = NSUserInterfaceItemIdentifier.init("paramValueCellView")
+    static let distributionCellView = NSUserInterfaceItemIdentifier.init("distributionCellView")
+    static let distributionParamCellView = NSUserInterfaceItemIdentifier.init("distributionParamCellView")
 }
 
 extension InputsViewController{
@@ -105,12 +108,28 @@ extension InputsViewController{
     }
     
     //Views in param view only
-    static func paramValueCellView(view: NSTableView, thisInput: Variable?)->NSTableCellView?{
+    
+    static func paramValueCellView(view: NSTableView, thisInput: RunVariant?)->NSTableCellView?{
         guard thisInput != nil else {return nil}
         let newView = view.makeView(withIdentifier: .paramValueCellView, owner: self) as? NSTableCellView
         if let textField = newView?.textField {
-            let dubVal = thisInput!.value[0]
-            textField.stringValue = String(format: "%g", dubVal)
+            textField.stringValue = thisInput!.curValue.valuestr
+        }
+        return newView
+    }
+    static func paramSummaryCellView(view: NSTableView, thisInput: RunVariant?)->NSTableCellView?{
+        guard thisInput != nil else {return nil}
+        let newView = view.makeView(withIdentifier: .paramSummaryCellView, owner: self) as? NSTableCellView
+        if let textField = newView?.textField {
+            textField.stringValue = "Summary"
+        }
+        return newView
+    }
+    static func paramTypeCellView(view: NSTableView, thisInput: RunVariant?)->NSTableCellView?{
+        guard thisInput != nil else {return nil}
+        let newView = view.makeView(withIdentifier: .paramTypeCellView, owner: self) as? NSTableCellView
+        if let textField = newView?.textField {
+            textField.stringValue = "Type"
         }
         return newView
     }

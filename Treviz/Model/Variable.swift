@@ -41,7 +41,6 @@ extension VariableID {
 Variable is a class that defines a single changeable numerical property of a vehicle, including name, unit information, and value. Used to display input state and output information
  */
 class Variable : Parameter, Codable, Hashable {
-    
     let id: VariableID
     let name: String
     let symbol: String!
@@ -50,6 +49,7 @@ class Variable : Parameter, Codable, Hashable {
     var isValid: Bool = true
     var hasParams: Bool {return isParam}
     var isParam: Bool = false
+    static let paramConstructor : (Parameter) -> RunVariant? = VariableRunVariant.init(param: )
 
     static func ==(lhs: Variable, rhs: Variable) -> Bool {
         return lhs.id == rhs.id && lhs.units == rhs.units && lhs.value == rhs.value

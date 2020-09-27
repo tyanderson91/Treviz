@@ -17,6 +17,7 @@ class InitStateViewController: PhasedViewController, NSOutlineViewDelegate, NSOu
     var inputVarStructure : InitStateHeader { return phase.initStateGroups }
     override func getHeaderTitle() -> String { return NSLocalizedString("Boundary States", comment: "") }
     var inputsViewController: InputsViewController?
+    
     // Terminal Condition variables
     @IBOutlet weak var terminalConditionPopupButton: NSPopUpButton!
     private var terminalConditionCandidates: [Condition] {
@@ -155,7 +156,14 @@ class InitStateViewController: PhasedViewController, NSOutlineViewDelegate, NSOu
         guard let button = sender as? NSButton else {return}
         let row = outlineView.row(for: button)
         if var thisParam = outlineView.item(atRow: row) as? Parameter {
-            thisParam.isParam = button.state == NSControl.StateValue.on
+            switch button.state {
+            case .on:
+                analysis.enableParam(param: thisParam)
+            case .off:
+                analysis.disableParam(param: thisParam)
+            default:
+                thisParam.isParam = false
+            }
             inputsViewController?.reloadParams()
         }
     }

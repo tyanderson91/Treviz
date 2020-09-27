@@ -21,6 +21,9 @@ class RunSettingsViewController: PhasedViewController {
     @IBOutlet weak var box1NumberFormatter: NumberFormatter!
     @IBOutlet weak var box2NumberFormatter: NumberFormatter!
     @IBOutlet weak var maxTimestepStackView: NSStackView!
+    @IBOutlet weak var paramDefaultTimestep: ParameterSelectorButton!
+    var inputsViewController: InputsViewController? { return self.parent as? InputsViewController }
+    
     var runSettings: TZRunSettings { return phase.runSettings }
     /*
     @IBOutlet weak var parameterButton: ParameterSelectorButton!
@@ -62,13 +65,33 @@ class RunSettingsViewController: PhasedViewController {
         } else {
             maxTimestepStackView.isHidden = true
             adaptiveTimestepCheckbox.state = .off
-            let defNumber = NSNumber(value: runSettings.defaultTimestep)
+            let defNumber = NSNumber(value: runSettings.defaultTimestep.value)
             let numStr = box1NumberFormatter.string(from: defNumber)
             firstTimestepTextBox.stringValue = numStr ?? ""
             firstTimestepLabel.stringValue = "Default timestep:"
         }
     }
     
+    @IBAction func didSetParamDefaultTimestep(_ sender: Any) {
+        guard let senderButton = sender as? ParameterSelectorButton else { return }
+        switch senderButton.state {
+        case .on:
+            if runSettings.useAdaptiveTimestep {
+            } else {
+                analysis.enableParam(param: runSettings.defaultTimestep)
+                inputsViewController?.reloadParams()
+            }
+        case .off:
+            if runSettings.useAdaptiveTimestep {
+            } else {
+                analysis.disableParam(param: runSettings.defaultTimestep)
+                inputsViewController?.reloadParams()
+            }
+        default:
+            return
+        }
+        
+    }
     @IBAction func didSetAdaptiveTimestep(_ sender: Any) {
         guard let checkbox = sender as? NSButton else { return }
         switch checkbox.state {
