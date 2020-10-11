@@ -60,6 +60,7 @@ extension Analysis {
                         guard let startVal = VarValue(numeric: thisVal) else { continue }
                         thisVar.isParam = true
                         thisVar.value[0] = startVal
+                        self.enableParam(param: thisVar)
                     }
                 }
             }
@@ -130,18 +131,5 @@ extension Analysis {
             return output
         } catch { self.logMessage(error.localizedDescription); return nil}
          
-        /*
-        if let outputType = yamlObj["output type"] as? String {
-            switch TZOutput.OutputType(rawValue: outputType) {
-            case .plot:
-                return TZPlot(with: outputDict)
-            case .text:
-                return TZTextOutput(with: outputDict)
-            default:
-                return TZPlot(with: outputDict)
-            }
-        } else {
-            return TZPlot(with: outputDict)
-        }*/
     }
 }

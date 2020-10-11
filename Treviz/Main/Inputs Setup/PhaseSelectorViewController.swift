@@ -41,7 +41,7 @@ class PhaseSelectorView: NSView {
         
     var circleColor = NSColor.controlAccentColor //NSColor.gray
     let node1Radius : CGFloat = 7
-    let node2Radius : CGFloat = 2
+    let node2Radius : CGFloat = 3.3
     let padding: CGFloat = 20
     let lineWidth: CGFloat = 2
     var viewController: PhaseSelectorViewController?
@@ -80,22 +80,22 @@ class PhaseSelectorView: NSView {
             context.setStrokeColor(NSColor.disabledControlTextColor.cgColor)
         }
         let node1Box = CGRect(x: x1 - node1Radius, y: y - node1Radius, width: 2*node1Radius, height: 2*node1Radius)
-        drawInitialNode(context: context, radius: node1Radius, thickness: lineWidth, cutoutWidth: 2*lineWidth, center: CGPoint(x: x1, y: y), isInitial: isInitial)
+        drawInitialNode(context: context, radius: node1Radius, thickness: lineWidth, cutoutWidth: 2.5*lineWidth, center: CGPoint(x: x1, y: y), isInitial: isInitial)
         let node2 = CGMutablePath()
         let node2Origin = CGPoint(x: x2 - node2Radius, y: y-node2Radius)
         let node2Box = CGRect(origin: node2Origin, size: CGSize(width: node2Radius*2, height: node2Radius*2))
         node2.addEllipse(in: node2Box)
         
         let path = CGMutablePath()
-        let pathStart = x1 + node1Radius
-        let pathEnd = x2 - node2Radius
+        let pathStart = x1 + node1Radius - 0.1
+        let pathEnd = x2 - node2Radius + 0.1
         path.addLines(between: [CGPoint(x: pathStart, y: y), CGPoint(x: pathEnd, y: y)])
         
         context.addPath(path)
+        context.drawPath(using: .stroke)
         context.addPath(node1)
         context.addPath(node2)
-
-        context.drawPath(using: .fillStroke)
+        context.drawPath(using: .fill)
         
         let lineTrackingBox = NSRect(x: x1 + node1Radius, y: -node1Radius, width: pathEnd - pathStart, height: 2*node2Radius)
         // Add tracking areas
