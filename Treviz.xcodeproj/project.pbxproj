@@ -53,6 +53,7 @@
 		CD6CCF3D244D2FFB0051F76D /* OutputDataSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6CCF3B244CCC960051F76D /* OutputDataSet.swift */; };
 		CD6E0B9E2431BAC5008D1656 /* TZToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6E0B9D2431BAC5008D1656 /* TZToolbar.swift */; };
 		CD6E0BA22436DEC7008D1656 /* TZStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6E0BA12436DEC7008D1656 /* TZStoryboard.swift */; };
+		CD70FAC9253EB39800B551F2 /* ParamValueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD70FAC8253EB39800B551F2 /* ParamValueView.swift */; };
 		CD715E8023EBE70400E31F97 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = CD715E7F23EBE70400E31F97 /* README.md */; };
 		CD75951224E2638C00B79EF5 /* VariableTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD75951124E2638C00B79EF5 /* VariableTest.swift */; };
 		CD75951624E51A3300B79EF5 /* TZOutputTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD75951524E51A3300B79EF5 /* TZOutputTest.swift */; };
@@ -233,6 +234,7 @@
 		CD6CCF3B244CCC960051F76D /* OutputDataSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputDataSet.swift; sourceTree = "<group>"; };
 		CD6E0B9D2431BAC5008D1656 /* TZToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TZToolbar.swift; sourceTree = "<group>"; };
 		CD6E0BA12436DEC7008D1656 /* TZStoryboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TZStoryboard.swift; sourceTree = "<group>"; };
+		CD70FAC8253EB39800B551F2 /* ParamValueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ParamValueView.swift; path = Treviz/Utilities/ParamValueView.swift; sourceTree = SOURCE_ROOT; };
 		CD715E7F23EBE70400E31F97 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		CD75951124E2638C00B79EF5 /* VariableTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VariableTest.swift; sourceTree = "<group>"; };
 		CD75951524E51A3300B79EF5 /* TZOutputTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TZOutputTest.swift; path = TrevizTests/TZOutputTest.swift; sourceTree = SOURCE_ROOT; };
@@ -412,6 +414,7 @@
 			children = (
 				CDF23381242DCD8000B8EF40 /* InfoBarStackView */,
 				CD3E645125086398001F6C8F /* ParameterSelectorButton.swift */,
+				CD70FAC8253EB39800B551F2 /* ParamValueView.swift */,
 				CD42E0A922FD05F600A0F9A1 /* CollapsibleStackView.swift */,
 				CD28477622FF9C8800D192A9 /* CollapsibleGridView.swift */,
 			);
@@ -966,6 +969,7 @@
 				CD28477722FF9C8800D192A9 /* CollapsibleGridView.swift in Sources */,
 				CDE2B5C124C2C729002026E0 /* TZPlotType.swift in Sources */,
 				CDE2B5BE24C2C729002026E0 /* OutputDataSet.swift in Sources */,
+				CD70FAC9253EB39800B551F2 /* ParamValueView.swift in Sources */,
 				CDD77FC2250D475E007E90BF /* PhysicsModel.swift in Sources */,
 				CD0F113F250560A700C88B05 /* TZRunSettings.swift in Sources */,
 				CDA35CD524ECE5A0005BF24D /* PhaseSelectorViewController.swift in Sources */,

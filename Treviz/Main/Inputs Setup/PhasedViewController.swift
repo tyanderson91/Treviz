@@ -14,6 +14,10 @@ import Cocoa
 class PhasedViewController: BaseViewController {
 
     var phase: TZPhase!
+    var inputsViewController: InputsViewController? { return self.parent as? InputsViewController }
+    var paramValueViews: [ParamValueView] = []
+    var paramSelectorViews: [ParameterSelectorButton] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
@@ -24,4 +28,25 @@ class PhasedViewController: BaseViewController {
         phase = curPhase
     }
     
+    func didSetParam(_ sender: ParameterSelectorButton) {
+        guard let representedParam = sender.param else { return }
+        switch sender.state {
+        case .on:
+            analysis.enableParam(param: representedParam )
+        case .off:
+            analysis.disableParam(param: representedParam )
+        default:
+            return
+        }
+        if inputsViewController != nil { inputsViewController?.reloadParams() }
+    }
+    
+    func containsParamView(for id: VariableID)->Bool{
+        return paramValueViews.contains(where: {$0.parameter.id == id})
+    }
+    func paramView(for id: VariableID)->ParamValueView? {
+        if let thisView = paramValueViews.first(where: {$0.parameter.id == id}) {
+            return thisView
+        } else {return nil}
+    }
 }

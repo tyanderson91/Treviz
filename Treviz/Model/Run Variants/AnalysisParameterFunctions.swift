@@ -7,8 +7,15 @@
 //
 
 import Foundation
+import Cocoa
 
 extension Analysis {
+    
+    func setParam(param: Parameter, setOn: Bool) {
+        if setOn { enableParam(param: param) }
+        else { disableParam(param: param) }
+    }
+    
     func enableParam(param: Parameter) {
 
         if let existingParam = self.runVariants.first(where: {$0.paramID == param.id}) {

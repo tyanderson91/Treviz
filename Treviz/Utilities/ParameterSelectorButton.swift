@@ -10,15 +10,14 @@ import Cocoa
 
 @IBDesignable
 public class ParameterSelectorButton: NSButton {
-    /*
-    static let labelAttributes: [NSAttributedString.Key: Any] = [ NSAttributedString.Key.font: NSFont.systemFont(ofSize: 13), NSAttributedString.Key.foregroundColor: NSColor.black.cgColor
-            //NSColor.labelColor.cgColor
-    ]*/
+
+    var param: Parameter?
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         self.wantsLayer = true
         self.canDrawSubviewsIntoLayer = true
+        self.refusesFirstResponder = true
     }
     
     private func rectInset(in rect: CGRect, by inset: CGFloat)->CGRect {
@@ -83,14 +82,9 @@ public class ParameterSelectorButton: NSButton {
             .foregroundColor: NSColor.labelColor
         ]
 
-        //context.addRect(textRect)
-        //context.setFillColor(NSColor.blue.cgColor)
-        //context.drawPath(using: .fill)
         let textTextHeight: CGFloat = textTextContent.boundingRect(with: NSSize(width: textRect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: textFontAttributes).height
         let textTextRect: NSRect = NSRect(x: height, y: (textRect.height - textTextHeight) / 2, width: textRect.width, height: textTextHeight)
         context.setAlpha(1)
-        //NSGraphicsContext.saveGraphicsState()
         textTextContent.draw(in: textTextRect, withAttributes: textFontAttributes)
-        //NSGraphicsContext.restoreGraphicsState()
     }
 }

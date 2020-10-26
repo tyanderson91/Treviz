@@ -26,12 +26,46 @@ class InputsViewController: TZViewController, NSTableViewDataSource, NSTableView
     weak var phaseSelectorViewController: PhaseSelectorViewController!
     weak var runSettingsViewController: RunSettingsViewController!
     var params : [Parameter] = []
+    var paramValueViews: [ParamValueView] {
+        var tmpViews = [ParamValueView]()
+        for thisView in self.children.filter({$0 is PhasedViewController}) as! [PhasedViewController] {
+            tmpViews.append(contentsOf: thisView.paramValueViews)
+        }
+        return tmpViews
+    }
+    var paramSelectorViews: [ParameterSelectorButton] {
+        var tmpViews = [ParameterSelectorButton]()
+        for thisView in self.children.filter({$0 is PhasedViewController}) as! [PhasedViewController] {
+            tmpViews.append(contentsOf: thisView.paramSelectorViews)
+        }
+        return tmpViews
+    }
+    
+    func valueView(for paramID: VariableID)->ParamValueView? {
+        if let thisView = paramValueViews.first(where: {$0.parameter.id == paramID}) {
+            return thisView
+        } else {return nil}
+    }
+    func updateParamValueView(for paramID: VariableID) {
+
+        let theseViews = paramValueViews.filter({$0.parameter.id == paramID})
+        for curView in theseViews {
+            curView.update()
+        }
+
+        self.runVariantViewController.tableView.reloadData()
+    }
+    func updateParamSelectorView(for paramID: VariableID) {
+        let selectorView = paramSelectorViews.first(where: {$0.param?.id == paramID})
+        if let param = selectorView?.param
+        {
+            if param.isParam { selectorView!.state = .on} else {selectorView!.state = .off}
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //stack.setHuggingPriority(NSLayoutConstraint.Priority.defaultHigh, for: .horizontal)
-        
+                
         // Load and install all the view controllers from our storyboard in the following order.
         let storyboard = NSStoryboard(name: "Inputs", bundle: nil)
 
@@ -41,7 +75,7 @@ class InputsViewController: TZViewController, NSTableViewDataSource, NSTableView
         physicsViewController = storyboard.instantiateController(identifier: "PhysicsViewController") { aCoder in
             PhysicsViewController(coder: aCoder, analysis: self.analysis, phase: self.analysis.phases[0])
         }
-        //let vehicleViewController = (stack.addViewController(fromStoryboardId: "Inputs", withIdentifier: "VehicleViewController", analysis: analysis) as! VehicleViewController)
+
         initStateViewController = storyboard.instantiateController(identifier: "InitStateViewController") { aCoder in
             InitStateViewController(coder: aCoder, analysis: self.analysis, phase: self.analysis.phases[0])
         }
@@ -55,9 +89,6 @@ class InputsViewController: TZViewController, NSTableViewDataSource, NSTableView
                                initStateViewController]{
             self.addChild(thisController!)
         }
-        
-        initStateViewController.inputsViewController = self
-        //runSettingsViewController.inputsViewController = self
     }
     
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
@@ -73,7 +104,8 @@ class InputsViewController: TZViewController, NSTableViewDataSource, NSTableView
     
     func reloadParams(){
         runVariantViewController.tableView.reloadData()
-        initStateViewController.outlineView.reloadData()
+        //initStateViewController.outlineView.reloadData()
+        //physicsViewController.viewDidLoad()
     }
     
     

@@ -51,6 +51,9 @@ class Variable : Parameter, Codable, Hashable {
     var isParam: Bool = false
     static let paramConstructor : (Parameter) -> RunVariant? = VariableRunVariant.init(param: )
 
+    func setValue(to string: String) {
+        if let varVal = VarValue(string){ value[0] = varVal }
+    }
     static func ==(lhs: Variable, rhs: Variable) -> Bool {
         return lhs.id == rhs.id && lhs.units == rhs.units && lhs.value == rhs.value
     }

@@ -13,6 +13,24 @@ enum DistributionType: String {
     case uniform
 }
 
+extension Bool: StringValue {
+    var valuestr: String {
+        if self == true {
+            return "True"
+        } else { return "False" }
+    }
+    init?(rawValue: String) {
+        switch rawValue {
+        case "True", "On":
+            self.init(true)
+        case "False", "Off":
+            self.init(false)
+        default:
+            return nil
+        }
+    }
+}
+
 class RunVariant {
     var paramID: VariableID { return parameter.id }
     var isActive: Bool {
@@ -78,5 +96,15 @@ class EnumGroupRunVariant: RunVariant {
     override init?(param: Parameter) {
         guard let curEnumParam = param as? EnumGroupParam else { return nil }
         super.init(param: curEnumParam)
+        options = curEnumParam.options
+    }
+}
+
+class BoolRunVariant: RunVariant {
+    var paramEnabled: Bool = false
+    override var curValue: StringValue { return paramEnabled }
+    override init?(param: Parameter) {
+        guard let curBoolParam = param as? BoolParam else { return nil }
+        super.init(param: curBoolParam)
     }
 }

@@ -37,6 +37,8 @@ extension NSUserInterfaceItemIdentifier{
     static let paramValueCellView = NSUserInterfaceItemIdentifier.init("paramValueCellView")
     static let distributionCellView = NSUserInterfaceItemIdentifier.init("distributionCellView")
     static let distributionParamCellView = NSUserInterfaceItemIdentifier.init("distributionParamCellView")
+    static let paramPopupCellView = NSUserInterfaceItemIdentifier.init("paramPopupCellView")
+    static let paramCheckboxCellView = NSUserInterfaceItemIdentifier.init("paramCheckboxCellView")
 }
 
 extension InputsViewController{
@@ -86,9 +88,10 @@ extension InputsViewController{
         return newView
     }
     
-    static func inputValueCellView(view: NSTableView, inputVar: Variable?)->NSTableCellView?{
+    static func inputValueCellView(view: NSTableView, inputVar: Variable?)->ParamValueTextView?{
         guard inputVar != nil else {return nil}
-        let newView = view.makeView(withIdentifier: .initStateValueCellView, owner: self) as? NSTableCellView
+        let newView = view.makeView(withIdentifier: .initStateValueCellView, owner: self) as? ParamValueTextView
+        newView?.parameter = inputVar
         if let textField = newView?.textField {
             let dubVal = inputVar!.value[0]
             textField.stringValue = String(format: "%g", dubVal)
@@ -108,15 +111,6 @@ extension InputsViewController{
     }
     
     //Views in param view only
-    
-    static func paramValueCellView(view: NSTableView, thisInput: RunVariant?)->NSTableCellView?{
-        guard thisInput != nil else {return nil}
-        let newView = view.makeView(withIdentifier: .paramValueCellView, owner: self) as? NSTableCellView
-        if let textField = newView?.textField {
-            textField.stringValue = thisInput!.curValue.valuestr
-        }
-        return newView
-    }
     static func paramSummaryCellView(view: NSTableView, thisInput: RunVariant?)->NSTableCellView?{
         guard thisInput != nil else {return nil}
         let newView = view.makeView(withIdentifier: .paramSummaryCellView, owner: self) as? NSTableCellView

@@ -16,7 +16,7 @@ class InitStateViewController: PhasedViewController, NSOutlineViewDelegate, NSOu
     var inputVars : [Parameter] { phase.varList }
     var inputVarStructure : InitStateHeader { return phase.initStateGroups }
     override func getHeaderTitle() -> String { return NSLocalizedString("Boundary States", comment: "") }
-    var inputsViewController: InputsViewController?
+    //var inputsViewController: InputsViewController?
     
     // Terminal Condition variables
     @IBOutlet weak var terminalConditionPopupButton: NSPopUpButton!
@@ -91,33 +91,37 @@ class InitStateViewController: PhasedViewController, NSOutlineViewDelegate, NSOu
     
     func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
         //  Custom view creators live in InputsCellViews.swift
+        var outputView: NSView?
         if let curItem = item as? InitStateHeader {
             switch tableColumn?.identifier{
             case NSUserInterfaceItemIdentifier.nameColumn:
                 if let itemAsSubHeader = curItem as? InitStateSubHeader{
-                    return InputsViewController.subHeaderCellView(view: outlineView, thisInput: itemAsSubHeader)
+                    outputView = InputsViewController.subHeaderCellView(view: outlineView, thisInput: itemAsSubHeader)
                 } else {
-                    return InputsViewController.headerCellView(view: outlineView, thisInput: curItem)
+                    outputView = InputsViewController.headerCellView(view: outlineView, thisInput: curItem)
                 }
             case NSUserInterfaceItemIdentifier.initStateParamColumn:
-                return InputsViewController.inputHeaderParamCellView(view: outlineView, thisInput: curItem)
+                outputView = InputsViewController.inputHeaderParamCellView(view: outlineView, thisInput: curItem)
             default: return nil}
         }
         else if let curItem = item as? Variable {
             switch tableColumn?.identifier{
             case NSUserInterfaceItemIdentifier.nameColumn:
-                return InputsViewController.nameCellView(view: outlineView, thisInput: curItem)
+                outputView = InputsViewController.nameCellView(view: outlineView, thisInput: curItem)
             case NSUserInterfaceItemIdentifier.initStateValueColumn:
-                return InputsViewController.inputValueCellView(view: outlineView, inputVar: curItem)
+                outputView = InputsViewController.inputValueCellView(view: outlineView, inputVar: curItem)
+                if !self.containsParamView(for: curItem.id) {
+                    paramValueViews.append(outputView as! ParamValueView)
+                }
             case NSUserInterfaceItemIdentifier.unitsColumn:
-                return InputsViewController.unitsCellView(view: outlineView, thisInput: curItem)
+                outputView = InputsViewController.unitsCellView(view: outlineView, thisInput: curItem)
             case NSUserInterfaceItemIdentifier.initStateParamColumn:
-                return InputsViewController.inputParamCellView(view: outlineView, thisInput: curItem)
+                outputView = InputsViewController.inputParamCellView(view: outlineView, thisInput: curItem)
             default:
                 return nil
             }
         }
-        return nil
+        return outputView
     }
 
     func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
@@ -179,8 +183,10 @@ class InitStateViewController: PhasedViewController, NSOutlineViewDelegate, NSOu
     @IBAction func editValues(_ sender: NSTextField) {
         let curRow = outlineView.row(for: sender)
         if let thisParam = outlineView.item(atRow: curRow) as? Variable{
-            if let value = VarValue(sender.stringValue) {
+            /*if let value = VarValue(sender.stringValue) {
                 thisParam.value[0] = value}
+            */
+            thisParam.setValue(to: sender.stringValue)
             inputsViewController?.reloadParams()
         }
     }

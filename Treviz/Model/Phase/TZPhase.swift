@@ -37,7 +37,8 @@ class TZPhase: Codable {
     var varCalculationsMultiple = Dictionary<VariableID,(inout StateDictArray)->[VarValue]>()
     var initStateGroups : InitStateHeader!
     var allParams: [Parameter] = []
-    var physicsModelParam = EnumGroupParam(id: "physicsModel", name: "Physics Model", enumType: PhysicsModel.self, value: PhysicsModel.flat2d)
+    var physicsModelParam = EnumGroupParam(id: "physicsModel", name: "Physics Model", enumType: PhysicsModel.self, value: PhysicsModel.flat2d, options: PhysicsModel.allPhysicsModels)
+    var usesVehicleInertiaParam = BoolParam(id: "usesMOI", name: "Use MOI", value: false)
     
     init(id idIn: String){
         id = idIn
@@ -138,8 +139,9 @@ extension TZPhase {
     func gatherParams() {
         allParams = []
         allParams.append(contentsOf: varList)
-        allParams.append(runSettings.defaultTimestep)
+        allParams.append(contentsOf: runSettings.allParams)
         allParams.append(physicsModelParam)
+        allParams.append(usesVehicleInertiaParam)
         //allParams.append()
     }
 }
