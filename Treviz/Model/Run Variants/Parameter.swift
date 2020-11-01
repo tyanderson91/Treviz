@@ -10,6 +10,20 @@ import Cocoa
 
 /**
  This protocol is adopted by every class used as a input parameter or plotting variable. The standard Variable class adopts this protocol for all numerical variable, but it can also be adopted by categorical parameters, such as integrator type, or physics model
+ 
+ Steps required to add parameters
+ Model:
+ 1. Create a new class for the parameter if needed
+ 2. Make sure the class conforms to Codable and StringValue
+ 3. Set a default value in phase
+ 4. Add param to param list within the phase constructor
+ 5. Add encoding and decoding within Phase
+ Test:
+ 6. Make unit tests for read/write.
+ View Controller:
+ 7. Add param selector and value buttons to view controller
+ 8. Add the param value view to the view controller’s list of param value views
+ 9. Connect the param itself to the selector and param value buttons
  */
 protocol Parameter {
     var id: VariableID {get}

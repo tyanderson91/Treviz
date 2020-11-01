@@ -35,5 +35,3 @@ extension PhysicsModel: StringValue {
         } else { return nil }
     }
 }
-
-

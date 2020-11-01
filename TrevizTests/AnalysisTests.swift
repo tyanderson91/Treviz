@@ -55,4 +55,14 @@ class AnalysisTests: XCTestCase {
         }
     }
 
+    func testReadJSON() throws {
+        do {
+            let bundle = Bundle(for: type(of: self))
+            let filePath = bundle.url(forResource: "TestAnalysis1", withExtension: "json")!
+            let analysisData = try Data(contentsOf: filePath)
+            let decoder = JSONDecoder()
+            let analysis = try decoder.decode(Analysis.self, from: analysisData)
+            XCTAssertNotNil(analysis)
+        } catch { XCTFail() }
+    }
 }

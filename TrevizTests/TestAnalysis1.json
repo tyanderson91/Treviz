@@ -4,8 +4,8 @@
   "propagatorType" : "explicit",
   "runSettings" : {
     "defaultTimestep" : 0.123,
-    "minTimeStep" : 0.1
-    "maxTimeStep" : 0.5
+    "minTimestep" : 0.1,
+    "maxTimestep" : 0.5,
     "useAdaptiveTimestep" : true,
     "propagatorType" : "rungeKutta4"
   },
@@ -55,7 +55,7 @@
 	  "name" : "Y vel"
 	}
   ],
-  "name" : "Analysis (public.yaml)",
+  "analysisName" : "This Analysis",
   "conditions" : [
     {
       "unionType" : 0,

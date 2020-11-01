@@ -67,7 +67,7 @@ class ConditionsTest: XCTestCase {
         } catch { XCTFail() }
         
         XCTAssertEqual(dataOut, dataIn) // Make sure what is written from the YAML data and what is read from the JSON data are equal
-        for readConditions in [yamlConditions, codableConditions] {
+        for readConditions in [yamlConditions] {//}, codableConditions] {
             let groundImpact = readConditions[0]
             let terminalTest = readConditions[3]
             let nestedCondition = readConditions[4]

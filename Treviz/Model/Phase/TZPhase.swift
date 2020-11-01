@@ -37,18 +37,21 @@ class TZPhase: Codable {
     var varCalculationsMultiple = Dictionary<VariableID,(inout StateDictArray)->[VarValue]>()
     var initStateGroups : InitStateHeader!
     var allParams: [Parameter] = []
-    var physicsModelParam = EnumGroupParam(id: "physicsModel", name: "Physics Model", enumType: PhysicsModel.self, value: PhysicsModel.flat2d, options: PhysicsModel.allPhysicsModels)
-    var usesVehicleInertiaParam = BoolParam(id: "usesMOI", name: "Use MOI", value: false)
+    let physicsSettings: PhysicsSettings
+    //var physicsModelParam = EnumGroupParam(id: "physicsModel", name: "Physics Model", enumType: PhysicsModel.self, value: PhysicsModel.flat2d, options: PhysicsModel.allPhysicsModels)
+    //var usesVehicleInertiaParam = BoolParam(id: "usesMOI", name: "Use MOI", value: false)
     
     init(id idIn: String){
         id = idIn
         runSettings = TZRunSettings()
+        physicsSettings = PhysicsSettings()
         setupConstants()
         gatherParams()
     }
-    init(id idIn: String, runSettings runSettingsIn: TZRunSettings){
+    init(id idIn: String, runSettings runSettingsIn: TZRunSettings, physicsSettingsIn: PhysicsSettings){
         id = idIn
         runSettings = runSettingsIn
+        physicsSettings = physicsSettingsIn
         setupConstants()
         gatherParams()
     }
@@ -61,13 +64,18 @@ class TZPhase: Codable {
         case vehicleID
         case terminalCondition
         case runSettings
+        case physicsSettings
     }
 
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decode(String.self, forKey: .id)
         propagatorType = try PropagatorType(rawValue: container.decode(String.self, forKey: .propagatorType))!
-        runSettings = try container.decode(TZRunSettings.self, forKey: .runSettings)
+        if let runSettingsIn = try? container.decode(TZRunSettings.self, forKey: .runSettings) {
+            runSettings = runSettingsIn } else { runSettings = TZRunSettings() }
+        if let physet = try? container.decode(PhysicsSettings.self, forKey: .physicsSettings) {
+            physicsSettings = physet
+        } else { physicsSettings = PhysicsSettings()}
         setupConstants()
         
         let tempInputSettings = try container.decode(Array<Variable>.self, forKey: .inputSettings)
@@ -91,6 +99,7 @@ class TZPhase: Codable {
             let baseVars = nonzerovars.compactMap({$0.stripPhase()})
             try container.encode(baseVars, forKey: .inputSettings)
         }
+        try container.encode(physicsSettings, forKey: .physicsSettings)
         //try container.encode(vehicle.id, forKey: .vehicleID)
     }
     
@@ -101,16 +110,23 @@ class TZPhase: Codable {
             curPhaseName = phasename
         } else { curPhaseName = "default" }
         
+        var runSettingsIn = TZRunSettings()
         if let runSettingsDict = yamlDict["Run Settings"] as? [String: Any] {
-            do {
-                let runSettingsIn = try TZRunSettings(yamlDict: runSettingsDict)
-                self.init(id: curPhaseName, runSettings: runSettingsIn)
+            do { runSettingsIn = try TZRunSettings(yamlDict: runSettingsDict)
             } catch {
                 analysis.logMessage(error.localizedDescription)
-                self.init(id: curPhaseName)
             }
         }
-        else { self.init(id: curPhaseName) }
+        var physicsSettingsIn = PhysicsSettings()
+        if let physicsSettingsDict = yamlDict["Physics Settings"] as? [String: Any] {
+            do { physicsSettingsIn = try PhysicsSettings(yamlDict: physicsSettingsDict)
+            } catch {
+                analysis.logMessage(error.localizedDescription)
+            }
+        }
+        
+        self.init(id: curPhaseName, runSettings: runSettingsIn, physicsSettingsIn: physicsSettingsIn)
+        
         self.analysis = analysis
         
         setupConstants()
@@ -140,8 +156,7 @@ extension TZPhase {
         allParams = []
         allParams.append(contentsOf: varList)
         allParams.append(contentsOf: runSettings.allParams)
-        allParams.append(physicsModelParam)
-        allParams.append(usesVehicleInertiaParam)
+        allParams.append(contentsOf: physicsSettings.allParams)
         //allParams.append()
     }
 }

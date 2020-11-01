@@ -135,7 +135,7 @@ class Analysis: NSObject, Codable {
     }
     // MARK: Codable implementation
     enum CodingKeys: String, CodingKey {
-        case name
+        case analysisName
         case conditions
         case inputSettings
         case plots
@@ -145,7 +145,7 @@ class Analysis: NSObject, Codable {
     required init(from decoder: Decoder) throws {
         super.init()
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        name = try container.decode(String.self, forKey: .name)
+        name = try container.decode(String.self, forKey: .analysisName)
 
         var allConds = try container.nestedUnkeyedContainer(forKey: .conditions)
         while(!allConds.isAtEnd){
@@ -191,7 +191,7 @@ class Analysis: NSObject, Codable {
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(name, forKey: .name)
+        try container.encode(name, forKey: .analysisName)
         try container.encode(conditions, forKey: .conditions)
         try container.encode(plots, forKey: .plots)
         try container.encode(phases, forKey: .phases)

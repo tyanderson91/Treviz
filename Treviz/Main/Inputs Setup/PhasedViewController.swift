@@ -16,7 +16,7 @@ class PhasedViewController: BaseViewController {
     var phase: TZPhase!
     var inputsViewController: InputsViewController? { return self.parent as? InputsViewController }
     var paramValueViews: [ParamValueView] = []
-    var paramSelectorViews: [ParameterSelectorButton] = []
+    var paramSelectorViews: [RunVariantEnableButton] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +28,7 @@ class PhasedViewController: BaseViewController {
         phase = curPhase
     }
     
-    func didSetParam(_ sender: ParameterSelectorButton) {
+    func didSetParam(_ sender: RunVariantEnableButton) {
         guard let representedParam = sender.param else { return }
         switch sender.state {
         case .on:

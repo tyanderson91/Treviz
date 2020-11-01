@@ -20,7 +20,7 @@ extension Analysis {
         var yamlObj: Any?
         do {
             let stryaml = String(data: data, encoding: String.Encoding.utf8)
-            yamlObj = try Yams.load(yaml: stryaml!)
+            yamlObj = try Yams.load(yaml: stryaml ?? "")
         } catch {
             return
         }
@@ -48,6 +48,7 @@ extension Analysis {
             let newPhase = TZPhase.init(yamlDict: curPhaseDict, analysis: self)
             phases.append(newPhase)
         }
+        if phases.count == 0 { self.phases = [TZPhase]()}
         
         
         if let inputList = yamlDict["Parameters"] as? [[String: Any]] {

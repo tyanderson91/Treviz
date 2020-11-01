@@ -33,6 +33,47 @@ struct PhysicsModel {
     static let allPhysicsModels: [PhysicsModel] = [.flat2d, .flat3d, .round2dSingle, .round3dSingle, .round2dMulti, .round3dMulti]
 }
 
+class PhysicsSettings: Codable {
+    var physicsModelParam = EnumGroupParam(id: "physicsModel", name: "Physics Model", enumType: PhysicsModel.self, value: PhysicsModel.flat2d, options: PhysicsModel.allPhysicsModels)
+    var vehiclePointMassParam = BoolParam(id: "vehiclePointMass", name: "Treat Vehicle as Point Mass", value: true)
+    var centralBodyParam = EnumGroupParam(id: "centralBody", name: "Central Body", enumType: CelestialBody.self, value: "Earth", options: CelestialBody.allBodies)
+    var allParams: [Parameter] { return [physicsModelParam, vehiclePointMassParam, centralBodyParam] }
+    
+    //MARK: Codable implementation
+    enum CodingKeys: String, CodingKey {
+        case physicsModel
+        case vehiclePointMass
+        //case centralBody
+    }
+    init(){}
+    
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        if let physicsModelName = try? container.decode(String.self, forKey: .physicsModel) {
+            physicsModelParam.setValue(to: physicsModelName)
+        }
+        if let usePointMass = try? container.decode(Bool.self, forKey: .vehiclePointMass) {
+            vehiclePointMassParam.value = usePointMass
+        }
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(physicsModelParam.value.valuestr, forKey: .physicsModel)
+        try container.encode(vehiclePointMassParam.value, forKey: .vehiclePointMass)
+        //try container.encode(physicsModelParam.value, forKey: .physicsModel)
+    }
+    
+    //MARK: YAML init
+    init(yamlDict: [String: Any]) throws {
+        if let physicsModelName = yamlDict["physics model"] as? String {
+            physicsModelParam.value = PhysicsModel.allPhysicsModels.first(where: {$0.valuestr == physicsModelName}) ?? PhysicsModel.flat2d
+        }
+        if let vehiclePointMass = yamlDict["vehicle is point mass"] as? Bool {
+            vehiclePointMassParam.value = vehiclePointMass
+        }
+    }
+}
 /*
 class PhysicsModelParam: Parameter {
     var curModel: PhysicsModel = .flat2d

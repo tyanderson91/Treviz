@@ -48,7 +48,7 @@
 	  "name" : "Y vel"
 	}
   ],
-  "name" : "Analysis (public.yaml)",
+  "analysisName" : "Analysis (public.yaml)",
   "conditions" : [
     {
       "unionType" : 0,

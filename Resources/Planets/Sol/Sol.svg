@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   sodipodi:docname="Sol.svg"
+   inkscape:version="1.0beta2 (2b71d25, 2019-12-03)"
+   id="svg8"
+   version="1.1"
+   viewBox="0 0 15 15"
+   height="15mm"
+   width="15mm"
+   inkscape:export-filename="/Users/TylerAnderson/Coding/Swift/Treviz/Resources/Plot type icons/nline2d.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96">
+  <defs
+     id="defs2">
+    <rect
+       x="13.607143"
+       y="30.994047"
+       width="22.655851"
+       height="13.098701"
+       id="rect840" />
+    <radialGradient
+       r="21.197905"
+       fy="306.1636"
+       fx="307.67786"
+       cy="306.1636"
+       cx="307.67786"
+       gradientTransform="matrix(1.4567985,0.04325702,-0.04564609,1.5372577,-307.05191,-547.06496)"
+       gradientUnits="userSpaceOnUse"
+       id="radialGradient2339"
+       xlink:href="#linearGradient2347"
+       inkscape:collect="always" />
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient2347">
+      <stop
+         style="stop-color:#ffff69;stop-opacity:1"
+         offset="0"
+         id="stop2343" />
+      <stop
+         style="stop-color:#f18000;stop-opacity:0.93841167"
+         offset="1"
+         id="stop2345" />
+    </linearGradient>
+    <filter
+       height="1.1089137"
+       y="-0.054456852"
+       width="1.1089145"
+       x="-0.054457247"
+       id="filter2349"
+       style="color-interpolation-filters:sRGB"
+       inkscape:collect="always">
+      <feGaussianBlur
+         id="feGaussianBlur2351"
+         stdDeviation="0.9454303"
+         inkscape:collect="always" />
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     inkscape:snap-nodes="true"
+     inkscape:window-maximized="0"
+     inkscape:window-y="25"
+     inkscape:window-x="0"
+     inkscape:window-height="622"
+     inkscape:window-width="1280"
+     showgrid="false"
+     inkscape:document-rotation="0"
+     inkscape:current-layer="layer1"
+     inkscape:document-units="mm"
+     inkscape:cy="42.392487"
+     inkscape:cx="-13.80019"
+     inkscape:zoom="4.2961039"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base"
+     inkscape:snap-midpoints="false"
+     inkscape:snap-intersection-paths="true"
+     inkscape:object-nodes="true"
+     inkscape:snap-bbox="true"
+     inkscape:bbox-nodes="true"
+     inkscape:bbox-paths="true" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1"
+     inkscape:groupmode="layer"
+     inkscape:label="Layer 1">
+    <rect
+       style="fill:#000000;stroke-width:0.293444;stroke-linejoin:bevel;stroke-dasharray:0.880331, 0.880331"
+       id="rect6160"
+       width="15.240964"
+       height="15"
+       x="-6.9388939e-18"
+       y="6.9388939e-18" />
+    <ellipse
+       transform="matrix(0.31598737,0,0,-0.31598508,-32.731772,-12.413399)"
+       style="mix-blend-mode:normal;fill:url(#radialGradient2339);fill-opacity:1;stroke:none;stroke-width:4.42945;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:2.26772;stroke-opacity:0.996078;filter:url(#filter2349)"
+       id="path1379-7-6"
+       cx="127.32082"
+       cy="-63.020042"
+       rx="20.833157"
+       ry="20.833307"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+  </g>
+</svg>

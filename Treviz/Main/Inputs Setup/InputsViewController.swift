@@ -33,8 +33,8 @@ class InputsViewController: TZViewController, NSTableViewDataSource, NSTableView
         }
         return tmpViews
     }
-    var paramSelectorViews: [ParameterSelectorButton] {
-        var tmpViews = [ParameterSelectorButton]()
+    var paramSelectorViews: [RunVariantEnableButton] {
+        var tmpViews = [RunVariantEnableButton]()
         for thisView in self.children.filter({$0 is PhasedViewController}) as! [PhasedViewController] {
             tmpViews.append(contentsOf: thisView.paramSelectorViews)
         }

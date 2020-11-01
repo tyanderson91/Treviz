@@ -40,14 +40,6 @@ class TZRunSettings: Codable {
         runMode = .parallel
     }
     
-    //MARK: Codable implementation
-    enum CodingKeys: String, CodingKey {
-        case propagatorType
-        case defaultTimestep
-        case useAdaptiveTimestep
-        case minTimestep
-        case maxTimestep
-    }
     func setMinTimeStep(_ minStep: VarValue) throws {
         guard minStep >= 0.0 else { throw TZRunSettingError.negativeNumberError }
         guard minStep < maxTimestep.value else { throw TZRunSettingError.minMaxError }
@@ -61,6 +53,15 @@ class TZRunSettings: Codable {
     func setDefaultTimeStep(_ defaultStep: VarValue) throws {
         guard defaultStep > 0.0 else { throw TZRunSettingError.negativeNumberError }
         defaultTimestep.value = defaultStep
+    }
+    
+    //MARK: Codable implementation
+    enum CodingKeys: String, CodingKey {
+        case propagatorType
+        case defaultTimestep
+        case useAdaptiveTimestep
+        case minTimestep
+        case maxTimestep
     }
     
     required init(from decoder: Decoder) throws {
@@ -97,13 +98,13 @@ class TZRunSettings: Codable {
             useAdaptiveTimestep.value = adaptiveTimeStepIn
         }
         if let timestepIn = yamlDict["timestep"] as? VarValue {
-            try setDefaultTimeStep(timestepIn)
+            self.defaultTimestep.value = timestepIn
         }
         if let minTimeStepIn = yamlDict["min timestep"] as? VarValue {
-            try setMinTimeStep(minTimeStepIn)
+            self.minTimestep.value = minTimeStepIn
         }
         if let maxTimeStepIn = yamlDict["max timestep"] as? VarValue {
-            try setMaxTimeStep(maxTimeStepIn)
+            self.maxTimestep.value = maxTimeStepIn
         }
     }
     

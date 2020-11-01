@@ -9,6 +9,7 @@
 //
 import Foundation
 import Cocoa
+import Yams
 
 enum AnalysisDocError: Error, LocalizedError {
     case UnknownDataTypeError
@@ -110,6 +111,17 @@ class AnalysisDoc: NSDocument {
                 return archiver.encodedData
             } catch { analysis.logMessage("Error when saving file")
                 throw error
+            }
+        case "public.yaml":
+            let encoder = YAMLEncoder()
+            encoder.options.allowUnicode = true
+            if let asysString = try? encoder.encode(analysis) {
+                let asysData = asysString.data(using: String.Encoding.symbol)!
+                return asysData
+            } else {
+                let dataError = AnalysisDocError.UnknownDataTypeError
+                analysis.logMessage(dataError.errorDescription!)
+                throw dataError
             }
         default:
             let dataError = AnalysisDocError.UnknownDataTypeError

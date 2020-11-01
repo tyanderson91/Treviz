@@ -24,11 +24,11 @@ class RunSettingsTest: XCTestCase {
         let yamlDict = getYamlDict(filename: "TestAnalysis1", self: self)
         let runSettingsDict = yamlDict["Run Settings"] as! [String: Any]
         let newRunSettings = try TZRunSettings(yamlDict: runSettingsDict)
-        XCTAssert(newRunSettings.defaultTimestep == 0.123)
+        XCTAssert(newRunSettings.defaultTimestep.value == 0.123)
         XCTAssert(newRunSettings.propagatorType == .rungeKutta4)
-        XCTAssert(newRunSettings.minTimestep == 0.1)
-        XCTAssert(newRunSettings.maxTimestep == 0.5)
-        XCTAssertTrue(newRunSettings.useAdaptiveTimestep)
+        XCTAssert(newRunSettings.minTimestep.value == 0.1)
+        XCTAssert(newRunSettings.maxTimestep.value == 0.5)
+        XCTAssertTrue(newRunSettings.useAdaptiveTimestep.value)
         
         //Writing Codable
         var dataOut = Data()

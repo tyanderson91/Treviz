@@ -14,14 +14,14 @@ class RunSettingsViewController: PhasedViewController {
     @IBOutlet weak var defaultTimestepTextBox: NSTextField!
     @IBOutlet weak var minTimestepTextBox: NSTextField!
     @IBOutlet weak var maxTimestepTextBox: NSTextField!
-    @IBOutlet weak var adaptiveTimestepParamCheckbox: ParameterSelectorButton!
-    @IBOutlet weak var defaultTimestepParamCheckbox: ParameterSelectorButton!
-    @IBOutlet weak var minTimestepParamCheckbox: ParameterSelectorButton!
-    @IBOutlet weak var maxTimestepParamCheckbox: ParameterSelectorButton!
+    @IBOutlet weak var adaptiveTimestepParamCheckbox: RunVariantEnableButton!
+    @IBOutlet weak var defaultTimestepParamCheckbox: RunVariantEnableButton!
+    @IBOutlet weak var minTimestepParamCheckbox: RunVariantEnableButton!
+    @IBOutlet weak var maxTimestepParamCheckbox: RunVariantEnableButton!
     @IBOutlet weak var defaultTimestepUnitLabel: NSTextField!
     @IBOutlet weak var minTimestepUnitLabel: NSTextField!
     @IBOutlet weak var maxTimestepUnitLabel: NSTextField!
-    @IBOutlet weak var propagatorParamCheckbox: ParameterSelectorButton!
+    @IBOutlet weak var propagatorParamCheckbox: RunVariantEnableButton!
     
     @IBOutlet weak var allTimestepsStackView: CollapsibleStackView!
     
@@ -88,7 +88,7 @@ class RunSettingsViewController: PhasedViewController {
     }
     
     @IBAction func didSetParams(_ sender: Any) {
-        didSetParam(sender as! ParameterSelectorButton)
+        didSetParam(sender as! RunVariantEnableButton)
     }
     
     @IBAction func didSetAdaptiveTimestep(_ sender: Any) {
