@@ -225,7 +225,7 @@ class ConditionsTest: XCTestCase {
         
         // Test subscript by condition
         let newState = state[cond6]
-        let matchingState: Dictionary<VariableID, [VarValue]> = ["t": [7.0], "x": [14.0], "y": [-5.0]]
+        let matchingState: Dictionary<ParamID, [VarValue]> = ["t": [7.0], "x": [14.0], "y": [-5.0]]
         XCTAssertEqual(newState, matchingState)
     }
     

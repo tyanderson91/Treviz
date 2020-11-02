@@ -23,18 +23,18 @@ class StateCalcVariable: Variable {
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
     }
-    init(_ idIn: VariableID, named nameIn: String = "", symbol symbolIn: String = "", units unitsIn: String = "", calculation calcIn: @escaping (inout StateDictSingle)->VarValue) {
+    init(_ idIn: ParamID, named nameIn: String = "", symbol symbolIn: String = "", units unitsIn: String = "", calculation calcIn: @escaping (inout StateDictSingle)->VarValue) {
         super.init(idIn, named: nameIn, symbol: symbolIn, units: unitsIn)
         singleStateCalculation = calcIn
         multiStateCalculation = defaultMultiStateCalc(singleStateCalculation)
     }
-    init(_ idIn: VariableID, named nameIn: String = "", symbol symbolIn: String = "", units unitsIn: String = "", calculation calcIn: @escaping (inout StateDictArray)->[VarValue]) {
+    init(_ idIn: ParamID, named nameIn: String = "", symbol symbolIn: String = "", units unitsIn: String = "", calculation calcIn: @escaping (inout StateDictArray)->[VarValue]) {
         super.init(idIn, named: nameIn, symbol: symbolIn, units: unitsIn)
         multiStateCalculation = calcIn
     }
     
     override func copyToPhase(phaseid: String)->StateCalcVariable {
-        var newID: VariableID = ""
+        var newID: ParamID = ""
         if !self.id.contains(".") {
             newID = phaseid + "." + self.id
         } else {
@@ -46,7 +46,7 @@ class StateCalcVariable: Variable {
         return newVar
     }
     override func stripPhase()->Variable {
-        var newID: VariableID = ""
+        var newID: ParamID = ""
         if self.id.contains(".") {
             newID = self.id.baseVarID()
         } else {

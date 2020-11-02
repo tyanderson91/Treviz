@@ -55,7 +55,7 @@ class VariableSelectorViewController: TZViewController {
         else if let parentGetter = parent as? VariableGetter { parentGetter.variableDidChange(self) }
     }
     
-    func selectVariable(with varid: VariableID?){
+    func selectVariable(with varid: ParamID?){
         if let thisVarIndex = varList?.firstIndex(where: {$0.id == varid }) {
             selectedVariable = varList?[thisVarIndex]
         }

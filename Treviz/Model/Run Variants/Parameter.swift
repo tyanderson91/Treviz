@@ -26,7 +26,7 @@ import Cocoa
  9. Connect the param itself to the selector and param value buttons
  */
 protocol Parameter {
-    var id: VariableID {get}
+    var id: ParamID {get}
     var name: String {get}
     var isParam : Bool {get set} // Defines whether the parameter is used as a 'parameter' in the current analysis; that is, whether it is varied as an input across multiple analysis runs
     static var paramConstructor: (_ param: Parameter)->RunVariant? {get}
@@ -37,7 +37,7 @@ class NumberParam : Parameter, Comparable {
     static func < (lhs: NumberParam, rhs: NumberParam) -> Bool { return lhs.value < rhs.value }
     static func == (lhs: NumberParam, rhs: NumberParam) -> Bool { return lhs.value == rhs.value }
     
-    var id: VariableID
+    var id: ParamID
     var name: String
     var isParam: Bool = false
     var value: VarValue = 0
@@ -48,19 +48,19 @@ class NumberParam : Parameter, Comparable {
         if let newVal = VarValue(string) { value = newVal }
     }
 
-    init(id numID: VariableID, name nameIn: String){
+    init(id numID: ParamID, name nameIn: String){
         id = numID
         name = nameIn
     }
     
-    convenience init(id numID: VariableID, name nameIn: String, value valIn: VarValue){
+    convenience init(id numID: ParamID, name nameIn: String, value valIn: VarValue){
         self.init(id: numID, name: nameIn)
         value = valIn
     }
 }
 
 class EnumGroupParam: Parameter {
-    var id: VariableID
+    var id: ParamID
     var name: String
     var isParam: Bool = false
     var value: StringValue
@@ -70,22 +70,22 @@ class EnumGroupParam: Parameter {
         return EnumGroupRunVariant(param: param) ?? nil
     }
     func setValue(to string: String) {
-        if let newVal = enumType.init(rawValue: string)  {value = newVal}
+        if let newVal = enumType.init(stringLiteral: string)  {value = newVal}
     }
     
-    init(id numID: VariableID, name nameIn: String, enumType enumTypeIn: StringValue.Type){
+    init(id numID: ParamID, name nameIn: String, enumType enumTypeIn: StringValue.Type){
         id = numID
         name = nameIn
         enumType = enumTypeIn
         value = ""
     }
     
-    convenience init(id numID: VariableID, name nameIn: String, enumType enumTypeIn: StringValue.Type, value valIn: StringValue){
+    convenience init(id numID: ParamID, name nameIn: String, enumType enumTypeIn: StringValue.Type, value valIn: StringValue){
         self.init(id: numID, name: nameIn, enumType: enumTypeIn)
         value = valIn
     }
     
-    convenience init(id numID: VariableID, name nameIn: String, enumType enumTypeIn: StringValue.Type, value valIn: StringValue, options optionsIn: [StringValue]){
+    convenience init(id numID: ParamID, name nameIn: String, enumType enumTypeIn: StringValue.Type, value valIn: StringValue, options optionsIn: [StringValue]){
         self.init(id: numID, name: nameIn, enumType: enumTypeIn, value: valIn)
         options = optionsIn
     }
@@ -93,7 +93,7 @@ class EnumGroupParam: Parameter {
 
 class BoolParam: Parameter {
     
-    var id: VariableID
+    var id: ParamID
     var name: String
     var isParam: Bool = false
     var value: Bool = false
@@ -102,15 +102,15 @@ class BoolParam: Parameter {
     }
     
     func setValue(to string: String) {
-        if let newVal = Bool(rawValue: string) { value = newVal }
+        if let newVal = Bool(stringLiteral: string) { value = newVal }
     }
     
-    init(id numID: VariableID, name nameIn: String){
+    init(id numID: ParamID, name nameIn: String){
         id = numID
         name = nameIn
     }
     
-    convenience init(id numID: VariableID, name nameIn: String, value valIn: Bool){
+    convenience init(id numID: ParamID, name nameIn: String, value valIn: Bool){
         self.init(id: numID, name: nameIn)
         value = valIn
     }

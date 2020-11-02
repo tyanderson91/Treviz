@@ -10,27 +10,24 @@ import Foundation
 
 protocol StringValue {
     var valuestr: String {get}
-    init?(rawValue: String)
+    init?(stringLiteral: String)
 }
 
 extension String: StringValue {
     var valuestr: String { return self }
     init(from strval: StringValue) { self = strval.valuestr }
-    init?(rawValue: String){
-        self = rawValue
-    }
 }
 
 extension VarValue: StringValue {
     var valuestr: String { return String(format: "%g", self)}
-    init?(rawValue: String) {
-        self.init(rawValue)
+    init?(stringLiteral: String) {
+        self.init(stringLiteral)
     }
 }
 
 extension PhysicsModel: StringValue {
-    init?(rawValue: String) {
-        if let match = PhysicsModel.allPhysicsModels.first(where: {$0.valuestr == rawValue}) {
+    init?(stringLiteral: String) {
+        if let match = PhysicsModel.allPhysicsModels.first(where: {$0.valuestr == stringLiteral}) {
             self = match
         } else { return nil }
     }

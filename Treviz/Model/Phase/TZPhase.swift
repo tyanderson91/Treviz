@@ -25,19 +25,20 @@ class TZPhase: Codable {
     var initState: StateDictSingle { return StateDictSingle(from: varList, at: 0) }
     weak var terminalCondition : Condition!
     var traj: StateDictArray!
-    var requiredVarIDs: [VariableID] = []
-    var requestedVarIDs: [VariableID] = ["v", "a"]
+    var requiredVarIDs: [ParamID] = []
+    var requestedVarIDs: [ParamID] = ["v", "a"]
     var progressReporter: AnalysisProgressReporter?
     var isRunning = false
     var returnCode : ReturnCode = .NotStarted
     var runMode : AnalysisRunMode = .parallel
     var analysis: Analysis!
     var varList: [Variable]!
-    var varCalculationsSingle = Dictionary<VariableID,(inout StateDictSingle)->VarValue>()
-    var varCalculationsMultiple = Dictionary<VariableID,(inout StateDictArray)->[VarValue]>()
+    var varCalculationsSingle = Dictionary<ParamID,(inout StateDictSingle)->VarValue>()
+    var varCalculationsMultiple = Dictionary<ParamID,(inout StateDictArray)->[VarValue]>()
     var initStateGroups : InitStateHeader!
     var allParams: [Parameter] = []
     let physicsSettings: PhysicsSettings
+    //var simpleIO: Bool = true
     //var physicsModelParam = EnumGroupParam(id: "physicsModel", name: "Physics Model", enumType: PhysicsModel.self, value: PhysicsModel.flat2d, options: PhysicsModel.allPhysicsModels)
     //var usesVehicleInertiaParam = BoolParam(id: "usesMOI", name: "Use MOI", value: false)
     
@@ -91,15 +92,21 @@ class TZPhase: Codable {
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(id, forKey: .id)
-        try container.encode(propagatorType.rawValue, forKey: .propagatorType)
-        try container.encode(terminalCondition.name, forKey: .terminalCondition)
-        try container.encode(runSettings, forKey: .runSettings)
-        if let nonzerovars = (varList)?.filter({$0.value[0] != 0 || $0.isParam}) {
-            let baseVars = nonzerovars.compactMap({$0.stripPhase()})
-            try container.encode(baseVars, forKey: .inputSettings)
-        }
-        try container.encode(physicsSettings, forKey: .physicsSettings)
+        let simpleIO : Bool = encoder.userInfo[.simpleIOKey] as? Bool ?? false
+        //if !simpleIO {
+            try container.encode(id, forKey: .id)
+            try container.encode(propagatorType.rawValue, forKey: .propagatorType)
+            if terminalCondition != nil {
+                try container.encode(terminalCondition.name, forKey: .terminalCondition)
+            }
+            try container.encode(runSettings, forKey: .runSettings)
+            if let nonzerovars = (varList)?.filter({$0.value[0] != 0 || $0.isParam}) {
+                let baseVars = nonzerovars.compactMap({$0.stripPhase()})
+                try container.encode(baseVars, forKey: .inputSettings)
+            }
+            try container.encode(physicsSettings, forKey: .physicsSettings)
+        //} else {
+        //}
         //try container.encode(vehicle.id, forKey: .vehicleID)
     }
     

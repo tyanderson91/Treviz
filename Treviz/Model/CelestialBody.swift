@@ -20,8 +20,8 @@ struct CelestialBody: StringValue {
         else { icon = NSImage(named: "Default_cbody_icon") }
     }
 
-    init?(rawValue: String) {
-        if let match = CelestialBody.allBodies.first(where: {$0.valuestr == rawValue}) {
+    init?(stringLiteral: String) {
+        if let match = CelestialBody.allBodies.first(where: {$0.valuestr == stringLiteral}) {
             self = match
         } else { return nil }
     }

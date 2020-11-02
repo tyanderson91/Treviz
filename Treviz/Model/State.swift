@@ -17,7 +17,7 @@ typealias State = Array<Variable>
 extension State {
 
     // Subscripts by variable
-    subscript(_ varID: VariableID) -> Variable? {
+    subscript(_ varID: ParamID) -> Variable? {
         get {
             let thisVar = self.first(where: {$0.id == varID})
             return thisVar
@@ -31,7 +31,7 @@ extension State {
         }
     }
     
-    subscript(_ varID: VariableID, index: Int) -> VarValue? {
+    subscript(_ varID: ParamID, index: Int) -> VarValue? {
         get {
             //let thisVar = self[varID]
             guard let thisVar = self[varID] else {return nil}
@@ -47,9 +47,9 @@ extension State {
     
     //Subscripts by condition
     
-    subscript(varIDs: [VariableID], condition: Condition) -> [VariableID: [VarValue]]? {
+    subscript(varIDs: [ParamID], condition: Condition) -> [ParamID: [VarValue]]? {
         // Note that this subscript take some time to collect, since by default it will evaluate the condition
-        var output = [VariableID: [VarValue]]()
+        var output = [ParamID: [VarValue]]()
         condition.evaluateState(self)
         let conditionIndex = condition.meetsConditionIndex
         guard conditionIndex.count > 0 else {return nil}
@@ -69,7 +69,7 @@ extension State {
         return output
     }
     
-    subscript(varID: VariableID, condition: Condition)->[VarValue]?{
+    subscript(varID: ParamID, condition: Condition)->[VarValue]?{
         if let output = self[[varID], condition]{
             return output[varID]}
         else {return nil}
@@ -84,7 +84,7 @@ extension State {
         let varID = variable.id
         return self[varID, condition]
     }*/
-    subscript(condition: Condition)->[VariableID: [VarValue]]?{
+    subscript(condition: Condition)->[ParamID: [VarValue]]?{
         let varIDs = self.map{ $0.id }
         let output = self[varIDs, condition]
         return output

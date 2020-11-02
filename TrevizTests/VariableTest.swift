@@ -31,13 +31,13 @@ class TestVariable: XCTestCase {
     
     // MARK: VariableID
     func testPhasename() {
-        let varID = VariableID("phase1.varid")
+        let varID = ParamID("phase1.varid")
         XCTAssert(varID.phasename() == "phase1")
-        let varid2 = VariableID("varid")
+        let varid2 = ParamID("varid")
         XCTAssertEqual(varid2.phasename(), "")
     }
     func testAtPhase() {
-        let varID = VariableID("varid")
+        let varID = ParamID("varid")
         let phase = "phase1"
         XCTAssertEqual(varID.atPhase(phase), "phase1.varid")
     }

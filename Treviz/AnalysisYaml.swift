@@ -94,16 +94,16 @@ extension Analysis {
         if let titlestr = yamlObj["title"] as? String{
             outputDict["title"] = titlestr
         }
-        if let varstr = yamlObj["variable1"] as? VariableID{
+        if let varstr = yamlObj["variable1"] as? ParamID{
             outputDict["variable1"] = varList.first(where: {$0.id == varstr}) ?? ""
         }
-        else if let varstr = yamlObj["variable"] as? VariableID{
+        else if let varstr = yamlObj["variable"] as? ParamID{
             outputDict["variable1"] = varList.first(where: {$0.id == varstr}) ?? ""
         }
-        if let varstr = yamlObj["variable2"] as? VariableID{
+        if let varstr = yamlObj["variable2"] as? ParamID{
             outputDict["variable2"] = varList.first(where: {$0.id == varstr}) ?? ""
         }
-        if let varstr = yamlObj["variable3"] as? VariableID{
+        if let varstr = yamlObj["variable3"] as? ParamID{
             outputDict["variable3"] = varList.first(where: {$0.id == varstr}) ?? ""
         }
         if let condstr = yamlObj["condition"] as? String{

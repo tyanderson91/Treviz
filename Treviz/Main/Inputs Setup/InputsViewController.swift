@@ -41,12 +41,12 @@ class InputsViewController: TZViewController, NSTableViewDataSource, NSTableView
         return tmpViews
     }
     
-    func valueView(for paramID: VariableID)->ParamValueView? {
+    func valueView(for paramID: ParamID)->ParamValueView? {
         if let thisView = paramValueViews.first(where: {$0.parameter.id == paramID}) {
             return thisView
         } else {return nil}
     }
-    func updateParamValueView(for paramID: VariableID) {
+    func updateParamValueView(for paramID: ParamID) {
 
         let theseViews = paramValueViews.filter({$0.parameter.id == paramID})
         for curView in theseViews {
@@ -55,7 +55,7 @@ class InputsViewController: TZViewController, NSTableViewDataSource, NSTableView
 
         self.runVariantViewController.tableView.reloadData()
     }
-    func updateParamSelectorView(for paramID: VariableID) {
+    func updateParamSelectorView(for paramID: ParamID) {
         let selectorView = paramSelectorViews.first(where: {$0.param?.id == paramID})
         if let param = selectorView?.param
         {
@@ -68,7 +68,8 @@ class InputsViewController: TZViewController, NSTableViewDataSource, NSTableView
                 
         // Load and install all the view controllers from our storyboard in the following order.
         let storyboard = NSStoryboard(name: "Inputs", bundle: nil)
-
+        
+        //self.analysis.phases = [TZPhase(id: "default")]
         runSettingsViewController = storyboard.instantiateController(identifier: "RunSettingsViewController") { aCoder in
             RunSettingsViewController(coder: aCoder, analysis: self.analysis, phase: self.analysis.phases[0])
         }

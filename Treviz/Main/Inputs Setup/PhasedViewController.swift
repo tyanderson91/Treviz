@@ -41,10 +41,10 @@ class PhasedViewController: BaseViewController {
         if inputsViewController != nil { inputsViewController?.reloadParams() }
     }
     
-    func containsParamView(for id: VariableID)->Bool{
+    func containsParamView(for id: ParamID)->Bool{
         return paramValueViews.contains(where: {$0.parameter.id == id})
     }
-    func paramView(for id: VariableID)->ParamValueView? {
+    func paramView(for id: ParamID)->ParamValueView? {
         if let thisView = paramValueViews.first(where: {$0.parameter.id == id}) {
             return thisView
         } else {return nil}

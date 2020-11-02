@@ -14,6 +14,8 @@
 		CD0F1140250560A700C88B05 /* TZRunSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0F113E250560A700C88B05 /* TZRunSettings.swift */; };
 		CD11FA8723408173001A3695 /* AddOutputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD11FA8623408173001A3695 /* AddOutputViewController.swift */; };
 		CD11FA9323433096001A3695 /* PlotTypes.plist in Resources */ = {isa = PBXBuildFile; fileRef = CD11FA9223433096001A3695 /* PlotTypes.plist */; };
+		CD18A660254FCB1C00B06C10 /* ParameterID.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD18A65F254FCB1C00B06C10 /* ParameterID.swift */; };
+		CD18A661254FCB1C00B06C10 /* ParameterID.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD18A65F254FCB1C00B06C10 /* ParameterID.swift */; };
 		CD28477722FF9C8800D192A9 /* CollapsibleGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD28477622FF9C8800D192A9 /* CollapsibleGridView.swift */; };
 		CD2D0DB42243836F0012978E /* ThreeAxisOutputSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2D0D96224382F70012978E /* ThreeAxisOutputSetupViewController.swift */; };
 		CD2D0DB52243836F0012978E /* TwoAxisOutputSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2D0DA9224382F70012978E /* TwoAxisOutputSetupViewController.swift */; };
@@ -196,6 +198,7 @@
 		CD0F113E250560A700C88B05 /* TZRunSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TZRunSettings.swift; sourceTree = "<group>"; };
 		CD11FA8623408173001A3695 /* AddOutputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOutputViewController.swift; sourceTree = "<group>"; };
 		CD11FA9223433096001A3695 /* PlotTypes.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = PlotTypes.plist; sourceTree = "<group>"; };
+		CD18A65F254FCB1C00B06C10 /* ParameterID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterID.swift; sourceTree = "<group>"; };
 		CD1A5B5C23FD1E9A00BE3BFB /* AnalysisYaml.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AnalysisYaml.swift; path = /Users/TylerAnderson/Coding/Swift/Treviz/Treviz/AnalysisYaml.swift; sourceTree = "<absolute>"; };
 		CD280F49233B45670004263F /* TZPlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TZPlot.swift; sourceTree = "<group>"; };
 		CD28477622FF9C8800D192A9 /* CollapsibleGridView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollapsibleGridView.swift; sourceTree = "<group>"; };
@@ -361,6 +364,7 @@
 				CD63AEA323E7EA26006502F2 /* State.swift */,
 				CDDFF28224A5ABE200E8BC31 /* StateDict.swift */,
 				CD63AEA123E7EA26006502F2 /* Variable.swift */,
+				CD18A65F254FCB1C00B06C10 /* ParameterID.swift */,
 				CDDA8F2124AEE386002936E6 /* CalculatedVariable.swift */,
 				CD0F010A2365595700C920AA /* Vehicle.swift */,
 				CDD60A962345C5AE00249987 /* TZOutput.swift */,
@@ -931,6 +935,7 @@
 				CD4656B2224C6F3500C587CC /* PhysicsViewController.swift in Sources */,
 				CD0F113D25048FE300C88B05 /* RunSettingsViewController.swift in Sources */,
 				CDF2338F242DCD8100B8EF40 /* HeaderViewController.swift in Sources */,
+				CD18A660254FCB1C00B06C10 /* ParameterID.swift in Sources */,
 				CDE2B5A324C2C71D002026E0 /* AnalysisProgressReporter.swift in Sources */,
 				CD410CF72444239700AB49DE /* CorePlotExtensions.swift in Sources */,
 				CDE2B5A424C2C71D002026E0 /* Analysis.swift in Sources */,
@@ -1012,6 +1017,7 @@
 				CDDA8F2824B44213002936E6 /* DefaultVariableCalculations.swift in Sources */,
 				CDFAD0FB23EA84FE00CE7424 /* TZOutput.swift in Sources */,
 				CDAF399324A7217500309CA9 /* PhaseRunFunctions.swift in Sources */,
+				CD18A661254FCB1C00B06C10 /* ParameterID.swift in Sources */,
 				CDDA8F2524B2C8B4002936E6 /* Output Handling Protocols.swift in Sources */,
 				CD5F4E9D2455101500823E43 /* AnalysisRunFunctions.swift in Sources */,
 				CD5F4E9B2455101100823E43 /* TZLogger.swift in Sources */,

@@ -17,10 +17,10 @@ enum StateError: Error, LocalizedError {
  */
 struct StateDictArray: Collection, ExpressibleByDictionaryLiteral {
     //MARK: Stardard Dictionary functions
-    typealias DictionaryType = Dictionary<VariableID, [VarValue]>
+    typealias DictionaryType = Dictionary<ParamID, [VarValue]>
     typealias Index = DictionaryType.Index
     typealias Element = DictionaryType.Element
-    typealias Key = VariableID
+    typealias Key = ParamID
     typealias Value = [VarValue]
     
     private var variables = DictionaryType()
@@ -30,7 +30,7 @@ struct StateDictArray: Collection, ExpressibleByDictionaryLiteral {
     subscript(index: Index) -> Element {
         get { return variables[index] }
     }
-    subscript(varid: VariableID) -> [VarValue]? {
+    subscript(varid: ParamID) -> [VarValue]? {
         mutating get {
             if variables.keys.contains(varid) { return variables[varid] ?? nil }
             else {
@@ -46,7 +46,7 @@ struct StateDictArray: Collection, ExpressibleByDictionaryLiteral {
         return variables.index(after: i)
     }
     
-    init(dictionaryLiteral elements: (VariableID, [VarValue])...) {
+    init(dictionaryLiteral elements: (ParamID, [VarValue])...) {
         for (varid, varval) in elements {
             variables[varid] = varval
         }
@@ -106,7 +106,7 @@ struct StateDictArray: Collection, ExpressibleByDictionaryLiteral {
             }
         }
     }
-    subscript(_ varid: VariableID, index: Int)->VarValue? {
+    subscript(_ varid: ParamID, index: Int)->VarValue? {
         mutating get {
             guard let thisVar = self[varid] else { return nil }
             if index < thisVar.count { return thisVar[index] }
@@ -138,10 +138,10 @@ A StateDictSingle is just like a StateDictArray, but only contains data for a si
 */
 struct StateDictSingle: Collection, ExpressibleByDictionaryLiteral {
     // MARK: Standard Dictionary functions
-    typealias DictionaryType = Dictionary<VariableID, VarValue>
+    typealias DictionaryType = Dictionary<ParamID, VarValue>
     typealias Index = DictionaryType.Index
     typealias Element = DictionaryType.Element
-    typealias Key = VariableID
+    typealias Key = ParamID
     typealias Value = VarValue
     
     private var variables = DictionaryType()
@@ -151,7 +151,7 @@ struct StateDictSingle: Collection, ExpressibleByDictionaryLiteral {
     subscript(index: Index) -> Element {
         get { return variables[index] }
     }
-    subscript(varid: VariableID) -> VarValue? {
+    subscript(varid: ParamID) -> VarValue? {
         get { return variables[varid] ?? nil }
         set { variables[varid] = newValue }
     }
@@ -159,7 +159,7 @@ struct StateDictSingle: Collection, ExpressibleByDictionaryLiteral {
         return variables.index(after: i)
     }
     
-    init(dictionaryLiteral elements: (VariableID, VarValue)...) {
+    init(dictionaryLiteral elements: (ParamID, VarValue)...) {
         for (varid, varval) in elements {
             variables[varid] = varval
         }

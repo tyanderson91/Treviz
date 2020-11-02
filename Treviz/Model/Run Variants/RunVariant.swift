@@ -19,8 +19,8 @@ extension Bool: StringValue {
             return "True"
         } else { return "False" }
     }
-    init?(rawValue: String) {
-        switch rawValue {
+    init?(stringLiteral: String) {
+        switch stringLiteral {
         case "True", "On":
             self.init(true)
         case "False", "Off":
@@ -32,7 +32,7 @@ extension Bool: StringValue {
 }
 
 class RunVariant {
-    var paramID: VariableID { return parameter.id }
+    var paramID: ParamID { return parameter.id }
     var isActive: Bool {
         get { return parameter.isParam }
         set { parameter.isParam = newValue }
@@ -90,7 +90,7 @@ class EnumGroupRunVariant: RunVariant {
     override var curValue: StringValue { return enumParam.value }
     
     override func setValue(from string: String) {
-        guard let newVal = enumType.init(rawValue: string) else { return }
+        guard let newVal = enumType.init(stringLiteral: string) else { return }
         enumParam.value = newVal
     }
     override init?(param: Parameter) {

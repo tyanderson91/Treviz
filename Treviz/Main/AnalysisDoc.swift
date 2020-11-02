@@ -98,9 +98,12 @@ class AnalysisDoc: NSDocument {
         // Insert code here to write your document to data of the specified type, throwing an error in case of failure.
         // Alternatively, you could remove this method and override fileWrapper(ofType:), write(to:ofType:), or write(to:ofType:for:originalContentsURL:) instead.
         //let asysData = try NSKeyedArchiver.archivedData(withRootObject: analysis as Any, requiringSecureCoding: false)
+        var userOptions : [CodingUserInfoKey : Any] = [.simpleIOKey: false]
+
         switch typeName {
         case "public.json":
             let encoder = JSONEncoder()
+            encoder.userInfo = userOptions
             encoder.outputFormatting = .prettyPrinted
             let asysData = try encoder.encode(analysis)
             return asysData
@@ -115,8 +118,9 @@ class AnalysisDoc: NSDocument {
         case "public.yaml":
             let encoder = YAMLEncoder()
             encoder.options.allowUnicode = true
-            if let asysString = try? encoder.encode(analysis) {
-                let asysData = asysString.data(using: String.Encoding.symbol)!
+            userOptions[.simpleIOKey] = true
+            if let asysString = try? encoder.encode(analysis, userInfo: userOptions) {
+                let asysData = asysString.data(using: String.Encoding.unicode)!
                 return asysData
             } else {
                 let dataError = AnalysisDocError.UnknownDataTypeError

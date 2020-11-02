@@ -7,6 +7,10 @@
 
 import Cocoa
 
+extension CodingUserInfoKey {
+    static let simpleIOKey : CodingUserInfoKey = CodingUserInfoKey(rawValue: "simpleIO")!
+}
+
 enum AnalysisError: Error {
     case NoTerminalCondition
     case TimeStepError
@@ -59,6 +63,13 @@ class Analysis: NSObject, Codable {
         return inputSettings.filter {$0.isParam}
     }
     @objc var plots : [TZOutput] = []
+    /*var simpleIO : Bool = true {
+        didSet {
+            for thisPhase in self.phases {
+                thisPhase.simpleIO = self.simpleIO
+            }
+        }
+    } */// whether to encode/decode data in a simple format (for YAML)
     
     // Phase variables
     var phases : [TZPhase] = []
@@ -190,9 +201,20 @@ class Analysis: NSObject, Codable {
     }
     
     func encode(to encoder: Encoder) throws {
+        let simpleIO : Bool = encoder.userInfo[.simpleIOKey] as? Bool ?? false
+        //if !simpleIO {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(name, forKey: .analysisName)
-        try container.encode(conditions, forKey: .conditions)
+        if simpleIO {
+            //try container.encode(conditions, forKey: .conditions)
+            var condsDict = [String: Condition]()
+            for thisCond in conditions {
+                    condsDict[thisCond.name] = thisCond
+            }
+            try container.encode(condsDict, forKey: .conditions)
+        } else {
+            try container.encode(conditions, forKey: .conditions)
+        }
         try container.encode(plots, forKey: .plots)
         try container.encode(phases, forKey: .phases)
     }

@@ -28,7 +28,7 @@ extension Variable: InitStateCheck {
 }
 
 class InitStateHeader: InitStateCheck{
-    var id: VariableID = ""
+    var id: ParamID = ""
     var subheaders: [InitStateHeader]
     var variables: [Variable]
     var children: [InitStateCheck] {
@@ -46,7 +46,7 @@ class InitStateHeader: InitStateCheck{
             curParam = curParam || curChild.hasParams}
         return curParam}
     
-    init(id : VariableID, subheaders: [InitStateHeader]=[], variables: [Variable]=[]){
+    init(id : ParamID, subheaders: [InitStateHeader]=[], variables: [Variable]=[]){
         self.id = id
         self.name = " "
         self.subheaders = subheaders

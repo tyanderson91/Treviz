@@ -25,7 +25,7 @@ extension TZPhase {
         loadVarCalculations()
         for thisVar in inputList {
             guard let dict = thisVar as? NSDictionary else { return []}
-            guard let varid = dict["id"] as? VariableID else { continue }
+            guard let varid = dict["id"] as? ParamID else { continue }
             if requiredVarIDs.contains(varid) {
                 let newVar = Variable(varid, named: dict["name"] as! String, symbol: dict["symbol"] as! String)
                 newVar.units = dict["units"] as! String
@@ -59,7 +59,7 @@ extension TZPhase {
      private func loadVarGroupsRecurs(input: InitStateHeader, withList list: [NSDictionary]){
          for dict in list {
              guard let itemType = dict["itemType"] as? String else { return }
-             guard let itemID = dict["id"] as? VariableID else { return }
+             guard let itemID = dict["id"] as? ParamID else { return }
              let name = dict["name"] as? String
              
              if itemType == "var"{

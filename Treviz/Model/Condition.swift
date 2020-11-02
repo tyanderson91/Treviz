@@ -87,7 +87,7 @@ extension NSNotification.Name {
  */
 class SingleCondition: EvaluateCondition, Codable {
     
-    var varID : VariableID!
+    var varID : ParamID!
     // A SingleCondition should take one of three forms: Interval (lower bound and/or upper bound), equality, or special (see above). If type is set, then unset the others
     // TODO: Allow for specification of units
     var lbound : VarValue? { didSet { if lbound != nil {
@@ -165,11 +165,11 @@ class SingleCondition: EvaluateCondition, Codable {
     init(){
     }
     
-    init(_ vid: VariableID){
+    init(_ vid: ParamID){
         varID = vid
     }
     
-    init(_ vid: VariableID, upperBound: VarValue? = nil, lowerBound: VarValue? = nil, equality eq: VarValue? = nil, specialCondition spc: SpecialConditionType? = nil){
+    init(_ vid: ParamID, upperBound: VarValue? = nil, lowerBound: VarValue? = nil, equality eq: VarValue? = nil, specialCondition spc: SpecialConditionType? = nil){
         varID = vid
         lbound = lowerBound
         ubound = upperBound
@@ -193,7 +193,7 @@ class SingleCondition: EvaluateCondition, Codable {
         do {ubound = try container.decode(VarValue.self, forKey: .ubound)} catch {ubound = nil}
         do {equality = try container.decode(VarValue.self, forKey: .equality)} catch {equality = nil}
         do {specialCondition = try container.decode(SpecialConditionType.self, forKey: .specialCondition)} catch {specialCondition = nil}
-        varID = try container.decode(VariableID.self, forKey: .varID)
+        varID = try container.decode(ParamID.self, forKey: .varID)
         setTests()
     }
     
@@ -357,7 +357,8 @@ class Condition : EvaluateCondition, Codable {
         } catch { _summary = "" }
     }
     
-    func encode(to encoder: Encoder) throws { 
+    func encode(to encoder: Encoder) throws {
+        let simpleIO : Bool = encoder.userInfo[.simpleIOKey] as? Bool ?? false
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(name, forKey: .name)
         try container.encode(unionType, forKey: .unionType)
@@ -367,20 +368,35 @@ class Condition : EvaluateCondition, Codable {
         let singleConditions = conditions.filter { $0 is SingleCondition } as? [SingleCondition]
         let conds = conditions.filter { $0 is Condition } as? [Condition]
         let conditionNames = conds?.compactMap({$0.name})
-        try container.encode(singleConditions, forKey: .singleConditions)
+        if simpleIO {
+            try container.encode(singleConditions, forKey: .singleConditions)
+            /*if conditions.count == 1 && singleConditions?.count == 1 {
+                var noContainer = encoder.unkeyedContainer()
+                let thisCond = singleConditions![0]
+                try noContainer.encode(thisCond.summary)
+            }*/
+            
+            /*for thisCondition in singleConditions! {
+                //SimpleCodingKeys.varID.rawValue = thisCondition.summary
+                var nameContainer = encoder.container(keyedBy: nameStringKey.self)
+                try nameContainer.encode(thisCondition.summary, forKey: .varID)
+            }*/
+        } else {
+            try container.encode(singleConditions, forKey: .singleConditions)
+        }
         try container.encode(conditionNames, forKey: .conditions)
     }
     
     // MARK: Inits
-    init(_ varid: VariableID, upperBound: VarValue? = nil, lowerBound: VarValue? = nil){
+    init(_ varid: ParamID, upperBound: VarValue? = nil, lowerBound: VarValue? = nil){
         let newCondition = SingleCondition(varid, upperBound: upperBound, lowerBound: lowerBound)
         conditions = [newCondition]
     }
-    init(_ varid: VariableID, equality: VarValue){
+    init(_ varid: ParamID, equality: VarValue){
         let newCondition = SingleCondition(varid, equality: equality)
         conditions = [newCondition]
     }
-    init(_ varid: VariableID, specialCondition: SpecialConditionType){
+    init(_ varid: ParamID, specialCondition: SpecialConditionType){
         let newCondition = SingleCondition(varid, specialCondition: specialCondition)
         conditions = [newCondition]
     }
