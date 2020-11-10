@@ -14,9 +14,14 @@ import Cocoa
 extension Condition {
     convenience init?(decoder: Decoder, referencing analysis: Analysis) {
         do {
-            try self.init(from: decoder)
+            let simpleIO : Bool = decoder.userInfo[.simpleIOKey] as? Bool ?? false
+            if simpleIO {
+                try self.init(from: decoder)
+            } else {
+                try self.init(from: decoder)
+            }
             let container = try decoder.container(keyedBy: Condition.CodingKeys.self)
-            let conditionNames = try container.decode(Array<String>.self, forKey: .conditions)
+            let conditionNames = (try? container.decode(Array<String>.self, forKey: .conditions)) ?? []
             for thisConditionName in conditionNames {
                 if let thisCondition = analysis.conditions.first(where: {$0.name == thisConditionName} ) {
                     self.conditions.append(thisCondition)
@@ -62,8 +67,8 @@ extension TZOutput {
                 if let thisCondition = analysis.conditions.first(where: {$0.name == conditionName}) {
                     self.condition = thisCondition
                 } else {
-                    let logmessage = String(format: "Could not find condition '%s' referenced in output '%s'", conditionName, self.title)
-                    analysis.logMessage(logmessage)
+                    //let logmessage = String(format: "Could not find condition '%s' referenced in output '%s'", conditionName, self.title)
+                    //analysis.logMessage(logmessage)
                 }
             }
         } catch {

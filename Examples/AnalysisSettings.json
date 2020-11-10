@@ -1,70 +1,62 @@
 {
-  "id" : "default",
-  "terminalCondition" : "Terminal",
-  "propagatorType" : "explicit",
-  "inputSettings" : [
-	{
-	  "symbol" : "𝑡",
-	  "id" : "t",
-	  "isParam" : false,
-	  "units" : "time",
-	  "isValid" : true,
-	  "value" : [
-		0
-	  ],
-	  "name" : "Time"
-	},
-	{
-	  "symbol" : "𝑋",
-	  "id" : "x",
-	  "isParam" : false,
-	  "units" : "distance",
-	  "isValid" : true,
-	  "value" : [
-		10
-	  ],
-	  "name" : "X pos"
-	},
-	{
-	  "symbol" : "𝑑𝑋\/𝑑𝑡",
-	  "id" : "dx",
-	  "isParam" : false,
-	  "units" : "velocity",
-	  "isValid" : true,
-	  "value" : [
-		100
-	  ],
-	  "name" : "X vel"
-	},
-	{
-	  "symbol" : "𝑑𝑌\/𝑑𝑡",
-	  "id" : "dy",
-	  "isParam" : false,
-	  "units" : "velocity",
-	  "isValid" : true,
-	  "value" : [
-		30
-	  ],
-	  "name" : "Y vel"
-	}
-  ],
-  "analysisName" : "Analysis (public.yaml)",
-  "conditions" : [
+  "analysisName" : "YAML Document",
+  "Outputs" : [
     {
-      "unionType" : 0,
+      "variable1" : "x",
+      "id" : 1,
+      "title" : "X pos",
+      "output type" : "text",
+      "condition" : "Terminal",
+      "plot type" : "singlevalue"
+    },
+    {
+      "variable1" : "t",
+      "id" : 2,
+      "title" : "Final time",
+      "output type" : "text",
+      "condition" : "Terminal",
+      "plot type" : "singlevalue"
+    },
+    {
+      "variable1" : "x",
+      "id" : 3,
+      "title" : "Traj",
+      "output type" : "plot",
+      "variable2" : "y",
+      "plot type" : "1line2d"
+    },
+    {
+      "variable1" : "y",
+      "id" : 4,
+      "title" : "Traj2",
+      "output type" : "plot",
+      "variable2" : "t",
+      "plot type" : "1line2d"
+    },
+    {
+      "variable1" : "x",
+      "id" : 5,
+      "title" : "Apogee range",
+      "output type" : "text",
+      "condition" : "Apogee",
+      "plot type" : "singlevalue"
+    }
+  ],
+  "Conditions" : [
+    {
       "singleConditions" : [
         {
           "varID" : "y",
-          "ubound" : -0.10000000149011612
+          "ubound" : -0.10000000000000001
         }
       ],
       "name" : "Ground Impact",
       "conditions" : [
 
-      ]
+      ],
+      "union" : "single"
     },
     {
-      "unionType" : 0,
       "singleConditions" : [
         {
           "varID" : "t",
@@ -74,10 +66,10 @@
       "name" : "Final time",
       "conditions" : [
 
-      ]
+      ],
+      "union" : "single"
     },
     {
-      "unionType" : 0,
       "singleConditions" : [
         {
           "varID" : "x",
@@ -87,10 +79,10 @@
       "name" : "Too far",
       "conditions" : [
 
-      ]
+      ],
+      "union" : "single"
     },
     {
-      "unionType" : 1,
       "singleConditions" : [
 
       ],
@@ -98,10 +90,10 @@
       "conditions" : [
         "Ground Impact",
         "Final time"
-      ]
+      ],
+      "union" : "and"
     },
     {
-      "unionType" : 4,
       "singleConditions" : [
 
       ],
@@ -109,10 +101,10 @@
       "conditions" : [
         "TerminalTest",
         "Too far"
-      ]
+      ],
+      "union" : "nor"
     },
     {
-      "unionType" : 0,
       "singleConditions" : [
         {
           "varID" : "y",
@@ -122,10 +114,10 @@
       "name" : "Apogee",
       "conditions" : [
 
-      ]
+      ],
+      "union" : "single"
     },
     {
-      "unionType" : 2,
       "singleConditions" : [
 
       ],
@@ -133,64 +125,69 @@
       "conditions" : [
         "Ground Impact",
         "Final time"
-      ]
+      ],
+      "union" : "or"
     }
   ],
-  "plots" : [
+  "Phases" : [
     {
-      "catVar" : null,
-      "var2" : null,
-      "outputType" : "text",
-      "id" : 1,
-      "condition" : "Terminal",
-      "title" : "X pos",
-      "var3" : null,
-      "plotTypeID" : "singlevalue",
-      "var1" : "x"
-    },
-    {
-      "catVar" : null,
-      "var2" : null,
-      "outputType" : "text",
-      "id" : 2,
-      "condition" : "Terminal",
-      "title" : "Final time",
-      "var3" : null,
-      "plotTypeID" : "singlevalue",
-      "var1" : "t"
-    },
-    {
-      "catVar" : null,
-      "var2" : "t",
-      "outputType" : "plot",
-      "id" : 3,
-      "condition" : null,
-      "title" : "Traj2",
-      "var3" : null,
-      "plotTypeID" : "1line2d",
-      "var1" : "y"
-    },
-    {
-      "catVar" : null,
-      "var2" : "y",
-      "outputType" : "plot",
-      "id" : 4,
-      "condition" : null,
-      "title" : "Traj",
-      "var3" : null,
-      "plotTypeID" : "1line2d",
-      "var1" : "x"
-    },
-    {
-      "catVar" : null,
-      "var2" : null,
-      "outputType" : "text",
-      "id" : 5,
-      "condition" : "Apogee",
-      "title" : "Apogee range",
-      "var3" : null,
-      "plotTypeID" : "singlevalue",
-      "var1" : "x"
+      "Physics Settings" : {
+        "vehiclePointMass" : true,
+        "physicsModel" : "Flat Surface, planar"
+      },
+      "id" : "default",
+      "Run Settings" : {
+        "useAdaptiveTimestep" : false,
+        "propagator" : "explicit",
+        "timestep" : 0.10000000000000001
+      },
+      "Initial Variables" : [
+        {
+          "symbol" : "𝑡",
+          "id" : "t",
+          "isParam" : false,
+          "units" : "time",
+          "isValid" : true,
+          "value" : [
+            0
+          ],
+          "name" : "Time"
+        },
+        {
+          "symbol" : "𝑋",
+          "id" : "x",
+          "isParam" : false,
+          "units" : "distance",
+          "isValid" : true,
+          "value" : [
+            10
+          ],
+          "name" : "X pos"
+        },
+        {
+          "symbol" : "𝑑𝑋\/𝑑𝑡",
+          "id" : "dx",
+          "isParam" : false,
+          "units" : "velocity",
+          "isValid" : true,
+          "value" : [
+            100
+          ],
+          "name" : "X vel"
+        },
+        {
+          "symbol" : "𝑑𝑌\/𝑑𝑡",
+          "id" : "dy",
+          "isParam" : false,
+          "units" : "velocity",
+          "isValid" : true,
+          "value" : [
+            30
+          ],
+          "name" : "Y vel"
+        }
+      ],
+      "Terminal Condition" : "Terminal"
     }
   ]
 }

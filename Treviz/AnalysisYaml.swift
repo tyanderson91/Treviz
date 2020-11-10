@@ -19,8 +19,8 @@ extension Analysis {
     func readFromYaml(data: Data){
         var yamlObj: Any?
         do {
-            let stryaml = String(data: data, encoding: String.Encoding.utf8)
-            yamlObj = try Yams.load(yaml: stryaml ?? "")
+            guard let stryaml = String(data: data, encoding: String.Encoding.utf8) else { return }
+            yamlObj = try Yams.load(yaml: stryaml)
         } catch {
             return
         }
@@ -48,8 +48,6 @@ extension Analysis {
             let newPhase = TZPhase.init(yamlDict: curPhaseDict, analysis: self)
             phases.append(newPhase)
         }
-        if phases.count == 0 { self.phases = [TZPhase]()}
-        
         
         if let inputList = yamlDict["Parameters"] as? [[String: Any]] {
             for paramSet in inputList {
@@ -95,9 +93,6 @@ extension Analysis {
             outputDict["title"] = titlestr
         }
         if let varstr = yamlObj["variable1"] as? ParamID{
-            outputDict["variable1"] = varList.first(where: {$0.id == varstr}) ?? ""
-        }
-        else if let varstr = yamlObj["variable"] as? ParamID{
             outputDict["variable1"] = varList.first(where: {$0.id == varstr}) ?? ""
         }
         if let varstr = yamlObj["variable2"] as? ParamID{

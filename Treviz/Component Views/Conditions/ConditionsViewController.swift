@@ -174,10 +174,11 @@ class ConditionsViewController: TZViewController, VariableGetter, NSTableViewDel
         tableView.reloadData()
     }
     @IBAction func joinTypePopupButtonClicked(_ sender: Any) {
+        guard let selection: String = (sender as? NSPopUpButton)?.selectedItem?.title else { return }
         if curCondition.conditions.count == 1 {
             curCondition.unionType = .single
         } else {
-            curCondition.unionType = BoolType(rawValue: unionTypeDropdown.indexOfSelectedItem + 1)!
+            curCondition.unionType = BoolType(rawValue: selection) ?? .single
         }
         tableView.reloadData()
     }

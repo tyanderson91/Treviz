@@ -60,18 +60,16 @@ class TZPhase: Codable {
     // MARK: Codable implementation
     enum CodingKeys: String, CodingKey {
         case id
-        case propagatorType
-        case inputSettings
+        case inputSettings = "Initial Variables"
         case vehicleID
-        case terminalCondition
-        case runSettings
-        case physicsSettings
+        case terminalCondition = "Terminal Condition"
+        case runSettings = "Run Settings"
+        case physicsSettings = "Physics Settings"
     }
 
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decode(String.self, forKey: .id)
-        propagatorType = try PropagatorType(rawValue: container.decode(String.self, forKey: .propagatorType))!
         if let runSettingsIn = try? container.decode(TZRunSettings.self, forKey: .runSettings) {
             runSettings = runSettingsIn } else { runSettings = TZRunSettings() }
         if let physet = try? container.decode(PhysicsSettings.self, forKey: .physicsSettings) {
@@ -93,18 +91,22 @@ class TZPhase: Codable {
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         let simpleIO : Bool = encoder.userInfo[.simpleIOKey] as? Bool ?? false
-        //if !simpleIO {
+        
+        let nonzerovars = (varList)?.filter({$0.value[0] != 0 || $0.isParam}) ?? []
+        let baseVars = nonzerovars.compactMap({$0.stripPhase()})
+        if simpleIO {
+            var initVarsDict = [String: VarValue]()
+            for thisVar in baseVars { initVarsDict[thisVar.id] = thisVar.value[0] }
+            try container.encode(initVarsDict, forKey: .inputSettings)
+        } else {
             try container.encode(id, forKey: .id)
-            try container.encode(propagatorType.rawValue, forKey: .propagatorType)
-            if terminalCondition != nil {
-                try container.encode(terminalCondition.name, forKey: .terminalCondition)
-            }
-            try container.encode(runSettings, forKey: .runSettings)
-            if let nonzerovars = (varList)?.filter({$0.value[0] != 0 || $0.isParam}) {
-                let baseVars = nonzerovars.compactMap({$0.stripPhase()})
-                try container.encode(baseVars, forKey: .inputSettings)
-            }
-            try container.encode(physicsSettings, forKey: .physicsSettings)
+            try container.encode(baseVars, forKey: .inputSettings)
+        }
+        if terminalCondition != nil {
+            try container.encode(terminalCondition.name, forKey: .terminalCondition)
+        }
+        try container.encode(runSettings, forKey: .runSettings)
+        try container.encode(physicsSettings, forKey: .physicsSettings)
         //} else {
         //}
         //try container.encode(vehicle.id, forKey: .vehicleID)

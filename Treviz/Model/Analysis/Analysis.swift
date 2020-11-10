@@ -63,13 +63,6 @@ class Analysis: NSObject, Codable {
         return inputSettings.filter {$0.isParam}
     }
     @objc var plots : [TZOutput] = []
-    /*var simpleIO : Bool = true {
-        didSet {
-            for thisPhase in self.phases {
-                thisPhase.simpleIO = self.simpleIO
-            }
-        }
-    } */// whether to encode/decode data in a simple format (for YAML)
     
     // Phase variables
     var phases : [TZPhase] = []
@@ -147,75 +140,85 @@ class Analysis: NSObject, Codable {
     // MARK: Codable implementation
     enum CodingKeys: String, CodingKey {
         case analysisName
-        case conditions
-        case inputSettings
-        case plots
-        case phases
+        case conditions = "Conditions"
+        case plots = "Outputs"
+        case phases = "Phases"
     }
 
     required init(from decoder: Decoder) throws {
         super.init()
+        let simpleIO : Bool = decoder.userInfo[.simpleIOKey] as? Bool ?? false
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        name = try container.decode(String.self, forKey: .analysisName)
 
-        var allConds = try container.nestedUnkeyedContainer(forKey: .conditions)
-        while(!allConds.isAtEnd){
-            let decoder = try allConds.superDecoder()
-            if let thisCond = Condition(decoder: decoder, referencing: self) {
-                conditions.append(thisCond)
-            }
-        }
-        
-        do {
-            var allPhases = try container.nestedUnkeyedContainer(forKey: .phases)
-            while(!allPhases.isAtEnd){
-                let decoder = try allPhases.superDecoder()
-                if let thisPhase = TZPhase(decoder: decoder, referencing: self) {
-                    phases.append(thisPhase)
+        if simpleIO {
+                        
+        } else {
+            name = try container.decode(String.self, forKey: .analysisName)
+
+            var allConds = try container.nestedUnkeyedContainer(forKey: .conditions)
+            while(!allConds.isAtEnd){
+                let decoder = try allConds.superDecoder()
+                if let thisCond = Condition(decoder: decoder, referencing: self) {
+                    conditions.append(thisCond)
                 }
             }
-        } catch { // If there is only one phase assumed and its data is stored in the top level file
-            if let defaultPhase = TZPhase(decoder: decoder, referencing: self) {
-                phases = [defaultPhase]
+            
+            do {
+                var allPhases = try container.nestedUnkeyedContainer(forKey: .phases)
+                while(!allPhases.isAtEnd){
+                    let decoder = try allPhases.superDecoder()
+                    if let thisPhase = TZPhase(decoder: decoder, referencing: self) {
+                        phases.append(thisPhase)
+                    }
+                }
+            } catch { // If there is only one phase assumed and its data is stored in the top level file
+                if let defaultPhase = TZPhase(decoder: decoder, referencing: self) {
+                    phases = [defaultPhase]
+                }
             }
-        }
-        
-        var allTZOutputs = try container.nestedUnkeyedContainer(forKey: .plots)
-        var plotsTemp = allTZOutputs
-        while(!allTZOutputs.isAtEnd)
-        {
-            let output = try allTZOutputs.nestedContainer(keyedBy: TZOutput.CustomCoderType.self)
-            let type = try output.decode(TZOutput.OutputType.self, forKey: TZOutput.CustomCoderType.type)
-            var newOutput : TZOutput?
-            let decoder = try plotsTemp.superDecoder()
+            
+            var allTZOutputs = try container.nestedUnkeyedContainer(forKey: .plots)
+            var plotsTemp = allTZOutputs
+            while(!allTZOutputs.isAtEnd)
+            {
+                let output = try allTZOutputs.nestedContainer(keyedBy: TZOutput.CustomCoderType.self)
+                let type = try output.decode(TZOutput.OutputType.self, forKey: TZOutput.CustomCoderType.type)
+                var newOutput : TZOutput?
+                let decoder = try plotsTemp.superDecoder()
 
-            switch type {
-            case .text:
-                newOutput = TZTextOutput(decoder: decoder, referencing: self)
-            case .plot:
-                newOutput = TZPlot(decoder: decoder, referencing: self)
+                switch type {
+                case .text:
+                    newOutput = TZTextOutput(decoder: decoder, referencing: self)
+                case .plot:
+                    newOutput = TZPlot(decoder: decoder, referencing: self)
+                }
+
+                if newOutput != nil { plots.append(newOutput!) }
             }
-
-            if newOutput != nil { plots.append(newOutput!) }
+            
         }
     }
     
     func encode(to encoder: Encoder) throws {
         let simpleIO : Bool = encoder.userInfo[.simpleIOKey] as? Bool ?? false
-        //if !simpleIO {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(name, forKey: .analysisName)
         if simpleIO {
-            //try container.encode(conditions, forKey: .conditions)
-            var condsDict = [String: Condition]()
+            var condsDict = [[String: Condition]]()
             for thisCond in conditions {
-                    condsDict[thisCond.name] = thisCond
+                condsDict.append([thisCond.name: thisCond])
             }
             try container.encode(condsDict, forKey: .conditions)
         } else {
             try container.encode(conditions, forKey: .conditions)
         }
         try container.encode(plots, forKey: .plots)
-        try container.encode(phases, forKey: .phases)
+
+        if phases.count == 1 && phases[0].id == "default" && simpleIO {
+            let thisPhase = phases[0]
+            try thisPhase.encode(to: encoder)
+        } else {
+            try container.encode(phases, forKey: .phases)
+        }
     }
 }

@@ -137,16 +137,16 @@ class TZOutput : NSObject, Codable {
     }
     
     // MARK: Codable implementation
-    enum CodingsKeys: CodingKey {
+    enum CodingsKeys: String, CodingKey {
         case id
         case title
-        case var1
-        case var2
-        case var3
-        case catVar
+        case var1 = "variable1"
+        case var2 = "variable2"
+        case var3 = "variable3"
+        case catVar = "category variable"
         case condition
-        case plotTypeID
-        case outputType
+        case plotTypeID = "plot type"
+        case outputType = "output type"
     }
     
     enum OutputType: String, Codable {
@@ -154,7 +154,7 @@ class TZOutput : NSObject, Codable {
         case plot = "plot"
     }
     enum CustomCoderType: String, CodingKey {
-        case type = "outputType"
+        case type = "output type"
         case condition = "condition"
     }
     
@@ -174,14 +174,11 @@ class TZOutput : NSObject, Codable {
         var container = encoder.container(keyedBy: CodingsKeys.self)
         try container.encode(id, forKey: .id)
         try container.encode(title, forKey: .title)
-        //try container.encode(var1, forKey: .var1)
-        //try container.encode(var2, forKey: .var2)
-        //try container.encode(var3, forKey: .var3)
-        try container.encode(var1?.id, forKey: .var1)
-        try container.encode(var2?.id, forKey: .var2)
-        try container.encode(var3?.id, forKey: .var3)
-        try container.encode(categoryVar?.id, forKey: .catVar)
-        try container.encode(condition?.name, forKey: .condition)
+        if var1 != nil { try container.encode(var1?.id, forKey: .var1) }
+        if var2 != nil { try container.encode(var2?.id, forKey: .var2) }
+        if var3 != nil { try container.encode(var3?.id, forKey: .var3) }
+        if categoryVar != nil { try container.encode(categoryVar?.id, forKey: .catVar) }
+        if condition != nil { try container.encode(condition?.name, forKey: .condition) }
         try container.encode(plotType.id, forKey: .plotTypeID)
     }
     
@@ -205,14 +202,6 @@ class TZOutput : NSObject, Codable {
         guard var3Valid else { throw TZOutputError.IncorrectVarSettingError }
         guard catVarValid else { throw TZOutputError.IncorrectVarSettingError }
     }
-    /*
-    func loadVars(analysis: Analysis){
-        let varlist = analysis.traj.variables
-        if var1 != nil { var1 = varlist.first(where: {$0.id == var1!.id})}
-        if var2 != nil { var2 = varlist.first(where: {$0.id == var2!.id})}
-        if var3 != nil { var3 = varlist.first(where: {$0.id == var3!.id})}
-        if categoryVar != nil { categoryVar = varlist.first(where: {$0.id == categoryVar!.id})}
-    }*/
     
     func getData() throws -> OutputDataSetLines? {
         guard let curTraj = curTrajectory else { throw TZOutputError.MissingTrajectoryError }

@@ -31,23 +31,29 @@ protocol EvaluateCondition : Codable, NSCopying {
  Booltype represents the different ways that conditions can be combined
  Raw value is set to index to allow for easy integration with dropdown menus
 */
-enum BoolType : Int, Codable {
-    case single = 0
-    case and = 1
-    case or = 2
-    case nand = 3
-    case nor = 4
-    case xor = 5
-    case xnor = 6
+enum BoolType : String, Codable {
+    case single
+    case and
+    case or
+    case nand
+    case nor
+    case xor
+    case xnor
 
+    static let stringDict : Dictionary<String, BoolType> = ["single": .single, "and": .and, "or": .or, "nor": .nor, "nand": .nand, "xor": .xor, "xnor": .xnor]
     /**
      Initialization from human-readable strings
      */
+    /*
     init?(_ input: String) {
-        let stringDict : Dictionary<String, BoolType> = ["single": .single, "and": .and, "or": .or, "nor": .nor, "nand": .nand, "xor": .xor, "xnor": .xnor]
-        if let type = stringDict[input] { self = type }
+
+        if let type = BoolType.stringDict[input] { self = type }
         else { return nil }
     }
+    func asString()->String {
+        let str = (BoolType.stringDict as NSDictionary).allKeys(for: self) as! [String]
+        return str[0]
+    }*/
 }
 
 /**
@@ -188,13 +194,76 @@ class SingleCondition: EvaluateCondition, Codable {
     }
     
     required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        do {lbound = try container.decode(VarValue.self, forKey: .lbound)} catch {lbound = nil}
-        do {ubound = try container.decode(VarValue.self, forKey: .ubound)} catch {ubound = nil}
-        do {equality = try container.decode(VarValue.self, forKey: .equality)} catch {equality = nil}
-        do {specialCondition = try container.decode(SpecialConditionType.self, forKey: .specialCondition)} catch {specialCondition = nil}
-        varID = try container.decode(ParamID.self, forKey: .varID)
+        let simpleIO : Bool = decoder.userInfo[.simpleIOKey] as? Bool ?? false
+        if simpleIO {
+            guard let singleCondContainer = try? decoder.singleValueContainer() else { return }
+            let valstr = try singleCondContainer.decode(String.self)
+            //RegEx to parse the text
+            let capturestr = #"(?:(?<lowerBound>[0-9\.-]+) ?(?<lowerSign>[\<\>]))?(?<varID>[\w ]+)(?<sign>[\<\>]|=| is ) ?(?<upperBound>[0-9\.-]+|[a-zA-Z ]+)"#
+            guard let regex = try? NSRegularExpression(pattern: capturestr, options: []) else { return }
+            let match = regex.firstMatch(in: valstr, options: [], range: NSRange(valstr.startIndex..<valstr.endIndex, in: valstr))
+            guard match != nil else { return } // No match found
+           
+            var componentDict = Dictionary<String, String>()
+            for component in ["lowerBound","lowerSign","sign","varID","upperBound"] {
+                if let curRange = Range((match!.range(withName: component)), in: capturestr){
+                    let curVal = valstr[curRange]
+                    componentDict[component] = String(curVal)
+                }
+            }
+           
+            varID = componentDict["varID"]!
+           
+            let ub = componentDict["upperBound"]!
+            let lb : VarValue? = {
+                if componentDict.keys.contains("lowerBound") { return VarValue(componentDict["lowerBound"]!) }
+                else { return nil }
+            }()
+     
+            switch componentDict["sign"]{
+            case "<":
+                ubound = VarValue(ub)
+                lbound = lb
+            case ">":
+                lbound = VarValue(ub)
+                ubound = lb
+            case "=":
+                equality = VarValue(ub)
+            case " is ":
+                if let specialCond = SpecialConditionType(ub){
+                    specialCondition = specialCond
+                } else { return }
+            default:
+                return
+            }
+        } else {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            do {lbound = try container.decode(VarValue.self, forKey: .lbound)} catch {lbound = nil}
+            do {ubound = try container.decode(VarValue.self, forKey: .ubound)} catch {ubound = nil}
+            do {equality = try container.decode(VarValue.self, forKey: .equality)} catch {equality = nil}
+            do {specialCondition = try container.decode(SpecialConditionType.self, forKey: .specialCondition)} catch {specialCondition = nil}
+            varID = try container.decode(ParamID.self, forKey: .varID)
+        }
         setTests()
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        let simpleIO : Bool = encoder.userInfo[.simpleIOKey] as? Bool ?? false
+        if simpleIO {
+            var container = encoder.unkeyedContainer()
+            try container.encode(summary)
+        } else {
+            var container = encoder.container(keyedBy: CodingKeys.self)
+            try container.encode(varID, forKey: .varID)
+            if specialCondition != nil {
+                try container.encode(specialCondition, forKey: .specialCondition)
+            } else if equality != nil {
+                try container.encode(equality, forKey: .equality)
+            } else {
+                if ubound != nil { try container.encode(ubound, forKey: .ubound) }
+                if lbound != nil { try container.encode(lbound, forKey: .lbound) }
+            }
+        }
     }
     
     // Evaluation functions
@@ -340,51 +409,55 @@ class Condition : EvaluateCondition, Codable {
         case name
         case conditions
         case singleConditions
-        case unionType
+        case unionType = "union"
         case _summary
     }
     
     required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        name = try container.decode(String.self, forKey: .name)
-        conditions = Array<EvaluateCondition>()
-        do {
-            let singleConditions = try container.decode(Array<SingleCondition>.self, forKey: .singleConditions)
-            conditions.append(contentsOf: singleConditions)
-        } catch { conditions = [] }
-        unionType = try container.decode(BoolType.self, forKey: .unionType)
-        do { _summary = try container.decode(String.self, forKey: ._summary)
-        } catch { _summary = "" }
+        let simpleIO : Bool = decoder.userInfo[.simpleIOKey] as? Bool ?? false
+        if simpleIO {
+            
+        } else {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            name = try container.decode(String.self, forKey: .name)
+            conditions = Array<EvaluateCondition>()
+            do {
+                let singleConditions = try container.decode(Array<SingleCondition>.self, forKey: .singleConditions)
+                conditions.append(contentsOf: singleConditions)
+            } catch { conditions = [] }
+            unionType = try container.decode(BoolType.self, forKey: .unionType)
+            do { _summary = try container.decode(String.self, forKey: ._summary)
+            } catch { _summary = "" }
+        }
     }
     
     func encode(to encoder: Encoder) throws {
         let simpleIO : Bool = encoder.userInfo[.simpleIOKey] as? Bool ?? false
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(name, forKey: .name)
-        try container.encode(unionType, forKey: .unionType)
-        if _summary != "" {
-            try container.encode(_summary, forKey: ._summary)
-        }
-        let singleConditions = conditions.filter { $0 is SingleCondition } as? [SingleCondition]
-        let conds = conditions.filter { $0 is Condition } as? [Condition]
-        let conditionNames = conds?.compactMap({$0.name})
-        if simpleIO {
-            try container.encode(singleConditions, forKey: .singleConditions)
-            /*if conditions.count == 1 && singleConditions?.count == 1 {
-                var noContainer = encoder.unkeyedContainer()
-                let thisCond = singleConditions![0]
-                try noContainer.encode(thisCond.summary)
-            }*/
-            
-            /*for thisCondition in singleConditions! {
-                //SimpleCodingKeys.varID.rawValue = thisCondition.summary
-                var nameContainer = encoder.container(keyedBy: nameStringKey.self)
-                try nameContainer.encode(thisCondition.summary, forKey: .varID)
-            }*/
+        let singleConditions = conditions.filter { $0 is SingleCondition } as? [SingleCondition] ?? []
+        let conds = conditions.filter { $0 is Condition } as? [Condition] ?? []
+         
+        if simpleIO && conditions.count == 1 && singleConditions.count == 1 {
+            let thisCond = singleConditions[0]
+            var thisCont = encoder.singleValueContainer()
+            try thisCont.encode(thisCond.summary)
         } else {
-            try container.encode(singleConditions, forKey: .singleConditions)
+            var container = encoder.container(keyedBy: CodingKeys.self)
+            try container.encode(unionType, forKey: .unionType)
+            if _summary != "" {
+                try container.encode(_summary, forKey: ._summary)
+            }
+            let conditionNames = conds.compactMap({$0.name})
+            if simpleIO {
+                var condStrs : [String] = conditionNames
+                condStrs.append(contentsOf: singleConditions.map({$0.summary}))
+                condStrs.append(contentsOf: conds.map({$0.name}))
+                try container.encode(condStrs, forKey: .conditions)
+            } else {
+                try container.encode(name, forKey: .name)
+                try container.encode(conditionNames, forKey: .conditions)
+                try container.encode(singleConditions, forKey: .singleConditions)
+            }
         }
-        try container.encode(conditionNames, forKey: .conditions)
     }
     
     // MARK: Inits
@@ -413,9 +486,10 @@ class Condition : EvaluateCondition, Codable {
      - Parameter yamlObj: a Dictionary of the type [String: String] read from a yaml file.
      */
     convenience init?(fromYaml yamlObj: [String: Any], inputConditions: [Condition] = []){
-        if yamlObj.count == 1 {
-            let conditionName = yamlObj.keys.first!
-            guard let valstr = yamlObj.values.first as? String else {return nil}
+        let conditionName = yamlObj.keys.first!
+        let value: Any = yamlObj.values.first!
+
+        if let valstr = value as? String {
            
             //RegEx to parse the text
             let capturestr = #"(?:(?<lowerBound>[0-9\.-]+) ?(?<lowerSign>[\<\>]))?(?<varID>[\w ]+)(?<sign>[\<\>]|=| is ) ?(?<upperBound>[0-9\.-]+|[a-zA-Z ]+)"#
@@ -461,24 +535,21 @@ class Condition : EvaluateCondition, Codable {
            
             self.init(conditions: [newSingleCondition], unionType: .single, name: conditionName)
         } // End of single-line definition
-        else {
+        else if let valDict = value as? [String: Any?]{
             var curConditions: [Condition] = []
-            var condName = ""
             var utype: BoolType!
-            for (thisKey, thisVal) in yamlObj { //Compound conditions
+            for (thisKey, thisVal) in valDict { //Compound conditions
                 if thisKey == "conditions", let condList = thisVal as? [String]{
                     curConditions = condList.compactMap( { (condName: String)->Condition? in
                         return inputConditions.first { $0.name == condName } } )
                     if curConditions.count != condList.count { return nil }
                 } else if thisKey == "union", let ustr = thisVal as? String{
-                    guard let utype1 = BoolType(ustr) else {return nil}
+                    guard let utype1 = BoolType(rawValue: ustr) else {return nil}
                     utype = utype1
-                } else {
-                    condName = thisKey
                 }
             }
-            self.init(conditions: curConditions, unionType: utype, name: condName)
-        }
+            self.init(conditions: curConditions, unionType: utype, name: conditionName)
+        } else { return nil}
         
     }
     

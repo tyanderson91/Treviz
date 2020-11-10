@@ -118,9 +118,10 @@ class AnalysisDoc: NSDocument {
         case "public.yaml":
             let encoder = YAMLEncoder()
             encoder.options.allowUnicode = true
+            encoder.options.indent = 2
             userOptions[.simpleIOKey] = true
             if let asysString = try? encoder.encode(analysis, userInfo: userOptions) {
-                let asysData = asysString.data(using: String.Encoding.unicode)!
+                let asysData = asysString.data(using: String.Encoding.utf8)!
                 return asysData
             } else {
                 let dataError = AnalysisDocError.UnknownDataTypeError
@@ -138,12 +139,26 @@ class AnalysisDoc: NSDocument {
     override func read(from data: Data, ofType typeName: String) throws {
         // Insert code here to read your document from the given data of the specified type, throwing an error in case of failure.
         // Alternatively, you could remove this method and override read(from:ofType:) instead.  If you do, you should also override isEntireFileLoaded to return false if the contents are lazily loaded.
+        var userOptions : [CodingUserInfoKey : Any] = [.simpleIOKey: false]
+        
         switch typeName {
             
         case "public.yaml":
             //analysis.phase[0].inputSettings = analysis.varList//.compactMap { ($0.copy() as! Parameter) } // TODO: Better way to copy?
-            analysis = Analysis(fromYaml: data)
-            analysis.name = "YAML Document"
+            let simpleIO = false
+            userOptions[.simpleIOKey] = simpleIO
+            if simpleIO {
+                let decoder = Yams.YAMLDecoder(encoding: .utf8)
+                if let stryaml = String(data: data, encoding: String.Encoding.utf8) {
+                    analysis = try decoder.decode(Analysis.self, from: stryaml, userInfo: userOptions)
+                }
+            }
+            
+            else {
+                analysis = Analysis(fromYaml: data)
+                analysis.name = "YAML Document"
+            }
+            
         case "public.json":
             let decoder = JSONDecoder()
             analysis = try decoder.decode(Analysis.self, from: data)
@@ -154,7 +169,13 @@ class AnalysisDoc: NSDocument {
         default:
             return
         }
-        analysis.name = "Analysis (\(typeName))"
+        if analysis.name == "" {
+            analysis.name = "Analysis (\(typeName))"
+        }
+        if analysis.phases.count == 0 {
+            analysis.phases = [TZPhase(id: "default")]
+            analysis.logMessage("No phases found. Creating one from default")
+        }
         analysis.defaultTimestep = 0.1
         
         //analysis.traj = State(analysis.varList)

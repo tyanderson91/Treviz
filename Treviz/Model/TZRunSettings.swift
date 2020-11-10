@@ -57,8 +57,8 @@ class TZRunSettings: Codable {
     
     //MARK: Codable implementation
     enum CodingKeys: String, CodingKey {
-        case propagatorType
-        case defaultTimestep
+        case propagator
+        case timestep
         case useAdaptiveTimestep
         case minTimestep
         case maxTimestep
@@ -66,8 +66,8 @@ class TZRunSettings: Codable {
     
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        propagatorType = try PropagatorType(rawValue: container.decode(String.self, forKey: .propagatorType))!
-        defaultTimestep.value = try container.decode(VarValue.self, forKey: .defaultTimestep)
+        propagatorType = try PropagatorType(rawValue: container.decode(String.self, forKey: .propagator))!
+        defaultTimestep.value = try container.decode(VarValue.self, forKey: .timestep)
         let adaptiveTimestep = try container.decode(Bool.self, forKey: .useAdaptiveTimestep)
         useAdaptiveTimestep.value = adaptiveTimestep
         if adaptiveTimestep {
@@ -80,8 +80,8 @@ class TZRunSettings: Codable {
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(propagatorType.rawValue, forKey: .propagatorType)
-        try container.encode(defaultTimestep.value, forKey: .defaultTimestep)
+        try container.encode(propagatorType.rawValue, forKey: .propagator)
+        try container.encode(defaultTimestep.value, forKey: .timestep)
         try container.encode(useAdaptiveTimestep.value, forKey: .useAdaptiveTimestep)
         if useAdaptiveTimestep.value {
             try container.encode(minTimestep.value, forKey: .minTimestep)

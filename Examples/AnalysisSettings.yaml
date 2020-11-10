@@ -14,21 +14,21 @@ Conditions:
   - Final time: t=10
   - Too far: x>100
   - TerminalTest:
-    union: and
-    conditions:
-    - Ground Impact
-    - Final time
+      union: and
+      conditions:
+      - Ground Impact
+      - Final time
   - NestedTest:
-    union: nor
-    conditions:
-    - TerminalTest
-    - Too far
+      union: nor
+      conditions:
+      - TerminalTest
+      - Too far
   - Apogee: y is local max
   - Terminal:
-    union: or
-    conditions:
-    - Ground Impact
-    - Final time
+      union: or
+      conditions:
+      - Ground Impact
+      - Final time
     
 Terminal Condition: Terminal
 
@@ -39,13 +39,13 @@ Run Settings:
 Outputs:
   - id: 1
     title: X pos
-    variable: x
+    variable1: x
     plot type: Value at Condition
     condition: terminal
     output type: text
   - id: 2
     title: Final time
-    variable: t
+    variable1: t
     plot type: Value at Condition
     condition: terminal
     output type: text
