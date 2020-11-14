@@ -15,13 +15,19 @@ extension Condition {
     convenience init?(decoder: Decoder, referencing analysis: Analysis) {
         do {
             let simpleIO : Bool = decoder.userInfo[.simpleIOKey] as? Bool ?? false
+            let container = try decoder.container(keyedBy: Condition.CodingKeys.self)
+            var conditionNames: [String]
             if simpleIO {
                 try self.init(from: decoder)
+                conditionNames = conditions.compactMap({
+                    guard let thisCond = $0 as? Condition else { return nil }
+                    return thisCond.name
+                })
+                self.conditions.removeAll(where: {$0 is Condition})
             } else {
                 try self.init(from: decoder)
+                conditionNames = (try? container.decode(Array<String>.self, forKey: .conditions)) ?? []
             }
-            let container = try decoder.container(keyedBy: Condition.CodingKeys.self)
-            let conditionNames = (try? container.decode(Array<String>.self, forKey: .conditions)) ?? []
             for thisConditionName in conditionNames {
                 if let thisCondition = analysis.conditions.first(where: {$0.name == thisConditionName} ) {
                     self.conditions.append(thisCondition)
@@ -67,8 +73,8 @@ extension TZOutput {
                 if let thisCondition = analysis.conditions.first(where: {$0.name == conditionName}) {
                     self.condition = thisCondition
                 } else {
-                    //let logmessage = String(format: "Could not find condition '%s' referenced in output '%s'", conditionName, self.title)
-                    //analysis.logMessage(logmessage)
+                    let logmessage = String(format: "Could not find condition '%s' referenced in output '%s'", conditionName, self.title)
+                    analysis.logMessage(logmessage)
                 }
             }
         } catch {

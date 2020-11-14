@@ -21,14 +21,12 @@ class RunSettingsTest: XCTestCase {
 
     func testSettingsIO() throws {
         //YAML
-        let yamlDict = getYamlDict(filename: "TestAnalysis1", self: self)
-        let runSettingsDict = yamlDict["Run Settings"] as! [String: Any]
-        let newRunSettings = try TZRunSettings(yamlDict: runSettingsDict)
-        XCTAssert(newRunSettings.defaultTimestep.value == 0.123)
-        XCTAssert(newRunSettings.propagatorType == .rungeKutta4)
-        XCTAssert(newRunSettings.minTimestep.value == 0.1)
-        XCTAssert(newRunSettings.maxTimestep.value == 0.5)
-        XCTAssertTrue(newRunSettings.useAdaptiveTimestep.value)
+        let newRunSettings = TZRunSettings()
+        newRunSettings.defaultTimestep.value = 0.123
+        newRunSettings.propagatorType = .rungeKutta4
+        newRunSettings.minTimestep.value = 0.1
+        newRunSettings.maxTimestep.value = 0.5
+        newRunSettings.useAdaptiveTimestep.value = true
         
         //Writing Codable
         var dataOut = Data()
@@ -39,7 +37,6 @@ class RunSettingsTest: XCTestCase {
         } catch { XCTFail() }
         
         // Reading Codable
-        var codableSetting = TZRunSettings()
         var dataIn = Data()
         do {
             let bundle = Bundle(for: type(of: self))
@@ -47,7 +44,7 @@ class RunSettingsTest: XCTestCase {
             let analysisData = try Data(contentsOf: filePath)
             let decoder = JSONDecoder()
             let analysis = try decoder.decode(Analysis.self, from: analysisData)
-            codableSetting = analysis.phases[0].runSettings
+            let codableSetting = analysis.phases[0].runSettings
             dataIn = try encoder.encode(codableSetting)
         } catch { XCTFail() }
         

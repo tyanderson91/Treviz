@@ -74,16 +74,7 @@ extension State {
             return output[varID]}
         else {return nil}
     }
-    /*
-    subscript(vars: [Variable], condition: Condition)->[VariableID: [VarValue]]?{
-        let varIDs = vars.map{ $0.id }
-        let output = self[varIDs, condition]
-        return output
-    }
-    subscript(variable: Variable, condition: Condition)->[VarValue]?{
-        let varID = variable.id
-        return self[varID, condition]
-    }*/
+
     subscript(condition: Condition)->[ParamID: [VarValue]]?{
         let varIDs = self.map{ $0.id }
         let output = self[varIDs, condition]

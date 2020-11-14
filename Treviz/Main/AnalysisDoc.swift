@@ -145,20 +145,11 @@ class AnalysisDoc: NSDocument {
             
         case "public.yaml":
             //analysis.phase[0].inputSettings = analysis.varList//.compactMap { ($0.copy() as! Parameter) } // TODO: Better way to copy?
-            let simpleIO = false
-            userOptions[.simpleIOKey] = simpleIO
-            if simpleIO {
-                let decoder = Yams.YAMLDecoder(encoding: .utf8)
-                if let stryaml = String(data: data, encoding: String.Encoding.utf8) {
-                    analysis = try decoder.decode(Analysis.self, from: stryaml, userInfo: userOptions)
-                }
+            userOptions[.simpleIOKey] = true
+            let decoder = Yams.YAMLDecoder(encoding: .utf8)
+            if let stryaml = String(data: data, encoding: String.Encoding.utf8) {
+                analysis = try decoder.decode(Analysis.self, from: stryaml, userInfo: userOptions)
             }
-            
-            else {
-                analysis = Analysis(fromYaml: data)
-                analysis.name = "YAML Document"
-            }
-            
         case "public.json":
             let decoder = JSONDecoder()
             analysis = try decoder.decode(Analysis.self, from: data)
@@ -176,9 +167,6 @@ class AnalysisDoc: NSDocument {
             analysis.phases = [TZPhase(id: "default")]
             analysis.logMessage("No phases found. Creating one from default")
         }
-        analysis.defaultTimestep = 0.1
-        
-        //analysis.traj = State(analysis.varList)
     }
 
     override class var autosavesInPlace: Bool {

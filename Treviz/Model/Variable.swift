@@ -86,4 +86,12 @@ class Variable : Parameter, Codable, Hashable {
         newVar.value = value
         return newVar
     }
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case name
+        case symbol
+        case units
+        case value
+    }
 }

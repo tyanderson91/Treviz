@@ -73,13 +73,7 @@ struct StateDictArray: Collection, ExpressibleByDictionaryLiteral {
             self[thisVar.id] = thisVar.value
         } // All variables in the input State should have the same number of entries
     }
-    /*
-    init(from state: State, at indices: [Int]) {
-        for thisVar in state.variables {
-            // TODO: Once Units are implemented, assert that all input variables use standard metric units
-            self[thisVar.id] = thisVar
-        }
-    }*/
+
     init(from state: State, at index: Int) {
         self.init()
         var i: Int!

@@ -165,7 +165,11 @@ class TZOutput : NSObject, Codable {
         var plotTypeID = ""
         do { // TODO: implement default detection of output type based on inputs
             plotTypeID = try container.decode(String.self, forKey: .plotTypeID)
-            plotType = TZPlotType.allPlotTypes.first { $0.id == plotTypeID }!
+            if let matchingPlotType = TZPlotType.allPlotTypes.first(where: { $0.id == plotTypeID }) {
+                plotType = matchingPlotType
+            } else if let matchingPlotType = TZPlotType.allPlotTypes.first(where: { $0.name == plotTypeID }) {
+                plotType = matchingPlotType
+            } else { throw TZPlotTypeError.InvalidPlotType }
         } catch { throw TZPlotTypeError.InvalidPlotType }
         // Assigning of variables and conditions is done in the analysis-level factory initializer
     }

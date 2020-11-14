@@ -1,5 +1,5 @@
 {
-  "analysisName" : "YAML Document",
+  "analysisName" : "New Analysis",
   "Outputs" : [
     {
       "variable1" : "x",
@@ -143,48 +143,22 @@
       },
       "Initial Variables" : [
         {
-          "symbol" : "𝑡",
-          "id" : "t",
-          "isParam" : false,
-          "units" : "time",
-          "isValid" : true,
-          "value" : [
-            0
-          ],
-          "name" : "Time"
-        },
-        {
-          "symbol" : "𝑋",
-          "id" : "x",
-          "isParam" : false,
-          "units" : "distance",
-          "isValid" : true,
-          "value" : [
-            10
-          ],
-          "name" : "X pos"
-        },
-        {
-          "symbol" : "𝑑𝑋\/𝑑𝑡",
           "id" : "dx",
-          "isParam" : false,
+          "symbol" : "𝑑𝑋\/𝑑𝑡",
           "units" : "velocity",
-          "isValid" : true,
+          "name" : "X vel",
           "value" : [
             100
-          ],
-          "name" : "X vel"
+          ]
         },
         {
-          "symbol" : "𝑑𝑌\/𝑑𝑡",
           "id" : "dy",
-          "isParam" : false,
+          "symbol" : "𝑑𝑌\/𝑑𝑡",
           "units" : "velocity",
-          "isValid" : true,
+          "name" : "Y vel",
           "value" : [
-            30
-          ],
-          "name" : "Y vel"
+            20
+          ]
         }
       ],
       "Terminal Condition" : "Terminal"

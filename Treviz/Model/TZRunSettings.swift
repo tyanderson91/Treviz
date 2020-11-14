@@ -87,25 +87,5 @@ class TZRunSettings: Codable {
             try container.encode(minTimestep.value, forKey: .minTimestep)
             try container.encode(maxTimestep.value, forKey: .maxTimestep)
         }
-    }
-
-    //MARK: YAML init
-    init(yamlDict: [String: Any]) throws {
-        if let propagator = yamlDict["propagator"] as? String {
-            propagatorType = PropagatorType(rawValue: propagator) ?? PropagatorType.explicit
-        }
-        if let adaptiveTimeStepIn = yamlDict["adaptive timestep"] as? Bool {
-            useAdaptiveTimestep.value = adaptiveTimeStepIn
-        }
-        if let timestepIn = yamlDict["timestep"] as? VarValue {
-            self.defaultTimestep.value = timestepIn
-        }
-        if let minTimeStepIn = yamlDict["min timestep"] as? VarValue {
-            self.minTimestep.value = minTimeStepIn
-        }
-        if let maxTimeStepIn = yamlDict["max timestep"] as? VarValue {
-            self.maxTimestep.value = maxTimeStepIn
-        }
-    }
-    
+    }    
 }

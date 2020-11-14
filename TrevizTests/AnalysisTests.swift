@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import Yams
 @testable import TrajectoryAnalysis
 /**
  This suite of tests provides an end-to-end verification of accuracy of tests for various types of analyses
@@ -18,7 +19,12 @@ class AnalysisTests: XCTestCase {
             let bundle = Bundle(for: type(of: self))
             let filePath = bundle.url(forResource: file, withExtension: "yaml")!
             let data = try Data(contentsOf: filePath)
-            return Analysis(fromYaml: data)
+            let decoder = Yams.YAMLDecoder(encoding: .utf8)
+            let userOptions : [CodingUserInfoKey : Any] = [.simpleIOKey: true]
+            if let stryaml = String(data: data, encoding: String.Encoding.utf8) {
+                let analysis = try decoder.decode(Analysis.self, from: stryaml, userInfo: userOptions)
+                return analysis
+            }
         } catch {XCTFail()}
         return Analysis()
     }

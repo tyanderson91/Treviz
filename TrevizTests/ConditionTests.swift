@@ -15,6 +15,7 @@ class ConditionsTest: XCTestCase {
     
     var yamlDict: [String: Any]?
     
+    
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
@@ -30,21 +31,21 @@ class ConditionsTest: XCTestCase {
      */
     func testConditionIO() {
         // Yaml
-        yamlDict = getYamlDict(filename: "TestAnalysis1", self: self)
-        
+        let bundle = Bundle(for: type(of: self))
+        var userOptions : [CodingUserInfoKey : Any] = [.simpleIOKey: true]
         var yamlConditions = [Condition]()
-        if let conditionList = yamlDict!["Conditions"] as? [[String: Any]] {
-            // self.conditions = []
-            for thisConditionDict in conditionList {
-                if let newCond = Condition(fromYaml: thisConditionDict, inputConditions: yamlConditions) {
-                    //initCondition(fromYaml: thisConditionDict) {
-                    yamlConditions.append(newCond)
-                }
+        do {
+            guard let filePath = bundle.url(forResource: "TestAnalysis1", withExtension: "yaml") else { XCTFail(); return  }
+            let data = try Data(contentsOf: filePath)
+            userOptions[.simpleIOKey] = true
+            let decoder = Yams.YAMLDecoder(encoding: .utf8)
+            if let stryaml = String(data: data, encoding: String.Encoding.utf8) {
+                let analysis = try decoder.decode(Analysis.self, from: stryaml, userInfo: userOptions)
+                yamlConditions = analysis.conditions
             }
-        }
-        
+        } catch { XCTFail() }
         // Codable JSON
-        
+        userOptions[.simpleIOKey] = false
         //Writing
         var dataOut = Data()
         let encoder = JSONEncoder()
@@ -231,14 +232,14 @@ class ConditionsTest: XCTestCase {
     
     // MARK: Enums related to condition
     func testBoolType(){
-        XCTAssertEqual(BoolType("or"), BoolType.or)
-        XCTAssertEqual(BoolType("and"), BoolType.and)
-        XCTAssertEqual(BoolType("nor"), BoolType.nor)
-        XCTAssertEqual(BoolType("nand"), BoolType.nand)
-        XCTAssertEqual(BoolType("xor"), BoolType.xor)
-        XCTAssertEqual(BoolType("xnor"), BoolType.xnor)
-        XCTAssertEqual(BoolType("single"), BoolType.single)
-        XCTAssertNil(BoolType("xand"))
+        XCTAssertEqual(BoolType(rawValue: "or"), BoolType.or)
+        XCTAssertEqual(BoolType(rawValue: "and"), BoolType.and)
+        XCTAssertEqual(BoolType(rawValue: "nor"), BoolType.nor)
+        XCTAssertEqual(BoolType(rawValue: "nand"), BoolType.nand)
+        XCTAssertEqual(BoolType(rawValue: "xor"), BoolType.xor)
+        XCTAssertEqual(BoolType(rawValue: "xnor"), BoolType.xnor)
+        XCTAssertEqual(BoolType(rawValue: "single"), BoolType.single)
+        XCTAssertNil(BoolType(rawValue: "xand"))
     }
     
     func testSpecialCondition(){

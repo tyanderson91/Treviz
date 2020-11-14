@@ -24,7 +24,6 @@
 		CD2D0DBB224385580012978E /* OutputSetup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD2D0DA6224382F70012978E /* OutputSetup.storyboard */; };
 		CD31EFF324C13C7300ED435A /* CalcsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD31EFF224C13C7300ED435A /* CalcsTest.swift */; };
 		CD31EFF724C15F6F00ED435A /* Yams in Frameworks */ = {isa = PBXBuildFile; productRef = CD31EFF624C15F6F00ED435A /* Yams */; };
-		CD31EFF824C15F9E00ED435A /* AnalysisYaml.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1A5B5C23FD1E9A00BE3BFB /* AnalysisYaml.swift */; };
 		CD39717B2506F12D00A8047A /* RunSettingsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD39717A2506F12D00A8047A /* RunSettingsTest.swift */; };
 		CD39717D2506F2AC00A8047A /* TestHelperFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD39717C2506F2AC00A8047A /* TestHelperFunctions.swift */; };
 		CD3B2218251FD05300218E44 /* StringValueProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3B2217251FD05300218E44 /* StringValueProtocol.swift */; };
@@ -105,7 +104,6 @@
 		CDE2B5A324C2C71D002026E0 /* AnalysisProgressReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF255F7245294880097F995 /* AnalysisProgressReporter.swift */; };
 		CDE2B5A424C2C71D002026E0 /* Analysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF3D1A0225025AF0064D70C /* Analysis.swift */; };
 		CDE2B5A524C2C71D002026E0 /* AnalysisFactoryInits.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE2A5172471F27700DB2B45 /* AnalysisFactoryInits.swift */; };
-		CDE2B5A624C2C71D002026E0 /* AnalysisYaml.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1A5B5C23FD1E9A00BE3BFB /* AnalysisYaml.swift */; };
 		CDE2B5A724C2C71D002026E0 /* AnalysisRunFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0F010823654ED400C920AA /* AnalysisRunFunctions.swift */; };
 		CDE2B5A824C2C71D002026E0 /* TZLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD92D6B82442302800483B8E /* TZLogger.swift */; };
 		CDE2B5B624C2C729002026E0 /* Condition.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD63AEA223E7EA26006502F2 /* Condition.swift */; };
@@ -199,7 +197,6 @@
 		CD11FA8623408173001A3695 /* AddOutputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOutputViewController.swift; sourceTree = "<group>"; };
 		CD11FA9223433096001A3695 /* PlotTypes.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = PlotTypes.plist; sourceTree = "<group>"; };
 		CD18A65F254FCB1C00B06C10 /* ParameterID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterID.swift; sourceTree = "<group>"; };
-		CD1A5B5C23FD1E9A00BE3BFB /* AnalysisYaml.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AnalysisYaml.swift; path = /Users/TylerAnderson/Coding/Swift/Treviz/Treviz/AnalysisYaml.swift; sourceTree = "<absolute>"; };
 		CD280F49233B45670004263F /* TZPlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TZPlot.swift; sourceTree = "<group>"; };
 		CD28477622FF9C8800D192A9 /* CollapsibleGridView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollapsibleGridView.swift; sourceTree = "<group>"; };
 		CD2D0D96224382F70012978E /* ThreeAxisOutputSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeAxisOutputSetupViewController.swift; sourceTree = "<group>"; };
@@ -391,7 +388,6 @@
 				CDF255F7245294880097F995 /* AnalysisProgressReporter.swift */,
 				CDF3D1A0225025AF0064D70C /* Analysis.swift */,
 				CDE2A5172471F27700DB2B45 /* AnalysisFactoryInits.swift */,
-				CD1A5B5C23FD1E9A00BE3BFB /* AnalysisYaml.swift */,
 				CD0F010823654ED400C920AA /* AnalysisRunFunctions.swift */,
 				CD92D6B82442302800483B8E /* TZLogger.swift */,
 			);
@@ -912,7 +908,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CDE2B5A624C2C71D002026E0 /* AnalysisYaml.swift in Sources */,
 				CDF3D1A6225057270064D70C /* TZViewController.swift in Sources */,
 				CDE6CDD7250E7D7C0093C4E1 /* RunVariant.swift in Sources */,
 				CD3F5E5A22EE4FFE00E4CF20 /* ConditionsViewController.swift in Sources */,
@@ -998,7 +993,6 @@
 				CDDFF28424A5ABE200E8BC31 /* StateDict.swift in Sources */,
 				CD5F4E992455100A00823E43 /* Analysis.swift in Sources */,
 				CD5F4E972455100600823E43 /* AnalysisProgressReporter.swift in Sources */,
-				CD31EFF824C15F9E00ED435A /* AnalysisYaml.swift in Sources */,
 				CDFAD0F523EA84FE00CE7424 /* Parameter.swift in Sources */,
 				CDFAD0F623EA84FE00CE7424 /* Condition.swift in Sources */,
 				CD0F1140250560A700C88B05 /* TZRunSettings.swift in Sources */,

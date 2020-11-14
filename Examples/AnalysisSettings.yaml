@@ -41,13 +41,13 @@ Outputs:
     title: X pos
     variable1: x
     plot type: Value at Condition
-    condition: terminal
+    condition: Terminal
     output type: text
   - id: 2
     title: Final time
     variable1: t
     plot type: Value at Condition
-    condition: terminal
+    condition: Terminal
     output type: text
   - id: 3
     title: Traj

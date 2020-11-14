@@ -63,22 +63,4 @@ class PhysicsSettings: Codable {
         try container.encode(vehiclePointMassParam.value, forKey: .vehiclePointMass)
         //try container.encode(physicsModelParam.value, forKey: .physicsModel)
     }
-    
-    //MARK: YAML init
-    init(yamlDict: [String: Any]) throws {
-        if let physicsModelName = yamlDict["physics model"] as? String {
-            physicsModelParam.value = PhysicsModel.allPhysicsModels.first(where: {$0.valuestr == physicsModelName}) ?? PhysicsModel.flat2d
-        }
-        if let vehiclePointMass = yamlDict["vehicle is point mass"] as? Bool {
-            vehiclePointMassParam.value = vehiclePointMass
-        }
-    }
 }
-/*
-class PhysicsModelParam: Parameter {
-    var curModel: PhysicsModel = .flat2d
-    var id = "physicsModel"
-    var name: String { return curModel.valuestr }
-    var isParam = false
-    static var paramConstructor: (_ param: Parameter)->RunVariant? = EnumGroupRunVariant.init(param: )
-}*/

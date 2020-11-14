@@ -39,24 +39,3 @@ extension ParamID {
         return phase + "." + self
     }
 }
-
-/*
-struct VariableID: CodingKey, Equatable, StringValue, Codable {
-    var stringValue: String
-    
-    init?(stringValue: String) {
-        self.stringValue = stringValue
-    }
-    
-    var intValue: Int?
-    
-    init?(intValue: Int) {
-        stringValue = ""
-    }
-    
-    var valuestr: String { return stringValue}
-    
-    init?(stringLiteral: String) {
-        self.stringValue = stringLiteral
-    }
-}*/

@@ -68,23 +68,37 @@ class TZPhase: Codable {
     }
 
     required init(from decoder: Decoder) throws {
+        let simpleIO : Bool = decoder.userInfo[.simpleIOKey] as? Bool ?? false
+
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.decode(String.self, forKey: .id)
+        id = (try? container.decode(String.self, forKey: .id)) ?? "default"
         if let runSettingsIn = try? container.decode(TZRunSettings.self, forKey: .runSettings) {
-            runSettings = runSettingsIn } else { runSettings = TZRunSettings() }
+            runSettings = runSettingsIn
+        } else {
+            runSettings = TZRunSettings()
+        }
         if let physet = try? container.decode(PhysicsSettings.self, forKey: .physicsSettings) {
             physicsSettings = physet
         } else { physicsSettings = PhysicsSettings()}
         setupConstants()
         
-        let tempInputSettings = try container.decode(Array<Variable>.self, forKey: .inputSettings)
-        tempInputSettings.forEach( { (thisParam: Parameter) in
-            if let thisVar = thisParam as? Variable {
-                let thisVar = thisVar.copyToPhase(phaseid: self.id)
-                let matchingVar = self.varList.first(where: {$0.id == thisVar.id})
-                matchingVar?[0] = thisVar.value[0]
+        if simpleIO {
+            let tempInputSettings = try container.decode([String: VarValue].self, forKey: .inputSettings)
+            for (thisVarID, thisVarVal) in tempInputSettings {
+                if let thisVar = self.varList.first(where: {thisVarID.atPhase(self.id) == $0.id}) {
+                    thisVar.value = [thisVarVal]
+                }
             }
-        } )
+        } else {
+            let tempInputSettings = try container.decode(Array<Variable>.self, forKey: .inputSettings)
+            tempInputSettings.forEach( { (thisParam: Parameter) in
+                if let thisVar = thisParam as? Variable {
+                    let thisVar = thisVar.copyToPhase(phaseid: self.id)
+                    let matchingVar = self.varList.first(where: {$0.id == thisVar.id})
+                    matchingVar?[0] = thisVar.value[0]
+                }
+            } )
+        }
         inputSettings = varList // TODO: When more settings are introduced, expand this
     }
     
@@ -92,7 +106,10 @@ class TZPhase: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         let simpleIO : Bool = encoder.userInfo[.simpleIOKey] as? Bool ?? false
         
-        let nonzerovars = (varList)?.filter({$0.value[0] != 0 || $0.isParam}) ?? []
+        let nonzerovars = (varList)?.filter({
+            guard $0.value.count > 0 else { return false }
+            return ($0.value[0] != 0 || $0.isParam)
+        }) ?? []
         let baseVars = nonzerovars.compactMap({$0.stripPhase()})
         if simpleIO {
             var initVarsDict = [String: VarValue]()
@@ -107,55 +124,7 @@ class TZPhase: Codable {
         }
         try container.encode(runSettings, forKey: .runSettings)
         try container.encode(physicsSettings, forKey: .physicsSettings)
-        //} else {
-        //}
         //try container.encode(vehicle.id, forKey: .vehicleID)
-    }
-    
-    // MARK: Yaml initiation
-    convenience init(yamlDict: [String: Any], analysis: Analysis) {
-        var curPhaseName: String
-        if let phasename = yamlDict["Name"] as? String {
-            curPhaseName = phasename
-        } else { curPhaseName = "default" }
-        
-        var runSettingsIn = TZRunSettings()
-        if let runSettingsDict = yamlDict["Run Settings"] as? [String: Any] {
-            do { runSettingsIn = try TZRunSettings(yamlDict: runSettingsDict)
-            } catch {
-                analysis.logMessage(error.localizedDescription)
-            }
-        }
-        var physicsSettingsIn = PhysicsSettings()
-        if let physicsSettingsDict = yamlDict["Physics Settings"] as? [String: Any] {
-            do { physicsSettingsIn = try PhysicsSettings(yamlDict: physicsSettingsDict)
-            } catch {
-                analysis.logMessage(error.localizedDescription)
-            }
-        }
-        
-        self.init(id: curPhaseName, runSettings: runSettingsIn, physicsSettingsIn: physicsSettingsIn)
-        
-        self.analysis = analysis
-        
-        setupConstants()
-        if let inputList = yamlDict["Initial Variables"] as? [String: Any] {
-            for (curVarID, curVarVal) in inputList {
-                guard let thisVar = self.varList.first(where: { $0.id == curVarID.atPhase(self.id)}
-                    ) else {
-                    analysis.logMessage("Could not set value for unknown variable '\(curVarID)'")
-                    continue
-                }
-                if let startVal = VarValue(numeric: curVarVal) { thisVar.value = [startVal] }
-            }
-        }
-        inputSettings = varList // TODO: When more settings are introduced, expand this
-        
-        if let terminalConditionName = yamlDict["Terminal Condition"] as? String {
-            if let cond = analysis.conditions.first(where: { $0.name == terminalConditionName }) {
-                terminalCondition = cond
-            }
-        }
     }
 }
 
@@ -166,6 +135,5 @@ extension TZPhase {
         allParams.append(contentsOf: varList)
         allParams.append(contentsOf: runSettings.allParams)
         allParams.append(contentsOf: physicsSettings.allParams)
-        //allParams.append()
     }
 }
