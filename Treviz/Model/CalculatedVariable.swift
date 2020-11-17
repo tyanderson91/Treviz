@@ -33,6 +33,7 @@ class StateCalcVariable: Variable {
         multiStateCalculation = calcIn
     }
     
+    /*
     override func copyToPhase(phaseid: String)->StateCalcVariable {
         var newID: ParamID = ""
         if !self.id.contains(".") {
@@ -55,7 +56,7 @@ class StateCalcVariable: Variable {
         let newVar = StateCalcVariable(newID, named: name, symbol: symbol, units: units, calculation: singleStateCalculation)
         newVar.value = value
         return newVar
-    }
+    }*/
 }
 
 class AggregateCalcVariable: Variable {

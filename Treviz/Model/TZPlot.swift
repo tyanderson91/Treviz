@@ -16,9 +16,7 @@ struct TZLineStyle {
     var lineWidth: Double
 }
 
-/**
- Options for plot symbol shapes
- */
+/**Options for plot symbol shapes*/
 enum TZPlotSymbolShape {
     case none
     case cross
@@ -34,9 +32,7 @@ enum TZPlotSymbolShape {
     case snow
 }
 
-/**
- Plot symbol configuration options
- */
+/**Plot symbol configuration options*/
 struct TZPlotSymbol {
     
     var shape: TZPlotSymbolShape

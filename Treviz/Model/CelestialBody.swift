@@ -9,6 +9,9 @@
 import Foundation
 import Cocoa
 
+/**
+ A Celestial body is a planet, moon, asteroid, or some other central body or gravitational source. Anything with a significant gravitational pull, atmosphere, or stable heliocentric orbit could be considered a celestial body
+ */
 struct CelestialBody: StringValue {
     let name: String
     var icon: NSImage?

@@ -14,7 +14,7 @@ extension TZPhase {
         for thisVar in self.varList { // Delete all data except for initial state
             if thisVar.value.count > 1 { thisVar.value.removeLast(thisVar.value.count - 1) }
         }
-        let baseVars1 = self.varList.compactMap({$0.stripPhase()})
+        let baseVars1 = self.varList.compactMap({$0.copyWithoutPhase()})
         let baseVars = baseVars1.filter({self.requiredVarIDs.contains($0.id)})
         //traj
         traj = StateDictArray(from: baseVars, at: 0)

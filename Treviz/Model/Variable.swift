@@ -23,7 +23,7 @@ extension VarValue {
 Variable is a class that defines a single changeable numerical property of a vehicle, including name, unit information, and value. Used to display input state and output information
  */
 class Variable : Parameter, Codable, Hashable {
-    let id: ParamID
+    var id: ParamID
     let name: String
     let symbol: String!
     var units: String //TODO: Turn units into a separate type
@@ -75,7 +75,7 @@ class Variable : Parameter, Codable, Hashable {
         return newVar
     }
     
-    func stripPhase()->Variable {
+    func copyWithoutPhase()->Variable {
         var newID: ParamID = ""
         if self.id.contains(".") {
             newID = self.id.baseVarID()

@@ -8,6 +8,9 @@
 
 import Foundation
 
+/**
+ StringValue is a protocol adopted by the underlying value of Parameters. This allows values to be set by a string, which allows setting a wide variety of Parameters and Run Variants through a text-based interface
+ */
 protocol StringValue {
     var valuestr: String {get}
     init?(stringLiteral: String)
@@ -22,6 +25,24 @@ extension VarValue: StringValue {
     var valuestr: String { return String(format: "%g", self)}
     init?(stringLiteral: String) {
         self.init(stringLiteral)
+    }
+}
+
+extension Bool: StringValue {
+    var valuestr: String {
+        if self == true {
+            return "True"
+        } else { return "False" }
+    }
+    init?(stringLiteral: String) {
+        switch stringLiteral {
+        case "True", "On":
+            self.init(true)
+        case "False", "Off":
+            self.init(false)
+        default:
+            return nil
+        }
     }
 }
 

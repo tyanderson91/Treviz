@@ -57,22 +57,24 @@ class TestVariable: XCTestCase {
         let timeVar = Variable("t", named: "time", symbol: "t", units: "s")
         let timeVar2 = timeVar.copyToPhase(phaseid: "phase1")
         XCTAssert(timeVar2.id == "phase1.t")
-        let timeVar3 = timeVar2.copyToPhase(phaseid: "phase2")
+        var timeVar3 = timeVar2.copyToPhase(phaseid: "phase2")
         XCTAssert(timeVar3.id == "phase2.t")
-        let timeVar4 = timeVar3.stripPhase()
-        XCTAssert(timeVar4.id == "t")
-        let timeVar5 = timeVar4.stripPhase()
-        XCTAssertEqual(timeVar4, timeVar5)
+        timeVar3.stripPhase()
+        XCTAssert(timeVar3.id == "t")
+        let timeVar4 = timeVar3
+        timeVar3.stripPhase()
+        XCTAssertEqual(timeVar4, timeVar3)
         
         let calcVar = StateCalcVariable("calcVar", calculation: {_ in return VarValue()})
         let calcVar2 = calcVar.copyToPhase(phaseid: "phase1")
         XCTAssert(calcVar2.id == "phase1.calcVar")
-        let calcVar3 = calcVar2.copyToPhase(phaseid: "phase2")
+        var calcVar3 = calcVar2.copyToPhase(phaseid: "phase2")
         XCTAssert(calcVar3.id == "phase2.calcVar")
-        let calcVar4 = calcVar3.stripPhase()
-        XCTAssert(calcVar4.id == "calcVar")
-        let calcVar5 = calcVar4.stripPhase()
-        XCTAssertEqual(calcVar4, calcVar5)
+        calcVar3.stripPhase()
+        XCTAssert(calcVar3.id == "calcVar")
+        let calcVar4 = calcVar3
+        calcVar3.stripPhase()
+        XCTAssertEqual(calcVar4, calcVar3)
     }
     
     // MARK: Calculated Variable

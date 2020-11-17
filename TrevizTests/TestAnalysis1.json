@@ -1,45 +1,23 @@
 {
-  "analysisName" : "New Analysis",
-  "Outputs" : [
+  "analysisName" : "Analysis Document",
+  "Phases" : [
     {
-      "variable1" : "x",
-      "id" : 1,
-      "title" : "X pos",
-      "output type" : "text",
-      "condition" : "Terminal",
-      "plot type" : "singlevalue"
-    },
-    {
-      "variable1" : "t",
-      "id" : 2,
-      "title" : "Final time",
-      "output type" : "text",
-      "condition" : "Terminal",
-      "plot type" : "singlevalue"
-    },
-    {
-      "variable1" : "y",
-      "id" : 3,
-      "title" : "Traj2",
-      "output type" : "plot",
-      "variable2" : "t",
-      "plot type" : "1line2d"
-    },
-    {
-      "variable1" : "x",
-      "id" : 4,
-      "title" : "Traj",
-      "output type" : "plot",
-      "variable2" : "y",
-      "plot type" : "1line2d"
-    },
-    {
-      "variable1" : "y",
-      "id" : 5,
-      "title" : "Apogee height",
-      "output type" : "text",
-      "condition" : "Apogee",
-      "plot type" : "singlevalue"
+      "Physics Settings" : {
+        "vehiclePointMass" : true,
+        "physicsModel" : "Flat Surface, planar"
+      },
+      "id" : "default",
+      "Run Settings" : {
+        "useAdaptiveTimestep" : true,
+        "timestep" : 0.123,
+        "maxTimestep" : 0.5,
+        "propagator" : "rungeKutta4",
+        "minTimestep" : 0.10000000000000001
+      },
+      "Initial Variables" : [
+
+      ],
+      "Terminal Condition" : "Terminal"
     }
   ],
   "Conditions" : [
@@ -129,41 +107,46 @@
       "union" : "nor"
     }
   ],
-  "Phases" : [
+  "Outputs" : [
     {
-      "Physics Settings" : {
-        "vehiclePointMass" : true,
-        "physicsModel" : "Flat Surface, planar"
-      },
-      "id" : "default",
-      "Run Settings" : {
-        "useAdaptiveTimestep" : true,
-        "propagator" : "rungeKutta4",
-        "timestep" : 0.123,
-        "minTimestep" : 0.1,
-        "maxTimestep" : 0.5
-      },
-      "Initial Variables" : [
-        {
-          "id" : "dx",
-          "symbol" : "𝑑𝑋\/𝑑𝑡",
-          "units" : "velocity",
-          "name" : "X vel",
-          "value" : [
-            100
-          ]
-        },
-        {
-          "id" : "dy",
-          "symbol" : "𝑑𝑌\/𝑑𝑡",
-          "units" : "velocity",
-          "name" : "Y vel",
-          "value" : [
-            20
-          ]
-        }
-      ],
-      "Terminal Condition" : "Terminal"
+      "variable1" : "x",
+      "id" : 1,
+      "title" : "X pos",
+      "output type" : "text",
+      "condition" : "Terminal",
+      "plot type" : "singlevalue"
+    },
+    {
+      "variable1" : "t",
+      "id" : 2,
+      "title" : "Final time",
+      "output type" : "text",
+      "condition" : "Terminal",
+      "plot type" : "singlevalue"
+    },
+    {
+      "variable1" : "y",
+      "id" : 3,
+      "title" : "Traj2",
+      "output type" : "plot",
+      "variable2" : "t",
+      "plot type" : "1line2d"
+    },
+    {
+      "variable1" : "x",
+      "id" : 4,
+      "title" : "Traj",
+      "output type" : "plot",
+      "variable2" : "y",
+      "plot type" : "1line2d"
+    },
+    {
+      "variable1" : "y",
+      "id" : 5,
+      "title" : "Apogee height",
+      "output type" : "text",
+      "condition" : "Apogee",
+      "plot type" : "singlevalue"
     }
   ]
 }

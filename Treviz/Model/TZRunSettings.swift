@@ -8,25 +8,32 @@
 
 import Foundation
 
+/**Algorithm used for propagation of the state*/
 enum PropagatorType: String {
     case explicit
     case rungeKutta4
 }
 
 enum TZRunSettingError: Error, LocalizedError {
-case minMaxError
-case negativeNumberError
+    case minMaxError
+    case negativeNumberError
+    case IOError
 
-public var errorDescription: String? {
-    switch self {
-        case .minMaxError:
-            return NSLocalizedString("Maximum timestep must be greater than minimum", comment: "")
-        case .negativeNumberError:
-            return NSLocalizedString("Negative timesteps are not allowed", comment: "")
+    public var errorDescription: String? {
+        switch self {
+            case .minMaxError:
+                return NSLocalizedString("Maximum timestep must be greater than minimum", comment: "")
+            case .negativeNumberError:
+                return NSLocalizedString("Negative timesteps are not allowed", comment: "")
+            case .IOError:
+                return NSLocalizedString("Error in run settings I/O", comment: "")
         }
     }
 }
 
+/**
+ A collection of settings that control the simulation engine, such a how to treat timesteps
+ */
 class TZRunSettings: Codable {
     var runMode: AnalysisRunMode!// Set automatically by the parent analysis
     var propagatorType: PropagatorType = .explicit
@@ -34,12 +41,13 @@ class TZRunSettings: Codable {
     private(set) var defaultTimestep = NumberParam(id: "dt", name: "Timestep", value: 0.1)
     private(set) var minTimestep = NumberParam(id: "dtmin", name: "Min Timestep", value: 0.0)
     private(set) var maxTimestep = NumberParam(id: "dtmax", name: "Max Timestep", value: 100)
-    var allParams: [Parameter] { return [self.defaultTimestep, self.minTimestep, self.maxTimestep]}
+    var allParams: [Parameter] { return [self.useAdaptiveTimestep, self.defaultTimestep, self.minTimestep, self.maxTimestep]}
 
     init() {
         runMode = .parallel
     }
     
+    //MARK: Setters
     func setMinTimeStep(_ minStep: VarValue) throws {
         guard minStep >= 0.0 else { throw TZRunSettingError.negativeNumberError }
         guard minStep < maxTimestep.value else { throw TZRunSettingError.minMaxError }
@@ -66,9 +74,12 @@ class TZRunSettings: Codable {
     
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        propagatorType = try PropagatorType(rawValue: container.decode(String.self, forKey: .propagator))!
+        if container.contains(.propagator) {
+            guard let propagator = try PropagatorType(rawValue: container.decode(String.self, forKey: .propagator)) else { throw TZRunSettingError.IOError }
+            propagatorType = propagator
+        }
         defaultTimestep.value = try container.decode(VarValue.self, forKey: .timestep)
-        let adaptiveTimestep = try container.decode(Bool.self, forKey: .useAdaptiveTimestep)
+        let adaptiveTimestep = (try? container.decode(Bool.self, forKey: .useAdaptiveTimestep)) ?? false
         useAdaptiveTimestep.value = adaptiveTimestep
         if adaptiveTimestep {
             let minTimestepIn = try container.decode(VarValue.self, forKey: .minTimestep)

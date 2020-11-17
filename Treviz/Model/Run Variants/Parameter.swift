@@ -26,7 +26,7 @@ import Cocoa
  9. Connect the param itself to the selector and param value buttons
  */
 protocol Parameter {
-    var id: ParamID {get}
+    var id: ParamID {get set}
     var name: String {get}
     var isParam : Bool {get set} // Defines whether the parameter is used as a 'parameter' in the current analysis; that is, whether it is varied as an input across multiple analysis runs
     static var paramConstructor: (_ param: Parameter)->RunVariant? {get}

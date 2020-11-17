@@ -23,7 +23,7 @@ Conditions:
       conditions:
       - TerminalTest
       - Too far
-  - Apogee: y is local max
+  - Apogee: local max y
   - Terminal:
       union: or
       conditions:
@@ -68,4 +68,7 @@ Outputs:
     output type: text
     condition: Apogee
 
+Physics Settings:
+  physicsModel: Flat Surface, 3D
+  vehiclePointMass: true
 

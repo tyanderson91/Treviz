@@ -57,7 +57,7 @@ enum SpecialConditionType : Int, CustomStringConvertible, Codable {
     case globalMin = 3
     
     var description: String {
-        let returnDict : Dictionary<SpecialConditionType, String> = [.globalMax: "Global Max", .globalMin: "Global Min", .localMax: "Local Max", .localMin: "Local Min"]
+        let returnDict : Dictionary<SpecialConditionType, String> = [.globalMax: "global max", .globalMin: "global min", .localMax: "local max", .localMin: "local min"]
         return returnDict[self]!
     }
 
@@ -108,19 +108,20 @@ class SingleCondition: EvaluateCondition, Codable {
            } } }
     var meetsCondition : [Bool]? // Temporary storage for the result of the condition evaluation
     var summary: String {
+        guard self.isValid() else { return "[invalid]"}
         var dstring = ""
         let varstr =  "\(varID!)"
         if equality != nil {
             let eqstring = String(format: "%g", arguments: [equality!])
-            dstring = "\(varstr) = \(eqstring)"
+            dstring = "\(varstr)=\(eqstring)"
         } else if let sc = specialCondition {
             dstring = String(describing: sc) + " \(varstr)"
         } else if lbound != nil || ubound != nil {
-            let ubstr = ubound == nil ? "" : " < \(String(format: "%g", arguments: [ubound!]))"
+            let ubstr = ubound == nil ? "" : "<\(String(format: "%g", arguments: [ubound!]))"
             let lbstr = lbound == nil ? "" : "\(String(format: "%g", arguments: [lbound!]))"
-            let lbCompareStr = lbstr == "" ? "" : " < "
+            let lbCompareStr = lbstr == "" ? "" : "<"
             if ubstr == "" {
-                dstring = varstr + " > " + lbstr
+                dstring = varstr + ">" + lbstr
             } else {
                 dstring = lbstr + lbCompareStr + varstr + ubstr
             }
@@ -182,44 +183,51 @@ class SingleCondition: EvaluateCondition, Codable {
         case varID
     }
     
+    /**
+     Creates a single condition based on a string used in the YAML format, such as "x < 4" or "Y is Local Maximum"
+     */
     init(summaryString valstr: String) throws {
-        let capturestr = #"(?:(?<lowerBound>[0-9\.-]+) ?(?<lowerSign>[\<\>]))?(?<varID>[\w ]+)(?<sign>[\<\>]|=| is ) ?(?<upperBound>[0-9\.-]+|[a-zA-Z ]+)"#
+        //let capturestr = #"(?:(?<lowerBound>[0-9\.-]+) ?(?<lowerSign>[\<\>]))?(?<varID>[\w ]+)(?<sign>[\<\>]|=| is ) ?(?<upperBound>[0-9\.-]+|[a-zA-Z ]+)"#
+        let capturestr = #"(?:(?<lowerBound>[0-9\.-]+) ?(?<lowerSign>[\<\>]))?(?<special>[GgLl]+o[cb]al [Mm][axin]+)? ?(?<varID>[\w]+) ?(?<sign>[\<\>]|=)? ?(?<upperBound>[0-9\.-]+)?"#
         guard let regex = try? NSRegularExpression(pattern: capturestr, options: []) else { return }
         let match = regex.firstMatch(in: valstr, options: [], range: NSRange(valstr.startIndex..<valstr.endIndex, in: valstr))
         guard match != nil else { throw ConditionError.unparsableText(valstr) } // No match found
        
         var componentDict = Dictionary<String, String>()
-        for component in ["lowerBound","lowerSign","sign","varID","upperBound"] {
+        for component in ["lowerBound","lowerSign","special","sign","varID","upperBound"] {
             if let curRange = Range((match!.range(withName: component)), in: capturestr){
                 let curVal = valstr[curRange]
                 componentDict[component] = String(curVal)
             }
         }
-       
+        guard componentDict.count >= 2
+        else {
+            throw ConditionError.unparsableText(valstr)
+        }
+        
         varID = componentDict["varID"]!
        
-        let ub = componentDict["upperBound"]!
-        let lb : VarValue? = {
-            if componentDict.keys.contains("lowerBound") { return VarValue(componentDict["lowerBound"]!) }
-            else { return nil }
-        }()
- 
-        switch componentDict["sign"]{
-        case "<":
-            ubound = VarValue(ub)
-            lbound = lb
-        case ">":
-            lbound = VarValue(ub)
-            ubound = lb
-        case "=":
-            equality = VarValue(ub)
-        case " is ":
-            if let specialCond = SpecialConditionType(ub){
-                specialCondition = specialCond
-            } else { return }
-        default:
-            return
-        }
+        if let ub = componentDict["upperBound"] {
+            let lb : VarValue? = {
+                if componentDict.keys.contains("lowerBound") { return VarValue(componentDict["lowerBound"]!) }
+                else { return nil }
+            }()
+     
+            switch componentDict["sign"]{
+            case "<":
+                ubound = VarValue(ub)
+                lbound = lb
+            case ">":
+                lbound = VarValue(ub)
+                ubound = lb
+            case "=":
+                equality = VarValue(ub)
+            default:
+                return
+            }
+        } else if let special = componentDict["special"] {
+            specialCondition = SpecialConditionType(special.lowercased())
+        } else { return }
     }
     
     required convenience init(from decoder: Decoder) throws {
@@ -259,8 +267,7 @@ class SingleCondition: EvaluateCondition, Codable {
         }
     }
     
-    // Evaluation functions
-    
+    //MARK: Evaluation functions
     func evaluateState(_ state: State){
         //let thisVariable = state[varID]
         guard let thisVariable = state[varID] else { return }
@@ -358,7 +365,7 @@ class SingleCondition: EvaluateCondition, Codable {
 }
 
 /**
-The Condition class provides teh mechanism to combine multiple SingleConditions or Conditions into one composite condition according to various boolean comparisons.
+The Condition class provides the mechanism to combine multiple SingleConditions or Conditions into one composite condition according to various boolean comparisons.
 */
 class Condition : EvaluateCondition, Codable {
     
@@ -552,6 +559,7 @@ class Condition : EvaluateCondition, Codable {
         }
     }
     
+    /**Whether the Condition has a valid set of rules*/
     func isValid() -> Bool {
         guard name != "" else { return false }
         guard conditions.count > 0 else { return false }
@@ -579,9 +587,7 @@ class Condition : EvaluateCondition, Codable {
         return false
     }
     
-    /**
-     Determines whether any children use Global Max or Global Min, making them unsuitable for use in terminal conditions
-     */
+    /**Determines whether any children use Global Max or Global Min, making them unsuitable for use in terminal conditions*/
     func containsGlobalCondition()->Bool{
         for curCondition in self.conditions {
             if let specialCondition = (curCondition as? SingleCondition)?.specialCondition {
@@ -604,6 +610,7 @@ class Condition : EvaluateCondition, Codable {
     }
 }
 
+/**Required at the Analysis level to decode data in the simplified format used by the YAML decoder*/
 struct ConditionDecodableData: Decodable {
     let conditions: [String]
     let union: BoolType

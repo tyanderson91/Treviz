@@ -70,8 +70,8 @@ class ConditionsTest: XCTestCase {
         XCTAssertEqual(dataOut, dataIn) // Make sure what is written from the YAML data and what is read from the JSON data are equal
         for readConditions in [yamlConditions] {//}, codableConditions] {
             let groundImpact = readConditions[0]
-            let terminalTest = readConditions[3]
-            let nestedCondition = readConditions[4]
+            let terminalTest = readConditions[4]
+            let nestedCondition = readConditions[6]
             XCTAssert(readConditions.count == 7)
             XCTAssert(groundImpact.name == "Ground Impact")
             XCTAssertTrue(nestedCondition.containsCondition(groundImpact))
@@ -96,23 +96,23 @@ class ConditionsTest: XCTestCase {
     func testSummary() {
         let cond1 = SingleCondition("t")
         cond1.ubound = 1
-        XCTAssertEqual(cond1.summary, "t < 1")
+        XCTAssertEqual(cond1.summary, "t<1")
         cond1.lbound = 0.1
-        XCTAssertEqual(cond1.summary, "0.1 < t < 1")
+        XCTAssertEqual(cond1.summary, "0.1<t<1")
         cond1.ubound = nil
-        XCTAssertEqual(cond1.summary, "t > 0.1")
+        XCTAssertEqual(cond1.summary, "t>0.1")
         cond1.equality = -3
-        XCTAssertEqual(cond1.summary, "t = -3")
+        XCTAssertEqual(cond1.summary, "t=-3")
         cond1.specialCondition = .globalMax
-        XCTAssertEqual(cond1.summary, "Global Max t")
+        XCTAssertEqual(cond1.summary, "global max t")
         cond1.specialCondition = .localMin
-        XCTAssertEqual(cond1.summary, "Local Min t")
+        XCTAssertEqual(cond1.summary, "local min t")
         let cond2 = SingleCondition("x", upperBound: 4)
         let cond3 = Condition(conditions: [cond1, cond2], unionType: .or, name: "")
-        XCTAssertEqual(cond3.summary, "Local Min t or x < 4")
+        XCTAssertEqual(cond3.summary, "local min t or x<4")
         let cond4 = SingleCondition("y", equality: 5.43)
         let cond5 = Condition(conditions: [cond3, cond4], unionType: .xnor, name: "")
-        XCTAssertEqual(cond5.summary, "(Local Min t or x < 4) xnor y = 5.43")
+        XCTAssertEqual(cond5.summary, "(local min t or x<4) xnor y=5.43")
     }
     
     func testMeetsSingleCondition() {
@@ -246,7 +246,7 @@ class ConditionsTest: XCTestCase {
         var spCond = SpecialConditionType("global min")
         XCTAssertEqual(spCond, SpecialConditionType.globalMin)
         spCond = .localMax
-        XCTAssertEqual(spCond?.description, "Local Max")
+        XCTAssertEqual(spCond?.description, "local max")
         let spCond2 = SpecialConditionType("max")
         XCTAssertEqual(spCond2, SpecialConditionType.localMax)
         XCTAssertNil(SpecialConditionType("glocal max"))

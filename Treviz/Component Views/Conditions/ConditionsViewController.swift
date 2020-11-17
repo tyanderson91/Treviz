@@ -72,7 +72,6 @@ class ConditionsViewController: TZViewController, VariableGetter, NSTableViewDel
             curCondition.name = "Condition \(analysis.conditions.count)"
             
             let newCondition = SingleCondition()
-            newCondition.varID = "t"
             curCondition.conditions.append(newCondition)
             showConditionView(condition: newCondition)
             canAddSubCondition = true

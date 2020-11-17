@@ -32,12 +32,21 @@ extension Condition {
                 if let thisCondition = analysis.conditions.first(where: {$0.name == thisConditionName} ) {
                     self.conditions.append(thisCondition)
                 } else {
-                    let logmessage = String(format: "Could not find constituent condition '%s' of condition '%s'", thisConditionName, self.name) // TODO: Make sure that conditions can be read in any order so that an error is not thrown for referencing a condition to be read later
+                    let logmessage = String(format: "Could not find constituent condition '%s' of condition '%s'", thisConditionName, self.name)
                     analysis.logMessage(logmessage)
                 }
             }
         } catch {
-            analysis.logMessage("Error when reading condition")
+            var strName : String
+            do {
+                let strCont = try decoder.singleValueContainer()
+                let strDict = try strCont.decode([String:String].self)
+                strName = strDict.keys.first!
+            }
+            catch {
+                strName = "<Unknown>" //TODO: Find a way to extract the condition name for compound conditions to write to the error message
+            }
+            analysis.logMessage("Error when reading condition '\(strName)': \(error.localizedDescription)")
             return nil
         }
     }
@@ -73,8 +82,8 @@ extension TZOutput {
                 if let thisCondition = analysis.conditions.first(where: {$0.name == conditionName}) {
                     self.condition = thisCondition
                 } else {
-                    let logmessage = String(format: "Could not find condition '%s' referenced in output '%s'", conditionName, self.title)
-                    analysis.logMessage(logmessage)
+                    //let logmessage = String(format: "Could not find condition '%s' referenced in output '%s'", conditionName, self.title)
+                    //analysis.logMessage(logmessage)
                 }
             }
         } catch {
@@ -95,7 +104,28 @@ extension TZPhase {
             let terminalConditionName = try container.decode(String.self, forKey: .terminalCondition)
             terminalCondition = analysis.conditions.first { $0.name == terminalConditionName }
         } catch {
-            analysis.logMessage("Error when reading phase")
+            analysis.logMessage("Error when reading phase: \(error.localizedDescription)")
+            return nil
+        }
+    }
+}
+
+extension RunVariant {
+    convenience init?(decoder: Decoder, referencing analysis: Analysis) {
+        do {
+            try self.init(from: decoder)
+            let container = try decoder.container(keyedBy: RunVariant.CodingKeys.self)
+            let paramID = try container.decode(ParamID.self, forKey: .paramID)
+            let curList = analysis.inputSettings
+            guard let matchingParam = curList.first(where: {$0.id == paramID})
+            else { throw ParamIDError.UnknownParamID(paramID) }
+            parameter = matchingParam
+            let nominalValue = try container.decode(String.self, forKey: .nominal)
+            setValue(from: nominalValue)
+            isActive = true
+            //let vehicleID = try container.decode(String.self, forKey: .vehicleID)
+        } catch {
+            analysis.logMessage("Error when reading run variants: \(error.localizedDescription)")
             return nil
         }
     }

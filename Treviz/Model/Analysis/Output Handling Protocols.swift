@@ -8,17 +8,13 @@
 
 import Cocoa
 
-/**
- This protocol is adopted by any object or view that handles IO aspects of presenting text outputs
- */
+/**This protocol is adopted by any object or view that handles IO aspects of presenting text outputs*/
 protocol TZTextOutputViewer {
     func clearOutput()
     func printOutput(curOutput: TZTextOutput) throws
 }
 
-/**
- This protocol is adopted by any object or view that handles IO aspects of presenting plots
- */
+/**This protocol is adopted by any object or view that handles IO aspects of presenting plots*/
 protocol TZPlotOutputViewer {
     func clearPlots()
     func createPlot(plot: TZPlot) throws

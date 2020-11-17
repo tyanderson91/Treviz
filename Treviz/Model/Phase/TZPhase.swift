@@ -72,20 +72,20 @@ class TZPhase: Codable {
 
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = (try? container.decode(String.self, forKey: .id)) ?? "default"
-        if let runSettingsIn = try? container.decode(TZRunSettings.self, forKey: .runSettings) {
-            runSettings = runSettingsIn
-        } else {
-            runSettings = TZRunSettings()
-        }
-        if let physet = try? container.decode(PhysicsSettings.self, forKey: .physicsSettings) {
-            physicsSettings = physet
-        } else { physicsSettings = PhysicsSettings()}
+        
+        if container.contains(.runSettings) {
+            runSettings = try container.decode(TZRunSettings.self, forKey: .runSettings)
+        } else { runSettings = TZRunSettings() }
+        
+        if container.contains(.physicsSettings) {
+            physicsSettings = try container.decode(PhysicsSettings.self, forKey: .physicsSettings)
+        } else { physicsSettings = PhysicsSettings() }
         setupConstants()
         
         if simpleIO {
             let tempInputSettings = try container.decode([String: VarValue].self, forKey: .inputSettings)
             for (thisVarID, thisVarVal) in tempInputSettings {
-                if let thisVar = self.varList.first(where: {thisVarID.atPhase(self.id) == $0.id}) {
+                if let thisVar = self.varList.first(where: {thisVarID == $0.id}) {
                     thisVar.value = [thisVarVal]
                 }
             }
@@ -100,6 +100,7 @@ class TZPhase: Codable {
             } )
         }
         inputSettings = varList // TODO: When more settings are introduced, expand this
+        gatherParams()
     }
     
     func encode(to encoder: Encoder) throws {
@@ -110,7 +111,7 @@ class TZPhase: Codable {
             guard $0.value.count > 0 else { return false }
             return ($0.value[0] != 0 || $0.isParam)
         }) ?? []
-        let baseVars = nonzerovars.compactMap({$0.stripPhase()})
+        let baseVars = nonzerovars.compactMap({$0.copyWithoutPhase()})
         if simpleIO {
             var initVarsDict = [String: VarValue]()
             for thisVar in baseVars { initVarsDict[thisVar.id] = thisVar.value[0] }
@@ -132,8 +133,15 @@ class TZPhase: Codable {
 extension TZPhase {
     func gatherParams() {
         allParams = []
+        varList.moveToPhase(self.id)
         allParams.append(contentsOf: varList)
-        allParams.append(contentsOf: runSettings.allParams)
-        allParams.append(contentsOf: physicsSettings.allParams)
+        
+        var runSetParams = runSettings.allParams as Array<Parameter>
+        for i in runSetParams.indices { runSetParams[i].moveToPhase(self.id) }
+        allParams.append(contentsOf: runSetParams)
+        
+        var physicsParams = physicsSettings.allParams
+        for i in physicsParams.indices { physicsParams[i].moveToPhase(self.id) }
+        allParams.append(contentsOf: physicsParams)
     }
 }

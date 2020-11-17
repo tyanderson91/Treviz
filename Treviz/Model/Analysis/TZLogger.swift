@@ -29,6 +29,4 @@ extension Analysis: TZLogger {
     func logMessage(_ message: String) {
         logMessage(NSAttributedString(string: message))
     }
-    
-
 }

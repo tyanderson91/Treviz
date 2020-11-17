@@ -364,16 +364,15 @@
 				CDDA8F2124AEE386002936E6 /* CalculatedVariable.swift */,
 				CD0F010A2365595700C920AA /* Vehicle.swift */,
 				CDD60A962345C5AE00249987 /* TZOutput.swift */,
-				CD6CCF3B244CCC960051F76D /* OutputDataSet.swift */,
 				CDD60A902345BF5C00249987 /* TZTextOutput.swift */,
+				CD280F49233B45670004263F /* TZPlot.swift */,
+				CD6CCF3B244CCC960051F76D /* OutputDataSet.swift */,
 				CD4AD70C23BD4C0C00FC815F /* TZPlotType.swift */,
 				CDB7C73B2352B58300BC50F1 /* InitStateHeader.swift */,
 				CD870F3324B448D7004A4D42 /* MathFuncs.swift */,
-				CD280F49233B45670004263F /* TZPlot.swift */,
 				CDD77FC1250D475E007E90BF /* PhysicsModel.swift */,
 				CD0F113E250560A700C88B05 /* TZRunSettings.swift */,
 				CD92180725493F5D001CA40B /* CelestialBody.swift */,
-				CD18A65F254FCB1C00B06C10 /* ParameterID.swift */,
 				CD3B2216251FD00800218E44 /* Run Variants */,
 				CD01037623E78EED00D336C2 /* Analysis */,
 				CDAF398D24A7209200309CA9 /* Phase */,
@@ -477,9 +476,10 @@
 		CD3B2216251FD00800218E44 /* Run Variants */ = {
 			isa = PBXGroup;
 			children = (
+				CD3B2217251FD05300218E44 /* StringValueProtocol.swift */,
 				CDE6CDD6250E7D7C0093C4E1 /* RunVariant.swift */,
 				CDB7C7392352B03100BC50F1 /* Parameter.swift */,
-				CD3B2217251FD05300218E44 /* StringValueProtocol.swift */,
+				CD18A65F254FCB1C00B06C10 /* ParameterID.swift */,
 				CD9465322517CBFA00DD7037 /* AnalysisParameterFunctions.swift */,
 			);
 			path = "Run Variants";

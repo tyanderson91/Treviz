@@ -46,7 +46,6 @@ extension State {
     }
     
     //Subscripts by condition
-    
     subscript(varIDs: [ParamID], condition: Condition) -> [ParamID: [VarValue]]? {
         // Note that this subscript take some time to collect, since by default it will evaluate the condition
         var output = [ParamID: [VarValue]]()

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="BWH-wW-vxd">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="BWH-wW-vxd">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17156"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17506"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -44,7 +44,7 @@
                                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                             <prototypeCellViews>
                                                                 <tableCellView identifier="initStateHeaderCellView" id="rmI-BO-63o" userLabel="Header Cell View">
-                                                                    <rect key="frame" x="1" y="1" width="195" height="17"/>
+                                                                    <rect key="frame" x="11" y="1" width="195" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
                                                                         <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ic4-SE-RRN">
@@ -79,7 +79,7 @@
                                                                     </connections>
                                                                 </tableCellView>
                                                                 <tableCellView identifier="initStateSubHeaderCellView" id="OlM-Kc-PPq" userLabel="SubHeader Cell View">
-                                                                    <rect key="frame" x="1" y="21" width="195" height="17"/>
+                                                                    <rect key="frame" x="11" y="21" width="195" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
                                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="6Xo-7l-f6U">
@@ -104,7 +104,7 @@
                                                                     </connections>
                                                                 </tableCellView>
                                                                 <tableCellView identifier="NameCellView" id="sal-K5-gNP" userLabel="Name Cell View" customClass="ParamValueTextView" customModule="Treviz" customModuleProvider="target">
-                                                                    <rect key="frame" x="1" y="41" width="195" height="17"/>
+                                                                    <rect key="frame" x="11" y="41" width="195" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
                                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="nib-0h-A2d">
@@ -143,7 +143,7 @@
                                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                             <prototypeCellViews>
                                                                 <tableCellView identifier="initStateValueCellView" id="6c2-Js-Hg1" customClass="ParamValueTextView" customModule="Treviz" customModuleProvider="target">
-                                                                    <rect key="frame" x="198" y="1" width="54" height="17"/>
+                                                                    <rect key="frame" x="208" y="1" width="54" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
                                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="O14-3P-80s">
@@ -185,7 +185,7 @@
                                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                             <prototypeCellViews>
                                                                 <tableCellView identifier="UnitsCellView" id="XMg-mg-lgj">
-                                                                    <rect key="frame" x="254" y="1" width="40" height="17"/>
+                                                                    <rect key="frame" x="263.5" y="1" width="40" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
                                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="iJs-bA-Yzx">
@@ -228,7 +228,7 @@
                                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                             <prototypeCellViews>
                                                                 <button identifier="initStateParamCheckBoxView" verticalHuggingPriority="750" id="Q4p-6L-kwQ" userLabel="Value check" customClass="RunVariantEnableButton" customModule="Treviz" customModuleProvider="target">
-                                                                    <rect key="frame" x="296" y="1" width="47" height="18"/>
+                                                                    <rect key="frame" x="305.5" y="1" width="47" height="18"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                                                     <buttonCell key="cell" type="check" bezelStyle="regularSquare" imagePosition="overlaps" alignment="center" inset="2" id="926-Li-fLp">
                                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -239,7 +239,7 @@
                                                                     </connections>
                                                                 </button>
                                                                 <tableCellView identifier="initStateHasParamCellView" wantsLayer="YES" id="Mlb-wb-KFY" userLabel="Has Params Cell View">
-                                                                    <rect key="frame" x="296" y="22" width="47" height="17"/>
+                                                                    <rect key="frame" x="305.5" y="22" width="47" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
                                                                         <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="w35-en-TRi">
@@ -745,13 +745,13 @@
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <scrollView horizontalCompressionResistancePriority="200" verticalCompressionResistancePriority="200" autohidesScrollers="YES" horizontalLineScroll="43" horizontalPageScroll="10" verticalLineScroll="43" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2wz-TP-qJy">
-                                                    <rect key="frame" x="0.0" y="0.0" width="304" height="59"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="304" height="120"/>
                                                     <clipView key="contentView" id="Urp-9H-jjm">
-                                                        <rect key="frame" x="1" y="1" width="302" height="57"/>
+                                                        <rect key="frame" x="1" y="1" width="302" height="118"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="41" rowSizeStyle="automatic" headerView="wtt-2f-HJN" viewBased="YES" floatsGroupRows="NO" id="dul-1k-Urz">
-                                                                <rect key="frame" x="0.0" y="0.0" width="451" height="43"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="451" height="90"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                 <size key="intercellSpacing" width="3" height="2"/>
                                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -926,7 +926,7 @@
                                                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                         <prototypeCellViews>
                                                                             <tableCellView identifier="paramSummaryCellView" id="5LI-lZ-CZd">
-                                                                                <rect key="frame" x="318" y="1" width="131" height="41"/>
+                                                                                <rect key="frame" x="317.5" y="1" width="131" height="41"/>
                                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                 <subviews>
                                                                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="usG-ON-DxL">
@@ -961,7 +961,7 @@
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="304" id="zdc-4h-cui"/>
                                                     </constraints>
                                                     <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="LUa-mL-Of6">
-                                                        <rect key="frame" x="1" y="42" width="302" height="16"/>
+                                                        <rect key="frame" x="1" y="103" width="302" height="16"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                     </scroller>
                                                     <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="tUD-Xb-M7e">
@@ -1306,7 +1306,7 @@
                                         <subviews>
                                             <button horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="110" translatesAutoresizingMaskIntoConstraints="NO" id="VgS-M5-hEf" customClass="RunVariantEnableButton" customModule="Treviz" customModuleProvider="target">
                                                 <rect key="frame" x="-2" y="1" width="98" height="18"/>
-                                                <buttonCell key="cell" type="check" title="Propagator:" bezelStyle="regularSquare" imagePosition="left" alignment="left" refusesFirstResponder="YES" inset="2" id="Fp1-Ed-2w7">
+                                                <buttonCell key="cell" type="check" title="Propagator:" bezelStyle="regularSquare" imagePosition="left" alignment="left" lineBreakMode="truncatingTail" refusesFirstResponder="YES" inset="2" id="Fp1-Ed-2w7">
                                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
@@ -1351,7 +1351,7 @@
                                                 <subviews>
                                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Z3Y-ol-J0u" customClass="RunVariantEnableButton" customModule="Treviz" customModuleProvider="target">
                                                         <rect key="frame" x="-2" y="2" width="134" height="18"/>
-                                                        <buttonCell key="cell" type="check" title="Default Timestep:" bezelStyle="regularSquare" imagePosition="left" alignment="left" refusesFirstResponder="YES" inset="2" id="gkJ-Gl-rs3">
+                                                        <buttonCell key="cell" type="check" title="Default Timestep:" bezelStyle="regularSquare" imagePosition="left" alignment="left" lineBreakMode="truncatingTail" refusesFirstResponder="YES" inset="2" id="gkJ-Gl-rs3">
                                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                             <font key="font" metaFont="system"/>
                                                         </buttonCell>
@@ -1399,7 +1399,7 @@
                                                 <subviews>
                                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Szq-yS-k22" userLabel="Min Timestep:" customClass="RunVariantEnableButton" customModule="Treviz" customModuleProvider="target">
                                                         <rect key="frame" x="-2" y="2" width="112" height="18"/>
-                                                        <buttonCell key="cell" type="check" title="Min Timestep:" bezelStyle="regularSquare" imagePosition="left" alignment="left" refusesFirstResponder="YES" inset="2" id="ucR-ur-SbL" userLabel="Min Timestep:">
+                                                        <buttonCell key="cell" type="check" title="Min Timestep:" bezelStyle="regularSquare" imagePosition="left" alignment="left" lineBreakMode="truncatingTail" refusesFirstResponder="YES" inset="2" id="ucR-ur-SbL" userLabel="Min Timestep:">
                                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                             <font key="font" metaFont="system"/>
                                                         </buttonCell>
@@ -1447,7 +1447,7 @@
                                                 <subviews>
                                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="y9U-Go-f1c" customClass="RunVariantEnableButton" customModule="Treviz" customModuleProvider="target">
                                                         <rect key="frame" x="-2" y="2" width="115" height="18"/>
-                                                        <buttonCell key="cell" type="check" title="Max Timestep:" bezelStyle="regularSquare" imagePosition="left" alignment="left" refusesFirstResponder="YES" inset="2" id="u1Q-rf-PPe">
+                                                        <buttonCell key="cell" type="check" title="Max Timestep:" bezelStyle="regularSquare" imagePosition="left" alignment="left" lineBreakMode="truncatingTail" refusesFirstResponder="YES" inset="2" id="u1Q-rf-PPe">
                                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                             <font key="font" metaFont="system"/>
                                                         </buttonCell>
@@ -1507,7 +1507,7 @@
                                         <subviews>
                                             <button verticalHuggingPriority="750" horizontalCompressionResistancePriority="110" translatesAutoresizingMaskIntoConstraints="NO" id="5zR-80-LuX" customClass="RunVariantEnableButton" customModule="Treviz" customModuleProvider="target">
                                                 <rect key="frame" x="-2" y="1" width="143" height="18"/>
-                                                <buttonCell key="cell" type="check" title="Adaptive Timestep:" bezelStyle="regularSquare" imagePosition="left" alignment="left" refusesFirstResponder="YES" inset="2" id="sSK-Tm-A93">
+                                                <buttonCell key="cell" type="check" title="Adaptive Timestep:" bezelStyle="regularSquare" imagePosition="left" alignment="left" lineBreakMode="truncatingTail" refusesFirstResponder="YES" inset="2" id="sSK-Tm-A93">
                                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
@@ -1589,7 +1589,7 @@
     </scenes>
     <resources>
         <image name="NSMenuOnStateTemplate" width="14" height="13"/>
-        <image name="NSRemoveTemplate" width="14" height="4"/>
+        <image name="NSRemoveTemplate" width="15" height="4"/>
         <image name="NSStatusUnavailable" width="16" height="16"/>
     </resources>
 </document>

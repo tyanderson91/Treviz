@@ -49,7 +49,7 @@ class Analysis: NSObject, Codable {
     var varList : [Variable]! {
         if phases.count == 1 {
             let onlyPhase = phases[0]
-            var summaryVars = onlyPhase.varList.compactMap({$0.stripPhase()})
+            var summaryVars = onlyPhase.varList.compactMap({$0.copyWithoutPhase()})
             summaryVars.append(contentsOf: onlyPhase.varList)
             return summaryVars
         } else { return [] }
@@ -72,7 +72,7 @@ class Analysis: NSObject, Codable {
     var inputSettings : [Parameter] {
         var tempSettings = [Parameter]()
         for thisPhase in phases {
-            tempSettings.append(contentsOf: thisPhase.inputSettings)
+            tempSettings.append(contentsOf: thisPhase.allParams)
         }
         return tempSettings
     }
@@ -81,7 +81,6 @@ class Analysis: NSObject, Codable {
     }
     weak var terminalCondition : Condition! {
         get { return phases[0].terminalCondition }
-        //set { phases[0].}
     }
     var traj: State!
     
@@ -143,6 +142,7 @@ class Analysis: NSObject, Codable {
         case conditions = "Conditions"
         case plots = "Outputs"
         case phases = "Phases"
+        case runVariants = "Run Variants"
     }
 
     required init(from decoder: Decoder) throws {
@@ -183,6 +183,35 @@ class Analysis: NSObject, Codable {
             }
         }
         
+        if container.contains(.runVariants) {
+            var allRunVariants = try container.nestedUnkeyedContainer(forKey: .runVariants)
+            var runVariantsTemp = allRunVariants
+            while(!allRunVariants.isAtEnd)
+            {
+                let output = try allRunVariants.nestedContainer(keyedBy: RunVariant.CodingKeys.self)
+                let paramID = try output.decode(ParamID.self, forKey: .paramID)
+                let category = try output.decode(RunVariant.CategoryKey.self, forKey: .category)
+                var newVariant : RunVariant?
+                let decoder = try runVariantsTemp.superDecoder()
+                
+                if let matchingParam = self.inputSettings.first(where: {$0.id == paramID}) {
+                    newVariant?.parameter = matchingParam
+                }
+                switch category {
+                case .variable:
+                    newVariant = VariableRunVariant.init(decoder: decoder, referencing: self)
+                case .number:
+                    newVariant = SingleNumberRunVariant.init(decoder: decoder, referencing: self)
+                case .enumeration:
+                    newVariant = EnumGroupRunVariant.init(decoder: decoder, referencing: self)
+                case .boolean:
+                    newVariant = BoolRunVariant.init(decoder: decoder, referencing: self)
+                }
+
+                if newVariant != nil { runVariants.append(newVariant!) }
+            }
+        }
+        
         var allTZOutputs = try container.nestedUnkeyedContainer(forKey: .plots)
         var plotsTemp = allTZOutputs
         while(!allTZOutputs.isAtEnd)
@@ -210,7 +239,7 @@ class Analysis: NSObject, Codable {
         let simpleIO : Bool = encoder.userInfo[.simpleIOKey] as? Bool ?? false
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(name, forKey: .analysisName)
-        // Need to write the simplest conditions first, so the compound conditions have something to refer to when they are read in
+        // Need to write the simplest conditions first, so the compound conditions have something to refer to when they are read in later
         let sortedConditions = conditions.sorted(by: {$0.subConditionCount < $1.subConditionCount})
         if simpleIO {
             var condsDict = [[String: Condition]]()
@@ -222,13 +251,17 @@ class Analysis: NSObject, Codable {
             try container.encode(sortedConditions, forKey: .conditions)
         }
 
-        try container.encode(plots, forKey: .plots)
-
         if phases.count == 1 && phases[0].id == "default" && simpleIO {
             let thisPhase = phases[0]
             try thisPhase.encode(to: encoder)
         } else {
             try container.encode(phases, forKey: .phases)
         }
+        
+        if runVariants.count > 0 {
+            try container.encode(runVariants, forKey: .runVariants)
+        }
+        
+        try container.encode(plots, forKey: .plots)
     }
 }

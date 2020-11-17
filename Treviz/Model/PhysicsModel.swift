@@ -9,6 +9,24 @@
 import Foundation
 import Cocoa
 
+enum PhysicsSettingsError: Error, LocalizedError {
+    case UnknownValue(String)
+    case InputError
+
+    public var errorDescription: String? {
+        var errorString: String = ""
+        switch self {
+        case .UnknownValue:
+            errorString = "\(self)"
+        case .InputError:
+            errorString = "error reading input"
+        }
+        return NSLocalizedString("Error in Physics setting (\(errorString))", comment: "")
+    }
+}
+/**
+ A Physics model denotes the high-level set of requirements required to understand the propagator and gravity models to use
+ */
 struct PhysicsModel {
     
     var valuestr: String
@@ -33,6 +51,9 @@ struct PhysicsModel {
     static let allPhysicsModels: [PhysicsModel] = [.flat2d, .flat3d, .round2dSingle, .round3dSingle, .round2dMulti, .round3dMulti]
 }
 
+/**
+ PhysicsSettings are a collection of run settings used to define the physical system being simulated
+ */
 class PhysicsSettings: Codable {
     var physicsModelParam = EnumGroupParam(id: "physicsModel", name: "Physics Model", enumType: PhysicsModel.self, value: PhysicsModel.flat2d, options: PhysicsModel.allPhysicsModels)
     var vehiclePointMassParam = BoolParam(id: "vehiclePointMass", name: "Treat Vehicle as Point Mass", value: true)
@@ -49,11 +70,16 @@ class PhysicsSettings: Codable {
     
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        if let physicsModelName = try? container.decode(String.self, forKey: .physicsModel) {
+        if container.contains(.physicsModel) {
+            let physicsModelName = try container.decode(String.self, forKey: .physicsModel)
+            let allNames = PhysicsModel.allPhysicsModels.map({$0.valuestr})
+            guard allNames.contains(physicsModelName) else { throw PhysicsSettingsError.UnknownValue(physicsModelName) }
             physicsModelParam.setValue(to: physicsModelName)
         }
-        if let usePointMass = try? container.decode(Bool.self, forKey: .vehiclePointMass) {
-            vehiclePointMassParam.value = usePointMass
+        if container.contains(.vehiclePointMass) {
+            if let pointMass = try? container.decode(Bool.self, forKey: .vehiclePointMass) {
+            vehiclePointMassParam.value = pointMass
+            } else { throw PhysicsSettingsError.InputError}
         }
     }
     

@@ -8,8 +8,14 @@ Conditions:
   - Ground Impact: y<-0.1
   - Final time: t=100
   - Too far: x>100
+  - Apogee: Local Max y
   - TerminalTest:
       union: and
+      conditions:
+      - Ground Impact
+      - Final time
+  - Terminal:
+      union: or
       conditions:
       - Ground Impact
       - Final time
@@ -18,12 +24,7 @@ Conditions:
       conditions:
       - TerminalTest
       - Too far
-  - Apogee: y is local max
-  - Terminal:
-      union: or
-      conditions:
-      - Ground Impact
-      - Final time
+
 
 Run Settings:
   propagator: rungeKutta4

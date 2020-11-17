@@ -20,7 +20,7 @@ class VariableSelectorViewController: TZViewController {
             guard selectedVariable != nil else { return }
             if let thisVarIndex = varList?.firstIndex(where: {$0.id == self.selectedVariable!.id }) {
                 selectedVariable = varList?[thisVarIndex]
-                variableSelectorPopup?.selectItem(at: thisVarIndex)
+                variableSelectorPopup?.selectItem(at: thisVarIndex+1)
             }
         }
     }
@@ -38,6 +38,7 @@ class VariableSelectorViewController: TZViewController {
 
     
     func loadVars(){
+        variableSelectorPopup.addItem(withTitle: "")
         variableSelectorPopup.addItems(withTitles: varList.compactMap { $0.name } )
     }
     
@@ -48,8 +49,9 @@ class VariableSelectorViewController: TZViewController {
     @IBAction func didSelectVar(_ sender: Any) {
         if let button = sender as? NSPopUpButton {
             let selectedIndex = button.indexOfSelectedItem
-            selectedVariable = varList[selectedIndex]
-            
+            if selectedIndex > 0 {
+                selectedVariable = varList[selectedIndex-1]
+            } else { selectedVariable = nil }
         }
         if variableGetter != nil { variableGetter!.variableDidChange(self) }
         else if let parentGetter = parent as? VariableGetter { parentGetter.variableDidChange(self) }
