@@ -15,6 +15,11 @@ protocol TZLogger {
     func logMessage(_ message: NSAttributedString)
     func logMessage(_ message: String)
 }
+extension TZLogger {
+    func logMessage(_ message: String) {
+        logMessage(NSAttributedString(string: message))
+    }
+}
 
 extension Analysis: TZLogger {
     func logMessage(_ message: NSAttributedString) {
@@ -24,9 +29,5 @@ extension Analysis: TZLogger {
             _bufferLog.append(message)
             _bufferLog.append(NSAttributedString(string: "\n"))
         }
-    }
-    
-    func logMessage(_ message: String) {
-        logMessage(NSAttributedString(string: message))
     }
 }

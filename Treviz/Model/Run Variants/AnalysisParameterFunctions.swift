@@ -17,7 +17,6 @@ extension Analysis {
     }
     
     func enableParam(param: Parameter) {
-
         if let existingParam = self.runVariants.first(where: {$0.paramID == param.id}) {
             existingParam.isActive = true
         } else {

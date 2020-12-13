@@ -32,7 +32,7 @@ extension NSUserInterfaceItemIdentifier{
     static let paramValueColumn = NSUserInterfaceItemIdentifier.init("paramValueColumn")
     static let paramTypeColumn = NSUserInterfaceItemIdentifier.init("paramVarTypeColumn")
     static let paramSummaryColumn = NSUserInterfaceItemIdentifier.init("paramSummaryColumn")
-    static let paramTypeCellView = NSUserInterfaceItemIdentifier.init("paramTypeCellView")
+    static let paramTypeCellView = NSUserInterfaceItemIdentifier.init("variantTypePopupCellView")
     static let paramSummaryCellView = NSUserInterfaceItemIdentifier.init("paramSummaryCellView")
     static let paramValueCellView = NSUserInterfaceItemIdentifier.init("paramValueCellView")
     static let distributionCellView = NSUserInterfaceItemIdentifier.init("distributionCellView")
@@ -119,12 +119,11 @@ extension InputsViewController{
         }
         return newView
     }
-    static func paramTypeCellView(view: NSTableView, thisInput: RunVariant?)->NSTableCellView?{
+    static func paramTypeCellView(view: NSTableView, thisInput: RunVariant?)->RunVariantTypeView?{
         guard thisInput != nil else {return nil}
-        let newView = view.makeView(withIdentifier: .paramTypeCellView, owner: self) as? NSTableCellView
-        if let textField = newView?.textField {
-            textField.stringValue = "Type"
-        }
+        guard let newView = view.makeView(withIdentifier: .paramTypeCellView, owner: self) as? RunVariantTypeView else { return nil }
+        newView.runVariant = thisInput
+        newView.update()
         return newView
     }
 }

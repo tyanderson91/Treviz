@@ -83,7 +83,6 @@ class RunVariantViewController: TZViewController , NSTableViewDelegate, NSTableV
     }
     
     @IBAction func editValues(_ sender: Any) {
-
         if let paramTextView = sender as? NSTextField {
             guard let parentParamView = paramTextView.superview as? ParamValueView
             else { return }
@@ -101,4 +100,10 @@ class RunVariantViewController: TZViewController , NSTableViewDelegate, NSTableV
             inputsViewController?.updateParamValueView(for: param.id)
         }
     }
+    
+    @IBAction func editVariantType(_ sender: Any) {
+        guard let senderTypeButton = sender as? RunVariantTypeView else { return }
+        senderTypeButton.runVariant.variantType = RunVariantType(rawValue: senderTypeButton.title) ?? .single
+    }
+    
 }

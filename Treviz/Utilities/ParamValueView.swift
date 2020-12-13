@@ -116,5 +116,17 @@ extension InputsViewController {
         }
         else { return nil }
     }
+}
 
+class RunVariantTypeView: NSPopUpButton {
+    var runVariant: RunVariant!
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        for thisType in RunVariantType.allCases {
+            self.addItem(withTitle: thisType.rawValue)
+        }
+    }
+    func update(){
+        self.selectItem(withTitle: runVariant.variantType.rawValue)
+    }
 }

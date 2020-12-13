@@ -12,6 +12,13 @@ enum DistributionType: String {
     case normal
     case uniform
 }
+
+enum RunVariantType: String, CaseIterable {
+    case single = "Single"
+    case montecarlo = "MC"
+    case trade = "Trade"
+}
+
 /**Required to set initial param value during initialization from Codable*/
 struct DummyParam : Parameter {
     var id: ParamID = ""
@@ -32,7 +39,7 @@ class RunVariant: Codable {
     }
     var curValue: StringValue { return "" }
     var options: [StringValue] = [] // The list of valid alternatives
-    var isTradeStudy: Bool = false
+    var variantType: RunVariantType = .single
     var parameter: Parameter
     func setValue(from string: String) {return}
     var paramVariantSummary: String { get { return "" } }
@@ -59,11 +66,13 @@ class RunVariant: Codable {
     
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        let variantType = try container.decode(String.self, forKey: .variantType)
-        if ["trade", "trade study"].contains(variantType) {
-            isTradeStudy = true
-        } else if ["mc", "monte carlo", "monte-carlo"].contains(variantType) {
-            isTradeStudy = false
+        let variantTypeString = try container.decode(String.self, forKey: .variantType)
+        if ["trade", "trade study"].contains(variantTypeString.lowercased()) {
+            variantType = .trade
+        } else if ["mc", "monte carlo", "monte-carlo"].contains(variantTypeString.lowercased()) {
+            variantType = .montecarlo
+        } else {
+            variantType = .single
         }
         parameter = DummyParam()
     }
@@ -72,8 +81,7 @@ class RunVariant: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(paramID, forKey: .paramID)
         try container.encode(curValue.valuestr, forKey: .nominal)
-        let variantType: String = isTradeStudy ? "trade" : "mc"
-        try container.encode(variantType, forKey: .variantType)
+        try container.encode(variantType.rawValue.lowercased(), forKey: .variantType)
     }
 }
 

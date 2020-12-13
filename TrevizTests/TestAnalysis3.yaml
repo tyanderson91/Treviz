@@ -1,0 +1,68 @@
+analysisName: Analysis Document
+Conditions:
+- Ground Impact: y<-0.1
+- Final time: t=100
+- Too far: x>100
+- Apogee: local max y
+- TerminalTest:
+    union: and
+    conditions:
+    - Ground Impact
+    - Final time
+- Terminal:
+    union: or
+    conditions:
+    - Ground Impact
+    - Final time
+- NestedTest:
+    union: nor
+    conditions:
+    - TerminalTest
+    - Too far
+Initial Variables: {}
+Terminal Condition: Terminal
+Run Settings:
+  propagator: rungeKutta4
+  timestep: 1.23e-1
+  useAdaptiveTimestep: true
+  minTimestep: 1e-1
+  maxTimestep: 5e-1
+Physics Settings:
+  physicsModel: Flat Surface, planar
+  vehiclePointMass: true
+Run Variants:
+- paramID: default.adaptivedt
+  nominal: False
+  variantType: mc
+  category: boolean
+Outputs:
+- output type: text
+  id: 1
+  title: X pos
+  variable1: x
+  condition: Terminal
+  plot type: singlevalue
+- output type: text
+  id: 2
+  title: Final time
+  variable1: t
+  condition: Terminal
+  plot type: singlevalue
+- output type: plot
+  id: 3
+  title: Traj2
+  variable1: y
+  variable2: t
+  plot type: 1line2d
+- output type: plot
+  id: 4
+  title: Traj
+  variable1: x
+  variable2: y
+  plot type: 1line2d
+- output type: text
+  id: 5
+  title: Apogee height
+  variable1: y
+  condition: Apogee
+  plot type: singlevalue

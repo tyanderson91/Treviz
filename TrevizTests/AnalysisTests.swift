@@ -71,4 +71,34 @@ class AnalysisTests: XCTestCase {
             XCTAssertNotNil(analysis)
         } catch { XCTFail() }
     }
+    
+    func testReadWrite() throws {
+        let bundle = Bundle(for: type(of: self))
+        let filePath = bundle.url(forResource: "TestAnalysis3", withExtension: "yaml")!
+        let dataIn = try Data(contentsOf: filePath)
+        let decoder = Yams.YAMLDecoder(encoding: .utf8)
+        let userOptions : [CodingUserInfoKey : Any] = [.simpleIOKey: true]
+        guard let strYamlIn = String(data: dataIn, encoding: String.Encoding.utf8) else { XCTFail(); return }
+        let analysis = try decoder.decode(Analysis.self, from: strYamlIn, userInfo: userOptions)
+        let encoder = Yams.YAMLEncoder()
+        let strYamlOut = try encoder.encode(analysis, userInfo: userOptions)
+        XCTAssertEqual(strYamlIn, strYamlOut)
+        let dataOut = strYamlOut.data(using: .utf8)
+        XCTAssertEqual(dataIn, dataOut)
+    }
+    
+    func testGetParameters() throws {
+        let analysis = loadFromYaml(file: "TestAnalysis2")
+        XCTAssertTrue(analysis.inputSettings.contains(where: {$0.id == "default.x"}))
+        XCTAssertTrue(analysis.parameters.contains(where: {$0.id == "default.physicsModel"}))
+        XCTAssertFalse(analysis.parameters.contains(where: {$0.id == "default.x"}))
+    }
+    
+    func testIsValid() throws {
+        let analysis = loadFromYaml(file: "TestAnalysis1")
+        XCTAssertNoThrow(try analysis.isValid())
+        let phase = analysis.phases[0]
+        phase.terminalCondition = nil
+        XCTAssertThrowsError(try analysis.isValid())
+    }
 }

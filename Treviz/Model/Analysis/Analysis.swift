@@ -52,13 +52,20 @@ class Analysis: NSObject, Codable {
             var summaryVars = onlyPhase.varList.compactMap({$0.copyWithoutPhase()})
             summaryVars.append(contentsOf: onlyPhase.varList)
             return summaryVars
-        } else { return [] }
+        } else { return nil }
     }
     var calculatedVarTemplates: [StateCalcVariable] = []
     
     // Analysis-specific data and configs (read/writing functions in AnalysisData.swift)
     var name : String = ""
     var conditions : [Condition] = []
+    var inputSettings : [Parameter] {
+        var tempSettings = [Parameter]()
+        for thisPhase in phases {
+            tempSettings.append(contentsOf: thisPhase.allParams)
+        }
+        return tempSettings
+    }
     var parameters : [Parameter] { //TODO: this should contain more than just input settings
         return inputSettings.filter {$0.isParam}
     }
@@ -69,13 +76,6 @@ class Analysis: NSObject, Codable {
     var vehicles = [Vehicle()]
     var propagatorType : PropagatorType = .explicit
     var defaultTimestep : VarValue = 0.01
-    var inputSettings : [Parameter] {
-        var tempSettings = [Parameter]()
-        for thisPhase in phases {
-            tempSettings.append(contentsOf: thisPhase.allParams)
-        }
-        return tempSettings
-    }
     var initState: StateDictSingle {
         get { return StateDictSingle(from: self.traj, at: 0) }
     }

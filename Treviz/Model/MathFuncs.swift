@@ -24,9 +24,23 @@ func ** (_ base: Float, _ exp: Float) -> Float {
 }
 
 let PI = 3.14159265
-func deg2rad(_ deg: VarValue)->VarValue{
-    return PI/180*deg
+func deg2rad(_ deg: VarValue, wrap: Bool = true)->VarValue{
+    var radOut = PI/180*deg
+    if wrap { radOut = wrapAngle(radOut, isRadian: true) }
+    return radOut
 }
-func rad2deg(_ rad: VarValue)->VarValue{
-    return 180/PI*rad
+func rad2deg(_ rad: VarValue, wrap: Bool = true)->VarValue{
+    var degOut = 180/PI*rad
+    if wrap { degOut = wrapAngle(degOut, isRadian: false) }
+    return degOut
+}
+
+func wrapAngle(_ angle: VarValue, isRadian: Bool=false)->VarValue{
+    var pi: VarValue
+    if isRadian { pi = PI }
+    else { pi = 180 }
+    var angleOut = angle.truncatingRemainder(dividingBy: 2*pi)
+    if angleOut > pi { angleOut = angleOut - 2*pi }
+    else if angleOut < -pi { angleOut = angleOut + 2*pi }
+    return angleOut
 }

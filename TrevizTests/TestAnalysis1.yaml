@@ -1,9 +1,7 @@
---- # Test configurations
 Initial Variables:
   t: 0
   dy: 20
   dx: 100
-  
 Conditions:
   - Ground Impact: y<-0.1
   - Final time: t=100
@@ -24,17 +22,13 @@ Conditions:
       conditions:
       - TerminalTest
       - Too far
-
-
 Run Settings:
   propagator: rungeKutta4
   timestep: 0.123
   min timestep: 0.1
   max timestep: 0.5
   adaptive timestep: true
-
 Terminal Condition: Terminal
-
 Outputs:
   - id: 1
     title: X pos
@@ -66,5 +60,3 @@ Outputs:
     plot type: Value at Condition
     output type: text
     condition: Apogee
-
-

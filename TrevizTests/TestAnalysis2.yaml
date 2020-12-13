@@ -1,0 +1,39 @@
+analysisName: New Analysis
+Conditions:
+- Ground Impact: y<-0.1
+Initial Variables:
+  x: 34
+Terminal Condition: Terminal
+Run Settings:
+  propagator: explicit
+  timestep: 1e-1
+  useAdaptiveTimestep: true
+  minTimestep: 2e+0
+  maxTimestep: 1e+2
+Physics Settings:
+  physicsModel: Flat Surface, 3D
+  vehiclePointMass: true
+Run Variants:
+- paramID: default.physicsModel
+  nominal: Flat Surface, 3D
+  variantType: mc
+  category: enumeration
+- paramID: default.dt
+  nominal: 0.1
+  variantType: mc
+  category: number
+- paramID: default.adaptivedt
+  nominal: False
+  variantType: mc
+  category: boolean
+- paramID: default.dtmin
+  nominal: 2
+  variantType: mc
+  category: number
+Outputs:
+- id: 1
+  title: X pos
+  variable1: x
+  plot type: Value at Condition
+  condition: Terminal
+  output type: text
