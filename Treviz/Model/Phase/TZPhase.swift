@@ -23,7 +23,7 @@ class TZPhase: Codable {
     var inputSettings : [Parameter] = []
     let runSettings : TZRunSettings
     var initState: StateDictSingle { return StateDictSingle(from: varList, at: 0) }
-    weak var terminalCondition : Condition!
+    var terminalCondition : Condition!
     var traj: StateDictArray!
     var requiredVarIDs: [ParamID] = []
     var requestedVarIDs: [ParamID] = ["v", "a"]
@@ -95,18 +95,22 @@ class TZPhase: Codable {
             let tempInputSettings = try container.decode(Array<Variable>.self, forKey: .inputSettings)
             tempInputSettings.forEach( { (thisParam: Parameter) in
                 if let thisVar = thisParam as? Variable {
-                    let thisVar = thisVar.copyToPhase(phaseid: self.id)
+                    //let thisVar = thisBaseVar.copyToPhase(phaseid: self.id)
                     let matchingVar = self.varList.first(where: {$0.id == thisVar.id})
                     matchingVar?[0] = thisVar.value[0]
                 }
             } )
             
             if deepCopy {
-                if container.contains(.terminalCondition) { terminalCondition = try container.decode(Condition.self, forKey: .terminalCondition) }
-                vehicle = try container.decode(Vehicle.self, forKey: .vehicle)
+                if container.contains(.terminalCondition) {
+                    let termCond1 = try container.decode(Condition.self, forKey: .terminalCondition)
+                    terminalCondition = termCond1
+                }
+                vehicle = Vehicle()// try container.decode(Vehicle.self, forKey: .vehicle)
             }
         }
         
+        let termCond = terminalCondition
         inputSettings = varList // TODO: When more settings are introduced, expand this
         gatherParams()
     }

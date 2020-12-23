@@ -26,7 +26,6 @@ extension Analysis {
                 }
             }
         case .serial:
-            logMessage("Done")
             for thisRun in self.runs {
                 thisRun.progressReporter = self.progressReporter
                 thisRun.run()
@@ -38,7 +37,7 @@ extension Analysis {
      Called by a run once it is finished running. This function takes care of processing the run and kicking off any new runs, or ending the analysis once all runs are complete
      */
     func processRun(_ run: TZRun) {
-        let returnCodes = phases.compactMap({$0.returnCode})
+        let returnCodes = runs.compactMap({$0.returnCode})
         if returnCodes.allSatisfy({$0.rawValue > 0}){ // If all runs have been run
             self.progressReporter?.endProgressTracking()
             self.isRunning = false

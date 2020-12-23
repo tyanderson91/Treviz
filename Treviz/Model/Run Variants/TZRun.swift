@@ -22,7 +22,7 @@ class TZRun {
         return tmpParam
     }
     let seed: Double = 0.0
-    let returnCode = 0
+    var returnCode : ReturnCode = .NotStarted
     var analysis: Analysis!
     var runMode : AnalysisRunMode { return analysis.runMode }
     var progressReporter: AnalysisProgressReporter?
@@ -92,6 +92,7 @@ class TZRun {
         let returnCodes = phases.compactMap({$0.returnCode})
         
         if returnCodes.allSatisfy({$0.rawValue > 0}){ // If all phases have been run
+            self.returnCode = .Success
             self.progressReporter?.endProgressTracking()
             self.isRunning = false
             progressReporter?.completeAnalysis()

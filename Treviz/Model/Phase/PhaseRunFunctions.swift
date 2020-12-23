@@ -22,7 +22,7 @@ extension TZPhase {
         let dt : VarValue = runSettings.defaultTimestep.value
         
         let initState = traj[0]
-        //self.terminalCondition.reset(initialState: initState)
+        self.terminalCondition.reset(initialState: initState)
         self.returnCode = .NotStarted
         
         traj["mtot"] = [self.vehicle.mass]

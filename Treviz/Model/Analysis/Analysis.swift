@@ -91,7 +91,7 @@ class Analysis: NSObject, Codable {
     var returnCode : Int = 0
     let analysisDispatchQueue = DispatchQueue(label: "analysisRunQueue", qos: .utility)
     var progressReporter: AnalysisProgressReporter?
-    var runMode = AnalysisRunMode.serial {
+    var runMode = AnalysisRunMode.parallel {
         didSet {
             for thisPhase in self.phases {
                 thisPhase.runMode = self.runMode
