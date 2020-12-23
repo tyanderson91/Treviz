@@ -99,8 +99,10 @@ extension TZPhase {
             try self.init(from: decoder)
             self.analysis = analysis
             let container = try decoder.container(keyedBy: TZPhase.CodingKeys.self)
-            //let vehicleID = try container.decode(String.self, forKey: .vehicleID)
-            //self.vehicle = self.analysis.vehicles.first(where: {$0.id == vehicleID})
+            if container.contains(.vehicle) {
+                let vehicleID = try container.decode(String.self, forKey: .vehicle)
+                self.vehicle = self.analysis.vehicles.first(where: {$0.id == vehicleID})
+            } else { self.vehicle = Vehicle() }
             let terminalConditionName = try container.decode(String.self, forKey: .terminalCondition)
             terminalCondition = analysis.conditions.first { $0.name == terminalConditionName }
         } catch {

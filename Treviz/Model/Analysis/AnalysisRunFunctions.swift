@@ -13,35 +13,33 @@ import Cocoa
 extension Analysis {
         
     func runAnalysis() {
+        do {
+            try createRunsFromVariants()
+        } catch { logMessage(error.localizedDescription) }
+        
         switch runMode {
         case .parallel:
-            for thisPhase in self.phases {
+            for thisRun in self.runs {
                 analysisDispatchQueue.async {
-                    thisPhase.progressReporter = self.progressReporter
-                    thisPhase.runAnalysis()
+                    thisRun.progressReporter = self.progressReporter
+                    thisRun.run()
                 }
             }
         case .serial:
-            for thisPhase in self.phases {
-                thisPhase.progressReporter = self.progressReporter
-                thisPhase.runAnalysis()
+            logMessage("Done")
+            for thisRun in self.runs {
+                thisRun.progressReporter = self.progressReporter
+                thisRun.run()
             }
         }
     }
+    
     /**
-     Called by a phase once it is finished running. This function takes care of processing the phase and kicking off any new phases, or ending the analysis once all phases are complete
+     Called by a run once it is finished running. This function takes care of processing the run and kicking off any new runs, or ending the analysis once all runs are complete
      */
-    func processPhase(_ phase: TZPhase) {
-        var trajArray = phase.traj!
-        if let calcVars = phase.varList.filter({phase.requestedVarIDs.contains($0.id.baseVarID())}) as? [StateCalcVariable] {
-            for thisVar in calcVars {
-                thisVar.calculate(from: &trajArray)
-            }
-        }
-        
+    func processRun(_ run: TZRun) {
         let returnCodes = phases.compactMap({$0.returnCode})
-        
-        if returnCodes.allSatisfy({$0.rawValue > 0}){ // If all phases have been run
+        if returnCodes.allSatisfy({$0.rawValue > 0}){ // If all runs have been run
             self.progressReporter?.endProgressTracking()
             self.isRunning = false
             progressReporter?.completeAnalysis()
@@ -59,7 +57,9 @@ extension Analysis {
                 logMessage(error.localizedDescription)
                 continue
             }
-            curOutput.curTrajectory = varList
+            curOutput.curTrajectory = varList // TODO: remove
+            curOutput.runData = runs
+            
             if curOutput is TZTextOutput {
                 do {
                     try self.textOutputViewer?.printOutput(curOutput: curOutput as! TZTextOutput)
@@ -76,6 +76,4 @@ extension Analysis {
             }
         }
     }
-    
-    
 }

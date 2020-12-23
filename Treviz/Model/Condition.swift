@@ -420,6 +420,7 @@ class Condition : EvaluateCondition, Codable {
     
     required init(from decoder: Decoder) throws {
         let simpleIO : Bool = decoder.userInfo[.simpleIOKey] as? Bool ?? false
+        let deepCopy : Bool = decoder.userInfo[.deepCopyKey] as? Bool ?? false // whether to encode the whole condition, or just a referenc
         if simpleIO {
             let container = try decoder.singleValueContainer()
             do { // Try to read as a single condition, e.g. x < 2
@@ -453,11 +454,17 @@ class Condition : EvaluateCondition, Codable {
             unionType = try container.decode(BoolType.self, forKey: .unionType)
             do { _summary = try container.decode(String.self, forKey: ._summary)
             } catch { _summary = "" }
+            if deepCopy {
+                let fullConditions = try container.decode(Array<Condition>.self, forKey: .conditions)
+                conditions.append(contentsOf: fullConditions)
+            }
         }
     }
     
     func encode(to encoder: Encoder) throws {
         let simpleIO : Bool = encoder.userInfo[.simpleIOKey] as? Bool ?? false
+        let deepCopy : Bool = encoder.userInfo[.deepCopyKey] as? Bool ?? false // whether to encode the whole condition, or just a referenc
+        
         let singleConditions = conditions.filter { $0 is SingleCondition } as? [SingleCondition] ?? []
         let conds = conditions.filter { $0 is Condition } as? [Condition] ?? []
          
@@ -478,8 +485,12 @@ class Condition : EvaluateCondition, Codable {
                 try container.encode(condStrs, forKey: .conditions)
             } else {
                 try container.encode(name, forKey: .name)
-                try container.encode(conditionNames, forKey: .conditions)
                 try container.encode(singleConditions, forKey: .singleConditions)
+                if deepCopy {
+                    try container.encode(conds, forKey: .conditions)
+                } else {
+                    try container.encode(conditionNames, forKey: .conditions)
+                }
             }
         }
     }

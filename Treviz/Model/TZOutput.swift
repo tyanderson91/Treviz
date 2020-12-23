@@ -68,7 +68,8 @@ class TZOutput : NSObject, Codable {
     var var3 : Variable?
     var categoryVar : Parameter?
     weak var condition : Condition?
-    var curTrajectory : State?
+    var curTrajectory : State? // TODO: Remove
+    var runData: [TZRun]?
     
     init(id : Int, plotType : TZPlotType){
         self.id = id
@@ -208,7 +209,11 @@ class TZOutput : NSObject, Codable {
     }
     
     func getData() throws -> OutputDataSetLines? {
-        guard let curTraj = curTrajectory else { throw TZOutputError.MissingTrajectoryError }
+        //guard let curTraj = curTrajectory else { throw TZOutputError.MissingTrajectoryError }
+        guard let curRunData = runData else { throw TZOutputError.MissingTrajectoryError }
+        let curRun = runData![0]
+        guard let curTraj = curRun.trajData else { throw TZOutputError.MissingTrajectoryError }
+        
         var lineSet = OutputDataSetLines()
         if plotType.requiresCondition {
             guard let condStates = curTraj[condition!] else {

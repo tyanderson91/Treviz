@@ -8,7 +8,8 @@
 import Cocoa
 
 extension CodingUserInfoKey {
-    static let simpleIOKey : CodingUserInfoKey = CodingUserInfoKey(rawValue: "simpleIO")!
+    static let simpleIOKey: CodingUserInfoKey = CodingUserInfoKey(rawValue: "simpleIO")!
+    static let deepCopyKey: CodingUserInfoKey = CodingUserInfoKey(rawValue: "deepCopy")!
 }
 
 enum AnalysisError: Error {
@@ -90,7 +91,7 @@ class Analysis: NSObject, Codable {
     var returnCode : Int = 0
     let analysisDispatchQueue = DispatchQueue(label: "analysisRunQueue", qos: .utility)
     var progressReporter: AnalysisProgressReporter?
-    var runMode = AnalysisRunMode.parallel {
+    var runMode = AnalysisRunMode.serial {
         didSet {
             for thisPhase in self.phases {
                 thisPhase.runMode = self.runMode
@@ -100,8 +101,24 @@ class Analysis: NSObject, Codable {
 
     // Run variant parameters
     var runVariants: [RunVariant] = []
-    var useGroupedVariants: Bool = false
+    var useGroupedVariants: Bool = false // Grouped versus Permutation
     var numMonteCarloRuns: Int = 1
+    var numRuns: Int {
+        let tradeRunVariants = runVariants.filter {$0.variantType == .trade}
+        let mcRunVariants = runVariants.filter {$0.variantType == .montecarlo}
+        var numTradeRuns: Int = 1
+        let numMCRuns: Int = mcRunVariants.isEmpty ? 1 : numMonteCarloRuns
+        if tradeRunVariants.isEmpty { numTradeRuns = 1 }
+        else if useGroupedVariants { numTradeRuns = tradeRunVariants[0].tradeValues.count }
+        else {
+            for thisVariant in tradeRunVariants {
+                let curNumRuns = thisVariant.tradeValues.isEmpty ? 1 : thisVariant.tradeValues.count
+                numTradeRuns = numTradeRuns * curNumRuns
+            }
+        }
+        return numTradeRuns * numMCRuns
+    }
+    var runs: [TZRun] = []
     
     // Logging
     var _bufferLog = NSMutableAttributedString() // This string is used to store any logs prior to the initialization of the log message text view
@@ -263,5 +280,15 @@ class Analysis: NSObject, Codable {
         }
         
         try container.encode(plots, forKey: .plots)
+    }
+    
+    /** Creates a data object containing all of the configurations required for setting up a run */
+    func copyForRuns() throws->Data {
+        let encoder = JSONEncoder()
+        encoder.userInfo = [CodingUserInfoKey.simpleIOKey: false, CodingUserInfoKey.deepCopyKey: true]
+        let data = try encoder.encode(self.phases)
+        //let asysString = String(data: data, encoding: .utf8)!
+        //logMessage(asysString)
+        return data
     }
 }

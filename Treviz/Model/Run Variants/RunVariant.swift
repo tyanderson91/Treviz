@@ -24,8 +24,25 @@ struct DummyParam : Parameter {
     var id: ParamID = ""
     var name: String = ""
     var isParam: Bool = false
+    var stringValue: String = ""
     static var paramConstructor = {(_ param: Parameter)->RunVariant? in return nil}
     func setValue(to: String){}
+}
+/** Placeholder class used in creating Runs when other run variants are not used*/
+class DummyRunVariant: RunVariant, MCRunVariant {
+    init(){
+        super.init(param: DummyParam())!
+    }
+    required init(from decoder: Decoder) throws {
+        fatalError("Dummy Run Variant should never need to be created from Coder")
+    }
+    func randomValue(seed: Double?)->VarValue { return 0.0 }
+}
+
+/** Type of run variant that can return a random value to be used in monte-carlo analysis*/
+protocol MCRunVariant {
+    var paramID: ParamID {get}
+    func randomValue(seed: Double?)->VarValue
 }
 
 /**
@@ -40,6 +57,7 @@ class RunVariant: Codable {
     var curValue: StringValue { return "" }
     var options: [StringValue] = [] // The list of valid alternatives
     var variantType: RunVariantType = .single
+    var tradeValues: [StringValue] = [] // List of variants to be used in trade study
     var parameter: Parameter
     func setValue(from string: String) {return}
     var paramVariantSummary: String { get { return "" } }
@@ -87,7 +105,7 @@ class RunVariant: Codable {
 
 
 /**A type of run variant used to define the variations on a Variable*/
-class VariableRunVariant: RunVariant {
+class VariableRunVariant: RunVariant, MCRunVariant {
     var distributionType: DistributionType = .normal
     // Monte-carlo dispersion parameters
     var min: VarValue?
@@ -128,10 +146,14 @@ class VariableRunVariant: RunVariant {
         var categoryContainer = encoder.container(keyedBy: CodingKeys.self)
         try categoryContainer.encode(CategoryKey.variable, forKey: .category)
     }
+    
+    func randomValue(seed: Double?)->VarValue{
+        return variable.value[0] // TODO: Make actually return random value
+    }
 }
 
 /**A type of Run Variant used to vary a single number parameter that is not a variable, such as a timestep*/
-class SingleNumberRunVariant: RunVariant {
+class SingleNumberRunVariant: RunVariant, MCRunVariant {
     var distributionType: DistributionType = .normal
     // Monte-carlo dispersion parameters
     var min: VarValue?
@@ -165,6 +187,10 @@ class SingleNumberRunVariant: RunVariant {
         
         var categoryContainer = encoder.container(keyedBy: CodingKeys.self)
         try categoryContainer.encode(CategoryKey.number, forKey: .category)
+    }
+    
+    func randomValue(seed: Double?)->VarValue{
+        return number.value // TODO: make actually return random value
     }
 }
 

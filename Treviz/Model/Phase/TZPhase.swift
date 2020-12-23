@@ -32,6 +32,7 @@ class TZPhase: Codable {
     var returnCode : ReturnCode = .NotStarted
     var runMode : AnalysisRunMode = .parallel
     var analysis: Analysis!
+    var parentRun: TZRun!
     var varList: [Variable]!
     var varCalculationsSingle = Dictionary<ParamID,(inout StateDictSingle)->VarValue>()
     var varCalculationsMultiple = Dictionary<ParamID,(inout StateDictArray)->[VarValue]>()
@@ -61,7 +62,7 @@ class TZPhase: Codable {
     enum CodingKeys: String, CodingKey {
         case id
         case inputSettings = "Initial Variables"
-        case vehicleID
+        case vehicle
         case terminalCondition = "Terminal Condition"
         case runSettings = "Run Settings"
         case physicsSettings = "Physics Settings"
@@ -69,6 +70,7 @@ class TZPhase: Codable {
 
     required init(from decoder: Decoder) throws {
         let simpleIO : Bool = decoder.userInfo[.simpleIOKey] as? Bool ?? false
+        let deepCopy : Bool = decoder.userInfo[.deepCopyKey] as? Bool ?? false
 
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = (try? container.decode(String.self, forKey: .id)) ?? "default"
@@ -98,7 +100,13 @@ class TZPhase: Codable {
                     matchingVar?[0] = thisVar.value[0]
                 }
             } )
+            
+            if deepCopy {
+                if container.contains(.terminalCondition) { terminalCondition = try container.decode(Condition.self, forKey: .terminalCondition) }
+                vehicle = try container.decode(Vehicle.self, forKey: .vehicle)
+            }
         }
+        
         inputSettings = varList // TODO: When more settings are introduced, expand this
         gatherParams()
     }
@@ -106,6 +114,7 @@ class TZPhase: Codable {
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         let simpleIO : Bool = encoder.userInfo[.simpleIOKey] as? Bool ?? false
+        let deepCopy : Bool = encoder.userInfo[.deepCopyKey] as? Bool ?? false
         
         let nonzerovars = (varList)?.filter({
             guard $0.value.count > 0 else { return false }
@@ -122,6 +131,11 @@ class TZPhase: Codable {
         }
         if terminalCondition != nil {
             try container.encode(terminalCondition.name, forKey: .terminalCondition)
+        }
+        
+        if deepCopy {
+            if terminalCondition != nil { try container.encode(terminalCondition, forKey: .terminalCondition) }
+            try container.encode(vehicle, forKey: .vehicle)
         }
         try container.encode(runSettings, forKey: .runSettings)
         try container.encode(physicsSettings, forKey: .physicsSettings)

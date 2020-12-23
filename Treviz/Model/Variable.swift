@@ -28,6 +28,8 @@ class Variable : Parameter, Codable, Hashable {
     let symbol: String!
     var units: String //TODO: Turn units into a separate type
     var value: [VarValue] = []
+    var stringValue: String { return value[0].valuestr }
+
     var isValid: Bool = true
     var hasParams: Bool {return isParam}
     var isParam: Bool = false

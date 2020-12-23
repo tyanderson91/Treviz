@@ -31,6 +31,7 @@ protocol Parameter {
     var isParam : Bool {get set} // Defines whether the parameter is used as a 'parameter' in the current analysis; that is, whether it is varied as an input across multiple analysis runs
     static var paramConstructor: (_ param: Parameter)->RunVariant? {get}
     func setValue(to: String)
+    var stringValue: String { get }
 }
 
 class NumberParam : Parameter, Comparable {
@@ -41,6 +42,8 @@ class NumberParam : Parameter, Comparable {
     var name: String
     var isParam: Bool = false
     var value: VarValue = 0
+    var stringValue: String { return value.valuestr }
+    
     static var paramConstructor: (Parameter) -> RunVariant? = { (param: Parameter) in
         return SingleNumberRunVariant(param: param) ?? nil
     }
@@ -57,6 +60,12 @@ class NumberParam : Parameter, Comparable {
         self.init(id: numID, name: nameIn)
         value = valIn
     }
+    
+    func copy()->Parameter {
+        let newParam = NumberParam(id: id, name: name, value: value)
+        newParam.isParam = isParam
+        return newParam
+    }
 }
 
 class EnumGroupParam: Parameter {
@@ -64,6 +73,7 @@ class EnumGroupParam: Parameter {
     var name: String
     var isParam: Bool = false
     var value: StringValue
+    var stringValue: String { return value.valuestr }
     var enumType: StringValue.Type
     var options: [StringValue] = []
     static var paramConstructor: (Parameter) -> RunVariant? = { (param: Parameter) in
@@ -97,6 +107,7 @@ class BoolParam: Parameter {
     var name: String
     var isParam: Bool = false
     var value: Bool = false
+    var stringValue: String { return value.valuestr }
     static var paramConstructor: (Parameter) -> RunVariant? = { (param: Parameter) in
         return BoolRunVariant(param: param) ?? nil
     }

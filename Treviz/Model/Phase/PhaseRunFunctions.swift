@@ -22,10 +22,10 @@ extension TZPhase {
         let dt : VarValue = runSettings.defaultTimestep.value
         
         let initState = traj[0]
-        self.terminalCondition.reset(initialState: initState)
+        //self.terminalCondition.reset(initialState: initState)
         self.returnCode = .NotStarted
         
-        traj["mtot"] = [10.0]
+        traj["mtot"] = [self.vehicle.mass]
         isRunning = true
         var i = 0
         while self.isRunning {
@@ -63,12 +63,12 @@ extension TZPhase {
         if self.runMode == .parallel {
             DispatchQueue.main.async {
                 self.varList.updateFromDict(traj: self.traj)
-                self.analysis.processPhase(self)
+                self.parentRun.processPhase(self)
             }
         }
         else {
             self.varList.updateFromDict(traj: self.traj)
-            self.analysis.processPhase(self)
+            self.parentRun.processPhase(self)
         }
     }
     
