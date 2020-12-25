@@ -13,21 +13,26 @@ import Cocoa
 extension Analysis {
         
     func runAnalysis() {
-        do {
-            try createRunsFromVariants()
-        } catch { logMessage(error.localizedDescription) }
+        createRunsFromVariants()
+
+        guard !runs.isEmpty else {
+            logMessage("No runs found to process. Aborting")
+            return
+        }
         
+        runs.forEach {
+            $0.runMode = self.runMode
+            $0.progressReporter = self.progressReporter
+        }
         switch runMode {
         case .parallel:
             for thisRun in self.runs {
                 analysisDispatchQueue.async {
-                    thisRun.progressReporter = self.progressReporter
                     thisRun.run()
                 }
             }
         case .serial:
             for thisRun in self.runs {
-                thisRun.progressReporter = self.progressReporter
                 thisRun.run()
             }
         }

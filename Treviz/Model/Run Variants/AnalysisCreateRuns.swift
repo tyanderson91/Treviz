@@ -12,6 +12,8 @@ struct RunGenerator {
     let analysisData: Data
     var paramSettings: [ParamID: String]
     let mcVariants: [MCRunVariant]
+    var curTradeGroupNum: Int
+    var tradeGroupDescriptions: [String] = []
 }
 
 extension Analysis {
@@ -24,65 +26,98 @@ extension Analysis {
         return data
     }
     
-    func createRunsFromVariants() throws {
+    func createRunsFromVariants() {
         var tradeVariants = runVariants.filter({$0.variantType == .trade})
         var mcVariants = runVariants.filter({$0.variantType == .montecarlo && $0 is MCRunVariant}) as! [MCRunVariant]
         
-        let analysisData = try self.copyForRuns()
-        if tradeVariants.count == 0 { tradeVariants = [DummyRunVariant]() }
-        if mcVariants.count == 0 { mcVariants = [DummyRunVariant]() }
-        var allRuns = [TZRun]()
-        let runGenerator = RunGenerator(analysisData: analysisData, paramSettings: [ParamID: String](), mcVariants: mcVariants)
-        
-        if tradeVariants.isEmpty && mcVariants.isEmpty {
-            allRuns = try [TZRun(analysisData: analysisData, paramSettings: [ParamID: String]() )]
+        do {
+            self.runs = []
+            let analysisData = try self.copyForRuns()
+            if tradeVariants.count == 0 { tradeVariants = [DummyRunVariant]() }
+            if mcVariants.count == 0 { mcVariants = [DummyRunVariant]() }
+            var allRuns = [TZRun]()
+            if self.tradeGroups.count != numTradeGroups {
+                self.tradeGroups = Array<TradeGroup>.init(repeating: TradeGroup(), count: numTradeGroups)
+            }
+            
+            let runGenerator = RunGenerator(analysisData: analysisData, paramSettings: [ParamID: String](), mcVariants: mcVariants, curTradeGroupNum: 0)
+            
+            if tradeVariants.isEmpty && mcVariants.isEmpty {
+                allRuns = try [TZRun(analysisData: analysisData, paramSettings: [ParamID: String]() )]
+            }
+            else if tradeVariants.isEmpty { allRuns = createAllMCRuns(runGenerator: runGenerator) }
+            else if self.useGroupedVariants {
+                allRuns = try createTradeGroups(runGenerator: runGenerator, tradeVariants: tradeVariants)
+            } else {
+                allRuns = createTradePermutations(runGenerator: runGenerator, remainingVariants: tradeVariants)
+            }
+            allRuns.forEach {$0.analysis = self}
+            self.runs = allRuns
+        } catch {
+            logMessage("Error creating runs: \(error.localizedDescription)")
         }
-        else if tradeVariants.isEmpty { allRuns = createAllMCRuns(runGenerator: runGenerator) }
-        else if self.useGroupedVariants {
-            allRuns = createTradeGroups(runGenerator: runGenerator, tradeVariants: tradeVariants)
-        } else {
-            allRuns = createTradePermutations(runGenerator: runGenerator, remainingVariants: tradeVariants)
-        }
-        
-        allRuns.forEach {$0.analysis = self}
-        self.runs = allRuns
     }
     
-    func createTradeGroups(runGenerator: RunGenerator, tradeVariants: [RunVariant])->[TZRun]{
+    private func createTradeGroups(runGenerator inputRunGenerator : RunGenerator, tradeVariants: [RunVariant]) throws->[TZRun]{
         let numGroups = tradeVariants.first!.tradeValues.count
-        assert(tradeVariants.allSatisfy({$0.tradeValues.count == numGroups})) // Make sure all variants have the same number of variant values
+        guard tradeVariants.allSatisfy({$0.tradeValues.count == numGroups}) else { throw TZRunError.UnequalTradeGroupNumbers } 
         var allRuns = [TZRun]()
-        var newRunGenerator = runGenerator
-        for i in 0...numGroups {
+        var runGenerator = inputRunGenerator
+        for i in 0...numGroups-1 {
+            runGenerator.tradeGroupDescriptions = []
             for thisVariant in tradeVariants {
-                newRunGenerator.paramSettings[thisVariant.paramID] = thisVariant.tradeValues[i].valuestr
+                let paramID = thisVariant.paramID
+                let paramVal = thisVariant.tradeValues[i].valuestr
+                runGenerator.paramSettings[paramID] = paramVal
+                runGenerator.tradeGroupDescriptions.append("\(paramID)=\(paramVal)")
             }
-            let curGroupRuns = createAllMCRuns(runGenerator: newRunGenerator)
+            runGenerator.curTradeGroupNum = i
+            let curTradeGroup = self.tradeGroups[runGenerator.curTradeGroupNum]
+            if curTradeGroup.groupDescription.isEmpty {
+                self.tradeGroups[i].groupDescription = runGenerator.tradeGroupDescriptions.joined(separator: ", ")
+            }
+            let curGroupRuns = createAllMCRuns(runGenerator: runGenerator)
             allRuns.append(contentsOf: curGroupRuns)
         }
         
         return allRuns
     }
     
-    func createTradePermutations(runGenerator: RunGenerator, remainingVariants: [RunVariant])->[TZRun]{
+    private func createTradePermutations(runGenerator inputRunGenerator: RunGenerator, remainingVariants: [RunVariant])->[TZRun]{
         var curRuns = [TZRun]()
         let curVariant = remainingVariants.first!
         let otherVariants = Array(remainingVariants.dropFirst())
-        var newRunGenerator = runGenerator
-        for thisVariant in curVariant.tradeValues {
-            newRunGenerator.paramSettings[curVariant.paramID] = thisVariant.valuestr
-            let thisVariantRuns = createTradePermutations(runGenerator: newRunGenerator, remainingVariants: otherVariants)
+        var runGenerator = inputRunGenerator
+        let inputGroupDescriptions = inputRunGenerator.tradeGroupDescriptions
+        for thisValue in curVariant.tradeValues {
+            let paramID = curVariant.paramID
+            let paramVal = thisValue.valuestr
+            runGenerator.paramSettings[paramID] = paramVal
+            runGenerator.tradeGroupDescriptions = inputGroupDescriptions
+            runGenerator.tradeGroupDescriptions.append("\(paramID)=\(paramVal)")
+            var thisVariantRuns = [TZRun]()
+            if otherVariants.isEmpty { // Reached the end of recursion
+                let curTradeGroup = self.tradeGroups[runGenerator.curTradeGroupNum]
+                if curTradeGroup.groupDescription.isEmpty {
+                    self.tradeGroups[runGenerator.curTradeGroupNum].groupDescription = runGenerator.tradeGroupDescriptions.joined(separator: ", ")
+                }
+                thisVariantRuns = createAllMCRuns(runGenerator: runGenerator)
+                runGenerator.curTradeGroupNum += 1
+            } else { // continue recursion
+                thisVariantRuns = createTradePermutations(runGenerator: runGenerator, remainingVariants: otherVariants)
+                runGenerator.curTradeGroupNum = thisVariantRuns.last!.tradeGroupNum + 1
+            }
             curRuns.append(contentsOf: thisVariantRuns)
         }
         return curRuns
     }
     
-    func createAllMCRuns(runGenerator: RunGenerator)->[TZRun]{
-        guard runGenerator.mcVariants.count > 0 else { // Return a single run if there are no variations
+    private func createAllMCRuns(runGenerator: RunGenerator)->[TZRun]{
+        guard runGenerator.mcVariants.count > 0 && numMonteCarloRuns > 0 else { // Return a single run if there are no variations
             return [createMCRun(runGenerator: runGenerator)]
         }
         var tmpMCRun = [TZRun]()
-        for _ in 0...numMonteCarloRuns {
+        for _ in 0...numMonteCarloRuns-1 {
             let newSeed = Double.random(in: 0.0...1.0)
             let newRun = createMCRun(runGenerator: runGenerator, seed: newSeed)
             tmpMCRun.append(newRun)
@@ -90,13 +125,16 @@ extension Analysis {
         return tmpMCRun
     }
     
-    func createMCRun(runGenerator: RunGenerator, seed: Double = 0.0)->TZRun {
+    private func createMCRun(runGenerator: RunGenerator, seed: Double = 0.0)->TZRun {
         var paramSettings = runGenerator.paramSettings
         for thisVariant in runGenerator.mcVariants {
             let randomNum = thisVariant.randomValue(seed: seed)
             paramSettings[thisVariant.paramID] = randomNum.valuestr
         }
-        return try! TZRun(analysisData: runGenerator.analysisData, paramSettings: paramSettings)
+        let outputRun = try! TZRun(analysisData: runGenerator.analysisData, paramSettings: paramSettings)
+        outputRun.tradeGroupNum = runGenerator.curTradeGroupNum
+        
+        return outputRun
     }
 }
 

@@ -13,7 +13,7 @@ import Yams
  This suite of tests provides an end-to-end verification of accuracy of tests for various types of analyses
  */
 class AnalysisTests: XCTestCase {
-    
+    /*
     func loadFromYaml(file: String)->Analysis{
         do {
             let bundle = Bundle(for: type(of: self))
@@ -27,11 +27,11 @@ class AnalysisTests: XCTestCase {
             }
         } catch {XCTFail()}
         return Analysis()
-    }
+    }*/
     
     var analysis_2d = Analysis()
     override func setUpWithError() throws {
-        analysis_2d = loadFromYaml(file: "TestAnalysis1")
+        analysis_2d = Analysis.initFromYaml(file: "TestAnalysis1", self: self)
         analysis_2d.runMode = .serial
     }
 
@@ -46,6 +46,7 @@ class AnalysisTests: XCTestCase {
         let dy_init = analysis_2d.initState["dy"]!
         let maxheight = (dy_init**2) / (2*9.81)
         let apogeeOutput = analysis_2d.plots.first(where: {$0.title == "Apogee height"})!
+        apogeeOutput.runData = analysis_2d.runs
         let dataSet = try apogeeOutput.getData()
         guard let calcApogee = dataSet?.var1![0] else { XCTFail(); return}
         XCTAssertEqual(calcApogee, maxheight, accuracy: 1.0)
@@ -88,14 +89,14 @@ class AnalysisTests: XCTestCase {
     }
     
     func testGetParameters() throws {
-        let analysis = loadFromYaml(file: "TestAnalysis2")
+        let analysis = Analysis.initFromYaml(file: "TestAnalysis2", self: self)
         XCTAssertTrue(analysis.inputSettings.contains(where: {$0.id == "default.x"}))
         XCTAssertTrue(analysis.parameters.contains(where: {$0.id == "default.physicsModel"}))
         XCTAssertFalse(analysis.parameters.contains(where: {$0.id == "default.x"}))
     }
     
     func testIsValid() throws {
-        let analysis = loadFromYaml(file: "TestAnalysis1")
+        let analysis = Analysis.initFromYaml(file: "TestAnalysis1", self: self)
         XCTAssertNoThrow(try analysis.isValid())
         let phase = analysis.phases[0]
         phase.terminalCondition = nil

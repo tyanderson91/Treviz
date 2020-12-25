@@ -16,7 +16,8 @@ enum TZOutputError: Error, LocalizedError {
     case MissingIDError
     case MissingPlotTypeError
     case MissingVariableError
-    case MissingTrajectoryError
+    case MissingRunDataError
+    case RunMissingTrajectoryError
     case MissingPointsError
     case UnmatchedConditionError
     case DuplicateIDError
@@ -31,7 +32,9 @@ enum TZOutputError: Error, LocalizedError {
             return NSLocalizedString("Output missing plot type assignment", comment: "")
         case .MissingVariableError:
             return NSLocalizedString("Output missing variable assignment", comment: "")
-        case .MissingTrajectoryError:
+        case .MissingRunDataError:
+            return NSLocalizedString("Output missing run data", comment: "")
+        case .RunMissingTrajectoryError:
             return NSLocalizedString("Trajectory not assigned", comment: "")
         case .MissingPointsError:
             return NSLocalizedString("No points could be found", comment: "")
@@ -207,28 +210,5 @@ class TZOutput : NSObject, Codable {
         guard var3Valid else { throw TZOutputError.IncorrectVarSettingError }
         guard catVarValid else { throw TZOutputError.IncorrectVarSettingError }
     }
-    
-    func getData() throws -> OutputDataSetLines? {
-        //guard let curTraj = curTrajectory else { throw TZOutputError.MissingTrajectoryError }
-        guard let curRunData = runData else { throw TZOutputError.MissingTrajectoryError }
-        let curRun = runData![0]
-        guard let curTraj = curRun.trajData else { throw TZOutputError.MissingTrajectoryError }
-        
-        var lineSet = OutputDataSetLines()
-        if plotType.requiresCondition {
-            guard let condStates = curTraj[condition!] else {
-                throw TZOutputError.UnmatchedConditionError }
-            if var1 != nil { lineSet.var1 = condStates[var1!.id]! }
-            if var2 != nil { lineSet.var2 = condStates[var2!.id]! }
-            if var3 != nil { lineSet.var3 = condStates[var3!.id]! }
-            return lineSet
-        } else if categoryVar == nil {
-            if var1 != nil { lineSet.var1 = curTraj[var1!.id]?.value }
-            if var2 != nil { lineSet.var2 = curTraj[var2!.id]?.value }
-            if var3 != nil { lineSet.var3 = curTraj[var3!.id]?.value }
-            return lineSet
-        } else { return nil } // TODO: Implement category variables
-    }
-
 }
 

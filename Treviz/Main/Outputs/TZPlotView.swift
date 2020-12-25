@@ -19,7 +19,7 @@ class TZPlotView: NSObject, CPTScatterPlotDelegate, CPTScatterPlotDataSource, CP
     
     var graph: CPTGraph
     var representedPlot: TZPlot
-    var _plotData: OutputDataSetLines
+    var _plotData: OutputDataSet
     
     @objc var thumbnail: NSImage {
         let plotSpace = graph.defaultPlotSpace as! CPTXYPlotSpace

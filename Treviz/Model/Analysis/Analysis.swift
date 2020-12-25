@@ -103,12 +103,10 @@ class Analysis: NSObject, Codable {
     var runVariants: [RunVariant] = []
     var useGroupedVariants: Bool = false // Grouped versus Permutation
     var numMonteCarloRuns: Int = 1
-    var numRuns: Int {
+    var numTradeGroups: Int {
         let tradeRunVariants = runVariants.filter {$0.variantType == .trade}
-        let mcRunVariants = runVariants.filter {$0.variantType == .montecarlo}
         var numTradeRuns: Int = 1
-        let numMCRuns: Int = mcRunVariants.isEmpty ? 1 : numMonteCarloRuns
-        if tradeRunVariants.isEmpty { numTradeRuns = 1 }
+        if tradeRunVariants.isEmpty { numTradeRuns = 0 }
         else if useGroupedVariants { numTradeRuns = tradeRunVariants[0].tradeValues.count }
         else {
             for thisVariant in tradeRunVariants {
@@ -116,9 +114,15 @@ class Analysis: NSObject, Codable {
                 numTradeRuns = numTradeRuns * curNumRuns
             }
         }
-        return numTradeRuns * numMCRuns
+        return numTradeRuns
+    }
+    var numRuns: Int {
+        let mcRunVariants = runVariants.filter {$0.variantType == .montecarlo}
+        let numMCRuns: Int = mcRunVariants.isEmpty ? 1 : numMonteCarloRuns
+        return numTradeGroups * numMCRuns
     }
     var runs: [TZRun] = []
+    var tradeGroups: [TradeGroup] = []
     
     // Logging
     var _bufferLog = NSMutableAttributedString() // This string is used to store any logs prior to the initialization of the log message text view

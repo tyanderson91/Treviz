@@ -4,6 +4,30 @@
 <dict>
 	<key>runDestinationsByUUID</key>
 	<dict>
+		<key>33A9725C-47B9-4AA1-882D-BB1C2D0E2727</key>
+		<dict>
+			<key>localComputer</key>
+			<dict>
+				<key>busSpeedInMHz</key>
+				<integer>100</integer>
+				<key>cpuCount</key>
+				<integer>1</integer>
+				<key>cpuKind</key>
+				<string>Dual-Core Intel Core i5</string>
+				<key>cpuSpeedInMHz</key>
+				<integer>2900</integer>
+				<key>logicalCPUCoresPerPackage</key>
+				<integer>4</integer>
+				<key>modelCode</key>
+				<string>MacBookPro12,1</string>
+				<key>physicalCPUCoresPerPackage</key>
+				<integer>2</integer>
+				<key>platformIdentifier</key>
+				<string>com.apple.platform.macosx</string>
+			</dict>
+			<key>targetArchitecture</key>
+			<string>x86_64</string>
+		</dict>
 		<key>B4C1C4F8-6302-46AE-B96D-0D990E301440</key>
 		<dict>
 			<key>localComputer</key>

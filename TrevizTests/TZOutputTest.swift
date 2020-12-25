@@ -90,12 +90,13 @@ class TZOutputTest: XCTestCase {
         let y = Variable("y", named: "Y Position", symbol:"y", units: "m")
         y.value = [0, 4, 7, 10, 8, 5, -2, -5, -4, 1]
         let traj = State(arrayLiteral: t,x,y)
+        let run = TZRun(trajData: traj)
         let cond = Condition("y", equality: 0.5)
         do {
             let output1 = try TZTextOutput(id: 1, vars: [t], plotType: .singleValue, conditionIn: cond)
             let output2 = try TZPlot(id: 2, vars: [x,y], plotType: .oneLine2d)
-            output1.curTrajectory = traj
-            output2.curTrajectory = traj
+            output1.runData = [run]
+            output2.runData = [run]
             let lineset1 = try output1.getData()
             let lineset2 = try output2.getData()
             XCTAssertEqual(lineset1?.var1, [1,6,9])

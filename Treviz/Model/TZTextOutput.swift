@@ -27,7 +27,7 @@ final class TZTextOutput: TZOutput {
             switch self.plotType {
             case .singleValue:
                 guard self.var1 != nil else { throw TZOutputError.MissingVariableError }
-                let data = try getData() ?? OutputDataSetLines()
+                guard let data: OutputDataSet = try getData() else { throw TZOutputError.MissingPointsError }
                 outputString = NSMutableAttributedString(string: "\(self.displayName):\t", attributes: [NSAttributedString.Key.font : NSFont.boldSystemFont(ofSize: 12)])
                 if let var1Data = data.var1 {
                     var strvals = [String]()

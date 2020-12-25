@@ -27,7 +27,7 @@ enum PhysicsSettingsError: Error, LocalizedError {
 /**
  A Physics model denotes the high-level set of requirements required to understand the propagator and gravity models to use
  */
-struct PhysicsModel {
+struct PhysicsModel: Equatable {
     
     var valuestr: String
     let id: String

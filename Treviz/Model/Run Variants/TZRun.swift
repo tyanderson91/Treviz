@@ -10,6 +10,7 @@ import Foundation
 
 enum TZRunError: Error {
     case MissingParamID
+    case UnequalTradeGroupNumbers
 }
 
 class TZRun {
@@ -24,7 +25,10 @@ class TZRun {
     let seed: Double = 0.0
     var returnCode : ReturnCode = .NotStarted
     var analysis: Analysis!
-    var runMode : AnalysisRunMode { return analysis.runMode }
+    var runMode : AnalysisRunMode {
+        get { return analysis.runMode }
+        set { phases.forEach {$0.runMode = newValue} }
+    }
     var progressReporter: AnalysisProgressReporter?
     var isRunning: Bool = false
     var trajData : [Variable]! {
@@ -45,11 +49,23 @@ class TZRun {
         return tempSettings
     }
     var runVariantSettings: [ParamID: String] = [:]
+    var tradeGroupNum: Int = -1
     
     enum AnalysisCodingKeys: String, CodingKey {
         case phases
     }
     
+    init(trajData: State) {
+        let phase = TZPhase(id: "default")
+        phase.traj = StateDictArray(from: trajData)
+        phase.varList.updateFromDict(traj: phase.traj)
+        self.phases = [phase]
+    }
+    
+    convenience init(analysis: Analysis, paramSettings: [ParamID: String] = [:]) throws {
+        let asysData = try analysis.copyForRuns()
+        try self.init(analysisData: asysData, paramSettings: paramSettings)
+    }
     init(analysisData: Data, paramSettings: [ParamID: String]) throws {
         let decoder = JSONDecoder()
         decoder.userInfo = [CodingUserInfoKey.simpleIOKey: false, CodingUserInfoKey.deepCopyKey: true]

@@ -18,11 +18,18 @@ protocol StringValue {
 
 extension String: StringValue {
     var valuestr: String { return self }
-    init(from strval: StringValue) { self = strval.valuestr }
+    init(from strval: String) { self = strval.valuestr }
 }
 
 extension VarValue: StringValue {
     var valuestr: String { return String(format: "%g", self)}
+    init?(stringLiteral: String) {
+        self.init(stringLiteral)
+    }
+}
+
+extension Int: StringValue {
+    var valuestr: String { return String(format: "%i", self)}
     init?(stringLiteral: String) {
         self.init(stringLiteral)
     }

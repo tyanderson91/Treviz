@@ -110,7 +110,6 @@ class TZPhase: Codable {
             }
         }
         
-        let termCond = terminalCondition
         inputSettings = varList // TODO: When more settings are introduced, expand this
         gatherParams()
     }
