@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct TradeGroup {
+struct RunGroup {
     var groupDescription: String = ""
     var runs: [TZRun] = []
 }

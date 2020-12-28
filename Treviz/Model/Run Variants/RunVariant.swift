@@ -148,7 +148,12 @@ class VariableRunVariant: RunVariant, MCRunVariant {
     }
     
     func randomValue(seed: Double?)->VarValue{
-        return variable.value[0] // TODO: Make actually return random value
+        switch distributionType {
+        case .normal:
+            return variable.value[0] // TODO: Make actually return random value and respond to seed
+        case .uniform:
+            return VarValue.random(in: min!...max!)
+        }
     }
 }
 
@@ -190,7 +195,12 @@ class SingleNumberRunVariant: RunVariant, MCRunVariant {
     }
     
     func randomValue(seed: Double?)->VarValue{
-        return number.value // TODO: make actually return random value
+        switch distributionType {
+        case .normal:
+            return number.value // TODO: Make actually return random value and respond to seed
+        case .uniform:
+            return VarValue.random(in: min!...max!)
+        }
     }
 }
 

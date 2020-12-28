@@ -14,7 +14,14 @@ import Cocoa
  */
 
 struct OutputDataSet {
-    var allGroups: [Int: [OutputDataSetSingle]] = [0:[OutputDataSetSingle()]]
+    var allGroups: [String: [OutputDataSetSingle]] = ["":[OutputDataSetSingle()]]
+    var allDataSets: [OutputDataSetSingle]? {
+        var tmpSets = [OutputDataSetSingle]()
+        for (_, groupsets) in allGroups {
+            tmpSets.append(contentsOf: groupsets)
+        }
+        return tmpSets
+    }
     var singleSet: OutputDataSetSingle? {
         get {
             if multiSet != nil { return multiSet!.first }
@@ -23,9 +30,9 @@ struct OutputDataSet {
             if multiSet != nil && newValue != nil { multiSet![0] = newValue! }
         }
     }
-    var groupedSet: [Int: OutputDataSetSingle]? {
+    var groupedSet: [String: OutputDataSetSingle]? {
         get {
-            var newDict = Dictionary<Int, OutputDataSetSingle>()
+            var newDict = Dictionary<String, OutputDataSetSingle>()
             allGroups.forEach({newDict[$0] = $1.first})
             return newDict
         } set {
@@ -34,9 +41,9 @@ struct OutputDataSet {
     }
     var multiSet: [OutputDataSetSingle]? {
         get {
-            return allGroups[0]
+            return allGroups.first?.value
         } set {
-            allGroups[0] = newValue
+            allGroups[allGroups.first?.key ?? ""] = newValue
         }
     }
     
@@ -58,35 +65,57 @@ struct OutputDataSetSingle {
     var var1: [VarValue]?
     var var2: [VarValue]?
     var var3: [VarValue]?
+    var identifier: String = ""
+    var groupName: String = ""
+    
+    init(){}
+    
+    init(traj: [Variable], output: TZOutput, identifier idIn: String="", groupName groupNameIn: String="") throws {
+        if output.plotType.requiresCondition {
+            guard let condStates = traj[output.condition!] else {
+                throw TZOutputError.UnmatchedConditionError }
+            if output.var1 != nil { var1 = condStates[output.var1!.id]! }
+            if output.var2 != nil { var2 = condStates[output.var2!.id]! }
+            if output.var3 != nil { var3 = condStates[output.var3!.id]! }
+        } else {
+            if output.var1 != nil { var1 = traj[output.var1!.id]?.value }
+            if output.var2 != nil { var2 = traj[output.var2!.id]?.value }
+            if output.var3 != nil { var3 = traj[output.var3!.id]?.value }
+        }
+        identifier = idIn
+        groupName = groupNameIn
+    }
 }
 
 
 extension TZOutput {
     func getData() throws -> OutputDataSet? {
         guard runData != nil else { throw TZOutputError.RunMissingTrajectoryError } // Collection of all runs
-        let curRun = runData![0]
-        guard let curTraj = curRun.trajData else { throw TZOutputError.RunMissingTrajectoryError }
+        //let curRun = runData![0]
+        //guard let curTraj = curRun.trajData else { throw TZOutputError.RunMissingTrajectoryError }
         
-        var dataSet = OutputDataSet()
-        var lineSet = dataSet.singleSet!
-                 
-        if plotType.requiresCondition {
-            guard let condStates = curTraj[condition!] else {
-                throw TZOutputError.UnmatchedConditionError }
-            if var1 != nil { lineSet.var1 = condStates[var1!.id]! }
-            if var2 != nil { lineSet.var2 = condStates[var2!.id]! }
-            if var3 != nil { lineSet.var3 = condStates[var3!.id]! }
-            dataSet.singleSet = lineSet
-            return dataSet
-        } else if categoryVar == nil {
-            if var1 != nil { lineSet.var1 = curTraj[var1!.id]?.value }
-            if var2 != nil { lineSet.var2 = curTraj[var2!.id]?.value }
-            if var3 != nil { lineSet.var3 = curTraj[var3!.id]?.value }
-            dataSet.singleSet = lineSet
-            return dataSet
-        } else { return nil } // TODO: Implement category variables
+        var outputDataSet = OutputDataSet()
+        //var lineSet = dataSet.singleSet!
+        if categoryVar == nil {
+            var dataSets: [OutputDataSetSingle] = []
+            for thisRun in self.runData! {
+                let curDataSet = try OutputDataSetSingle(traj: thisRun.trajData, output: self, identifier: thisRun.id)
+                dataSets.append(curDataSet)
+            }
+            outputDataSet.multiSet = dataSets
+        } else {
+            outputDataSet.allGroups = [:]
+            for thisRun in self.runData! {
+                guard let matchingParam = thisRun.parameters.first(where: {$0.id == categoryVar!.id})
+                else { throw TZOutputError.MissingVariableError }
+                let curVal = matchingParam.stringValue
+                let groupName = thisRun.tradeGroupName
+                //let groupName = "\(matchingParam.id)=\(curVal)" // TODO: Fix this for all group name types
+                let curDataSet = try OutputDataSetSingle(traj: thisRun.trajData, output: self, identifier: thisRun.id, groupName: groupName)
+                if outputDataSet.allGroups.keys.contains(groupName) { outputDataSet.allGroups[groupName]!.append(curDataSet) }
+                else { outputDataSet.allGroups[groupName] = [curDataSet] }
+            }
+        }
+        return outputDataSet
     }
 }
-/*struct CategoryOutputDataSet: Dictionary<Parameter, OutputDataSet>, OutputDataSet{ //TODO: make Parameter able to be used as a dictionary key. Likely requires PAT: https://www.youtube.com/watch?v=XWoNjiSPqI8&feature=youtu.be
-    
-}*/

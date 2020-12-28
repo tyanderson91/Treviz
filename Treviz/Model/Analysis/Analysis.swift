@@ -122,7 +122,7 @@ class Analysis: NSObject, Codable {
         return numTradeGroups * numMCRuns
     }
     var runs: [TZRun] = []
-    var tradeGroups: [TradeGroup] = []
+    var tradeGroups: [RunGroup] = []
     
     // Logging
     var _bufferLog = NSMutableAttributedString() // This string is used to store any logs prior to the initialization of the log message text view

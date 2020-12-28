@@ -10,7 +10,7 @@ Parameters:
   - dy: 30
   
 Conditions:
-  - Ground Impact: y<-0.1
+  - Ground Impact: y=0
   - Final time: t=10
   - Too far: x>100
   - TerminalTest:

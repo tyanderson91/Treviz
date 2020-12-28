@@ -36,7 +36,7 @@ enum TZPlotSymbolShape {
 struct TZPlotSymbol {
     
     var shape: TZPlotSymbolShape
-    var size: CGFloat = 10
+    var size: CGFloat = 5
     var color: CGColor = CGColor(red: 0, green: 0, blue: 0, alpha: 1)
     
     init(_ shapeIn: TZPlotSymbolShape){
