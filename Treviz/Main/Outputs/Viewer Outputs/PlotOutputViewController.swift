@@ -31,7 +31,7 @@ class PlotOutputViewController: TZViewController, NSTableViewDelegate, NSTableVi
         let newGraph = try TZPlotView(with: plot)
         plotViews.append(newGraph)
         //graph.defaultPlotSpace?.allowsUserInteraction = true
-        graphHostingView.hostedGraph = newGraph.graph
+        graphHostingView.hostedGraph = newGraph.graph       
         tableView.reloadData()
     }
     
@@ -39,11 +39,13 @@ class PlotOutputViewController: TZViewController, NSTableViewDelegate, NSTableVi
         return plotViews.count
     }
     
+
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let curPlot = plotViews[row]
         let tableCellView =  tableView.makeView(withIdentifier: .plotThumbnailTableCellView, owner: self) as? NSTableCellView
         let imageView = tableCellView!.imageView!
         imageView.image = curPlot.thumbnail
+        imageView.imageAlignment = .alignCenter
         return tableCellView
     }
     

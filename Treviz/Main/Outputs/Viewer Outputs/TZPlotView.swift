@@ -25,18 +25,12 @@ class TZPlotView: NSObject, CPTScatterPlotDelegate, CPTScatterPlotDataSource, CP
     var representedPlot: TZPlot
     var _plotData: OutputDataSet
     //var plotAreaSize: CGSize!
-    var plotAreaSize: (Decimal, Decimal) = (-1.0, -1.0)
-    var newPlotAreaSize: (Decimal, Decimal) {
-        let pa = graph.plotAreaFrame!.plotArea!
-        return (pa.widthDecimal, pa.heightDecimal)
+    private var plotAreaSize: (Decimal, Decimal) = (-1.0, -1.0)
+    private var plotArea: CPTPlotArea { return graph.plotAreaFrame!.plotArea! }
+    private var newPlotAreaSize: (Decimal, Decimal) {
+        return (plotArea.widthDecimal, plotArea.heightDecimal)
     }
-    
-    @objc var thumbnail: NSImage!// {
-        //let plotSpace = graph.defaultPlotSpace as! CPTXYPlotSpace
-        //plotSpace.scale(toFitEntirePlots: graph.allPlots())
-        //let img = graph.imageOfLayer()
-        //return img
-    //}
+    @objc var thumbnail: NSImage!
     
     init(with inputPlot: TZPlot) throws {
         let defaultTheme = CPTTheme(named: .plainWhiteTheme)
@@ -48,7 +42,6 @@ class TZPlotView: NSObject, CPTScatterPlotDelegate, CPTScatterPlotDataSource, CP
 
         super.init()
 
-        //create(with: representedPlot)
         var i = 0
         let lineStyles: [CPTMutableLineStyle] = [.init(TZLineStyle(color: .init(red: 1.0, green: 0.0, blue: 0.0, alpha: 1.0), lineWidth: 1.0)),
             .init(TZLineStyle(color: .init(red: 0.0, green: 1.0, blue: 0.0, alpha: 1.0), lineWidth: 1.0)),
@@ -82,7 +75,7 @@ class TZPlotView: NSObject, CPTScatterPlotDelegate, CPTScatterPlotDataSource, CP
         
         graph.paddingRight = 0
         graph.paddingTop = 0
-        graph.paddingLeft = 65
+        graph.paddingLeft = 65 // TODO: Offset by axis label width
         graph.paddingBottom = 60
         graph.plotAreaFrame?.masksToBorder = false
         
@@ -110,31 +103,27 @@ class TZPlotView: NSObject, CPTScatterPlotDelegate, CPTScatterPlotDataSource, CP
         yaxis.titleOffset = graph.titleTextStyle!.fontSize * CGFloat(3.5)
         
         plotSpace.scale(toFitEntirePlots: graph.allPlots())
-        graph.layoutSublayers()
+        graph.layoutIfNeeded()
         if inputPlot.var1?.units == inputPlot.var2?.units {
             enforceEqualAxes(xScale: 1.0, yScale: 1.0)
             thumbnail = graph.imageOfLayer()
-            guard let plotArea = graph.plotAreaFrame?.plotArea else { return }
             NotificationCenter.default.addObserver(self, selector: #selector(self.didResizePlotArea), name: NSNotification.Name( CPTLayerNotification.boundsDidChange.rawValue), object: plotArea)
-        } else { thumbnail = graph.imageOfLayer() }
-        /*
-        guard let plotArea = graph.plotAreaFrame?.plotArea else { return }
-        if inputPlot.var1?.units == inputPlot.var2?.units {
-            NotificationCenter.default.addObserver(self, selector: #selector(self.didResizePlotArea), name: NSNotification.Name( CPTLayerNotification.boundsDidChange.rawValue), object: plotArea)
-        }*/
+        } else {
+            thumbnail = graph.imageOfLayer()
+        }
     }
     
     @objc func didResizePlotArea(notification: NSNotification) {
-        if plotAreaSize.0 > 0  && plotAreaSize.1 > 0 { // Default before setup
-            enforceEqualAxes(xScale: newPlotAreaSize.0/plotAreaSize.0, yScale: newPlotAreaSize.1/plotAreaSize.1)
+        if plotAreaSize.0 < 0 && plotAreaSize.1 < 0 { // First time initialization
+            plotAreaSize = newPlotAreaSize
         }
+        enforceEqualAxes(xScale: newPlotAreaSize.0/plotAreaSize.0, yScale: newPlotAreaSize.1/plotAreaSize.1)
         plotAreaSize = newPlotAreaSize
     }
     
     // MARK: Scatter Plot Delegate functions
     
     func numberOfRecords(for plot: CPTPlot) -> UInt {
-        //let newName : String = (plot.name?.replacingOccurrences(of: "_", with: ", "))!
         guard let thisDataSet = _plotData.allDataSets?.first(where: {$0.identifier == plot.name}) else { return 0 }
         let numRecords = thisDataSet.var1?.count
         return UInt(numRecords!)
@@ -159,17 +148,22 @@ class TZPlotView: NSObject, CPTScatterPlotDelegate, CPTScatterPlotDataSource, CP
         let maxY = plotSpace.yRange.lengthDecimal*yScale
         let xLoc = plotSpace.xRange.locationDecimal
         let yLoc = plotSpace.yRange.locationDecimal
-        let maxSize = [maxX, maxY].max()!
+        
+        let areaWidth = newPlotAreaSize.0
+        let areaHeight = newPlotAreaSize.1
+        let yRes = maxY/areaHeight
+        let xRes = maxX/areaWidth
+        let maxRes = [yRes, xRes].max()!
         
         if xScale == 1.0 && yScale == 1.0 {
-            plotSpace.xRange = CPTPlotRange(locationDecimal: xLoc, lengthDecimal: maxSize)
-            plotSpace.yRange = CPTPlotRange(locationDecimal: yLoc, lengthDecimal: maxSize)
+            plotSpace.xRange = CPTPlotRange(locationDecimal: xLoc, lengthDecimal: maxRes*areaWidth)
+            plotSpace.yRange = CPTPlotRange(locationDecimal: yLoc, lengthDecimal: maxRes*areaHeight)
         }
         if xScale != 1.0 {
-            plotSpace.xRange = CPTPlotRange(locationDecimal: xLoc, lengthDecimal: maxX)
+            plotSpace.xRange = CPTPlotRange(locationDecimal: xLoc, lengthDecimal: maxRes*areaWidth)
         }
         if yScale != 1.0 {
-            plotSpace.yRange = CPTPlotRange(locationDecimal: yLoc, lengthDecimal: maxY)
+            plotSpace.yRange = CPTPlotRange(locationDecimal: yLoc, lengthDecimal: maxRes*areaHeight)
         }
     }
     

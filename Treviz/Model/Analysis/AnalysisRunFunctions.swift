@@ -13,19 +13,19 @@ import Cocoa
 extension Analysis {
         
     func runAnalysis() {
-        let dxRunVariant = VariableRunVariant(param: phases[0].allParams.first(where: {$0.id == "default.dx"}) as! Parameter)!
+        let dxRunVariant = VariableRunVariant(param: phases[0].allParams.first(where: {$0.id == "default.dx"})!)!
         dxRunVariant.tradeValues = [3, 9, 33.6]
         dxRunVariant.variantType = .trade
-        let dyRunVariant = VariableRunVariant(param: phases[0].allParams.first(where: {$0.id == "default.dy"}) as! Parameter)!
+        let dyRunVariant = VariableRunVariant(param: phases[0].allParams.first(where: {$0.id == "default.dy"})!)!
         dyRunVariant.tradeValues = [50, 30, 15]
         dyRunVariant.variantType = .trade
-        let y0RunVariant = VariableRunVariant(param: phases[0].allParams.first(where: {$0.id == "default.y"}) as! Parameter)!
+        let y0RunVariant = VariableRunVariant(param: phases[0].allParams.first(where: {$0.id == "default.y"})!)!
         y0RunVariant.min = 0
         y0RunVariant.max = 5
         y0RunVariant.variantType = .montecarlo
         y0RunVariant.distributionType = .uniform
         
-        let x0RunVariant = VariableRunVariant(param: phases[0].allParams.first(where: {$0.id == "default.x"}) as! Parameter)!
+        let x0RunVariant = VariableRunVariant(param: phases[0].allParams.first(where: {$0.id == "default.x"})!)!
         x0RunVariant.min = 0
         x0RunVariant.max = 5
         x0RunVariant.variantType = .montecarlo
