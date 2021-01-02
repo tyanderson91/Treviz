@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="BWH-wW-vxd">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="BWH-wW-vxd">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17506"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -143,7 +143,7 @@
                                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                             <prototypeCellViews>
                                                                 <tableCellView identifier="initStateValueCellView" id="6c2-Js-Hg1" customClass="ParamValueTextView" customModule="Treviz" customModuleProvider="target">
-                                                                    <rect key="frame" x="208" y="1" width="54" height="17"/>
+                                                                    <rect key="frame" x="208" y="1" width="53" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
                                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="O14-3P-80s">
@@ -185,7 +185,7 @@
                                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                             <prototypeCellViews>
                                                                 <tableCellView identifier="UnitsCellView" id="XMg-mg-lgj">
-                                                                    <rect key="frame" x="264" y="1" width="40" height="17"/>
+                                                                    <rect key="frame" x="263" y="1" width="40" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
                                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="iJs-bA-Yzx">
@@ -228,7 +228,7 @@
                                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                             <prototypeCellViews>
                                                                 <button identifier="initStateParamCheckBoxView" verticalHuggingPriority="750" id="Q4p-6L-kwQ" userLabel="Value check" customClass="RunVariantEnableButton" customModule="Treviz" customModuleProvider="target">
-                                                                    <rect key="frame" x="306" y="1" width="47" height="18"/>
+                                                                    <rect key="frame" x="305" y="1" width="47" height="18"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                                                     <buttonCell key="cell" type="check" bezelStyle="regularSquare" imagePosition="overlaps" alignment="center" inset="2" id="926-Li-fLp">
                                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -239,7 +239,7 @@
                                                                     </connections>
                                                                 </button>
                                                                 <tableCellView identifier="initStateHasParamCellView" wantsLayer="YES" id="Mlb-wb-KFY" userLabel="Has Params Cell View">
-                                                                    <rect key="frame" x="306" y="22" width="47" height="17"/>
+                                                                    <rect key="frame" x="305" y="22" width="47" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
                                                                         <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="w35-en-TRi">
@@ -729,7 +729,7 @@
             <objects>
                 <viewController title="Param Table View" id="hM9-90-DLw" customClass="RunVariantViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" misplaced="YES" id="ckW-8D-J3x">
-                        <rect key="frame" x="0.0" y="0.0" width="427" height="173"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="173"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <tabView translatesAutoresizingMaskIntoConstraints="NO" id="Ny4-qJ-zuG">
@@ -916,7 +916,7 @@
                                                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                         <prototypeCellViews>
                                                                             <tableCellView identifier="paramSummaryCellView" id="5LI-lZ-CZd">
-                                                                                <rect key="frame" x="327.5" y="1" width="131" height="41"/>
+                                                                                <rect key="frame" x="327" y="1" width="131" height="41"/>
                                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                 <subviews>
                                                                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="usG-ON-DxL">
@@ -974,17 +974,17 @@
                                     </tabViewItem>
                                     <tabViewItem label="Monte-Carlo" identifier="" id="v0C-5J-E23">
                                         <view key="view" id="gW9-Hx-Tj4">
-                                            <rect key="frame" x="10" y="33" width="116" height="120"/>
+                                            <rect key="frame" x="10" y="33" width="384" height="120"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <scrollView autohidesScrollers="YES" horizontalLineScroll="24" horizontalPageScroll="10" verticalLineScroll="24" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2YX-GZ-EsF">
-                                                    <rect key="frame" x="0.0" y="25" width="136" height="95"/>
+                                                <scrollView misplaced="YES" autohidesScrollers="YES" horizontalLineScroll="24" horizontalPageScroll="10" verticalLineScroll="24" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2YX-GZ-EsF">
+                                                    <rect key="frame" x="0.0" y="25" width="384" height="95"/>
                                                     <clipView key="contentView" id="yYC-kY-pwA">
-                                                        <rect key="frame" x="1" y="1" width="134" height="93"/>
+                                                        <rect key="frame" x="1" y="1" width="382" height="93"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
                                                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="24" rowSizeStyle="automatic" headerView="ZvH-BO-HNE" viewBased="YES" id="YmQ-i5-INF">
-                                                                <rect key="frame" x="0.0" y="0.0" width="394" height="65"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="402" height="65"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                 <size key="intercellSpacing" width="17" height="0.0"/>
                                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1098,7 +1098,7 @@
                                                                             </tableCellView>
                                                                         </prototypeCellViews>
                                                                     </tableColumn>
-                                                                    <tableColumn identifier="Param2Column" width="71" minWidth="40" maxWidth="1000" id="LoN-we-Luv">
+                                                                    <tableColumn identifier="Param2Column" width="79" minWidth="40" maxWidth="1000" id="LoN-we-Luv">
                                                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Param 2">
                                                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                             <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -1111,11 +1111,11 @@
                                                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                         <prototypeCellViews>
                                                                             <tableCellView identifier="distributionParamCellView2" id="ohm-eo-Kop">
-                                                                                <rect key="frame" x="307" y="0.0" width="68" height="24"/>
+                                                                                <rect key="frame" x="307" y="0.0" width="76" height="24"/>
                                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                 <subviews>
                                                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="F0E-73-99N">
-                                                                                        <rect key="frame" x="0.0" y="4" width="68" height="16"/>
+                                                                                        <rect key="frame" x="0.0" y="4" width="76" height="16"/>
                                                                                         <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="15b-xV-zeD">
                                                                                             <font key="font" usesAppearanceFont="YES"/>
                                                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -1139,7 +1139,7 @@
                                                         </subviews>
                                                     </clipView>
                                                     <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="TTL-7C-AVQ">
-                                                        <rect key="frame" x="1" y="78" width="134" height="16"/>
+                                                        <rect key="frame" x="1" y="78" width="382" height="16"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                     </scroller>
                                                     <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="PH9-1R-xyg">
@@ -1147,12 +1147,12 @@
                                                         <autoresizingMask key="autoresizingMask"/>
                                                     </scroller>
                                                     <tableHeaderView key="headerView" wantsLayer="YES" id="ZvH-BO-HNE">
-                                                        <rect key="frame" x="0.0" y="0.0" width="394" height="28"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="402" height="28"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                     </tableHeaderView>
                                                 </scrollView>
                                                 <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fQO-X6-Hp3">
-                                                    <rect key="frame" x="-37" y="3" width="191" height="19"/>
+                                                    <rect key="frame" x="97" y="3" width="191" height="19"/>
                                                     <subviews>
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3pa-1v-EbO">
                                                             <rect key="frame" x="-2" y="2" width="127" height="16"/>
@@ -1197,7 +1197,7 @@
                                     </tabViewItem>
                                     <tabViewItem label="Trades" identifier="" id="eAI-dL-Vlr">
                                         <view key="view" id="ia2-cK-E3b">
-                                            <rect key="frame" x="10" y="33" width="390" height="120"/>
+                                            <rect key="frame" x="10" y="33" width="381" height="120"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <gridView fixedFrame="YES" xPlacement="leading" yPlacement="bottom" rowAlignment="none" translatesAutoresizingMaskIntoConstraints="NO" id="wV7-FC-1Ct">
@@ -1292,7 +1292,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="617" height="73"/>
                                 <subviews>
                                     <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="6" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="B9e-he-cl0">
-                                        <rect key="frame" x="10" y="43" width="211" height="20"/>
+                                        <rect key="frame" x="10" y="43" width="178" height="20"/>
                                         <subviews>
                                             <button horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="110" translatesAutoresizingMaskIntoConstraints="NO" id="VgS-M5-hEf" customClass="RunVariantEnableButton" customModule="Treviz" customModuleProvider="target">
                                                 <rect key="frame" x="-2" y="1" width="98" height="18"/>
@@ -1304,8 +1304,8 @@
                                                     <action selector="didSetParams:" target="hYm-K2-kci" id="xLf-0b-I38"/>
                                                 </connections>
                                             </button>
-                                            <popUpButton verticalHuggingPriority="750" horizontalCompressionResistancePriority="105" translatesAutoresizingMaskIntoConstraints="NO" id="rLA-vi-YO8">
-                                                <rect key="frame" x="99" y="-4" width="116" height="25"/>
+                                            <popUpButton verticalHuggingPriority="750" horizontalCompressionResistancePriority="105" translatesAutoresizingMaskIntoConstraints="NO" id="rLA-vi-YO8" customClass="ParamValuePopupView" customModule="Treviz" customModuleProvider="target">
+                                                <rect key="frame" x="99" y="-4" width="83" height="25"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="30" id="ynw-c2-4C8"/>
                                                 </constraints>
@@ -1315,7 +1315,6 @@
                                                     <menu key="menu" id="TRd-9z-wcC">
                                                         <items>
                                                             <menuItem title="Explicit" state="on" id="juy-zN-gKs"/>
-                                                            <menuItem title="Runge-Kutta" id="LCA-0g-jH4"/>
                                                         </items>
                                                     </menu>
                                                 </popUpButtonCell>
@@ -1349,7 +1348,7 @@
                                                             <action selector="didSetParams:" target="hYm-K2-kci" id="S4f-2W-uDe"/>
                                                         </connections>
                                                     </button>
-                                                    <textField identifier="defaultTimeStepBox" verticalHuggingPriority="750" horizontalCompressionResistancePriority="100" translatesAutoresizingMaskIntoConstraints="NO" id="gHh-9A-GcC">
+                                                    <textField identifier="defaultTimeStepBox" verticalHuggingPriority="750" horizontalCompressionResistancePriority="100" translatesAutoresizingMaskIntoConstraints="NO" id="gHh-9A-GcC" customClass="ParamValueTextField" customModule="Treviz" customModuleProvider="target">
                                                         <rect key="frame" x="132" y="0.0" width="50" height="21"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="50" id="lFa-ha-zoC"/>
@@ -1397,7 +1396,7 @@
                                                             <action selector="didSetParams:" target="hYm-K2-kci" id="z8t-n2-644"/>
                                                         </connections>
                                                     </button>
-                                                    <textField identifier="minTimeStepBox" verticalHuggingPriority="750" horizontalCompressionResistancePriority="100" translatesAutoresizingMaskIntoConstraints="NO" id="v5h-qS-wb5">
+                                                    <textField identifier="minTimeStepBox" verticalHuggingPriority="750" horizontalCompressionResistancePriority="100" translatesAutoresizingMaskIntoConstraints="NO" id="v5h-qS-wb5" customClass="ParamValueTextField" customModule="Treviz" customModuleProvider="target">
                                                         <rect key="frame" x="110" y="0.0" width="50" height="21"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="50" id="U4E-oR-mlv"/>
@@ -1445,7 +1444,7 @@
                                                             <action selector="didSetParams:" target="hYm-K2-kci" id="gIc-Uq-LQl"/>
                                                         </connections>
                                                     </button>
-                                                    <textField identifier="maxTimeStepBox" verticalHuggingPriority="750" horizontalCompressionResistancePriority="100" translatesAutoresizingMaskIntoConstraints="NO" id="CgV-eV-Zzt">
+                                                    <textField identifier="maxTimeStepBox" verticalHuggingPriority="750" horizontalCompressionResistancePriority="100" translatesAutoresizingMaskIntoConstraints="NO" id="CgV-eV-Zzt" customClass="ParamValueTextField" customModule="Treviz" customModuleProvider="target">
                                                         <rect key="frame" x="113" y="0.0" width="50" height="21"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="50" id="Eci-S8-Gqi"/>
@@ -1493,7 +1492,7 @@
                                         </customSpacing>
                                     </stackView>
                                     <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="2" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CW9-cE-0RD">
-                                        <rect key="frame" x="231" y="43" width="185" height="20"/>
+                                        <rect key="frame" x="198" y="43" width="185" height="20"/>
                                         <subviews>
                                             <button verticalHuggingPriority="750" horizontalCompressionResistancePriority="110" translatesAutoresizingMaskIntoConstraints="NO" id="5zR-80-LuX" customClass="RunVariantEnableButton" customModule="Treviz" customModuleProvider="target">
                                                 <rect key="frame" x="-2" y="1" width="143" height="18"/>
@@ -1516,7 +1515,7 @@
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
                                                 <connections>
-                                                    <action selector="didSetAdaptiveTimestep:" target="hYm-K2-kci" id="iVc-nc-IAR"/>
+                                                    <action selector="didSetAdaptiveTimestep:" target="hYm-K2-kci" id="G4P-Lh-rgd"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -1550,11 +1549,12 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="adaptiveTimestepCheckbox" destination="wd1-XN-Z9Y" id="eLc-Fx-NVm"/>
+                        <outlet property="adaptiveTimestepCheckbox" destination="wd1-XN-Z9Y" id="U1l-bu-9sr"/>
                         <outlet property="adaptiveTimestepParamCheckbox" destination="5zR-80-LuX" id="tkb-ek-Uw3"/>
                         <outlet property="allTimestepsStackView" destination="Z6H-UD-fgW" id="Pn3-iD-mT6"/>
                         <outlet property="defaultTimestepParamCheckbox" destination="Z3Y-ol-J0u" id="fLz-hg-l6O"/>
                         <outlet property="defaultTimestepTextBox" destination="gHh-9A-GcC" id="SFR-3M-ZKm"/>
+                        <outlet property="defaultTimestepTextField" destination="gHh-9A-GcC" id="kiV-SR-0VS"/>
                         <outlet property="defaultTimestepUnitLabel" destination="Raf-MB-9i8" id="NJn-Ig-qtH"/>
                         <outlet property="heightConstraint" destination="Ir5-hM-jfj" id="Q2n-xJ-WRg"/>
                         <outlet property="maxTimestepParamCheckbox" destination="y9U-Go-f1c" id="G71-f2-t7c"/>

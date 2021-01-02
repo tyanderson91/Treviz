@@ -19,7 +19,6 @@ enum ReturnCode: Int {
 class TZPhase: Codable {
     var id: String
     var vehicle : Vehicle!
-    var propagatorType : PropagatorType = .explicit
     var inputSettings : [Parameter] = []
     let runSettings : TZRunSettings
     var initState: StateDictSingle { return StateDictSingle(from: varList, at: 0) }

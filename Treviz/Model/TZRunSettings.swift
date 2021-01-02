@@ -9,9 +9,14 @@
 import Foundation
 
 /**Algorithm used for propagation of the state*/
-enum PropagatorType: String {
-    case explicit
-    case rungeKutta4
+enum PropagatorType: String, StringValue, CaseIterable {
+    case explicit = "Explicit"
+    case rungeKutta4 = "Runge-Kutta"
+    
+    init?(stringLiteral: String) {
+        self.init(rawValue: stringLiteral)
+    }
+    var valuestr: String { return self.rawValue }
 }
 
 enum TZRunSettingError: Error, LocalizedError {
@@ -36,7 +41,7 @@ enum TZRunSettingError: Error, LocalizedError {
  */
 class TZRunSettings: Codable {
     var runMode: AnalysisRunMode!// Set automatically by the parent analysis
-    var propagatorType: PropagatorType = .explicit
+    var propagatorType: EnumGroupParam = EnumGroupParam(id: "propagatorType", name: "Propagator", enumType: PropagatorType.self, value: PropagatorType.explicit, options: PropagatorType.allCases)
     var useAdaptiveTimestep = BoolParam(id: "adaptivedt", name: "Adaptive Timestep", value: false)
     private(set) var defaultTimestep = NumberParam(id: "dt", name: "Timestep", value: 0.1)
     private(set) var minTimestep = NumberParam(id: "dtmin", name: "Min Timestep", value: 0.0)
@@ -75,8 +80,8 @@ class TZRunSettings: Codable {
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         if container.contains(.propagator) {
-            guard let propagator = try PropagatorType(rawValue: container.decode(String.self, forKey: .propagator)) else { throw TZRunSettingError.IOError }
-            propagatorType = propagator
+            let propagatorName = try container.decode(String.self, forKey: .propagator)
+            propagatorType.setValue(to: propagatorName)
         }
         defaultTimestep.value = try container.decode(VarValue.self, forKey: .timestep)
         let adaptiveTimestep = (try? container.decode(Bool.self, forKey: .useAdaptiveTimestep)) ?? false
@@ -91,7 +96,7 @@ class TZRunSettings: Codable {
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(propagatorType.rawValue, forKey: .propagator)
+        try container.encode(propagatorType.stringValue, forKey: .propagator)
         try container.encode(defaultTimestep.value, forKey: .timestep)
         try container.encode(useAdaptiveTimestep.value, forKey: .useAdaptiveTimestep)
         if useAdaptiveTimestep.value {

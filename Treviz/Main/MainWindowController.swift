@@ -22,42 +22,6 @@ class MainWindowController: NSWindowController, AnalysisProgressReporter {
     @IBAction func storyboardRunAnalysisClicked(_ sender: Any) {
         runAnalysisClicked(sender)
     }
-    /*
-    private func processOutputs() {
-        guard let textOutputView = viewController.textOutputView else {return}
-        guard let outputSplitVC = viewController.mainSplitViewController.outputsViewController.outputSplitViewController else { return }
-        guard let plotViewController = outputSplitVC.plotViewController else { return }
-        
-        textOutputView.string = ""
-        plotViewController.plotViews = []
-        for curOutput in analysis.plots {
-            //curOutput.loadVars(analysis: analysis)
-            do { try curOutput.assertValid() }
-            catch {
-                analysis.logMessage(error.localizedDescription)
-                continue
-            }
-            curOutput.curTrajectory = analysis.varList
-            if curOutput is TZTextOutput {
-                do {
-                    let newText = try (curOutput as! TZTextOutput).getText()
-                    textOutputView.textStorage?.append(newText)
-                    textOutputView.textStorage?.append(NSAttributedString(string: "\n\n"))
-                } catch {
-                    analysis.logMessage("Error in output set '\(curOutput.title)': \(error.localizedDescription)")
-                }
-            }
-            else if curOutput is TZPlot {
-                do {
-                    try plotViewController.createPlot(plot: curOutput as! TZPlot)
-                } catch {
-                    analysis.logMessage("Error in plot '\(curOutput.title)': \(error.localizedDescription)")
-                }
-            }
-        }
-        let plotTabViewIndex = outputSplitVC.viewerTabViewController.tabView.indexOfTabViewItem(withIdentifier: "plotterTabViewItem")
-        outputSplitVC.viewerTabViewController.tabView.selectTabViewItem(at: plotTabViewIndex)
-    }*/
         
     // MARK: AnalysisProgressReporter implementation
     var terminalCondition = Condition()
@@ -81,7 +45,7 @@ class MainWindowController: NSWindowController, AnalysisProgressReporter {
         toolbar.toggleAnalysisRun.image = NSImage(named: "play.fill")
 
         guard let outputSplitVC = viewController.mainSplitViewController.outputsViewController.outputSplitViewController else { return }
-        let plotTabViewIndex = outputSplitVC.viewerTabViewController.tabView.indexOfTabViewItem(withIdentifier: "plotterTabViewItem")
+        let plotTabViewIndex = outputSplitVC.viewerTabViewController.tabView.indexOfTabViewItem(withIdentifier: "plotsTabViewItem")
         outputSplitVC.viewerTabViewController.tabView.selectTabViewItem(at: plotTabViewIndex)
     }
 

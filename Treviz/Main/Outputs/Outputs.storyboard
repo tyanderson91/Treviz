@@ -140,13 +140,158 @@
             </objects>
             <point key="canvasLocation" x="958" y="574.5"/>
         </scene>
+        <!--Plot Output Split View Controller-->
+        <scene sceneID="9IJ-t4-fIu">
+            <objects>
+                <splitViewController storyboardIdentifier="plotOutputSplitViewController" id="ctD-mf-hTd" customClass="PlotOutputSplitViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
+                    <splitViewItems>
+                        <splitViewItem holdingPriority="200" id="bSs-IN-1Q0"/>
+                        <splitViewItem holdingPriority="200" id="eAb-B5-gAN"/>
+                    </splitViewItems>
+                    <splitView key="splitView" arrangesAllSubviews="NO" dividerStyle="thin" vertical="YES" id="w2n-Tp-CHT">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <connections>
+                            <outlet property="delegate" destination="ctD-mf-hTd" id="tMl-5x-tvm"/>
+                        </connections>
+                    </splitView>
+                    <connections>
+                        <outlet property="selectorTabViewItem" destination="bSs-IN-1Q0" id="cyW-V0-A12"/>
+                        <outlet property="splitView" destination="w2n-Tp-CHT" id="73V-KZ-B1X"/>
+                        <outlet property="viewerTabViewItem" destination="eAb-B5-gAN" id="kdN-3N-beE"/>
+                        <segue destination="Fio-tY-jcY" kind="relationship" relationship="splitItems" id="jV0-yh-NuI"/>
+                        <segue destination="9CK-x4-JrX" kind="relationship" relationship="splitItems" id="uYv-kJ-kfF"/>
+                    </connections>
+                </splitViewController>
+                <customObject id="8Lm-y0-MA8" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1044" y="-920"/>
+        </scene>
+        <!--Plot Output Selector View Controller-->
+        <scene sceneID="dB5-Wu-qaD">
+            <objects>
+                <viewController id="Fio-tY-jcY" customClass="PlotOutputSelectorViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="kcW-k2-pLu">
+                        <rect key="frame" x="0.0" y="0.0" width="50" height="322"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <scrollView autohidesScrollers="YES" horizontalLineScroll="96" horizontalPageScroll="10" verticalLineScroll="96" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cdJ-5i-qRX" userLabel="Plot Selector Scroll View">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="322"/>
+                                <clipView key="contentView" id="lgC-By-4zR">
+                                    <rect key="frame" x="1" y="1" width="48" height="320"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="none" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="94" rowSizeStyle="automatic" viewBased="YES" id="bfG-T6-Xtx">
+                                            <rect key="frame" x="0.0" y="0.0" width="119" height="320"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <size key="intercellSpacing" width="3" height="2"/>
+                                            <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
+                                            <tableColumns>
+                                                <tableColumn editable="NO" width="107" minWidth="40" maxWidth="300" id="un2-9m-83p" userLabel="Plot Thumbnail column">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center">
+                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                                    </tableHeaderCell>
+                                                    <imageCell key="dataCell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="CSYS" id="WpX-wY-DVl" customClass="TZPlotThumbnailImageCell" customModule="Treviz" customModuleProvider="target"/>
+                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES"/>
+                                                    <prototypeCellViews>
+                                                        <tableCellView identifier="plotThumbnailTableCellView" id="uwy-lX-hx3">
+                                                            <rect key="frame" x="11" y="1" width="116" height="94"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                            <subviews>
+                                                                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="91" placeholderIntrinsicHeight="88" translatesAutoresizingMaskIntoConstraints="NO" id="AoF-6M-6oW">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="116" height="94"/>
+                                                                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="imageCell:uUt-3q-pTu:image" id="uUt-3q-pTu" customClass="TZPlotThumbnailImageCell" customModule="Treviz" customModuleProvider="target"/>
+                                                                </imageView>
+                                                            </subviews>
+                                                            <constraints>
+                                                                <constraint firstItem="58J-BN-Cfg" firstAttribute="bottom" secondItem="AoF-6M-6oW" secondAttribute="bottom" id="0Yj-6P-bn5"/>
+                                                                <constraint firstItem="AoF-6M-6oW" firstAttribute="top" secondItem="58J-BN-Cfg" secondAttribute="top" id="328-6t-9TA"/>
+                                                                <constraint firstItem="AoF-6M-6oW" firstAttribute="leading" secondItem="58J-BN-Cfg" secondAttribute="leading" id="H5G-s4-egr"/>
+                                                                <constraint firstItem="58J-BN-Cfg" firstAttribute="trailing" secondItem="AoF-6M-6oW" secondAttribute="trailing" id="Vs1-FJ-OpU"/>
+                                                            </constraints>
+                                                            <viewLayoutGuide key="safeArea" id="58J-BN-Cfg"/>
+                                                            <viewLayoutGuide key="layoutMargins" id="i8P-ib-WSH"/>
+                                                            <connections>
+                                                                <outlet property="imageView" destination="AoF-6M-6oW" id="MWf-yW-Buc"/>
+                                                            </connections>
+                                                        </tableCellView>
+                                                    </prototypeCellViews>
+                                                </tableColumn>
+                                            </tableColumns>
+                                            <connections>
+                                                <outlet property="dataSource" destination="Fio-tY-jcY" id="hYZ-r2-rp0"/>
+                                                <outlet property="delegate" destination="Fio-tY-jcY" id="K5N-am-PnN"/>
+                                            </connections>
+                                        </tableView>
+                                    </subviews>
+                                </clipView>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="250" id="b9d-bv-c7W"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="lig-08-2Kv"/>
+                                </constraints>
+                                <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="Gci-h6-O4v">
+                                    <rect key="frame" x="1" y="305" width="48" height="16"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                                <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="nUb-3U-OUX">
+                                    <rect key="frame" x="224" y="17" width="15" height="102"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                            </scrollView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="cdJ-5i-qRX" secondAttribute="trailing" id="4Cn-Rh-dEY"/>
+                            <constraint firstItem="cdJ-5i-qRX" firstAttribute="leading" secondItem="kcW-k2-pLu" secondAttribute="leading" id="KXH-AV-2Ig"/>
+                            <constraint firstAttribute="bottom" secondItem="cdJ-5i-qRX" secondAttribute="bottom" id="LjL-8I-ZNT"/>
+                            <constraint firstItem="cdJ-5i-qRX" firstAttribute="top" secondItem="kcW-k2-pLu" secondAttribute="top" id="ME2-NL-6bi"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="maxWidthConstraint" destination="b9d-bv-c7W" id="xre-OJ-T2h"/>
+                        <outlet property="minWidthConstraint" destination="lig-08-2Kv" id="hfL-Q8-Iux"/>
+                        <outlet property="tableView" destination="bfG-T6-Xtx" id="CBS-gP-sGU"/>
+                    </connections>
+                </viewController>
+                <customObject id="VBA-pu-iwY" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1507" y="-1105"/>
+        </scene>
+        <!--Plot Output Viewer View Controller-->
+        <scene sceneID="Q6a-Zt-AlV">
+            <objects>
+                <viewController id="9CK-x4-JrX" customClass="PlotOutputViewerViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="kRr-NN-Qi2">
+                        <rect key="frame" x="0.0" y="0.0" width="270" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <customView horizontalHuggingPriority="50" horizontalCompressionResistancePriority="800" translatesAutoresizingMaskIntoConstraints="NO" id="Kre-Oo-UuI" customClass="CPTGraphHostingView">
+                                <rect key="frame" x="0.0" y="0.0" width="270" height="300"/>
+                            </customView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="Kre-Oo-UuI" firstAttribute="leading" secondItem="kRr-NN-Qi2" secondAttribute="leading" id="JTy-Id-ipO"/>
+                            <constraint firstAttribute="bottom" secondItem="Kre-Oo-UuI" secondAttribute="bottom" id="kn6-JQ-uC5"/>
+                            <constraint firstAttribute="trailing" secondItem="Kre-Oo-UuI" secondAttribute="trailing" id="yCo-fZ-k2u"/>
+                            <constraint firstItem="Kre-Oo-UuI" firstAttribute="top" secondItem="kRr-NN-Qi2" secondAttribute="top" id="zJN-ia-AGP"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="graphHostingView" destination="Kre-Oo-UuI" id="7Rf-Im-XAt"/>
+                    </connections>
+                </viewController>
+                <customObject id="fNC-hp-rdv" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1713" y="-1105"/>
+        </scene>
         <!--Viewer Tab View Controller-->
         <scene sceneID="7dg-bH-2ZR">
             <objects>
-                <tabViewController identifier="viewerTabViewControllerRestoration" storyboardIdentifier="viewerTabViewController" selectedTabViewItemIndex="0" id="mOM-Iz-vf6" customClass="ViewerTabViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
+                <tabViewController identifier="viewerTabViewControllerRestoration" storyboardIdentifier="viewerTabViewController" selectedTabViewItemIndex="1" id="mOM-Iz-vf6" customClass="ViewerTabViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
                     <tabViewItems>
                         <tabViewItem label="Visualizer" identifier="visualizerTabViewItem" id="rQj-OT-E8h"/>
-                        <tabViewItem label="Plotter" identifier="plotterTabViewItem" id="Egc-SW-yOb"/>
+                        <tabViewItem label="Plots" identifier="plotsTabViewItem" id="Dkd-b9-ouO"/>
                     </tabViewItems>
                     <viewControllerTransitionOptions key="transitionOptions" allowUserInteraction="YES"/>
                     <tabView key="tabView" type="noTabsNoBorder" id="nLU-aM-vwa">
@@ -158,112 +303,17 @@
                         </connections>
                     </tabView>
                     <connections>
-                        <outlet property="plotTabViewItem" destination="Egc-SW-yOb" id="C5h-ss-yfH"/>
+                        <outlet property="plotTabViewItem" destination="Dkd-b9-ouO" id="LhL-Lm-v9y"/>
                         <outlet property="tabView" destination="nLU-aM-vwa" id="SXt-Jl-yO2"/>
                         <outlet property="visualizerTabViewItem" destination="rQj-OT-E8h" id="yZG-j5-Ebl"/>
                         <segue destination="kWr-Ah-mB4" kind="relationship" relationship="tabItems" id="uwu-Ql-y3x"/>
-                        <segue destination="BcX-Kn-pAr" kind="relationship" relationship="tabItems" id="gWx-cI-84d"/>
+                        <segue destination="ctD-mf-hTd" kind="relationship" relationship="tabItems" id="TB2-wQ-TzF"/>
                     </connections>
                 </tabViewController>
                 <customObject id="Kum-Q4-fOu" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <tabViewItem label="Plotter" identifier="plotterTabViewItem" id="lJN-Jv-rdw"/>
             </objects>
             <point key="canvasLocation" x="1025" y="-314"/>
-        </scene>
-        <!--Plot Output View Controller-->
-        <scene sceneID="Beb-V0-0iB">
-            <objects>
-                <viewController id="BcX-Kn-pAr" customClass="PlotOutputViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="v8a-8N-YZw">
-                        <rect key="frame" x="0.0" y="0.0" width="446" height="322"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <subviews>
-                            <customView horizontalHuggingPriority="50" horizontalCompressionResistancePriority="800" translatesAutoresizingMaskIntoConstraints="NO" id="q6x-sP-SB5" customClass="CPTGraphHostingView">
-                                <rect key="frame" x="100" y="0.0" width="346" height="322"/>
-                            </customView>
-                            <scrollView autohidesScrollers="YES" horizontalLineScroll="96" horizontalPageScroll="10" verticalLineScroll="96" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fAb-Rd-ex3" userLabel="Plot Selector Scroll View">
-                                <rect key="frame" x="0.0" y="0.0" width="100" height="322"/>
-                                <clipView key="contentView" id="TRb-Z1-rrT">
-                                    <rect key="frame" x="1" y="1" width="98" height="320"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <subviews>
-                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="none" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="94" rowSizeStyle="automatic" viewBased="YES" id="UWb-kI-vO6">
-                                            <rect key="frame" x="0.0" y="0.0" width="105" height="320"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            <size key="intercellSpacing" width="3" height="2"/>
-                                            <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
-                                            <tableColumns>
-                                                <tableColumn editable="NO" width="93" minWidth="85" maxWidth="100" id="CLG-sb-9dB" userLabel="Plot Thumbnail column">
-                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center">
-                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
-                                                        <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
-                                                    </tableHeaderCell>
-                                                    <imageCell key="dataCell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="CSYS" id="kS7-hX-Y1V" customClass="TZPlotThumbnailImageCell" customModule="Treviz" customModuleProvider="target"/>
-                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES"/>
-                                                    <prototypeCellViews>
-                                                        <tableCellView identifier="plotThumbnailTableCellView" translatesAutoresizingMaskIntoConstraints="NO" id="9zB-RF-Eyv">
-                                                            <rect key="frame" x="1" y="1" width="102" height="94"/>
-                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                            <subviews>
-                                                                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="91" placeholderIntrinsicHeight="88" translatesAutoresizingMaskIntoConstraints="NO" id="BLe-Nn-Wf1">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="102" height="94"/>
-                                                                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageAlignment="left" imageScaling="proportionallyUpOrDown" image="imageCell:B0s-jW-ClV:image" id="B0s-jW-ClV" customClass="TZPlotThumbnailImageCell" customModule="Treviz" customModuleProvider="target"/>
-                                                                </imageView>
-                                                            </subviews>
-                                                            <constraints>
-                                                                <constraint firstItem="XzU-rG-scZ" firstAttribute="trailing" secondItem="BLe-Nn-Wf1" secondAttribute="trailing" id="NnE-1O-7PZ"/>
-                                                                <constraint firstItem="BLe-Nn-Wf1" firstAttribute="leading" secondItem="XzU-rG-scZ" secondAttribute="leading" id="o6B-Bd-H7g"/>
-                                                                <constraint firstItem="XzU-rG-scZ" firstAttribute="bottom" secondItem="BLe-Nn-Wf1" secondAttribute="bottom" id="q0k-s2-xy0"/>
-                                                                <constraint firstItem="BLe-Nn-Wf1" firstAttribute="top" secondItem="XzU-rG-scZ" secondAttribute="top" id="zDj-Rb-GqF"/>
-                                                            </constraints>
-                                                            <viewLayoutGuide key="safeArea" id="XzU-rG-scZ"/>
-                                                            <viewLayoutGuide key="layoutMargins" id="Ze1-N8-WsH"/>
-                                                            <connections>
-                                                                <outlet property="imageView" destination="BLe-Nn-Wf1" id="H68-WF-8zk"/>
-                                                            </connections>
-                                                        </tableCellView>
-                                                    </prototypeCellViews>
-                                                </tableColumn>
-                                            </tableColumns>
-                                            <connections>
-                                                <outlet property="dataSource" destination="BcX-Kn-pAr" id="cUp-RG-wVa"/>
-                                                <outlet property="delegate" destination="BcX-Kn-pAr" id="nCe-bJ-LGb"/>
-                                            </connections>
-                                        </tableView>
-                                    </subviews>
-                                </clipView>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="LzR-xo-mp5"/>
-                                </constraints>
-                                <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="ZlS-ZN-Zjv">
-                                    <rect key="frame" x="1" y="305" width="98" height="16"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </scroller>
-                                <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="hlY-1w-NfT">
-                                    <rect key="frame" x="224" y="17" width="15" height="102"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </scroller>
-                            </scrollView>
-                        </subviews>
-                        <constraints>
-                            <constraint firstItem="fAb-Rd-ex3" firstAttribute="top" secondItem="v8a-8N-YZw" secondAttribute="top" id="86r-Va-4fK"/>
-                            <constraint firstItem="q6x-sP-SB5" firstAttribute="leading" secondItem="v8a-8N-YZw" secondAttribute="leading" constant="100" id="Bsz-sB-PzI"/>
-                            <constraint firstItem="q6x-sP-SB5" firstAttribute="leading" secondItem="fAb-Rd-ex3" secondAttribute="trailing" id="EwV-PX-byt"/>
-                            <constraint firstAttribute="bottom" secondItem="fAb-Rd-ex3" secondAttribute="bottom" id="RU2-Sg-hXc"/>
-                            <constraint firstAttribute="trailing" secondItem="q6x-sP-SB5" secondAttribute="trailing" id="afP-pR-7B5"/>
-                            <constraint firstAttribute="bottom" secondItem="q6x-sP-SB5" secondAttribute="bottom" id="i4o-Y8-Mki"/>
-                            <constraint firstItem="fAb-Rd-ex3" firstAttribute="leading" secondItem="v8a-8N-YZw" secondAttribute="leading" id="r4i-NL-EFP"/>
-                            <constraint firstItem="q6x-sP-SB5" firstAttribute="top" secondItem="v8a-8N-YZw" secondAttribute="top" id="uY5-NI-JZY"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="graphHostingView" destination="q6x-sP-SB5" id="aKd-ru-mn4"/>
-                        <outlet property="tableView" destination="UWb-kI-vO6" id="ns8-6j-8o2"/>
-                    </connections>
-                </viewController>
-                <customObject id="yZO-iK-8Az" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1511" y="-726.5"/>
         </scene>
         <!--visualizerOutputViewController-->
         <scene sceneID="X15-YZ-sea">
@@ -291,7 +341,7 @@
                 </viewController>
                 <customObject id="Ofl-UG-cIh" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1542" y="-209"/>
+            <point key="canvasLocation" x="1608" y="-124"/>
         </scene>
         <!--Text Outputs View Controller-->
         <scene sceneID="9HR-bL-jxG">
@@ -350,7 +400,7 @@
     <resources>
         <image name="CSYS" width="20" height="20"/>
         <image name="globe_picture" width="2048" height="2048"/>
-        <image name="imageCell:B0s-jW-ClV:image" width="43" height="43">
+        <image name="imageCell:uUt-3q-pTu:image" width="43" height="43">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGBwpYJHZlcnNpb25ZJGFyY2hpdmVyVCR0b3BYJG9iamVjdHMSAAGGoF8QD05T
 S2V5ZWRBcmNoaXZlctEICVRyb290gAGvEBcLDBkaIRQmKywzNjs+P0RHSEtVXV5iZVUkbnVsbNYNDg8Q

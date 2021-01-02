@@ -8,17 +8,59 @@
 
 import Foundation
 
+extension Dictionary where Value: Equatable {
+    func key(forValue value: Value) -> Key? {
+        return first { $0.1 == value }?.0
+    }
+}
+
 protocol ParamValueView: NSView {
     var parameter: Parameter! { get set }
     var stringValue: String { get set }
     func update()
+    var didUpdate: ()->() { get set } // Action to perform after parameter update
 }
 
-class ParamValuePopupView: NSPopUpButton, ParamValueView {
+// MARK: Inputs views
+class ParamValueTextField: NSTextField, ParamValueView {
+    override var stringValue: String {
+        didSet { parameter.setValue(to: super.stringValue) }
+    }
     var parameter: Parameter!
+    var didUpdate = {}
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
+    func update(){
+        if let valParam = parameter as? NumberParam {
+            self.stringValue = valParam.value.valuestr
+        } else if let varParam = parameter as? Variable {
+            self.stringValue = varParam.value[0].valuestr
+        }
+    }
+}
+
+// MARK: RunVariant table views
+class ParamValuePopupView: NSPopUpButton, ParamValueView {
+    var parameter: Parameter!
+    var didUpdate = {}
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
+    /**
+     If the view has not already been populated with options, this function will add them automatically based on the EnumGroupParam options. Also selects the currently active option
+     */
+    func finishSetup(){
+        if let enumParam = parameter as? EnumGroupParam {
+            if self.numberOfItems <= 1 {
+                self.removeAllItems()
+                self.addItems(withTitles: enumParam.options.map {$0.valuestr})
+            }
+            self.selectItem(withTitle: enumParam.stringValue)
+        }
+    }
+    
     override var stringValue: String {
         get { return self.selectedItem!.title }
         set { parameter.setValue(to: newValue) }
@@ -26,12 +68,13 @@ class ParamValuePopupView: NSPopUpButton, ParamValueView {
     
     func update(){
         if let enumParam = parameter as? EnumGroupParam {
-            self.selectItem(withTitle: enumParam.value.valuestr)
+            self.selectItem(withTitle: enumParam.stringValue)
         }
     }
 }
 class ParamValueCheckboxView: NSButton, ParamValueView {
     var parameter: Parameter!
+    var didUpdate = {}
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
@@ -56,6 +99,7 @@ class ParamValueTextView: NSTableCellView, ParamValueView {
         }
     }
     var parameter: Parameter!
+    var didUpdate = {}
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
@@ -66,17 +110,9 @@ class ParamValueTextView: NSTableCellView, ParamValueView {
             self.textField?.stringValue = varParam.value[0].valuestr
         }
     }
-    /*
-    override func draw(_ dirtyRect: NSRect) {
-        if let valParam = parameter as? NumberParam {
-            self.textField?.stringValue = valParam.value.valuestr
-        } else if let varParam = parameter as? Variable {
-            self.textField?.stringValue = varParam.value[0].valuestr
-        }
-        super.draw(dirtyRect)
-    }*/
 }
 
+//MARK: InputsViewController
 extension InputsViewController {
     static func paramValueCellView(view: NSTableView, thisInput: Parameter?)->ParamValueTextView?{
         guard thisInput != nil else {return nil}
@@ -94,10 +130,13 @@ extension InputsViewController {
         guard thisInput != nil else {return nil}
         let newView = view.makeView(withIdentifier: .paramPopupCellView, owner: self) as? ParamValuePopupView
         guard let thisParam = thisInput as? EnumGroupParam else { return nil }
+        newView?.parameter = thisParam
+        newView?.removeAllItems()
+        newView?.finishSetup()/*
         newView?.removeAllItems()
         newView?.addItems(withTitles: thisParam.options.map({$0.valuestr}))
-        newView?.selectItem(withTitle: thisParam.value.valuestr)
-        newView?.parameter = thisParam
+        newView?.selectItem(withTitle: thisParam.value.valuestr)*/
+        //newView?.parameter = thisParam
         return newView
     }
     static func paramCheckboxCellView(view: NSTableView, thisInput: Parameter?)->ParamValueCheckboxView?{

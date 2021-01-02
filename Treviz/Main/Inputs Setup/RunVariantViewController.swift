@@ -12,24 +12,13 @@ extension NSStoryboardSegue.Identifier{
     static let paramTableViewSegue = "ParamTableViewControllerSegue"
 }
 
-class RunVariantViewController: TZViewController , NSTableViewDelegate, NSTableViewDataSource {
+class RunVariantOverviewTableDelegate: NSObject, NSTableViewDelegate, NSTableViewDataSource {
     
-    @IBOutlet weak var tableView: NSTableView!
-    var params : [Parameter] { return analysis.parameters }
-    var paramSettings: [RunVariant] { return analysis.runVariants.filter({$0.isActive}) }
-    var inputsViewController: InputsViewController?
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        tableView.rowHeight = 18
-    }
-    
-    func numberOfRows(in tableView: NSTableView) -> Int {
-        return paramSettings.count
-    }
+    var analysis: Analysis!
+    var paramSettings: [RunVariant] { return analysis?.runVariants.filter({$0.isActive}) ?? [] }
+    var parentVC: RunVariantViewController!
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-
         let thisRunVariant = paramSettings[row]
         let thisParam = thisRunVariant.parameter
         switch tableColumn?.identifier{
@@ -65,12 +54,35 @@ class RunVariantViewController: TZViewController , NSTableViewDelegate, NSTableV
         if let thisSetting = item as? Parameter{
             switch tableColumn?.identifier{
             case NSUserInterfaceItemIdentifier.nameColumn:
-                inputsViewController?.reloadParams()
+                parentVC.inputsViewController?.reloadParams()
                 return thisSetting.name
             default: return nil
             }
         }
         return nil
+    }
+    
+    func numberOfRows(in tableView: NSTableView) -> Int {
+        return paramSettings.count
+    }
+}
+
+class RunVariantViewController: TZViewController {
+    
+    @IBOutlet weak var tableView: NSTableView!
+    var params : [Parameter] { return analysis.parameters }
+    var paramSettings: [RunVariant] { return analysis?.runVariants.filter({$0.isActive}) ?? [] }
+    var inputsViewController: InputsViewController?
+    var overviewDelegate = RunVariantOverviewTableDelegate()
+    
+    override func viewDidLoad() {
+        overviewDelegate.analysis = analysis
+        overviewDelegate.parentVC = self
+        super.viewDidLoad()
+        tableView.delegate = overviewDelegate
+        tableView.dataSource = overviewDelegate
+        tableView.rowHeight = 18
+        
     }
     
     @IBAction func removeParamPressed(_ sender: Any) {

@@ -415,11 +415,11 @@
 				CDF3D1A722505A000064D70C /* AnalysisDoc.swift */,
 				CDC1F53F22363DDB00D1BB25 /* MainViewController.swift */,
 				CDC1F53B2234874000D1BB25 /* MainSplitViewController.swift */,
-				CDF1670B2237A10400CD9590 /* MainWindowController.swift */,
 				CD6E0B9D2431BAC5008D1656 /* TZToolbar.swift */,
 				CDD5049522252AF900B29751 /* AppDelegate.swift */,
 				CDF3D1A5225057270064D70C /* TZViewController.swift */,
 				CD6E0BA12436DEC7008D1656 /* TZStoryboard.swift */,
+				CDF1670B2237A10400CD9590 /* MainWindowController.swift */,
 				CD9F2041223B7CBF005BFDCB /* Inputs Setup */,
 				CD9F2040223B7C95005BFDCB /* Outputs Setup */,
 				CD05E3BB225491A100906EB0 /* Outputs */,
@@ -443,7 +443,6 @@
 			isa = PBXGroup;
 			children = (
 				CDFE81FA23E14AD10013945F /* Viewer Outputs */,
-				CD3C187D23E2B03700E72EFF /* TZPlotView.swift */,
 				CD410CF62444239700AB49DE /* CorePlotExtensions.swift */,
 				CD59C54523E79476001D98D5 /* Outputs.storyboard */,
 				CDC25615243D9E86007EBE8A /* TZMessageLoggerViewController.swift */,
@@ -658,6 +657,7 @@
 		CDFE81FA23E14AD10013945F /* Viewer Outputs */ = {
 			isa = PBXGroup;
 			children = (
+				CD3C187D23E2B03700E72EFF /* TZPlotView.swift */,
 				CDFE81FB23E14B730013945F /* ViewerTabViewController.swift */,
 				CD557436236EA14500DA53A1 /* VisualizerViewController.swift */,
 				CDFE81F823E147060013945F /* PlotOutputViewController.swift */,

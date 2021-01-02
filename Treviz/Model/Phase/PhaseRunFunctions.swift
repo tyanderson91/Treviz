@@ -31,7 +31,7 @@ extension TZPhase {
         while self.isRunning {
             let curstate = self.traj[i]
             var newState = StateDictSingle()
-            switch self.propagatorType {
+            switch runSettings.propagatorType.value as! PropagatorType {
             case .explicit:
                 newState = self.equationsOfMotion(curState: curstate, dt: dt)
             case .rungeKutta4:

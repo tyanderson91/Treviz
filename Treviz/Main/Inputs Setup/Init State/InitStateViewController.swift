@@ -192,7 +192,7 @@ class InitStateViewController: PhasedViewController, NSOutlineViewDelegate, NSOu
     }
     
     // MARK: Terminal Condition
-    @IBAction func didChangeSelection(_ sender: Any) {
+    @IBAction override func didChangeSelection(_ sender: Any) {
         if let curCondition = analysis.conditions.first(where: { $0.name == terminalConditionPopupButton.titleOfSelectedItem }) {
             phase.terminalCondition = curCondition
         }

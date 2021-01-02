@@ -15,6 +15,8 @@ struct PhaseSelector {
     let node2Box: CGRect
 }
 class PhaseSelectorViewController: BaseViewController {
+    var inputSplitViewController: InputsSplitViewController!
+    
     var phases : [TZPhase] = [
         TZPhase(id: "default"),
         TZPhase(id: "phase2")

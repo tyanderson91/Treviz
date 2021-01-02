@@ -54,7 +54,7 @@ class OutputsSplitViewController: TZSplitViewController {
         return textOutputViewController?.textOutputView
     }
     var visualizerViewController: VisualizerViewController! { return viewerTabViewController.visualizerTabViewItem.viewController as? VisualizerViewController ?? nil }
-    var plotViewController: PlotOutputViewController! { return viewerTabViewController.plotTabViewItem.viewController as? PlotOutputViewController ?? nil }
+    var plotViewController: PlotOutputSplitViewController! { return viewerTabViewController.plotTabViewItem.viewController as? PlotOutputSplitViewController ?? nil }// PlotOutputViewController ?? nil }
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -60,42 +60,16 @@ class PhysicsViewController: PhasedViewController {
         }
         physicsSelectorPopupButton.bezelStyle = .texturedSquare
         centralBodyParamPopupButton.bezelStyle = .texturedSquare
-        //let newModel = curPhysicsModel?.valuestr
         physicsSelectorPopupButton.parameter = curModelParam
         physicsModelRunVariantButton.param = curModelParam
         centralBodyParamPopupButton.parameter = physicsSettings.centralBodyParam
         centralBodyRunVariantButton.param = physicsSettings.centralBodyParam
-        
-        self.paramValueViews = [physicsSelectorPopupButton, centralBodyParamPopupButton]
-        for thisParam in paramValueViews {
-            thisParam.update()
+        centralBodyParamPopupButton.didUpdate = {
+            guard let cbody = self.physicsSettings.centralBodyParam.value as? CelestialBody else { return }
+            if let cbodyImage = NSImage(named: cbody.name) {
+                self.staticCentralBodyImage = cbodyImage
+            } else { self.staticCentralBodyImage = NSImage(named: "Default_cbody")}
         }
-        //physicsSelectorPopupButton.selectItem(withTitle: curPhysicsModel?.valuestr ?? "")
-    }
-    
-    @IBAction func didChangeSelection(_ sender: Any) {
-        if let thisSelector = sender as? ParamValueView {
-            guard let param = thisSelector.parameter else {return}
-            param.setValue(to: thisSelector.stringValue)
-            inputsViewController?.updateParamValueView(for: param.id)
-            
-            if thisSelector.identifier!.rawValue == "centralBodyPopup" {
-                guard let cbody = (param as? EnumGroupParam)?.value as? CelestialBody else { return }
-                if let cbodyImage = NSImage(named: cbody.name) {
-                    staticCentralBodyImage = cbodyImage
-                } else { staticCentralBodyImage = NSImage(named: "Default_cbody")}
-            }
-        }
-    }
-    
-    private func setSelection(){
-    }
-    
-    private func getPopupOptions(){
-    }
-    
-    @IBAction func didSetParamValue(_ sender: Any){
-        inputsViewController?.reloadParams()
     }
     
     @IBAction func didSetParameter(_ sender: Any) {

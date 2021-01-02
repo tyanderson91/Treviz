@@ -16,10 +16,37 @@ extension NSNotification.Name {
     static let didChangeValue = Notification.Name("didChangeValue")
 }
 
-class InputsViewController: TZViewController, NSTableViewDataSource, NSTableViewDelegate {
+class InputsSplitViewController: TZSplitViewController {
+    @IBOutlet var phaseSelectorSplitViewItem: NSSplitViewItem!
+    @IBOutlet weak var inputsSplitViewItem: NSSplitViewItem!
+    @IBOutlet var runVariantsSplitViewItem: NSSplitViewItem!
+    
+    var runVariantViewController : RunVariantViewController!
+    var phaseSelectorViewController: PhaseSelectorViewController!
+    var inputsViewController : InputsViewController!
+    
+    func reloadParams(){
+        runVariantViewController.tableView.reloadData()
+    
+        //initStateViewController.outlineView.reloadData()
+        //physicsViewController.viewDidLoad()
+    }
+    
+    override func viewDidLoad() {
+        inputsViewController = inputsSplitViewItem.viewController as? InputsViewController
+        phaseSelectorViewController = phaseSelectorSplitViewItem.viewController as? PhaseSelectorViewController
+        runVariantViewController = runVariantsSplitViewItem.viewController as? RunVariantViewController
+        inputsViewController.inputSplitViewController = self
+        phaseSelectorViewController.inputSplitViewController = self
+        runVariantViewController.inputsViewController = inputsViewController
+    }
+}
+
+class InputsViewController: TZViewController {
      
     @IBOutlet weak var stack: CustomStackView!
     
+    var inputSplitViewController : InputsSplitViewController!
     var runVariantViewController : RunVariantViewController!
     weak var physicsViewController: PhysicsViewController!
     weak var initStateViewController: InitStateViewController!
@@ -47,10 +74,10 @@ class InputsViewController: TZViewController, NSTableViewDataSource, NSTableView
         } else {return nil}
     }
     func updateParamValueView(for paramID: ParamID) {
-
-        let theseViews = paramValueViews.filter({$0.parameter.id == paramID})
+        let theseViews = paramValueViews.filter({ ($0.parameter?.id ?? "") == paramID})
         for curView in theseViews {
             curView.update()
+            curView.didUpdate()
         }
 
         self.runVariantViewController.tableView.reloadData()
@@ -69,7 +96,6 @@ class InputsViewController: TZViewController, NSTableViewDataSource, NSTableView
         // Load and install all the view controllers from our storyboard in the following order.
         let storyboard = NSStoryboard(name: "Inputs", bundle: nil)
         
-        //self.analysis.phases = [TZPhase(id: "default")]
         runSettingsViewController = storyboard.instantiateController(identifier: "RunSettingsViewController") { aCoder in
             RunSettingsViewController(coder: aCoder, analysis: self.analysis, phase: self.analysis.phases[0])
         }
@@ -87,9 +113,9 @@ class InputsViewController: TZViewController, NSTableViewDataSource, NSTableView
         for thisController in [runSettingsViewController,
                                physicsViewController,
                                //vehicleViewController,
-                               initStateViewController]{
-            self.addChild(thisController!)
-        }
+                               initStateViewController
+                               ]
+        { self.addChild(thisController!) }
     }
     
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
@@ -105,8 +131,6 @@ class InputsViewController: TZViewController, NSTableViewDataSource, NSTableView
     
     func reloadParams(){
         runVariantViewController.tableView.reloadData()
-        //initStateViewController.outlineView.reloadData()
-        //physicsViewController.viewDidLoad()
     }
     
     

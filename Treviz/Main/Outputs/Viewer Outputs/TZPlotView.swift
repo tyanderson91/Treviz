@@ -8,11 +8,11 @@
 
 import Cocoa
 
-
 class TZPlotThumbnailImageCell: NSImageCell {
     required init(coder: NSCoder) {
         super.init(coder: coder)
         self.imageAlignment = .alignCenter
+        self.imageScaling = .scaleProportionallyUpOrDown
     }
 }
 
@@ -31,6 +31,17 @@ class TZPlotView: NSObject, CPTScatterPlotDelegate, CPTScatterPlotDataSource, CP
         return (plotArea.widthDecimal, plotArea.heightDecimal)
     }
     @objc var thumbnail: NSImage!
+    
+    
+    func getThumbnail() {
+        thumbnail = graph.imageOfLayer()
+        var dims = thumbnail.size
+        if dims.width > dims.height {
+            dims.width = dims.height
+        } else {
+            dims.height = dims.width
+        }
+    }
     
     init(with inputPlot: TZPlot) throws {
         let defaultTheme = CPTTheme(named: .plainWhiteTheme)
