@@ -57,9 +57,13 @@ class PhasedViewController: BaseViewController {
     override func viewWillAppear() {
         for thisParamView in paramValueViews {
             thisParamView.update()
-            //(thisParamView as? NSButton)?.action = #selector(self.didChangeSelection(_:))
-            (thisParamView as? NSTextField)?.action = #selector(self.didChangeSelection(_:))
-            (thisParamView as? ParamValuePopupView)?.finishSetup()
+            if let thisControl = thisParamView as? NSControl {
+                thisControl.action = #selector(self.didChangeSelection(_:))
+                thisControl.target = self
+            }
+            if let thisPopup = thisParamView as? ParamValuePopupView {
+                thisPopup.finishSetup()
+            }
         }
         for thisParamSelector in paramSelectorViews {
             thisParamSelector.action = #selector(self.didSetParam(_:))

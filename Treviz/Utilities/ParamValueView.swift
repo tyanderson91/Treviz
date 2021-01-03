@@ -75,6 +75,18 @@ class ParamValuePopupView: NSPopUpButton, ParamValueView {
 class ParamValueCheckboxView: NSButton, ParamValueView {
     var parameter: Parameter!
     var didUpdate = {}
+    override var stringValue: String {
+        get {
+            switch self.state {
+            case .on: return "True"
+            case .off: return "False"
+            default: return "False"
+            }
+        } set {
+            if newValue == "True" { self.state = .on}
+            else if newValue == "False" { self.state = .off }
+        }
+    }
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
@@ -132,11 +144,7 @@ extension InputsViewController {
         guard let thisParam = thisInput as? EnumGroupParam else { return nil }
         newView?.parameter = thisParam
         newView?.removeAllItems()
-        newView?.finishSetup()/*
-        newView?.removeAllItems()
-        newView?.addItems(withTitles: thisParam.options.map({$0.valuestr}))
-        newView?.selectItem(withTitle: thisParam.value.valuestr)*/
-        //newView?.parameter = thisParam
+        newView?.finishSetup()
         return newView
     }
     static func paramCheckboxCellView(view: NSTableView, thisInput: Parameter?)->ParamValueCheckboxView?{

@@ -37,6 +37,7 @@ class PhysicsViewController: PhasedViewController {
     @IBOutlet weak var gravityRunVariantButton: RunVariantEnableButton!
     @IBOutlet weak var atmosphereRunVariantButton: RunVariantEnableButton!
     @IBOutlet weak var useVehicleInertiaRunVariantButton: RunVariantEnableButton!
+    @IBOutlet weak var useVehicleInertiaCheckbox: ParamValueCheckboxView!
     
     @IBOutlet weak var centralBodyParamPopupButton: ParamValuePopupView!
     
@@ -45,8 +46,6 @@ class PhysicsViewController: PhasedViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if analysis != nil {
-        }
         for thisPhysicsModel in physicsModels {
             let menuItem = NSMenuItem.init(title: thisPhysicsModel.valuestr, action: nil, keyEquivalent: "")
             menuItem.image = thisPhysicsModel.icon
@@ -70,19 +69,7 @@ class PhysicsViewController: PhasedViewController {
                 self.staticCentralBodyImage = cbodyImage
             } else { self.staticCentralBodyImage = NSImage(named: "Default_cbody")}
         }
-    }
-    
-    @IBAction func didSetParameter(_ sender: Any) {
-        guard let senderButton = sender as? RunVariantEnableButton else { return }
-
-        var setOn = false
-        if senderButton.state == .on {
-            setOn = true
-        }
-        
-        if let paramToSet = senderButton.param {
-            analysis.setParam(param: paramToSet, setOn: setOn)
-            inputsViewController?.updateParamValueView(for: paramToSet.id)
-        }
+        useVehicleInertiaRunVariantButton.param = physicsSettings.vehiclePointMassParam
+        useVehicleInertiaCheckbox.parameter = physicsSettings.vehiclePointMassParam
     }
 }

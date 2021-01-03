@@ -28,7 +28,9 @@ class RunSettingsViewController: PhasedViewController {
     // Other UI elements
     @IBOutlet weak var propagatorPopupButton: ParamValuePopupView!
     @IBOutlet weak var adaptiveTimestepCheckbox: ParamValueCheckboxView!
-    @IBOutlet weak var timeStepNumberFormatter: NumberFormatter!
+    @IBOutlet weak var minTimeStepNumberFormatter: NumberFormatter!
+    @IBOutlet weak var maxTimeStepNumberFormatter: NumberFormatter!
+    @IBOutlet weak var defaultTimeStepNumberFormatter: NumberFormatter!
     
     var runSettings: TZRunSettings { return phase.runSettings }
         
@@ -36,7 +38,9 @@ class RunSettingsViewController: PhasedViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        timeStepNumberFormatter.maximumFractionDigits = 10
+        maxTimeStepNumberFormatter.maximumFractionDigits = 10
+        minTimeStepNumberFormatter.maximumFractionDigits = 10
+        defaultTimeStepNumberFormatter.maximumFractionDigits = 10
         adaptiveTimestepParamCheckbox.param = runSettings.useAdaptiveTimestep
         adaptiveTimestepCheckbox.parameter = runSettings.useAdaptiveTimestep
         defaultTimestepParamCheckbox.param = runSettings.defaultTimestep
@@ -48,87 +52,48 @@ class RunSettingsViewController: PhasedViewController {
         propagatorParamCheckbox.param = runSettings.propagatorType
         propagatorPopupButton.parameter = runSettings.propagatorType
         setRunSettingUI()
+        adaptiveTimestepCheckbox.didUpdate = didSetAdaptiveTimestep
+        minTimestepTextBox.didUpdate = didSetMinMaxTimestep
+        maxTimestepTextBox.didUpdate = didSetMinMaxTimestep
+        didSetMinMaxTimestep()
     }
-    
-    /*
-    @IBAction func propagatorChanged(_ sender: Any) {
-        guard let senderButton = sender as? NSPopUpButton else { return }
         
-        switch senderButton.selectedItem?.title {
-        case "Explicit":
-            runSettings.propagatorType.value = PropagatorType.explicit
-        case "Runge-Kutta":
-            runSettings.propagatorType.value = PropagatorType.rungeKutta4
-        default:
-            runSettings.propagatorType.value = PropagatorType.explicit
-        }
-    }*/
-    
     private func setRunSettingUI() {
-        /*switch (runSettings.propagatorType.value as! PropagatorType) {
-        case .explicit:
-            propagatorPopupButton.selectItem(withTitle: "Explicit")
-        case .rungeKutta4:
-            propagatorPopupButton.selectItem(withTitle: "Runge-Kutta")
-        }*/
         adaptiveTimestepCheckbox.update()
         if runSettings.useAdaptiveTimestep.value {
             allTimestepsStackView.showHideViews(.hide, index: [0])
             allTimestepsStackView.showHideViews(.show, index: [1,2])
             
-            minTimestepTextBox.stringValue = timeStepNumberFormatter.string(from: NSNumber(value: runSettings.minTimestep.value)) ?? ""
-            maxTimestepTextBox.stringValue = timeStepNumberFormatter.string(from: NSNumber(value: runSettings.maxTimestep.value)) ?? ""
+            minTimestepTextBox.stringValue = maxTimeStepNumberFormatter.string(from: NSNumber(value: runSettings.minTimestep.value)) ?? ""
+            maxTimestepTextBox.stringValue = maxTimeStepNumberFormatter.string(from: NSNumber(value: runSettings.maxTimestep.value)) ?? ""
         } else {
             allTimestepsStackView.showHideViews(.show, index: [0])
             allTimestepsStackView.showHideViews(.hide, index: [1,2])
             
             let defNumber = NSNumber(value: runSettings.defaultTimestep.value)
-            let numStr = timeStepNumberFormatter.string(from: defNumber)
+            let numStr = maxTimeStepNumberFormatter.string(from: defNumber)
             defaultTimestepTextBox.stringValue = numStr ?? ""
         }
     }
     
-    @IBAction func didSetParams(_ sender: Any) {
-        didSetParam(sender as! RunVariantEnableButton)
-    }
-    
-    @IBAction func didSetAdaptiveTimestep(_ sender: Any) {
-        guard let checkbox = sender as? NSButton else { return }
-        switch checkbox.state {
+    func didSetAdaptiveTimestep() {
+        switch adaptiveTimestepCheckbox.state {
         case .on:
-            runSettings.useAdaptiveTimestep.value = true
             defaultTimestepParamCheckbox.state = .off
-            //didSetParam(defaultTimestepParamCheckbox)
+            didSetParam(defaultTimestepParamCheckbox)
         case .off, .mixed:
-            runSettings.useAdaptiveTimestep.value = false
             minTimestepParamCheckbox.state = .off
             maxTimestepParamCheckbox.state = .off
-            //didSetParam(minTimestepParamCheckbox)
-            //didSetParam(maxTimestepParamCheckbox)
+            didSetParam(minTimestepParamCheckbox)
+            didSetParam(maxTimestepParamCheckbox)
         default:
             runSettings.useAdaptiveTimestep.value = false
         }
-        inputsViewController?.updateParamValueView(for: phase.runSettings.useAdaptiveTimestep.id)
         setRunSettingUI()
     }
-    /*
-    @IBAction func didSetTimestep(_ sender: Any) {
-        guard let textBox = sender as? NSTextField,
-            let inputNum = VarValue(textBox.stringValue)
-            else { return }
-        
-        do {
-            switch textBox.identifier?.rawValue {
-            case "defaultTimeStepBox":
-                try runSettings.setDefaultTimeStep(inputNum)
-            case "minTimeStepBox":
-                try runSettings.setMinTimeStep(inputNum)
-            case "maxTimeStepBox":
-                try runSettings.setMaxTimeStep(inputNum)
-            default:
-                return
-            }
-        } catch { phase.analysis.logMessage(error.localizedDescription) }
-        setRunSettingUI()
-    }*/
+    
+    func didSetMinMaxTimestep() {
+        minTimeStepNumberFormatter.maximum = NSNumber(value: runSettings.maxTimestep.value)
+        maxTimeStepNumberFormatter.minimum = NSNumber(value: runSettings.minTimestep.value)
+    }
 }

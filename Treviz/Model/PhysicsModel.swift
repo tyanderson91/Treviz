@@ -56,7 +56,7 @@ struct PhysicsModel: Equatable {
  */
 class PhysicsSettings: Codable {
     var physicsModelParam = EnumGroupParam(id: "physicsModel", name: "Physics Model", enumType: PhysicsModel.self, value: PhysicsModel.flat2d, options: PhysicsModel.allPhysicsModels)
-    var vehiclePointMassParam = BoolParam(id: "vehiclePointMass", name: "Treat Vehicle as Point Mass", value: true)
+    var vehiclePointMassParam = BoolParam(id: "vehiclePointMass", name: "Vehicle is Point Mass", value: true)
     var centralBodyParam = EnumGroupParam(id: "centralBody", name: "Central Body", enumType: CelestialBody.self, value: "Earth", options: CelestialBody.allBodies)
     var allParams: [Parameter] { return [physicsModelParam, vehiclePointMassParam, centralBodyParam] }
     
@@ -87,6 +87,5 @@ class PhysicsSettings: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(physicsModelParam.value.valuestr, forKey: .physicsModel)
         try container.encode(vehiclePointMassParam.value, forKey: .vehiclePointMass)
-        //try container.encode(physicsModelParam.value, forKey: .physicsModel)
     }
 }

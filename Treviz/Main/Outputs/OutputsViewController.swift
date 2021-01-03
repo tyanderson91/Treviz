@@ -60,5 +60,4 @@ class OutputsSplitViewController: TZSplitViewController {
         super.viewDidLoad()
         self.analysis.plotOutputViewer = plotViewController
     }
-    
 }

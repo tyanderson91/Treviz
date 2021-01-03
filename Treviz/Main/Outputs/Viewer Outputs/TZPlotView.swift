@@ -32,7 +32,7 @@ class TZPlotView: NSObject, CPTScatterPlotDelegate, CPTScatterPlotDataSource, CP
     }
     @objc var thumbnail: NSImage!
     
-    
+    /*
     func getThumbnail() {
         thumbnail = graph.imageOfLayer()
         var dims = thumbnail.size
@@ -41,7 +41,7 @@ class TZPlotView: NSObject, CPTScatterPlotDelegate, CPTScatterPlotDataSource, CP
         } else {
             dims.height = dims.width
         }
-    }
+    }*/
     
     init(with inputPlot: TZPlot) throws {
         let defaultTheme = CPTTheme(named: .plainWhiteTheme)

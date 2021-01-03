@@ -15,6 +15,7 @@ extension NSToolbarItem.Identifier {
     static var vectors = NSToolbarItem.Identifier("vectors")
     static var csys = NSToolbarItem.Identifier("csys")
     static var showWindowPanes = NSToolbarItem.Identifier("showWindowPanes")
+    static var runVariants = NSToolbarItem.Identifier("runVariants")
 }
 
 
@@ -46,11 +47,12 @@ class TZToolbar: NSToolbar {
     var variablesButton = TZToolbarButtonItem(itemIdentifier: .variables)
     var vectorsButton = TZToolbarButtonItem(itemIdentifier: .vectors)
     var csysButton = TZToolbarButtonItem(itemIdentifier: .csys)
-    var showWindowPanes = NSToolbarItem(itemIdentifier: .showWindowPanes)
+    var runVariantsButton = TZToolbarButtonItem(itemIdentifier: .runVariants)
+    var showWindowPanes = TZToolbarButtonItem(itemIdentifier: .showWindowPanes)
     var showHidePanesControl : NSSegmentedControl!
     
-    var defaultItemIdentifiers : [NSToolbarItem.Identifier] = [.runAnalysis, .conditions, .variables, .vectors, .csys, .flexibleSpace, .showWindowPanes]
-    var defaultItems : [NSToolbarItem] { [toggleAnalysisRun, conditionsButton, variablesButton, vectorsButton, csysButton, showWindowPanes] }
+    var defaultItemIdentifiers : [NSToolbarItem.Identifier] = [.runAnalysis, .conditions, .variables, .vectors, .csys, .runVariants, .flexibleSpace, .showWindowPanes]
+    var defaultItems : [NSToolbarItem] { [toggleAnalysisRun, conditionsButton, variablesButton, vectorsButton, csysButton, runVariantsButton, showWindowPanes] }
     
     override init(identifier: NSToolbar.Identifier) {
         super.init(identifier: identifier)
@@ -74,6 +76,8 @@ class TZToolbar: NSToolbar {
         csysButton.label = "CSYS"
         csysButton.button.image = NSImage(named: "CSYS")
         csysButton.button.imageScaling = .scaleProportionallyDown
+        
+        runVariantsButton.label = "Run Variants"
         
         super.init(identifier: "MainToolbar")
         showHidePanesControl = NSSegmentedControl(labels: ["◁","▽","▷"], trackingMode: .selectAny, target: self, action: nil)

@@ -37,13 +37,8 @@ class PlotOutputSplitViewController: TZSplitViewController, TZPlotOutputViewer {
     override func splitViewDidResizeSubviews(_ notification: Notification) {
         let newWidth = selectorViewController.view.bounds.width
         tableView.rowHeight = newWidth
-        /*if abs((newWidth - selectorViewController.storedWidth)/selectorViewController.storedWidth) > 0.2  {
-            selectorViewController.storedWidth = newWidth
-            plotViews.forEach { $0.getThumbnail() }
-        }*/
-        //selectorViewController.storedWidth = newWidth
+        tableView.tableColumns[0].width = newWidth
         tableView.reloadData()
-        selectorViewController.maxWidthConstraint.constant = splitView.bounds.width/2
     }
     
     // MARK: TZPlotOutputViewer
@@ -56,29 +51,31 @@ class PlotOutputSplitViewController: TZSplitViewController, TZPlotOutputViewer {
         //graph.defaultPlotSpace?.allowsUserInteraction = true
         viewerViewController.graphHostingView.hostedGraph = newGraph.graph
         tableView.reloadData()
-        let newWidth = selectorViewController.view.bounds.width
+        let newWidth = selectorViewController.defaultWidth//selectorViewController.view.bounds.width
         tableView.rowHeight = newWidth
+        tableView.tableColumns[0].width = newWidth
+        splitView.setPosition(newWidth, ofDividerAt: 0)
     }
 }
 
 class PlotOutputSelectorViewController: TZViewController, NSTableViewDelegate, NSTableViewDataSource {
+    let defaultWidth = CGFloat(50)
     var parentSplitViewController: PlotOutputSplitViewController!
     var plotViews: [TZPlotView]! { return parentSplitViewController?.plotViews ?? [] }
     var graphHostingView: CPTGraphHostingView? { return parentSplitViewController.viewerViewController.graphHostingView }
     @IBOutlet weak var maxWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var minWidthConstraint: NSLayoutConstraint!
-    //var storedWidth: CGFloat = 0
     
     @IBOutlet weak var tableView: NSTableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.rowHeight = 100
-        //storedWidth = 100
+        let newWidth = view.bounds.width
+        tableView.rowHeight = newWidth
         tableView.allowsColumnResizing = false
         tableView.columnAutoresizingStyle = .firstColumnOnlyAutoresizingStyle
+        tableView.alignment = .justified
     }
-
     
     // MARK: TableViewDelegate and DataSource
     func numberOfRows(in tableView: NSTableView) -> Int {
@@ -110,8 +107,8 @@ class PlotOutputViewerViewController: TZViewController {
     var plotViews: [TZPlotView]! { return parentSplitViewController?.plotViews ?? []}
 }
 
-class PlotOutputViewController: TZViewController, NSTableViewDelegate, NSTableViewDataSource, TZPlotOutputViewer {//}, CPTScatterPlotDelegate, CPTScatterPlotDataSource, CPTPlotSpaceDelegate  {
-
+class PlotOutputViewController: TZViewController, TZPlotOutputViewer {
+    
     @IBOutlet weak var tableView: NSTableView!
     @IBOutlet weak var graphHostingView: CPTGraphHostingView!
     
@@ -132,29 +129,5 @@ class PlotOutputViewController: TZViewController, NSTableViewDelegate, NSTableVi
         //graph.defaultPlotSpace?.allowsUserInteraction = true
         graphHostingView.hostedGraph = newGraph.graph       
         tableView.reloadData()
-    }
-    
-    // MARK: TableViewDelegate and DataSource
-    func numberOfRows(in tableView: NSTableView) -> Int {
-        return plotViews.count
-    }
-    
-
-    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        let curPlot = plotViews[row]
-        let tableCellView =  tableView.makeView(withIdentifier: .plotThumbnailTableCellView, owner: self) as? NSTableCellView
-        let imageView = tableCellView!.imageView!
-        imageView.image = curPlot.thumbnail
-        imageView.imageAlignment = .alignCenter
-        return tableCellView
-    }
-    
-    func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
-        return plotViews[row]
-    }
-    
-    func tableViewSelectionDidChange(_ notification: Notification) {
-        let newPlotView = plotViews[tableView.selectedRow]
-        graphHostingView.hostedGraph = newPlotView.graph
     }
 }

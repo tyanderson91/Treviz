@@ -172,23 +172,23 @@
             <objects>
                 <viewController id="Fio-tY-jcY" customClass="PlotOutputSelectorViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="kcW-k2-pLu">
-                        <rect key="frame" x="0.0" y="0.0" width="50" height="322"/>
+                        <rect key="frame" x="0.0" y="0.0" width="151" height="322"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="96" horizontalPageScroll="10" verticalLineScroll="96" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cdJ-5i-qRX" userLabel="Plot Selector Scroll View">
-                                <rect key="frame" x="0.0" y="0.0" width="50" height="322"/>
+                                <rect key="frame" x="0.0" y="0.0" width="151" height="322"/>
                                 <clipView key="contentView" id="lgC-By-4zR">
-                                    <rect key="frame" x="1" y="1" width="48" height="320"/>
+                                    <rect key="frame" x="1" y="1" width="149" height="320"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="none" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="94" rowSizeStyle="automatic" viewBased="YES" id="bfG-T6-Xtx">
-                                            <rect key="frame" x="0.0" y="0.0" width="119" height="320"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="149" height="320"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn editable="NO" width="107" minWidth="40" maxWidth="300" id="un2-9m-83p" userLabel="Plot Thumbnail column">
+                                                <tableColumn editable="NO" width="100" minWidth="10" maxWidth="1000" id="un2-9m-83p" userLabel="Plot Thumbnail column">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center">
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -197,11 +197,11 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView identifier="plotThumbnailTableCellView" id="uwy-lX-hx3">
-                                                            <rect key="frame" x="11" y="1" width="116" height="94"/>
+                                                            <rect key="frame" x="1" y="1" width="109" height="94"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="91" placeholderIntrinsicHeight="88" translatesAutoresizingMaskIntoConstraints="NO" id="AoF-6M-6oW">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="116" height="94"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="109" height="94"/>
                                                                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="imageCell:uUt-3q-pTu:image" id="uUt-3q-pTu" customClass="TZPlotThumbnailImageCell" customModule="Treviz" customModuleProvider="target"/>
                                                                 </imageView>
                                                             </subviews>
@@ -228,11 +228,11 @@
                                     </subviews>
                                 </clipView>
                                 <constraints>
-                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="250" id="b9d-bv-c7W"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="lig-08-2Kv"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="1000" id="b9d-bv-c7W"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="10" id="lig-08-2Kv"/>
                                 </constraints>
-                                <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="Gci-h6-O4v">
-                                    <rect key="frame" x="1" y="305" width="48" height="16"/>
+                                <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="Gci-h6-O4v">
+                                    <rect key="frame" x="1" y="305" width="109" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="nUb-3U-OUX">
@@ -256,7 +256,7 @@
                 </viewController>
                 <customObject id="VBA-pu-iwY" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1507" y="-1105"/>
+            <point key="canvasLocation" x="1453.5" y="-1105"/>
         </scene>
         <!--Plot Output Viewer View Controller-->
         <scene sceneID="Q6a-Zt-AlV">

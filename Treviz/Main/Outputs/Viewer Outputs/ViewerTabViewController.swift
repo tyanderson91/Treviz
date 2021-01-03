@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class ViewerTabViewController: NSTabViewController {
+class ViewerTabViewController: TZTabViewController {
 
     @IBOutlet weak var visualizerTabViewItem: NSTabViewItem!
     @IBOutlet weak var plotTabViewItem: NSTabViewItem!

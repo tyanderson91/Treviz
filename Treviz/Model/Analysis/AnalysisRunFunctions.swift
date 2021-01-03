@@ -34,7 +34,7 @@ extension Analysis {
         
         plots[2].categoryVar = dxRunVariant.parameter
         plots[2].plotType = .multiLine2d
-        if plots.count == 5 { plots.remove(at: 3) }
+        //if plots.count == 5 { plots.remove(at: 3) }
         self.runVariants = [dxRunVariant, dyRunVariant, y0RunVariant, x0RunVariant]
         self.useGroupedVariants = true
         createRunsFromVariants()
