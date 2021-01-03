@@ -32,11 +32,19 @@ extension NSUserInterfaceItemIdentifier{
     static let paramValueColumn = NSUserInterfaceItemIdentifier.init("paramValueColumn")
     static let paramTypeColumn = NSUserInterfaceItemIdentifier.init("paramVarTypeColumn")
     static let paramSummaryColumn = NSUserInterfaceItemIdentifier.init("paramSummaryColumn")
+
+    static let paramNameCellView = NSUserInterfaceItemIdentifier.init("paramNameCellView")
     static let paramTypeCellView = NSUserInterfaceItemIdentifier.init("variantTypePopupCellView")
     static let paramSummaryCellView = NSUserInterfaceItemIdentifier.init("paramSummaryCellView")
     static let paramValueCellView = NSUserInterfaceItemIdentifier.init("paramValueCellView")
+    
+    static let distributionColumn = NSUserInterfaceItemIdentifier.init("distributionColumn")
     static let distributionCellView = NSUserInterfaceItemIdentifier.init("distributionCellView")
+    static let distributionParam0Column = NSUserInterfaceItemIdentifier.init("distributionParam0Column")
+    static let distributionParam1Column = NSUserInterfaceItemIdentifier.init("distributionParam1Column")
     static let distributionParamCellView = NSUserInterfaceItemIdentifier.init("distributionParamCellView")
+    static let distributionParam0CellView = NSUserInterfaceItemIdentifier.init("distributionParam0CellView")
+    static let distributionParam1CellView = NSUserInterfaceItemIdentifier.init("distributionParam1CellView")
     static let paramPopupCellView = NSUserInterfaceItemIdentifier.init("paramPopupCellView")
     static let paramCheckboxCellView = NSUserInterfaceItemIdentifier.init("paramCheckboxCellView")
 }

@@ -150,6 +150,32 @@ class AnalysisDoc: NSDocument {
             if let stryaml = String(data: data, encoding: String.Encoding.utf8) {
                 analysis = try decoder.decode(Analysis.self, from: stryaml, userInfo: userOptions)
             }
+            let dxRunVariant = VariableRunVariant(param: analysis.phases[0].allParams.first(where: {$0.id == "default.dx"})!)!
+            dxRunVariant.tradeValues = [3, 9, 33.6]
+            dxRunVariant.variantType = .trade
+            let dyRunVariant = VariableRunVariant(param: analysis.phases[0].allParams.first(where: {$0.id == "default.dy"})!)!
+            dyRunVariant.tradeValues = [50, 30, 15]
+            dyRunVariant.variantType = .trade
+            let y0RunVariant = VariableRunVariant(param: analysis.phases[0].allParams.first(where: {$0.id == "default.y"})!)!
+            y0RunVariant.min = 0
+            y0RunVariant.max = 5
+            y0RunVariant.variantType = .montecarlo
+            y0RunVariant.distributionType = .uniform
+            
+            let x0RunVariant = VariableRunVariant(param: analysis.phases[0].allParams.first(where: {$0.id == "default.x"})!)!
+            x0RunVariant.min = 0
+            x0RunVariant.max = 5
+            x0RunVariant.variantType = .montecarlo
+            x0RunVariant.distributionType = .uniform
+            analysis.numMonteCarloRuns = 3
+            
+            analysis.plots[2].categoryVar = dxRunVariant.parameter
+            analysis.plots[2].plotType = .multiLine2d
+            //if plots.count == 5 { plots.remove(at: 3) }
+            analysis.runVariants = [dxRunVariant, dyRunVariant, y0RunVariant, x0RunVariant]
+            analysis.runVariants.forEach({$0.parameter.isParam = true})
+            analysis.useGroupedVariants = true
+            
         case "public.json":
             let decoder = JSONDecoder()
             analysis = try decoder.decode(Analysis.self, from: data)

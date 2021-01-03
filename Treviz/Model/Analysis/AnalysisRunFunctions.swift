@@ -13,32 +13,8 @@ import Cocoa
 extension Analysis {
         
     func runAnalysis() {
-        let dxRunVariant = VariableRunVariant(param: phases[0].allParams.first(where: {$0.id == "default.dx"})!)!
-        dxRunVariant.tradeValues = [3, 9, 33.6]
-        dxRunVariant.variantType = .trade
-        let dyRunVariant = VariableRunVariant(param: phases[0].allParams.first(where: {$0.id == "default.dy"})!)!
-        dyRunVariant.tradeValues = [50, 30, 15]
-        dyRunVariant.variantType = .trade
-        let y0RunVariant = VariableRunVariant(param: phases[0].allParams.first(where: {$0.id == "default.y"})!)!
-        y0RunVariant.min = 0
-        y0RunVariant.max = 5
-        y0RunVariant.variantType = .montecarlo
-        y0RunVariant.distributionType = .uniform
-        
-        let x0RunVariant = VariableRunVariant(param: phases[0].allParams.first(where: {$0.id == "default.x"})!)!
-        x0RunVariant.min = 0
-        x0RunVariant.max = 5
-        x0RunVariant.variantType = .montecarlo
-        x0RunVariant.distributionType = .uniform
-        self.numMonteCarloRuns = 3
-        
-        plots[2].categoryVar = dxRunVariant.parameter
-        plots[2].plotType = .multiLine2d
-        //if plots.count == 5 { plots.remove(at: 3) }
-        self.runVariants = [dxRunVariant, dyRunVariant, y0RunVariant, x0RunVariant]
-        self.useGroupedVariants = true
-        createRunsFromVariants()
 
+        createRunsFromVariants()
         guard !runs.isEmpty else {
             logMessage("No runs found to process. Aborting")
             return

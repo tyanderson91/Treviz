@@ -131,6 +131,7 @@ class InputsViewController: TZViewController {
     
     func reloadParams(){
         runVariantViewController.tableView.reloadData()
+        runVariantViewController.mcRunVariantTableView.reloadData()
     }
     
     

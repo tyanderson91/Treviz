@@ -8,9 +8,9 @@
 
 import Foundation
 
-enum DistributionType: String {
-    case normal
-    case uniform
+enum DistributionType: String, CaseIterable {
+    case normal = "Normal"
+    case uniform = "Uniform"
 }
 
 enum RunVariantType: String, CaseIterable {
@@ -30,6 +30,11 @@ struct DummyParam : Parameter {
 }
 /** Placeholder class used in creating Runs when other run variants are not used*/
 class DummyRunVariant: RunVariant, MCRunVariant {
+    var distributionType: DistributionType = .normal
+    var mean: VarValue?
+    var sigma: VarValue?
+    var min: VarValue?
+    var max: VarValue?
     init(){
         super.init(param: DummyParam())!
     }
@@ -41,8 +46,14 @@ class DummyRunVariant: RunVariant, MCRunVariant {
 
 /** Type of run variant that can return a random value to be used in monte-carlo analysis*/
 protocol MCRunVariant {
+    var parameter: Parameter {get set}
     var paramID: ParamID {get}
     func randomValue(seed: Double?)->VarValue
+    var distributionType: DistributionType {get set}
+    var mean: VarValue? {get set}
+    var sigma: VarValue? {get set}
+    var min: VarValue? {get set}
+    var max: VarValue? {get set}
 }
 
 /**
