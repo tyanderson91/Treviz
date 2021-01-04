@@ -34,6 +34,18 @@ extension InputsViewController {
         }
         return newView
     }
+    
+    static func groupNameCellView(view: NSTableView, groupName: String?, groupNum: Int?)->NSTableCellView?{
+        let newView = view.makeView(withIdentifier: .nameCellView, owner: self) as? NSTableCellView
+        if let textField = newView?.textField{
+            if groupName != nil && groupName != "" {
+                textField.stringValue = groupName!
+            } else if groupNum != nil {
+                textField.stringValue = "Group \(groupNum!+1)"
+            }
+        }
+        return newView
+    }
 }
 
 class RunVariantOverviewTableDelegate: NSObject, NSTableViewDelegate, NSTableViewDataSource {
@@ -155,7 +167,7 @@ class RunVariantMCTableDelegate: NSObject, NSTableViewDelegate, NSTableViewDataS
     func numberOfRows(in tableView: NSTableView) -> Int {
         return paramSettings.count
     }
-    
+    /*
     func tableView(_ tableView: NSTableView, setObjectValue object: Any?, for tableColumn: NSTableColumn?, row: Int) {
         var thisParam = paramSettings[row]
         var paramIndex: Int
@@ -167,7 +179,7 @@ class RunVariantMCTableDelegate: NSObject, NSTableViewDelegate, NSTableViewDataS
         let newNum = object as? VarValue
         let newStr = object as? String
         thisParam.distributionParams[paramIndex] = VarValue(stringLiteral: newStr!)
-    }
+    }*/
     @IBAction func didEditMCParamValue(_ sender: Any) {
         guard let thisView = sender as? NSTextField else { return }
         let newVal = VarValue(stringLiteral: thisView.stringValue)
@@ -204,6 +216,56 @@ class RunVariantMCTableDelegate: NSObject, NSTableViewDelegate, NSTableViewDataS
     
 }
 
+protocol TradeTableViewDelegate : NSTableViewDelegate, NSTableViewDataSource{
+    var analysis: Analysis! { get set }
+    var runVariants: [RunVariant] { get }
+    var tableView: NSTableView! { get set }
+}
+extension TradeTableViewDelegate {
+    var runVariants: [RunVariant] { return analysis.tradeRunVariants }
+}
+class GroupedTradeTableDelegate: NSObject, TradeTableViewDelegate {
+    var analysis: Analysis!
+    var tableView: NSTableView!
+    
+    func numberOfRows(in tableView: NSTableView) -> Int {
+        return analysis.numTradeGroups
+    }
+    
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+        
+        let curIndex = tableView.column(withIdentifier: tableColumn!.identifier)
+        if curIndex == 0 {
+            var groupName : String?
+            if analysis.tradeGroups.count > row {
+                groupName = analysis.tradeGroups[row].groupDescription
+            }
+            let groupView = InputsViewController.groupNameCellView(view: tableView, groupName: groupName, groupNum: row)
+            return groupView
+        }
+        
+        guard let matchingVariant = analysis.tradeRunVariants.first(where: {$0.paramID == tableColumn?.identifier.rawValue}) else { return nil }
+        
+        if matchingVariant.tradeValues.count < row { return nil }
+        else if matchingVariant.tradeValues.count == row { return nil }// Return Add button }
+        
+        // Value cell views
+        if let thisEnumVariant = matchingVariant as? EnumGroupRunVariant {
+            return InputsViewController.runVariantPopupCellView(view: tableView, thisVariant: thisEnumVariant, option: row)
+        } else if let thisBoolVariant = matchingVariant as? BoolRunVariant {
+            return InputsViewController.runVariantCheckboxCellView(view: tableView, thisVariant: thisBoolVariant, option: row)
+        } else {
+            let newView = InputsViewController.runVariantValueCellView(view: tableView, thisVariant: matchingVariant, option: row)
+            return newView
+        }
+    }
+}
+
+class PermutationsTradeTableDelegate: NSObject, TradeTableViewDelegate {
+    var analysis: Analysis!
+    var tableView: NSTableView!
+}
+
 class RunVariantViewController: TZViewController {
     
     @IBOutlet weak var tableView: NSTableView!
@@ -212,8 +274,14 @@ class RunVariantViewController: TZViewController {
     var inputsViewController: InputsViewController?
     var overviewDelegate = RunVariantOverviewTableDelegate()
     @IBOutlet var mcDelegate: RunVariantMCTableDelegate!
+    
+    var currentTradeTableDelegate: TradeTableViewDelegate!
+    @IBOutlet var groupsDelegate: GroupedTradeTableDelegate!
+    @IBOutlet var permuationsDelegate: PermutationsTradeTableDelegate!
+    
     @IBOutlet weak var mcRunVariantTableView: NSTableView!
     @IBOutlet weak var tradesRunVariantTableView: NSTableView!
+    let minTradesColumnWidth: CGFloat = 35
     @IBOutlet weak var numMCRunsTextField: NSTextField!
     @IBOutlet weak var numRunsTotalTextField: NSTextField!
     @IBOutlet weak var groupTradesRadioButton: NSButton!
@@ -236,8 +304,23 @@ class RunVariantViewController: TZViewController {
         numMCRunsTextField.stringValue = analysis.numMonteCarloRuns.valuestr
         numRunsTotalTextField.stringValue = analysis.numRuns.valuestr
         
-        if analysis.useGroupedVariants { groupTradesRadioButton.state = .on }
-        else { permuteTradesRadioButton.state = .on }
+        groupsDelegate.analysis = analysis; permuationsDelegate.analysis = analysis
+        groupsDelegate.tableView = tradesRunVariantTableView; permuationsDelegate.tableView = tradesRunVariantTableView
+        
+        if analysis.useGroupedVariants {groupTradesRadioButton.state = .on; currentTradeTableDelegate = groupsDelegate }
+        else { permuteTradesRadioButton.state = .on; currentTradeTableDelegate = permuationsDelegate }
+        
+        for thisVariant in currentTradeTableDelegate.runVariants {
+            addRemoveTradeVariantCol(shouldAdd: true, runVariant: thisVariant)
+        }
+        tradesRunVariantTableView.delegate = currentTradeTableDelegate
+        tradesRunVariantTableView.dataSource = currentTradeTableDelegate
+        tradesRunVariantTableView.reloadData()
+    }
+    
+    override func viewWillAppear() {
+        super.viewWillAppear()
+        //tradesRunVariantTableView.sizeToFit()
     }
     
     @IBAction func removeParamPressed(_ sender: Any) {
@@ -268,9 +351,34 @@ class RunVariantViewController: TZViewController {
         }
     }
     
+    private func addRemoveTradeVariantCol(shouldAdd: Bool, runVariant: RunVariant){
+        let identifier = NSUserInterfaceItemIdentifier(rawValue: runVariant.paramID)
+        if shouldAdd {
+            let newCol = NSTableColumn(identifier: identifier)
+            newCol.minWidth = minTradesColumnWidth
+            newCol.title = runVariant.parameter.name
+            newCol.headerCell.alignment = .center
+            tradesRunVariantTableView.addTableColumn(newCol)
+        } else {
+            let matchingColNum = tradesRunVariantTableView.column(withIdentifier: identifier)
+            let matchingCol = tradesRunVariantTableView.tableColumns[matchingColNum]
+            tradesRunVariantTableView.removeTableColumn(matchingCol)
+        }
+    }
+    
     @IBAction func editVariantType(_ sender: Any) {
         guard let senderTypeButton = sender as? RunVariantTypeView else { return }
-        senderTypeButton.runVariant.variantType = RunVariantType(rawValue: senderTypeButton.title) ?? .single
+        let curRunVariant = senderTypeButton.runVariant
+        let oldType = curRunVariant?.variantType
+        let newType = RunVariantType(rawValue: senderTypeButton.title) ?? .single
+        curRunVariant?.variantType = newType
+        if newType == .trade && oldType != .trade {
+            addRemoveTradeVariantCol(shouldAdd: true, runVariant: curRunVariant!)
+        } else if oldType == .trade && newType != .trade {
+            addRemoveTradeVariantCol(shouldAdd: false, runVariant: curRunVariant!)
+        }
+        tradesRunVariantTableView.reloadData()
+        tradesRunVariantTableView.sizeToFit()
         mcRunVariantTableView.reloadData()
     }
     
@@ -290,5 +398,23 @@ class RunVariantViewController: TZViewController {
         default:
             return
         }
+    }
+    @IBAction func removeTradeGroup(_ sender: Any) {
+        guard let senderButton = sender as? NSButton else { return }
+        let matchingGroupNum = tradesRunVariantTableView.row(for: senderButton)
+        for thisVariant in analysis.tradeRunVariants {
+            thisVariant.tradeValues.remove(at: matchingGroupNum)
+        }
+        tradesRunVariantTableView.reloadData()
+    }
+    @IBAction func renameTradeGroup(_ sender: Any) {
+    }
+    @IBAction func editTradeGroupValue(_ sender: Any) {
+        guard let button = sender as? NSTextField else { return }
+        let newVal = button.stringValue
+        let matchingRow = tradesRunVariantTableView.row(for: button)
+        let matchingColumn = tradesRunVariantTableView.column(for: button) - 1
+        let matchingVariant = analysis.tradeRunVariants[matchingColumn]
+        matchingVariant.tradeValues[matchingRow] = VarValue(stringLiteral: newVal)!
     }
 }

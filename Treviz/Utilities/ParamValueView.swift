@@ -165,6 +165,42 @@ extension InputsViewController {
     }
 }
 
+//MARK: Run Variant Trade Groups
+extension InputsViewController {
+    static func runVariantValueCellView(view: NSTableView, thisVariant: RunVariant?, option: Int)->ParamValueTextView? {
+        guard thisVariant != nil else {return nil}
+        let newView = view.makeView(withIdentifier: .paramValueCellView, owner: self) as? ParamValueTextView
+        guard thisVariant!.tradeValues.count >= option else { return nil }
+        let curOption = thisVariant!.tradeValues[option]
+        if let textField = newView?.textField {
+            textField.stringValue = curOption.valuestr
+        }
+        return newView
+    }
+    static func runVariantPopupCellView(view: NSTableView, thisVariant: RunVariant?, option: Int)->ParamValuePopupView? {
+        guard thisVariant != nil else {return nil}
+        guard thisVariant!.tradeValues.count >= option else { return nil }
+        let newView = view.makeView(withIdentifier: .paramPopupCellView, owner: self) as? ParamValuePopupView
+        let curOption = thisVariant?.tradeValues[option]
+        newView?.removeAllItems()
+        newView?.addItems(withTitles: thisVariant!.tradeValues.map {$0.valuestr})
+        newView?.selectItem(withTitle: curOption!.valuestr)
+        return newView
+    }
+    static func runVariantCheckboxCellView(view: NSTableView, thisVariant: RunVariant?, option: Int)->ParamValueCheckboxView? {
+        guard thisVariant != nil else {return nil}
+        let newView = view.makeView(withIdentifier: .paramCheckboxCellView, owner: self) as? ParamValueCheckboxView
+        if option == 0 {
+            newView?.state = .off
+            newView?.title = "Off"
+        } else if option == 1 {
+            newView?.state = .on
+            newView?.title = "On"
+        } else { return nil }
+        return newView
+    }
+}
+
 class RunVariantTypeView: NSPopUpButton {
     var runVariant: RunVariant!
     required init?(coder: NSCoder) {

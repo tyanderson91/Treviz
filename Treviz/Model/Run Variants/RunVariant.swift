@@ -56,6 +56,14 @@ protocol MCRunVariant {
     var max: VarValue? {get set}
 }
 
+extension Analysis {
+    var tradeRunVariants: [RunVariant] {
+        return runVariants.filter { $0.variantType == .trade }
+    }
+    var mcRunVariants: [MCRunVariant] {
+        return runVariants.filter { $0 is MCRunVariant && $0.variantType == .montecarlo } as! [MCRunVariant]
+    }
+}
 /**
  A set of configuration parameters that describes how to vary a single parameter within an analysis, whether through monte-carlo dispersions or distinct variations within a trade study
  */
