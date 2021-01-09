@@ -182,9 +182,9 @@ extension Analysis {
             runGenerator.tradeGroupDescriptions = []
             for thisVariant in tradeVariants {
                 let paramID = thisVariant.paramID
-                let paramVal = thisVariant.tradeValues[i].valuestr
-                runGenerator.paramSettings[paramID] = paramVal
-                runGenerator.tradeGroupDescriptions.append("\(paramID)=\(paramVal)")
+                let paramVal = thisVariant.tradeValues[i]?.valuestr
+                runGenerator.paramSettings[paramID] = paramVal ?? thisVariant.parameter.stringValue
+                runGenerator.tradeGroupDescriptions.append("\(paramID)=\(paramVal ?? "?")")
             }
             runGenerator.curTradeGroupNum = i
             let curTradeGroup = self.tradeGroups[runGenerator.curTradeGroupNum]
@@ -208,7 +208,7 @@ extension Analysis {
         let inputGroupDescriptions = inputRunGenerator.tradeGroupDescriptions
         for thisValue in curVariant.tradeValues {
             let paramID = curVariant.paramID
-            let paramVal = thisValue.valuestr
+            let paramVal = thisValue?.valuestr ?? curVariant.parameter.stringValue
             runGenerator.paramSettings[paramID] = paramVal
             runGenerator.tradeGroupDescriptions = inputGroupDescriptions
             runGenerator.tradeGroupDescriptions.append("\(paramID)=\(paramVal)")

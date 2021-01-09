@@ -172,20 +172,21 @@
             <objects>
                 <viewController id="Fio-tY-jcY" customClass="PlotOutputSelectorViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="kcW-k2-pLu">
-                        <rect key="frame" x="0.0" y="0.0" width="151" height="322"/>
+                        <rect key="frame" x="0.0" y="0.0" width="150" height="322"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <scrollView autohidesScrollers="YES" horizontalLineScroll="96" horizontalPageScroll="10" verticalLineScroll="96" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cdJ-5i-qRX" userLabel="Plot Selector Scroll View">
-                                <rect key="frame" x="0.0" y="0.0" width="151" height="322"/>
+                            <scrollView autohidesScrollers="YES" horizontalLineScroll="96" horizontalPageScroll="10" verticalLineScroll="96" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="cdJ-5i-qRX" userLabel="Plot Selector Scroll View" customClass="PlotSelectorScrollView" customModule="Treviz" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="150" height="322"/>
                                 <clipView key="contentView" id="lgC-By-4zR">
-                                    <rect key="frame" x="1" y="1" width="149" height="320"/>
+                                    <rect key="frame" x="1" y="1" width="148" height="320"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="none" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="94" rowSizeStyle="automatic" viewBased="YES" id="bfG-T6-Xtx">
-                                            <rect key="frame" x="0.0" y="0.0" width="149" height="320"/>
+                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="none" tableStyle="fullWidth" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="94" rowSizeStyle="automatic" viewBased="YES" id="bfG-T6-Xtx">
+                                            <rect key="frame" x="0.0" y="0.0" width="148" height="320"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            <size key="intercellSpacing" width="3" height="2"/>
+                                            <size key="intercellSpacing" width="0.0" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            <tableViewGridLines key="gridStyleMask" horizontal="YES"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
                                                 <tableColumn editable="NO" width="100" minWidth="10" maxWidth="1000" id="un2-9m-83p" userLabel="Plot Thumbnail column">
@@ -197,7 +198,7 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView identifier="plotThumbnailTableCellView" id="uwy-lX-hx3">
-                                                            <rect key="frame" x="1" y="1" width="109" height="94"/>
+                                                            <rect key="frame" x="0.0" y="1" width="109" height="94"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="91" placeholderIntrinsicHeight="88" translatesAutoresizingMaskIntoConstraints="NO" id="AoF-6M-6oW">
@@ -231,8 +232,9 @@
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="1000" id="b9d-bv-c7W"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="10" id="lig-08-2Kv"/>
                                 </constraints>
+                                <edgeInsets key="contentInsets" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
                                 <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="Gci-h6-O4v">
-                                    <rect key="frame" x="1" y="305" width="109" height="16"/>
+                                    <rect key="frame" x="-100" y="-100" width="109" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="nUb-3U-OUX">
@@ -251,6 +253,7 @@
                     <connections>
                         <outlet property="maxWidthConstraint" destination="b9d-bv-c7W" id="xre-OJ-T2h"/>
                         <outlet property="minWidthConstraint" destination="lig-08-2Kv" id="hfL-Q8-Iux"/>
+                        <outlet property="scrollView" destination="cdJ-5i-qRX" id="FiO-hA-vMW"/>
                         <outlet property="tableView" destination="bfG-T6-Xtx" id="CBS-gP-sGU"/>
                     </connections>
                 </viewController>

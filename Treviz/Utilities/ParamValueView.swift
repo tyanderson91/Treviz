@@ -172,8 +172,11 @@ extension InputsViewController {
         let newView = view.makeView(withIdentifier: .paramValueCellView, owner: self) as? ParamValueTextView
         guard thisVariant!.tradeValues.count >= option else { return nil }
         let curOption = thisVariant!.tradeValues[option]
-        if let textField = newView?.textField {
-            textField.stringValue = curOption.valuestr
+        guard let textField = newView?.textField else { return nil }
+        if let curVal = curOption?.valuestr {
+            textField.stringValue = curVal
+        } else {
+            textField.stringValue = ""
         }
         return newView
     }
@@ -183,7 +186,7 @@ extension InputsViewController {
         let newView = view.makeView(withIdentifier: .paramPopupCellView, owner: self) as? ParamValuePopupView
         let curOption = thisVariant?.tradeValues[option]
         newView?.removeAllItems()
-        newView?.addItems(withTitles: thisVariant!.tradeValues.map {$0.valuestr})
+        newView?.addItems(withTitles: thisVariant!.tradeValues.filter({$0 != nil}).map( {$0!.valuestr }))
         newView?.selectItem(withTitle: curOption!.valuestr)
         return newView
     }

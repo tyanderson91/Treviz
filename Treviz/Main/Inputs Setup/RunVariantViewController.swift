@@ -216,26 +216,54 @@ class RunVariantMCTableDelegate: NSObject, NSTableViewDelegate, NSTableViewDataS
     
 }
 
-protocol TradeTableViewDelegate : NSTableViewDelegate, NSTableViewDataSource{
-    var analysis: Analysis! { get set }
-    var runVariants: [RunVariant] { get }
-    var tableView: NSTableView! { get set }
-}
-extension TradeTableViewDelegate {
-    var runVariants: [RunVariant] { return analysis.tradeRunVariants }
-}
-class GroupedTradeTableDelegate: NSObject, TradeTableViewDelegate {
-    var analysis: Analysis!
-    var tableView: NSTableView!
+class PermutationTradeTableViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource {
+    var representedVariant: RunVariant!
+    var column: NSTableColumn? { return tableView?.tableColumns.first ?? nil}
+    @IBOutlet weak var scrollView: NSScrollView!
+    @IBOutlet weak var tableView: NSTableView!
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return analysis.numTradeGroups
+        return representedVariant.tradeValues.count + 1
+    }
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+        // Value cell views
+        if row >= representedVariant.tradeValues.count {
+            let thisButton = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier.init("addValueButton"), owner: InputsViewController.self)
+            return thisButton
+        } else {
+            if let thisEnumVariant = representedVariant as? EnumGroupRunVariant {
+                return InputsViewController.runVariantPopupCellView(view: tableView, thisVariant: thisEnumVariant, option: row)
+            } else if let thisBoolVariant = representedVariant as? BoolRunVariant {
+                return InputsViewController.runVariantCheckboxCellView(view: tableView, thisVariant: thisBoolVariant, option: row)
+            } else {
+                let newView = InputsViewController.runVariantValueCellView(view: tableView, thisVariant: representedVariant, option: row)
+                return newView
+            }
+        }
+    }
+    @IBAction func addValue(_ sender: Any) {
+        representedVariant.tradeValues.append(nil)
+        self.tableView.reloadData()
+    }
+}
+
+class GroupedTradeTableDelegate: NSObject, NSTableViewDelegate, NSTableViewDataSource {
+    var analysis: Analysis!
+    var tableView: NSTableView!
+    var runVariants: [RunVariant] { return analysis.tradeRunVariants }
+    
+    func numberOfRows(in tableView: NSTableView) -> Int {
+        return analysis.numTradeGroups + 1
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         
         let curIndex = tableView.column(withIdentifier: tableColumn!.identifier)
         if curIndex == 0 {
+            if row == analysis.numTradeGroups {
+                let newView = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier("newTradeGroupButton"), owner: InputsViewController.self)
+                return newView
+            }
             var groupName : String?
             if analysis.tradeGroups.count > row {
                 groupName = analysis.tradeGroups[row].groupDescription
@@ -243,6 +271,7 @@ class GroupedTradeTableDelegate: NSObject, TradeTableViewDelegate {
             let groupView = InputsViewController.groupNameCellView(view: tableView, groupName: groupName, groupNum: row)
             return groupView
         }
+        if row == analysis.numTradeGroups { return nil }
         
         guard let matchingVariant = analysis.tradeRunVariants.first(where: {$0.paramID == tableColumn?.identifier.rawValue}) else { return nil }
         
@@ -261,11 +290,6 @@ class GroupedTradeTableDelegate: NSObject, TradeTableViewDelegate {
     }
 }
 
-class PermutationsTradeTableDelegate: NSObject, TradeTableViewDelegate {
-    var analysis: Analysis!
-    var tableView: NSTableView!
-}
-
 class RunVariantViewController: TZViewController {
     
     @IBOutlet weak var tableView: NSTableView!
@@ -274,10 +298,12 @@ class RunVariantViewController: TZViewController {
     var inputsViewController: InputsViewController?
     var overviewDelegate = RunVariantOverviewTableDelegate()
     @IBOutlet var mcDelegate: RunVariantMCTableDelegate!
+    @IBOutlet weak var permutationsStackView: NSStackView!
+    var permutationsTableViews: [NSTableView] = []
+    var permutationsDelegates: [PermutationTradeTableViewController] = []
+    @IBOutlet weak var permutationsScrollView: NSScrollView!
     
-    var currentTradeTableDelegate: TradeTableViewDelegate!
     @IBOutlet var groupsDelegate: GroupedTradeTableDelegate!
-    @IBOutlet var permuationsDelegate: PermutationsTradeTableDelegate!
     
     @IBOutlet weak var mcRunVariantTableView: NSTableView!
     @IBOutlet weak var tradesRunVariantTableView: NSTableView!
@@ -286,6 +312,7 @@ class RunVariantViewController: TZViewController {
     @IBOutlet weak var numRunsTotalTextField: NSTextField!
     @IBOutlet weak var groupTradesRadioButton: NSButton!
     @IBOutlet weak var permuteTradesRadioButton: NSButton!
+    @IBOutlet weak var tradeViewsStackView: CollapsibleStackView!
     
     override func viewDidLoad() {
         overviewDelegate.analysis = analysis
@@ -304,20 +331,48 @@ class RunVariantViewController: TZViewController {
         numMCRunsTextField.stringValue = analysis.numMonteCarloRuns.valuestr
         numRunsTotalTextField.stringValue = analysis.numRuns.valuestr
         
-        groupsDelegate.analysis = analysis; permuationsDelegate.analysis = analysis
-        groupsDelegate.tableView = tradesRunVariantTableView; permuationsDelegate.tableView = tradesRunVariantTableView
+        groupsDelegate.analysis = analysis
+        groupsDelegate.tableView = tradesRunVariantTableView
         
-        if analysis.useGroupedVariants {groupTradesRadioButton.state = .on; currentTradeTableDelegate = groupsDelegate }
-        else { permuteTradesRadioButton.state = .on; currentTradeTableDelegate = permuationsDelegate }
+        if analysis.useGroupedVariants {
+            groupTradesRadioButton.state = .on
+            tradeViewsStackView.showHideViews(.hide, index: [1])
+        }
+        else {
+            permuteTradesRadioButton.state = .on
+            tradeViewsStackView.showHideViews(.hide, index: [0])
+        }
         
-        for thisVariant in currentTradeTableDelegate.runVariants {
+        for thisVariant in groupsDelegate.runVariants {
             addRemoveTradeVariantCol(shouldAdd: true, runVariant: thisVariant)
         }
-        tradesRunVariantTableView.delegate = currentTradeTableDelegate
-        tradesRunVariantTableView.dataSource = currentTradeTableDelegate
+        tradesRunVariantTableView.delegate = groupsDelegate
+        tradesRunVariantTableView.dataSource = groupsDelegate
         tradesRunVariantTableView.reloadData()
     }
     
+    func loadPermutationsView() {
+        permutationsDelegates = []
+        permutationsTableViews = []
+        permutationsStackView.arrangedSubviews.forEach({permutationsStackView.removeArrangedSubview($0)})
+        for thisVariant in analysis.tradeRunVariants {
+            let thisNam = thisVariant.parameter.name
+            /*let newScrollView = NSScrollView()
+            let newTable = NSTableView()
+            let newCol = NSTableColumn(identifier: NSUserInterfaceItemIdentifier(rawValue: thisVariant.paramID))
+            newCol.width = 30.0
+            newCol.title = thisNam
+            newTable.addTableColumn(newCol)*/
+            let storyboard = NSStoryboard(name: "Inputs", bundle: nil)
+            let newController: PermutationTradeTableViewController = storyboard.instantiateController(identifier: "permutationsTableViewController")
+            newController.representedVariant = thisVariant
+            permutationsDelegates.append(newController)
+            permutationsStackView.addArrangedSubview(newController.view)
+            newController.tableView.reloadData()
+            newController.column?.title = thisNam
+            newController.view.setContentHuggingPriority(NSLayoutConstraint.Priority(rawValue: 900), for: .horizontal)
+        }
+    }
     override func viewWillAppear() {
         super.viewWillAppear()
         //tradesRunVariantTableView.sizeToFit()
@@ -393,8 +448,13 @@ class RunVariantViewController: TZViewController {
         switch button.identifier?.rawValue {
         case "groupTradesRadioButton":
             permuteTradesRadioButton.state = .off
+            tradeViewsStackView.showHideViews(.hide, index: [1])
+            tradeViewsStackView.showHideViews(.show, index: [0])
         case "permuteTradesRadioButton":
             groupTradesRadioButton.state = .off
+            tradeViewsStackView.showHideViews(.hide, index: [0])
+            tradeViewsStackView.showHideViews(.show, index: [1])
+            loadPermutationsView()
         default:
             return
         }
@@ -405,6 +465,11 @@ class RunVariantViewController: TZViewController {
         for thisVariant in analysis.tradeRunVariants {
             thisVariant.tradeValues.remove(at: matchingGroupNum)
         }
+        tradesRunVariantTableView.reloadData()
+    }
+    @IBAction func addTradeGroup(_ sender: Any) {
+        let nilVal: StringValue? = nil
+        analysis.tradeRunVariants.forEach({$0.tradeValues.append(nilVal)})
         tradesRunVariantTableView.reloadData()
     }
     @IBAction func renameTradeGroup(_ sender: Any) {

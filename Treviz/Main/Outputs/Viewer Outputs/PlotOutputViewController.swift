@@ -36,9 +36,13 @@ class PlotOutputSplitViewController: TZSplitViewController, TZPlotOutputViewer {
     
     override func splitViewDidResizeSubviews(_ notification: Notification) {
         let newWidth = selectorViewController.view.bounds.width
+        //let contentWidth = selectorViewController.scrollView.contentView.bounds.width
         tableView.rowHeight = newWidth
         tableView.tableColumns[0].width = newWidth
         tableView.reloadData()
+        //let docWidth = selectorViewController.scrollView.documentView?.bounds.width
+        //let contWidth = selectorViewController.scrollView.contentView.bounds.width
+        //let scrollWidth = selectorViewController.scrollView.bounds.width
     }
     
     // MARK: TZPlotOutputViewer
@@ -57,12 +61,38 @@ class PlotOutputSplitViewController: TZSplitViewController, TZPlotOutputViewer {
         splitView.setPosition(newWidth, ofDividerAt: 0)
     }
 }
+class PlotSelectorScrollView: NSScrollView {
+    var currentScrollIsHorizontal: Bool = true;
+
+    override func scrollWheel(with event: NSEvent) { // https://stackoverflow.com/a/31930488
+
+        let phase: NSEvent.Phase = event.phase
+
+        // Ensure that both scrollbars are flashed when the user taps trackpad with two fingers
+        if (phase == .mayBegin) {
+            super.scrollWheel(with: event) ;
+            self.nextResponder?.scrollWheel(with: event);
+            return;
+        }
+        // Check the scroll direction only at the beginning of a gesture for modern scrolling devices
+        // Check every event for legacy scrolling devices
+        if (phase == .began || (phase == .stationary && event.momentumPhase == .stationary)) {
+            currentScrollIsHorizontal = abs(event.scrollingDeltaX) > abs(event.scrollingDeltaY);
+        }
+        if (!currentScrollIsHorizontal ) {
+            super.scrollWheel(with: event);
+        } else {
+            self.nextResponder!.scrollWheel(with: event);
+        }
+    }
+}
 
 class PlotOutputSelectorViewController: TZViewController, NSTableViewDelegate, NSTableViewDataSource {
     let defaultWidth = CGFloat(50)
     var parentSplitViewController: PlotOutputSplitViewController!
     var plotViews: [TZPlotView]! { return parentSplitViewController?.plotViews ?? [] }
     var graphHostingView: CPTGraphHostingView? { return parentSplitViewController.viewerViewController.graphHostingView }
+    @IBOutlet weak var scrollView: PlotSelectorScrollView!
     @IBOutlet weak var maxWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var minWidthConstraint: NSLayoutConstraint!
     
@@ -75,6 +105,9 @@ class PlotOutputSelectorViewController: TZViewController, NSTableViewDelegate, N
         tableView.allowsColumnResizing = false
         tableView.columnAutoresizingStyle = .firstColumnOnlyAutoresizingStyle
         tableView.alignment = .justified
+        scrollView.horizontalScrollElasticity = .none
+        tableView.intercellSpacing.width = 0
+        tableView.intercellSpacing.height = 0
     }
     
     // MARK: TableViewDelegate and DataSource

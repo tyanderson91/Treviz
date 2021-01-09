@@ -76,7 +76,7 @@ class RunVariant: Codable {
     var curValue: StringValue { return "" }
     var options: [StringValue] = [] // The list of valid alternatives
     var variantType: RunVariantType = .single
-    var tradeValues: [StringValue] = [] // List of variants to be used in trade study
+    var tradeValues: [StringValue?] = [] // List of variants to be used in trade study
     var parameter: Parameter
     func setValue(from string: String) {return}
     var paramVariantSummary: String { get { return "" } }
