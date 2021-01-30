@@ -57,6 +57,10 @@ class TZPlotView: NSObject, CPTScatterPlotDelegate, CPTScatterPlotDataSource, CP
         let lineStyles: [CPTMutableLineStyle] = [.init(TZLineStyle(color: .init(red: 1.0, green: 0.0, blue: 0.0, alpha: 1.0), lineWidth: 1.0)),
             .init(TZLineStyle(color: .init(red: 0.0, green: 1.0, blue: 0.0, alpha: 1.0), lineWidth: 1.0)),
             .init(TZLineStyle(color: .init(red: 0.0, green: 0.0, blue: 1.0, alpha: 1.0), lineWidth: 1.0)),
+            .init(TZLineStyle(color: .init(red: 1.0, green: 1.0, blue: 0.0, alpha: 1.0), lineWidth: 1.0)),
+            .init(TZLineStyle(color: .init(red: 1.0, green: 0.0, blue: 1.0, alpha: 1.0), lineWidth: 1.0)),
+            .init(TZLineStyle(color: .init(red: 0.0, green: 1.0, blue: 1.0, alpha: 1.0), lineWidth: 1.0)),
+            .init(TZLineStyle(color: .init(red: 0.0, green: 0.0, blue: 0.0, alpha: 1.0), lineWidth: 1.0)),
         ]
         
         for (thisGroupName, thisGroupData) in _plotData.allGroups {

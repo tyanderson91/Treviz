@@ -10,5 +10,6 @@ import Foundation
 
 struct RunGroup {
     var groupDescription: String = ""
+    var _didSetDescription: Bool = false
     var runs: [TZRun] = []
 }

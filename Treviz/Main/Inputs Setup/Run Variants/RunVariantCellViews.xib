@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner"/>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView identifier="addRemoveNameCellView" id="zHM-ki-p1P" customClass="RunVariantButtonNameCellView" customModule="Treviz" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="163" height="23"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7oM-cn-Mac">
+                    <rect key="frame" x="20" y="4" width="140" height="16"/>
+                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="TextField" id="h9D-ap-pXh">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MkT-J0-KDT">
+                    <rect key="frame" x="0.0" y="3" width="15" height="17"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="15" id="iwY-WS-1DN"/>
+                        <constraint firstAttribute="height" constant="15" id="kfG-dy-VYI"/>
+                    </constraints>
+                    <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSRemoveTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="4Us-ON-zIP">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                </button>
+            </subviews>
+            <constraints>
+                <constraint firstItem="MkT-J0-KDT" firstAttribute="leading" secondItem="zHM-ki-p1P" secondAttribute="leading" id="VMP-Ka-J4W"/>
+                <constraint firstAttribute="trailing" secondItem="7oM-cn-Mac" secondAttribute="trailing" constant="5" id="aRq-bK-dWX"/>
+                <constraint firstItem="7oM-cn-Mac" firstAttribute="leading" secondItem="MkT-J0-KDT" secondAttribute="trailing" constant="7" id="cEz-fj-QPE"/>
+                <constraint firstItem="MkT-J0-KDT" firstAttribute="centerY" secondItem="zHM-ki-p1P" secondAttribute="centerY" id="f0x-Yk-dXF"/>
+                <constraint firstItem="7oM-cn-Mac" firstAttribute="centerY" secondItem="zHM-ki-p1P" secondAttribute="centerY" id="lge-gS-YEP"/>
+            </constraints>
+            <connections>
+                <outlet property="addRemoveButton" destination="MkT-J0-KDT" id="xx2-jd-xzp"/>
+                <outlet property="nameTextField" destination="7oM-cn-Mac" id="sso-cL-aYc"/>
+            </connections>
+            <point key="canvasLocation" x="-543.5" y="-593.5"/>
+        </customView>
+        <popUpButton identifier="paramValuePopupCellView" verticalHuggingPriority="750" id="eP6-tM-vgW" customClass="ParamValuePopupView" customModule="Treviz" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="185" height="22"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <popUpButtonCell key="cell" type="roundRect" bezelStyle="roundedRect" imagePosition="left" alignment="center" lineBreakMode="truncatingTail" borderStyle="border" inset="2" id="nSa-uZ-TJa">
+                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                <font key="font" metaFont="cellTitle"/>
+                <menu key="menu" id="dbH-oy-IZT">
+                    <items>
+                        <menuItem title="Item 1" id="EEr-4s-Jl3"/>
+                        <menuItem title="Item 2" id="5aT-qN-3A7"/>
+                        <menuItem title="Item 3" id="l97-DZ-ru4"/>
+                    </items>
+                </menu>
+            </popUpButtonCell>
+            <point key="canvasLocation" x="-523" y="-514"/>
+        </popUpButton>
+        <button identifier="paramValueCheckboxCellView" verticalHuggingPriority="750" imageHugsTitle="YES" id="ImB-79-lgF" customClass="ParamValueCheckboxView" customModule="Treviz" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="185" height="18"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <buttonCell key="cell" type="check" title="On" bezelStyle="regularSquare" imagePosition="left" alignment="center" state="on" inset="2" id="Fdu-C8-N8O">
+                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                <font key="font" metaFont="system"/>
+            </buttonCell>
+            <point key="canvasLocation" x="-798" y="-594"/>
+        </button>
+        <textField identifier="paramValueTextField" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="G6M-1H-DUx" customClass="ParamValueTextField" customModule="Treviz" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="185" height="16"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" alignment="center" title="Text View Cell" id="iYE-S5-cZ7">
+                <font key="font" metaFont="system"/>
+                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+            </textFieldCell>
+            <point key="canvasLocation" x="-562" y="-673"/>
+        </textField>
+    </objects>
+    <resources>
+        <image name="NSRemoveTemplate" width="15" height="4"/>
+    </resources>
+</document>

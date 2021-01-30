@@ -11,6 +11,15 @@ import Foundation
 enum DistributionType: String, CaseIterable {
     case normal = "Normal"
     case uniform = "Uniform"
+ 
+    func summary(runVariant: MCRunVariant)->String{
+        switch self {
+        case .normal:
+            return "𝐍(\(runVariant.mean?.valuestr ?? "?"),\(runVariant.sigma?.valuestr ?? "?")"
+        case .uniform:
+            return "𝐔(\(runVariant.min?.valuestr ?? "?"),\(runVariant.max?.valuestr ?? "?")"
+        }
+    }
 }
 
 enum RunVariantType: String, CaseIterable {
@@ -58,10 +67,23 @@ protocol MCRunVariant {
 
 extension Analysis {
     var tradeRunVariants: [RunVariant] {
-        return runVariants.filter { $0.variantType == .trade }
+        return runVariants.filter { $0.variantType == .trade && $0.isActive }
+    }
+    var numTradeGroups: Int {
+        var numTradeRuns: Int = 1
+        if tradeRunVariants.isEmpty { numTradeRuns = 0 }
+        else if useGroupedVariants { numTradeRuns = tradeRunVariants.map({$0.tradeValues.count}).max() ?? 0 }
+        else {
+            for thisVariant in tradeRunVariants {
+                let tradeCounts = thisVariant.tradeValues.filter({$0 != nil}).count
+                let curNumRuns = tradeCounts > 0 ? tradeCounts : 1
+                numTradeRuns = numTradeRuns * curNumRuns
+            }
+        }
+        return numTradeRuns
     }
     var mcRunVariants: [MCRunVariant] {
-        return runVariants.filter { $0 is MCRunVariant && $0.variantType == .montecarlo } as! [MCRunVariant]
+        return runVariants.filter { $0 is MCRunVariant && $0.variantType == .montecarlo && $0.isActive } as! [MCRunVariant]
     }
 }
 /**
@@ -79,7 +101,18 @@ class RunVariant: Codable {
     var tradeValues: [StringValue?] = [] // List of variants to be used in trade study
     var parameter: Parameter
     func setValue(from string: String) {return}
-    var paramVariantSummary: String { get { return "" } }
+    var paramVariantSummary: String {
+        switch variantType {
+        case .single:
+            return "\(paramID) = \(parameter.stringValue)"
+        case .montecarlo:
+            guard let mcvar = self as? MCRunVariant else { return "" }
+            return "\(paramID) ∼ \(mcvar.distributionType.summary(runVariant: mcvar)))"
+        case .trade:
+            let valuestr = self.tradeValues.filter({$0 != nil}).map({$0!.valuestr}).joined(separator: ", ")
+            return "\(paramID) ∈ {\(valuestr)}"
+        }
+    }
     
     init?(param: Parameter) {
         parameter = param
@@ -251,8 +284,14 @@ class EnumGroupRunVariant: RunVariant {
 
 /**A type of run variant used to define variations for a boolean parameter*/
 class BoolRunVariant: RunVariant {
-    var paramEnabled: Bool = false
-    override var curValue: StringValue { return paramEnabled }
+    var paramEnabled: Bool {
+        get { return (parameter as? BoolParam)?.value ?? false }
+        set { (parameter as? BoolParam)?.value = newValue }
+    }
+    override var curValue: StringValue {
+        get { return paramEnabled }
+        set { paramEnabled = newValue as? Bool ?? paramEnabled }
+    }
     override init?(param: Parameter) {
         guard let curBoolParam = param as? BoolParam else { return nil }
         super.init(param: curBoolParam)

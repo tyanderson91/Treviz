@@ -100,7 +100,7 @@ class InitStateViewController: PhasedViewController, NSOutlineViewDelegate, NSOu
                 } else {
                     outputView = InputsViewController.headerCellView(view: outlineView, thisInput: curItem)
                 }
-            case NSUserInterfaceItemIdentifier.initStateParamColumn:
+            case NSUserInterfaceItemIdentifier.initStateRunVariantColumn:
                 outputView = InputsViewController.inputHeaderParamCellView(view: outlineView, thisInput: curItem)
             default: return nil}
         }
@@ -115,7 +115,7 @@ class InitStateViewController: PhasedViewController, NSOutlineViewDelegate, NSOu
                 }
             case NSUserInterfaceItemIdentifier.unitsColumn:
                 outputView = InputsViewController.unitsCellView(view: outlineView, thisInput: curItem)
-            case NSUserInterfaceItemIdentifier.initStateParamColumn:
+            case NSUserInterfaceItemIdentifier.initStateRunVariantColumn:
                 outputView = InputsViewController.inputParamCellView(view: outlineView, thisInput: curItem)
             default:
                 return nil
@@ -137,7 +137,7 @@ class InitStateViewController: PhasedViewController, NSOutlineViewDelegate, NSOu
                 return varItem.units
             case NSUserInterfaceItemIdentifier.nameColumn:
                 return varItem.name
-            case NSUserInterfaceItemIdentifier.initStateParamColumn:
+            case NSUserInterfaceItemIdentifier.initStateRunVariantColumn:
                 return varItem.isParam
             default:
                 return nil
@@ -145,7 +145,7 @@ class InitStateViewController: PhasedViewController, NSOutlineViewDelegate, NSOu
         }
         if let headerItem = item as? InitStateHeader {
             switch tableColumn?.identifier{
-            case NSUserInterfaceItemIdentifier.initStateParamColumn:
+            case NSUserInterfaceItemIdentifier.initStateRunVariantColumn:
                 return headerItem.hasParams
             case NSUserInterfaceItemIdentifier.nameColumn:
                 return headerItem.name
@@ -192,7 +192,7 @@ class InitStateViewController: PhasedViewController, NSOutlineViewDelegate, NSOu
     }
     
     // MARK: Terminal Condition
-    @IBAction override func didChangeSelection(_ sender: Any) {
+    @IBAction override func didChangeParamValue(_ sender: Any) {
         if let curCondition = analysis.conditions.first(where: { $0.name == terminalConditionPopupButton.titleOfSelectedItem }) {
             phase.terminalCondition = curCondition
         }

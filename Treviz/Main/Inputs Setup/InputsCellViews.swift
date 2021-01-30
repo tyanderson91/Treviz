@@ -19,34 +19,13 @@ extension NSUserInterfaceItemIdentifier{
     static let unitsCellView = NSUserInterfaceItemIdentifier.init("UnitsCellView")
 
     //Views in init state view only
-    static let initStateParamColumn = NSUserInterfaceItemIdentifier.init("InitStateParameterColumn")
+    static let initStateRunVariantColumn = NSUserInterfaceItemIdentifier.init("InitStateParameterColumn")
     static let initStateValueColumn = NSUserInterfaceItemIdentifier.init("InitStateValueColumn")
     static let initStateSubHeaderCellView = NSUserInterfaceItemIdentifier.init("initStateSubHeaderCellView")
     static let initStateHeaderCellView = NSUserInterfaceItemIdentifier.init("initStateHeaderCellView")
     static let initStateValueCellView = NSUserInterfaceItemIdentifier.init("initStateValueCellView")
-    static let initStateParamCellView = NSUserInterfaceItemIdentifier.init("initStateParamCheckBoxView")
-    static let initStateHasParamCellView = NSUserInterfaceItemIdentifier.init("initStateHasParamCellView")
-    
-    //Views in param view only
-    static let paramNameColumn = NSUserInterfaceItemIdentifier.init("paramNameColumn")
-    static let paramValueColumn = NSUserInterfaceItemIdentifier.init("paramValueColumn")
-    static let paramTypeColumn = NSUserInterfaceItemIdentifier.init("paramVarTypeColumn")
-    static let paramSummaryColumn = NSUserInterfaceItemIdentifier.init("paramSummaryColumn")
-
-    static let paramNameCellView = NSUserInterfaceItemIdentifier.init("paramNameCellView")
-    static let paramTypeCellView = NSUserInterfaceItemIdentifier.init("variantTypePopupCellView")
-    static let paramSummaryCellView = NSUserInterfaceItemIdentifier.init("paramSummaryCellView")
-    static let paramValueCellView = NSUserInterfaceItemIdentifier.init("paramValueCellView")
-    
-    static let distributionColumn = NSUserInterfaceItemIdentifier.init("distributionColumn")
-    static let distributionCellView = NSUserInterfaceItemIdentifier.init("distributionCellView")
-    static let distributionParam0Column = NSUserInterfaceItemIdentifier.init("distributionParam0Column")
-    static let distributionParam1Column = NSUserInterfaceItemIdentifier.init("distributionParam1Column")
-    static let distributionParamCellView = NSUserInterfaceItemIdentifier.init("distributionParamCellView")
-    static let distributionParam0CellView = NSUserInterfaceItemIdentifier.init("distributionParam0CellView")
-    static let distributionParam1CellView = NSUserInterfaceItemIdentifier.init("distributionParam1CellView")
-    static let paramPopupCellView = NSUserInterfaceItemIdentifier.init("paramPopupCellView")
-    static let paramCheckboxCellView = NSUserInterfaceItemIdentifier.init("paramCheckboxCellView")
+    static let initStateRunVariantCellView = NSUserInterfaceItemIdentifier.init("initStateParamCheckBoxView")
+    static let initStateHasRunVariantCellView = NSUserInterfaceItemIdentifier.init("initStateHasParamCellView")
 }
 
 extension InputsViewController{
@@ -74,13 +53,13 @@ extension InputsViewController{
     
     //Views in init state view only
     static func inputParamCellView(view: NSTableView, thisInput: Parameter)->NSButton?{
-        let newView = view.makeView(withIdentifier: .initStateParamCellView, owner: self) as? NSButton
+        let newView = view.makeView(withIdentifier: .initStateRunVariantCellView, owner: self) as? NSButton
         newView?.state = thisInput.isParam ? NSControl.StateValue.on : NSControl.StateValue.off
         return newView
     }
     
     static func inputHeaderParamCellView(view: NSTableView, thisInput: InitStateCheck)->NSTableCellView?{
-        let newView = view.makeView(withIdentifier: .initStateHasParamCellView, owner: self) as? NSTableCellView
+        let newView = view.makeView(withIdentifier: .initStateHasRunVariantCellView, owner: self) as? NSTableCellView
         if let thisImageView = newView?.imageView {
             let curimage = thisInput.hasParams ? NSImage(named: NSImage.menuOnStateTemplateName) : nil
             thisImageView.image = curimage
@@ -115,23 +94,6 @@ extension InputsViewController{
                     thisImageView.image = NSImage.init(named: (thisInput.isValid ? NSImage.statusAvailableName : NSImage.statusUnavailableName))
                 }
             }
-        return newView
-    }
-    
-    //Views in param view only
-    static func paramSummaryCellView(view: NSTableView, thisInput: RunVariant?)->NSTableCellView?{
-        guard thisInput != nil else {return nil}
-        let newView = view.makeView(withIdentifier: .paramSummaryCellView, owner: self) as? NSTableCellView
-        if let textField = newView?.textField {
-            textField.stringValue = "Summary"
-        }
-        return newView
-    }
-    static func paramTypeCellView(view: NSTableView, thisInput: RunVariant?)->RunVariantTypeView?{
-        guard thisInput != nil else {return nil}
-        guard let newView = view.makeView(withIdentifier: .paramTypeCellView, owner: self) as? RunVariantTypeView else { return nil }
-        newView.runVariant = thisInput
-        newView.update()
         return newView
     }
 }

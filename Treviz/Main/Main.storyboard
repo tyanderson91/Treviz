@@ -941,6 +941,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="CSYS" width="20" height="20"/>
+        <image name="CSYS" width="40" height="40"/>
     </resources>
 </document>

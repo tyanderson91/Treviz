@@ -71,5 +71,7 @@ class PhysicsViewController: PhasedViewController {
         }
         useVehicleInertiaRunVariantButton.param = physicsSettings.vehiclePointMassParam
         useVehicleInertiaCheckbox.parameter = physicsSettings.vehiclePointMassParam
+        
+        //paramSelectorViews.forEach({$0.action = #selector(self.didSetParam(_:))})
     }
 }

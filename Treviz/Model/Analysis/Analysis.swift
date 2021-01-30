@@ -103,24 +103,6 @@ class Analysis: NSObject, Codable {
     var runVariants: [RunVariant] = []
     var useGroupedVariants: Bool = false // Grouped versus Permutation
     var numMonteCarloRuns: Int = 1
-    var numTradeGroups: Int {
-        let tradeRunVariants = runVariants.filter {$0.variantType == .trade}
-        var numTradeRuns: Int = 1
-        if tradeRunVariants.isEmpty { numTradeRuns = 0 }
-        else if useGroupedVariants { numTradeRuns = tradeRunVariants[0].tradeValues.count }
-        else {
-            for thisVariant in tradeRunVariants {
-                let curNumRuns = thisVariant.tradeValues.isEmpty ? 1 : thisVariant.tradeValues.count
-                numTradeRuns = numTradeRuns * curNumRuns
-            }
-        }
-        return numTradeRuns
-    }
-    var numRuns: Int {
-        let mcRunVariants = runVariants.filter {$0.variantType == .montecarlo}
-        let numMCRuns: Int = mcRunVariants.isEmpty ? 1 : numMonteCarloRuns
-        return numTradeGroups * numMCRuns
-    }
     var runs: [TZRun] = []
     var tradeGroups: [RunGroup] = []
     

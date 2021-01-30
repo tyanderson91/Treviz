@@ -132,7 +132,12 @@ struct RunGenerator {
 }
 
 extension Analysis {
-
+    var numRuns: Int {
+        let mcRunVariants = runVariants.filter {$0.variantType == .montecarlo}
+        let numMCRuns: Int = mcRunVariants.isEmpty ? 1 : numMonteCarloRuns
+        return numTradeGroups * numMCRuns
+    }
+    
     func copyData(analysis: Analysis) throws->Data {
         let encoder = JSONEncoder()
         encoder.userInfo = [CodingUserInfoKey.simpleIOKey: false, CodingUserInfoKey.deepCopyKey: true]

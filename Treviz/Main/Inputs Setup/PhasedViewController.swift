@@ -39,7 +39,7 @@ class PhasedViewController: BaseViewController {
     /**
      Automatically called to update param value based on the text in the control
      */
-    @objc func didChangeSelection(_ sender: Any) {
+    @objc func didChangeParamValue(_ sender: Any) {
         if let thisSelector = sender as? ParamValueView {
             guard let param = thisSelector.parameter else {return}
             param.setValue(to: thisSelector.stringValue)
@@ -55,18 +55,21 @@ class PhasedViewController: BaseViewController {
     }
     
     override func viewWillAppear() {
+        super.viewWillAppear()
         for thisParamView in paramValueViews {
             thisParamView.update()
             if let thisControl = thisParamView as? NSControl {
-                thisControl.action = #selector(self.didChangeSelection(_:))
+                thisControl.action = #selector(self.didChangeParamValue(_:))
                 thisControl.target = self
             }
             if let thisPopup = thisParamView as? ParamValuePopupView {
+                thisPopup.target = self
                 thisPopup.finishSetup()
             }
         }
         for thisParamSelector in paramSelectorViews {
-            thisParamSelector.action = #selector(self.didSetParam(_:))
+            thisParamSelector.target = self
+            thisParamSelector.action = #selector(didSetParam(_:))
         }
     }
     
@@ -77,15 +80,18 @@ class PhasedViewController: BaseViewController {
     
     @objc func didSetParam(_ sender: RunVariantEnableButton) {
         guard let representedParam = sender.param else { return }
+        guard inputsViewController != nil else { return }
         switch sender.state {
         case .on:
             analysis.enableParam(param: representedParam )
+            inputsViewController?.reloadParams()
+            inputsViewController?.runVariantViewController.overviewTableView.scrollToEndOfDocument(self)
         case .off:
             analysis.disableParam(param: representedParam )
+            inputsViewController?.reloadParams()
         default:
             return
         }
-        if inputsViewController != nil { inputsViewController?.reloadParams() }
     }
     
     func containsParamView(for id: ParamID)->Bool{

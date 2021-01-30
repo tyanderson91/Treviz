@@ -26,7 +26,7 @@ class InputsSplitViewController: TZSplitViewController {
     var inputsViewController : InputsViewController!
     
     func reloadParams(){
-        runVariantViewController.tableView.reloadData()
+        runVariantViewController.reloadAll()
     
         //initStateViewController.outlineView.reloadData()
         //physicsViewController.viewDidLoad()
@@ -80,7 +80,7 @@ class InputsViewController: TZViewController {
             curView.didUpdate()
         }
 
-        self.runVariantViewController.tableView.reloadData()
+        self.runVariantViewController.reloadAll()
     }
     func updateParamSelectorView(for paramID: ParamID) {
         let selectorView = paramSelectorViews.first(where: {$0.param?.id == paramID})
@@ -119,7 +119,7 @@ class InputsViewController: TZViewController {
     }
     
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
-        if segue.identifier == .paramTableViewSegue as NSStoryboardSegue.Identifier{
+        if segue.identifier == "runVariantViewSegue" {
             self.runVariantViewController = segue.destinationController as? RunVariantViewController
             self.runVariantViewController.analysis = analysis
             runVariantViewController.inputsViewController = self
@@ -130,8 +130,7 @@ class InputsViewController: TZViewController {
     }
     
     func reloadParams(){
-        runVariantViewController.tableView.reloadData()
-        runVariantViewController.mcRunVariantTableView.reloadData()
+        runVariantViewController.reloadAll()
     }
     
     
