@@ -34,6 +34,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
     }
+    
+    /**
+     Set user defaults, if unset
+     */
+    func setDefaults(){
+        let defaults = UserDefaults.standard
+        defaults.register(defaults: ["color_map":"default"])
+    }
     /*
     func loadVars(from plist: String){
         guard let varFilePath = Bundle.main.path(forResource: plist, ofType: "plist") else {return}

@@ -20,7 +20,7 @@ class TwoAxisOutputSetupViewController: AddOutputViewController {
 
     var var1ViewController: VariableSelectorViewController!
     var var2ViewController: VariableSelectorViewController!
-    var var3ViewController: VariableSelectorViewController!
+    var var3ViewController: ParameterSelectorViewController!
     
     override func createOutput()->TZOutput? {// TODO : expand for all plot types
         guard let plotType = plotTypePopupButton.selectedItem?.title else {return nil}
@@ -39,6 +39,8 @@ class TwoAxisOutputSetupViewController: AddOutputViewController {
     
     override func viewDidLoad() {
         let storyboard = NSStoryboard(name: "VariableSelector", bundle: nil)
+        let storyboard2 = NSStoryboard(name: "ParamSelector", bundle: nil) // TODO: merge variable selector into param selector
+
         var1ViewController = storyboard.instantiateController(identifier: "variableSelectorViewController") { aDecoder in VariableSelectorViewController(coder: aDecoder, analysis: self.analysis) }
         self.addChild(var1ViewController)
         variableGridView.cell(atColumnIndex: 1, rowIndex: 0).contentView = var1ViewController.view
@@ -47,7 +49,7 @@ class TwoAxisOutputSetupViewController: AddOutputViewController {
         self.addChild(var2ViewController)
         variableGridView.cell(atColumnIndex: 1, rowIndex: 1).contentView = var2ViewController.view
         
-        var3ViewController = storyboard.instantiateController(identifier: "variableSelectorViewController") { aDecoder in VariableSelectorViewController(coder: aDecoder, analysis: self.analysis) }
+        var3ViewController = storyboard2.instantiateController(identifier: "paramSelectorViewController") { aDecoder in ParameterSelectorViewController(coder: aDecoder, analysis: self.analysis) }
         self.addChild(var3ViewController)
         variableGridView.cell(atColumnIndex: 1, rowIndex: 2).contentView = var3ViewController.view
         
@@ -55,19 +57,19 @@ class TwoAxisOutputSetupViewController: AddOutputViewController {
 
         var1ViewController.selectedVariable = self.representedOutput.var1
         var2ViewController.selectedVariable = self.representedOutput.var2
-        var3ViewController.selectedVariable = self.representedOutput.var3
+        var3ViewController.selectedParameter = self.representedOutput.categoryVar
     }
     
     override func variableDidChange(_ sender: VariableSelectorViewController) {
         representedOutput.var1 = var1ViewController.selectedVariable
         representedOutput.var2 = var2ViewController.selectedVariable
-        representedOutput.var3 = var3ViewController.selectedVariable
+        representedOutput.categoryVar = var3ViewController.selectedParameter
     }
     
     override func populateWithOutput(text: TZTextOutput?, plot: TZPlot?){ //Should be overwritten by each subclass
         var1ViewController.selectedVariable = self.representedOutput.var1
         var2ViewController.selectedVariable = self.representedOutput.var2
-        var3ViewController.selectedVariable = self.representedOutput.var3
+        var3ViewController.selectedParameter = self.representedOutput.categoryVar
 
         if representedOutput.plotType.nVars == 2 {
             let vg = variableGridView

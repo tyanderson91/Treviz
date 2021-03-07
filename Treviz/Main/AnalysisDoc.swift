@@ -168,14 +168,10 @@ class AnalysisDoc: NSDocument {
             x0RunVariant.variantType = .montecarlo
             x0RunVariant.distributionType = .uniform
             analysis.numMonteCarloRuns = 3
-            
-            analysis.plots[2].categoryVar = dxRunVariant.parameter
-            analysis.plots[2].plotType = .multiLine2d
-            //if plots.count == 5 { plots.remove(at: 3) }
             analysis.runVariants = [dxRunVariant, dyRunVariant, y0RunVariant, x0RunVariant]
             analysis.runVariants.forEach({$0.parameter.isParam = true})
             analysis.useGroupedVariants = true
-            
+            analysis.tradeGroups = Array<RunGroup>.init(repeating: RunGroup(), count: analysis.numTradeGroups)
         case "public.json":
             let decoder = JSONDecoder()
             analysis = try decoder.decode(Analysis.self, from: data)

@@ -8,11 +8,14 @@
 
 import Cocoa
 
+/**
+ Protocol adopted by view controllers that house a variable selector that must respond to changes
+ */
 protocol VariableGetter {
     func variableDidChange(_ sender: VariableSelectorViewController)
 }
 
-class VariableSelectorViewController: TZViewController {
+class VariableSelectorViewController: TZViewController { // TODO: see if this can be folded into parameter selector
 
     @IBOutlet weak var variableSelectorPopup: NSPopUpButton!
     var selectedVariable : Variable? {
@@ -35,7 +38,6 @@ class VariableSelectorViewController: TZViewController {
             selectVariable(with: selectedVariable!.id)
         }
     }
-
     
     func loadVars(){
         variableSelectorPopup.addItem(withTitle: "")

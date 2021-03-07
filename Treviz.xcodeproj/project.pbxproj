@@ -59,6 +59,8 @@
 		CD6CCF3D244D2FFB0051F76D /* OutputDataSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6CCF3B244CCC960051F76D /* OutputDataSet.swift */; };
 		CD6E0B9E2431BAC5008D1656 /* TZToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6E0B9D2431BAC5008D1656 /* TZToolbar.swift */; };
 		CD6E0BA22436DEC7008D1656 /* TZStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6E0BA12436DEC7008D1656 /* TZStoryboard.swift */; };
+		CD70451B25F5533000A2F372 /* ParamSelector.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD70451A25F5532F00A2F372 /* ParamSelector.storyboard */; };
+		CD70451F25F5579200A2F372 /* ParameterSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD70451E25F5579200A2F372 /* ParameterSelectorViewController.swift */; };
 		CD70FAC9253EB39800B551F2 /* ParamValueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD70FAC8253EB39800B551F2 /* ParamValueView.swift */; };
 		CD715E8023EBE70400E31F97 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = CD715E7F23EBE70400E31F97 /* README.md */; };
 		CD75951224E2638C00B79EF5 /* VariableTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD75951124E2638C00B79EF5 /* VariableTest.swift */; };
@@ -225,7 +227,7 @@
 		CD39717C2506F2AC00A8047A /* TestHelperFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelperFunctions.swift; sourceTree = "<group>"; };
 		CD3B2217251FD05300218E44 /* StringValueProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringValueProtocol.swift; sourceTree = "<group>"; };
 		CD3C187D23E2B03700E72EFF /* TZPlotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TZPlotView.swift; sourceTree = "<group>"; };
-		CD3E645125086398001F6C8F /* RunVariantEnableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RunVariantEnableButton.swift; path = Treviz/Utilities/RunVariantEnableButton.swift; sourceTree = SOURCE_ROOT; };
+		CD3E645125086398001F6C8F /* RunVariantEnableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RunVariantEnableButton.swift; path = "Treviz/Component Views/RunVariantEnableButton.swift"; sourceTree = SOURCE_ROOT; };
 		CD3F5E5722EE4DCD00E4CF20 /* Conditions.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Conditions.storyboard; sourceTree = "<group>"; };
 		CD3F5E5922EE4FFE00E4CF20 /* ConditionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionsViewController.swift; sourceTree = "<group>"; };
 		CD410CF12444211500AB49DE /* CorePlot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CorePlot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -253,7 +255,9 @@
 		CD6CCF3B244CCC960051F76D /* OutputDataSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputDataSet.swift; sourceTree = "<group>"; };
 		CD6E0B9D2431BAC5008D1656 /* TZToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TZToolbar.swift; sourceTree = "<group>"; };
 		CD6E0BA12436DEC7008D1656 /* TZStoryboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TZStoryboard.swift; sourceTree = "<group>"; };
-		CD70FAC8253EB39800B551F2 /* ParamValueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ParamValueView.swift; path = Treviz/Utilities/ParamValueView.swift; sourceTree = SOURCE_ROOT; };
+		CD70451A25F5532F00A2F372 /* ParamSelector.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ParamSelector.storyboard; sourceTree = "<group>"; };
+		CD70451E25F5579200A2F372 /* ParameterSelectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParameterSelectorViewController.swift; path = "Treviz/Component Views/Variable/ParameterSelectorViewController.swift"; sourceTree = SOURCE_ROOT; };
+		CD70FAC8253EB39800B551F2 /* ParamValueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ParamValueView.swift; path = "Treviz/Component Views/ParamValueView.swift"; sourceTree = SOURCE_ROOT; };
 		CD715E7F23EBE70400E31F97 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		CD75951124E2638C00B79EF5 /* VariableTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VariableTest.swift; sourceTree = "<group>"; };
 		CD75951524E51A3300B79EF5 /* TZOutputTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TZOutputTest.swift; path = TrevizTests/TZOutputTest.swift; sourceTree = SOURCE_ROOT; };
@@ -389,10 +393,6 @@
 				CD63AEA123E7EA26006502F2 /* Variable.swift */,
 				CDDA8F2124AEE386002936E6 /* CalculatedVariable.swift */,
 				CD0F010A2365595700C920AA /* Vehicle.swift */,
-				CDD60A962345C5AE00249987 /* TZOutput.swift */,
-				CDD60A902345BF5C00249987 /* TZTextOutput.swift */,
-				CD280F49233B45670004263F /* TZPlot.swift */,
-				CD6CCF3B244CCC960051F76D /* OutputDataSet.swift */,
 				CD4AD70C23BD4C0C00FC815F /* TZPlotType.swift */,
 				CDB7C73B2352B58300BC50F1 /* InitStateHeader.swift */,
 				CD870F3324B448D7004A4D42 /* MathFuncs.swift */,
@@ -400,6 +400,7 @@
 				CD0F113E250560A700C88B05 /* TZRunSettings.swift */,
 				CD0FCA9A2593060600EEB1B2 /* Parameter.swift */,
 				CD92180725493F5D001CA40B /* CelestialBody.swift */,
+				CD03B6DD25C68D41002A334E /* Outputs */,
 				CD3B2216251FD00800218E44 /* Run Variants */,
 				CD01037623E78EED00D336C2 /* Analysis */,
 				CDAF398D24A7209200309CA9 /* Phase */,
@@ -420,6 +421,18 @@
 			path = Analysis;
 			sourceTree = "<group>";
 		};
+		CD03B6DD25C68D41002A334E /* Outputs */ = {
+			isa = PBXGroup;
+			children = (
+				CD8FEB0725956A4F008A08A7 /* RunGroup.swift */,
+				CDD60A962345C5AE00249987 /* TZOutput.swift */,
+				CDD60A902345BF5C00249987 /* TZTextOutput.swift */,
+				CD280F49233B45670004263F /* TZPlot.swift */,
+				CD6CCF3B244CCC960051F76D /* OutputDataSet.swift */,
+			);
+			path = Outputs;
+			sourceTree = "<group>";
+		};
 		CD05E3B9225490C500906EB0 /* Main */ = {
 			isa = PBXGroup;
 			children = (
@@ -437,18 +450,6 @@
 				CD05E3BB225491A100906EB0 /* Outputs */,
 			);
 			path = Main;
-			sourceTree = "<group>";
-		};
-		CD05E3BA2254916500906EB0 /* Utilities */ = {
-			isa = PBXGroup;
-			children = (
-				CDF23381242DCD8000B8EF40 /* InfoBarStackView */,
-				CD3E645125086398001F6C8F /* RunVariantEnableButton.swift */,
-				CD70FAC8253EB39800B551F2 /* ParamValueView.swift */,
-				CD42E0A922FD05F600A0F9A1 /* CollapsibleStackView.swift */,
-				CD28477622FF9C8800D192A9 /* CollapsibleGridView.swift */,
-			);
-			path = Utilities;
 			sourceTree = "<group>";
 		};
 		CD05E3BB225491A100906EB0 /* Outputs */ = {
@@ -511,7 +512,6 @@
 				CDE6CDD6250E7D7C0093C4E1 /* RunVariant.swift */,
 				CD18A65F254FCB1C00B06C10 /* ParameterID.swift */,
 				CD9465322517CBFA00DD7037 /* AnalysisParameterFunctions.swift */,
-				CD8FEB0725956A4F008A08A7 /* RunGroup.swift */,
 			);
 			path = "Run Variants";
 			sourceTree = "<group>";
@@ -530,8 +530,10 @@
 		CD449022233B26370095F243 /* Variable */ = {
 			isa = PBXGroup;
 			children = (
+				CD70451E25F5579200A2F372 /* ParameterSelectorViewController.swift */,
 				CD59C53F23E793E3001D98D5 /* VariableSelectorViewController.swift */,
 				CD59C53A23E79295001D98D5 /* VariableSelector.storyboard */,
+				CD70451A25F5532F00A2F372 /* ParamSelector.storyboard */,
 			);
 			path = Variable;
 			sourceTree = "<group>";
@@ -547,6 +549,11 @@
 		CD59C53E23E79336001D98D5 /* Component Views */ = {
 			isa = PBXGroup;
 			children = (
+				CDF23381242DCD8000B8EF40 /* InfoBarStackView */,
+				CD3E645125086398001F6C8F /* RunVariantEnableButton.swift */,
+				CD70FAC8253EB39800B551F2 /* ParamValueView.swift */,
+				CD42E0A922FD05F600A0F9A1 /* CollapsibleStackView.swift */,
+				CD28477622FF9C8800D192A9 /* CollapsibleGridView.swift */,
 				CD3F5E5622EE4D8C00E4CF20 /* Conditions */,
 				CD449022233B26370095F243 /* Variable */,
 			);
@@ -646,7 +653,6 @@
 				CD01037523E78EC500D336C2 /* Model */,
 				CDD5049E22252AFD00B29751 /* Images.xcassets */,
 				CDD504A322252AFD00B29751 /* Info.plist */,
-				CD05E3BA2254916500906EB0 /* Utilities */,
 				CDD504A422252AFD00B29751 /* Treviz.entitlements */,
 				CDFE81F423E0104A0013945F /* Treviz-Bridging-Header.h */,
 				CD59C53E23E79336001D98D5 /* Component Views */,
@@ -661,14 +667,14 @@
 				CDF23382242DCD8000B8EF40 /* EditableHeaderTextField.swift */,
 				CDF23383242DCD8000B8EF40 /* BaseViewController.swift */,
 				CDF23384242DCD8000B8EF40 /* StackView.swift */,
+				CDF23387242DCD8000B8EF40 /* HeaderViewController.swift */,
 				CDF23385242DCD8000B8EF40 /* HeaderViewController.storyboard */,
 				CDF23386242DCD8000B8EF40 /* ReadMe.md */,
-				CDF23387242DCD8000B8EF40 /* HeaderViewController.swift */,
 				CDF23388242DCD8000B8EF40 /* LICENSE.txt */,
 				CDF23389242DCD8000B8EF40 /* Info.plist */,
 			);
 			name = InfoBarStackView;
-			path = Treviz/Utilities/InfoBarStackView;
+			path = "Treviz/Component Views/InfoBarStackView";
 			sourceTree = SOURCE_ROOT;
 		};
 		CDFAD0EA23EA84EB00CE7424 /* TrajectoryAnalysis */ = {
@@ -854,6 +860,7 @@
 				CDA7FD75236FE9CC009CDFAF /* InitVarSettings.yaml in Resources */,
 				CD6A255F25AC24EF0075ED81 /* RunVariants.storyboard in Resources */,
 				CD3F5E5822EE4DCD00E4CF20 /* Conditions.storyboard in Resources */,
+				CD70451B25F5533000A2F372 /* ParamSelector.storyboard in Resources */,
 				CD2D0DBB224385580012978E /* OutputSetup.storyboard in Resources */,
 				CD11FA9323433096001A3695 /* PlotTypes.plist in Resources */,
 				CD59C54623E79476001D98D5 /* Outputs.storyboard in Resources */,
@@ -993,6 +1000,7 @@
 				CDF1670C2237A10400CD9590 /* MainWindowController.swift in Sources */,
 				CDE2B5B624C2C729002026E0 /* Condition.swift in Sources */,
 				CDE2B5A024C2C718002026E0 /* PhaseRunFunctions.swift in Sources */,
+				CD70451F25F5579200A2F372 /* ParameterSelectorViewController.swift in Sources */,
 				CD3C187E23E2B03800E72EFF /* TZPlotView.swift in Sources */,
 				CD92180825493F5D001CA40B /* CelestialBody.swift in Sources */,
 				CDC1F53C2234874000D1BB25 /* MainSplitViewController.swift in Sources */,

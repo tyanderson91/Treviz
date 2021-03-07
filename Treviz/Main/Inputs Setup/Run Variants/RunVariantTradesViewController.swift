@@ -115,17 +115,17 @@ class RunVariantTradesViewController: TZViewController {
     @objc func renameTradeGroup(_ sender: Any) {
         guard let button = sender as? NSTextField else { return }
         let curRow = groupsTableView.row(for: button)
-        //var matchingGroup = analysis.tradeGroups[curRow]
-        //matchingGroup.groupDescription = button.stringValue
+        var matchingGroup = analysis.tradeGroups[curRow]
+        matchingGroup.groupDescription = button.stringValue
     }
     
     private func removeTradeGroup(index: Int) {
         guard index < analysis.numTradeGroups else { return }
         groupsDelegate.runVariants.forEach( { $0.tradeValues.remove(at: index) } )
+        analysis.tradeGroups.remove(at: index)
         groupsTableView.removeRows(at: IndexSet(integer: index), withAnimation: .slideDown)
         parentVC.updateNumRuns()
         parentVC.overviewVC.tableView.reloadData()
-        reloadPermutationsView()
     }
     @objc func removeTradeGroupPressed(_ sender: Any) {
         guard let senderButton = sender as? NSButton else { return }
@@ -135,8 +135,10 @@ class RunVariantTradesViewController: TZViewController {
     @IBAction func addTradeGroup(_ sender: Any) {
         let nilVal: StringValue? = nil
         analysis.tradeRunVariants.forEach({$0.tradeValues.append(nilVal)})
+        analysis.tradeGroups.append(RunGroup())
         let lastRow = analysis.tradeRunVariants.first!.tradeValues.count - 1
         groupsTableView.insertRows(at: IndexSet(integer: lastRow), withAnimation: .slideUp)
+        
         parentVC.updateNumRuns()
     }
     

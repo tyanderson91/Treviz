@@ -16,13 +16,7 @@ enum TZRunError: Error {
 class TZRun {
     let id: String
     let phases: [TZPhase]
-    var parameters: [Parameter] {
-        var tmpParam = [Parameter]()
-        for thisPhase in phases {
-            tmpParam.append(contentsOf: thisPhase.allParams)
-        }
-        return tmpParam
-    }
+    var parameters: [Parameter] = []
     let seed: Double = 0.0
     var returnCode : ReturnCode = .NotStarted
     var analysis: Analysis!
@@ -63,8 +57,16 @@ class TZRun {
         phase.traj = StateDictArray(from: trajData)
         phase.varList.updateFromDict(traj: phase.traj)
         self.phases = [phase]
+        getParams()
     }
     
+    func getParams(){
+        var tmpParam = [Parameter]()
+        for thisPhase in phases {
+            tmpParam.append(contentsOf: thisPhase.allParams)
+        }
+        parameters = tmpParam
+    }
     convenience init(analysis: Analysis, paramSettings: [ParamID: String] = [:]) throws {
         let asysData = try analysis.copyForRuns()
         try self.init(analysisData: asysData, paramSettings: paramSettings)
@@ -74,6 +76,7 @@ class TZRun {
         let decoder = JSONDecoder()
         decoder.userInfo = [CodingUserInfoKey.simpleIOKey: false, CodingUserInfoKey.deepCopyKey: true]
         phases = try decoder.decode(Array<TZPhase>.self, from: analysisData)
+        getParams()
         for (thisParamID, thisParamValue) in paramSettings {
             if let matchingParam = parameters.first(where: {$0.id == thisParamID}) {
                 matchingParam.setValue(to: thisParamValue)
@@ -198,6 +201,14 @@ extension Analysis {
             }
             runGenerator.runID = runGenerator.tradeGroupDescriptions.joined(separator: "_")
             let curGroupRuns = createAllMCRuns(runGenerator: runGenerator)
+            
+            // Add a parameter documenting the trade group
+            var curGroupParam = TradeGroupParam()
+            curGroupParam.tradeGroupName = curTradeGroup.groupDescription
+            curGroupRuns.forEach({ thisRun in
+                thisRun.parameters.append(curGroupParam)
+            })
+            
             self.tradeGroups[i].runs = curGroupRuns
             allRuns.append(contentsOf: curGroupRuns)
         }

@@ -126,3 +126,13 @@ class BoolParam: Parameter {
         value = valIn
     }
 }
+/** Param that stores the current trade group name for group runs */
+struct TradeGroupParam: Parameter {
+    var id = "tradeGroup"
+    var name = "Trade Group"
+    var tradeGroupName: String = ""
+    var isParam = false
+    static var paramConstructor: (Parameter) -> RunVariant? = {(Parameter)->RunVariant? in return nil}
+    func setValue(to stringIn: String) {}
+    var stringValue: String = ""
+}

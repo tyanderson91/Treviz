@@ -44,6 +44,7 @@ struct TZPlotSymbol {
     }
     
     // Default symbols by shape
+    static let none = TZPlotSymbol(.none)
     static let cross = TZPlotSymbol(.cross)
     static let circle = TZPlotSymbol(.circle)
     static let square = TZPlotSymbol(.square)
@@ -64,7 +65,7 @@ final class TZPlot: TZOutput {
     var majorGridLineStyle = TZLineStyle(color: CGColor(gray: 0.9, alpha: 1), lineWidth: 1)
     var minorGridLineStyle = TZLineStyle(color: CGColor(gray: 0.5, alpha: 1), lineWidth: 0.5)
     var isInteractive = true
-    var plotSymbol : TZPlotSymbol = .circle
+    var plotSymbol : TZPlotSymbol = .none
     
     override func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingsKeys.self)

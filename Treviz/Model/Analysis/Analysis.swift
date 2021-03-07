@@ -116,9 +116,13 @@ class Analysis: NSObject, Codable {
             }
         }
     }
+    
     // Outputs
     var textOutputViewer: TZTextOutputViewer?
     var plotOutputViewer: TZPlotOutputViewer?
+    
+    // User defaults
+    var defaultColorMap = ColorMap.defaultMap
     
     override init(){
         super.init()
@@ -214,6 +218,7 @@ class Analysis: NSObject, Codable {
                 if newVariant != nil { runVariants.append(newVariant!) }
             }
         }
+        tradeGroups = Array<RunGroup>.init(repeating: RunGroup(), count: numTradeGroups) // TODO: Allow reading of custom trade groups
         
         var allTZOutputs = try container.nestedUnkeyedContainer(forKey: .plots)
         var plotsTemp = allTZOutputs
@@ -230,8 +235,13 @@ class Analysis: NSObject, Codable {
             case .plot:
                 newOutput = TZPlot(decoder: decoder, referencing: self)
             }
-
-            if newOutput != nil { plots.append(newOutput!) }
+            
+            guard newOutput != nil else { continue }
+            let reqCat = newOutput?.plotType.requiresCategoryVar
+            if newOutput!.plotType.requiresCategoryVar && newOutput!.categoryVar == nil {
+                newOutput?.categoryVar = TradeGroupParam() // Default to use trade groups if no other category variable is input
+            }
+            plots.append(newOutput!)
         }
         
         // Final settings

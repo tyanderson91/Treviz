@@ -38,6 +38,13 @@ struct TZPlotType : Equatable {
         }
     }
     
+    var requiresCategoryVar: Bool {
+        if id == "contour2d" {
+            return false
+        } else {
+            return nVars > nAxis // If there are more vars than axes, then one var must be a category (except for with contours)
+        }
+    }
     /**
      Get a PlotType object corresponding to a given name
      - Parameter name: String, name of the plot type you want to return

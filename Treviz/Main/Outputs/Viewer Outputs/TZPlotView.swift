@@ -24,7 +24,6 @@ class TZPlotView: NSObject, CPTScatterPlotDelegate, CPTScatterPlotDataSource, CP
     var graph: CPTGraph
     var representedPlot: TZPlot
     var _plotData: OutputDataSet
-    //var plotAreaSize: CGSize!
     private var plotAreaSize: (Decimal, Decimal) = (-1.0, -1.0)
     private var plotArea: CPTPlotArea { return graph.plotAreaFrame!.plotArea! }
     private var newPlotAreaSize: (Decimal, Decimal) {
@@ -52,21 +51,33 @@ class TZPlotView: NSObject, CPTScatterPlotDelegate, CPTScatterPlotDataSource, CP
         } catch { throw error }
 
         super.init()
-
+        let colorMapName = UserDefaults.standard.string(forKey: "color_map") ?? "default"
+        let colorMap = ColorMap.allMaps.first(where: {$0.name == colorMapName}) ?? ColorMap.defaultMap
         var i = 0
-        let lineStyles: [CPTMutableLineStyle] = [.init(TZLineStyle(color: .init(red: 1.0, green: 0.0, blue: 0.0, alpha: 1.0), lineWidth: 1.0)),
-            .init(TZLineStyle(color: .init(red: 0.0, green: 1.0, blue: 0.0, alpha: 1.0), lineWidth: 1.0)),
-            .init(TZLineStyle(color: .init(red: 0.0, green: 0.0, blue: 1.0, alpha: 1.0), lineWidth: 1.0)),
-            .init(TZLineStyle(color: .init(red: 1.0, green: 1.0, blue: 0.0, alpha: 1.0), lineWidth: 1.0)),
-            .init(TZLineStyle(color: .init(red: 1.0, green: 0.0, blue: 1.0, alpha: 1.0), lineWidth: 1.0)),
-            .init(TZLineStyle(color: .init(red: 0.0, green: 1.0, blue: 1.0, alpha: 1.0), lineWidth: 1.0)),
-            .init(TZLineStyle(color: .init(red: 0.0, green: 0.0, blue: 0.0, alpha: 1.0), lineWidth: 1.0)),
-        ]
         
+        let multiGroup = _plotData.allGroups.count > 1
+
         for (thisGroupName, thisGroupData) in _plotData.allGroups {
-            let groupLinestyle = lineStyles[i]
+            var thisColor: CGColor
+            var groupLinestyle: CPTMutableLineStyle
+            
+            if multiGroup {
+                thisColor = colorMap.colors[i]
+            } else {
+                thisColor = CGColor.black
+            }
+            groupLinestyle = CPTMutableLineStyle.init(TZLineStyle(color: thisColor, lineWidth: 3.0))
             let lineFill = CPTFill(color: groupLinestyle.lineColor!.withAlphaComponent(0.5))
             groupLinestyle.lineFill = lineFill
+            
+            let multiSets = thisGroupData.count > 1
+            if multiSets { // If many data sets of the same group, apply some transparency
+                let lineFill = CPTFill(color: groupLinestyle.lineColor!.withAlphaComponent(0.5))
+                groupLinestyle.lineFill = lineFill
+            } else {
+                let lineFill = CPTFill(color: groupLinestyle.lineColor!.withAlphaComponent(1.0))
+                groupLinestyle.lineFill = lineFill
+            }
             
             for thisPlotData in thisGroupData {
                 let plot = addSinglePlot(from: inputPlot, plotData: thisPlotData) as! CPTScatterPlot
@@ -88,6 +99,7 @@ class TZPlotView: NSObject, CPTScatterPlotDelegate, CPTScatterPlotDataSource, CP
         plotSpace.delegate = self
         plotSpace.allowsMomentum = true
         
+        graph.plotAreaFrame?.plotArea?.backgroundColor = CGColor(gray: 0.95, alpha: 1.0)
         graph.paddingRight = 0
         graph.paddingTop = 0
         graph.paddingLeft = 65 // TODO: Offset by axis label width

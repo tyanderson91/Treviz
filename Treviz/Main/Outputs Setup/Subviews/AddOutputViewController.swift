@@ -72,6 +72,7 @@ class AddOutputViewController: BaseViewController, VariableGetter {
         }
         plotTypePopupButton.bezelStyle = .texturedSquare
         self.bind(.title, to: objectController!, withKeyPath: "selection.title")
+        plotTypePopupButton.selectItem(withTitle: representedOutput.plotType.name)
         
         conditionsPopupButton.addItems(withTitles: analysis.conditions.compactMap({$0.name}))
         if let curCond = representedOutput.condition {

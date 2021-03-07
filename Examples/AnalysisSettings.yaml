@@ -59,7 +59,7 @@ Outputs:
     title: Traj2
     variable1: y
     variable2: t
-    plot type: 2 Var along Trajectory
+    plot type: 2 Var along Trajectory, by Category
     output type: plot
   - id: 5
     title: Apogee range
