@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="FMf-NL-ufc">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="FMf-NL-ufc">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17156"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -11,17 +11,17 @@
             <objects>
                 <viewController identifier="outputSetupRestoration" storyboardIdentifier="outputSetup" id="FMf-NL-ufc" customClass="OutputSetupViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="fmw-WQ-uxs">
-                        <rect key="frame" x="0.0" y="0.0" width="508" height="153"/>
+                        <rect key="frame" x="0.0" y="0.0" width="508" height="200"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <scrollView verticalHuggingPriority="900" verticalCompressionResistancePriority="50" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X3z-Eb-GAM" userLabel="Output Setup Custom Scroll View">
-                                <rect key="frame" x="0.0" y="100" width="508" height="3"/>
+                            <scrollView verticalHuggingPriority="900" verticalCompressionResistancePriority="50" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="50" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X3z-Eb-GAM" userLabel="Output Setup Custom Scroll View">
+                                <rect key="frame" x="0.0" y="100" width="508" height="50"/>
                                 <clipView key="contentView" id="iZT-XH-WJ0">
-                                    <rect key="frame" x="1" y="1" width="506" height="1"/>
+                                    <rect key="frame" x="1" y="1" width="506" height="48"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <stackView distribution="fill" orientation="vertical" alignment="trailing" spacing="1" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" verticalClippingResistancePriority="900" verticalHuggingPriority="900" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gfp-GI-MP9" customClass="CustomStackView" customModule="Treviz" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="1" width="506" height="0.0"/>
+                                            <rect key="frame" x="0.0" y="48" width="506" height="0.0"/>
                                         </stackView>
                                     </subviews>
                                     <constraints>
@@ -34,16 +34,16 @@
                                     <constraint firstAttribute="height" priority="50" constant="400" placeholder="YES" id="sXx-O9-x1F"/>
                                 </constraints>
                                 <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="kBx-UO-78b">
-                                    <rect key="frame" x="1" y="-14" width="506" height="16"/>
+                                    <rect key="frame" x="1" y="33" width="506" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="39l-sD-gFI">
-                                    <rect key="frame" x="491" y="1" width="16" height="1"/>
+                                    <rect key="frame" x="491" y="1" width="16" height="48"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2VV-N6-yqy">
-                                <rect key="frame" x="13" y="112" width="52" height="32"/>
+                                <rect key="frame" x="13" y="159" width="52" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="48" id="b4k-k1-kdx"/>
                                 </constraints>
@@ -79,7 +79,7 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView id="BUK-Xk-xTa">
-                                                            <rect key="frame" x="1" y="1" width="80" height="17"/>
+                                                            <rect key="frame" x="11" y="1" width="80" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="iWK-mf-xjI">
@@ -118,7 +118,7 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView id="Sv2-rT-2MN">
-                                                            <rect key="frame" x="84" y="1" width="120" height="17"/>
+                                                            <rect key="frame" x="94" y="1" width="120" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="CSb-uG-B8q">
@@ -144,7 +144,7 @@
                                                         </tableCellView>
                                                     </prototypeCellViews>
                                                 </tableColumn>
-                                                <tableColumn width="293" minWidth="40" maxWidth="1000" id="MXf-j7-hBy">
+                                                <tableColumn width="264" minWidth="40" maxWidth="1000" id="MXf-j7-hBy">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Description">
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -157,11 +157,11 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView id="UdY-h2-eqB">
-                                                            <rect key="frame" x="207" y="1" width="297" height="17"/>
+                                                            <rect key="frame" x="217" y="1" width="268" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="79G-Ci-R9Q">
-                                                                    <rect key="frame" x="0.0" y="1" width="297" height="16"/>
+                                                                    <rect key="frame" x="0.0" y="1" width="268" height="16"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Description" id="FjU-Tp-C89">
                                                                         <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -207,7 +207,7 @@
                                 </tableHeaderView>
                             </scrollView>
                             <stackView distribution="fillEqually" orientation="horizontal" alignment="top" spacing="1" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uyZ-oY-mbV">
-                                <rect key="frame" x="78" y="118" width="352" height="20"/>
+                                <rect key="frame" x="78" y="165" width="352" height="20"/>
                                 <subviews>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vQy-oS-3AV">
                                         <rect key="frame" x="-7" y="-7" width="101" height="32"/>
@@ -293,7 +293,7 @@
                     </connections>
                 </arrayController>
             </objects>
-            <point key="canvasLocation" x="-108.5" y="762.5"/>
+            <point key="canvasLocation" x="-109" y="786"/>
         </scene>
         <!--SingleAxisViewController-->
         <scene sceneID="hxV-f7-wcq">
@@ -350,7 +350,7 @@
                                             </gridCell>
                                             <gridCell row="aaj-xq-o1N" column="EoY-4L-tgo" id="l6z-Rw-DEs">
                                                 <containerView key="contentView" horizontalCompressionResistancePriority="50" translatesAutoresizingMaskIntoConstraints="NO" id="SXR-EZ-NMh">
-                                                    <rect key="frame" x="0.0" y="5" width="141" height="30"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="141" height="35"/>
                                                     <connections>
                                                         <outlet property="nextKeyView" destination="ZYv-Vs-iDV" id="fmX-L6-bwq"/>
                                                     </connections>

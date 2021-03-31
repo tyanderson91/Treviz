@@ -7,14 +7,14 @@
 //
 
 import Cocoa
-
+import OrderedDictionary
 /**
  Structure to contain the number sets that feed into text and plot outputs
  Format varies depending on whether categories and conditions are used
  */
 
 struct OutputDataSet {
-    var allGroups: [String: [OutputDataSetSingle]] = ["":[OutputDataSetSingle()]]
+    var allGroups: OrderedDictionary<String, [OutputDataSetSingle]> = ["":[OutputDataSetSingle()]]
     var allDataSets: [OutputDataSetSingle]? {
         var tmpSets = [OutputDataSetSingle]()
         for (_, groupsets) in allGroups {
@@ -30,9 +30,9 @@ struct OutputDataSet {
             if multiSet != nil && newValue != nil { multiSet![0] = newValue! }
         }
     }
-    var groupedSet: [String: OutputDataSetSingle]? {
+    var groupedSet: OrderedDictionary<String, OutputDataSetSingle>? {
         get {
-            var newDict = Dictionary<String, OutputDataSetSingle>()
+            var newDict = OrderedDictionary<String, OutputDataSetSingle>()
             allGroups.forEach({newDict[$0] = $1.first})
             return newDict
         } set {
@@ -112,7 +112,7 @@ extension TZOutput {
                 let groupName = thisRun.tradeGroupName
                 //let groupName = "\(matchingParam.id)=\(curVal)" // TODO: Fix this for all group name types
                 let curDataSet = try OutputDataSetSingle(traj: thisRun.trajData, output: self, identifier: thisRun.id, groupName: groupName)
-                if outputDataSet.allGroups.keys.contains(groupName) { outputDataSet.allGroups[groupName]!.append(curDataSet) }
+                if outputDataSet.allGroups.containsKey(groupName) { outputDataSet.allGroups[groupName]!.append(curDataSet) }
                 else { outputDataSet.allGroups[groupName] = [curDataSet] }
             }
         }

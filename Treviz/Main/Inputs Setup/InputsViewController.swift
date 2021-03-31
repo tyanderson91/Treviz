@@ -93,6 +93,8 @@ class InputsViewController: TZViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
                 
+        stack.parent = self
+        stack.setHuggingPriority(NSLayoutConstraint.Priority.defaultHigh, for: .horizontal)
         // Load and install all the view controllers from our storyboard in the following order.
         let storyboard = NSStoryboard(name: "Inputs", bundle: nil)
         

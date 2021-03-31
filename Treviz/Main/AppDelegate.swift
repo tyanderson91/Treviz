@@ -13,21 +13,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     @IBOutlet weak var application: NSApplication!
     
-    //var plotTypes : [TZPlotType]! = nil
-    //var initVars : [Variable]! = nil
-    
     func applicationWillFinishLaunching(_ notification: Notification) {
     }
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        setDefaults()
         for thisWindow in application.windows {
             let windowController = thisWindow.windowController
             if let doc = windowController?.document as? AnalysisDoc {
                 doc.appDelegate = self
             }
         }
-        
-        //NotificationCenter.default.post(name: .didLoadAppDelegate, object: nil)
         // Insert code here to initialize your application
     }
     
@@ -35,24 +31,4 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Insert code here to tear down your application
     }
     
-    /**
-     Set user defaults, if unset
-     */
-    func setDefaults(){
-        let defaults = UserDefaults.standard
-        defaults.register(defaults: ["color_map":"default"])
-    }
-    /*
-    func loadVars(from plist: String){
-        guard let varFilePath = Bundle.main.path(forResource: plist, ofType: "plist") else {return}
-        guard let inputList = NSArray.init(contentsOfFile: varFilePath) else {return}//return empty if filename not found
-        initVars = []
-        for thisVar in inputList {
-            guard let dict = thisVar as? NSDictionary else {return}
-            let newVar = Variable(dict["id"] as! VariableID, named: dict["name"] as! String, symbol: dict["symbol"] as! String)
-            newVar.units = dict["units"] as! String
-            newVar.value = [0]
-            initVars.append(newVar)
-        }
-    }*/
 }

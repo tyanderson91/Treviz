@@ -116,7 +116,13 @@ class RunVariantTradesViewController: TZViewController {
         guard let button = sender as? NSTextField else { return }
         let curRow = groupsTableView.row(for: button)
         var matchingGroup = analysis.tradeGroups[curRow]
+        let newDesc = button.stringValue
         matchingGroup.groupDescription = button.stringValue
+        if !(!matchingGroup._didSetDescription && newDesc.hasPrefix("Group ")) {
+            matchingGroup._didSetDescription = true
+            button.font = NSFont.systemFont(ofSize: NSFont.systemFontSize)
+            analysis.tradeGroups[curRow] = matchingGroup
+        }
     }
     
     private func removeTradeGroup(index: Int) {
@@ -170,8 +176,10 @@ class RunVariantTradesViewController: TZViewController {
         let newView = groupsTableView.makeView(withIdentifier: .rvAddRemoveNameCellView, owner: self) as? RunVariantButtonNameCellView
         if let textField = newView?.nameTextField{
             if groupName != nil && groupName != "" {
+                textField.font = NSFont.systemFont(ofSize: NSFont.systemFontSize)
                 textField.stringValue = groupName!
             } else if groupNum != nil {
+                textField.font = NSFont(name: "Helvetica Neue Light Italic", size: NSFont.systemFontSize)
                 textField.stringValue = "Group \(groupNum!+1)"
             }
         }
@@ -296,6 +304,7 @@ class PermutationTradeTableViewController: TZViewController, NSTableViewDelegate
         representedVariant.tradeValues.append(nil)
         let thisRow = representedVariant.tradeValues.count
         self.tableView.insertRows(at: IndexSet(integer: thisRow-1), withAnimation: .slideUp)
+        let textField = tableView.view(atColumn: 0, row: tableView.numberOfRows-2, makeIfNecessary: false) as? NSTextField // TODO: Start editing
         tradesVC.parentVC.updateNumRuns()
     }
     
@@ -365,7 +374,8 @@ class GroupedTradeTableDelegate: NSObject, NSTableViewDelegate, NSTableViewDataS
             }
             var groupName : String?
             if row < analysis.tradeGroups.count {
-                groupName = analysis.tradeGroups[row].groupDescription
+                let curGroup = analysis.tradeGroups[row]
+                if curGroup._didSetDescription { groupName = curGroup.groupDescription }
             }
             let groupView = tradesVC.groupNameCellView(groupName: groupName, groupNum: row)
             return groupView

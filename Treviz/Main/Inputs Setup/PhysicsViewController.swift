@@ -11,7 +11,7 @@
 import Cocoa
 
 class PhysicsViewController: PhasedViewController {
-    
+    fileprivate let cbodyDivider : Int = 3 // Grid row for the divider between the central body params and everything else
     let physicsModels = PhysicsModel.allPhysicsModels
     var curModelParam: EnumGroupParam { return phase.physicsSettings.physicsModelParam }
     var curPhysicsModel: PhysicsModel? { return curModelParam.value as? PhysicsModel }
@@ -28,11 +28,14 @@ class PhysicsViewController: PhasedViewController {
         }
     }
     
+    @IBOutlet weak var gridView: NSGridView!
+    
     //MARK: Param views
     @IBOutlet weak var physicsSelectorPopupButton: ParamValuePopupView!
     @IBOutlet weak var physicsModelRunVariantButton: RunVariantEnableButton!
     @IBOutlet weak var centralBodyRunVariantButton: RunVariantEnableButton!
     @IBOutlet weak var includeRotationRunVariantButton: RunVariantEnableButton!
+    @IBOutlet weak var includeRotationCheckbox: ParamValueCheckboxView!
     @IBOutlet weak var baseCsysRunVariantButton: RunVariantEnableButton!
     @IBOutlet weak var gravityRunVariantButton: RunVariantEnableButton!
     @IBOutlet weak var atmosphereRunVariantButton: RunVariantEnableButton!
@@ -45,6 +48,7 @@ class PhysicsViewController: PhasedViewController {
     override func getHeaderTitle() -> String { return NSLocalizedString("Physics Model", comment: "") }
     
     override func viewDidLoad() {
+        gridView.mergeCells(inHorizontalRange: NSRange(location: 0, length: 2), verticalRange: NSRange(location: cbodyDivider, length: 1))
         super.viewDidLoad()
         for thisPhysicsModel in physicsModels {
             let menuItem = NSMenuItem.init(title: thisPhysicsModel.valuestr, action: nil, keyEquivalent: "")

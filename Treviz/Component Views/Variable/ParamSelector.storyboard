@@ -39,7 +39,6 @@
                     </view>
                     <connections>
                         <outlet property="paramSelectorPopup" destination="CgL-W3-DSA" id="DxN-X8-blo"/>
-                        <outlet property="variableSelectorPopup" destination="CgL-W3-DSA" id="p7x-di-14X"/>
                     </connections>
                 </viewController>
                 <customObject id="Onb-kS-cy1" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

@@ -121,9 +121,6 @@ class Analysis: NSObject, Codable {
     var textOutputViewer: TZTextOutputViewer?
     var plotOutputViewer: TZPlotOutputViewer?
     
-    // User defaults
-    var defaultColorMap = ColorMap.defaultMap
-    
     override init(){
         super.init()
         phases = []

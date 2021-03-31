@@ -186,17 +186,20 @@ extension Analysis {
         guard tradeVariants.allSatisfy({$0.tradeValues.count == numGroups}) else { throw TZRunError.UnequalTradeGroupNumbers }
         var allRuns = [TZRun]()
         var runGenerator = inputRunGenerator
+        let shouldTrimPhase = self.phases.count == 1
         for i in 0...numGroups-1 {
             runGenerator.tradeGroupDescriptions = []
             for thisVariant in tradeVariants {
                 let paramID = thisVariant.paramID
                 let paramVal = thisVariant.tradeValues[i]?.valuestr
                 runGenerator.paramSettings[paramID] = paramVal ?? thisVariant.parameter.stringValue
-                runGenerator.tradeGroupDescriptions.append("\(paramID)=\(paramVal ?? "?")")
+                var curParamID = paramID
+                if shouldTrimPhase { curParamID = curParamID.baseVarID() }
+                runGenerator.tradeGroupDescriptions.append("\(curParamID)=\(paramVal ?? "?")")
             }
             runGenerator.curTradeGroupNum = i
             let curTradeGroup = self.tradeGroups[runGenerator.curTradeGroupNum]
-            if curTradeGroup.groupDescription.isEmpty {
+            if !curTradeGroup._didSetDescription {
                 self.tradeGroups[i].groupDescription = runGenerator.tradeGroupDescriptions.joined(separator: ", ")
             }
             runGenerator.runID = runGenerator.tradeGroupDescriptions.joined(separator: "_")

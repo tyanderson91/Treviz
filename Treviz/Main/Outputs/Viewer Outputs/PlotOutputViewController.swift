@@ -36,13 +36,11 @@ class PlotOutputSplitViewController: TZSplitViewController, TZPlotOutputViewer {
     
     override func splitViewDidResizeSubviews(_ notification: Notification) {
         let newWidth = selectorViewController.view.bounds.width
-        //let contentWidth = selectorViewController.scrollView.contentView.bounds.width
         tableView.rowHeight = newWidth
         tableView.tableColumns[0].width = newWidth
+        let r = tableView.selectedRow
         tableView.reloadData()
-        //let docWidth = selectorViewController.scrollView.documentView?.bounds.width
-        //let contWidth = selectorViewController.scrollView.contentView.bounds.width
-        //let scrollWidth = selectorViewController.scrollView.bounds.width
+        tableView.selectRowIndexes(IndexSet(integer: r), byExtendingSelection: false)
     }
     
     // MARK: TZPlotOutputViewer
@@ -100,14 +98,15 @@ class PlotOutputSelectorViewController: TZViewController, NSTableViewDelegate, N
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let newWidth = view.bounds.width
-        tableView.rowHeight = newWidth
         tableView.allowsColumnResizing = false
         tableView.columnAutoresizingStyle = .firstColumnOnlyAutoresizingStyle
         tableView.alignment = .justified
         scrollView.horizontalScrollElasticity = .none
         tableView.intercellSpacing.width = 0
         tableView.intercellSpacing.height = 0
+    }
+    override func viewWillAppear() {
+        tableView.rowHeight = view.bounds.width
     }
     
     // MARK: TableViewDelegate and DataSource
@@ -159,7 +158,6 @@ class PlotOutputViewController: TZViewController, TZPlotOutputViewer {
     func createPlot(plot: TZPlot) throws {
         let newGraph = try TZPlotView(with: plot)
         plotViews.append(newGraph)
-        //graph.defaultPlotSpace?.allowsUserInteraction = true
         graphHostingView.hostedGraph = newGraph.graph       
         tableView.reloadData()
     }

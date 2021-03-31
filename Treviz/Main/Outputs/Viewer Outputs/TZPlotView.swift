@@ -19,7 +19,7 @@ class TZPlotThumbnailImageCell: NSImageCell {
 /**
  Takes a TZPlot instance and renders it as a plot using CorePlot
  */
-class TZPlotView: NSObject, CPTScatterPlotDelegate, CPTScatterPlotDataSource, CPTPlotSpaceDelegate {
+class TZPlotView: NSObject, CPTScatterPlotDelegate, CPTScatterPlotDataSource, CPTPlotSpaceDelegate, CPTLegendDelegate {
     
     var graph: CPTGraph
     var representedPlot: TZPlot
@@ -46,97 +46,124 @@ class TZPlotView: NSObject, CPTScatterPlotDelegate, CPTScatterPlotDataSource, CP
         let defaultTheme = CPTTheme(named: .plainWhiteTheme)
         graph = (defaultTheme?.newGraph() as! CPTGraph)
         representedPlot = inputPlot
+        let prefs = inputPlot.plotPreferences
         do {
             _plotData = try representedPlot.getData()!
         } catch { throw error }
 
         super.init()
-        let colorMapName = UserDefaults.standard.string(forKey: "color_map") ?? "default"
-        let colorMap = ColorMap.allMaps.first(where: {$0.name == colorMapName}) ?? ColorMap.defaultMap
-        var i = 0
         
+        // Get default properties from user inputs
+        let colorMap = prefs.colorMap!
+        let lineWidth = Double(prefs.lineWidth)
+        let mcOpacity = UserDefaults.mcOpacity
+        let linePattern = prefs.linePattern!
+        
+        var i = 0
         let multiGroup = _plotData.allGroups.count > 1
-
+        var legendPlots: [CPTPlot] = []
+        let ngroups = _plotData.allGroups.count
+        let ncolors = colorMap.colors.count
+        
         for (thisGroupName, thisGroupData) in _plotData.allGroups {
             var thisColor: CGColor
             var groupLinestyle: CPTMutableLineStyle
             
             if multiGroup {
-                thisColor = colorMap.colors[i]
+                if colorMap.isContinuous {
+                    let colorPct: Float = Float(i)/Float(ngroups-1)
+                    thisColor = colorMap[colorPct] ?? CGColor.black
+                } else {
+                    let color_index = i % (ncolors)
+                    thisColor = colorMap[color_index]!
+                    
+                }
             } else {
                 thisColor = CGColor.black
             }
-            groupLinestyle = CPTMutableLineStyle.init(TZLineStyle(color: thisColor, lineWidth: 3.0))
-            let lineFill = CPTFill(color: groupLinestyle.lineColor!.withAlphaComponent(0.5))
-            groupLinestyle.lineFill = lineFill
+            groupLinestyle = CPTMutableLineStyle.init(TZLineStyle(color: thisColor, lineWidth: lineWidth))
+            var lineFill: CPTFill
             
             let multiSets = thisGroupData.count > 1
             if multiSets { // If many data sets of the same group, apply some transparency
-                let lineFill = CPTFill(color: groupLinestyle.lineColor!.withAlphaComponent(0.5))
+                lineFill = CPTFill(color: groupLinestyle.lineColor!.withAlphaComponent(mcOpacity))
                 groupLinestyle.lineFill = lineFill
             } else {
-                let lineFill = CPTFill(color: groupLinestyle.lineColor!.withAlphaComponent(1.0))
+                lineFill = CPTFill(color: groupLinestyle.lineColor!.withAlphaComponent(1.0))
                 groupLinestyle.lineFill = lineFill
             }
+            groupLinestyle.setLinePattern(linePattern)
             
+            var j = 0
             for thisPlotData in thisGroupData {
                 let plot = addSinglePlot(from: inputPlot, plotData: thisPlotData) as! CPTScatterPlot
-                
                 plot.dataLineStyle = groupLinestyle
-                let newSymbol = plot.plotSymbol!
-                newSymbol.fill = lineFill
-                newSymbol.lineStyle = .none
-                newSymbol.size = CGSize(width: 10.0, height: 10.0)
-                plot.plotSymbol = newSymbol
-                //plot.plotSymbol = allSymbols[i]
-                //plot.dataLineStyle?.lineColor = CPTColor(componentRed: 0.6, green: 0.7, blue: 0.8, alpha: 1,0)
+                 plot.title = thisGroupName
+                if j==0 { // Add the first of the group into the legend
+                    legendPlots.append(plot)
+                }
+                j += 1
             }
             i += 1
             // TODO: Add configurations for group here
         }
         let plotSpace = graph.defaultPlotSpace as! CPTXYPlotSpace
-        plotSpace.allowsUserInteraction = inputPlot.isInteractive
+        plotSpace.allowsUserInteraction = prefs.isInteractive
         plotSpace.delegate = self
         plotSpace.allowsMomentum = true
         
-        graph.plotAreaFrame?.plotArea?.backgroundColor = CGColor(gray: 0.95, alpha: 1.0)
+        graph.plotAreaFrame?.plotArea?.backgroundColor = UserDefaults.backgroundColor
         graph.paddingRight = 0
         graph.paddingTop = 0
         graph.paddingLeft = 65 // TODO: Offset by axis label width
         graph.paddingBottom = 60
         graph.plotAreaFrame?.masksToBorder = false
         
-        let majorGridLineStyle = CPTMutableLineStyle(inputPlot.majorGridLineStyle)
-        let minorGridLineStyle = CPTMutableLineStyle(inputPlot.minorGridLineStyle)
+        let majorGridLineStyle = CPTMutableLineStyle(prefs.majorGridLineStyle)
+        let minorGridLineStyle = CPTMutableLineStyle(prefs.minorGridLineStyle)
 
         let axisSet: CPTXYAxisSet = graph.axisSet! as! CPTXYAxisSet
         
-        //axisSet.xAxis.
         let xaxis = axisSet.axes![0] as! CPTXYAxis
         xaxis.labelingPolicy = .automatic
         xaxis.axisConstraints = CPTConstraints(relativeOffset: 0.00)
         
-        xaxis.majorGridLineStyle = minorGridLineStyle
-        xaxis.minorGridLineStyle = majorGridLineStyle
+        xaxis.majorGridLineStyle = majorGridLineStyle
+        xaxis.minorGridLineStyle = minorGridLineStyle
         xaxis.title = "\(String(describing: inputPlot.var1!.name)) (\(String(describing: inputPlot.var1!.units)))"
         xaxis.titleOffset = graph.titleTextStyle!.fontSize * CGFloat(3)
 
         let yaxis = axisSet.axes![1] as! CPTXYAxis
         yaxis.labelingPolicy = .automatic
         yaxis.axisConstraints = CPTConstraints(relativeOffset: 0.00)
-        yaxis.majorGridLineStyle = minorGridLineStyle
-        yaxis.minorGridLineStyle = majorGridLineStyle
+        yaxis.majorGridLineStyle = majorGridLineStyle
+        yaxis.minorGridLineStyle = minorGridLineStyle
         yaxis.title = "\(String(describing: inputPlot.var2!.name)) (\(String(describing: inputPlot.var2!.units)))"
         yaxis.titleOffset = graph.titleTextStyle!.fontSize * CGFloat(3.5)
         
         plotSpace.scale(toFitEntirePlots: graph.allPlots())
         graph.layoutIfNeeded()
+        
         if inputPlot.var1?.units == inputPlot.var2?.units {
             enforceEqualAxes(xScale: 1.0, yScale: 1.0)
             thumbnail = graph.imageOfLayer()
             NotificationCenter.default.addObserver(self, selector: #selector(self.didResizePlotArea), name: NSNotification.Name( CPTLayerNotification.boundsDidChange.rawValue), object: plotArea)
         } else {
             thumbnail = graph.imageOfLayer()
+        }
+        
+        if multiGroup {
+            let legend = CPTLegend(plots: legendPlots)
+            legend.fill = CPTFill(color: CPTColor.white())
+            legend.borderLineStyle = yaxis.axisLineStyle
+            legend.cornerRadius = 5.0
+            legend.numberOfRows = UInt(legendPlots.count)
+            //legend.numberOfColumns = 1
+            let legLineWidth = UserDefaults.lineWidth
+            legend.swatchSize = CGSize(width: 8*legLineWidth, height: legLineWidth*1.5)
+            
+            graph.legend = legend
+            graph.legendAnchor = CPTRectAnchor.topRight
         }
     }
     
@@ -168,7 +195,7 @@ class TZPlotView: NSObject, CPTScatterPlotDelegate, CPTScatterPlotDataSource, CP
         }
     }
 
-    
+    // MARK: Helper functions
     private func enforceEqualAxes(xScale: Decimal, yScale: Decimal) {
         let plotSpace = graph.defaultPlotSpace as! CPTXYPlotSpace
         let maxX = plotSpace.xRange.lengthDecimal*xScale
@@ -198,7 +225,7 @@ class TZPlotView: NSObject, CPTScatterPlotDelegate, CPTScatterPlotDataSource, CP
         let scatterPlot = CPTScatterPlot(frame: graph.bounds)
         scatterPlot.delegate = self
         scatterPlot.dataSource = self
-        scatterPlot.plotSymbol = CPTPlotSymbol.fromTZPlotSymbol(plot.plotSymbol)
+        scatterPlot.plotSymbol = CPTPlotSymbol(plot.plotPreferences.plotSymbol)
         scatterPlot.name = plotData.identifier
         graph.add(scatterPlot)
         

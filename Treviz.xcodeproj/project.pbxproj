@@ -55,12 +55,17 @@
 		CD5F4E9E2455105300823E43 /* InitStateHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB7C73B2352B58300BC50F1 /* InitStateHeader.swift */; };
 		CD656F71248771D500BB5CBC /* PhaseStartupFuncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD656F6F248770A300BB5CBC /* PhaseStartupFuncs.swift */; };
 		CD6A255F25AC24EF0075ED81 /* RunVariants.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD6A255E25AC24EF0075ED81 /* RunVariants.storyboard */; };
-		CD6CCF3A244BB5720051F76D /* TZPlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD280F49233B45670004263F /* TZPlot.swift */; };
 		CD6CCF3D244D2FFB0051F76D /* OutputDataSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6CCF3B244CCC960051F76D /* OutputDataSet.swift */; };
 		CD6E0B9E2431BAC5008D1656 /* TZToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6E0B9D2431BAC5008D1656 /* TZToolbar.swift */; };
 		CD6E0BA22436DEC7008D1656 /* TZStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6E0BA12436DEC7008D1656 /* TZStoryboard.swift */; };
 		CD70451B25F5533000A2F372 /* ParamSelector.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD70451A25F5532F00A2F372 /* ParamSelector.storyboard */; };
 		CD70451F25F5579200A2F372 /* ParameterSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD70451E25F5579200A2F372 /* ParameterSelectorViewController.swift */; };
+		CD70454725FEE69700A2F372 /* ColorMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD70454625FEE69700A2F372 /* ColorMap.swift */; };
+		CD70454A25FEE6A000A2F372 /* ColorMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD70454625FEE69700A2F372 /* ColorMap.swift */; };
+		CD7045632601D14E00A2F372 /* OrderedDictionary in Frameworks */ = {isa = PBXBuildFile; productRef = CD7045622601D14E00A2F372 /* OrderedDictionary */; };
+		CD704581260475D000A2F372 /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD70454F26017D4300A2F372 /* UserPreferences.swift */; };
+		CD70458E2606C2FD00A2F372 /* TZPlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD280F49233B45670004263F /* TZPlot.swift */; };
+		CD704591261031A900A2F372 /* TZPlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD280F49233B45670004263F /* TZPlot.swift */; };
 		CD70FAC9253EB39800B551F2 /* ParamValueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD70FAC8253EB39800B551F2 /* ParamValueView.swift */; };
 		CD715E8023EBE70400E31F97 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = CD715E7F23EBE70400E31F97 /* README.md */; };
 		CD75951224E2638C00B79EF5 /* VariableTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD75951124E2638C00B79EF5 /* VariableTest.swift */; };
@@ -133,7 +138,6 @@
 		CDE2B5BD24C2C729002026E0 /* TZOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD60A962345C5AE00249987 /* TZOutput.swift */; };
 		CDE2B5BE24C2C729002026E0 /* OutputDataSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6CCF3B244CCC960051F76D /* OutputDataSet.swift */; };
 		CDE2B5BF24C2C729002026E0 /* TZTextOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD60A902345BF5C00249987 /* TZTextOutput.swift */; };
-		CDE2B5C024C2C729002026E0 /* TZPlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD280F49233B45670004263F /* TZPlot.swift */; };
 		CDE2B5C124C2C729002026E0 /* TZPlotType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4AD70C23BD4C0C00FC815F /* TZPlotType.swift */; };
 		CDE2B5C224C2C729002026E0 /* InitStateHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB7C73B2352B58300BC50F1 /* InitStateHeader.swift */; };
 		CDE2B5C324C2C729002026E0 /* MathFuncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD870F3324B448D7004A4D42 /* MathFuncs.swift */; };
@@ -257,6 +261,8 @@
 		CD6E0BA12436DEC7008D1656 /* TZStoryboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TZStoryboard.swift; sourceTree = "<group>"; };
 		CD70451A25F5532F00A2F372 /* ParamSelector.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ParamSelector.storyboard; sourceTree = "<group>"; };
 		CD70451E25F5579200A2F372 /* ParameterSelectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParameterSelectorViewController.swift; path = "Treviz/Component Views/Variable/ParameterSelectorViewController.swift"; sourceTree = SOURCE_ROOT; };
+		CD70454625FEE69700A2F372 /* ColorMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorMap.swift; sourceTree = "<group>"; };
+		CD70454F26017D4300A2F372 /* UserPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferences.swift; sourceTree = "<group>"; };
 		CD70FAC8253EB39800B551F2 /* ParamValueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ParamValueView.swift; path = "Treviz/Component Views/ParamValueView.swift"; sourceTree = SOURCE_ROOT; };
 		CD715E7F23EBE70400E31F97 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		CD75951124E2638C00B79EF5 /* VariableTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VariableTest.swift; sourceTree = "<group>"; };
@@ -362,6 +368,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD7045632601D14E00A2F372 /* OrderedDictionary in Frameworks */,
 				CD31EFF724C15F6F00ED435A /* Yams in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -429,6 +436,7 @@
 				CDD60A902345BF5C00249987 /* TZTextOutput.swift */,
 				CD280F49233B45670004263F /* TZPlot.swift */,
 				CD6CCF3B244CCC960051F76D /* OutputDataSet.swift */,
+				CD70454625FEE69700A2F372 /* ColorMap.swift */,
 			);
 			path = Outputs;
 			sourceTree = "<group>";
@@ -438,10 +446,11 @@
 			children = (
 				CDF23395242DCF0F00B8EF40 /* Main.storyboard */,
 				CDF3D1A722505A000064D70C /* AnalysisDoc.swift */,
+				CDD5049522252AF900B29751 /* AppDelegate.swift */,
+				CD70454F26017D4300A2F372 /* UserPreferences.swift */,
 				CDC1F53F22363DDB00D1BB25 /* MainViewController.swift */,
 				CDC1F53B2234874000D1BB25 /* MainSplitViewController.swift */,
 				CD6E0B9D2431BAC5008D1656 /* TZToolbar.swift */,
-				CDD5049522252AF900B29751 /* AppDelegate.swift */,
 				CDF3D1A5225057270064D70C /* TZViewController.swift */,
 				CD6E0BA12436DEC7008D1656 /* TZStoryboard.swift */,
 				CDF1670B2237A10400CD9590 /* MainWindowController.swift */,
@@ -780,6 +789,7 @@
 			name = TrajectoryAnalysis;
 			packageProductDependencies = (
 				CD31EFF624C15F6F00ED435A /* Yams */,
+				CD7045622601D14E00A2F372 /* OrderedDictionary */,
 			);
 			productName = TrajectoryAnalysis;
 			productReference = CDFAD0E923EA84EB00CE7424 /* TrajectoryAnalysis.framework */;
@@ -819,6 +829,7 @@
 			mainGroup = CDD5048922252AF900B29751;
 			packageReferences = (
 				CD1F6C6923DADBFE00461FC7 /* XCRemoteSwiftPackageReference "Yams" */,
+				CD7045612601D14E00A2F372 /* XCRemoteSwiftPackageReference "OrderedDictionary" */,
 			);
 			productRefGroup = CDD5049322252AF900B29751 /* Products */;
 			projectDirPath = "";
@@ -988,14 +999,15 @@
 				CD2D0DB82243836F0012978E /* SingleAxisOutputSetupViewController.swift in Sources */,
 				CD4656B2224C6F3500C587CC /* PhysicsViewController.swift in Sources */,
 				CD0F113D25048FE300C88B05 /* RunSettingsViewController.swift in Sources */,
+				CD704581260475D000A2F372 /* UserPreferences.swift in Sources */,
 				CDF2338F242DCD8100B8EF40 /* HeaderViewController.swift in Sources */,
+				CD70454725FEE69700A2F372 /* ColorMap.swift in Sources */,
 				CD18A660254FCB1C00B06C10 /* ParameterID.swift in Sources */,
 				CDE2B5A324C2C71D002026E0 /* AnalysisProgressReporter.swift in Sources */,
 				CD410CF72444239700AB49DE /* CorePlotExtensions.swift in Sources */,
 				CDE2B5A424C2C71D002026E0 /* Analysis.swift in Sources */,
 				CD6E0BA22436DEC7008D1656 /* TZStoryboard.swift in Sources */,
 				CDE2B59E24C2C718002026E0 /* TZPhase.swift in Sources */,
-				CDE2B5C024C2C729002026E0 /* TZPlot.swift in Sources */,
 				CDC25616243D9E86007EBE8A /* TZMessageLoggerViewController.swift in Sources */,
 				CDF1670C2237A10400CD9590 /* MainWindowController.swift in Sources */,
 				CDE2B5B624C2C729002026E0 /* Condition.swift in Sources */,
@@ -1035,6 +1047,7 @@
 				CDBEA0A622447A9C00D3159C /* TextOutputsViewController.swift in Sources */,
 				CD59C54423E79449001D98D5 /* InitStateViewController.swift in Sources */,
 				CD11FA8723408173001A3695 /* AddOutputViewController.swift in Sources */,
+				CD70458E2606C2FD00A2F372 /* TZPlot.swift in Sources */,
 				CD28477722FF9C8800D192A9 /* CollapsibleGridView.swift in Sources */,
 				CDE2B5C124C2C729002026E0 /* TZPlotType.swift in Sources */,
 				CDE2B5BE24C2C729002026E0 /* OutputDataSet.swift in Sources */,
@@ -1056,7 +1069,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD8FEB0925956A4F008A08A7 /* RunGroup.swift in Sources */,
-				CD6CCF3A244BB5720051F76D /* TZPlot.swift in Sources */,
 				CDDFF28424A5ABE200E8BC31 /* StateDict.swift in Sources */,
 				CD0FCAA32593065900EEB1B2 /* TZRun.swift in Sources */,
 				CD5F4E992455100A00823E43 /* Analysis.swift in Sources */,
@@ -1071,6 +1083,7 @@
 				CD0FCA9C2593060600EEB1B2 /* Parameter.swift in Sources */,
 				CDDA8F2924B4451F002936E6 /* CalculatedVariable.swift in Sources */,
 				CDFAD0F723EA84FE00CE7424 /* State.swift in Sources */,
+				CD704591261031A900A2F372 /* TZPlot.swift in Sources */,
 				CD6CCF3D244D2FFB0051F76D /* OutputDataSet.swift in Sources */,
 				CDFAD0F923EA84FE00CE7424 /* Variable.swift in Sources */,
 				CDFAD0FA23EA84FE00CE7424 /* Vehicle.swift in Sources */,
@@ -1082,6 +1095,7 @@
 				CD18A661254FCB1C00B06C10 /* ParameterID.swift in Sources */,
 				CDDA8F2524B2C8B4002936E6 /* Output Handling Protocols.swift in Sources */,
 				CD5F4E9D2455101500823E43 /* AnalysisRunFunctions.swift in Sources */,
+				CD70454A25FEE6A000A2F372 /* ColorMap.swift in Sources */,
 				CD5F4E9B2455101100823E43 /* TZLogger.swift in Sources */,
 				CDC789C3247B47A200A1DCED /* AnalysisFactoryInits.swift in Sources */,
 				CDFAD0FC23EA84FE00CE7424 /* TZTextOutput.swift in Sources */,
@@ -1441,6 +1455,14 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		CD7045612601D14E00A2F372 /* XCRemoteSwiftPackageReference "OrderedDictionary" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/lukaskubanek/OrderedDictionary.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1448,6 +1470,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CD1F6C6923DADBFE00461FC7 /* XCRemoteSwiftPackageReference "Yams" */;
 			productName = Yams;
+		};
+		CD7045622601D14E00A2F372 /* OrderedDictionary */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CD7045612601D14E00A2F372 /* XCRemoteSwiftPackageReference "OrderedDictionary" */;
+			productName = OrderedDictionary;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
