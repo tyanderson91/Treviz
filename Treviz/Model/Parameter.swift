@@ -31,6 +31,7 @@ protocol Parameter {
     var isParam : Bool {get set} // Defines whether the parameter is used as a 'parameter' in the current analysis; that is, whether it is varied as an input across multiple analysis runs
     static var paramConstructor: (_ param: Parameter)->RunVariant? {get}
     func setValue(to: String)
+    func valueSetter(string: String)->StringValue?
     var stringValue: String { get }
 }
 
@@ -49,6 +50,10 @@ class NumberParam : Parameter, Comparable {
     }
     func setValue(to string: String) {
         if let newVal = VarValue(string) { value = newVal }
+    }
+    func valueSetter(string: String) -> StringValue? {
+        if let val = VarValue(string) { return val }
+        else { return nil }
     }
 
     init(id numID: ParamID, name nameIn: String){
@@ -81,6 +86,10 @@ class EnumGroupParam: Parameter {
     }
     func setValue(to string: String) {
         if let newVal = enumType.init(stringLiteral: string)  {value = newVal}
+    }
+    func valueSetter(string: String) -> StringValue? {
+        if let newVal = enumType.init(stringLiteral: string) { return newVal }
+        else { return nil }
     }
     
     init(id numID: ParamID, name nameIn: String, enumType enumTypeIn: StringValue.Type){
@@ -115,6 +124,10 @@ class BoolParam: Parameter {
     func setValue(to string: String) {
         if let newVal = Bool(stringLiteral: string) { value = newVal }
     }
+    func valueSetter(string: String) -> StringValue? {
+        if let newVal = Bool(stringLiteral: string) { return newVal }
+        else { return nil }
+    }
     
     init(id numID: ParamID, name nameIn: String){
         id = numID
@@ -134,5 +147,6 @@ struct TradeGroupParam: Parameter {
     var isParam = false
     static var paramConstructor: (Parameter) -> RunVariant? = {(Parameter)->RunVariant? in return nil}
     func setValue(to stringIn: String) {}
+    func valueSetter(string: String) -> StringValue? {return nil}
     var stringValue: String = ""
 }

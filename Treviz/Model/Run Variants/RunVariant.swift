@@ -36,6 +36,7 @@ struct DummyParam : Parameter {
     var stringValue: String = ""
     static var paramConstructor = {(_ param: Parameter)->RunVariant? in return nil}
     func setValue(to: String){}
+    func valueSetter(string: String) -> StringValue? {return nil}
 }
 /** Placeholder class used in creating Runs when other run variants are not used*/
 class DummyRunVariant: RunVariant, MCRunVariant {
@@ -117,12 +118,21 @@ class RunVariant: Codable {
     init?(param: Parameter) {
         parameter = param
     }
+    func setTradeValues(from strings: [String]) {
+        var tempTradeValues: [StringValue] = []
+        strings.forEach {
+            if let val = parameter.valueSetter(string: $0) {
+                tempTradeValues.append(val)
+            } else { return }
+        }
+        tradeValues = tempTradeValues
+    }
     
     //MARK: Codable
     enum CodingKeys: String, CodingKey {
         case paramID
         case nominal
-        case options
+        case tradeValues
         case variantType
         case category
     }

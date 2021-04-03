@@ -194,24 +194,27 @@ class Analysis: NSObject, Codable {
             {
                 let output = try allRunVariants.nestedContainer(keyedBy: RunVariant.CodingKeys.self)
                 let paramID = try output.decode(ParamID.self, forKey: .paramID)
-                let category = try output.decode(RunVariant.CategoryKey.self, forKey: .category)
                 var newVariant : RunVariant?
                 let decoder = try runVariantsTemp.superDecoder()
                 
                 if let matchingParam = self.inputSettings.first(where: {$0.id == paramID}) {
                     newVariant?.parameter = matchingParam
+                    if matchingParam is Variable {
+                        newVariant = VariableRunVariant.init(decoder: decoder, referencing: self)
+                    } else if matchingParam is NumberParam {
+                        newVariant = SingleNumberRunVariant.init(decoder: decoder, referencing: self)
+                    } else if matchingParam is EnumGroupParam {
+                        newVariant = EnumGroupRunVariant.init(decoder: decoder, referencing: self)
+                        newVariant?.options = (matchingParam as? EnumGroupParam)?.options ?? []
+                    } else if matchingParam is BoolParam {
+                        newVariant = BoolRunVariant.init(decoder: decoder, referencing: self)
+                    } else {
+                        continue
+                    }
                 }
-                switch category {
-                case .variable:
-                    newVariant = VariableRunVariant.init(decoder: decoder, referencing: self)
-                case .number:
-                    newVariant = SingleNumberRunVariant.init(decoder: decoder, referencing: self)
-                case .enumeration:
-                    newVariant = EnumGroupRunVariant.init(decoder: decoder, referencing: self)
-                case .boolean:
-                    newVariant = BoolRunVariant.init(decoder: decoder, referencing: self)
+                if let tradeValues = try? output.decode(Array<String>.self, forKey: .tradeValues) {
+                    newVariant?.setTradeValues(from: tradeValues)
                 }
-
                 if newVariant != nil { runVariants.append(newVariant!) }
             }
         }

@@ -7,6 +7,7 @@
 // Icons made by <a href="https://www.freepik.com/" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/"                 title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/"                 title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
 
 import Cocoa
+import Yams
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -17,6 +18,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        let colormapDecoder = Yams.YAMLDecoder(encoding: .utf8)
+        do {
+            let cmapFile = Bundle.main.path(forResource: "colormaps", ofType: "yaml") ?? ""
+            let cmapData = try String(contentsOfFile: cmapFile, encoding: .utf8)
+            let cmaps = try colormapDecoder.decode(Array<ColorMap>.self, from: cmapData, userInfo: [:])
+            ColorMap.allMaps = cmaps
+        } catch {}
         setDefaults()
         for thisWindow in application.windows {
             let windowController = thisWindow.windowController

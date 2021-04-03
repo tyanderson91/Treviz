@@ -78,6 +78,7 @@
 		CD870F3524B448D7004A4D42 /* MathFuncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD870F3324B448D7004A4D42 /* MathFuncs.swift */; };
 		CD8896B024C8013F00610692 /* TestAnalysis1.yaml in Resources */ = {isa = PBXBuildFile; fileRef = CD8896AE24C8013300610692 /* TestAnalysis1.yaml */; };
 		CD8896B424C8104300610692 /* TestAnalysis1.json in Resources */ = {isa = PBXBuildFile; fileRef = CD8896B224C8103B00610692 /* TestAnalysis1.json */; };
+		CD8911D5261774B200157715 /* colormaps.yaml in Resources */ = {isa = PBXBuildFile; fileRef = CD8911D4261774B200157715 /* colormaps.yaml */; };
 		CD8FEB042595402A008A08A7 /* StringValueTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8FEB032595402A008A08A7 /* StringValueTest.swift */; };
 		CD8FEB0825956A4F008A08A7 /* RunGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8FEB0725956A4F008A08A7 /* RunGroup.swift */; };
 		CD8FEB0925956A4F008A08A7 /* RunGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8FEB0725956A4F008A08A7 /* RunGroup.swift */; };
@@ -275,6 +276,7 @@
 		CD8896AE24C8013300610692 /* TestAnalysis1.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = TestAnalysis1.yaml; path = TrevizTests/TestAnalysis1.yaml; sourceTree = SOURCE_ROOT; };
 		CD8896B124C807F500610692 /* TrajectoryAnalysis.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = TrajectoryAnalysis.xctestplan; sourceTree = "<group>"; };
 		CD8896B224C8103B00610692 /* TestAnalysis1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = TestAnalysis1.json; path = TrevizTests/TestAnalysis1.json; sourceTree = SOURCE_ROOT; };
+		CD8911D4261774B200157715 /* colormaps.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = colormaps.yaml; path = Assets/colormaps.yaml; sourceTree = "<group>"; };
 		CD8FEB032595402A008A08A7 /* StringValueTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringValueTest.swift; sourceTree = "<group>"; };
 		CD8FEB0725956A4F008A08A7 /* RunGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunGroup.swift; sourceTree = "<group>"; };
 		CD92180725493F5D001CA40B /* CelestialBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CelestialBody.swift; sourceTree = "<group>"; };
@@ -595,6 +597,14 @@
 			path = Subviews;
 			sourceTree = "<group>";
 		};
+		CD8911CF2617742B00157715 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				CD8911D4261774B200157715 /* colormaps.yaml */,
+			);
+			name = Assets;
+			sourceTree = "<group>";
+		};
 		CD9F2040223B7C95005BFDCB /* Outputs Setup */ = {
 			isa = PBXGroup;
 			children = (
@@ -638,6 +648,7 @@
 				CD715E7F23EBE70400E31F97 /* README.md */,
 				CDD5049422252AF900B29751 /* Treviz */,
 				CD0F011123656B7200C920AA /* TrevizTests */,
+				CD8911CF2617742B00157715 /* Assets */,
 				CD590D4623E7E42C000897C2 /* Playgrounds */,
 				CDFAD0EA23EA84EB00CE7424 /* TrajectoryAnalysis */,
 				CDD5049322252AF900B29751 /* Products */,
@@ -875,6 +886,7 @@
 				CD2D0DBB224385580012978E /* OutputSetup.storyboard in Resources */,
 				CD11FA9323433096001A3695 /* PlotTypes.plist in Resources */,
 				CD59C54623E79476001D98D5 /* Outputs.storyboard in Resources */,
+				CD8911D5261774B200157715 /* colormaps.yaml in Resources */,
 				CD715E8023EBE70400E31F97 /* README.md in Resources */,
 				CD500337234DA64F00D71099 /* InitVarSettings.plist in Resources */,
 				CD59C53B23E79295001D98D5 /* VariableSelector.storyboard in Resources */,

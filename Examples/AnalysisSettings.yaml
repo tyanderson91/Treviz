@@ -4,10 +4,31 @@ Initial Variables:
   dy: 20
   dx: 100
   
-Parameters:
-  - t: 0
-  - x: 10
-  - dy: 30
+Run Variants:
+  - paramID: default.dx
+    nominal: 50
+    tradeValues:
+    - 30
+    - 40
+    - 50
+    variantType: trade
+  - paramID: default.dt
+    nominal: 0.1
+    variantType: mc
+  - paramID: default.vehiclePointMass
+    nominal: off
+    variantType: trade
+    tradeValues:
+    - on
+    - on
+    - off
+  - paramID: default.centralBody
+    nominal: Mars
+    variantType: trade
+    tradeValues:
+    - Earth
+    - Venus
+    - Sol
   
 Conditions:
   - Ground Impact: y=0

@@ -35,6 +35,7 @@ class RunVariantTradesViewController: TZViewController {
         if analysis.useGroupedVariants {
             groupTradesRadioButton.state = .on
             tradeViewsStackView.showHideViews(.hide, index: [1])
+            for thisVariant in analysis.tradeRunVariants { padTradeValues(runVariant: thisVariant) }
         }
         else {
             permuteTradesRadioButton.state = .on

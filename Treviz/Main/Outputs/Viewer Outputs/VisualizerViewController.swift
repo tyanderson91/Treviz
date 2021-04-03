@@ -16,6 +16,8 @@ class VisualizerViewController: TZViewController {
         super.viewDidLoad()
         view.wantsLayer = true
         view.layer?.backgroundColor = NSColor.black.cgColor
+        
+        placeholderImageView.image = NSImage(named: analysis.phases[0].physicsSettings.centralBodyParam.stringValue)
         //placeholderImageView.image = nil
         // Do view setup here.
     }

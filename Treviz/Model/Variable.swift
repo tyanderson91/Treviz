@@ -38,6 +38,10 @@ class Variable : Parameter, Codable, Hashable {
     func setValue(to string: String) {
         if let varVal = VarValue(string){ value[0] = varVal }
     }
+    func valueSetter(string: String) -> StringValue? {
+        if let varVal = VarValue(string){ return varVal }
+        else { return nil }
+    }
     static func ==(lhs: Variable, rhs: Variable) -> Bool {
         return lhs.id == rhs.id && lhs.units == rhs.units && lhs.value == rhs.value
     }
