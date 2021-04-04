@@ -124,6 +124,9 @@ extension RunVariant {
             parameter = matchingParam
             let nominalValue = try container.decode(String.self, forKey: .nominal)
             setValue(from: nominalValue)
+            if let tradeValues = try? container.decode(Array<String>.self, forKey: .tradeValues) {
+                self.setTradeValues(from: tradeValues)
+            }
             isActive = true
             //let vehicleID = try container.decode(String.self, forKey: .vehicleID)
         } catch {
@@ -132,4 +135,3 @@ extension RunVariant {
         }
     }
 }
-

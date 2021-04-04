@@ -99,7 +99,7 @@
                                                                         <outlet property="textField" destination="jIt-zq-ftf" id="M6a-gt-W00"/>
                                                                     </connections>
                                                                 </tableCellView>
-                                                                <tableCellView identifier="newTradeGroupButton" id="Yxv-Le-gMj">
+                                                                <tableCellView identifier="newTradeGroupButton" id="Yxv-Le-gMj" customClass="AddTradeValueCellView" customModule="Treviz" customModuleProvider="target">
                                                                     <rect key="frame" x="18" y="17" width="81" height="33"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
@@ -137,6 +137,8 @@
                                                                         <constraint firstItem="7m7-Ci-szh" firstAttribute="leading" secondItem="hdq-vy-gfR" secondAttribute="trailing" constant="5" id="s70-Yt-Ibx"/>
                                                                     </constraints>
                                                                     <connections>
+                                                                        <outlet property="addButton" destination="hdq-vy-gfR" id="oGS-sf-uqK"/>
+                                                                        <outlet property="label" destination="7m7-Ci-szh" id="cnf-S2-5Oe"/>
                                                                         <outlet property="textField" destination="7m7-Ci-szh" id="XJH-bG-Kui"/>
                                                                     </connections>
                                                                 </tableCellView>

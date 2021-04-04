@@ -370,7 +370,16 @@ class GroupedTradeTableDelegate: NSObject, NSTableViewDelegate, NSTableViewDataS
         let curIndex = tableView.column(withIdentifier: tableColumn!.identifier)
         if curIndex == 0 { // Group name
             if row == analysis.numTradeGroups {
-                let newView = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier("newTradeGroupButton"), owner: self)
+                let newView = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier("newTradeGroupButton"), owner: self) as? AddTradeValueCellView
+                if runVariants.isEmpty {
+                    newView?.addButton.isEnabled = false
+                    newView?.label.stringValue = "Add a parameter to create groups"
+                    newView?.label.isEnabled = false
+                } else {
+                    newView?.addButton.isEnabled = true
+                    newView?.label.stringValue = "New Group"
+                    newView?.label.isEnabled = true
+                }
                 return newView
             }
             var groupName : String?

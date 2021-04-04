@@ -129,14 +129,25 @@ class RunVariant: Codable {
     }
     
     //MARK: Codable
+    enum VariantTypeKeys: String, CodingKey {
+        case mc = "MC Variants"
+        case single = "Single Variants"
+        case trade = "Trade Variants"
+        case type = "Trade Type"
+    }
     enum CodingKeys: String, CodingKey {
         case paramID
         case nominal
         case tradeValues
         case variantType
         case category
+        // MC run variants
+        case min
+        case max
+        case mean
+        case sigma
+        case distribution
     }
-    
     enum CategoryKey: String, Codable {
         case variable
         case enumeration
@@ -146,10 +157,10 @@ class RunVariant: Codable {
     
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        let variantTypeString = try container.decode(String.self, forKey: .variantType)
-        if ["trade", "trade study"].contains(variantTypeString.lowercased()) {
+        let variantTypeString = try? container.decode(String.self, forKey: .variantType) 
+        if ["trade", "trade study"].contains(variantTypeString?.lowercased()) {
             variantType = .trade
-        } else if ["mc", "monte carlo", "monte-carlo"].contains(variantTypeString.lowercased()) {
+        } else if ["mc", "monte carlo", "monte-carlo"].contains(variantTypeString?.lowercased()) {
             variantType = .montecarlo
         } else {
             variantType = .single

@@ -229,3 +229,8 @@ class RunVariantButtonNameCellView: NSView {
     @IBOutlet weak var nameTextField: NSTextField!
     @IBOutlet weak var addRemoveButton: NSButton!
 }
+
+class AddTradeValueCellView: NSTableCellView {
+    @IBOutlet weak var addButton: NSButton!
+    @IBOutlet weak var label: NSTextField!
+}

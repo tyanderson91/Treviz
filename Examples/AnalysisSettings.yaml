@@ -5,30 +5,66 @@ Initial Variables:
   dx: 100
   
 Run Variants:
-  - paramID: default.dx
-    nominal: 50
-    tradeValues:
-    - 30
-    - 40
-    - 50
-    variantType: trade
-  - paramID: default.dt
-    nominal: 0.1
-    variantType: mc
-  - paramID: default.vehiclePointMass
-    nominal: off
-    variantType: trade
-    tradeValues:
-    - on
-    - on
-    - off
-  - paramID: default.centralBody
-    nominal: Mars
-    variantType: trade
-    tradeValues:
-    - Earth
-    - Venus
-    - Sol
+  MC Variants:
+  - paramID: default.y
+    nominal: 0
+    distribution: uniform
+    min: 0
+    max: 5
+  
+  Trade Variants:
+  - One:
+      default.x: 0
+      default.dx: 30
+      default.dy: 50
+  - Two:
+      default.x: 5
+      default.dx: 29.6
+      default.dy: 49
+  - Three:
+      default.x: 10
+      default.dx: 29.2
+      default.dy: 48
+  - Four:
+      default.x: 15
+      default.dx: 28.8
+      default.dy: 47
+  - Five:
+      default.x: 20
+      default.dx: 28.4
+      default.dy: 45.9
+  - Six:
+      default.x: 25
+      default.dx: 28.0
+      default.dy: 44.8
+  - Seven:
+      default.x: 30
+      default.dx: 27.6
+      default.dy: 43.7
+  - Eight:
+      default.x: 35
+      default.dx: 27.2
+      default.dy: 42.6
+  - Nine:
+      default.x: 40
+      default.dx: 26.7
+      default.dy: 41.4
+#  - paramID: default.vehiclePointMass
+#    nominal: off
+#    tradeValues:
+#    - on
+#    - on
+#    - off
+#  - paramID: default.centralBody
+#    nominal: Mars
+#    tradeValues:
+#    - Earth
+#    - Venus
+#    - Sol
+    
+  Single Variants:
+  - paramID: default.t
+    nominal: 3.0
   
 Conditions:
   - Ground Impact: y=0

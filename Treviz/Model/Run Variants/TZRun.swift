@@ -163,7 +163,8 @@ extension Analysis {
                 self.tradeGroups = Array<RunGroup>.init(repeating: RunGroup(), count: numTradeGroups)
             }
             
-            let runGenerator = RunGenerator(analysisData: analysisData, paramSettings: [ParamID: String](), mcVariants: mcVariants, curTradeGroupNum: 0)
+            let runGeneratorNum = tradeVariants.isEmpty ? -1 : 0
+            let runGenerator = RunGenerator(analysisData: analysisData, paramSettings: [ParamID: String](), mcVariants: mcVariants, curTradeGroupNum: runGeneratorNum)
             
             if tradeVariants.isEmpty && mcVariants.isEmpty {
                 allRuns = try [TZRun(analysisData: analysisData, paramSettings: [ParamID: String]() )]
@@ -274,8 +275,10 @@ extension Analysis {
             paramSettings[thisVariant.paramID] = randomNum.valuestr
         }
         let outputRun = try! TZRun(analysisData: runGenerator.analysisData, paramSettings: paramSettings, id: runGenerator.runID)
-        outputRun.tradeGroupNum = runGenerator.curTradeGroupNum
-        outputRun.tradeGroupName = self.tradeGroups[outputRun.tradeGroupNum].groupDescription
+        if runGenerator.curTradeGroupNum >= 0 {
+            outputRun.tradeGroupNum = runGenerator.curTradeGroupNum
+            outputRun.tradeGroupName = self.tradeGroups[outputRun.tradeGroupNum].groupDescription
+        }
         
         return outputRun
     }
