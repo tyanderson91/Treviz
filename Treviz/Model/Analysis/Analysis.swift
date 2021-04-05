@@ -193,88 +193,6 @@ class Analysis: NSObject, Codable {
             /**
              Function to take a group of run variants, process them, and add to the analysis
              */
-            func processVariantType( curRunVariants: inout UnkeyedDecodingContainer, type: RunVariantType?) throws {
-                var runVariantsTemp = curRunVariants
-                var tradeGroupnum = 0
-                
-                while(!curRunVariants.isAtEnd)
-                {   var runVariantCopy = curRunVariants
-                    let output = try curRunVariants.nestedContainer(keyedBy: RunVariant.CodingKeys.self)
-                    
-                    if let paramID = try? output.decode(ParamID.self, forKey: .paramID) {// Start reading individual variants
-                        var newVariant : RunVariant?
-                        let curDecoder = try runVariantsTemp.superDecoder()
-                        
-                        if let matchingParam = self.inputSettings.first(where: {$0.id == paramID}) {
-                            newVariant?.parameter = matchingParam
-                            if matchingParam is Variable {
-                                newVariant = VariableRunVariant.init(decoder: curDecoder, referencing: self)
-                            } else if matchingParam is NumberParam {
-                                newVariant = SingleNumberRunVariant.init(decoder: curDecoder, referencing: self)
-                            } else if matchingParam is EnumGroupParam {
-                                newVariant = EnumGroupRunVariant.init(decoder: curDecoder, referencing: self)
-                                newVariant?.options = (matchingParam as? EnumGroupParam)?.options ?? []
-                            } else if matchingParam is BoolParam {
-                                newVariant = BoolRunVariant.init(decoder: curDecoder, referencing: self)
-                            } else {
-                                continue
-                            }
-                        }
-                        if type != nil { newVariant?.variantType = type! }
-                        if newVariant?.variantType == .montecarlo {
-                            guard var mcVariant = newVariant as? MCRunVariant else { continue } // TODO: error handling
-                            if let distribution = try? output.decode(String.self, forKey: .distribution) { mcVariant.distributionType = DistributionType(rawValue: distribution) ?? .uniform }
-                            if let min = try? output.decode(VarValue.self, forKey: .min) { mcVariant.min = min }
-                            if let max = try? output.decode(VarValue.self, forKey: .max) { mcVariant.max = max }
-                            if let mean = try? output.decode(VarValue.self, forKey: .min) { mcVariant.mean = mean }
-                            if let stdev = try? output.decode(VarValue.self, forKey: .sigma) { mcVariant.sigma = stdev }
-                        }
-                        if newVariant != nil { runVariants.append(newVariant!) }
-                    }//End reading individual variants
-                    else if type == .trade, simpleIO, let tradeGroupDecoder = try? runVariantCopy.superDecoder() {
-                        let singValCont = try tradeGroupDecoder.singleValueContainer()
-                        let tradeGroupDict = try singValCont.decode(Dictionary<String,[ParamID:String]>.self)
-                        let groupName = tradeGroupDict.keys.first!
-                        let paramValDict = tradeGroupDict.values.first!
-                        
-                        for (paramID, val) in paramValDict {
-                            var curVariant: RunVariant!
-                            if let matchingVariant = runVariants.first(where: {$0.paramID == paramID}) {
-                                curVariant = matchingVariant
-                            } else if let matchingParam = self.inputSettings.first(where: {$0.id == paramID}) {
-                                if matchingParam is Variable {
-                                    curVariant = VariableRunVariant(param: matchingParam)!
-                                } else if matchingParam is NumberParam {
-                                    curVariant = SingleNumberRunVariant(param: matchingParam)!
-                                } else if matchingParam is EnumGroupParam {
-                                    curVariant = EnumGroupRunVariant(param: matchingParam)!
-                                    curVariant.options = (matchingParam as? EnumGroupParam)?.options ?? []
-                                } else if matchingParam is BoolParam {
-                                    curVariant = BoolRunVariant(param: matchingParam)!
-                                } else {
-                                    continue
-                                }
-                                curVariant.variantType = .trade
-                                curVariant.isActive = true
-                                runVariants.append(curVariant)
-                            } else {
-                                continue
-                            }
-                            if curVariant.tradeValues.count == tradeGroupnum {
-                                let newVal = curVariant.parameter.valueSetter(string: val)
-                                curVariant.tradeValues.append(newVal)
-                            } else { // TODO: find more robust way of handling mismatched groups
-                                curVariant.isActive = false
-                                curVariant.tradeValues = []
-                            }
-                        }
-                        var newGroup = RunGroup(name: groupName)
-                        newGroup._didSetDescription = true
-                        tradeGroups.append(newGroup)
-                        tradeGroupnum += 1
-                    }// End custom trade group reading
-                }
-            }// End of function definition
             
             if simpleIO {
                 let allRunVariants = try container.nestedContainer(keyedBy: RunVariant.VariantTypeKeys.self, forKey: .runVariants)
@@ -283,18 +201,19 @@ class Analysis: NSObject, Codable {
                 var mcRunVariants = try allRunVariants.nestedUnkeyedContainer(forKey: .mc)
                 var tradeRunVariants = try allRunVariants.nestedUnkeyedContainer(forKey: .trade)
                 
-                try processVariantType(curRunVariants: &singleRunVariants, type: .single)
-                try processVariantType(curRunVariants: &mcRunVariants, type: .montecarlo)
-                try processVariantType(curRunVariants: &tradeRunVariants, type: .trade)
+                try processVariantType(curRunVariants: &singleRunVariants, type: .single, simpleIO: true)
+                try processVariantType(curRunVariants: &mcRunVariants, type: .montecarlo, simpleIO: true)
+                try processVariantType(curRunVariants: &tradeRunVariants, type: .trade, simpleIO: true)
             } else {
                 var allRunVariants = try container.nestedUnkeyedContainer(forKey: .runVariants)
-                try processVariantType(curRunVariants: &allRunVariants, type: nil)
+                try processVariantType(curRunVariants: &allRunVariants, type: nil, simpleIO: false)
             }
 
         }
         if tradeGroups.isEmpty {
             tradeGroups = Array<RunGroup>.init(repeating: RunGroup(), count: numTradeGroups)
         }
+        
         var allTZOutputs = try container.nestedUnkeyedContainer(forKey: .plots)
         var plotsTemp = allTZOutputs
         while(!allTZOutputs.isAtEnd)
