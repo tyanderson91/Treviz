@@ -32,7 +32,14 @@ protocol Parameter {
     static var paramConstructor: (_ param: Parameter)->RunVariant? {get}
     func setValue(to: String)
     func valueSetter(string: String)->StringValue?
+    var nomValue: StringValue? { get }
     var stringValue: String { get }
+}
+extension Parameter {
+    var nomValue: StringValue? {
+        let valuestr = stringValue
+        return valueSetter(string: valuestr)
+    }
 }
 
 class NumberParam : Parameter, Comparable {

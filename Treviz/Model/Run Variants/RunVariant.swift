@@ -185,7 +185,7 @@ class RunVariant: Codable {
 
 /**A type of run variant used to define the variations on a Variable*/
 class VariableRunVariant: RunVariant, MCRunVariant {
-    var distributionType: DistributionType = .normal
+    var distributionType: DistributionType = .uniform
     // Monte-carlo dispersion parameters
     var min: VarValue?
     var max: VarValue?
@@ -208,21 +208,15 @@ class VariableRunVariant: RunVariant, MCRunVariant {
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
-        let container = try decoder.container(keyedBy: VariableCodingKeys.self)
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        if container.contains(.distribution) {
+            let distName = try container.decode(String.self, forKey: .distribution)
+            distributionType = DistributionType(rawValue: distName) ?? .uniform
+        }
         if container.contains(.min) { min = try container.decode(VarValue.self, forKey: .min)}
         if container.contains(.max) { max = try container.decode(VarValue.self, forKey: .max)}
         if container.contains(.mean) { mean = try container.decode(VarValue.self, forKey: .mean)}
         if container.contains(.sigma) { sigma = try container.decode(VarValue.self, forKey: .sigma)}
-    }
-    convenience init?(decoder: Decoder, referencing analysis: Analysis) {
-        do {
-            try self.init(from: decoder)
-            try setupFromCoder(decoder: decoder, referencing: analysis)
-            //let vehicleID = try container.decode(String.self, forKey: .vehicleID)
-        } catch {
-            analysis.logMessage("Error when reading run variants: \(error.localizedDescription)")
-            return nil
-        }
     }
     override func encode(to encoder: Encoder) throws {
         try super.encode(to: encoder)
@@ -271,16 +265,6 @@ class SingleNumberRunVariant: RunVariant, MCRunVariant {
         if container.contains(.mean) { mean = try container.decode(VarValue.self, forKey: .mean)}
         if container.contains(.sigma) { sigma = try container.decode(VarValue.self, forKey: .sigma)}
     }
-    convenience init?(decoder: Decoder, referencing analysis: Analysis) {
-        do {
-            try self.init(from: decoder)
-            try setupFromCoder(decoder: decoder, referencing: analysis)
-            //let vehicleID = try container.decode(String.self, forKey: .vehicleID)
-        } catch {
-            analysis.logMessage("Error when reading run variants: \(error.localizedDescription)")
-            return nil
-        }
-    }
     override func encode(to encoder: Encoder) throws {
         try super.encode(to: encoder)
         var container = encoder.container(keyedBy: VariableRunVariant.VariableCodingKeys.self)
@@ -322,16 +306,6 @@ class EnumGroupRunVariant: RunVariant {
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
     }
-    convenience init?(decoder: Decoder, referencing analysis: Analysis) {
-        do {
-            try self.init(from: decoder)
-            try setupFromCoder(decoder: decoder, referencing: analysis)
-            //let vehicleID = try container.decode(String.self, forKey: .vehicleID)
-        } catch {
-            analysis.logMessage("Error when reading run variants: \(error.localizedDescription)")
-            return nil
-        }
-    }
     override func encode(to encoder: Encoder) throws {
         try super.encode(to: encoder)
         var categoryContainer = encoder.container(keyedBy: CodingKeys.self)
@@ -356,16 +330,6 @@ class BoolRunVariant: RunVariant {
     //MARK: Codable
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
-    }
-    convenience init?(decoder: Decoder, referencing analysis: Analysis) {
-        do {
-            try self.init(from: decoder)
-            try setupFromCoder(decoder: decoder, referencing: analysis)
-            //let vehicleID = try container.decode(String.self, forKey: .vehicleID)
-        } catch {
-            analysis.logMessage("Error when reading run variants: \(error.localizedDescription)")
-            return nil
-        }
     }
     override func encode(to encoder: Encoder) throws {
         try super.encode(to: encoder)

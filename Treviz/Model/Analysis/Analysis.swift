@@ -190,23 +190,22 @@ class Analysis: NSObject, Codable {
         }
         
         if container.contains(.runVariants) {
-            /**
-             Function to take a group of run variants, process them, and add to the analysis
-             */
-            
+            do {
             if simpleIO {
                 let allRunVariants = try container.nestedContainer(keyedBy: RunVariant.VariantTypeKeys.self, forKey: .runVariants)
 
                 var singleRunVariants = try allRunVariants.nestedUnkeyedContainer(forKey: .single)
                 var mcRunVariants = try allRunVariants.nestedUnkeyedContainer(forKey: .mc)
                 var tradeRunVariants = try allRunVariants.nestedUnkeyedContainer(forKey: .trade)
-                
                 try processVariantType(curRunVariants: &singleRunVariants, type: .single, simpleIO: true)
                 try processVariantType(curRunVariants: &mcRunVariants, type: .montecarlo, simpleIO: true)
                 try processVariantType(curRunVariants: &tradeRunVariants, type: .trade, simpleIO: true)
             } else {
                 var allRunVariants = try container.nestedUnkeyedContainer(forKey: .runVariants)
                 try processVariantType(curRunVariants: &allRunVariants, type: nil, simpleIO: false)
+            }
+            } catch {
+                logMessage("Error reading run variants: \(error.localizedDescription)")
             }
 
         }

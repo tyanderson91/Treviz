@@ -113,7 +113,8 @@ extension TZPhase {
 }
 
 extension RunVariant {
-    func setupFromCoder(decoder: Decoder, referencing analysis: Analysis) throws {
+    /** Sets up the parameter and param-dependent values using the current analysis and decoder */
+    fileprivate func setupFromCoder(decoder: Decoder, referencing analysis: Analysis) throws {
         let container = try decoder.container(keyedBy: RunVariant.CodingKeys.self)
         let paramID = try container.decode(ParamID.self, forKey: .paramID)
         let curList = analysis.inputSettings
@@ -127,69 +128,59 @@ extension RunVariant {
         }
         isActive = true
     }
-    /*
-    convenience init?(decoder: Decoder, referencing analysis: Analysis) {
-        do {
-            try self.init(from: decoder)
-            try setupFromCoder(decoder: decoder, referencing: analysis)
-            //let vehicleID = try container.decode(String.self, forKey: .vehicleID)
-        } catch {
-            analysis.logMessage("Error when reading run variants: \(error.localizedDescription)")
-            return nil
-        }
-    }*/
 }
 
 extension Analysis {
+    /** Helper function for reading lists of run variants from a decoder */
     func processVariantType( curRunVariants: inout UnkeyedDecodingContainer, type: RunVariantType?, simpleIO: Bool) throws {
         var runVariantsTemp = curRunVariants
         var tradeGroupnum = 0
         
-        while(!curRunVariants.isAtEnd)
-        {   var runVariantCopy = curRunVariants
-            let output = try curRunVariants.nestedContainer(keyedBy: RunVariant.CodingKeys.self)
+        // There are two ways to read the lists: as a list of run variants, and as a list of trade groups
+        // First try to read as individual list (the default). Make a copy of the list beforehand, since it shrinks as you access it through iterations
+        // If you can't read a param ID, then try to read as trade groups
+        while(!curRunVariants.isAtEnd) {
+            var runVariantCopy = curRunVariants
             
-            if let paramID = try? output.decode(ParamID.self, forKey: .paramID) {// Start reading individual variants
+            let output = try? curRunVariants.nestedContainer(keyedBy: RunVariant.CodingKeys.self)
+            if let paramID = try? output?.decode(ParamID.self, forKey: .paramID) {// Start reading individual variants
                 var newVariant : RunVariant?
+                
                 let curDecoder = try runVariantsTemp.superDecoder()
                 
                 if let matchingParam = self.inputSettings.first(where: {$0.id == paramID}) {
                     newVariant?.parameter = matchingParam
+                    do {
                     if matchingParam is Variable {
-                        newVariant = VariableRunVariant.init(decoder: curDecoder, referencing: self)
+                        newVariant = try VariableRunVariant.init(from: curDecoder)
                     } else if matchingParam is NumberParam {
-                        newVariant = SingleNumberRunVariant.init(decoder: curDecoder, referencing: self)
+                        newVariant = try SingleNumberRunVariant.init(from: curDecoder)
                     } else if matchingParam is EnumGroupParam {
-                        newVariant = EnumGroupRunVariant.init(decoder: curDecoder, referencing: self)
+                        newVariant = try EnumGroupRunVariant.init(from: curDecoder)
                         newVariant?.options = (matchingParam as? EnumGroupParam)?.options ?? []
                     } else if matchingParam is BoolParam {
-                        newVariant = BoolRunVariant.init(decoder: curDecoder, referencing: self)
+                        newVariant = try BoolRunVariant.init(from: curDecoder)
                     } else {
                         continue
                     }
-                }
+                    try newVariant?.setupFromCoder(decoder: curDecoder, referencing: self)
+                    } catch { throw RunVariantError.ReadError }
+                } else { throw ParamIDError.UnknownParamID(paramID) }
                 if type != nil { newVariant?.variantType = type! }
-                if newVariant?.variantType == .montecarlo {
-                    guard var mcVariant = newVariant as? MCRunVariant else { continue } // TODO: error handling
-                    if let distribution = try? output.decode(String.self, forKey: .distribution) { mcVariant.distributionType = DistributionType(rawValue: distribution) ?? .uniform }
-                    if let min = try? output.decode(VarValue.self, forKey: .min) { mcVariant.min = min }
-                    if let max = try? output.decode(VarValue.self, forKey: .max) { mcVariant.max = max }
-                    if let mean = try? output.decode(VarValue.self, forKey: .min) { mcVariant.mean = mean }
-                    if let stdev = try? output.decode(VarValue.self, forKey: .sigma) { mcVariant.sigma = stdev }
-                }
                 if newVariant != nil { runVariants.append(newVariant!) }
             }//End reading individual variants
             else if type == .trade, simpleIO, let tradeGroupDecoder = try? runVariantCopy.superDecoder() {
                 let singValCont = try tradeGroupDecoder.singleValueContainer()
-                let tradeGroupDict = try singValCont.decode(Dictionary<String,[ParamID:String]>.self)
+                guard let tradeGroupDict = try? singValCont.decode(Dictionary<String,[ParamID:String]>.self) else { throw RunVariantError.ReadError }
                 let groupName = tradeGroupDict.keys.first!
                 let paramValDict = tradeGroupDict.values.first!
                 
+                var curGroupParamIDs = [String]() // Tracker for all variants introduced in this group
                 for (paramID, val) in paramValDict {
                     var curVariant: RunVariant!
-                    if let matchingVariant = runVariants.first(where: {$0.paramID == paramID}) {
+                    if let matchingVariant = runVariants.first(where: {$0.paramID == paramID}) { // Variant exists
                         curVariant = matchingVariant
-                    } else if let matchingParam = self.inputSettings.first(where: {$0.id == paramID}) {
+                    } else if let matchingParam = self.inputSettings.first(where: {$0.id == paramID}) { // Variant does not exist
                         if matchingParam is Variable {
                             curVariant = VariableRunVariant(param: matchingParam)!
                         } else if matchingParam is NumberParam {
@@ -206,21 +197,32 @@ extension Analysis {
                         curVariant.isActive = true
                         runVariants.append(curVariant)
                     } else {
-                        continue
+                        throw ParamIDError.UnknownParamID(paramID)
                     }
-                    if curVariant.tradeValues.count == tradeGroupnum {
-                        let newVal = curVariant.parameter.valueSetter(string: val)
+                    curGroupParamIDs.append(curVariant.paramID)
+                    
+                    let newVal = curVariant.parameter.valueSetter(string: val)
+                    if tradeGroupnum == 0 { // First group, nothing initialized yet
+                        curVariant.tradeValues = [newVal]
+                    } else if tradeGroupnum > 0 && curVariant.tradeValues.isEmpty { // Newly introduced variant, pad the first values with its nominal value
+                        let nomVal = curVariant.parameter.nomValue
+                        curVariant.tradeValues = Array(repeating: nomVal, count: tradeGroupnum)
                         curVariant.tradeValues.append(newVal)
-                    } else { // TODO: find more robust way of handling mismatched groups
-                        curVariant.isActive = false
-                        curVariant.tradeValues = []
+                    } else { // Normal situation for groups after the first
+                        curVariant.tradeValues.append(newVal)
                     }
-                }
+                } // End looping through all variants for this trade group
+                
+                runVariants.forEach({ // if a value was not set for this group, pad it with the nominal value
+                    if !curGroupParamIDs.contains($0.paramID) { $0.tradeValues.append($0.parameter.nomValue) }
+                })
+                
                 var newGroup = RunGroup(name: groupName)
                 newGroup._didSetDescription = true
                 tradeGroups.append(newGroup)
                 tradeGroupnum += 1
             }// End custom trade group reading
-        }
+            else { throw RunVariantError.MissingParamID }
+        } // End of while loop
     }// End of function definition
 }

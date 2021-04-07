@@ -11,8 +11,14 @@ import Foundation
 /**
  ParamID is the identifier for a parameter. Each parameter should use a unique ID. IDs should be short, preferable a single lowercase word
  */
-enum ParamIDError: Error {
-    case UnknownParamID(_ id: String)
+enum ParamIDError: Error, LocalizedError {
+    case UnknownParamID(_ idIn: String)
+    public var errorDescription: String? {
+        switch self {
+        case let .UnknownParamID(idIn):
+            return "unknown parameter id '\(idIn)'"
+        }
+    }
 }
 
 typealias ParamID = String
