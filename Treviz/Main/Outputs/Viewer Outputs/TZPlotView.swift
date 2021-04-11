@@ -24,6 +24,12 @@ class TZPlotView: NSObject, CPTScatterPlotDelegate, CPTScatterPlotDataSource, CP
     var graph: CPTGraph
     var representedPlot: TZPlot
     var _plotData: OutputDataSet
+    var legendBorderStyle : CPTLineStyle {
+        let style = CPTMutableLineStyle()
+        style.lineWidth = 1.0
+        style.lineColor = CPTColor.black()
+        return CPTLineStyle(style: style)
+    }
     private var plotAreaSize: (Decimal, Decimal) = (-1.0, -1.0)
     private var plotArea: CPTPlotArea { return graph.plotAreaFrame!.plotArea! }
     private var newPlotAreaSize: (Decimal, Decimal) {
@@ -43,10 +49,11 @@ class TZPlotView: NSObject, CPTScatterPlotDelegate, CPTScatterPlotDataSource, CP
     }*/
     
     init(with inputPlot: TZPlot) throws {
+        let prefs = TZPlot.preferencesGetter!.getPreferences(inputPlot)
+        
         let defaultTheme = CPTTheme(named: .plainWhiteTheme)
         graph = (defaultTheme?.newGraph() as! CPTGraph)
         representedPlot = inputPlot
-        let prefs = inputPlot.plotPreferences
         do {
             _plotData = try representedPlot.getData()!
         } catch { throw error }
@@ -55,9 +62,8 @@ class TZPlotView: NSObject, CPTScatterPlotDelegate, CPTScatterPlotDataSource, CP
         
         // Get default properties from user inputs
         let colorMap = prefs.colorMap!
-        let lineWidth = Double(prefs.lineWidth)
         let mcOpacity = UserDefaults.mcOpacity
-        let linePattern = prefs.linePattern!
+        let lineStyle = prefs.lineStyle!
         
         var i = 0
         let multiGroup = _plotData.allGroups.count > 1
@@ -76,12 +82,12 @@ class TZPlotView: NSObject, CPTScatterPlotDelegate, CPTScatterPlotDataSource, CP
                 } else {
                     let color_index = i % (ncolors)
                     thisColor = colorMap[color_index]!
-                    
                 }
             } else {
-                thisColor = CGColor.black
+                thisColor = lineStyle.color
             }
-            groupLinestyle = CPTMutableLineStyle.init(TZLineStyle(color: thisColor, lineWidth: lineWidth))
+            let curLineStyle = TZLineStyle(color: thisColor, lineWidth: lineStyle.lineWidth, pattern: lineStyle.pattern)
+            groupLinestyle = CPTMutableLineStyle.init(curLineStyle)
             var lineFill: CPTFill
             
             let multiSets = thisGroupData.count > 1
@@ -92,13 +98,12 @@ class TZPlotView: NSObject, CPTScatterPlotDelegate, CPTScatterPlotDataSource, CP
                 lineFill = CPTFill(color: groupLinestyle.lineColor!.withAlphaComponent(1.0))
                 groupLinestyle.lineFill = lineFill
             }
-            groupLinestyle.setLinePattern(linePattern)
             
             var j = 0
             for thisPlotData in thisGroupData {
                 let plot = addSinglePlot(from: inputPlot, plotData: thisPlotData) as! CPTScatterPlot
                 plot.dataLineStyle = groupLinestyle
-                 plot.title = thisGroupName
+                plot.title = thisGroupName
                 if j==0 { // Add the first of the group into the legend
                     legendPlots.append(plot)
                 }
@@ -121,6 +126,7 @@ class TZPlotView: NSObject, CPTScatterPlotDelegate, CPTScatterPlotDataSource, CP
         
         let majorGridLineStyle = CPTMutableLineStyle(prefs.majorGridLineStyle)
         let minorGridLineStyle = CPTMutableLineStyle(prefs.minorGridLineStyle)
+        let axesLineStyle = CPTMutableLineStyle(prefs.axesLineStyle)
 
         let axisSet: CPTXYAxisSet = graph.axisSet! as! CPTXYAxisSet
         
@@ -128,6 +134,7 @@ class TZPlotView: NSObject, CPTScatterPlotDelegate, CPTScatterPlotDataSource, CP
         xaxis.labelingPolicy = .automatic
         xaxis.axisConstraints = CPTConstraints(relativeOffset: 0.00)
         
+        xaxis.axisLineStyle = axesLineStyle
         xaxis.majorGridLineStyle = majorGridLineStyle
         xaxis.minorGridLineStyle = minorGridLineStyle
         xaxis.title = "\(String(describing: inputPlot.var1!.name)) (\(String(describing: inputPlot.var1!.units)))"
@@ -136,6 +143,8 @@ class TZPlotView: NSObject, CPTScatterPlotDelegate, CPTScatterPlotDataSource, CP
         let yaxis = axisSet.axes![1] as! CPTXYAxis
         yaxis.labelingPolicy = .automatic
         yaxis.axisConstraints = CPTConstraints(relativeOffset: 0.00)
+        
+        yaxis.axisLineStyle = axesLineStyle
         yaxis.majorGridLineStyle = majorGridLineStyle
         yaxis.minorGridLineStyle = minorGridLineStyle
         yaxis.title = "\(String(describing: inputPlot.var2!.name)) (\(String(describing: inputPlot.var2!.units)))"
@@ -155,11 +164,11 @@ class TZPlotView: NSObject, CPTScatterPlotDelegate, CPTScatterPlotDataSource, CP
         if multiGroup {
             let legend = CPTLegend(plots: legendPlots)
             legend.fill = CPTFill(color: CPTColor.white())
-            legend.borderLineStyle = yaxis.axisLineStyle
+            legend.borderLineStyle = legendBorderStyle
             legend.cornerRadius = 5.0
             legend.numberOfRows = UInt(legendPlots.count)
             //legend.numberOfColumns = 1
-            let legLineWidth = UserDefaults.lineWidth
+            let legLineWidth = UserDefaults.mainLineWidth
             legend.swatchSize = CGSize(width: 8*legLineWidth, height: legLineWidth*1.5)
             
             graph.legend = legend

@@ -15,6 +15,8 @@ struct TZLineStyle {
     var color: CGColor
     var lineWidth: Double
     var pattern: TZLinePattern = .solid
+    
+    static var solid = TZLineStyle(color: CGColor.black, lineWidth: 2.0)
 }
 
 /**Options for plot symbol shapes*/
@@ -38,7 +40,7 @@ struct TZLinePattern: Equatable {
     let nums: [CGFloat]
     
     static let solid = TZLinePattern(name: "solid", nums: [])
-    static let dash = TZLinePattern(name: "dash", nums: [3, 1])
+    static let dash = TZLinePattern(name: "dash", nums: [3, 1.5])
     static let shortDash = TZLinePattern(name: "shortDash", nums: [2,1])
     static let longDash = TZLinePattern(name: "longDash", nums: [4,2])
     static let dot = TZLinePattern(name: "dot", nums: [0.01,1.5])
@@ -83,21 +85,22 @@ typealias SymbolSet = [TZPlotSymbolShape]
  Used to allow the App Delegate to assign preferences for the plots based on stored User defaults
  */
 protocol PlotPreferencesGetter {
-    func getPreferences(_  plot: TZPlot)
+    func getPreferences(_  plot: TZPlot)->PlotPreferences
 }
 
 struct PlotPreferences {
+    var axesLineStyle: TZLineStyle!
     var majorGridLineStyle: TZLineStyle!
     var minorGridLineStyle: TZLineStyle!
     var isInteractive: Bool!
     var plotSymbol: TZPlotSymbol = .none
     var symbolSize: CGFloat!
     var symbolSet: SymbolSet!
-    var lineWidth: CGFloat!
-    var lineColor: CGColor!
-    var linePattern: TZLinePattern!
+    var lineStyle: TZLineStyle!
     var backgroundColor: CGColor!
     var colorMap: ColorMap!
+    
+    var customPrefs = [String]()
 }
 /**
  A TZPlot contains all the information required to render a plot in a TZPlotView. TZPlot is a subclass of TZOutput. The subclassing allows TZPlot to include configuration options specifically related to the plot, such as colors, axes options, and other options related to the appearance of the plot view
@@ -113,8 +116,8 @@ final class TZPlot: TZOutput {
         try container.encode("plot", forKey: .outputType)
         try super.encode(to: encoder)
     }
-    
+    /*
     override func initPreferences() {
         TZPlot.preferencesGetter?.getPreferences(self)
-    }
+    }*/
 }

@@ -21,6 +21,7 @@ class TZMessageLoggerViewController: TZViewController, TZLogger {
     func logMessage(_ message: NSAttributedString) {
         self.messageLoggerTextView.textStorage?.append(message)
         self.messageLoggerTextView.textStorage?.append(NSAttributedString(string: "\n"))
+        self.messageLoggerTextView.scrollToEndOfDocument(nil)
     }
     
     func logMessage(_ message: String) {

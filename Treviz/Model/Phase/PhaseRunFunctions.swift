@@ -59,17 +59,17 @@ extension TZPhase {
                 self.progressReporter?.updateProgress(at: curState)
             }*/
         }
-
+/*
         if self.runMode == .parallel {
             DispatchQueue.main.async {
                 self.varList.updateFromDict(traj: self.traj)
                 self.parentRun.processPhase(self)
             }
         }
-        else {
+        else {*/
             self.varList.updateFromDict(traj: self.traj)
             self.parentRun.processPhase(self)
-        }
+        //}
     }
     
     /**

@@ -199,7 +199,7 @@ class InitStateViewController: PhasedViewController, NSOutlineViewDelegate, NSOu
     }
     
     private func setSelection(){
-        if let curCondition = analysis.terminalCondition {
+        if let curCondition = phase.terminalCondition {
             terminalConditionPopupButton.selectItem(withTitle: curCondition.name)
         } else {terminalConditionPopupButton.selectItem(at: -1)}
     }

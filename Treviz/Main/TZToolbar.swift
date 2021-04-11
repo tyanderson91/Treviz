@@ -11,7 +11,7 @@ import Cocoa
 extension NSToolbarItem.Identifier {
     static var runAnalysis = NSToolbarItem.Identifier("runAnalysis")
     static var conditions = NSToolbarItem.Identifier("conditions")
-    static var variables = NSToolbarItem.Identifier("variables")
+    static var parameters = NSToolbarItem.Identifier("parameters")
     static var vectors = NSToolbarItem.Identifier("vectors")
     static var csys = NSToolbarItem.Identifier("csys")
     static var showWindowPanes = NSToolbarItem.Identifier("showWindowPanes")
@@ -42,16 +42,18 @@ class TZToolbarButtonItem: NSToolbarItem {
 }
 
 class TZToolbar: NSToolbar {
+    
+    /*
     var toggleAnalysisRun = TZToolbarButtonItem(itemIdentifier: .runAnalysis)
     var conditionsButton = TZToolbarButtonItem(itemIdentifier: .conditions)
-    var variablesButton = TZToolbarButtonItem(itemIdentifier: .variables)
+    var variablesButton = TZToolbarButtonItem(itemIdentifier: .parameters)
     var vectorsButton = TZToolbarButtonItem(itemIdentifier: .vectors)
     var csysButton = TZToolbarButtonItem(itemIdentifier: .csys)
     var runVariantsButton = TZToolbarButtonItem(itemIdentifier: .runVariants)
     var showWindowPanes = TZToolbarButtonItem(itemIdentifier: .showWindowPanes)
     var showHidePanesControl : NSSegmentedControl!
     
-    var defaultItemIdentifiers : [NSToolbarItem.Identifier] = [.runAnalysis, .conditions, .variables, .vectors, .csys, .runVariants, .flexibleSpace, .showWindowPanes]
+    var defaultItemIdentifiers : [NSToolbarItem.Identifier] = [.runAnalysis, .conditions, .parameters, .vectors, .csys, .runVariants, .flexibleSpace, .showWindowPanes]
     var defaultItems : [NSToolbarItem] { [toggleAnalysisRun, conditionsButton, variablesButton, vectorsButton, csysButton, runVariantsButton, showWindowPanes] }
     
     override init(identifier: NSToolbar.Identifier) {
@@ -103,7 +105,7 @@ class TZToolbar: NSToolbar {
         showWindowPanes.label = "Show/Hide Panes"
         
         self.showsBaselineSeparator = false
-    }
+    }*/
     
 }
 
@@ -179,12 +181,12 @@ extension MainWindowController: NSToolbarDelegate {
     @objc func runAnalysisClicked(_ sender: Any) {
         if let asys = self.contentViewController?.representedObject as? Analysis {
             if asys.isRunning{
-                toolbar.toggleAnalysisRun.image = NSImage(named: "play.fill")
+                toolbar.toggleAnalysisRun.image = NSImage(systemSymbolName: "play.rectangle", accessibilityDescription: nil)
                 asys.isRunning = false
                 self.endProgressTracking()
             }
             else {
-                toolbar.toggleAnalysisRun.image = NSImage(named: "stop.fill")
+                toolbar.toggleAnalysisRun.image = NSImage(systemSymbolName: "stop.fill", accessibilityDescription: nil)
                 viewController.analysisProgressBar.doubleValue = analysis.pctComplete
                 asys.runAnalysis()
             }
@@ -201,6 +203,7 @@ extension MainWindowController: NSToolbarDelegate {
     
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         if segue.identifier == "conditionsPopupSegue" {
+            conditionsToolbarItem.isEnabled = false
             let conditionsVC = segue.destinationController as! ConditionsViewController
             conditionsVC.analysis = self.viewController.analysis
         }
@@ -231,14 +234,15 @@ extension MainWindowController: NSToolbarDelegate {
     @IBAction func runAnalysisClicked(_ sender: Any) {
         if let asys = self.contentViewController?.representedObject as? Analysis {
             if asys.isRunning{
-                runButton.image = NSImage(named: "play.fill")
                 asys.isRunning = false
+                asys.analysisDispatchQueue.suspend()
+                endProgressTracking()
                 /*DistributedNotificationCenter.default().post(name: .didFinishRunningAnalysis, object: nil)*/
             }
             else {
-                runButton.image = NSImage(named: "stop.fill")
+                startProgressTracking()
                 viewController.analysisProgressBar.doubleValue = analysis.pctComplete
-                _ = asys.runAnalysis()
+                asys.runAnalysis()
             }
         }
     }

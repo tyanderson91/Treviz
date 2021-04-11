@@ -74,13 +74,13 @@ class TZOutput : NSObject, Codable {
     var curTrajectory : State? // TODO: Remove
     var runData: [TZRun]?
     
-    func initPreferences() {}
+    //func initPreferences() {}
     
     init(id : Int, plotType : TZPlotType){
         self.id = id
         self.plotType = plotType
         super.init()
-        initPreferences()
+        //initPreferences()
     }
     
     /**
@@ -106,7 +106,7 @@ class TZOutput : NSObject, Codable {
         if let categoryvar = dict["category"] as? Parameter {self.categoryVar = categoryvar}
         if let condition = dict["condition"] as? Condition {self.condition = condition}
         
-        initPreferences()
+        //initPreferences()
         try self.assertValid()
     }
     
@@ -180,7 +180,7 @@ class TZOutput : NSObject, Codable {
             } else { throw TZPlotTypeError.InvalidPlotType }
         } catch { throw TZPlotTypeError.InvalidPlotType }
         super.init()
-        initPreferences()
+        //initPreferences()
         // Assigning of variables and conditions is done in the analysis-level factory initializer
     }
     

@@ -13,6 +13,7 @@ extension CPTMutableLineStyle {
         self.init()
         lineWidth = CGFloat(lineStyle.lineWidth)
         lineColor = CPTColor(cgColor: lineStyle.color)
+        setLinePattern(lineStyle.pattern)
     }
     func setLinePattern(_ pattern: TZLinePattern){
         let lineWidth = self.lineWidth
@@ -31,7 +32,6 @@ extension CGLineCap {
         default:
             return .round
         }
-        return .round
     }
 }
 

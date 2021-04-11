@@ -111,6 +111,8 @@
 		CDC1F54022363DDB00D1BB25 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC1F53F22363DDB00D1BB25 /* MainViewController.swift */; };
 		CDC25616243D9E86007EBE8A /* TZMessageLoggerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC25615243D9E86007EBE8A /* TZMessageLoggerViewController.swift */; };
 		CDC789C3247B47A200A1DCED /* AnalysisFactoryInits.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE2A5172471F27700DB2B45 /* AnalysisFactoryInits.swift */; };
+		CDD2BD1F261EA818008BE616 /* Preferences.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDD2BD1E261EA818008BE616 /* Preferences.storyboard */; };
+		CDD2BD25261EA983008BE616 /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD2BD24261EA983008BE616 /* PreferencesViewController.swift */; };
 		CDD5049622252AF900B29751 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD5049522252AF900B29751 /* AppDelegate.swift */; };
 		CDD5049822252AFA00B29751 /* InputsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD5049722252AFA00B29751 /* InputsViewController.swift */; };
 		CDD5049F22252AFD00B29751 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDD5049E22252AFD00B29751 /* Images.xcassets */; };
@@ -306,6 +308,8 @@
 		CDC1F53B2234874000D1BB25 /* MainSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSplitViewController.swift; sourceTree = "<group>"; };
 		CDC1F53F22363DDB00D1BB25 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		CDC25615243D9E86007EBE8A /* TZMessageLoggerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TZMessageLoggerViewController.swift; sourceTree = "<group>"; };
+		CDD2BD1E261EA818008BE616 /* Preferences.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Preferences.storyboard; sourceTree = "<group>"; };
+		CDD2BD24261EA983008BE616 /* PreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
 		CDD5049222252AF900B29751 /* Treviz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Treviz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDD5049522252AF900B29751 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CDD5049722252AFA00B29751 /* InputsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputsViewController.swift; sourceTree = "<group>"; };
@@ -449,13 +453,13 @@
 				CDF23395242DCF0F00B8EF40 /* Main.storyboard */,
 				CDF3D1A722505A000064D70C /* AnalysisDoc.swift */,
 				CDD5049522252AF900B29751 /* AppDelegate.swift */,
-				CD70454F26017D4300A2F372 /* UserPreferences.swift */,
 				CDC1F53F22363DDB00D1BB25 /* MainViewController.swift */,
 				CDC1F53B2234874000D1BB25 /* MainSplitViewController.swift */,
 				CD6E0B9D2431BAC5008D1656 /* TZToolbar.swift */,
 				CDF3D1A5225057270064D70C /* TZViewController.swift */,
 				CD6E0BA12436DEC7008D1656 /* TZStoryboard.swift */,
 				CDF1670B2237A10400CD9590 /* MainWindowController.swift */,
+				CDD2BD2A261EBB81008BE616 /* Preferences */,
 				CD9F2041223B7CBF005BFDCB /* Inputs Setup */,
 				CD9F2040223B7C95005BFDCB /* Outputs Setup */,
 				CD05E3BB225491A100906EB0 /* Outputs */,
@@ -640,6 +644,16 @@
 				CD656F6F248770A300BB5CBC /* PhaseStartupFuncs.swift */,
 			);
 			path = Phase;
+			sourceTree = "<group>";
+		};
+		CDD2BD2A261EBB81008BE616 /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				CDD2BD1E261EA818008BE616 /* Preferences.storyboard */,
+				CD70454F26017D4300A2F372 /* UserPreferences.swift */,
+				CDD2BD24261EA983008BE616 /* PreferencesViewController.swift */,
+			);
+			path = Preferences;
 			sourceTree = "<group>";
 		};
 		CDD5048922252AF900B29751 = {
@@ -878,6 +892,7 @@
 				CDF2338D242DCD8100B8EF40 /* HeaderViewController.storyboard in Resources */,
 				CDE078F4224806EF00815E7F /* Inputs.storyboard in Resources */,
 				CDB897FE25B3D80F001EA5E0 /* RunVariantCellViews.xib in Resources */,
+				CDD2BD1F261EA818008BE616 /* Preferences.storyboard in Resources */,
 				CDF2338E242DCD8100B8EF40 /* ReadMe.md in Resources */,
 				CDA7FD75236FE9CC009CDFAF /* InitVarSettings.yaml in Resources */,
 				CD6A255F25AC24EF0075ED81 /* RunVariants.storyboard in Resources */,
@@ -1037,6 +1052,7 @@
 				CD42E0AA22FD05F600A0F9A1 /* CollapsibleStackView.swift in Sources */,
 				CDB897CD25AC2CE5001EA5E0 /* RunVariantTradesViewController.swift in Sources */,
 				CDA549EF23CC254B00933C6B /* AddConditionViewControllers.swift in Sources */,
+				CDD2BD25261EA983008BE616 /* PreferencesViewController.swift in Sources */,
 				CDC1F5372233978500D1BB25 /* OutputsViewController.swift in Sources */,
 				CDE2B5A124C2C718002026E0 /* PhaseStartupFuncs.swift in Sources */,
 				CD6E0B9E2431BAC5008D1656 /* TZToolbar.swift in Sources */,
@@ -1316,11 +1332,12 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.TylerAnderson.Treviz;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				"SWIFT_ACTIVE_COMPILATION_CONDITIONS[arch=*]" = STORYBOARD_WINDOW_CONTROLLER;
 				SWIFT_OBJC_BRIDGING_HEADER = "Treviz/Treviz-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -1345,11 +1362,11 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.TylerAnderson.Treviz;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = STORYBOARD_WINDOW_CONTROLLER;
 				SWIFT_OBJC_BRIDGING_HEADER = "Treviz/Treviz-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 			};

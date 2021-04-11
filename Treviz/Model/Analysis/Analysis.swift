@@ -87,9 +87,13 @@ class Analysis: NSObject, Codable {
     
     // Run settings
     var pctComplete: Double = 0
+    var numComplete: Int = 0
     var isRunning = false
     var returnCode : Int = 0
     let analysisDispatchQueue = DispatchQueue(label: "analysisRunQueue", qos: .utility)
+    let dispatchGroup = DispatchGroup()
+    let runProcessingGroup = DispatchGroup()
+    let processingQueue = DispatchQueue(label: "outputProcessingQueue", qos: .userInteractive)
     var progressReporter: AnalysisProgressReporter?
     var runMode = AnalysisRunMode.parallel {
         didSet {
@@ -137,8 +141,7 @@ class Analysis: NSObject, Codable {
      If this function throws an error, the analysis cannot be run
      */
     func isValid() throws {
-        if self.terminalCondition == nil { throw AnalysisError.NoTerminalCondition }
-        if self.defaultTimestep <= 0 { throw AnalysisError.TimeStepError }
+        try phases.forEach { try $0.isValid() }
     }
     // MARK: Codable implementation
     

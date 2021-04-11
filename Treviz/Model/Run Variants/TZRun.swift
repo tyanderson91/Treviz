@@ -34,6 +34,7 @@ class TZRun {
             return summaryVars
         } else { return nil }
     }
+    let runDispatchGroup = DispatchGroup()
     
     var inputSettings : [Parameter] {
         var tempSettings = [Parameter]()
@@ -89,11 +90,15 @@ class TZRun {
         switch runMode {
         case .parallel:
             for thisPhase in self.phases {
-                analysis.analysisDispatchQueue.async {
-                    thisPhase.progressReporter = self.progressReporter
-                    thisPhase.runAnalysis()
-                }
+                //runDispatchGroup.enter()
+                //analysis.analysisDispatchQueue.async {
+                thisPhase.progressReporter = self.progressReporter
+                thisPhase.runAnalysis()
+                //self.runDispatchGroup.leave()
+                //}
             }
+            self.cleanupRun()
+            //runDispatchGroup.notify(queue: analysis.analysisDispatchQueue) { self.cleanupRun() }
         case .serial:
             for thisPhase in self.phases {
                 thisPhase.progressReporter = self.progressReporter
@@ -112,15 +117,16 @@ class TZRun {
             }
         }
         
-        let returnCodes = phases.compactMap({$0.returnCode})
-        
-        if returnCodes.allSatisfy({$0.rawValue > 0}){ // If all phases have been run
-            self.returnCode = .Success
-            self.progressReporter?.endProgressTracking()
-            self.isRunning = false
-            progressReporter?.completeAnalysis()
-            self.analysis.processRun(self)
-        }
+        //let returnCodes = phases.compactMap({$0.returnCode})
+        /*if returnCodes.allSatisfy({$0.rawValue > 0}){ // If all phases have been run
+            cleanupRun()
+        }*/
+    }
+    func cleanupRun(){
+        self.returnCode = .Success
+        //self.progressReporter?.endProgressTracking()
+        self.isRunning = false
+        //analysis.runProcessingGroup.wait()
     }
 }
 

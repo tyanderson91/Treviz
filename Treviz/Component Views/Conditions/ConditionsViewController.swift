@@ -230,6 +230,8 @@ class ConditionsViewController: TZViewController, VariableGetter, NSTableViewDel
             if tableView.selectedRow != -1 {
                 deleteCondition(at: tableView.selectedRow)
             }
+        } else if kc == 53 {//Escape
+            self.dismiss(parent)
         }
     }
     

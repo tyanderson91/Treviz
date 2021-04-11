@@ -57,6 +57,9 @@ class TZPhase: Codable {
         gatherParams()
     }
     
+    func isValid() throws {
+    }
+    
     // MARK: Codable implementation
     enum CodingKeys: String, CodingKey {
         case id
@@ -161,3 +164,46 @@ extension TZPhase {
         allParams.append(contentsOf: physicsParams)
     }
 }
+/*
+extension TZPhase: AnalysisProgressReporter { // TODO: figure out a good way to track progress
+    func updateProgress(at currentState: StateDictSingle) {
+    }
+    
+    func startProgressTracking() {
+    }
+    
+    func endProgressTracking() {
+    }
+    
+    func completeAnalysis() {
+    }
+    
+    func pctComplete(curState: StateDictSingle)->Double{
+        var tempPctComplete = 0.0
+        for thisCond in terminalCondition.conditions {
+            var curPctComplete = 0.0
+            if let thisCond1 = thisCond as? SingleCondition {
+                let thisVar = curState[thisCond1.varID]!//2State.getValue(thisCond1.varID, curState)!
+                let initVar = initState[thisCond1.varID]!//State.getValue(thisCond1.varID, initialState)!
+                if thisCond1.equality != nil {
+                    let finalVar = thisCond1.equality!
+                    curPctComplete = Double((thisVar-initVar) / (finalVar-initVar))
+                }
+                else if thisCond1.specialCondition != nil {
+                    
+                } else {
+                    let finalVar = thisCond1.ubound != nil ? thisCond1.ubound! : thisCond1.lbound!
+                    curPctComplete = Double((thisVar-initVar) / (finalVar-initVar))
+                }
+            } else { curPctComplete = pctComplete(curState: curState) }
+        
+            tempPctComplete = (tempPctComplete < curPctComplete) ? curPctComplete : tempPctComplete
+            if tempPctComplete < 0 {
+                tempPctComplete = 0}
+            else if tempPctComplete > 1{
+                tempPctComplete = 1}
+            }
+        return tempPctComplete
+    }
+}
+*/

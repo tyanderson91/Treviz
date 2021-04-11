@@ -13,6 +13,7 @@ import Yams
 class AppDelegate: NSObject, NSApplicationDelegate {
     
     @IBOutlet weak var application: NSApplication!
+    var prefsWC: PreferencesWindowController?
     
     func applicationWillFinishLaunching(_ notification: Notification) {
     }
@@ -37,6 +38,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
+    }
+    
+    @IBAction func openPreferences(sender: Any){
+        let storyboard = NSStoryboard(name: "Preferences", bundle: nil)
+        prefsWC = storyboard.instantiateController(identifier: "preferencesWindowController")
+        (sender as? NSMenuItem)?.isEnabled = false
+        prefsWC?.parentItem = sender as? NSMenuItem
+        prefsWC?.showWindow(sender)
     }
     
 }
