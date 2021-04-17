@@ -36,46 +36,94 @@ class PreferencesViewController: NSTabViewController {
     }
 }
 
+protocol PlotPreferencesControllerDelegate {
+    var plotPreferences: PlotPreferences { get set }
+}
+class GlobalPlotPreferencesViewController: NSViewController, PlotPreferencesControllerDelegate {
+    @IBOutlet weak var preferencesView: NSView!
+    
+    var plotPreferences: PlotPreferences {
+        get { return UserDefaults.plotPreferences }
+        set { UserDefaults.plotPreferences = newValue }
+    }
+    var preferencesVC: PlotPreferencesViewController!
+    
+    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
+        guard segue.identifier == "preferenceControlSegue" else { return }
+        preferencesVC = (segue.destinationController as! PlotPreferencesViewController)
+        preferencesVC.delegate = self
+    }
+}
+
 class PlotPreferencesViewController: NSViewController {
     
+    var delegate: PlotPreferencesControllerDelegate!
+    
+    @IBOutlet weak var gridView: CollapsibleGridView!
     @IBOutlet weak var axesLineStyleButton: LineStyleButton!
     @IBOutlet weak var majorGridlineStyleButton: LineStyleButton!
     @IBOutlet weak var minorGridlineStyleButton: LineStyleButton!
     @IBOutlet weak var mainLineStyleButton: LineStyleButton!
     
     @IBOutlet weak var backgroundColorWell: NSColorWell!
-
+    @IBOutlet weak var useInteractiveCheckbox: NSButton!
+    
     @IBOutlet weak var mcOpacitySlider: NSSlider!
     @IBOutlet weak var mcLabel: NSTextField!
     
-    @IBOutlet weak var markerStyleButton: NSPopUpButton!
-    @IBOutlet weak var markerSetButton: NSButton!
+    @IBOutlet weak var colormapSelectorPopup: ColormapPopUpButton!
+    @IBOutlet weak var colormapPreview: ColormapPreview!
+    
+    @IBOutlet weak var markerStyleButton: SymbolStyleButton!
+    @IBOutlet weak var markerSetButton: NSPopUpButton!
     @IBOutlet var mcOpacityFormatter: NumberFormatter!
     
     override func viewDidLoad() {
-        backgroundColorWell.color = NSColor(cgColor: UserDefaults.backgroundColor)!
+        backgroundColorWell.color = NSColor(cgColor: delegate.plotPreferences.backgroundColor)!
         NotificationCenter.default.addObserver(self, selector: #selector(self.didSelectColor(_:)), name: NSColorPanel.colorDidChangeNotification, object: nil)
         
         // Connections for line style buttons
-        mainLineStyleButton.lineStyle = UserDefaults.mainLineStyle
-        mainLineStyleButton.didChangeStyle = { UserDefaults.mainLineStyle = self.mainLineStyleButton.lineStyle }
+        mainLineStyleButton.lineStyle = delegate.plotPreferences.mainLineStyle
+        mainLineStyleButton.didChangeStyle = { self.delegate.plotPreferences.mainLineStyle = self.mainLineStyleButton.lineStyle }
         
-        majorGridlineStyleButton.lineStyle = UserDefaults.majorGridlineStyle
-        majorGridlineStyleButton.didChangeStyle = { UserDefaults.majorGridlineStyle = self.majorGridlineStyleButton.lineStyle }
+        majorGridlineStyleButton.lineStyle = delegate.plotPreferences.majorGridLineStyle
+        majorGridlineStyleButton.didChangeStyle = { self.delegate.plotPreferences.majorGridLineStyle = self.majorGridlineStyleButton.lineStyle }
         
-        minorGridlineStyleButton.lineStyle = UserDefaults.minorGridlineStyle
-        minorGridlineStyleButton.didChangeStyle = { UserDefaults.minorGridlineStyle = self.minorGridlineStyleButton.lineStyle }
+        minorGridlineStyleButton.lineStyle = delegate.plotPreferences.minorGridLineStyle
+        minorGridlineStyleButton.didChangeStyle = { self.delegate.plotPreferences.minorGridLineStyle = self.minorGridlineStyleButton.lineStyle }
         
         axesLineStyleButton.shouldHavePattern = false
-        axesLineStyleButton.lineStyle = UserDefaults.axesLineStyle
-        axesLineStyleButton.didChangeStyle = { UserDefaults.axesLineStyle = self.axesLineStyleButton.lineStyle }
+        axesLineStyleButton.lineStyle = delegate.plotPreferences.axesLineStyle
+        axesLineStyleButton.didChangeStyle = { self.delegate.plotPreferences.axesLineStyle = self.axesLineStyleButton.lineStyle }
         
         // Other controls
         mcOpacityFormatter.maximumFractionDigits = 2
-        mcOpacityFormatter.maximumSignificantDigits = 2
         let mcOpacity = Double(UserDefaults.mcOpacity)
         mcOpacitySlider.doubleValue = mcOpacity
         mcLabel.stringValue = mcOpacityFormatter.string(from: NSNumber(value: mcOpacity)) ?? ""
+        
+        colormapSelectorPopup?.addItems(withTitles: ColorMap.allMaps.map({$0.name}))
+        colormapSelectorPopup.preview = colormapPreview
+        colormapSelectorPopup.colormap = delegate.plotPreferences.colorMap
+        colormapSelectorPopup.updateSelection()
+        colormapSelectorPopup.didChangeMap = { self.delegate.plotPreferences.colorMap = self.colormapSelectorPopup.colormap }
+        
+        if self.delegate.plotPreferences.isInteractive {
+            useInteractiveCheckbox.state = .on
+            useInteractiveCheckbox.stringValue = "On"
+        } else {
+            useInteractiveCheckbox.state = .off
+            useInteractiveCheckbox.stringValue = "Off"
+        }
+        markerStyleButton.parentVC = self
+        markerStyleButton.symbolStyle = delegate.plotPreferences.markerStyle
+        markerSetButton.addItems(withTitles: SymbolSet.allSets.map({$0.description}))
+        markerStyleButton.didChangeStyle = {
+            self.delegate.plotPreferences.markerStyle = self.markerStyleButton.symbolStyle
+            self.updateSymbolSetSelections()
+        }
+        
+        markerStyleButton.changeStyle()
         
         // Final setup
         let baseSubViews = self.view.recurseGetSubviews()
@@ -88,151 +136,35 @@ class PlotPreferencesViewController: NSViewController {
     
     @IBAction func didChangeMCOpacity(_ sender: NSSlider) {
         let newOpacity = sender.doubleValue
-        UserDefaults.mcOpacity = CGFloat(newOpacity)
+        delegate.plotPreferences.mcOpacity = CGFloat(newOpacity)
         mcLabel.stringValue = mcOpacityFormatter.string(from: NSNumber(value: newOpacity)) ?? ""
-
     }
     
     @IBAction func didSelectColor(_ sender: Any) {
         let thisColor = backgroundColorWell.color
-        UserDefaults.backgroundColor = thisColor.cgColor
-    }
-}
-
-/**
- This is a pushbutton that opens an editor for line styles when pushed and continuously updates an associated style when edited
- */
-class LineStyleButton: NSButton {
-    var lineStyle: TZLineStyle!
-    var parentVC: NSViewController!
-    var shouldHavePattern: Bool = true
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        self.target = self
-        self.action = #selector(self.showLineStyleView)
-    }
-    @objc func showLineStyleView(){
-        let storyboard = NSStoryboard(name: "Preferences", bundle: nil)
-        guard let newVC = storyboard.instantiateController(withIdentifier: "lineStyleController") as? LineStyleVC else { return }
-        newVC.parentButton = self
-        parentVC.present(newVC, asPopoverRelativeTo: self.bounds, of: self, preferredEdge: NSRectEdge.maxX, behavior: NSPopover.Behavior.transient)
-    }
-    var didChangeStyle: ()->() = {} // Closure for setting line style in the superclass
-    
-    func changeStyle(){
-        didChangeStyle()
-        self.needsDisplay = true
+        delegate.plotPreferences.backgroundColor = thisColor.cgColor
     }
     
-    override func draw(_ dirtyRect: NSRect) {
-        let margin: CGFloat = 13.0
-        guard let context = NSGraphicsContext.current?.cgContext else { return }
-        super.draw(dirtyRect)
-        
-        context.setStrokeColor(lineStyle.color)
-        let width = CGFloat(lineStyle.lineWidth)
-        context.setLineWidth(width)
-        var x1 = dirtyRect.minX + margin
-        let x2 = dirtyRect.maxX - margin
-        let y = dirtyRect.midY
-        var point1: CGPoint
-        var point2: CGPoint
-        var x = x1
-        var pattern = lineStyle.pattern.nums
-        context.setLineCap(.capForPattern(lineStyle.pattern))
-        if pattern.count > 1 {
-            while x<x2 {
-                // Find line segment, draw line
-                x = x1 + width*pattern[0]
-                point1 = CGPoint(x: x1, y: y)
-                point2 = CGPoint(x: x, y: y)
-                context.addLines(between: [point1, point2])
-                pattern.append(pattern[0])
-                pattern = Array(pattern.dropFirst())
-                
-                // Skip ahead by the space
-                x = x + width*pattern[0]
-                pattern.append(pattern[0])
-                pattern = Array(pattern.dropFirst())
-                x1 = x
-            }
+    @IBAction func didSetInteractive(_ sender: NSButton) {
+        if sender.state == .on {
+            delegate.plotPreferences.isInteractive = true
         } else {
-            context.addLines(between: [CGPoint(x: x1, y: y), CGPoint(x: x2, y: y)])
-        }
-        context.drawPath(using: .stroke)
-    }
-}
-
-/*
- Small popover window that allows setting a line style
- */
-class LineStyleVC: NSViewController {
-    var parentButton: LineStyleButton!
-    var shouldHavePattern: Bool { return parentButton.shouldHavePattern }
-    @IBOutlet weak var gridView: CollapsibleGridView!
-    @IBOutlet weak var colorWell: NSColorWell!
-    @IBOutlet weak var widthSelector: NSComboBox!
-    @IBOutlet weak var patternSelector: NSPopUpButton!
-    
-    var lineWidth: Double {
-        get { return lineStyle.lineWidth }
-        set { lineStyle.lineWidth = newValue
-            parentButton.changeStyle()
-        }
-    }
-    var lineColor: CGColor {
-        get { return lineStyle.color }
-        set { lineStyle.color = newValue
-            parentButton.changeStyle()
-        }
-    }
-    var linePattern: TZLinePattern {
-        get {
-            if shouldHavePattern { return lineStyle.pattern }
-            else { return .solid }
-        }
-        set {
-            if shouldHavePattern { lineStyle.pattern = newValue
-            parentButton.changeStyle()
-            }
-        }
-    }
-    var lineStyle: TZLineStyle! {
-        get { return parentButton.lineStyle }
-        set { parentButton.lineStyle = newValue
-            parentButton.changeStyle()
+            delegate.plotPreferences.isInteractive = false
         }
     }
     
-    override func viewDidLoad() {
-        if shouldHavePattern {
-            let patternNames: [String] = TZLinePattern.allPatterns.map {$0.name}
-            patternSelector.addItems(withTitles: patternNames)
-            patternSelector.selectItem(withTitle: lineStyle.pattern.name)
-        } else {
-            gridView.showHide(.hide, .row, index: [2])
-        }
-        lineStyle = parentButton.lineStyle
-        widthSelector.stringValue = lineStyle.lineWidth.valuestr
-        colorWell.color = NSColor(cgColor: lineStyle.color) ?? .black
+    @IBAction func didChangeMarkerSet(_ sender: NSPopUpButton) {
+        let selectedSet = SymbolSet.allSets[sender.indexOfSelectedItem]
+        delegate.plotPreferences.symbolSet = selectedSet
     }
     
-    override func viewDidDisappear() {
-        parentButton.lineStyle = lineStyle
-        parentButton.changeStyle()
+    private func updateSymbolSetSelections() {
+        let selectedItem = markerSetButton.indexOfSelectedItem
+        let curSymbol = markerStyleButton.symbolStyle.shape
+        SymbolSet.allSets[SymbolSet.allSets.count-1] = [curSymbol]
+        markerSetButton.removeAllItems()
+        markerSetButton.addItems(withTitles: SymbolSet.allSets.map({$0.description}))
+        markerSetButton.selectItem(withTitle: delegate.plotPreferences.symbolSet.description)
     }
-    
-    @IBAction func didSelectColor(_ sender: NSColorWell) {
-        lineColor = sender.color.cgColor
-    }
-    @IBAction func didSelectWidth(_ sender: NSComboBox) {
-        if let newWidth = Double(sender.stringValue){
-            lineWidth = newWidth
-        }
-    }
-    @IBAction func didSelectPattern(_ sender: NSPopUpButton) {
-        linePattern = TZLinePattern.allPatterns[sender.indexOfSelectedItem]
-    }
-    
     
 }

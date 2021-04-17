@@ -26,6 +26,7 @@
 		CD2D0DB62243836F0012978E /* MonteCarloOutputSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2D0DAA224382F70012978E /* MonteCarloOutputSetupViewController.swift */; };
 		CD2D0DB82243836F0012978E /* SingleAxisOutputSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2D0DAE224382F70012978E /* SingleAxisOutputSetupViewController.swift */; };
 		CD2D0DBB224385580012978E /* OutputSetup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD2D0DA6224382F70012978E /* OutputSetup.storyboard */; };
+		CD2E4C7E26240269002F5D99 /* PlotPreferenceComponentViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2E4C7D26240269002F5D99 /* PlotPreferenceComponentViews.swift */; };
 		CD31EFF324C13C7300ED435A /* CalcsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD31EFF224C13C7300ED435A /* CalcsTest.swift */; };
 		CD31EFF724C15F6F00ED435A /* Yams in Frameworks */ = {isa = PBXBuildFile; productRef = CD31EFF624C15F6F00ED435A /* Yams */; };
 		CD39717B2506F12D00A8047A /* RunSettingsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD39717A2506F12D00A8047A /* RunSettingsTest.swift */; };
@@ -229,6 +230,7 @@
 		CD2D0DA9224382F70012978E /* TwoAxisOutputSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoAxisOutputSetupViewController.swift; sourceTree = "<group>"; };
 		CD2D0DAA224382F70012978E /* MonteCarloOutputSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonteCarloOutputSetupViewController.swift; sourceTree = "<group>"; };
 		CD2D0DAE224382F70012978E /* SingleAxisOutputSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleAxisOutputSetupViewController.swift; sourceTree = "<group>"; };
+		CD2E4C7D26240269002F5D99 /* PlotPreferenceComponentViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlotPreferenceComponentViews.swift; sourceTree = "<group>"; };
 		CD31EFF224C13C7300ED435A /* CalcsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalcsTest.swift; sourceTree = "<group>"; };
 		CD39717A2506F12D00A8047A /* RunSettingsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RunSettingsTest.swift; path = TrevizTests/RunSettingsTest.swift; sourceTree = SOURCE_ROOT; };
 		CD39717C2506F2AC00A8047A /* TestHelperFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelperFunctions.swift; sourceTree = "<group>"; };
@@ -652,6 +654,7 @@
 				CDD2BD1E261EA818008BE616 /* Preferences.storyboard */,
 				CD70454F26017D4300A2F372 /* UserPreferences.swift */,
 				CDD2BD24261EA983008BE616 /* PreferencesViewController.swift */,
+				CD2E4C7D26240269002F5D99 /* PlotPreferenceComponentViews.swift */,
 			);
 			path = Preferences;
 			sourceTree = "<group>";
@@ -1038,6 +1041,7 @@
 				CDC25616243D9E86007EBE8A /* TZMessageLoggerViewController.swift in Sources */,
 				CDF1670C2237A10400CD9590 /* MainWindowController.swift in Sources */,
 				CDE2B5B624C2C729002026E0 /* Condition.swift in Sources */,
+				CD2E4C7E26240269002F5D99 /* PlotPreferenceComponentViews.swift in Sources */,
 				CDE2B5A024C2C718002026E0 /* PhaseRunFunctions.swift in Sources */,
 				CD70451F25F5579200A2F372 /* ParameterSelectorViewController.swift in Sources */,
 				CD3C187E23E2B03800E72EFF /* TZPlotView.swift in Sources */,

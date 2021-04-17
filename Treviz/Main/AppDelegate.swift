@@ -41,10 +41,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @IBAction func openPreferences(sender: Any){
-        let storyboard = NSStoryboard(name: "Preferences", bundle: nil)
-        prefsWC = storyboard.instantiateController(identifier: "preferencesWindowController")
-        (sender as? NSMenuItem)?.isEnabled = false
-        prefsWC?.parentItem = sender as? NSMenuItem
+        if prefsWC == nil {
+            let storyboard = NSStoryboard(name: "Preferences", bundle: nil)
+            prefsWC = storyboard.instantiateController(identifier: "preferencesWindowController")
+            prefsWC?.parentItem = sender as? NSMenuItem
+        }
         prefsWC?.showWindow(sender)
     }
     

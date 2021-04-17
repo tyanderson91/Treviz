@@ -36,7 +36,7 @@ extension CGLineCap {
 }
 
 extension CPTPlotSymbol {
-    static func fromTZPlotSymbol(_ plotSymbolIn: TZPlotSymbol)->CPTPlotSymbol{
+    static func fromTZPlotSymbol(_ plotSymbolIn: TZMarkerStyle)->CPTPlotSymbol{
         //self.init()
         var plotSymbol: CPTPlotSymbol
         switch plotSymbolIn.shape {
@@ -74,7 +74,7 @@ extension CPTPlotSymbol {
         return plotSymbol
     }
     
-    convenience init(_ plotSymbolIn: TZPlotSymbol) {
+    convenience init(_ plotSymbolIn: TZMarkerStyle) {
         self.init()
         switch plotSymbolIn.shape {
         case .circle:
@@ -103,10 +103,36 @@ extension CPTPlotSymbol {
             symbolType = .none
         }
         
+        let markerColor = plotSymbolIn.color
         size = CGSize(width: plotSymbolIn.size, height: plotSymbolIn.size)
-        fill = CPTFill(color: CPTColor(cgColor: plotSymbolIn.color))
+        fill = CPTFill(color: CPTColor(cgColor: markerColor))
         let mlineStyle = CPTMutableLineStyle()
-        mlineStyle.lineFill = CPTFill(color: CPTColor(cgColor: plotSymbolIn.color))
+        
+        switch plotSymbolIn.shape {
+        case .cross, .dash, .snow, .plus:
+            mlineStyle.lineWidth = 2.0
+        default:
+            mlineStyle.lineWidth = 1.0
+        }
+        mlineStyle.lineFill = CPTFill(color: CPTColor(componentRed: 0.0, green: 0.0, blue: 0.0, alpha: markerColor.alpha))
         lineStyle = mlineStyle
+    }
+    
+    func changeFill(to newFill: CPTFill){
+        let newLineStyle = CPTMutableLineStyle(style: self.lineStyle)
+        newLineStyle.lineFill = CPTFill(color: CPTColor(componentRed: 0.0, green: 0.0, blue: 0.0, alpha: newFill.cgColor?.alpha ?? 1.0))
+        self.lineStyle? = newLineStyle
+        self.fill = newFill
+    }
+}
+
+class TestViewController: NSViewController {
+    
+    @IBOutlet weak var button: ColormapPreview!
+    override func viewDidLoad() {
+        button.colormap = ColorMap.allMaps.first { $0.name == "bright" }
+        super.viewDidLoad()
+        if button.colormap.isContinuous {
+        }
     }
 }

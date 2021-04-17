@@ -180,7 +180,6 @@ class TZOutput : NSObject, Codable {
             } else { throw TZPlotTypeError.InvalidPlotType }
         } catch { throw TZPlotTypeError.InvalidPlotType }
         super.init()
-        //initPreferences()
         // Assigning of variables and conditions is done in the analysis-level factory initializer
     }
     

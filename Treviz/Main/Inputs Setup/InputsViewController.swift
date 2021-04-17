@@ -111,13 +111,7 @@ class InputsViewController: TZViewController {
         stack.addViewController(runSettingsViewController)
         stack.addViewController(physicsViewController)
         stack.addViewController(initStateViewController)
-        
-        for thisController in [runSettingsViewController,
-                               physicsViewController,
-                               //vehicleViewController,
-                               initStateViewController
-                               ]
-        { self.addChild(thisController!) }
+
     }
     
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {

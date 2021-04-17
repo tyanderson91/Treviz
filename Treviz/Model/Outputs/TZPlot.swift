@@ -20,7 +20,7 @@ struct TZLineStyle {
 }
 
 /**Options for plot symbol shapes*/
-enum TZPlotSymbolShape: String {
+enum TZPlotSymbol: String, CaseIterable {
     case none
     case cross
     case circle
@@ -33,6 +33,23 @@ enum TZPlotSymbolShape: String {
     case hexagon
     case dash
     case snow
+    
+    func character()->String {
+        switch self {
+        case .none: return ""
+        case .cross: return "×"
+        case .circle: return "●"
+        case .square: return "■"
+        case .plus: return "＋"
+        case .star: return "★"
+        case .diamond: return "♦︎"
+        case .triangle: return "▲"
+        case .pentagon: return "⬟"
+        case .hexagon: return "⬢"
+        case .dash: return "-"
+        case .snow: return "*"
+        }
+    }
 }
 
 struct TZLinePattern: Equatable {
@@ -50,36 +67,26 @@ struct TZLinePattern: Equatable {
     // TODO: Turn this all into multipliers on the line width, rather than fixed values
     static let allPatterns: [TZLinePattern] = [.solid, .dash, .shortDash, .longDash, .dot, .dashDot, .altDash]
 }
+
 /**Plot symbol configuration options*/
-struct TZPlotSymbol {
+struct TZMarkerStyle {
     
-    var shape: TZPlotSymbolShape
-    var size: CGFloat = 5
-    var color: CGColor = CGColor(red: 0, green: 0, blue: 0, alpha: 1)
-    
-    init(_ shapeIn: TZPlotSymbolShape){
-        shape = shapeIn
-    }
-    init?(symbolName: String) {
-        guard let shape = TZPlotSymbolShape(rawValue: symbolName) else { return nil }
-        self.init(shape)
-    }
-    
-    // Default symbols by shape
-    static let none = TZPlotSymbol(.none)
-    static let cross = TZPlotSymbol(.cross)
-    static let circle = TZPlotSymbol(.circle)
-    static let square = TZPlotSymbol(.square)
-    static let plus = TZPlotSymbol(.plus)
-    static let star = TZPlotSymbol(.star)
-    static let diamond = TZPlotSymbol(.diamond)
-    static let triangle = TZPlotSymbol(.triangle)
-    static let pentagon = TZPlotSymbol(.pentagon)
-    static let hexagon = TZPlotSymbol(.hexagon)
-    static let dash = TZPlotSymbol(.dash)
-    static let snow = TZPlotSymbol(.snow)
+    var shape: TZPlotSymbol
+    var size: CGFloat
+    var color: CGColor
+        
+    static let none = TZMarkerStyle(shape: .none, size: 1.0, color: CGColor.black)
 }
-typealias SymbolSet = [TZPlotSymbolShape]
+/**Collection of symbols to be used for differentiating plot groups*/
+typealias SymbolSet = [TZPlotSymbol]
+extension SymbolSet {
+    var description: String {
+        if self.count == 0 { return "None" }
+        let strnames: [String] = self.map({$0.character()})
+        return strnames.joined(separator: ", ")
+    }
+    static var allSets: [SymbolSet] = []
+}
 
 /**
  Used to allow the App Delegate to assign preferences for the plots based on stored User defaults
@@ -93,15 +100,14 @@ struct PlotPreferences {
     var majorGridLineStyle: TZLineStyle!
     var minorGridLineStyle: TZLineStyle!
     var isInteractive: Bool!
-    var plotSymbol: TZPlotSymbol = .none
-    var symbolSize: CGFloat!
+    var markerStyle: TZMarkerStyle!
     var symbolSet: SymbolSet!
-    var lineStyle: TZLineStyle!
+    var mainLineStyle: TZLineStyle!
     var backgroundColor: CGColor!
     var colorMap: ColorMap!
-    
-    var customPrefs = [String]()
+    var mcOpacity: CGFloat!
 }
+
 /**
  A TZPlot contains all the information required to render a plot in a TZPlotView. TZPlot is a subclass of TZOutput. The subclassing allows TZPlot to include configuration options specifically related to the plot, such as colors, axes options, and other options related to the appearance of the plot view
  */
@@ -116,8 +122,4 @@ final class TZPlot: TZOutput {
         try container.encode("plot", forKey: .outputType)
         try super.encode(to: encoder)
     }
-    /*
-    override func initPreferences() {
-        TZPlot.preferencesGetter?.getPreferences(self)
-    }*/
 }

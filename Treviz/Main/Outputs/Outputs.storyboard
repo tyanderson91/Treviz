@@ -294,6 +294,7 @@
                     <tabViewItems>
                         <tabViewItem label="Visualizer" identifier="visualizerTabViewItem" id="rQj-OT-E8h"/>
                         <tabViewItem label="Plots" identifier="plotsTabViewItem" id="Dkd-b9-ouO"/>
+                        <tabViewItem id="dxn-EL-2Oc"/>
                     </tabViewItems>
                     <viewControllerTransitionOptions key="transitionOptions" allowUserInteraction="YES"/>
                     <tabView key="tabView" type="noTabsNoBorder" id="nLU-aM-vwa">
@@ -310,6 +311,7 @@
                         <outlet property="visualizerTabViewItem" destination="rQj-OT-E8h" id="yZG-j5-Ebl"/>
                         <segue destination="kWr-Ah-mB4" kind="relationship" relationship="tabItems" id="uwu-Ql-y3x"/>
                         <segue destination="ctD-mf-hTd" kind="relationship" relationship="tabItems" id="TB2-wQ-TzF"/>
+                        <segue destination="xYi-hM-nUA" kind="relationship" relationship="tabItems" id="xDc-Sb-fH4"/>
                     </connections>
                 </tabViewController>
                 <customObject id="Kum-Q4-fOu" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -397,6 +399,33 @@
                 <customObject id="h1w-o3-RXn" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="959" y="330"/>
+        </scene>
+        <!--Test View Controller-->
+        <scene sceneID="NrB-6o-BKT">
+            <objects>
+                <viewController id="xYi-hM-nUA" customClass="TestViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" wantsLayer="YES" id="F95-if-RkL" customClass="TestViewController" customModule="Treviz" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="4nT-eM-HAa" customClass="ColormapPreview" customModule="Treviz" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                            </customView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="4nT-eM-HAa" firstAttribute="leading" secondItem="F95-if-RkL" secondAttribute="leading" id="3OB-jz-J91"/>
+                            <constraint firstAttribute="bottom" secondItem="4nT-eM-HAa" secondAttribute="bottom" id="CdD-s7-rgg"/>
+                            <constraint firstAttribute="trailing" secondItem="4nT-eM-HAa" secondAttribute="trailing" id="DsJ-cK-LmB"/>
+                            <constraint firstItem="4nT-eM-HAa" firstAttribute="top" secondItem="F95-if-RkL" secondAttribute="top" id="np2-Xm-Yns"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="button" destination="4nT-eM-HAa" id="Aiy-mG-1XD"/>
+                    </connections>
+                </viewController>
+                <customObject id="ZzV-1d-U1L" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1549" y="-587"/>
         </scene>
     </scenes>
     <resources>

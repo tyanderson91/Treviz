@@ -26,18 +26,21 @@ extension UserDefaults {
     fileprivate func dict(key: Key)->[String:Any]? { return self.dictionary(forKey: key.rawValue)}
     fileprivate func bool(key: Key)->Bool? { return self.bool(forKey: key.rawValue)}
     fileprivate func cgfloat(key: Key)->CGFloat { return CGFloat(self.float(forKey: key.rawValue))}
+    fileprivate func data(key: Key)->Data? { return self.data(forKey: key.rawValue)}
     
-    private func color(key: Key)->CGColor { // TODO: Allow for more types of color spaces
-        guard let colorComponents = self.array(key: key) as? [CGFloat] else { return .black }
-        guard colorComponents.count == 3 else { return .black }
-        let newColor = CGColor(red: colorComponents[0], green: colorComponents[1], blue: colorComponents[2], alpha: CGFloat(1.0))
+    private func color(key: Key)->CGColor? {
+        var newColor: CGColor?
+        if let colorData = self.data(key: key) {
+            let nscolor = try? NSKeyedUnarchiver.unarchivedObject(ofClass: NSColor.self, from: colorData) ?? nil
+            newColor = nscolor?.cgColor
+        } else { newColor = nil }
+        
         return newColor
     }
     private func setColor(_ color: CGColor, key: Key){
         guard let nscolor = NSColor(cgColor: color) else { return }
-        let rgb : [CGFloat] = [nscolor.redComponent, nscolor.greenComponent, nscolor.blueComponent]
-        let newArray = Array(rgb[0...2])
-        self.set(newArray, key: key)
+        guard let colorData = try? NSKeyedArchiver.archivedData(withRootObject: nscolor, requiringSecureCoding: false) else { return }
+        self.set(colorData, key: key)
     }
     
     // MARK: List of keys
@@ -57,9 +60,10 @@ extension UserDefaults {
         case axesColor
         
         case mcOpacity
-        case plotSymbol
+        case markerSymbol
         case symbolSet
-        case symbolSize
+        case markerSize
+        case markerColor
         case backgroundColor
         case plotIsInteractive
     }
@@ -73,7 +77,7 @@ extension UserDefaults {
         set { standard.set(newValue.name, key: .colorMap) }
     }
     class var mainLineColor: CGColor {
-        get { return standard.color(key: .mainLineColor) }
+        get { return standard.color(key: .mainLineColor)! }
         set { standard.setColor(newValue, key: .mainLineColor) }
     }
     class var mainLineWidth: Double {
@@ -98,27 +102,38 @@ extension UserDefaults {
         get { return standard.cgfloat(key: .mcOpacity) }
         set { standard.set(Float(newValue), key: .mcOpacity) }
     }
-    class var symbolSize: CGFloat {
-        get { return standard.cgfloat(key: .symbolSize) }
-        set { standard.set(Float(newValue), key: .symbolSize) }
-    }
     class var backgroundColor: CGColor {
-        get { return standard.color(key: .backgroundColor) }
+        get { return standard.color(key: .backgroundColor)! }
         set { standard.setColor(newValue, key: .backgroundColor) }
     }
-    class var plotSymbol: TZPlotSymbol {
-        get { guard let symbolName = standard.string(key: .plotSymbol) else { return .none }
-            guard var symbol = TZPlotSymbol(symbolName: symbolName) else { return .none }
-            symbol.size = self.symbolSize
-            symbol.color = self.mainLineColor
-            return symbol
+    class var markerSymbol: TZPlotSymbol {
+        get {
+            let symbolName = standard.string(key: .markerSymbol) ?? ""
+            return TZPlotSymbol(rawValue: symbolName) ?? .none }
+        set { standard.set(newValue.rawValue, key: .markerSymbol) }
+    }
+    class var markerSize: CGFloat {
+        get { return standard.cgfloat(key: .markerSize) }
+        set { standard.set(Float(newValue), key: .markerSize) }
+    }
+    class var markerColor: CGColor {
+        get { return standard.color(key: .markerColor)! }
+        set { standard.setColor(newValue, key: .markerColor) }
+    }
+    class var markerStyle: TZMarkerStyle {
+        get {
+            return TZMarkerStyle(shape: UserDefaults.markerSymbol, size: UserDefaults.markerSize, color: UserDefaults.markerColor)
         }
-        set { standard.set(newValue.shape.rawValue, key: .plotSymbol) }
+        set {
+            standard.set(newValue.shape.rawValue, key: .markerSymbol)
+            standard.setColor(newValue.color, key: .markerColor)
+            standard.set(newValue.size, key: .markerSize)
+        }
     }
     class var symbolSet: SymbolSet {
         get {
-            guard let symbolNames: [String] = standard.array(key: .symbolSet) as? [String] else { return [plotSymbol.shape] }
-            return symbolNames.compactMap { TZPlotSymbolShape(rawValue: $0) }
+            guard let symbolNames: [String] = standard.array(key: .symbolSet) as? [String] else { return [markerStyle.shape] }
+            return symbolNames.compactMap { TZPlotSymbol(rawValue: $0) }
         }
         set { standard.set(newValue.compactMap({$0.rawValue}), key: .symbolSet) }
     }
@@ -126,7 +141,7 @@ extension UserDefaults {
     class var majorGridlineStyle: TZLineStyle {
         get {
             let width = standard.double(key: .majorGridlineWidth) ?? 1.0
-            let color = standard.color(key: .majorGridlineColor)
+            let color = standard.color(key: .majorGridlineColor)!
             let pattern: TZLinePattern = TZLinePattern.allPatterns.first(where: {$0.name == standard.string(key: .majorGridlinePattern) }) ?? .solid
             return TZLineStyle(color: color, lineWidth: width, pattern: pattern)
         }
@@ -139,7 +154,7 @@ extension UserDefaults {
     class var minorGridlineStyle: TZLineStyle {
         get {
             let width = standard.double(key: .minorGridlineWidth) ?? 1.0
-            let color = standard.color(key: .minorGridlineColor)
+            let color = standard.color(key: .minorGridlineColor)!
             let pattern: TZLinePattern = TZLinePattern.allPatterns.first(where: {$0.name == standard.string(key: .minorGridlinePattern) }) ?? .solid
             return TZLineStyle(color: color, lineWidth: width, pattern: pattern)
         }
@@ -152,7 +167,7 @@ extension UserDefaults {
     class var axesLineStyle: TZLineStyle {
         get {
             let width = standard.double(key: .axesWidth) ?? 3.0
-            let color = standard.color(key: .axesColor)
+            let color = standard.color(key: .axesColor)!
             return TZLineStyle(color: color, lineWidth: width)
         }
         set {
@@ -164,10 +179,37 @@ extension UserDefaults {
         get { return (standard.bool(key: .plotIsInteractive) ?? false) }
         set { standard.set(newValue, key: .plotIsInteractive) }
     }
+    class var plotPreferences: PlotPreferences {
+        get {
+            var prefs = PlotPreferences()
+            prefs.markerStyle = UserDefaults.markerStyle
+            prefs.isInteractive = UserDefaults.plotIsInteractive
+            prefs.axesLineStyle = UserDefaults.axesLineStyle
+            prefs.majorGridLineStyle = UserDefaults.majorGridlineStyle
+            prefs.minorGridLineStyle = UserDefaults.minorGridlineStyle
+            prefs.backgroundColor = UserDefaults.backgroundColor
+            prefs.mainLineStyle = UserDefaults.mainLineStyle
+            prefs.mcOpacity = UserDefaults.mcOpacity
+            prefs.colorMap = UserDefaults.colorMap
+            prefs.symbolSet = UserDefaults.symbolSet
+            return prefs
+        } set {
+            let prefs = newValue
+            UserDefaults.markerStyle = prefs.markerStyle
+            UserDefaults.plotIsInteractive = prefs.isInteractive
+            UserDefaults.axesLineStyle = prefs.axesLineStyle
+            UserDefaults.majorGridlineStyle = prefs.majorGridLineStyle
+            UserDefaults.minorGridlineStyle = prefs.minorGridLineStyle
+            UserDefaults.backgroundColor = prefs.backgroundColor
+            UserDefaults.mainLineStyle = prefs.mainLineStyle
+            UserDefaults.mcOpacity = prefs.mcOpacity
+            UserDefaults.colorMap = prefs.colorMap
+            UserDefaults.symbolSet = prefs.symbolSet
+        }
+    }
 }
 
 extension AppDelegate: PlotPreferencesGetter {
-   
     /**
      Set user defaults, if unset
      */
@@ -176,49 +218,52 @@ extension AppDelegate: PlotPreferencesGetter {
         
         let defaults = UserDefaults.standard
         // System defaults
+        let bgColor = try! NSKeyedArchiver.archivedData(withRootObject: NSColor(deviceWhite: 0.95, alpha: 1.0), requiringSecureCoding: false)
+        let lineColor = try! NSKeyedArchiver.archivedData(withRootObject: NSColor(deviceWhite: 0.0, alpha: 1.0), requiringSecureCoding: false)
+        let markerColor = lineColor
+        let axesColor = lineColor
+        let majorGridlineColor = try! NSKeyedArchiver.archivedData(withRootObject: NSColor(deviceWhite: 0.5, alpha: 1.0), requiringSecureCoding: false)
+        let minorGridlineColor = try! NSKeyedArchiver.archivedData(withRootObject: NSColor(deviceWhite: 0.75, alpha: 1.0), requiringSecureCoding: false)
         defaults.register(defaults: [.colorMap: "okabe",
-                                     .mainLineColor: [0.0, 0.0, 0.1],
+                                     .mainLineColor: lineColor,
                                      .mainLineWidth: 3.0,
                                      .mainLinePattern: "solid",
                                      .mcOpacity: 0.7,
-                                     .plotSymbol: "circle",
+                                     .markerSymbol: "circle",
                                      .symbolSet: ["circle", "square","triangle","cross","plus","diamond"],
-                                     .symbolSize: 3.0,
-                                     .backgroundColor: [0.95, 0.95, 0.95],
-                                     .majorGridlineColor: [0.5, 0.5, 0.5],
+                                     .markerSize: 3.0,
+                                     .markerColor: markerColor,
+                                        .backgroundColor: bgColor,
+                                     .majorGridlineColor: majorGridlineColor,
                                      .majorGridlineWidth: 0.8,
-                                     .minorGridlineColor: [0.75, 0.75, 0.75],
+                                     .minorGridlineColor: minorGridlineColor,
                                      .minorGridlineWidth: 0.5,
                                      .axesWidth: 3.0,
-                                     .axesColor: [0.0, 0.0, 0.0],
+                                     .axesColor: axesColor,
                                      .plotIsInteractive: true
         ])
         
-        // User defaults
-        // TODO: Remove the below once it can be set in the GUI
-        defaults.set("gnuplot", forKey: UserDefaults.Key.colorMap.rawValue)
-        
-        UserDefaults.plotIsInteractive = true
-        UserDefaults.mcOpacity = 0.8
-        UserDefaults.symbolSize = 6.0
-        UserDefaults.plotSymbol = .none
-        UserDefaults.symbolSize = 6.0
+        let defaultSymbol = UserDefaults.markerStyle.shape
+        let defaultSet = SymbolSet([.circle,.square,.triangle,.diamond,.pentagon, .star, .hexagon])
+        let altSet = SymbolSet([.circle,.cross,.square,.plus,.triangle,.snow,.diamond,.dash])
+        SymbolSet.allSets = [[], defaultSet, altSet, [defaultSymbol]]
     }
     
     func getPreferences(_ plot: TZPlot)->PlotPreferences {
         var prefs = plot.plotPreferences
         
-        if plot.plotType.requiresCondition && prefs.plotSymbol.shape == .none { prefs.plotSymbol = UserDefaults.plotSymbol }
+        if plot.plotType.requiresCondition && prefs.markerStyle.shape == .none { prefs.markerStyle = UserDefaults.markerStyle }
         if prefs.isInteractive == nil { prefs.isInteractive = UserDefaults.plotIsInteractive }
         if prefs.axesLineStyle == nil { prefs.axesLineStyle = UserDefaults.axesLineStyle }
         if prefs.majorGridLineStyle == nil { prefs.majorGridLineStyle = UserDefaults.majorGridlineStyle }
         if prefs.minorGridLineStyle == nil { prefs.minorGridLineStyle = UserDefaults.minorGridlineStyle }
         if prefs.backgroundColor == nil { prefs.backgroundColor = UserDefaults.backgroundColor }
-        if prefs.lineStyle == nil { prefs.lineStyle = UserDefaults.mainLineStyle }
+        if prefs.mainLineStyle == nil { prefs.mainLineStyle = UserDefaults.mainLineStyle }
         if prefs.colorMap == nil { prefs.colorMap = UserDefaults.colorMap }
+        if prefs.markerStyle == nil { prefs.markerStyle = UserDefaults.markerStyle }
         if prefs.symbolSet == nil { prefs.symbolSet = UserDefaults.symbolSet }
+        if prefs.mcOpacity == nil { prefs.mcOpacity = UserDefaults.mcOpacity }
         
-        //plot.plotPreferences = prefs
         return prefs
     }
     

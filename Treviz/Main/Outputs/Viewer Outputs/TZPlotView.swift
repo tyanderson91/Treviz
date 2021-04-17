@@ -62,18 +62,23 @@ class TZPlotView: NSObject, CPTScatterPlotDelegate, CPTScatterPlotDataSource, CP
         
         // Get default properties from user inputs
         let colorMap = prefs.colorMap!
-        let mcOpacity = UserDefaults.mcOpacity
-        let lineStyle = prefs.lineStyle!
+        let mcOpacity = prefs.mcOpacity!
+        let lineStyle = prefs.mainLineStyle!
+        let plotSymbol = prefs.markerStyle!
+        let symbolSet = prefs.symbolSet!
         
         var i = 0
         let multiGroup = _plotData.allGroups.count > 1
         var legendPlots: [CPTPlot] = []
         let ngroups = _plotData.allGroups.count
         let ncolors = colorMap.colors.count
+        let nsymbols = symbolSet.count
         
         for (thisGroupName, thisGroupData) in _plotData.allGroups {
             var thisColor: CGColor
             var groupLinestyle: CPTMutableLineStyle
+            var groupMarkerStyle: CPTPlotSymbol
+            var thisSymbol: TZPlotSymbol
             
             if multiGroup {
                 if colorMap.isContinuous {
@@ -83,26 +88,34 @@ class TZPlotView: NSObject, CPTScatterPlotDelegate, CPTScatterPlotDataSource, CP
                     let color_index = i % (ncolors)
                     thisColor = colorMap[color_index]!
                 }
+                if nsymbols > 0 {
+                    let symbol_index = i % (nsymbols)
+                    thisSymbol = symbolSet[symbol_index]
+                } else { thisSymbol = .none }
             } else {
                 thisColor = lineStyle.color
+                thisSymbol = plotSymbol.shape
             }
             let curLineStyle = TZLineStyle(color: thisColor, lineWidth: lineStyle.lineWidth, pattern: lineStyle.pattern)
             groupLinestyle = CPTMutableLineStyle.init(curLineStyle)
-            var lineFill: CPTFill
+            let curMarkerStyle = TZMarkerStyle(shape: thisSymbol, size: plotSymbol.size, color: thisColor)
+            groupMarkerStyle = CPTPlotSymbol(curMarkerStyle)
             
+            var lineFill: CPTFill
             let multiSets = thisGroupData.count > 1
             if multiSets { // If many data sets of the same group, apply some transparency
                 lineFill = CPTFill(color: groupLinestyle.lineColor!.withAlphaComponent(mcOpacity))
-                groupLinestyle.lineFill = lineFill
             } else {
                 lineFill = CPTFill(color: groupLinestyle.lineColor!.withAlphaComponent(1.0))
-                groupLinestyle.lineFill = lineFill
             }
+            groupLinestyle.lineFill = lineFill
+            groupMarkerStyle.changeFill(to: lineFill)
             
             var j = 0
             for thisPlotData in thisGroupData {
                 let plot = addSinglePlot(from: inputPlot, plotData: thisPlotData) as! CPTScatterPlot
                 plot.dataLineStyle = groupLinestyle
+                plot.plotSymbol = groupMarkerStyle
                 plot.title = thisGroupName
                 if j==0 { // Add the first of the group into the legend
                     legendPlots.append(plot)
@@ -117,7 +130,7 @@ class TZPlotView: NSObject, CPTScatterPlotDelegate, CPTScatterPlotDataSource, CP
         plotSpace.delegate = self
         plotSpace.allowsMomentum = true
         
-        graph.plotAreaFrame?.plotArea?.backgroundColor = UserDefaults.backgroundColor
+        graph.plotAreaFrame?.plotArea?.backgroundColor = prefs.backgroundColor
         graph.paddingRight = 0
         graph.paddingTop = 0
         graph.paddingLeft = 65 // TODO: Offset by axis label width
@@ -163,12 +176,12 @@ class TZPlotView: NSObject, CPTScatterPlotDelegate, CPTScatterPlotDataSource, CP
         
         if multiGroup {
             let legend = CPTLegend(plots: legendPlots)
-            legend.fill = CPTFill(color: CPTColor.white())
+            legend.fill = CPTFill(color: CPTColor(cgColor: prefs.backgroundColor))
             legend.borderLineStyle = legendBorderStyle
             legend.cornerRadius = 5.0
             legend.numberOfRows = UInt(legendPlots.count)
             //legend.numberOfColumns = 1
-            let legLineWidth = UserDefaults.mainLineWidth
+            let legLineWidth = CGFloat(2.0)
             legend.swatchSize = CGSize(width: 8*legLineWidth, height: legLineWidth*1.5)
             
             graph.legend = legend
@@ -234,7 +247,6 @@ class TZPlotView: NSObject, CPTScatterPlotDelegate, CPTScatterPlotDataSource, CP
         let scatterPlot = CPTScatterPlot(frame: graph.bounds)
         scatterPlot.delegate = self
         scatterPlot.dataSource = self
-        scatterPlot.plotSymbol = CPTPlotSymbol(plot.plotPreferences.plotSymbol)
         scatterPlot.name = plotData.identifier
         graph.add(scatterPlot)
         
