@@ -44,14 +44,27 @@ class GlobalPlotPreferencesViewController: NSViewController, PlotPreferencesCont
     
     var plotPreferences: PlotPreferences {
         get { return UserDefaults.plotPreferences }
-        set { UserDefaults.plotPreferences = newValue }
+        set { UserDefaults.plotPreferences = newValue
+            previewObject.applyPrefs()
+        }
     }
     var preferencesVC: PlotPreferencesViewController!
+    @IBOutlet weak var plotPreview: CPTGraphHostingView!
+    var previewGraph: CPTGraph!
+    var previewObject: GlobalPlotPreview!
     
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         guard segue.identifier == "preferenceControlSegue" else { return }
         preferencesVC = (segue.destinationController as! PlotPreferencesViewController)
         preferencesVC.delegate = self
+        preferencesVC.plotPreviewViewer = previewObject
+    }
+    
+    override func viewDidLoad() {
+        previewObject = GlobalPlotPreview()
+        previewGraph = previewObject.graph
+        plotPreview.hostedGraph = previewGraph
+        super.viewDidLoad()
     }
 }
 
@@ -64,6 +77,13 @@ class PlotPreferencesViewController: NSViewController {
     @IBOutlet weak var majorGridlineStyleButton: LineStyleButton!
     @IBOutlet weak var minorGridlineStyleButton: LineStyleButton!
     @IBOutlet weak var mainLineStyleButton: LineStyleButton!
+    @IBOutlet weak var lineSetPopupButton: NSPopUpButton!
+    var plotPreviewViewer: PlotPreviewDisplay?
+    
+    @IBOutlet weak var divider1: NSBox!
+    @IBOutlet weak var divider2: NSBox!
+    let d1row = 8
+    let d2row = 11
     
     @IBOutlet weak var backgroundColorWell: NSColorWell!
     @IBOutlet weak var useInteractiveCheckbox: NSButton!
@@ -72,7 +92,6 @@ class PlotPreferencesViewController: NSViewController {
     @IBOutlet weak var mcLabel: NSTextField!
     
     @IBOutlet weak var colormapSelectorPopup: ColormapPopUpButton!
-    @IBOutlet weak var colormapPreview: ColormapPreview!
     
     @IBOutlet weak var markerStyleButton: SymbolStyleButton!
     @IBOutlet weak var markerSetButton: NSPopUpButton!
@@ -102,8 +121,11 @@ class PlotPreferencesViewController: NSViewController {
         mcOpacitySlider.doubleValue = mcOpacity
         mcLabel.stringValue = mcOpacityFormatter.string(from: NSNumber(value: mcOpacity)) ?? ""
         
-        colormapSelectorPopup?.addItems(withTitles: ColorMap.allMaps.map({$0.name}))
-        colormapSelectorPopup.preview = colormapPreview
+        for thisMap in ColorMap.allMaps {
+            let newItem = ColorMapMenuItem(colormap: thisMap)
+            colormapSelectorPopup.menu?.addItem(newItem)
+        }
+        
         colormapSelectorPopup.colormap = delegate.plotPreferences.colorMap
         colormapSelectorPopup.updateSelection()
         colormapSelectorPopup.didChangeMap = { self.delegate.plotPreferences.colorMap = self.colormapSelectorPopup.colormap }
@@ -124,6 +146,12 @@ class PlotPreferencesViewController: NSViewController {
         }
         
         markerStyleButton.changeStyle()
+        // Section dividers
+        gridView.mergeCells(inHorizontalRange: NSRange(location: 0, length: 2), verticalRange: NSRange(location: d1row, length: 1))
+        gridView.mergeCells(inHorizontalRange: NSRange(location: 0, length: 2), verticalRange: NSRange(location: d2row, length: 1))
+        
+        // CUSTOM TEST
+        //lineSetPopupButton.addItems(withObjects: [NSString("A"), NSString("B"),NSString("C")])
         
         // Final setup
         let baseSubViews = self.view.recurseGetSubviews()
@@ -159,7 +187,7 @@ class PlotPreferencesViewController: NSViewController {
     }
     
     private func updateSymbolSetSelections() {
-        let selectedItem = markerSetButton.indexOfSelectedItem
+        //let selectedItem = markerSetButton.indexOfSelectedItem
         let curSymbol = markerStyleButton.symbolStyle.shape
         SymbolSet.allSets[SymbolSet.allSets.count-1] = [curSymbol]
         markerSetButton.removeAllItems()

@@ -21,6 +21,10 @@
 		CD18A660254FCB1C00B06C10 /* ParameterID.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD18A65F254FCB1C00B06C10 /* ParameterID.swift */; };
 		CD18A661254FCB1C00B06C10 /* ParameterID.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD18A65F254FCB1C00B06C10 /* ParameterID.swift */; };
 		CD28477722FF9C8800D192A9 /* CollapsibleGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD28477622FF9C8800D192A9 /* CollapsibleGridView.swift */; };
+		CD2A95E9262BEBA5004279F0 /* GlobalPlotPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2A95E8262BEBA5004279F0 /* GlobalPlotPreview.swift */; };
+		CD2A95ED262D3BCF004279F0 /* ColormapPreview.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD2A95EC262D3BCF004279F0 /* ColormapPreview.xib */; };
+		CD2A95FB262FBE66004279F0 /* CustomPopUpButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD2A95FA262FBE66004279F0 /* CustomPopUpButton.xib */; };
+		CD2A95FF262FBEC0004279F0 /* CustomPopUpButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2A95FE262FBEC0004279F0 /* CustomPopUpButton.swift */; };
 		CD2D0DB42243836F0012978E /* ThreeAxisOutputSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2D0D96224382F70012978E /* ThreeAxisOutputSetupViewController.swift */; };
 		CD2D0DB52243836F0012978E /* TwoAxisOutputSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2D0DA9224382F70012978E /* TwoAxisOutputSetupViewController.swift */; };
 		CD2D0DB62243836F0012978E /* MonteCarloOutputSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2D0DAA224382F70012978E /* MonteCarloOutputSetupViewController.swift */; };
@@ -225,6 +229,10 @@
 		CD18A65F254FCB1C00B06C10 /* ParameterID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterID.swift; sourceTree = "<group>"; };
 		CD280F49233B45670004263F /* TZPlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TZPlot.swift; sourceTree = "<group>"; };
 		CD28477622FF9C8800D192A9 /* CollapsibleGridView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollapsibleGridView.swift; sourceTree = "<group>"; };
+		CD2A95E8262BEBA5004279F0 /* GlobalPlotPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalPlotPreview.swift; sourceTree = "<group>"; };
+		CD2A95EC262D3BCF004279F0 /* ColormapPreview.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ColormapPreview.xib; sourceTree = "<group>"; };
+		CD2A95FA262FBE66004279F0 /* CustomPopUpButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CustomPopUpButton.xib; path = "Treviz/Component Views/CustomPopUpButton.xib"; sourceTree = SOURCE_ROOT; };
+		CD2A95FE262FBEC0004279F0 /* CustomPopUpButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPopUpButton.swift; sourceTree = "<group>"; };
 		CD2D0D96224382F70012978E /* ThreeAxisOutputSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeAxisOutputSetupViewController.swift; sourceTree = "<group>"; };
 		CD2D0DA6224382F70012978E /* OutputSetup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OutputSetup.storyboard; sourceTree = "<group>"; };
 		CD2D0DA9224382F70012978E /* TwoAxisOutputSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoAxisOutputSetupViewController.swift; sourceTree = "<group>"; };
@@ -569,6 +577,8 @@
 				CDF23381242DCD8000B8EF40 /* InfoBarStackView */,
 				CD3E645125086398001F6C8F /* RunVariantEnableButton.swift */,
 				CD70FAC8253EB39800B551F2 /* ParamValueView.swift */,
+				CD2A95FE262FBEC0004279F0 /* CustomPopUpButton.swift */,
+				CD2A95FA262FBE66004279F0 /* CustomPopUpButton.xib */,
 				CD42E0A922FD05F600A0F9A1 /* CollapsibleStackView.swift */,
 				CD28477622FF9C8800D192A9 /* CollapsibleGridView.swift */,
 				CD3F5E5622EE4D8C00E4CF20 /* Conditions */,
@@ -652,8 +662,10 @@
 			isa = PBXGroup;
 			children = (
 				CDD2BD1E261EA818008BE616 /* Preferences.storyboard */,
+				CD2A95EC262D3BCF004279F0 /* ColormapPreview.xib */,
 				CD70454F26017D4300A2F372 /* UserPreferences.swift */,
 				CDD2BD24261EA983008BE616 /* PreferencesViewController.swift */,
+				CD2A95E8262BEBA5004279F0 /* GlobalPlotPreview.swift */,
 				CD2E4C7D26240269002F5D99 /* PlotPreferenceComponentViews.swift */,
 			);
 			path = Preferences;
@@ -887,6 +899,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDF23396242DCF3100B8EF40 /* Main.storyboard in Resources */,
+				CD2A95FB262FBE66004279F0 /* CustomPopUpButton.xib in Resources */,
 				CDF23390242DCD8100B8EF40 /* LICENSE.txt in Resources */,
 				CDBE33C6224CB48200E1404E /* InitStateStructure.plist in Resources */,
 				CDF23391242DCD8100B8EF40 /* Info.plist in Resources */,
@@ -899,6 +912,7 @@
 				CDF2338E242DCD8100B8EF40 /* ReadMe.md in Resources */,
 				CDA7FD75236FE9CC009CDFAF /* InitVarSettings.yaml in Resources */,
 				CD6A255F25AC24EF0075ED81 /* RunVariants.storyboard in Resources */,
+				CD2A95ED262D3BCF004279F0 /* ColormapPreview.xib in Resources */,
 				CD3F5E5822EE4DCD00E4CF20 /* Conditions.storyboard in Resources */,
 				CD70451B25F5533000A2F372 /* ParamSelector.storyboard in Resources */,
 				CD2D0DBB224385580012978E /* OutputSetup.storyboard in Resources */,
@@ -1035,6 +1049,7 @@
 				CD18A660254FCB1C00B06C10 /* ParameterID.swift in Sources */,
 				CDE2B5A324C2C71D002026E0 /* AnalysisProgressReporter.swift in Sources */,
 				CD410CF72444239700AB49DE /* CorePlotExtensions.swift in Sources */,
+				CD2A95FF262FBEC0004279F0 /* CustomPopUpButton.swift in Sources */,
 				CDE2B5A424C2C71D002026E0 /* Analysis.swift in Sources */,
 				CD6E0BA22436DEC7008D1656 /* TZStoryboard.swift in Sources */,
 				CDE2B59E24C2C718002026E0 /* TZPhase.swift in Sources */,
@@ -1080,6 +1095,7 @@
 				CD59C54423E79449001D98D5 /* InitStateViewController.swift in Sources */,
 				CD11FA8723408173001A3695 /* AddOutputViewController.swift in Sources */,
 				CD70458E2606C2FD00A2F372 /* TZPlot.swift in Sources */,
+				CD2A95E9262BEBA5004279F0 /* GlobalPlotPreview.swift in Sources */,
 				CD28477722FF9C8800D192A9 /* CollapsibleGridView.swift in Sources */,
 				CDE2B5C124C2C729002026E0 /* TZPlotType.swift in Sources */,
 				CDE2B5BE24C2C729002026E0 /* OutputDataSet.swift in Sources */,

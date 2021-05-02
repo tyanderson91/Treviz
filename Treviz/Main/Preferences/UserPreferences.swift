@@ -217,13 +217,17 @@ extension AppDelegate: PlotPreferencesGetter {
         TZPlot.preferencesGetter = self
         
         let defaults = UserDefaults.standard
-        // System defaults
+        // MARK: System defaults
+        
+        // Set colors
         let bgColor = try! NSKeyedArchiver.archivedData(withRootObject: NSColor(deviceWhite: 0.95, alpha: 1.0), requiringSecureCoding: false)
         let lineColor = try! NSKeyedArchiver.archivedData(withRootObject: NSColor(deviceWhite: 0.0, alpha: 1.0), requiringSecureCoding: false)
         let markerColor = lineColor
         let axesColor = lineColor
         let majorGridlineColor = try! NSKeyedArchiver.archivedData(withRootObject: NSColor(deviceWhite: 0.5, alpha: 1.0), requiringSecureCoding: false)
         let minorGridlineColor = try! NSKeyedArchiver.archivedData(withRootObject: NSColor(deviceWhite: 0.75, alpha: 1.0), requiringSecureCoding: false)
+        
+        // Register defaults
         defaults.register(defaults: [.colorMap: "okabe",
                                      .mainLineColor: lineColor,
                                      .mainLineWidth: 3.0,

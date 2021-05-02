@@ -84,6 +84,16 @@
                 return CGColor(red: newRed, green: newGreen, blue: newBlue, alpha: 1.0)
             }
         }
+        subscript(index: Int, total: Int)->CGColor?{
+            if isContinuous {
+                let colorPct: Float = Float(index)/Float(total-1)
+                return self[colorPct] ?? CGColor.black
+            } else {
+                let color_index = index % (colors.count)
+                return self[color_index]!
+            }
+        }
+        
         
         // MARK: Codable
         enum CodingKeys: CodingKey {

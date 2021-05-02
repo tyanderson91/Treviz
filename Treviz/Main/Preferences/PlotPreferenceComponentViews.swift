@@ -154,73 +154,6 @@ extension CGPoint {
         self.init(x: newX, y: newY)
     }
 }
-class ColormapPopUpButton: NSPopUpButton {
-    var colormap: ColorMap!
-    var preview: ColormapPreview!
-    
-    var didChangeMap: ()->() = {} // Closure for setting line style in the superclass
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        self.target = self
-        self.action = #selector(self.didUpdate)
-    }
-
-    @objc func didUpdate(){
-        let newItem = self.titleOfSelectedItem ?? ""
-        guard let newColormap = ColorMap.allMaps.first(where: {$0.name == newItem})
-        else { return }
-        colormap = newColormap
-        preview.colormap = self.colormap
-        preview.needsDisplay = true
-        didChangeMap()
-    }
-    func updateSelection() {
-        self.selectItem(withTitle: colormap.name)
-        preview.colormap = self.colormap
-        preview.needsDisplay = true
-    }
-}
-
-class ColormapPreview: NSView {
-    var colormap: ColorMap!
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-    
-    override func draw(_ dirtyRect: NSRect) {
-        let insetRect = dirtyRect.insetBy(dx: 5.0, dy: 5.0)
-        let centerCutout: CGFloat = 0.1
-        let nWedges = colormap.colors.count
-        let wedgeAngle = -CGFloat(2*PI/Double(nWedges))
-        let x0 = insetRect.midX
-        let y0 = insetRect.midY
-        let rad = insetRect.height/2.0
-        let center = CGPoint(x: x0, y: y0)
-        
-        
-        guard let context = NSGraphicsContext.current?.cgContext else { return }
-        var angle: CGFloat = CGFloat(PI/2)
-        context.move(to: CGPoint(x: x0, y: y0-rad))
-
-        for thisColor in colormap.colors {
-            let path = CGMutablePath()
-            let point1 = context.currentPointOfPath
-            path.addRelativeArc(center: center, radius: rad, startAngle: angle, delta: wedgeAngle)
-            let point2 = path.currentPoint
-            let point3 = CGPoint(point1: point2, point2: center, pct: (1-centerCutout))
-            path.addLine(to: point3)
-            path.addRelativeArc(center: center, radius: rad*centerCutout, startAngle: angle+wedgeAngle, delta: -wedgeAngle)
-            path.addLine(to: point1)
-            context.addPath(path)
-            context.setFillColor(thisColor)
-            context.drawPath(using: .fill)
-            context.move(to: point2)
-            angle = angle + wedgeAngle
-        }
-    }
-}
 
 class SymbolStyleButton: NSButton {
     var symbolStyle: TZMarkerStyle!
@@ -314,5 +247,235 @@ class SymbolStyleVC: NSViewController {
     
     @IBAction func didSelectShape(_ sender: NSPopUpButton) {
         symbolShape = TZPlotSymbol.allCases[sender.indexOfSelectedItem]
+    }
+}
+
+// MARK: Colormap selector stuff
+class ColormapPopUpButton: NSPopUpButton {
+    var colormap: ColorMap! {
+        didSet {
+            if let cmapCell = self.cell as? ColormapPopupButtonCell {
+                cmapCell.colormap = colormap
+            }
+        }
+    }
+    var preview: ColormapPreview!
+    
+    var didChangeMap: ()->() = {} // Closure for setting line style in the superclass
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        self.target = self
+        self.action = #selector(self.didUpdate)
+    }
+
+    @objc func didUpdate(){
+        let newItem = self.titleOfSelectedItem ?? ""
+        guard let newColormap = ColorMap.allMaps.first(where: {$0.name == newItem})
+        else { return }
+        colormap = newColormap
+        preview?.colormap = self.colormap
+        preview?.needsDisplay = true
+        didChangeMap()
+    }
+    func updateSelection() {
+        self.selectItem(withTitle: colormap.name)
+        preview?.colormap = self.colormap
+        preview?.needsDisplay = true
+    }
+    
+    override func willOpenMenu(_ menu: NSMenu, with event: NSEvent) {
+        super.willOpenMenu(menu, with: event)
+    }
+}
+
+class ColormapPopupButtonCell: NSPopUpButtonCell {
+    var colormap: ColorMap! {
+        didSet {
+            preview?.colormap = colormap
+            preview.needsDisplay = true
+            preview.setTextMode(on: false)
+            preview.previewBox.needsDisplay = true
+        }
+    }
+    var preview: ColormapPreview!
+    
+    required init(coder: NSCoder) {
+        super.init(coder: coder)
+        preview = ColormapPreview.createFromNib()
+        //preview.previewBoxSizeConstraint.constant = 15.0
+        controlView?.addSubview(preview)
+        preview.setTextMode(on: false)
+        self.title = ""
+    }
+    
+    override func draw(withFrame cellFrame: NSRect, in controlView: NSView) {
+        self.title = ""
+        //self.stringValue = ""
+        super.draw(withFrame: cellFrame, in: controlView)
+        preview.colormap = colormap
+        //preview.previewBoxSizeConstraint.constant = 15.0
+        //preview.needsLayout = true
+        let safeArea = controlView.safeAreaRect.insetBy(dx: 1.0, dy: 1.0)
+        //preview.setTextMode(on: false)
+        preview.draw(safeArea)
+    }
+}
+
+class ColormapPreviewCircle: NSView {
+    var colormap: ColorMap!
+    
+    override func draw(_ dirtyRect: NSRect) {
+        guard colormap != nil else { return }
+        let insetRect = dirtyRect
+        let centerCutout: CGFloat = 0.4
+        let nWedges = colormap.colors.count
+        let wedgeAngle = -CGFloat(2*PI/Double(nWedges))
+        let x0 = insetRect.midX
+        let y0 = insetRect.midY
+        let rad = insetRect.height/2.0
+        let center = CGPoint(x: x0, y: y0)
+        
+        
+        guard let context = NSGraphicsContext.current?.cgContext else { return }
+        var angle: CGFloat = CGFloat(PI/2)
+        context.move(to: CGPoint(x: x0, y: y0-rad))
+
+        for thisColor in colormap.colors {
+            let path = CGMutablePath()
+            let point1 = context.currentPointOfPath
+            path.addRelativeArc(center: center, radius: rad, startAngle: angle, delta: wedgeAngle)
+            let point2 = path.currentPoint
+            let point3 = CGPoint(point1: point2, point2: center, pct: (1-centerCutout))
+            path.addLine(to: point3)
+            path.addRelativeArc(center: center, radius: rad*centerCutout, startAngle: angle+wedgeAngle, delta: -wedgeAngle)
+            path.addLine(to: point1)
+            context.addPath(path)
+            context.setFillColor(thisColor)
+            context.drawPath(using: .fill)
+            context.move(to: point2)
+            angle = angle + wedgeAngle
+        }
+    }
+}
+
+class ColormapPreview: NSView, NibLoadable {
+    
+    var colormap: ColorMap! {
+        didSet { previewBox?.colormap = colormap
+            label?.stringValue = colormap.name
+        }
+    }
+    var includeText: Bool = true
+    @IBOutlet weak var previewBox: ColormapPreviewCircle!
+    @IBOutlet weak var previewBoxSizeConstraint: NSLayoutConstraint!
+    @IBOutlet weak var label: NSTextField!
+    @IBOutlet weak var previewBoxLeftConstraint: NSLayoutConstraint!
+    @IBOutlet weak var previewBoxTrailingConstraint: NSLayoutConstraint!
+    let defaultTrailingConstraint: CGFloat = 71.0
+    
+    
+    private var effectView: NSVisualEffectView!
+    var menuItem: NSMenuItem? { return enclosingMenuItem }
+    var enclosingMenu: NSMenu? { return menuItem?.menu }
+    
+    override init(frame: NSRect) {
+        effectView = NSVisualEffectView()
+        effectView.state = .active
+        effectView.material = .selection
+        effectView.isEmphasized = true
+        effectView.blendingMode = .behindWindow
+
+        super.init(frame: frame)
+        addSubview(effectView)
+        effectView.frame = bounds
+    }
+
+    func setTextMode(on: Bool){
+        if on {
+            label?.stringValue = colormap.name
+            previewBoxTrailingConstraint.constant = defaultTrailingConstraint
+        } else {
+            label.stringValue = ""
+            previewBoxTrailingConstraint?.constant = previewBoxLeftConstraint.constant
+        }
+        self.layout()
+        self.needsDisplay = true
+    }
+    required init?(coder decoder: NSCoder) {
+        effectView = NSVisualEffectView()
+        effectView.state = .active
+        effectView.material = .selection
+        effectView.isEmphasized = true
+        effectView.blendingMode = .behindWindow
+
+        super.init(coder: decoder)
+        addSubview(effectView, positioned: .below, relativeTo: previewBox)
+        effectView.frame = bounds
+    }
+    
+    override func draw(_ dirtyRect: NSRect) {
+        if effectView != nil {
+            effectView.isHidden = !(enclosingMenuItem?.isHighlighted ?? false)
+        }
+        guard label != nil, previewBox != nil else { return }
+    }
+    
+    override func mouseEntered(with event: NSEvent) {
+        guard enclosingMenu != nil else {return}
+        enclosingMenu!.items.forEach({$0.state = .off})
+    }
+    
+    override func mouseExited(with event: NSEvent) {
+        needsDisplay = true
+        enclosingMenuItem?.state = .off
+    }
+
+    override func mouseUp(with event: NSEvent) {
+        guard enclosingMenu != nil else {return}
+        enclosingMenu!.cancelTracking()
+        enclosingMenu!.performActionForItem(at: enclosingMenu!.index(of: menuItem!))
+        //menu.performActionForItemAtIndex(menu.indexOfItem: self.enclosingmenuItem)
+    }
+}
+
+class ColorMapMenuItem: NSMenuItem {
+    var colormap: ColorMap!
+    override init(title string: String, action selector: Selector?, keyEquivalent charCode: String) {
+        super.init(title: string, action: selector, keyEquivalent: charCode)
+    }
+    convenience init(colormap cmapIn: ColorMap) {
+        self.init(title: cmapIn.name, action: nil, keyEquivalent: "")
+        colormap = cmapIn
+        let newView = ColormapPreview.createFromNib()
+        newView.colormap = colormap
+        newView.label.stringValue = title
+        self.view = newView
+    }
+    required init(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
+}
+
+// For views that can be loaded from nib file
+protocol NibLoadable {
+    // Name of the nib file
+    static var nibName: String { get }
+    static func createFromNib(in bundle: Bundle) -> Self
+}
+
+extension NibLoadable where Self: NSView {
+
+    // Default nib name must be same as class name
+    static var nibName: String {
+        return String(describing: Self.self)
+    }
+
+    static func createFromNib(in bundle: Bundle = Bundle.main) -> Self {
+        var topLevelArray: NSArray? = nil
+        bundle.loadNibNamed(NSNib.Name(nibName), owner: self, topLevelObjects: &topLevelArray)
+        let views = Array<Any>(topLevelArray!).filter { $0 is Self }
+        return views.last as! Self
     }
 }

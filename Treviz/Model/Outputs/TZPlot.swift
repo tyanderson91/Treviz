@@ -86,6 +86,12 @@ extension SymbolSet {
         return strnames.joined(separator: ", ")
     }
     static var allSets: [SymbolSet] = []
+    subscript(at index: Int)->TZPlotSymbol {
+        if self.count == 0 { return .none }
+        else {
+            return self[index % self.count]
+        }
+    }
 }
 
 /**

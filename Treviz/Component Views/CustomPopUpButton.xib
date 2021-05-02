@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="PlotPreferencesViewController" customModule="Treviz" customModuleProvider="target"/>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView identifier="colormapPreview" id="c22-O7-iKe" customClass="CustomPopUpButton" customModule="Treviz" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="200" height="40"/>
+            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="oYE-TA-UL6">
+                    <rect key="frame" x="38" y="12" width="164" height="16"/>
+                    <textFieldCell key="cell" lineBreakMode="truncatingTail" alignment="left" title="Label" usesSingleLineMode="YES" id="uk7-1E-RPz">
+                        <font key="font" usesAppearanceFont="YES"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="HDr-eQ-U5z" userLabel="Image Box">
+                    <rect key="frame" x="5" y="5" width="30" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="SAr-uc-zgX"/>
+                        <constraint firstAttribute="width" secondItem="HDr-eQ-U5z" secondAttribute="height" multiplier="1:1" id="ahm-lK-Jzl"/>
+                    </constraints>
+                </customView>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="oYE-TA-UL6" secondAttribute="trailing" id="0Wg-Xv-R7d"/>
+                <constraint firstAttribute="bottom" secondItem="HDr-eQ-U5z" secondAttribute="bottom" constant="5" id="1Nd-6z-xS0"/>
+                <constraint firstItem="HDr-eQ-U5z" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="5" id="Jq7-iB-vy0"/>
+                <constraint firstItem="HDr-eQ-U5z" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="5" id="KTn-Nw-TcA"/>
+                <constraint firstItem="oYE-TA-UL6" firstAttribute="centerY" secondItem="c22-O7-iKe" secondAttribute="centerY" id="gS5-3q-RFV"/>
+                <constraint firstItem="oYE-TA-UL6" firstAttribute="leading" secondItem="HDr-eQ-U5z" secondAttribute="trailing" constant="5" id="xSS-Ad-nPh"/>
+            </constraints>
+            <connections>
+                <outlet property="imageBoxView" destination="HDr-eQ-U5z" id="U5C-A7-Cxs"/>
+                <outlet property="label" destination="oYE-TA-UL6" id="Ztb-2W-ox7"/>
+                <outlet property="previewBox" destination="HDr-eQ-U5z" id="PeJ-KZ-UTA"/>
+                <outlet property="previewBoxSizeConstraint" destination="SAr-uc-zgX" id="9MO-Vd-vvb"/>
+            </connections>
+            <point key="canvasLocation" x="44" y="119.5"/>
+        </customView>
+    </objects>
+</document>
