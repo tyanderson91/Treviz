@@ -174,9 +174,22 @@ class InitStateViewController: PhasedViewController, NSOutlineViewDelegate, NSOu
     
     @IBAction func editUnits(_ sender: NSTextField) {
         let curRow = outlineView.row(for: sender)
-        if let thisParam = outlineView.item(atRow: curRow) as? Variable{
-            thisParam.units = sender.stringValue
-            inputsViewController?.reloadParams()
+        guard let thisParam = outlineView.item(atRow: curRow) as? Variable else { return }
+        if let thisUnit = Unit.fromString(stringSymbol: sender.stringValue) {
+            if let oldDim = thisParam.units as? Dimension, let newDim = thisUnit as? Dimension { // Convert the value
+                guard (oldDim as? TZDim)?.unitType() == (newDim as? TZDim)?.unitType()
+                else {
+                    sender.stringValue = thisParam.units.symbol
+                    return } // Make sure the types are the same
+                let oldVal = Measurement(value: thisParam.value[0], unit: oldDim)
+                let newVal = oldVal.converted(to: newDim)
+                thisParam.value[0] = newVal.value; thisParam.units = thisUnit
+            } else {
+                thisParam.units = thisUnit
+            }
+            outlineView.reloadData(forRowIndexes: IndexSet(integer: curRow), columnIndexes: IndexSet(integersIn: 0...outlineView.numberOfColumns-1))
+        } else {
+            sender.stringValue = thisParam.units.symbol
         }
     }
     

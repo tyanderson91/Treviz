@@ -11,8 +11,8 @@
         "useAdaptiveTimestep" : true,
         "timestep" : 0.123,
         "maxTimestep" : 0.5,
-        "propagator" : "rungeKutta4",
-        "minTimestep" : 0.10000000000000001
+        "propagator" : "Runge-Kutta",
+        "minTimestep" : 0.1
       },
       "Initial Variables" : [
 
@@ -25,7 +25,7 @@
       "singleConditions" : [
         {
           "varID" : "y",
-          "ubound" : -0.10000000000000001
+          "ubound" : -0.1
         }
       ],
       "name" : "Ground Impact",

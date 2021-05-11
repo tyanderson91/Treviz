@@ -15,24 +15,24 @@ class StateTests: XCTestCase {
     let phase = TZPhase(id: "phase1")
     
     override func setUpWithError() throws {
-        let t = Variable("t", named: "time", symbol: "t", units: "s")
+        let t = Variable("t", named: "time", symbol: "t", unitSymbol: "s")
         t.value = (0...9).map { VarValue($0) }
-        let x = Variable("x", named: "X Position", symbol: "x", units: "m")
+        let x = Variable("x", named: "X Position", symbol: "x", unitSymbol: "m")
         x.value = (0...9).map { 2*VarValue($0) }
-        let y = Variable("y", named: "Y Position", symbol:"y", units: "m")
+        let y = Variable("y", named: "Y Position", symbol:"y", unitSymbol: "m")
         y.value = [0, 4, 7, 10, 8, 5, -2, -5, -4, 1]
         state1 = State([t, x, y])
     }
 
     func testSubscript() throws {
         // Variable
-        let z = Variable("z", named: "Z position", symbol: "z", units: "m")
+        let z = Variable("z", named: "Z position", symbol: "z", unitSymbol: "m")
         z.value = Array(repeating: 0.0, count: 10)
         state1["z"] = z
         XCTAssert(state1["z"]!.id == "z")
         let y = state1["y"]!
         XCTAssert(y.name == "Y Position")
-        let newY = Variable("y", named: "Y Position2", symbol:"y2", units: "m")
+        let newY = Variable("y", named: "Y Position2", symbol:"y2", unitSymbol: "m")
         state1["y"] = newY
         XCTAssert(state1["y"]!.name == "Y Position2")
         XCTAssertNil(state1["dx"])

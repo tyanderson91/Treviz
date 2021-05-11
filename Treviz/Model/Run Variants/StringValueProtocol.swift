@@ -38,14 +38,14 @@ extension Int: StringValue {
 extension Bool: StringValue {
     var valuestr: String {
         if self == true {
-            return "True"
-        } else { return "False" }
+            return "true"
+        } else { return "false" }
     }
     init?(stringLiteral: String) {
         switch stringLiteral {
-        case "True", "On":
+        case "True","true","On":
             self.init(true)
-        case "False", "Off":
+        case "False","false","Off":
             self.init(false)
         default:
             return nil

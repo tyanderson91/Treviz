@@ -116,11 +116,11 @@ class ConditionsTest: XCTestCase {
     }
     
     func testMeetsSingleCondition() {
-        let t = Variable("t", named: "time", symbol: "t", units: "s")
+        let t = Variable("t", named: "time", symbol: "t", unitSymbol: "s")
         t.value = (0...9).map { VarValue($0) }
-        let x = Variable("x", named: "X Position", symbol: "x", units: "m")
+        let x = Variable("x", named: "X Position", symbol: "x", unitSymbol: "m")
         x.value = (0...9).map { 2*VarValue($0) }
-        let y = Variable("y", named: "Y Position", symbol:"y", units: "m")
+        let y = Variable("y", named: "Y Position", symbol:"y", unitSymbol: "m")
         y.value = [0, 4, 7, 10, 8, 5, -2, -5, -4, 1]
         //Test State functions
         let state = State([t, x, y])
@@ -172,11 +172,11 @@ class ConditionsTest: XCTestCase {
     }
     
     func testMeetsCondition(){
-        let t = Variable("t", named: "time", symbol: "t", units: "s")
+        let t = Variable("t", named: "time", symbol: "t", unitSymbol: "s")
         t.value = (0...9).map { VarValue($0) }
-        let x = Variable("x", named: "X Position", symbol: "x", units: "m")
+        let x = Variable("x", named: "X Position", symbol: "x", unitSymbol: "m")
         x.value = (0...9).map { 2*VarValue($0) }
-        let y = Variable("y", named: "Y Position", symbol:"y", units: "m")
+        let y = Variable("y", named: "Y Position", symbol:"y", unitSymbol: "m")
         y.value = [0, 4, 7, 10, 8, 5, -2, -5, -4, 1]
         let state = State([t, x, y])
 

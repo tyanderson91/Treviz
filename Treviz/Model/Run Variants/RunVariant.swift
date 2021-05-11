@@ -15,9 +15,9 @@ enum DistributionType: String, CaseIterable {
     func summary(runVariant: MCRunVariant)->String{
         switch self {
         case .normal:
-            return "𝐍(\(runVariant.mean?.valuestr ?? "?"),\(runVariant.sigma?.valuestr ?? "?")"
+            return "𝐍(\(runVariant.mean?.valuestr ?? "?"),\(runVariant.sigma?.valuestr ?? "?"))"
         case .uniform:
-            return "𝐔(\(runVariant.min?.valuestr ?? "?"),\(runVariant.max?.valuestr ?? "?")"
+            return "𝐔(\(runVariant.min?.valuestr ?? "?"),\(runVariant.max?.valuestr ?? "?"))"
         }
     }
 }
@@ -66,10 +66,14 @@ protocol MCRunVariant {
     var paramID: ParamID {get}
     func randomValue(seed: Double?)->VarValue
     var distributionType: DistributionType {get set}
+    var distributionSummary: String {get}
     var mean: VarValue? {get set}
     var sigma: VarValue? {get set}
     var min: VarValue? {get set}
     var max: VarValue? {get set}
+}
+extension MCRunVariant {
+    var distributionSummary: String { return distributionType.summary(runVariant: self) }
 }
 
 extension Analysis {
@@ -135,7 +139,7 @@ class RunVariant: Codable {
     }
     
     //MARK: Codable
-    enum VariantTypeKeys: String, CodingKey {
+    enum VariantTypeKeys: String, CodingKey, Encodable {
         case mc = "MC Variants"
         case single = "Single Variants"
         case trade = "Trade Variants"
@@ -175,10 +179,13 @@ class RunVariant: Codable {
     }
     
     func encode(to encoder: Encoder) throws {
+        let simpleIO = encoder.userInfo[.simpleIOKey] as? Bool ?? false
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(paramID, forKey: .paramID)
         try container.encode(curValue.valuestr, forKey: .nominal)
-        try container.encode(variantType.rawValue.lowercased(), forKey: .variantType)
+        if !simpleIO {
+            try container.encode(variantType.rawValue.lowercased(), forKey: .variantType)
+        }
     }
 }
 
@@ -221,10 +228,10 @@ class VariableRunVariant: RunVariant, MCRunVariant {
     override func encode(to encoder: Encoder) throws {
         try super.encode(to: encoder)
         var container = encoder.container(keyedBy: VariableCodingKeys.self)
-        try container.encode(min, forKey: .min)
-        try container.encode(max, forKey: .max)
-        try container.encode(mean, forKey: .mean)
-        try container.encode(sigma, forKey: .sigma)
+        if min != nil {try container.encode(min, forKey: .min)}
+        if max != nil {try container.encode(max, forKey: .max)}
+        if mean != nil {try container.encode(mean, forKey: .mean)}
+        if sigma != nil {try container.encode(sigma, forKey: .sigma)}
         
         var categoryContainer = encoder.container(keyedBy: CodingKeys.self)
         try categoryContainer.encode(CategoryKey.variable, forKey: .category)
@@ -327,6 +334,11 @@ class BoolRunVariant: RunVariant {
         guard let curBoolParam = param as? BoolParam else { return nil }
         super.init(param: curBoolParam)
     }
+    override func setValue(from string: String) {
+        guard let newVal = Bool.init(stringLiteral: string) else { return }
+        (parameter as? BoolParam)?.value = newVal
+    }
+    
     //MARK: Codable
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)

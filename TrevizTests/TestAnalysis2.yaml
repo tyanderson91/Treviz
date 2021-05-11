@@ -14,22 +14,19 @@ Physics Settings:
   physicsModel: Flat Surface, 3D
   vehiclePointMass: true
 Run Variants:
-- paramID: default.physicsModel
-  nominal: Flat Surface, 3D
-  variantType: mc
-  category: enumeration
-- paramID: default.dt
-  nominal: 0.1
-  variantType: mc
-  category: number
-- paramID: default.adaptivedt
-  nominal: False
-  variantType: mc
-  category: boolean
-- paramID: default.dtmin
-  nominal: 2
-  variantType: mc
-  category: number
+  Trade Variants:
+  - paramID: default.physicsModel
+    nominal: Flat Surface, 3D
+    category: enumeration
+  - paramID: default.dt
+    nominal: 0.1
+    category: number
+  - paramID: default.adaptivedt
+    nominal: False
+    category: boolean
+  - paramID: default.dtmin
+    nominal: 2
+    category: number
 Outputs:
 - id: 1
   title: X pos

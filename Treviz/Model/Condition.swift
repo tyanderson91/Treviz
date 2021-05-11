@@ -372,7 +372,7 @@ class Condition : EvaluateCondition, Codable {
     @objc var name : String = ""
     var conditions : [EvaluateCondition] = []
     var unionType : BoolType = .single
-    var meetsCondition : [Bool]? // TODO: Move this out of the Conditions object?
+    var meetsCondition : [Bool]?
     var meetsConditionIndex : [Int] { // Converts array of bools into indices
         var i = 0
         var indices = [Int]()
@@ -463,7 +463,7 @@ class Condition : EvaluateCondition, Codable {
     
     func encode(to encoder: Encoder) throws {
         let simpleIO : Bool = encoder.userInfo[.simpleIOKey] as? Bool ?? false
-        let deepCopy : Bool = encoder.userInfo[.deepCopyKey] as? Bool ?? false // whether to encode the whole condition, or just a referenc
+        let deepCopy : Bool = encoder.userInfo[.deepCopyKey] as? Bool ?? false // whether to encode the whole condition, or just a reference
         
         let singleConditions = conditions.filter { $0 is SingleCondition } as? [SingleCondition] ?? []
         let conds = conditions.filter { $0 is Condition } as? [Condition] ?? []

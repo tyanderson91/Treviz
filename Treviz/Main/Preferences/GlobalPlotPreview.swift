@@ -78,7 +78,7 @@ class GlobalPlotPreview: NSObject, PlotPreviewDisplay, CPTPlotSpaceDelegate {
         xaxis = axisSet.axes![0] as! CPTXYAxis
         xaxis.labelingPolicy = .automatic
         xaxis.axisConstraints = CPTConstraints(relativeOffset: 0.00)
-        xaxis.title = "Abcissa (units)"
+        xaxis.title = "X Variable (units)"
         xaxis.titleOffset = graph.titleTextStyle!.fontSize * CGFloat(2.5)
 
         yaxis = axisSet.axes![1] as! CPTXYAxis
@@ -86,7 +86,7 @@ class GlobalPlotPreview: NSObject, PlotPreviewDisplay, CPTPlotSpaceDelegate {
         yaxis.axisConstraints = CPTConstraints(relativeOffset: 0.00)
         yaxis.minorTickLabelRotation = CGFloat(PI/2)
         yaxis.labelRotation = CGFloat(PI/2)
-        yaxis.title = "Ordinate (units)"
+        yaxis.title = "Y Variable (units)"
         yaxis.titleOffset = graph.titleTextStyle!.fontSize * CGFloat(2.5)
         
         // Scatter Plots
@@ -250,6 +250,7 @@ class LinesPreviewDelegate: NSObject, CPTScatterPlotDelegate, CPTScatterPlotData
             if isMC {
                 newLineStyle.lineColor = newLineStyle.lineColor?.withAlphaComponent(prefs.mcOpacity)
             }
+            scatterPlots.first?.dataLineStyle = newLineStyle // Swatch
             curPlots.forEach({$0.dataLineStyle = newLineStyle})
             let symbolPlots = scatterPlots.filter({($0.identifier as? PreviewPlotID)?.mcID == -2})
             symbolPlots.forEach({

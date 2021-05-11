@@ -67,7 +67,7 @@ class Analysis: NSObject, Codable {
         }
         return tempSettings
     }
-    var parameters : [Parameter] { //TODO: this should contain more than just input settings
+    var activeParameters : [Parameter] { //TODO: this should contain more than just input settings
         return inputSettings.filter {$0.isParam}
     }
     @objc var plots : [TZOutput] = []
@@ -143,8 +143,8 @@ class Analysis: NSObject, Codable {
     func isValid() throws {
         try phases.forEach { try $0.isValid() }
     }
-    // MARK: Codable implementation
     
+    // MARK: Codable implementation
     enum CodingKeys: String, CodingKey {
         case analysisName
         case conditions = "Conditions"
@@ -153,7 +153,6 @@ class Analysis: NSObject, Codable {
         case runVariants = "Run Variants"
     }
     
-
     required init(from decoder: Decoder) throws {
         super.init()
         let simpleIO : Bool = decoder.userInfo[.simpleIOKey] as? Bool ?? false
@@ -196,13 +195,18 @@ class Analysis: NSObject, Codable {
             do {
             if simpleIO {
                 let allRunVariants = try container.nestedContainer(keyedBy: RunVariant.VariantTypeKeys.self, forKey: .runVariants)
-
-                var singleRunVariants = try allRunVariants.nestedUnkeyedContainer(forKey: .single)
-                var mcRunVariants = try allRunVariants.nestedUnkeyedContainer(forKey: .mc)
-                var tradeRunVariants = try allRunVariants.nestedUnkeyedContainer(forKey: .trade)
-                try processVariantType(curRunVariants: &singleRunVariants, type: .single, simpleIO: true)
-                try processVariantType(curRunVariants: &mcRunVariants, type: .montecarlo, simpleIO: true)
-                try processVariantType(curRunVariants: &tradeRunVariants, type: .trade, simpleIO: true)
+                if allRunVariants.contains(.single) {
+                    var singleRunVariants = try allRunVariants.nestedUnkeyedContainer(forKey: .single)
+                    try processVariantType(curRunVariants: &singleRunVariants, type: .single, simpleIO: true)
+                }
+                if allRunVariants.contains(.mc) {
+                    var mcRunVariants = try allRunVariants.nestedUnkeyedContainer(forKey: .mc)
+                    try processVariantType(curRunVariants: &mcRunVariants, type: .montecarlo, simpleIO: true)
+                }
+                if allRunVariants.contains(.trade) {
+                    var tradeRunVariants = try allRunVariants.nestedUnkeyedContainer(forKey: .trade)
+                    try processVariantType(curRunVariants: &tradeRunVariants, type: .trade, simpleIO: true)
+                }
             } else {
                 var allRunVariants = try container.nestedUnkeyedContainer(forKey: .runVariants)
                 try processVariantType(curRunVariants: &allRunVariants, type: nil, simpleIO: false)
@@ -268,7 +272,21 @@ class Analysis: NSObject, Codable {
         }
         
         if runVariants.count > 0 {
-            try container.encode(runVariants, forKey: .runVariants)
+            if simpleIO { // TODO: Figure the best way to write inactive run variants
+                var newContainer = container.nestedContainer(keyedBy: RunVariant.VariantTypeKeys.self, forKey: .runVariants)
+                if mcRunVariants.count > 0 {
+                    try newContainer.encode(mcRunVariants as? [RunVariant], forKey: .mc)
+                }
+                if tradeRunVariants.count > 0 {
+                    try newContainer.encode(tradeRunVariants, forKey: .trade)
+                }
+                let singleRunVariants = runVariants.filter({$0.variantType == .single})
+                if singleRunVariants.count > 0 {
+                    try newContainer.encode(singleRunVariants, forKey: .single)
+                }
+            } else {
+                try container.encode(runVariants, forKey: .runVariants)
+            }
         }
         
         try container.encode(plots, forKey: .plots)

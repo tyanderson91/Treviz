@@ -13,22 +13,7 @@ import Yams
  This suite of tests provides an end-to-end verification of accuracy of tests for various types of analyses
  */
 class AnalysisTests: XCTestCase {
-    /*
-    func loadFromYaml(file: String)->Analysis{
-        do {
-            let bundle = Bundle(for: type(of: self))
-            let filePath = bundle.url(forResource: file, withExtension: "yaml")!
-            let data = try Data(contentsOf: filePath)
-            let decoder = Yams.YAMLDecoder(encoding: .utf8)
-            let userOptions : [CodingUserInfoKey : Any] = [.simpleIOKey: true]
-            if let stryaml = String(data: data, encoding: String.Encoding.utf8) {
-                let analysis = try decoder.decode(Analysis.self, from: stryaml, userInfo: userOptions)
-                return analysis
-            }
-        } catch {XCTFail()}
-        return Analysis()
-    }*/
-    
+
     var analysis_2d = Analysis()
     override func setUpWithError() throws {
         analysis_2d = Analysis.initFromYaml(file: "TestAnalysis1", self: self)
@@ -86,13 +71,22 @@ class AnalysisTests: XCTestCase {
         XCTAssertEqual(strYamlIn, strYamlOut)
         let dataOut = strYamlOut.data(using: .utf8)
         XCTAssertEqual(dataIn, dataOut)
+        
+        // JSON
+        let jsonEncoder = JSONEncoder()
+        let jsonData = try jsonEncoder.encode(analysis)
+        let jsonDecoder = JSONDecoder()
+        let newAnalysis = try jsonDecoder.decode(Analysis.self, from: jsonData)
+        let yamlEncoder = Yams.YAMLEncoder()
+        let yamlFromJson = try yamlEncoder.encode(newAnalysis, userInfo: userOptions)
+        XCTAssertEqual(strYamlIn, yamlFromJson)
     }
     
     func testGetParameters() throws {
         let analysis = Analysis.initFromYaml(file: "TestAnalysis2", self: self)
         XCTAssertTrue(analysis.inputSettings.contains(where: {$0.id == "default.x"}))
-        XCTAssertTrue(analysis.parameters.contains(where: {$0.id == "default.physicsModel"}))
-        XCTAssertFalse(analysis.parameters.contains(where: {$0.id == "default.x"}))
+        XCTAssertTrue(analysis.activeParameters.contains(where: {$0.id == "default.physicsModel"}))
+        XCTAssertFalse(analysis.activeParameters.contains(where: {$0.id == "default.x"}))
     }
     
     func testIsValid() throws {

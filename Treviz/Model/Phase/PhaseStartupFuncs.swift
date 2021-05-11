@@ -26,20 +26,17 @@ extension TZPhase {
             guard let dict = thisVar as? NSDictionary else { return []}
             guard let varid = dict["id"] as? ParamID else { continue }
             if requiredVarIDs.contains(varid) {
-                let newVar = Variable(varid, named: dict["name"] as! String, symbol: dict["symbol"] as! String)
-                newVar.units = dict["units"] as! String
+                let newVar = Variable(varid, named: dict["name"] as! String, symbol: dict["symbol"] as! String, unitSymbol: dict["units"] as! String)
                 newVar.value = [0]
                 tempVarList.append(newVar)
             }
             else if requestedVarIDs.contains(varid) {
                 if let varCalculation = self.varCalculationsSingle[varid] {
-                    let newVar = StateCalcVariable(varid, named: dict["name"] as! String, symbol: dict["symbol"] as! String, units: dict["units"] as! String, calculation: varCalculation)
-                    newVar.units = dict["units"] as! String
+                    let newVar = StateCalcVariable(varid, named: dict["name"] as! String, symbol: dict["symbol"] as! String, unitSymbol: dict["units"] as! String, calculation: varCalculation)
                     newVar.value = [0]
                     tempVarList.append(newVar)
                 } else if let varCalculationMulti = self.varCalculationsMultiple[varid] {
-                    let newVar = StateCalcVariable(varid, named: dict["name"] as! String, symbol: dict["symbol"] as! String, units: dict["units"] as! String, calculation: varCalculationMulti)
-                    newVar.units = dict["units"] as! String
+                    let newVar = StateCalcVariable(varid, named: dict["name"] as! String, symbol: dict["symbol"] as! String, unitSymbol: dict["units"] as! String, calculation: varCalculationMulti)
                     newVar.value = [0]
                     tempVarList.append(newVar)
                 }

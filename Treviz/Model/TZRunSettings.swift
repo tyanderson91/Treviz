@@ -12,7 +12,6 @@ import Foundation
 enum PropagatorType: String, StringValue, CaseIterable {
     case explicit = "Explicit"
     case rungeKutta4 = "Runge-Kutta"
-    
     init?(stringLiteral: String) {
         self.init(rawValue: stringLiteral)
     }
@@ -99,7 +98,7 @@ class TZRunSettings: Codable {
         try container.encode(propagatorType.stringValue, forKey: .propagator)
         try container.encode(defaultTimestep.value, forKey: .timestep)
         try container.encode(useAdaptiveTimestep.value, forKey: .useAdaptiveTimestep)
-        if useAdaptiveTimestep.value {
+        if useAdaptiveTimestep.value { // TODO: Figure out if this should always be written out
             try container.encode(minTimestep.value, forKey: .minTimestep)
             try container.encode(maxTimestep.value, forKey: .maxTimestep)
         }

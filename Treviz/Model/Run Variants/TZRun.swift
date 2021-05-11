@@ -156,6 +156,7 @@ extension Analysis {
     }
     
     func createRunsFromVariants() {
+        // TODO: Assert all variants valid before doing this
         var tradeVariants = runVariants.filter({$0.variantType == .trade})
         var mcVariants = runVariants.filter({$0.variantType == .montecarlo && $0 is MCRunVariant}) as! [MCRunVariant]
         

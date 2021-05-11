@@ -13,6 +13,10 @@ enum ReturnCode: Int {
     case Success = 1
     case Failure = 2
 }
+
+enum PhaseError: Error {
+    case MissingTerminalCondition
+}
 /**
  A TZPhase is a defined section of an Analysis. It contains an initial condition (or delta-initial condition from the previous phase), a terminal condition, and all vehicle and runtime settings required to propagate
  */
@@ -58,6 +62,8 @@ class TZPhase: Codable {
     }
     
     func isValid() throws {
+        if terminalCondition == nil { throw PhaseError.MissingTerminalCondition }
+        // TODO: Add a lot more here
     }
     
     // MARK: Codable implementation
@@ -111,7 +117,6 @@ class TZPhase: Codable {
                 vehicle = Vehicle()// try container.decode(Vehicle.self, forKey: .vehicle)
             }
         }
-        
         inputSettings = varList // TODO: When more settings are introduced, expand this
         gatherParams()
     }

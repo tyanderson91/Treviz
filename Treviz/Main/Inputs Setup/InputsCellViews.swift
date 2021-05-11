@@ -45,7 +45,7 @@ extension InputsViewController{
         guard thisInput != nil else {return nil}
         let newView = view.makeView(withIdentifier: .unitsCellView, owner: self) as? NSTableCellView
         if let textField = newView?.textField{
-            let str = String(thisInput!.units)
+            let str = thisInput!.units.symbol
             textField.stringValue = str
         }
         return newView

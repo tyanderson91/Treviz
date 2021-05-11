@@ -29,7 +29,7 @@ extension RunVariant {
  */
 class RunVariantViewController: TZViewController {
     
-    var params : [Parameter] { return analysis.parameters }
+    var params : [Parameter] { return analysis.activeParameters }
     var runVariants: [RunVariant] { return analysis?.runVariants.filter({$0.isActive}) ?? [] }
     var inputsViewController: InputsViewController?
     @IBOutlet weak var numRunsTotalTextField: NSTextField!

@@ -21,7 +21,7 @@
         func interpolate(pct: CGFloat)->CGFloat? {
             if pct<=0.0 { return self.first }
             else if pct>=1.0 { return self.last }
-            let pcts = (0...self.count).map({ CGFloat($0) / CGFloat(self.count) })
+            let pcts = (0...self.count-1).map({ CGFloat($0) / CGFloat(self.count-1) })
             guard let base_index = pcts.lastIndex(where: {$0 <= pct} ) else { return nil}
             
             let v1 = self[base_index]

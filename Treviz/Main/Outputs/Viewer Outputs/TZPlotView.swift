@@ -150,7 +150,7 @@ class TZPlotView: NSObject, CPTScatterPlotDelegate, CPTScatterPlotDataSource, CP
         xaxis.axisLineStyle = axesLineStyle
         xaxis.majorGridLineStyle = majorGridLineStyle
         xaxis.minorGridLineStyle = minorGridLineStyle
-        xaxis.title = "\(String(describing: inputPlot.var1!.name)) (\(String(describing: inputPlot.var1!.units)))"
+        xaxis.title = "\(String(describing: inputPlot.var1!.name)) (\(String(describing: inputPlot.var1!.units.symbol)))"
         xaxis.titleOffset = graph.titleTextStyle!.fontSize * CGFloat(3)
 
         let yaxis = axisSet.axes![1] as! CPTXYAxis
@@ -160,7 +160,7 @@ class TZPlotView: NSObject, CPTScatterPlotDelegate, CPTScatterPlotDataSource, CP
         yaxis.axisLineStyle = axesLineStyle
         yaxis.majorGridLineStyle = majorGridLineStyle
         yaxis.minorGridLineStyle = minorGridLineStyle
-        yaxis.title = "\(String(describing: inputPlot.var2!.name)) (\(String(describing: inputPlot.var2!.units)))"
+        yaxis.title = "\(String(describing: inputPlot.var2!.name)) (\(String(describing: inputPlot.var2!.units.symbol)))"
         yaxis.titleOffset = graph.titleTextStyle!.fontSize * CGFloat(3.5)
         
         plotSpace.scale(toFitEntirePlots: graph.allPlots())

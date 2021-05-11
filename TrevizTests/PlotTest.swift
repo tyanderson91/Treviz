@@ -7,6 +7,7 @@
 //
 
 import XCTest
+@testable import TrajectoryAnalysis
 
 class PlotTest: XCTestCase {
 
@@ -18,9 +19,13 @@ class PlotTest: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testSymbolSet() throws {
+        let ss = SymbolSet([TZPlotSymbol.circle, TZPlotSymbol.diamond, TZPlotSymbol.hexagon])
+        let A = ss[0]
+        XCTAssertEqual(A, TZPlotSymbol.circle)
+        XCTAssertEqual(A.character(), "●")
+        XCTAssertEqual(ss[at: 2], TZPlotSymbol.hexagon)
+        XCTAssertEqual(ss[at: 3], TZPlotSymbol.circle)
     }
 
 }

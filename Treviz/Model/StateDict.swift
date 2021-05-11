@@ -70,7 +70,15 @@ struct StateDictArray: Collection, ExpressibleByDictionaryLiteral {
         for thisVar in state {
             //if curLen == nil { curlen = thisVar.value.count }
             //else if curlen! != thisVar.value.count { throw StateError.UnmatchingVarLength }
-            self[thisVar.id] = thisVar.value
+            var metricVal: [VarValue]
+            if let thisDim = thisVar.units as? TZDim {
+                metricVal = thisVar.value.map({
+                    return thisDim.convertToBase(val: $0)
+                })
+            } else {
+                metricVal = thisVar.value
+            }
+            self[thisVar.id] = metricVal
         } // All variables in the input State should have the same number of entries
     }
 

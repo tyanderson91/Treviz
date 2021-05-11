@@ -1,5 +1,5 @@
 //
-//  TestVariable.swift
+//  VariableTest.swift
 //  TrevizTests
 //
 //  Created by Tyler Anderson on 8/10/20.
@@ -9,7 +9,7 @@
 import XCTest
 @testable import TrajectoryAnalysis
 
-class TestVariable: XCTestCase {
+class VariableTest: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -44,7 +44,7 @@ class TestVariable: XCTestCase {
 
     // MARK: Variable
     func testSubscript() {
-        let timeVar = Variable("t", named: "time", symbol: "t", units: "s")
+        let timeVar = Variable("t", named: "time", symbol: "t", unitSymbol: "s")
         timeVar.value = [0,1,2]
         XCTAssert(timeVar[1] == 1)
         XCTAssertNil(timeVar[4])
@@ -54,7 +54,7 @@ class TestVariable: XCTestCase {
     }
     
     func testPhaseFuncs() {
-        let timeVar = Variable("t", named: "time", symbol: "t", units: "s")
+        let timeVar = Variable("t", named: "time", symbol: "t", unitSymbol: "s")
         let timeVar2 = timeVar.copyToPhase(phaseid: "phase1")
         XCTAssert(timeVar2.id == "phase1.t")
         var timeVar3 = timeVar2.copyToPhase(phaseid: "phase2")
@@ -75,6 +75,29 @@ class TestVariable: XCTestCase {
         let calcVar4 = calcVar3
         calcVar3.stripPhase()
         XCTAssertEqual(calcVar4, calcVar3)
+    }
+    
+    func testStringFuncs() {
+        let timeVar = Variable("t", named: "time", symbol: "t", unitSymbol: "s", value: [0])
+        timeVar.setValue(to: "4.1")
+        XCTAssertEqual(timeVar.value[0], 4.1)
+        XCTAssertEqual(timeVar.stringValue, "4.1")
+        XCTAssertEqual(timeVar.valueSetter(string: "4.0") as? VarValue, 4.0)
+        timeVar.setValue(to: "1")
+        XCTAssertEqual(timeVar.value[0], 1)
+        XCTAssertEqual(timeVar.stringValue, "1")
+    }
+    
+    func testCompare() {
+        let t1 = Variable("t", named: "time", symbol: "t", unitSymbol: "s", value: [1])
+        let t2 = Variable("t", named: "time", symbol: "t", unitSymbol: "s", value: [1])
+        XCTAssertEqual(t1, t2)
+        t2.value[0] = 0
+        XCTAssertNotEqual(t1, t2)
+        t2.value[0] = 1; t2.units = UnitDuration.days
+        XCTAssertNotEqual(t1, t2)
+        t2.units = UnitDuration.seconds
+        XCTAssertEqual(t1, t2)
     }
     
     // MARK: Calculated Variable

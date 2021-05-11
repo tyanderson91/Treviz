@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="BWH-wW-vxd">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="BWH-wW-vxd">
     <dependencies>
-        <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="18122"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -200,7 +199,6 @@
                                                                             </textFieldCell>
                                                                             <connections>
                                                                                 <action selector="editUnits:" target="QV5-fD-s1c" id="p6m-5e-1xb"/>
-                                                                                <binding destination="XMg-mg-lgj" name="value" keyPath="objectValue" id="f9u-8M-1qn"/>
                                                                             </connections>
                                                                         </textField>
                                                                     </subviews>
@@ -370,14 +368,6 @@
                                 <subviews>
                                     <gridView horizontalHuggingPriority="10" horizontalCompressionResistancePriority="900" xPlacement="fill" yPlacement="center" rowAlignment="none" rowSpacing="10" columnSpacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="tmg-lh-g64">
                                         <rect key="frame" x="10" y="7" width="313" height="271"/>
-                                        <backgroundFilters>
-                                            <ciFilter name="CIGaussianBlur">
-                                                <configuration>
-                                                    <null key="inputImage"/>
-                                                    <real key="inputRadius" value="10"/>
-                                                </configuration>
-                                            </ciFilter>
-                                        </backgroundFilters>
                                         <rows>
                                             <gridRow yPlacement="center" rowAlignment="firstBaseline" id="bGb-Yk-LGd"/>
                                             <gridRow id="TCC-fT-DHT"/>

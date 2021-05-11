@@ -23,7 +23,8 @@ class RunSettingsTest: XCTestCase {
         //YAML
         let newRunSettings = TZRunSettings()
         newRunSettings.defaultTimestep.value = 0.123
-        newRunSettings.propagatorType = .rungeKutta4
+        newRunSettings.propagatorType = EnumGroupParam(id: "propagatorType", name: "Propagator", enumType: PropagatorType.self)
+        newRunSettings.propagatorType.setValue(to: PropagatorType.rungeKutta4.rawValue)
         newRunSettings.minTimestep.value = 0.1
         newRunSettings.maxTimestep.value = 0.5
         newRunSettings.useAdaptiveTimestep.value = true

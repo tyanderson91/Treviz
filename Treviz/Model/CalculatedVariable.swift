@@ -23,14 +23,22 @@ class StateCalcVariable: Variable {
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
     }
-    init(_ idIn: ParamID, named nameIn: String = "", symbol symbolIn: String = "", units unitsIn: String = "", calculation calcIn: @escaping (inout StateDictSingle)->VarValue) {
+    init(_ idIn: ParamID, named nameIn: String, symbol symbolIn: String, units unitsIn: Unit, calculation calcIn: @escaping (inout StateDictSingle)->VarValue) {
         super.init(idIn, named: nameIn, symbol: symbolIn, units: unitsIn)
         singleStateCalculation = calcIn
         multiStateCalculation = defaultMultiStateCalc(singleStateCalculation)
     }
-    init(_ idIn: ParamID, named nameIn: String = "", symbol symbolIn: String = "", units unitsIn: String = "", calculation calcIn: @escaping (inout StateDictArray)->[VarValue]) {
+    init(_ idIn: ParamID, named nameIn: String, symbol symbolIn: String, units unitsIn: Unit, calculation calcIn: @escaping (inout StateDictArray)->[VarValue]) {
         super.init(idIn, named: nameIn, symbol: symbolIn, units: unitsIn)
         multiStateCalculation = calcIn
+    }
+    convenience init(_ idIn: ParamID, named nameIn: String = "", symbol symbolIn: String = "", unitSymbol unitsIn: String = "", calculation calcIn: @escaping (inout StateDictSingle)->VarValue) {
+        let unit = Unit.fromString(stringSymbol: unitsIn) ?? Unit(symbol: "")
+        self.init(idIn, named: nameIn, symbol: symbolIn, units: unit, calculation: calcIn)
+    }
+    convenience init(_ idIn: ParamID, named nameIn: String = "", symbol symbolIn: String = "", unitSymbol unitsIn: String = "", calculation calcIn: @escaping (inout StateDictArray)->[VarValue]) {
+        let unit = Unit.fromString(stringSymbol: unitsIn) ?? Unit(symbol: "")
+        self.init(idIn, named: nameIn, symbol: symbolIn, units: unit, calculation: calcIn)
     }
     
     /*

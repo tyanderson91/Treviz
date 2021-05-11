@@ -34,11 +34,11 @@ class StringValueTest: XCTestCase {
         testString = "True"
         var newBool = Bool(stringLiteral: testString)!
         XCTAssertTrue(newBool)
-        XCTAssertEqual(newBool.valuestr, "True")
+        XCTAssertEqual(newBool.valuestr, "true")
         testString = "False"
         newBool = Bool(stringLiteral: testString)!
         XCTAssertFalse(newBool)
-        XCTAssertEqual(newBool.valuestr, "False")
+        XCTAssertEqual(newBool.valuestr, "false")
         testString = "On"
         newBool = Bool(stringLiteral: testString)!
         XCTAssertTrue(newBool)

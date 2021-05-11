@@ -35,7 +35,7 @@ extension TZPhase {
             case .explicit:
                 newState = self.equationsOfMotion(curState: curstate, dt: dt)
             case .rungeKutta4:
-                newState = curstate
+                newState = self.equationsOfMotion(curState: curstate, dt: dt)
             }
             i += 1
             self.traj.append(newState)
