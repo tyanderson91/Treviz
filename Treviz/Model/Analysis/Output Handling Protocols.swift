@@ -20,3 +20,6 @@ protocol TZPlotOutputViewer {
     func createPlot(plot: TZPlot) throws
 }
 
+protocol TZVizualizer {
+    func loadVisual(trajectory: State)
+}

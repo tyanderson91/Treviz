@@ -66,6 +66,8 @@ extension UserDefaults {
         case markerColor
         case backgroundColor
         case plotIsInteractive
+        
+        case showVisualization
     }
     
     // Var definitions
@@ -207,6 +209,11 @@ extension UserDefaults {
             UserDefaults.symbolSet = prefs.symbolSet
         }
     }
+    
+    class var showVisualization: Bool {
+        get { return standard.bool(key: .showVisualization) ?? true}
+        set { standard.set(newValue, key: .showVisualization) }
+    }
 }
 
 extension AppDelegate: PlotPreferencesGetter {
@@ -244,7 +251,8 @@ extension AppDelegate: PlotPreferencesGetter {
                                      .minorGridlineWidth: 0.5,
                                      .axesWidth: 3.0,
                                      .axesColor: axesColor,
-                                     .plotIsInteractive: true
+                                     .plotIsInteractive: true,
+                                     .showVisualization: true
         ])
         
         let defaultSymbol = UserDefaults.markerStyle.shape

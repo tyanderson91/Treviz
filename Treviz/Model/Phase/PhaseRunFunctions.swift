@@ -8,6 +8,8 @@
 import Cocoa
 
 extension TZPhase {
+    typealias SIMDD2 = SIMD2<VarValue>
+    typealias SIMDD3 = SIMD3<VarValue>
     
     func runAnalysis() {
         //Check if enough inputs are defined
@@ -76,25 +78,20 @@ extension TZPhase {
      This is the primary wrapper function for determining the next state based on the current state. It is called by the propagator at least once per timestep, and calls all the functions that determine the forces, moments, and subsequent motion of a vehicle
      */
     func equationsOfMotion(curState: StateDictSingle, dt: VarValue)->StateDictSingle { //TODO: Move calculation of forces and moments to separate function
-        
-        var x = curState["x"]!
-        var y = curState["y"]!
-        var dx = curState["dx"]!
-        var dy = curState["dy"]!
+        var pos = SIMDD2(curState["x"]!, curState["y"]!)
+        var vel = SIMDD2(curState["dx"]!, curState["dy"]!)
+
         var t = curState["t"]!
         var m = curState["mtot"]!
         
-        let F_g = -9.81*m
-        let a_y = F_g/m
-        let a_x : VarValue = 0
+        let F_g = SIMDD2(0, -9.81)*m
+        let accel = F_g/m
         
+        pos += vel*dt
+        vel += accel*dt
         t += dt
-        dy += a_y * dt
-        y += dy*dt
-        dx += a_x*dt
-        x += dx*dt
         m += 0
-        let newState : StateDictSingle = ["t":t, "x":x, "y":y, "z":0, "dx":dx, "dy":dy, "dz":0, "mtot":m]
+        let newState : StateDictSingle = ["t":t, "x":pos.x, "y":pos.y, "z":0, "dx":vel.x, "dy":vel.y, "dz":0, "mtot":m]
         
         return newState
     }

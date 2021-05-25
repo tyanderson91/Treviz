@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="Pa4-gg-nuF">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="Pa4-gg-nuF">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="18122"/>
+        <plugIn identifier="com.apple.SceneKitIBPlugin" version="18122"/>
         <capability name="NSView safe area layout guides" minToolsVersion="12.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -331,21 +332,120 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="351"/>
                                 <imageCell key="cell" selectable="YES" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="globe_picture" id="z1w-gs-roZ"/>
                             </imageView>
+                            <sceneView hidden="YES" fixedFrame="YES" loops="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Adg-Ek-huj" userLabel="3D Scene View">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="351"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            </sceneView>
+                            <customView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5ke-9L-ke1" userLabel="2D Scene View" customClass="TwoDSceneView" customModule="Treviz" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="351"/>
+                                <subviews>
+                                    <box boxType="custom" cornerRadius="4" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="PEF-1R-mnw">
+                                        <rect key="frame" x="60" y="10" width="200" height="50"/>
+                                        <view key="contentView" id="jE8-LJ-7YO">
+                                            <rect key="frame" x="1" y="1" width="198" height="48"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <button identifier="playPauseButton" verticalHuggingPriority="750" alphaValue="0.5" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="u8h-to-NcT" userLabel="Play/Pause">
+                                                    <rect key="frame" x="87" y="8" width="24" height="42"/>
+                                                    <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="playpause.fill" catalog="system" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" imageScaling="proportionallyDown" inset="2" id="mez-Uy-5Bc">
+                                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                        <font key="font" metaFont="system"/>
+                                                    </buttonCell>
+                                                    <connections>
+                                                        <action selector="playPauseClicked:" target="kWr-Ah-mB4" id="n1b-VO-0NO"/>
+                                                    </connections>
+                                                </button>
+                                                <button identifier="slowDownButton" verticalHuggingPriority="750" alphaValue="0.5" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PcW-jy-6bD" userLabel="RW">
+                                                    <rect key="frame" x="60" y="23.5" width="19" height="12"/>
+                                                    <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="backward.fill" catalog="system" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" imageScaling="proportionallyDown" inset="2" id="kxI-tX-Ybb">
+                                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                        <font key="font" metaFont="system"/>
+                                                    </buttonCell>
+                                                    <connections>
+                                                        <action selector="didChangeSpeed:" target="kWr-Ah-mB4" id="YaS-m6-Xgo"/>
+                                                    </connections>
+                                                </button>
+                                                <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="TKO-DX-cWc">
+                                                    <rect key="frame" x="3" y="1" width="192" height="17"/>
+                                                    <sliderCell key="cell" controlSize="mini" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="e9J-Kc-KAE"/>
+                                                    <connections>
+                                                        <action selector="didChangePosition:" target="kWr-Ah-mB4" id="f4y-MI-YrY"/>
+                                                    </connections>
+                                                </slider>
+                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="oZr-Zr-JP3">
+                                                    <rect key="frame" x="149" y="21" width="41" height="16"/>
+                                                    <textFieldCell key="cell" lineBreakMode="clipping" title="1000x" id="Csm-fs-uo9">
+                                                        <font key="font" usesAppearanceFont="YES"/>
+                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                </textField>
+                                                <button identifier="speedUpButton" verticalHuggingPriority="750" alphaValue="0.5" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4B2-rm-VfD" userLabel="FF">
+                                                    <rect key="frame" x="119" y="23.5" width="19" height="12"/>
+                                                    <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="forward.fill" catalog="system" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" imageScaling="proportionallyDown" inset="2" id="paj-pB-bLF">
+                                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                        <font key="font" metaFont="system"/>
+                                                    </buttonCell>
+                                                    <connections>
+                                                        <action selector="didChangeSpeed:" target="kWr-Ah-mB4" id="Up3-dd-zVs"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="u8h-to-NcT" firstAttribute="centerX" secondItem="jE8-LJ-7YO" secondAttribute="centerX" id="4Rg-9p-3YX"/>
+                                                <constraint firstItem="u8h-to-NcT" firstAttribute="top" secondItem="jE8-LJ-7YO" secondAttribute="top" id="6wz-xv-y5R"/>
+                                                <constraint firstItem="TKO-DX-cWc" firstAttribute="leading" secondItem="jE8-LJ-7YO" secondAttribute="leading" constant="5" id="Imf-LM-gvx"/>
+                                                <constraint firstItem="4B2-rm-VfD" firstAttribute="centerY" secondItem="u8h-to-NcT" secondAttribute="centerY" id="X5Y-kz-TsB"/>
+                                                <constraint firstItem="PcW-jy-6bD" firstAttribute="centerY" secondItem="u8h-to-NcT" secondAttribute="centerY" id="Xpr-C4-6R5"/>
+                                                <constraint firstAttribute="bottom" secondItem="u8h-to-NcT" secondAttribute="bottom" constant="10" id="YTH-tb-QGv"/>
+                                                <constraint firstItem="u8h-to-NcT" firstAttribute="leading" secondItem="PcW-jy-6bD" secondAttribute="trailing" constant="8" symbolic="YES" id="dW0-6d-Fci"/>
+                                                <constraint firstAttribute="bottom" secondItem="TKO-DX-cWc" secondAttribute="bottom" constant="3" id="eVJ-Km-8aQ"/>
+                                                <constraint firstItem="4B2-rm-VfD" firstAttribute="leading" secondItem="u8h-to-NcT" secondAttribute="trailing" constant="8" symbolic="YES" id="n9x-Sj-1GM"/>
+                                                <constraint firstItem="oZr-Zr-JP3" firstAttribute="centerY" secondItem="u8h-to-NcT" secondAttribute="centerY" id="tCp-Qe-XnM"/>
+                                                <constraint firstAttribute="trailing" secondItem="oZr-Zr-JP3" secondAttribute="trailing" constant="10" id="uBg-o3-Ko4"/>
+                                                <constraint firstAttribute="trailing" secondItem="TKO-DX-cWc" secondAttribute="trailing" constant="5" id="zuu-Ye-RS3"/>
+                                            </constraints>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="5AH-de-do3"/>
+                                            <constraint firstAttribute="width" constant="200" id="Hhz-GM-Oc5"/>
+                                        </constraints>
+                                        <color key="fillColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    </box>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="PEF-1R-mnw" secondAttribute="bottom" constant="10" id="EBd-9A-tQk"/>
+                                    <constraint firstItem="PEF-1R-mnw" firstAttribute="centerX" secondItem="5ke-9L-ke1" secondAttribute="centerX" id="LJz-9e-Kk1"/>
+                                </constraints>
+                            </customView>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="5ke-9L-ke1" firstAttribute="leading" secondItem="kVX-fw-nPv" secondAttribute="leading" id="0ES-dS-swj"/>
+                            <constraint firstAttribute="bottom" secondItem="5ke-9L-ke1" secondAttribute="bottom" id="3ce-bU-Sgi"/>
                             <constraint firstAttribute="trailing" secondItem="dVC-90-yCV" secondAttribute="trailing" id="FCP-pd-ZEa"/>
+                            <constraint firstItem="5ke-9L-ke1" firstAttribute="top" secondItem="kVX-fw-nPv" secondAttribute="top" id="Hpz-ZR-zGi"/>
                             <constraint firstAttribute="bottom" secondItem="dVC-90-yCV" secondAttribute="bottom" id="Qki-9J-Bv0"/>
                             <constraint firstItem="dVC-90-yCV" firstAttribute="top" secondItem="kVX-fw-nPv" secondAttribute="top" id="R8f-pq-5lL"/>
                             <constraint firstItem="dVC-90-yCV" firstAttribute="leading" secondItem="kVX-fw-nPv" secondAttribute="leading" id="f9V-C9-fHn"/>
+                            <constraint firstAttribute="trailing" secondItem="5ke-9L-ke1" secondAttribute="trailing" id="uOA-b5-Csi"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="controlsBox" destination="PEF-1R-mnw" id="TmC-cs-Egf"/>
+                        <outlet property="controlsBoxView" destination="jE8-LJ-7YO" id="39o-8v-RY1"/>
+                        <outlet property="currentSpeedLabel" destination="oZr-Zr-JP3" id="ZAA-xg-Pon"/>
+                        <outlet property="fastForwardButton" destination="4B2-rm-VfD" id="6EV-IP-UhV"/>
                         <outlet property="placeholderImageView" destination="dVC-90-yCV" id="mLS-pN-0ZN"/>
+                        <outlet property="playPauseButton" destination="u8h-to-NcT" id="9qu-bp-xnT"/>
+                        <outlet property="sceneView" destination="Adg-Ek-huj" id="V69-pw-qkH"/>
+                        <outlet property="scrubber" destination="TKO-DX-cWc" id="sRm-4r-gnS"/>
+                        <outlet property="skView" destination="5ke-9L-ke1" id="GIr-Bc-W1Z"/>
+                        <outlet property="slowDownButton" destination="PcW-jy-6bD" id="r1B-rf-SuX"/>
                     </connections>
                 </viewController>
                 <customObject id="Ofl-UG-cIh" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1608" y="-124"/>
+            <point key="canvasLocation" x="1608" y="-124.5"/>
         </scene>
         <!--Text Outputs View Controller-->
         <scene sceneID="9HR-bL-jxG">
@@ -430,6 +530,8 @@
     </scenes>
     <resources>
         <image name="CSYS" width="20" height="20"/>
+        <image name="backward.fill" catalog="system" width="19" height="12"/>
+        <image name="forward.fill" catalog="system" width="19" height="12"/>
         <image name="globe_picture" width="2048" height="2048"/>
         <image name="imageCell:uUt-3q-pTu:image" width="43" height="43">
             <mutableData key="keyedArchiveRepresentation">
@@ -2472,5 +2574,6 @@ yaAAAcmiAAHJpAAB20QAAdtJAAHbVgAB21kAAdtmAAHbawAB23MAAdt2AAHbewAB24MAAAAAAAAEAQAA
 AAAAAABoAAAAAAAAAAAAAAAAAAHbhg
 </mutableData>
         </image>
+        <image name="playpause.fill" catalog="system" width="24" height="13"/>
     </resources>
 </document>

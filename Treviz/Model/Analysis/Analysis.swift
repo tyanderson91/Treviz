@@ -124,6 +124,7 @@ class Analysis: NSObject, Codable {
     // Outputs
     var textOutputViewer: TZTextOutputViewer?
     var plotOutputViewer: TZPlotOutputViewer?
+    var visualViewer: TZVizualizer?
     
     override init(){
         super.init()

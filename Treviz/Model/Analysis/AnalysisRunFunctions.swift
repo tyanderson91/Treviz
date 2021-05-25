@@ -72,6 +72,7 @@ extension Analysis {
         DispatchQueue.main.async {
             self.progressReporter?.changeType(indeterminate: true)
             self.processOutputs()
+            self.showVisualization()
             self.logMessage("Done")
             self.progressReporter?.changeType(indeterminate: false)
         }
@@ -110,5 +111,10 @@ extension Analysis {
                 dispatchGroup.leave()
             }
         }
+    }
+    
+    func showVisualization(){
+        let curState: State = runs[0].trajData
+        visualViewer?.loadVisual(trajectory: curState)
     }
 }

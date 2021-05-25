@@ -39,6 +39,7 @@ class PreferencesViewController: NSTabViewController {
 protocol PlotPreferencesControllerDelegate {
     var plotPreferences: PlotPreferences { get set }
 }
+
 class GlobalPlotPreferencesViewController: NSViewController, PlotPreferencesControllerDelegate {
     @IBOutlet weak var preferencesView: NSView!
     

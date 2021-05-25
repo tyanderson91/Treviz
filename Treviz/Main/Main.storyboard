@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="18122"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -479,21 +479,10 @@
                                 <toolbarItem implicitItemIdentifier="NSToolbarPrintItem" id="iNF-nm-hs1"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="9m0-eV-BGQ"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="sla-GS-rBt"/>
-                                <toolbarItem implicitItemIdentifier="14EFA49B-1699-4D5D-B9AA-254DB2FED47D" explicitItemIdentifier="parameters" label="Params" paletteLabel="Parameters" tag="-1" image="p.circle" catalog="system" id="TqS-2n-1qM">
-                                    <size key="minSize" width="37" height="28"/>
-                                    <size key="maxSize" width="37" height="28"/>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="44446E33-F9FF-4B07-A269-B3FA99A90989" explicitItemIdentifier="vectors" label="Vectors" paletteLabel="Vectors" tag="-1" image="arrow.up.right" catalog="system" id="W4U-76-qaD">
-                                    <size key="minSize" width="31.5" height="25"/>
-                                    <size key="maxSize" width="31.5" height="25"/>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="5758292E-2D0A-4DCD-A6EF-7B3ADE96F53D" explicitItemIdentifier="csys" label="CSYS" paletteLabel="CSYS" tag="-1" image="move.3d" catalog="system" id="h9h-bR-Fwf">
-                                    <size key="minSize" width="39" height="27"/>
-                                    <size key="maxSize" width="39" height="27"/>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="0A87A498-3962-46F5-A46C-4F314604C83D" explicitItemIdentifier="runAnalysis" label="Run" paletteLabel="Run" tag="-1" image="play.rectangle" catalog="system" id="jMV-yt-vxY">
-                                    <size key="minSize" width="44" height="27"/>
-                                    <size key="maxSize" width="44" height="27"/>
+                                <toolbarItem implicitItemIdentifier="14EFA49B-1699-4D5D-B9AA-254DB2FED47D" explicitItemIdentifier="parameters" label="Params" paletteLabel="Parameters" tag="-1" image="p.circle" catalog="system" sizingBehavior="auto" id="TqS-2n-1qM"/>
+                                <toolbarItem implicitItemIdentifier="44446E33-F9FF-4B07-A269-B3FA99A90989" explicitItemIdentifier="vectors" label="Vectors" paletteLabel="Vectors" tag="-1" image="arrow.up.right" catalog="system" sizingBehavior="auto" id="W4U-76-qaD"/>
+                                <toolbarItem implicitItemIdentifier="5758292E-2D0A-4DCD-A6EF-7B3ADE96F53D" explicitItemIdentifier="csys" label="CSYS" paletteLabel="CSYS" tag="-1" image="move.3d" catalog="system" sizingBehavior="auto" id="h9h-bR-Fwf"/>
+                                <toolbarItem implicitItemIdentifier="0A87A498-3962-46F5-A46C-4F314604C83D" explicitItemIdentifier="runAnalysis" label="Run" paletteLabel="Run" tag="-1" image="play.rectangle" catalog="system" sizingBehavior="auto" id="jMV-yt-vxY">
                                     <connections>
                                         <action selector="runAnalysisClicked:" target="jGA-0Y-lOj" id="Py9-2v-OZZ"/>
                                     </connections>
@@ -516,26 +505,15 @@
                                         <action selector="showHidePanesClicked:" target="jGA-0Y-lOj" id="uVm-bH-zwR"/>
                                     </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="DE007689-8B0B-463F-A111-7DEF41E5B399" explicitItemIdentifier="conditions" label="Conditions" paletteLabel="Conditions" tag="-1" image="equal.square" catalog="system" id="97n-jf-vw7">
-                                    <size key="minSize" width="37" height="27"/>
-                                    <size key="maxSize" width="37" height="27"/>
+                                <toolbarItem implicitItemIdentifier="DE007689-8B0B-463F-A111-7DEF41E5B399" explicitItemIdentifier="conditions" label="Conditions" paletteLabel="Conditions" tag="-1" image="equal.square" catalog="system" sizingBehavior="auto" id="97n-jf-vw7">
                                     <connections>
                                         <action selector="conditionsClicked:" target="jGA-0Y-lOj" id="Ed0-ac-JUE"/>
                                         <segue destination="JQf-0b-2JY" kind="popover" identifier="conditionsPopupSegue" popoverAnchorView="97n-jf-vw7" popoverBehavior="t" preferredEdge="maxY" id="5xf-g2-ymY"/>
                                     </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="DD31E925-B17F-4776-8357-AC29F95EE183" explicitItemIdentifier="runVariants" label="Variants" paletteLabel="Run Variants" tag="-1" image="slider.vertical.3" catalog="system" id="a1I-3e-mOH">
-                                    <size key="minSize" width="37" height="27"/>
-                                    <size key="maxSize" width="37" height="27"/>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="6B3B0C95-33C2-4168-988B-82E541F050F8" label="Viz" paletteLabel="Viz" tag="-1" image="rotate.3d" catalog="system" id="ATF-vq-fIV">
-                                    <size key="minSize" width="37" height="28"/>
-                                    <size key="maxSize" width="37" height="28"/>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="46211623-E162-42C5-B776-F785371F7D47" label="Plot" paletteLabel="Plot" tag="-1" image="perspective" catalog="system" id="zFO-4H-OQ7">
-                                    <size key="minSize" width="45.5" height="31"/>
-                                    <size key="maxSize" width="45.5" height="31"/>
-                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="DD31E925-B17F-4776-8357-AC29F95EE183" explicitItemIdentifier="runVariants" label="Variants" paletteLabel="Run Variants" tag="-1" image="slider.vertical.3" catalog="system" sizingBehavior="auto" id="a1I-3e-mOH"/>
+                                <toolbarItem implicitItemIdentifier="6B3B0C95-33C2-4168-988B-82E541F050F8" label="Viz" paletteLabel="Viz" tag="-1" image="rotate.3d" catalog="system" sizingBehavior="auto" id="ATF-vq-fIV"/>
+                                <toolbarItem implicitItemIdentifier="46211623-E162-42C5-B776-F785371F7D47" label="Plot" paletteLabel="Plot" tag="-1" image="perspective" catalog="system" sizingBehavior="auto" id="zFO-4H-OQ7"/>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
                                 <toolbarItem reference="jMV-yt-vxY"/>
@@ -695,16 +673,16 @@
         </scene>
     </scenes>
     <resources>
-        <image name="arrow.up.right" catalog="system" width="13" height="12"/>
-        <image name="equal.square" catalog="system" width="15" height="14"/>
+        <image name="arrow.up.right" catalog="system" width="14" height="12"/>
+        <image name="equal.square" catalog="system" width="16" height="14"/>
         <image name="move.3d" catalog="system" width="16" height="14"/>
         <image name="p.circle" catalog="system" width="15" height="15"/>
-        <image name="perspective" catalog="system" width="19" height="18"/>
-        <image name="play.rectangle" catalog="system" width="18" height="14"/>
-        <image name="rectangle.bottomthird.inset.fill" catalog="system" width="18" height="14"/>
+        <image name="perspective" catalog="system" width="20" height="18"/>
+        <image name="play.rectangle" catalog="system" width="19" height="14"/>
+        <image name="rectangle.bottomthird.inset.fill" catalog="system" width="19" height="14"/>
         <image name="rotate.3d" catalog="system" width="15" height="15"/>
-        <image name="sidebar.leading" catalog="system" width="18" height="14"/>
-        <image name="sidebar.trailing" catalog="system" width="18" height="14"/>
-        <image name="slider.vertical.3" catalog="system" width="15" height="14"/>
+        <image name="sidebar.leading" catalog="system" width="19" height="14"/>
+        <image name="sidebar.trailing" catalog="system" width="19" height="14"/>
+        <image name="slider.vertical.3" catalog="system" width="16" height="14"/>
     </resources>
 </document>
