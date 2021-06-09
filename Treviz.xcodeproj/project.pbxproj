@@ -58,6 +58,7 @@
 		CD5F4E9B2455101100823E43 /* TZLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD92D6B82442302800483B8E /* TZLogger.swift */; };
 		CD5F4E9D2455101500823E43 /* AnalysisRunFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0F010823654ED400C920AA /* AnalysisRunFunctions.swift */; };
 		CD5F4E9E2455105300823E43 /* InitStateHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB7C73B2352B58300BC50F1 /* InitStateHeader.swift */; };
+		CD61B340265DD7BA004C7165 /* TZScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD61B33F265DD7BA004C7165 /* TZScene.swift */; };
 		CD656F71248771D500BB5CBC /* PhaseStartupFuncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD656F6F248770A300BB5CBC /* PhaseStartupFuncs.swift */; };
 		CD6A255F25AC24EF0075ED81 /* RunVariants.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD6A255E25AC24EF0075ED81 /* RunVariants.storyboard */; };
 		CD6CCF3D244D2FFB0051F76D /* OutputDataSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6CCF3B244CCC960051F76D /* OutputDataSet.swift */; };
@@ -272,6 +273,7 @@
 		CD59C54123E79449001D98D5 /* InitVars.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = InitVars.plist; sourceTree = "<group>"; };
 		CD59C54223E79449001D98D5 /* InitStateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitStateViewController.swift; sourceTree = "<group>"; };
 		CD59C54523E79476001D98D5 /* Outputs.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Outputs.storyboard; sourceTree = "<group>"; };
+		CD61B33F265DD7BA004C7165 /* TZScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TZScene.swift; sourceTree = "<group>"; };
 		CD63AEA123E7EA26006502F2 /* Variable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Variable.swift; sourceTree = "<group>"; };
 		CD63AEA223E7EA26006502F2 /* Condition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Condition.swift; sourceTree = "<group>"; };
 		CD63AEA323E7EA26006502F2 /* State.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
@@ -614,6 +616,14 @@
 			path = "Component Views";
 			sourceTree = "<group>";
 		};
+		CD61B341265DD7C5004C7165 /* SpriteKit */ = {
+			isa = PBXGroup;
+			children = (
+				CD61B33F265DD7BA004C7165 /* TZScene.swift */,
+			);
+			path = SpriteKit;
+			sourceTree = "<group>";
+		};
 		CD6A255B25AC24C50075ED81 /* Run Variants */ = {
 			isa = PBXGroup;
 			children = (
@@ -770,6 +780,7 @@
 				CDFE81FB23E14B730013945F /* ViewerTabViewController.swift */,
 				CD557436236EA14500DA53A1 /* VisualizerViewController.swift */,
 				CDFE81F823E147060013945F /* PlotOutputViewController.swift */,
+				CD61B341265DD7C5004C7165 /* SpriteKit */,
 			);
 			path = "Viewer Outputs";
 			sourceTree = "<group>";
@@ -1068,6 +1079,7 @@
 				CD8FEB0825956A4F008A08A7 /* RunGroup.swift in Sources */,
 				CDF3D1A822505A000064D70C /* AnalysisDoc.swift in Sources */,
 				CDE2B5A724C2C71D002026E0 /* AnalysisRunFunctions.swift in Sources */,
+				CD61B340265DD7BA004C7165 /* TZScene.swift in Sources */,
 				CD3E645225086399001F6C8F /* RunVariantEnableButton.swift in Sources */,
 				CD2D0DB42243836F0012978E /* ThreeAxisOutputSetupViewController.swift in Sources */,
 				CDE2B5B724C2C729002026E0 /* State.swift in Sources */,

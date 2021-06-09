@@ -17,9 +17,7 @@ class ViewerTabViewController: TZTabViewController {
         super.viewDidLoad()
         // Do view setup here.
         let plotView = plotTabViewItem.viewController
-        plotView?.loadView()
         let vizView = visualizerTabViewItem.viewController
-        vizView?.loadView()
         
         /*
         if let lastTabView = UserDefaults.standard.value(forKey: "selectedOutputTab") {

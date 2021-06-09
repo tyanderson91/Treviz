@@ -21,5 +21,5 @@ protocol TZPlotOutputViewer {
 }
 
 protocol TZVizualizer {
-    func loadVisual(trajectory: State)
+    func loadTrajectories(trajectories: [State])
 }
