@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "paper_plane_top.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

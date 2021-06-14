@@ -9,41 +9,30 @@
 import Foundation
 import SpriteKit
 
-protocol VisualizerPlaybackController {
-    var scene: TZScene! { get set }
-    var speedOptions: [CGFloat] { get }
-    var curSpeedOption: Int { get set }
-    var playbackSpeed: CGFloat { get }
-    var maxTime: VarValue { get set }
-    var shouldRepeat: Bool { get set }
-    
-    func continuePlayback()
-    func pausePlayback()
-    //var isHidden: Bool { get set }
-}
-extension VisualizerPlaybackController {
-    var playbackSpeed: CGFloat {
-        if curSpeedOption < speedOptions.count && curSpeedOption >= 0 {
-            return speedOptions[curSpeedOption]
-        } else if curSpeedOption >= speedOptions.count {
-            let exp = Double(curSpeedOption-speedOptions.count+2)
-            return CGFloat(10**exp)
-        } else if curSpeedOption < 0 {
-            let exp = Double(curSpeedOption-1)
-            return CGFloat(10**exp)
-        } else {
-            return 1.0
-        }
+// MARK: Protocols
+class SafeArea: SKNode, ConductorNode {
+    var isGrouped = true
+    var timeArray: [TimeInterval] = []
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        name = "safeArea"
+    }
+    override init() {
+        super.init()
+        name = "safeArea"
     }
 }
 
-class TZScene: SKScene {
+class TZScene: SKScene, ConductorNode {
+    var isGrouped = true
     var background: SKSpriteNode!
     let screenMargin: CGFloat = 0.0
-    let safeArea: SKNode
+    let safeArea: SafeArea
     var overlays: SKSpriteNode!
     var trajGroups = [SKTrajGroup]()
-    var currentTime: VarValue = 0
+    /*var startTime: TimeInterval = 0
+    var elapsedTime: TimeInterval = 0
+    var deltaTime: TimeInterval = 0*/
     var maxSize = CGSize(width: 1, height: 1)
     var vehicleSprites: [SKVehicle] {
         var sprites = [SKVehicle]()
@@ -54,6 +43,24 @@ class TZScene: SKScene {
         }
         return sprites
     }
+    var timeArray: [TimeInterval] = []
+    var maxTime: TimeInterval {
+        var maxTime: TimeInterval = .leastNormalMagnitude
+        for perf in performers {
+            guard let curMax = perf.timeArray.last else { continue }
+            if curMax > maxTime { maxTime = curMax }
+        }
+        return maxTime
+    }
+    var minTime: TimeInterval {
+        var minTime: TimeInterval = .greatestFiniteMagnitude
+        for perf in performers {
+            guard let curMin = perf.timeArray.first else { continue }
+            if curMin < minTime { minTime = curMin }
+        }
+        return minTime
+    }
+    
     var sceneActions: SKAction {
         var acts = [SKAction]()
         for thisGroup in trajGroups {
@@ -64,13 +71,10 @@ class TZScene: SKScene {
         }
         return SKAction.sequence([SKAction.group(acts)])
     }
-    
     var playbackController: VisualizerPlaybackController!
-    var isComplete: Bool { return !self.isPaused && !self.isRunning}
-    var isRunning: Bool = false
     
     override init(size: CGSize) {
-        safeArea = SKNode()
+        safeArea = SafeArea()
         super.init(size: size)
         self.scaleMode = .resizeFill
         let xmargin = screenMargin/size.width
@@ -96,13 +100,16 @@ class TZScene: SKScene {
         maxSize = CGSize(width: xrange, height: yrange)
                 
         let group1 = SKTrajGroup(data: data)
-        group1.trajectories = [group1.trajectories[0]]
+        let traj = group1.trajectories[0]
+        group1.name = "group1"
+        group1.trajectories = [traj]
         trajGroups = [group1]
         
         trajGroups.forEach {
             safeArea.addChild($0)
         }
         resizeScene()
+        playbackController.reset()
     }
     
     func resizeScene(){
@@ -116,7 +123,7 @@ class TZScene: SKScene {
     }
     
     required init?(coder aDecoder: NSCoder) {
-        safeArea = SKNode()
+        safeArea = SafeArea()
         super.init(coder: aDecoder)
     }
     
@@ -127,156 +134,43 @@ class TZScene: SKScene {
     
     func runAll() {
         self.resizeScene()
-
-        var completionAct: SKAction
-        self.isRunning = true
-        let completion: ()->() = { self.postProcess() }
-        
-        if false {//playbackController.shouldRepeat {
-            completionAct = SKAction.run({ self.isRunning = true })
-            self.run(self.sceneActions)
-        } else {
-            completionAct = SKAction.run(completion)
-            let newAct = SKAction.sequence([self.sceneActions, completionAct])
-            let A = self.isComplete
-            self.run(newAct)
-        }
-        //trajGroups.forEach { $0.run() }
-    }
-    
-    func postProcess(){
+        self.playbackController.reset()
         self.isPaused = false
-        self.isRunning = false
+        self.run(at: 0)
     }
-}
-
-class SKTrajGroup: SKNode {
-    var pathColor: CGColor!
-    var trajectories = [SKTrajectory]()
-    var action: SKAction {
-        var acts = [SKAction]()
-        for traj in trajectories {
-            let newAct = SKAction.run { traj.run() }
-            acts.append(newAct)
+    
+    func run(at time: TimeInterval){
+        guard time < self.duration else {
+            return
         }
-        return SKAction.group(acts)
-    }
-    
-    init(data: [State]){
-        //trajectories = data.map({SKTrajectory(data: $0)})
-        trajectories = [SKTrajectory(data: data[0])]
-        super.init()
-        self.position = CGPoint.zero
-        trajectories.forEach {self.addChild($0) }
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
-    func run(){
-        trajectories.forEach { $0.run() }
-    }
-    
-}
-
-class SKTrajectory: SKNode {
-    var showPropagation = false
-    var showPath = true
-    var trajData: State!
-    var vehicleSprite: SKVehicle!
-    var action: SKAction { return SKAction.run { self.vehicleSprite.run() } }
-    
-    init(data: State){
-        trajData = data
-        super.init()
-        vehicleSprite = SKVehicle(trajectory: data)
-        vehicleSprite.tzvehicle = Vehicle()
-        vehicleSprite.position = CGPoint.zero
-        self.addChild(vehicleSprite)
-        self.position = CGPoint.zero
-        /*
-         Make trajectory traces and propagations
-        */
-    }
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
-    func run(){
-        vehicleSprite.run()
-    }
-}
-
-class SKVehicle: SKNode {
-    static let spriteHeight: CGFloat = 60.0
-
-    var tzvehicle: Vehicle! {
-        didSet {
-            vehicleSprite = SKVehicleBody(imageNamed: self.tzvehicle.imageFile)
-            self.resize()
-            self.addChild(vehicleSprite)
-        }
-    }
-    
-    var vehicleSprite: SKVehicleBody!
-    var showPlume = false
-    var showShock = false
-    var rotateWithVelocity = true
-    
-    var actions: [SKAction] = []
-    
-    init(trajectory: State){
-        super.init()
-        self.position = CGPoint.zero
         
-        let times = trajectory["t"]!
-        let x: Variable = trajectory["x"]!
-        let y: Variable = trajectory["y"]!
-        let dx = trajectory["dx"]!
-        let dy = trajectory["dy"]!
+        let waitTime = self.duration - time
+        var act: SKAction
         
-        for idx in 0...(times.value.count)-2 {
-            let dt = (times[idx+1]!-times[idx]!)
-            let x1 = CGFloat(x[idx]!)
-            let y1 = CGFloat(y[idx]!)
-            let dx1 = CGFloat(dx[idx]!)
-            let dy1 = CGFloat(dy[idx]!)
-            let rotation_angle = atan2(dy1, dx1)
-            let newPoint = CGPoint(x: x1, y: y1)
-            
-            let rot = SKAction.rotate(toAngle: rotation_angle, duration: dt)
-            let mov = SKAction.move(to: newPoint, duration: dt)
-            let act = SKAction.group([rot, mov])
-            actions.append(act)
-        }
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
-    func resize(){
-        vehicleSprite.scale(to: SKVehicle.spriteHeight)
-    }
-    
-    func run(){
-        let seqAction = SKAction.sequence(self.actions)
-        run(seqAction)
-    }
-
-}
-
-class SKVehicleBody: SKSpriteNode {
-    func scale(to length: CGFloat){
-        let s = self.size
-        var newSize: CGSize
-        if s.width > s.height {
-            newSize = CGSize(width: length, height: s.height/s.width*length)
+        if time > 0 {
+            let reducedAction = self.getAction(at: time)
+            act = reducedAction
+            //act = SKAction.sequence([reducedAction, SKAction.wait(forDuration: waitTime)])
         } else {
-            newSize = CGSize(width: s.width/s.height*length, height: length)
+            act = self.action
+            //act = SKAction.sequence([self.action, SKAction.wait(forDuration: waitTime)])
         }
-        self.size = newSize
+        /*
+        if playbackController.shouldRepeat {
+            self.run(act, completion: { self.run(at: 0.0) })
+        } else {
+            self.run(act, completion: self.postProcess)
+        }*/
+        self.run(act)
+        
+        if self.isPaused {
+            self.playbackController.pausePlayback()
+        } else {
+            self.playbackController.continuePlayback()
+        }
+    }
+    
+    override func update(_ currentTime: TimeInterval) {
+        playbackController.updatePlaybackPosition(to: currentTime)
     }
 }
-

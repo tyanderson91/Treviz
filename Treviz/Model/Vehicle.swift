@@ -14,7 +14,7 @@ import Cocoa
 class Vehicle: Codable {
     var id: String = "Vehicle1"
     var mass: Double = 0
-    var imageFile: String = "Ship_top"
+    var imageFile: String = "paper_plane_top"
     init() {
         mass = 10
     }

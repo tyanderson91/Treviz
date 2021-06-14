@@ -23,6 +23,10 @@ func ** (_ base: Float, _ exp: Float) -> Float {
   return pow(base, exp)
 }
 
+func ** (_ base: CGFloat, _ exp: Double) -> CGFloat {
+  return pow(base, CGFloat(exp))
+}
+
 let PI = 3.14159265
 func deg2rad(_ deg: VarValue, wrap: Bool = true)->VarValue{
     var radOut = PI/180*deg

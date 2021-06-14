@@ -328,7 +328,7 @@
                                 <rect key="frame" x="0.0" y="70" width="320" height="281"/>
                                 <imageCell key="cell" selectable="YES" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="globe_picture" id="z1w-gs-roZ"/>
                             </imageView>
-                            <customView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5ke-9L-ke1" userLabel="2D Scene View" customClass="SKView">
+                            <customView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5ke-9L-ke1" userLabel="2D Scene View" customClass="TZSKView" customModule="Treviz" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="351"/>
                             </customView>
                             <containerView horizontalHuggingPriority="501" translatesAutoresizingMaskIntoConstraints="NO" id="upz-uG-I30" userLabel="Playback Controller Container View">
@@ -368,48 +368,45 @@
         <scene sceneID="zHd-Yz-7tW">
             <objects>
                 <viewController title="Playback Controller" storyboardIdentifier="playbackController" showSeguePresentationStyle="single" id="Ogx-I9-jEI" customClass="TZPlaybackController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="yKX-9A-XWy">
-                        <rect key="frame" x="0.0" y="0.0" width="280" height="50"/>
+                    <view key="view" misplaced="YES" id="yKX-9A-XWy">
+                        <rect key="frame" x="0.0" y="0.0" width="280" height="51"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <box identifier="playbackControllerBox" placeholderIntrinsicWidth="280" placeholderIntrinsicHeight="50" boxType="custom" cornerRadius="8" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="MXL-aP-Bq4">
-                                <rect key="frame" x="0.0" y="0.0" width="280" height="50"/>
+                                <rect key="frame" x="0.0" y="0.0" width="280" height="55"/>
                                 <view key="contentView" id="jDz-Bb-mqr">
-                                    <rect key="frame" x="1" y="1" width="278" height="48"/>
+                                    <rect key="frame" x="1" y="1" width="278" height="53"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WRx-we-65A">
-                                            <rect key="frame" x="3" y="1" width="272" height="17"/>
-                                            <sliderCell key="cell" controlSize="mini" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="rB1-PU-koP"/>
-                                            <connections>
-                                                <action selector="didChangePlaybackPosition:" target="Ogx-I9-jEI" id="iJC-wC-1pn"/>
-                                            </connections>
+                                        <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WRx-we-65A" customClass="PlaybackScrubber" customModule="Treviz" customModuleProvider="target">
+                                            <rect key="frame" x="3" y="3" width="227" height="17"/>
+                                            <sliderCell key="cell" controlSize="mini" continuous="YES" state="on" alignment="left" maxValue="100" tickMarkPosition="above" sliderType="linear" id="rB1-PU-koP"/>
                                         </slider>
                                         <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="6" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h7Y-xc-bH3" userLabel="Main Controls Stack View">
-                                            <rect key="frame" x="64" y="21" width="150" height="22"/>
+                                            <rect key="frame" x="64" y="28" width="150" height="18"/>
                                             <subviews>
                                                 <button identifier="back10Button" verticalHuggingPriority="750" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7ZN-c5-gFD" userLabel="back10">
-                                                    <rect key="frame" x="0.0" y="4" width="14.5" height="15"/>
+                                                    <rect key="frame" x="0.0" y="2" width="14.5" height="15"/>
                                                     <buttonCell key="cell" type="inline" bezelStyle="inline" image="gobackward.10" catalog="system" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="mPO-bd-14x">
                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                         <font key="font" metaFont="smallSystemBold"/>
                                                     </buttonCell>
                                                     <connections>
-                                                        <action selector="didChangePlaybackPosition:" target="Ogx-I9-jEI" id="QfC-e5-sIk"/>
+                                                        <action selector="didShiftTime:" target="Ogx-I9-jEI" id="nDt-lY-XIe"/>
                                                     </connections>
                                                 </button>
                                                 <button identifier="beginningButton" verticalHuggingPriority="750" alphaValue="0.5" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cz1-yY-Tk7" userLabel="Beginning">
-                                                    <rect key="frame" x="20" y="5" width="15.5" height="12"/>
+                                                    <rect key="frame" x="20" y="3" width="15.5" height="12"/>
                                                     <buttonCell key="cell" type="inline" bezelStyle="inline" image="backward.end.fill" catalog="system" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" imageScaling="proportionallyDown" inset="2" id="xFl-pH-s7k">
                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                         <font key="font" metaFont="smallSystemBold"/>
                                                     </buttonCell>
                                                     <connections>
-                                                        <action selector="didChangePlaybackPosition:" target="Ogx-I9-jEI" id="0we-OK-Kg1"/>
+                                                        <action selector="didGoToBeginning:" target="Ogx-I9-jEI" id="Hux-vd-ibk"/>
                                                     </connections>
                                                 </button>
                                                 <button identifier="slowDownButton" verticalHuggingPriority="750" alphaValue="0.5" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="u2I-XI-Jnh" userLabel="RW">
-                                                    <rect key="frame" x="41" y="5.5" width="18" height="12"/>
+                                                    <rect key="frame" x="41" y="3.5" width="18" height="12"/>
                                                     <buttonCell key="cell" type="inline" bezelStyle="inline" image="backward.fill" catalog="system" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" imageScaling="proportionallyDown" inset="2" id="kj3-sU-94t">
                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                         <font key="font" metaFont="smallSystemBold"/>
@@ -419,7 +416,7 @@
                                                     </connections>
                                                 </button>
                                                 <button identifier="playPauseButton" verticalHuggingPriority="750" alphaValue="0.5" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rbv-Me-J1P" userLabel="Play/Pause">
-                                                    <rect key="frame" x="65" y="1" width="20" height="19"/>
+                                                    <rect key="frame" x="65" y="-1" width="20" height="19"/>
                                                     <buttonCell key="cell" type="recessed" bezelStyle="recessed" image="play.fill" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="cnY-rO-qzw">
                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
                                                         <font key="font" metaFont="systemBold" size="12"/>
@@ -429,7 +426,7 @@
                                                     </connections>
                                                 </button>
                                                 <button identifier="speedUpButton" verticalHuggingPriority="750" alphaValue="0.5" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AgU-d0-e5o" userLabel="FF">
-                                                    <rect key="frame" x="91" y="5.5" width="18" height="12"/>
+                                                    <rect key="frame" x="91" y="3.5" width="18" height="12"/>
                                                     <buttonCell key="cell" type="inline" bezelStyle="inline" image="forward.fill" catalog="system" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" imageScaling="proportionallyDown" inset="2" id="I0O-QK-B3m">
                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                         <font key="font" metaFont="smallSystemBold"/>
@@ -439,23 +436,23 @@
                                                     </connections>
                                                 </button>
                                                 <button identifier="endButton" verticalHuggingPriority="750" alphaValue="0.5" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I37-mD-oLe" userLabel="End">
-                                                    <rect key="frame" x="115" y="5" width="15.5" height="12"/>
+                                                    <rect key="frame" x="115" y="3" width="15.5" height="12"/>
                                                     <buttonCell key="cell" type="inline" bezelStyle="inline" image="forward.end.fill" catalog="system" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" imageScaling="proportionallyDown" inset="2" id="eZw-dO-7XU">
                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                         <font key="font" metaFont="smallSystemBold"/>
                                                     </buttonCell>
                                                     <connections>
-                                                        <action selector="didChangePlaybackPosition:" target="Ogx-I9-jEI" id="FXD-Sq-ggw"/>
+                                                        <action selector="didGoToEnd:" target="Ogx-I9-jEI" id="moo-v4-vY4"/>
                                                     </connections>
                                                 </button>
                                                 <button identifier="fwd10Button" verticalHuggingPriority="750" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hCA-ws-tfM" userLabel="fwd10">
-                                                    <rect key="frame" x="136" y="4" width="14.5" height="15"/>
+                                                    <rect key="frame" x="136" y="2" width="14.5" height="15"/>
                                                     <buttonCell key="cell" type="inline" bezelStyle="inline" image="goforward.10" catalog="system" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="Ebd-Pw-ZQ8">
                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                         <font key="font" metaFont="smallSystemBold"/>
                                                     </buttonCell>
                                                     <connections>
-                                                        <action selector="didChangePlaybackPosition:" target="Ogx-I9-jEI" id="ZjW-bH-RnF"/>
+                                                        <action selector="didShiftTime:" target="Ogx-I9-jEI" id="OK1-b3-P9X"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -479,7 +476,7 @@
                                             </customSpacing>
                                         </stackView>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3H7-S2-ewT">
-                                            <rect key="frame" x="234" y="24" width="41" height="16"/>
+                                            <rect key="frame" x="234" y="29" width="41" height="16"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" relation="lessThanOrEqual" constant="45" id="e18-MM-XCn"/>
                                             </constraints>
@@ -490,7 +487,7 @@
                                             </textFieldCell>
                                         </textField>
                                         <button identifier="setRepeat" verticalHuggingPriority="750" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zCc-xZ-YS8" userLabel="Repeat">
-                                            <rect key="frame" x="27" y="22" width="27" height="19"/>
+                                            <rect key="frame" x="27" y="27" width="27" height="19"/>
                                             <buttonCell key="cell" type="recessed" bezelStyle="recessed" image="repeat" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="X3M-bD-Afn">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
                                                 <font key="font" metaFont="systemBold" size="12"/>
@@ -500,7 +497,7 @@
                                             </connections>
                                         </button>
                                         <button identifier="dockButton" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Gi1-L6-57A">
-                                            <rect key="frame" x="4" y="22.5" width="15" height="20"/>
+                                            <rect key="frame" x="4" y="27.5" width="15" height="20"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="15" id="Nsj-yd-7xC"/>
                                                 <constraint firstAttribute="width" constant="15" id="z8Z-fk-58v"/>
@@ -510,20 +507,36 @@
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
                                         </button>
+                                        <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qfx-X2-SX3">
+                                            <rect key="frame" x="233" y="1" width="40" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="40" id="K0D-3s-cyp"/>
+                                            </constraints>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" alignment="right" id="2Ku-r8-opo">
+                                                <font key="font" usesAppearanceFont="YES"/>
+                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                            <connections>
+                                                <outlet property="formatter" destination="pht-NS-uGP" id="Yas-qM-BAO"/>
+                                            </connections>
+                                        </textField>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="WRx-we-65A" secondAttribute="trailing" constant="5" id="4QX-Q5-OqE"/>
                                         <constraint firstItem="h7Y-xc-bH3" firstAttribute="centerX" secondItem="jDz-Bb-mqr" secondAttribute="centerX" id="9D4-pI-ySL"/>
                                         <constraint firstItem="3H7-S2-ewT" firstAttribute="centerY" secondItem="h7Y-xc-bH3" secondAttribute="centerY" id="FbP-E6-TWF"/>
-                                        <constraint firstItem="h7Y-xc-bH3" firstAttribute="top" secondItem="jDz-Bb-mqr" secondAttribute="top" constant="5" id="LsY-3i-66C"/>
+                                        <constraint firstItem="qfx-X2-SX3" firstAttribute="leading" secondItem="WRx-we-65A" secondAttribute="trailing" constant="5" id="IHi-fw-Xyv"/>
+                                        <constraint firstItem="h7Y-xc-bH3" firstAttribute="top" secondItem="jDz-Bb-mqr" secondAttribute="top" constant="7" id="LsY-3i-66C"/>
                                         <constraint firstAttribute="trailing" secondItem="3H7-S2-ewT" secondAttribute="trailing" constant="5" id="M0B-p3-k0L"/>
                                         <constraint firstItem="Gi1-L6-57A" firstAttribute="leading" secondItem="jDz-Bb-mqr" secondAttribute="leading" constant="4" id="Tcm-7D-1nx"/>
                                         <constraint firstItem="zCc-xZ-YS8" firstAttribute="centerY" secondItem="h7Y-xc-bH3" secondAttribute="centerY" id="UGI-Sj-toE"/>
                                         <constraint firstItem="WRx-we-65A" firstAttribute="leading" secondItem="jDz-Bb-mqr" secondAttribute="leading" constant="5" id="VM5-mG-R9S"/>
-                                        <constraint firstAttribute="bottom" secondItem="WRx-we-65A" secondAttribute="bottom" constant="3" id="XIi-cl-HZV"/>
+                                        <constraint firstAttribute="bottom" secondItem="WRx-we-65A" secondAttribute="bottom" constant="5" id="XIi-cl-HZV"/>
+                                        <constraint firstItem="qfx-X2-SX3" firstAttribute="centerY" secondItem="WRx-we-65A" secondAttribute="centerY" id="Z6t-8g-CWs"/>
                                         <constraint firstItem="Gi1-L6-57A" firstAttribute="centerY" secondItem="zCc-xZ-YS8" secondAttribute="centerY" id="bJx-c6-t9e"/>
                                         <constraint firstItem="h7Y-xc-bH3" firstAttribute="leading" secondItem="zCc-xZ-YS8" secondAttribute="trailing" constant="10" id="jbr-zI-cUX"/>
-                                        <constraint firstItem="WRx-we-65A" firstAttribute="top" secondItem="h7Y-xc-bH3" secondAttribute="bottom" constant="5" id="u6K-iV-2Tb"/>
+                                        <constraint firstAttribute="trailing" secondItem="qfx-X2-SX3" secondAttribute="trailing" constant="5" id="rDh-9I-OQE"/>
+                                        <constraint firstItem="WRx-we-65A" firstAttribute="top" secondItem="h7Y-xc-bH3" secondAttribute="bottom" constant="10" id="u6K-iV-2Tb"/>
                                     </constraints>
                                 </view>
                                 <color key="fillColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -539,6 +552,8 @@
                     <connections>
                         <outlet property="box" destination="MXL-aP-Bq4" id="nag-vo-fBx"/>
                         <outlet property="curSpeedLabel" destination="3H7-S2-ewT" id="s5T-Fa-1tK"/>
+                        <outlet property="currentTimeNumberFormatter" destination="pht-NS-uGP" id="Tdd-vJ-0Zg"/>
+                        <outlet property="currentTimeTextField" destination="qfx-X2-SX3" id="cKf-Nb-eEF"/>
                         <outlet property="goBackButton" destination="7ZN-c5-gFD" id="tFc-as-GyQ"/>
                         <outlet property="goForwardButton" destination="hCA-ws-tfM" id="i5m-FL-YHq"/>
                         <outlet property="goToBeginningButton" destination="Cz1-yY-Tk7" id="cBA-er-Q0y"/>
@@ -552,6 +567,7 @@
                     </connections>
                 </viewController>
                 <customObject id="8v1-qO-WQr" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <numberFormatter formatterBehavior="default10_4" usesGroupingSeparator="NO" formatWidth="-1" groupingSize="0" minimumIntegerDigits="1" maximumIntegerDigits="42" id="pht-NS-uGP"/>
             </objects>
             <point key="canvasLocation" x="1603" y="218"/>
         </scene>
