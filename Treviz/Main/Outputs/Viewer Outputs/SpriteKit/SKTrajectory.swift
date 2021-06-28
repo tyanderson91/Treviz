@@ -45,6 +45,7 @@ class SKTrajectoryTrace: SKShapeNode, ConductorNode, PerformerNode {
     var points: [CGPoint] = []
     var line = CGMutablePath()
     var action: SKAction!
+    var states: [SKState] = []
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -68,7 +69,7 @@ class SKTrajectoryTrace: SKShapeNode, ConductorNode, PerformerNode {
             let newPoint = CGPoint(x: x1, y: y1)
             points.append(newPoint)
             line.addLine(to: newPoint)
-
+            states.append(SKState(pos: newPoint, rot: nil, dt: dt))
         }
 
     }

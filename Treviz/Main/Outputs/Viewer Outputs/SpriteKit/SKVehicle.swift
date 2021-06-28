@@ -10,6 +10,7 @@ import Foundation
 import SpriteKit
 
 class SKVehicle: SKNode, ConductorNode, PerformerNode {
+    var states: [SKState] = []
     var isGrouped = false
     static let spriteSize: CGFloat = 1000.0
 
@@ -55,6 +56,7 @@ class SKVehicle: SKNode, ConductorNode, PerformerNode {
             let mov = SKAction.move(to: newPoint, duration: dt)
             let act = SKAction.group([rot, mov])
             actions.append(act)
+            states.append(SKState(pos: newPoint, rot: rotation_angle, dt: dt))
         }
     }
     

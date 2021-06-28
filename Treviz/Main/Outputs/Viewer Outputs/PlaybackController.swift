@@ -5,77 +5,14 @@
 //  Created by Tyler Anderson on 6/9/21.
 //  Copyright © 2021 Tyler Anderson. All rights reserved.
 //
-
 import Foundation
 import SpriteKit
-
-
-enum PlaybackState {
-    case beginning, running, end, paused, scrubbing
-}
-protocol VisualizerPlaybackController {
-    var scene: TZScene! { get set }
-    var speedOptions: [CGFloat] { get }
-    var curSpeedOption: Int { get set }
-    var playbackSpeed: CGFloat { get }
-    var shouldRepeat: Bool { get set }
-    var state: PlaybackState { get set }
-    
-    func didPressPlayPause(_ sender: Any)
-    func continuePlayback()
-    func pausePlayback()
-    func reset()
-    func updatePlaybackPosition(to time: TimeInterval)
-}
-extension VisualizerPlaybackController {
-    var playbackSpeed: CGFloat {
-        if curSpeedOption < speedOptions.count && curSpeedOption >= 0 {
-            return speedOptions[curSpeedOption]
-        } else if curSpeedOption >= speedOptions.count {
-            let exp = Double(curSpeedOption-speedOptions.count+2)
-            return CGFloat(10**exp)
-        } else if curSpeedOption < 0 {
-            let exp = Double(curSpeedOption-1)
-            return CGFloat(10**exp)
-        } else {
-            return 1.0
-        }
-    }
-}
-
-class PlaybackScrubber: NSSlider {
-    var controller: TZPlaybackController!
-    
-    override func mouseDown(with event: NSEvent) {
-        super.mouseDown(with: event)
-        startedScrubbing()
-    }
-    override func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation {
-        startedScrubbing()
-        return super.draggingEntered(sender)
-    }
-    override func mouseDragged(with event: NSEvent) {
-        //super.mouseDragged(with: event)
-        startedScrubbing()
-    }
-    func startedScrubbing(){
-        let newTime = self.doubleValue
-        controller.elapsedTime = newTime
-        if let scene = controller.scene {
-            scene.stop()
-            scene.isPaused = false
-            scene.go(to: newTime)
-            controller._didChangePosition = true
-            controller.playPauseButton.image = NSImage(systemSymbolName: "play.fill", accessibilityDescription: "")
-        }
-    }
-}
 
 class TZPlaybackController: NSViewController, VisualizerPlaybackController {
     var scene: TZScene!
     var speedOptions: [CGFloat] = [0.1, 0.2, 0.5, 1.0, 2.0, 3.0, 5.0, 10.0]
     var curSpeedOption: Int = 3
-    var maxTime: TimeInterval = 0
+    var maxTime: TimeInterval = 1
     var minTime: TimeInterval = 0
     var shouldRepeat: Bool = false
     
@@ -94,13 +31,18 @@ class TZPlaybackController: NSViewController, VisualizerPlaybackController {
     var _didEnd = false
     var _endCounter = 0
     var state: PlaybackState = .beginning
+    var _mouseInside: Bool = false
+    var _shouldPersist: Bool = true {
+        didSet {
+            showHideBox()
+        }
+    }
     
     @IBOutlet weak var box: NSBox!
     @IBOutlet weak var playPauseButton: NSButton!
     @IBOutlet weak var slowDownButton: NSButton!
     @IBOutlet weak var speedUpButton: NSButton!
     @IBOutlet weak var curSpeedLabel: NSTextField!
-    @IBOutlet weak var scrubber: PlaybackScrubber!
     @IBOutlet weak var setRepeatButton: NSButton!
     let speedFormatter = NumberFormatter()
     @IBOutlet weak var goBackButton: NSButton!
@@ -110,9 +52,10 @@ class TZPlaybackController: NSViewController, VisualizerPlaybackController {
     @IBOutlet weak var shouldDockButton: NSButton!
     @IBOutlet weak var currentTimeTextField: NSTextField!
     @IBOutlet var currentTimeNumberFormatter: NumberFormatter!
+    var scrubberController: CustomPlaybackScrubberController!
     
     override func viewDidLoad() {
-        box.fillColor = NSColor(deviceWhite: 1.0, alpha: 0.5)
+        box.fillColor = NSColor(deviceWhite: 1.0, alpha: 0.7)
         playPauseButton.state = .off
         super.viewDidLoad()
         
@@ -120,40 +63,27 @@ class TZPlaybackController: NSViewController, VisualizerPlaybackController {
         view.addTrackingArea(boxTrackingArea)
         setSpeedLabel()
         shouldRepeat = setRepeatButton.state == .on ? true : false
-        
-        scrubber.sendAction(on: .leftMouseDragged)
-        scrubber.target = self
-        scrubber.action = #selector(didChangePlaybackPosition(_:))
         currentTimeTextField.isBezeled = false
-        
-        scrubber.controller = self
+    }
+    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
+        if segue.identifier == "scrubberSegue", let vc = segue.destinationController as? CustomPlaybackScrubberController {
+            vc.playbackController = self
+            scrubberController = vc
+        }
     }
 
     override func mouseEntered(with event: NSEvent) {
-        box.animator().isHidden = false
+        _mouseInside = true
+        showHideBox()
     }
     override func mouseExited(with event: NSEvent) {
-        box.animator().isHidden = true
-    }
- 
-    func setSpeedLabel(){
-        if playbackSpeed > 10 {
-            speedFormatter.format = "0X"
-        } else if playbackSpeed >= 0.1 {
-            speedFormatter.format = "0.0X"
-        } else {
-            speedFormatter.format = "0.00X"
+        _mouseInside = false
+        if !_shouldPersist {
+            showHideBox()
         }
-        if curSpeedOption >= 10 || curSpeedOption < -1 {
-            speedFormatter.format = "0E0X"
-            speedFormatter.numberStyle = .scientific
-        } else {
-            speedFormatter.numberStyle = .none
-        }
-
-        curSpeedLabel.stringValue = speedFormatter.string(from: NSNumber(cgFloat: playbackSpeed)) ?? "UNKNOWN"
     }
     
+    // MARK: Controls
     @IBAction func didPressPlayPause(_ sender: Any) {
         if state == .beginning || state == .end {
             scene.runAll()
@@ -169,18 +99,6 @@ class TZPlaybackController: NSViewController, VisualizerPlaybackController {
         if !(sender is NSButton) {
             playPauseButton.state = ( playPauseButton.state == .on ? .off  : .on )
         }
-    }
-    
-    func continuePlayback(){
-        _shouldPause = false
-        scene.isPaused = false
-        state = .running
-        playPauseButton.image = NSImage(systemSymbolName: "pause.fill", accessibilityDescription: "")
-    }
-    func pausePlayback(){
-        _shouldPause = true
-        state = .paused
-        playPauseButton.image = NSImage(systemSymbolName: "play.fill", accessibilityDescription: "")
     }
     
     @IBAction func didChangeSpeed(_ sender: NSControl) {
@@ -200,62 +118,6 @@ class TZPlaybackController: NSViewController, VisualizerPlaybackController {
         state = .scrubbing
         elapsedTime = newTime
         scene.go(to: newTime)
-    }
-    
-    func reset(){
-        minTime = scene.minTime
-        maxTime = scene.maxTime
-        startTime = 0
-        elapsedTime = minTime
-        currentTimeNumberFormatter.format = "0.0s"
-        
-        scrubber.doubleValue = minTime
-        scrubber.maxValue = maxTime
-        scrubber.minValue = minTime
-
-        state = .beginning
-        scene.isPaused = true
-        playPauseButton.image = NSImage(systemSymbolName: "play.fill", accessibilityDescription: "")
-    }
-    
-    func updatePlaybackPosition(to time: TimeInterval){
-        if t1 == 0 { // First cycle, set the initial time
-            scrubber.doubleValue = minTime
-            elapsedTime = minTime
-        } else if _didPause {
-            _didPause = false
-        } else if _didChangePosition {
-        } else {
-            let dt = time - t1
-            elapsedTime += dt*Double(scene.speed)
-            scrubber.doubleValue = elapsedTime
-        }
-    
-        t1 = time
-        if _shouldPause {
-            _shouldPause = false
-            scene.isPaused = true
-            _didPause = true
-        }
-        
-        if elapsedTime >= maxTime && state == .running {
-            _shouldEnd = true
-            _endCounter += 1
-        }
-        
-        //if _endCounter > 3 { cleanup() }
-        if _shouldEnd {
-            cleanup()
-        }
-    }
-    
-    func cleanup(){
-        _shouldEnd = false
-        state = .end
-        _endCounter = 0
-        scene.isPaused = true
-        t1 = 0
-        playPauseButton.image = NSImage(systemSymbolName: "play.fill", accessibilityDescription: "")
     }
     
     @IBAction func didGoToEnd(_ sender: Any) {
@@ -315,7 +177,102 @@ class TZPlaybackController: NSViewController, VisualizerPlaybackController {
             }
         }
         state = .scrubbing
-        scrubber.doubleValue = elapsedTime
+        scrubberController.curValue = elapsedTime
     }
     
+    // MARK: Visuals
+    func showHideBox(){
+        if _mouseInside || _shouldPersist {
+            box.animator().isHidden = false
+        } else {
+            box.animator().isHidden = true
+        }
+    }
+ 
+    func setSpeedLabel(){
+        if playbackSpeed > 10 {
+            speedFormatter.format = "0X"
+        } else if playbackSpeed >= 0.1 {
+            speedFormatter.format = "0.0X"
+        } else {
+            speedFormatter.format = "0.00X"
+        }
+        if curSpeedOption >= 10 || curSpeedOption < -1 {
+            speedFormatter.format = "0E0X"
+            speedFormatter.numberStyle = .scientific
+        } else {
+            speedFormatter.numberStyle = .none
+        }
+
+        curSpeedLabel.stringValue = speedFormatter.string(from: NSNumber(cgFloat: playbackSpeed)) ?? "UNKNOWN"
+    }
+    
+    /** This function is run on every loop of the scene animation. This controls the playback when the animation is in motion */
+    func updatePlaybackPosition(to time: TimeInterval){
+        if t1 == 0 { // First cycle, set the initial time
+            scrubberController.minValue = minTime
+            elapsedTime = minTime
+        } else if _didPause {
+            _didPause = false
+        } else if _didChangePosition {
+        } else {
+            let dt = time - t1
+            elapsedTime += dt*Double(scene.speed)
+            scrubberController.curValue = elapsedTime
+        }
+    
+        t1 = time
+        if _shouldPause {
+            _shouldPause = false
+            scene.isPaused = true
+            _didPause = true
+        }
+        
+        if elapsedTime >= maxTime && state == .running {
+            _shouldEnd = true
+            _endCounter += 1
+        }
+        
+        if _shouldEnd {
+            cleanup()
+        }
+    }
+    
+    // MARK: Workhorse functions
+    func continuePlayback(){
+        _shouldPause = false
+        scene.isPaused = false
+        state = .running
+        playPauseButton.image = NSImage(systemSymbolName: "pause.fill", accessibilityDescription: "")
+    }
+    func pausePlayback(){
+        _shouldPause = true
+        state = .paused
+        playPauseButton.image = NSImage(systemSymbolName: "play.fill", accessibilityDescription: "")
+    }
+    
+    func reset(){
+        minTime = scene.minTime
+        maxTime = scene.maxTime
+        startTime = 0
+        elapsedTime = minTime
+        currentTimeNumberFormatter.format = "0.0s"
+        
+        scrubberController.maxValue = maxTime
+        scrubberController.minValue = minTime
+        scrubberController.curValue = minTime
+
+        state = .beginning
+        scene.isPaused = true
+        playPauseButton.image = NSImage(systemSymbolName: "play.fill", accessibilityDescription: "")
+    }
+    
+    func cleanup(){
+        _shouldEnd = false
+        state = .end
+        _endCounter = 0
+        scene.isPaused = true
+        t1 = 0
+        playPauseButton.image = NSImage(systemSymbolName: "play.fill", accessibilityDescription: "")
+    }
 }

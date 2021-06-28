@@ -25,9 +25,20 @@ protocol ConductorNode {
     func removeAllActions()
     
 }
+
+struct SKState {
+    var pos: CGPoint
+    var rot: CGFloat?
+    var dt: TimeInterval
+}
 protocol PerformerNode {
     var actions: [SKAction] { get set }
+    var states: [SKState] { get set }
     var timeArray: [TimeInterval] { get set }
+    
+    //SKNode
+    var position: CGPoint { get set }
+    var zRotation: CGFloat { get set }
 }
 
 extension ConductorNode {
@@ -94,19 +105,20 @@ extension ConductorNode {
     }
     
     func go(to time: TimeInterval){
-        if let perf = self as? PerformerNode {
+        if var perf = self as? PerformerNode {
             let ind: Int = {
                 let tempInd = (perf.timeArray.firstIndex { $0>time } ?? perf.timeArray.count) - 1
                 return tempInd >= 0 ? tempInd : 0
             }()
-            guard ind < perf.actions.count else { return }
-            let thisAct = perf.actions[ind]
-            thisAct.duration = .zero
-            self.run(thisAct)
+            guard ind < perf.states.count else { return }
+            let thisState = perf.states[ind]
+            perf.position = thisState.pos
+            perf.zRotation = thisState.rot!
         }
         for thisChild in childPlayers {
             thisChild.go(to: time)
         }
+        
     }
     
     func stop(){

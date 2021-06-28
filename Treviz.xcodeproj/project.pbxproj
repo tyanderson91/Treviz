@@ -97,6 +97,7 @@
 		CD94908F25951793007FF5E4 /* TestAnalysis2.yaml in Resources */ = {isa = PBXBuildFile; fileRef = CD94908D25951793007FF5E4 /* TestAnalysis2.yaml */; };
 		CDA0F88122587E05003C62E6 /* RunVariantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA0F88022587E05003C62E6 /* RunVariantViewController.swift */; };
 		CDA0F888225C5D47003C62E6 /* InputsCellViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA0F887225C5D47003C62E6 /* InputsCellViews.swift */; };
+		CDA29CE62689905B0054659F /* PlaybackControllerHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA29CE52689905B0054659F /* PlaybackControllerHelpers.swift */; };
 		CDA35CD524ECE5A0005BF24D /* PhaseSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA35CD424ECE5A0005BF24D /* PhaseSelectorViewController.swift */; };
 		CDA549EF23CC254B00933C6B /* AddConditionViewControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA549EE23CC254B00933C6B /* AddConditionViewControllers.swift */; };
 		CDA549F123CC3C5400933C6B /* ConditionsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA549F023CC3C5400933C6B /* ConditionsTableView.swift */; };
@@ -316,6 +317,7 @@
 		CD94908D25951793007FF5E4 /* TestAnalysis2.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = TestAnalysis2.yaml; sourceTree = "<group>"; };
 		CDA0F88022587E05003C62E6 /* RunVariantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunVariantViewController.swift; sourceTree = "<group>"; };
 		CDA0F887225C5D47003C62E6 /* InputsCellViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputsCellViews.swift; sourceTree = "<group>"; };
+		CDA29CE52689905B0054659F /* PlaybackControllerHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackControllerHelpers.swift; sourceTree = "<group>"; };
 		CDA35CD424ECE5A0005BF24D /* PhaseSelectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhaseSelectorViewController.swift; sourceTree = "<group>"; };
 		CDA549EE23CC254B00933C6B /* AddConditionViewControllers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddConditionViewControllers.swift; sourceTree = "<group>"; };
 		CDA549F023CC3C5400933C6B /* ConditionsTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionsTableView.swift; sourceTree = "<group>"; };
@@ -794,6 +796,7 @@
 				CDFE81FB23E14B730013945F /* ViewerTabViewController.swift */,
 				CD557436236EA14500DA53A1 /* VisualizerViewController.swift */,
 				CDF0CCDF2671D71400CF14DE /* PlaybackController.swift */,
+				CDA29CE52689905B0054659F /* PlaybackControllerHelpers.swift */,
 				CDFE81F823E147060013945F /* PlotOutputViewController.swift */,
 				CD61B341265DD7C5004C7165 /* SpriteKit */,
 			);
@@ -1118,6 +1121,7 @@
 				CDE2B5A424C2C71D002026E0 /* Analysis.swift in Sources */,
 				CD6E0BA22436DEC7008D1656 /* TZStoryboard.swift in Sources */,
 				CDE2B59E24C2C718002026E0 /* TZPhase.swift in Sources */,
+				CDA29CE62689905B0054659F /* PlaybackControllerHelpers.swift in Sources */,
 				CDC25616243D9E86007EBE8A /* TZMessageLoggerViewController.swift in Sources */,
 				CDF1670C2237A10400CD9590 /* MainWindowController.swift in Sources */,
 				CDFAC19A263FABD300C479CB /* Units.swift in Sources */,
