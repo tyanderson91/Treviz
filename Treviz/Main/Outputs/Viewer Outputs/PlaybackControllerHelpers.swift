@@ -52,8 +52,6 @@ class CustomPlaybackScrubberController: NSViewController {
     }}
     var savedState: PlaybackState = .beginning
     var playbackController: TZPlaybackController!
-    var scene: TZScene { return playbackController.scene }
-    //var sceneIsPaused = false
     
     override func viewDidLoad() {
     }
@@ -68,29 +66,27 @@ class CustomPlaybackScrubberController: NSViewController {
     
     override func mouseDown(with event: NSEvent) {
         sview.showScrubber = true
-        startedScrubbing()
+        savedState = playbackController.state
+        playbackController.startedScrubbing()
         mouseDragged(with: event)
     }
     override func mouseDragged(with event: NSEvent) {
         playbackController._shouldPersist = true
         sview.hoverValue = nil
         curValue = lineValue(froms: event)
-        playbackController.elapsedTime = curValue
-        scene.go(to: curValue)
+        playbackController.goToTime(time: curValue)
         sview.needsDisplay = true
     }
     override func mouseUp(with event: NSEvent) {
         playbackController._shouldPersist = false
-        playbackController.state = savedState
-        //scene.go(to: curValue)
+        if savedState == .end || savedState == .beginning {
+            playbackController.state = .paused
+        } else {
+             playbackController.state = savedState
+        }
+        playbackController.didChangePosition()
         sview.showScrubber = false
         sview.needsDisplay = true
-        if savedState == .running {
-            scene.isPaused = false
-            playbackController.scene.run(at: curValue)
-            playbackController._didChangePosition = false
-            playbackController.continuePlayback()
-        }
     }
     override func mouseEntered(with event: NSEvent) {
         mouseMoved(with: event)
@@ -112,18 +108,6 @@ class CustomPlaybackScrubberController: NSViewController {
         if dubVal < minValue { return minValue }
         else if dubVal > maxValue { return maxValue }
         else { return dubVal }
-    }
-    
-    func startedScrubbing(){
-        savedState = playbackController.state
-        playbackController.state = .scrubbing
-        
-        scene.stop()
-        scene.isPaused = false
-        scene.go(to: curValue)
-        playbackController._didChangePosition = true
-        playbackController.elapsedTime = curValue
-        //playbackController.playPauseButton.image = NSImage(systemSymbolName: "play.fill", accessibilityDescription: "")
     }
 }
 class CustomPlaybackScrubber: NSView {

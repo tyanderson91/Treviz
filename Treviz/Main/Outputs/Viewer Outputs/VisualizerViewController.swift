@@ -32,6 +32,14 @@ class VisualizerViewController: TZViewController, TZVizualizer, SKSceneDelegate 
     var trajectory: State!
     var curScene: TZScene!
     var controlsVC: TZPlaybackController!
+    var floatControls = true
+    
+    @IBOutlet weak var controlsFixedWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var controlsEqualWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var controlsBottomOffsetConstraint: NSLayoutConstraint!
+    @IBOutlet weak var scene2dBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var controlsTopConstraint: NSLayoutConstraint!
+    
     
     override func viewDidLoad() {
         //view.wantsLayer = true
@@ -71,8 +79,5 @@ class VisualizerViewController: TZViewController, TZVizualizer, SKSceneDelegate 
         toggleView(1)
         skView.presentScene(curScene)
         curScene.loadData(data: trajectories)
-        
-        //curScene.runAll()
-        //curScene.playbackController.continuePlayback()
     }
 }

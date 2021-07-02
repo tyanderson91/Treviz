@@ -331,11 +331,10 @@
                             <customView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5ke-9L-ke1" userLabel="2D Scene View" customClass="TZSKView" customModule="Treviz" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="351"/>
                             </customView>
-                            <containerView horizontalHuggingPriority="501" translatesAutoresizingMaskIntoConstraints="NO" id="upz-uG-I30" userLabel="Playback Controller Container View">
+                            <containerView horizontalHuggingPriority="501" placeholderIntrinsicWidth="280" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="upz-uG-I30" userLabel="Playback Controller Container View">
                                 <rect key="frame" x="20" y="10" width="280" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="280" id="EwC-Fv-hYD"/>
-                                    <constraint firstAttribute="height" constant="50" id="o2J-bC-m7V"/>
                                 </constraints>
                                 <connections>
                                     <segue destination="Ogx-I9-jEI" kind="embed" identifier="playbackControllerSegue" id="z7I-yI-Epz"/>
@@ -345,18 +344,25 @@
                         <constraints>
                             <constraint firstItem="5ke-9L-ke1" firstAttribute="leading" secondItem="kVX-fw-nPv" secondAttribute="leading" id="0ES-dS-swj"/>
                             <constraint firstItem="upz-uG-I30" firstAttribute="centerX" secondItem="kVX-fw-nPv" secondAttribute="centerX" id="0kJ-Ts-UL0"/>
-                            <constraint firstAttribute="bottom" secondItem="5ke-9L-ke1" secondAttribute="bottom" id="3ce-bU-Sgi"/>
+                            <constraint firstAttribute="bottom" secondItem="5ke-9L-ke1" secondAttribute="bottom" id="3ce-bU-Sgi" userLabel="2d scene bottom"/>
                             <constraint firstAttribute="trailing" secondItem="dVC-90-yCV" secondAttribute="trailing" id="FCP-pd-ZEa"/>
                             <constraint firstItem="5ke-9L-ke1" firstAttribute="top" secondItem="kVX-fw-nPv" secondAttribute="top" id="Hpz-ZR-zGi"/>
-                            <constraint firstAttribute="bottom" secondItem="upz-uG-I30" secondAttribute="bottom" constant="10" id="I7r-zZ-Jix"/>
+                            <constraint firstAttribute="bottom" secondItem="upz-uG-I30" secondAttribute="bottom" constant="10" id="I7r-zZ-Jix" userLabel="ctrl Bottom Offset Constraint"/>
                             <constraint firstAttribute="bottom" secondItem="dVC-90-yCV" secondAttribute="bottom" constant="70" id="Qki-9J-Bv0"/>
                             <constraint firstItem="dVC-90-yCV" firstAttribute="top" secondItem="kVX-fw-nPv" secondAttribute="top" id="R8f-pq-5lL"/>
+                            <constraint firstItem="upz-uG-I30" firstAttribute="top" secondItem="5ke-9L-ke1" secondAttribute="bottom" priority="1" id="VJT-W9-S1q" userLabel="ctrl Top Constraint"/>
+                            <constraint firstItem="upz-uG-I30" firstAttribute="width" secondItem="5ke-9L-ke1" secondAttribute="width" priority="1" id="Wb1-dO-uSe" userLabel="ctrl Equal Width Constraint"/>
                             <constraint firstItem="dVC-90-yCV" firstAttribute="leading" secondItem="kVX-fw-nPv" secondAttribute="leading" id="f9V-C9-fHn"/>
                             <constraint firstAttribute="trailing" secondItem="5ke-9L-ke1" secondAttribute="trailing" id="uOA-b5-Csi"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="controlsBottomOffsetConstraint" destination="I7r-zZ-Jix" id="4Ip-C8-tpl"/>
+                        <outlet property="controlsEqualWidthConstraint" destination="Wb1-dO-uSe" id="gGF-Z3-DQA"/>
+                        <outlet property="controlsFixedWidthConstraint" destination="EwC-Fv-hYD" id="uoP-ln-X3p"/>
+                        <outlet property="controlsTopConstraint" destination="VJT-W9-S1q" id="D3D-Zi-PyL"/>
                         <outlet property="placeholderImageView" destination="dVC-90-yCV" id="mLS-pN-0ZN"/>
+                        <outlet property="scene2dBottomConstraint" destination="3ce-bU-Sgi" id="FOp-eg-RmY"/>
                         <outlet property="skView" destination="5ke-9L-ke1" id="GIr-Bc-W1Z"/>
                     </connections>
                 </viewController>
@@ -368,7 +374,7 @@
         <scene sceneID="zHd-Yz-7tW">
             <objects>
                 <viewController title="Playback Controller" storyboardIdentifier="playbackController" showSeguePresentationStyle="single" id="Ogx-I9-jEI" customClass="TZPlaybackController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="yKX-9A-XWy">
+                    <view key="view" id="yKX-9A-XWy" customClass="TZPlaybackControllerView" customModule="Treviz" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="280" height="52"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
@@ -502,18 +508,22 @@
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
+                                            <connections>
+                                                <action selector="didClickDock:" target="Ogx-I9-jEI" id="yF1-f4-XBY"/>
+                                            </connections>
                                         </button>
-                                        <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qfx-X2-SX3">
+                                        <textField verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qfx-X2-SX3">
                                             <rect key="frame" x="233" y="2" width="40" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="40" id="K0D-3s-cyp"/>
                                             </constraints>
-                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" alignment="right" id="2Ku-r8-opo">
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" allowsUndo="NO" sendsActionOnEndEditing="YES" borderStyle="bezel" alignment="right" id="2Ku-r8-opo">
                                                 <font key="font" usesAppearanceFont="YES"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                             <connections>
+                                                <action selector="didSelectNewTime:" target="Ogx-I9-jEI" id="KhC-5h-hXi"/>
                                                 <outlet property="formatter" destination="pht-NS-uGP" id="Yas-qM-BAO"/>
                                             </connections>
                                         </textField>
@@ -529,13 +539,13 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="h7Y-xc-bH3" firstAttribute="centerX" secondItem="jDz-Bb-mqr" secondAttribute="centerX" id="9D4-pI-ySL"/>
-                                        <constraint firstItem="Qd9-Mz-cfz" firstAttribute="top" secondItem="h7Y-xc-bH3" secondAttribute="bottom" constant="5" id="9dW-61-zPM"/>
+                                        <constraint firstItem="Qd9-Mz-cfz" firstAttribute="top" secondItem="h7Y-xc-bH3" secondAttribute="bottom" constant="5" id="9dW-61-zPM" userLabel="bottom Stack Space Constraint"/>
                                         <constraint firstItem="qfx-X2-SX3" firstAttribute="centerY" secondItem="Qd9-Mz-cfz" secondAttribute="centerY" id="Avu-aZ-h3I"/>
                                         <constraint firstItem="3H7-S2-ewT" firstAttribute="centerY" secondItem="h7Y-xc-bH3" secondAttribute="centerY" id="FbP-E6-TWF"/>
                                         <constraint firstItem="Qd9-Mz-cfz" firstAttribute="leading" secondItem="jDz-Bb-mqr" secondAttribute="leading" constant="5" id="LLJ-uJ-MhH"/>
-                                        <constraint firstItem="h7Y-xc-bH3" firstAttribute="top" secondItem="jDz-Bb-mqr" secondAttribute="top" constant="7" id="LsY-3i-66C"/>
+                                        <constraint firstItem="h7Y-xc-bH3" firstAttribute="top" secondItem="jDz-Bb-mqr" secondAttribute="top" constant="7" id="LsY-3i-66C" userLabel="top Stack Space Constraint"/>
                                         <constraint firstAttribute="trailing" secondItem="3H7-S2-ewT" secondAttribute="trailing" constant="5" id="M0B-p3-k0L"/>
-                                        <constraint firstAttribute="bottom" secondItem="Qd9-Mz-cfz" secondAttribute="bottom" constant="5" id="McD-xc-GjJ"/>
+                                        <constraint firstAttribute="bottom" secondItem="Qd9-Mz-cfz" secondAttribute="bottom" constant="5" id="McD-xc-GjJ" userLabel="bottom Scrubber Space Constraint"/>
                                         <constraint firstItem="Gi1-L6-57A" firstAttribute="leading" secondItem="jDz-Bb-mqr" secondAttribute="leading" constant="4" id="Tcm-7D-1nx"/>
                                         <constraint firstItem="zCc-xZ-YS8" firstAttribute="centerY" secondItem="h7Y-xc-bH3" secondAttribute="centerY" id="UGI-Sj-toE"/>
                                         <constraint firstItem="Gi1-L6-57A" firstAttribute="centerY" secondItem="zCc-xZ-YS8" secondAttribute="centerY" id="bJx-c6-t9e"/>
@@ -555,6 +565,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="bottomScrubberSpaceConstraint" destination="McD-xc-GjJ" id="dUV-sB-24Z"/>
+                        <outlet property="bottomStackSpaceConstraint" destination="9dW-61-zPM" id="yn3-ay-huo"/>
                         <outlet property="box" destination="MXL-aP-Bq4" id="nag-vo-fBx"/>
                         <outlet property="curSpeedLabel" destination="3H7-S2-ewT" id="s5T-Fa-1tK"/>
                         <outlet property="currentTimeNumberFormatter" destination="pht-NS-uGP" id="Tdd-vJ-0Zg"/>
@@ -568,6 +580,7 @@
                         <outlet property="shouldDockButton" destination="Gi1-L6-57A" id="ITj-co-4oB"/>
                         <outlet property="slowDownButton" destination="u2I-XI-Jnh" id="LHp-0w-hnQ"/>
                         <outlet property="speedUpButton" destination="AgU-d0-e5o" id="QIw-Gu-qfx"/>
+                        <outlet property="topStackSpaceConstraint" destination="LsY-3i-66C" id="fJq-Gp-OQy"/>
                     </connections>
                 </viewController>
                 <customObject id="8v1-qO-WQr" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -639,7 +652,7 @@
                 </viewController>
                 <customObject id="5Al-bh-qxR" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1617" y="493"/>
+            <point key="canvasLocation" x="1558" y="406"/>
         </scene>
     </scenes>
     <resources>

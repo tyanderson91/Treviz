@@ -132,42 +132,25 @@ class TZScene: SKScene, ConductorNode {
         trajGroups = []
     }
     
-    func runAll() {
-        self.resizeScene()
-        self.playbackController.reset()
+    func start() {
+        self.go(to: minTime)
+        self.run(at: minTime)
         self.isPaused = false
-        self.run(at: 0)
     }
     
     func run(at time: TimeInterval){
-        guard time < self.duration else {
+        guard time < self.maxTime else {
             return
         }
         
-        let waitTime = self.duration - time
         var act: SKAction
-        
         if time > 0 {
             let reducedAction = self.getAction(at: time)
             act = reducedAction
-            //act = SKAction.sequence([reducedAction, SKAction.wait(forDuration: waitTime)])
         } else {
             act = self.action
-            //act = SKAction.sequence([self.action, SKAction.wait(forDuration: waitTime)])
         }
-        /*
-        if playbackController.shouldRepeat {
-            self.run(act, completion: { self.run(at: 0.0) })
-        } else {
-            self.run(act, completion: self.postProcess)
-        }*/
         self.run(act)
-        
-        if self.isPaused {
-            self.playbackController.pausePlayback()
-        } else {
-            self.playbackController.continuePlayback()
-        }
     }
     
     override func update(_ currentTime: TimeInterval) {
