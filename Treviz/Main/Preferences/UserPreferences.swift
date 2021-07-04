@@ -68,6 +68,7 @@ extension UserDefaults {
         case plotIsInteractive
         
         case showVisualization
+        case dockVisualizerController
     }
     
     // Var definitions
@@ -214,6 +215,11 @@ extension UserDefaults {
         get { return standard.bool(key: .showVisualization) ?? true}
         set { standard.set(newValue, key: .showVisualization) }
     }
+    
+    class var dockVisualizationController: Bool {
+        get { return standard.bool(key: .dockVisualizerController) ?? false}
+        set { standard.set(newValue, key: .dockVisualizerController) }
+    }
 }
 
 extension AppDelegate: PlotPreferencesGetter {
@@ -252,7 +258,8 @@ extension AppDelegate: PlotPreferencesGetter {
                                      .axesWidth: 3.0,
                                      .axesColor: axesColor,
                                      .plotIsInteractive: true,
-                                     .showVisualization: true
+                                     .showVisualization: true,
+                                     .dockVisualizerController: false
         ])
         
         let defaultSymbol = UserDefaults.markerStyle.shape

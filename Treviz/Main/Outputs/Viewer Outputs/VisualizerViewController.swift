@@ -18,7 +18,7 @@ class TZSKView: SKView {
         let key = event.keyCode
         if key == 49 { // space
             if let cont = tzscene!.playbackController {
-                cont.didPressPlayPause(self)
+                cont.playPauseButtonToggled(self)
             }
         }
     }
@@ -32,7 +32,7 @@ class VisualizerViewController: TZViewController, TZVizualizer, SKSceneDelegate 
     var trajectory: State!
     var curScene: TZScene!
     var controlsVC: TZPlaybackController!
-    var floatControls = true
+    var dockControls = true
     
     @IBOutlet weak var controlsFixedWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var controlsEqualWidthConstraint: NSLayoutConstraint!
@@ -48,6 +48,7 @@ class VisualizerViewController: TZViewController, TZVizualizer, SKSceneDelegate 
         analysis.visualViewer = self
         
         toggleView(1)
+        dockControls = UserDefaults.dockVisualizationController
         
         let sceneSize = skView.bounds.size
         curScene = TZScene(size: sceneSize)

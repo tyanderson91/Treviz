@@ -100,9 +100,9 @@ class TZScene: SKScene, ConductorNode {
         maxSize = CGSize(width: xrange, height: yrange)
                 
         let group1 = SKTrajGroup(data: data)
-        let traj = group1.trajectories[0]
+        //let traj = group1.trajectories[0]
         group1.name = "group1"
-        group1.trajectories = [traj]
+        //group1.trajectories = [traj]
         trajGroups = [group1]
         
         trajGroups.forEach {
@@ -142,7 +142,6 @@ class TZScene: SKScene, ConductorNode {
         guard time < self.maxTime else {
             return
         }
-        
         var act: SKAction
         if time > 0 {
             let reducedAction = self.getAction(at: time)

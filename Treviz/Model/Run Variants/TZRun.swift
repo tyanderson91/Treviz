@@ -143,7 +143,7 @@ struct RunGenerator {
 extension Analysis {
     var numRuns: Int {
         let mcRunVariants = runVariants.filter {$0.variantType == .montecarlo}
-        let numMCRuns: Int = mcRunVariants.isEmpty ? 1 : numMonteCarloRuns
+        let numMCRuns: Int = (mcRunVariants.isEmpty || numMonteCarloRuns==0) ? 1 : numMonteCarloRuns
         return numTradeGroups * numMCRuns
     }
     
@@ -164,7 +164,7 @@ extension Analysis {
             self.runs = []
             let analysisData = try self.copyForRuns()
             if tradeVariants.count == 0 { tradeVariants = [DummyRunVariant]() }
-            if mcVariants.count == 0 { mcVariants = [DummyRunVariant]() }
+            if mcVariants.count == 0 || numMonteCarloRuns == 0 { mcVariants = [DummyRunVariant]() }
             var allRuns = [TZRun]()
             if self.tradeGroups.count != numTradeGroups {
                 self.tradeGroups = Array<RunGroup>.init(repeating: RunGroup(), count: numTradeGroups)

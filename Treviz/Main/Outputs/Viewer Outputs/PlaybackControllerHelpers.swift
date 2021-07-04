@@ -20,7 +20,7 @@ protocol VisualizerPlaybackController {
     var shouldRepeat: Bool { get set }
     var state: PlaybackState { get set }
     
-    func didPressPlayPause(_ sender: Any)
+    func playPauseButtonToggled(_ sender: Any)
     func continuePlayback()
     func pausePlayback()
     func reset()
@@ -119,7 +119,6 @@ class CustomPlaybackScrubber: NSView {
     
     let scrubberSize: CGFloat = 6.0
     let lineWidth: CGFloat = 4.0
-    let lineAlpha: CGFloat = 0.7
     
     var startPoint: CGPoint!
     var endPoint: CGPoint!
@@ -138,17 +137,19 @@ class CustomPlaybackScrubber: NSView {
         guard let context = NSGraphicsContext.current?.cgContext else { return }
         let mid = dirtyRect.height/2
         let valuePos = lineLength*(curValue-minValue)/(maxValue-minValue) + startPoint.x
-        let color = NSColor.controlAccentColor.withAlphaComponent(lineAlpha)
-        let markerColor = color.blended(withFraction: 0.3, of: .black)!.withAlphaComponent(1.0).cgColor
+        let color = NSColor.controlAccentColor
+        let markerColor = color.blended(withFraction: 0.2, of: .black)!.cgColor
+        let backgroundColor = NSColor.systemGray.cgColor
         
-        context.setStrokeColor(CGColor(gray: 0.3, alpha: lineAlpha))
+        let curPoint = CGPoint(x: valuePos, y: mid)
+        context.setStrokeColor(backgroundColor)
         context.setLineCap(.round)
         context.setLineWidth(lineWidth)
-        context.move(to: startPoint)
-        context.addLine(to: CGPoint(x: startPoint.x+lineLength, y: mid))
+        context.addLines(between: [curPoint, endPoint])
         context.drawPath(using: .stroke)
+        
         context.setStrokeColor(color.cgColor)
-        context.addLines(between: [startPoint, CGPoint(x: valuePos, y: mid)])
+        context.addLines(between: [startPoint, curPoint])
         context.drawPath(using: .stroke)
         if showScrubber {
             let scrubberRect = CGRect(x: valuePos-scrubberSize, y: mid-scrubberSize, width: scrubberSize*2, height: scrubberSize*2)

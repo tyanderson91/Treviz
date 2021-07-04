@@ -24,13 +24,20 @@ class SKTrajGroup: SKNode, ConductorNode {
     var timeArray: [TimeInterval] = []
     
     init(data: [State]){
-        //trajectories = data.map({SKTrajectory(data: $0)})
-        let traj0 = SKTrajectory(data: data[0])
-        traj0.name = "traj0"
-        trajectories = [traj0]
+        trajectories = []
+        var tcount = 0
+        for d in data {
+            let newTraj = SKTrajectory(data: d)
+            newTraj.name = "traj\(tcount)"
+            newTraj.vehicleSprite.name = "veh\(tcount)"
+            newTraj.trace.name = "trace\(tcount)"
+            newTraj.trajColor = .controlAccentColor
+            trajectories.append(newTraj)
+            tcount += 1
+        }
         super.init()
         self.position = CGPoint.zero
-        trajectories.forEach {self.addChild($0) }
+        trajectories.forEach { self.addChild($0) }
     }
     
     required init?(coder aDecoder: NSCoder) {

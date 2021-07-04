@@ -17,6 +17,11 @@ class SKTrajectory: SKNode, ConductorNode {
     var timeArray: [TimeInterval] = []
     var vehicleSprite: SKVehicle!
     var trace: SKTrajectoryTrace!
+    var trajColor: NSColor = .black {
+        didSet {
+            trace.strokeColor = trajColor
+        }
+    }
     
     init(data: State){
         trajData = data
@@ -31,6 +36,8 @@ class SKTrajectory: SKNode, ConductorNode {
          Make trajectory traces and propagations
         */
         self.trace = SKTrajectoryTrace(trajectory: data)
+        trace.strokeColor = trajColor
+        self.addChild(trace)
     
     }
     required init?(coder aDecoder: NSCoder) {
@@ -39,12 +46,11 @@ class SKTrajectory: SKNode, ConductorNode {
 }
 
 class SKTrajectoryTrace: SKShapeNode, ConductorNode, PerformerNode {
-    var isGrouped: Bool = true
+    var isGrouped: Bool = false
     var timeArray: [TimeInterval] = []
     var actions: [SKAction] = []
-    var points: [CGPoint] = []
     var line = CGMutablePath()
-    var action: SKAction!
+    var action: SKAction! { return SKAction.sequence(actions) }
     var states: [SKState] = []
     
     required init?(coder aDecoder: NSCoder) {
@@ -54,6 +60,7 @@ class SKTrajectoryTrace: SKShapeNode, ConductorNode, PerformerNode {
     init(trajectory: State){
         super.init()
         
+        name = "TrajTrace"
         let times = trajectory["t"]!
         let x: Variable = trajectory["x"]!
         let y: Variable = trajectory["y"]!
@@ -63,14 +70,38 @@ class SKTrajectoryTrace: SKShapeNode, ConductorNode, PerformerNode {
         line.move(to: CGPoint(x: x.value[0], y: y.value[0]) )
         
         for idx in 0...n {
-            let dt = (times[idx+1]!-times[idx]!)
+            let newTime = times[idx+1]!
+            let dt = (newTime-times[idx]!)
             let x1 = CGFloat(x[idx]!)
             let y1 = CGFloat(y[idx]!)
             let newPoint = CGPoint(x: x1, y: y1)
-            points.append(newPoint)
             line.addLine(to: newPoint)
             states.append(SKState(pos: newPoint, rot: nil, dt: dt))
+            let newAction = SKAction.run {
+                self.move(to: newTime)
+            }
+            actions.append(SKAction.sequence([SKAction.wait(forDuration: dt), newAction]))
         }
-
+        
+        self.lineWidth = 2.0
+    }
+    
+    func move(to time: TimeInterval){
+        guard states.count>0 else { return }
+        let ind: Int = {
+            let tempInd = (timeArray.firstIndex { $0>time } ?? timeArray.count) - 1
+            return tempInd >= 0 ? tempInd : 0
+        }()
+        if ind == 0 {
+            self.path = nil
+            return
+        }
+        guard ind < states.count else { return }
+        let line = CGMutablePath()
+        line.move(to: states.first!.pos)
+        for idx in 1...ind {
+            line.addLine(to: states[idx].pos)
+        }
+        self.path = line
     }
 }

@@ -15,6 +15,7 @@ protocol ConductorNode {
     var action: SKAction { get }
     var timeArray: [TimeInterval] { get set }
     var scene: SKScene? { get }
+    var isPerformer: Bool { get }
     
     // SKNode
     var name: String? { get set }
@@ -35,6 +36,7 @@ protocol PerformerNode {
     var actions: [SKAction] { get set }
     var states: [SKState] { get set }
     var timeArray: [TimeInterval] { get set }
+    mutating func move(to time: TimeInterval)
     
     //SKNode
     var position: CGPoint { get set }
@@ -83,6 +85,7 @@ extension ConductorNode {
         self.run(action)
     }
     
+    var isPerformer: Bool { return self is PerformerNode }
     func getAction(at time: TimeInterval)->SKAction{
         var curActions: [SKAction]
         if let perf = self as? PerformerNode {
@@ -106,23 +109,28 @@ extension ConductorNode {
     
     func go(to time: TimeInterval){
         if var perf = self as? PerformerNode {
-            let ind: Int = {
-                let tempInd = (perf.timeArray.firstIndex { $0>time } ?? perf.timeArray.count) - 1
-                return tempInd >= 0 ? tempInd : 0
-            }()
-            guard ind < perf.states.count else { return }
-            let thisState = perf.states[ind]
-            perf.position = thisState.pos
-            perf.zRotation = thisState.rot!
+            perf.move(to: time)
         }
         for thisChild in childPlayers {
             thisChild.go(to: time)
         }
-        
     }
     
     func stop(){
         removeAllActions()
         childPlayers.forEach {$0.stop()}
+    }
+}
+
+extension PerformerNode {
+    mutating func move(to time: TimeInterval) {
+        let ind: Int = {
+            let tempInd = (timeArray.firstIndex { $0>time } ?? timeArray.count) - 1
+            return tempInd >= 0 ? tempInd : 0
+        }()
+        guard ind < states.count else { return }
+        let thisState = states[ind]
+        position = thisState.pos
+        zRotation = thisState.rot!
     }
 }

@@ -22,8 +22,7 @@ class TZPlaybackController: NSViewController, VisualizerPlaybackController {
             currentTimeTextField.stringValue = currentTimeNumberFormatter.string(from: number)!
         }
     }
-    var t1: TimeInterval = 0.0
-    var _resetTimeBase = false
+    var t0: TimeInterval = 0.0
     var _shouldPause = false
     var _didEnd = false
     var state: PlaybackState = .beginning
@@ -66,11 +65,22 @@ class TZPlaybackController: NSViewController, VisualizerPlaybackController {
         super.viewDidLoad()
         
         box.viewDidChangeEffectiveAppearance()
+        setControllerLocation()
         let boxTrackingArea = NSTrackingArea(rect: box.bounds, options: [.activeInKeyWindow, .mouseEnteredAndExited, .inVisibleRect], owner: self, userInfo: nil)
         view.addTrackingArea(boxTrackingArea)
         setSpeedLabel()
         shouldRepeat = setRepeatButton.state == .on ? true : false
         currentTimeTextField.isBezeled = false
+        
+        speedUpButton.toolTip = "Speed Up"
+        slowDownButton.toolTip = "Slow Down"
+        playPauseButton.toolTip = "Play"
+        goForwardButton.toolTip = "Skip Forward"
+        goBackButton.toolTip = "Jump Backward"
+        goToBeginningButton.toolTip = "Go to Beginning"
+        goToEndButton.toolTip = "Go to End"
+        setRepeatButton.toolTip = "Toggle Repeat"
+        curSpeedLabel.toolTip = "Speed Multiplier"
     }
     
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
@@ -86,13 +96,11 @@ class TZPlaybackController: NSViewController, VisualizerPlaybackController {
     }
     override func mouseExited(with event: NSEvent) {
         _mouseInside = false
-        if !_shouldPersist && visualizerController.floatControls {
-            showHideBox()
-        }
+        showHideBox()
     }
     
     // MARK: Controls
-    @IBAction func didPressPlayPause(_ sender: Any) {
+    @IBAction func playPauseButtonToggled(_ sender: Any) {
         switch state {
         case .beginning:
             state = .running
@@ -113,14 +121,14 @@ class TZPlaybackController: NSViewController, VisualizerPlaybackController {
         }
     }
     
-    @IBAction func didChangeSpeed(_ sender: NSControl) {
+    @IBAction func speedChangeButtonClicked(_ sender: NSControl) {
         if sender.identifier?.rawValue == "slowDownButton" { curSpeedOption -= 1 }
         else if sender.identifier?.rawValue == "speedUpButton" { curSpeedOption += 1 }
         scene.speed = playbackSpeed
         setSpeedLabel()
     }
     
-    @IBAction func didPressRepeat(_ sender: Any) {
+    @IBAction func repeatToggleClicked(_ sender: Any) {
         shouldRepeat = setRepeatButton.state == .on ? true : false
     }
     
@@ -133,24 +141,24 @@ class TZPlaybackController: NSViewController, VisualizerPlaybackController {
             self.continuePlayback()
         case .paused:
             scene.run(at: elapsedTime)
-            _resetTimeBase = true
+            t0 = 0
             self.pausePlayback()
         default:
             return
         }
     }
     
-    @IBAction func didGoToEnd(_ sender: Any) {
+    @IBAction func endButtonClicked(_ sender: Any) {
         shouldRepeat = false
         setRepeatButton.state = .off
         goToEnd()
     }
     
-    @IBAction func didGoToBeginning(_ sender: Any) {
+    @IBAction func beginningButtonClicked(_ sender: Any) {
         goToBeginning()
     }
     
-    @IBAction func didShiftTime(_ sender: Any) {
+    @IBAction func timeShiftButtonClicked(_ sender: Any) {
         var timeShift: TimeInterval
         if let button = sender as? NSButton {
             switch button.identifier?.rawValue {
@@ -169,25 +177,26 @@ class TZPlaybackController: NSViewController, VisualizerPlaybackController {
         didChangePosition()
     }
     
-    @IBAction func didSelectNewTime(_ sender: NSTextField) {
-        let stringVal = sender.stringValue
+    @IBAction func newTimeTextboxEntered(_ sender: NSTextField) {
         let dubVal = sender.doubleValue
-        
-        if let newTime = TimeInterval.init(stringVal) {
-            goToTime(time: newTime)
-        }
+        goToTime(time: dubVal)
+        didChangePosition()
     }
     
-    @IBAction func didClickDock(_ sender: Any) {
-        guard let v = visualizerController else { return }
-        v.floatControls = !v.floatControls
-        if v.floatControls {
+    @IBAction func dockButtonClicked(_ sender: Any) {
+        visualizerController.dockControls = !visualizerController.dockControls
+        UserDefaults.dockVisualizationController = visualizerController.dockControls
+        setControllerLocation()
+    }
+    
+    func setControllerLocation(){
+        if !visualizerController.dockControls {
             box.isHidden = true
-            v.controlsEqualWidthConstraint.priority = .defaultLow
-            v.controlsFixedWidthConstraint.priority = .defaultHigh
-            v.controlsBottomOffsetConstraint.constant = floatingOffset
-            v.controlsTopConstraint.priority = .defaultLow
-            v.scene2dBottomConstraint.priority = .defaultHigh
+            visualizerController.controlsEqualWidthConstraint.priority = .defaultLow
+            visualizerController.controlsFixedWidthConstraint.priority = .defaultHigh
+            visualizerController.controlsBottomOffsetConstraint.constant = floatingOffset
+            visualizerController.controlsTopConstraint.priority = .defaultLow
+            visualizerController.scene2dBottomConstraint.priority = .defaultHigh
             bottomStackSpaceConstraint.constant = smallMargin
             topStackSpaceConstraint.constant = largin
             bottomScrubberSpaceConstraint.constant = smallMargin
@@ -196,11 +205,11 @@ class TZPlaybackController: NSViewController, VisualizerPlaybackController {
             shouldDockButton.image = NSImage(systemSymbolName: "arrow.down.backward.square", accessibilityDescription: "")
             view.needsLayout = true
         } else {
-            v.controlsFixedWidthConstraint.priority = .defaultLow
-            v.controlsEqualWidthConstraint.priority = .defaultHigh
-            v.controlsBottomOffsetConstraint.constant = 0
-            v.scene2dBottomConstraint.priority = .defaultLow
-            v.controlsTopConstraint.priority = .defaultHigh
+            visualizerController.controlsFixedWidthConstraint.priority = .defaultLow
+            visualizerController.controlsEqualWidthConstraint.priority = .defaultHigh
+            visualizerController.controlsBottomOffsetConstraint.constant = 0
+            visualizerController.scene2dBottomConstraint.priority = .defaultLow
+            visualizerController.controlsTopConstraint.priority = .defaultHigh
             bottomStackSpaceConstraint.constant = dockedMargin
             topStackSpaceConstraint.constant = dockedMargin
             bottomScrubberSpaceConstraint.constant = dockedMargin
@@ -213,7 +222,7 @@ class TZPlaybackController: NSViewController, VisualizerPlaybackController {
     
     // MARK: Visuals
     func showHideBox(){
-        if _mouseInside || _shouldPersist {
+        if _mouseInside || _shouldPersist || visualizerController.dockControls {
             box.animator().isHidden = false
         } else {
             box.animator().isHidden = true
@@ -242,28 +251,29 @@ class TZPlaybackController: NSViewController, VisualizerPlaybackController {
         if paused {
             playPauseButton.state = .off
             playPauseButton.image = NSImage(systemSymbolName: "play.fill", accessibilityDescription: "")
+            playPauseButton.toolTip = "Play"
         } else {
             playPauseButton.state = .on
             playPauseButton.image = NSImage(systemSymbolName: "pause.fill", accessibilityDescription: "")
+            playPauseButton.toolTip = "Pause"
         }
     }
     
     /** This function is run on every loop of the scene animation. This controls the playback when the animation is in motion */
     func updatePlaybackPosition(to time: TimeInterval){
-        if t1 == 0 { // First cycle, only set the initial time
-        } else if _resetTimeBase {
-            _resetTimeBase = false
+        if t0 == 0 { // First cycle, only set the initial time
         } else {
-            let dt = time - t1
+            let dt = time - t0
             elapsedTime += dt*Double(scene.speed)
             scrubberController.curValue = elapsedTime
         }
     
-        t1 = time
         if _shouldPause {
             _shouldPause = false
             scene.isPaused = true
-            _resetTimeBase = true
+            t0 = 0
+        } else {
+            t0 = time
         }
         
         if elapsedTime >= maxTime && state == .running {
@@ -306,7 +316,7 @@ class TZPlaybackController: NSViewController, VisualizerPlaybackController {
         } else {
             if state == .beginning || state == .end {
                 state = .paused
-                _resetTimeBase = true
+                t0 = 0
             }
             elapsedTime = newTime
             scene.go(to: elapsedTime)
@@ -315,12 +325,12 @@ class TZPlaybackController: NSViewController, VisualizerPlaybackController {
     }
     
     func goToBeginning(){
+        scene.stop()
         scene.go(to: minTime)
         switch state {
         case .running:
             scene.start()
         case .paused:
-            scene.stop()
             state = .beginning
         case .end:
             state = .beginning
@@ -339,12 +349,11 @@ class TZPlaybackController: NSViewController, VisualizerPlaybackController {
     }
     
     func reset(){
-        
         minTime = scene.minTime
         maxTime = scene.maxTime
-        t1 = 0
+        t0 = 0
         elapsedTime = minTime
-        currentTimeNumberFormatter.format = "0.0s"
+        currentTimeNumberFormatter.format = "0.0"
         
         scrubberController.maxValue = maxTime
         scrubberController.minValue = minTime

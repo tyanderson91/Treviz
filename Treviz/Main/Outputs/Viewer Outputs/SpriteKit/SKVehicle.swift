@@ -66,6 +66,7 @@ class SKVehicle: SKNode, ConductorNode, PerformerNode {
     
     func resize(){
         vehicleSprite.scale(to: SKVehicle.spriteSize)
+        vehicleSprite.zPosition = 2
     }
 }
 
