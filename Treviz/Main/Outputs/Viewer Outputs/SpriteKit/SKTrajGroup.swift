@@ -11,16 +11,12 @@ import SpriteKit
 
 class SKTrajGroup: SKNode, ConductorNode {
     var isGrouped = true
-    var pathColor: CGColor!
-    var trajectories = [SKTrajectory]()/*
-    var action: SKAction {
-        var acts = [SKAction]()
-        for traj in trajectories {
-            let newAct = SKAction.run { traj.run() }
-            acts.append(newAct)
+    var pathColor: CGColor! {
+        didSet {
+            trajectories.forEach({$0.trajColor = NSColor(cgColor: pathColor)!})
         }
-        return SKAction.group(acts)
-    }*/
+    }
+    var trajectories = [SKTrajectory]()
     var timeArray: [TimeInterval] = []
     
     init(data: [State]){
@@ -37,15 +33,11 @@ class SKTrajGroup: SKNode, ConductorNode {
         }
         super.init()
         self.position = CGPoint.zero
+        self.zPosition = 10
         trajectories.forEach { self.addChild($0) }
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    /*
-    func run(){
-        trajectories.forEach { $0.run() }
-    }*/
-    
 }

@@ -228,6 +228,7 @@ extension AppDelegate: PlotPreferencesGetter {
      */
     func setDefaults(){
         TZPlot.preferencesGetter = self
+        VisualizerViewController.preferencesGetter = self
         
         let defaults = UserDefaults.standard
         // MARK: System defaults
@@ -283,6 +284,12 @@ extension AppDelegate: PlotPreferencesGetter {
         if prefs.symbolSet == nil { prefs.symbolSet = UserDefaults.symbolSet }
         if prefs.mcOpacity == nil { prefs.mcOpacity = UserDefaults.mcOpacity }
         
+        return prefs
+    }
+    
+    func getPreferences()->VisualizerPreferences {
+        var prefs = VisualizerPreferences()
+        prefs.colorMap = UserDefaults.colorMap
         return prefs
     }
     

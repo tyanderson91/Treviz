@@ -52,6 +52,7 @@ class CustomPlaybackScrubberController: NSViewController {
     }}
     var savedState: PlaybackState = .beginning
     var playbackController: TZPlaybackController!
+    var boxTrackingArea: NSTrackingArea!
     
     override func viewDidLoad() {
     }
@@ -60,7 +61,7 @@ class CustomPlaybackScrubberController: NSViewController {
         sview.endPoint = CGPoint(x: sview.frame.width-2*sview.lineWidth-sview.scrubberSize/2, y: sview.frame.height/2)
         sview.lineLength = sview.endPoint.x - sview.startPoint.x
         
-        let boxTrackingArea = NSTrackingArea(rect: sview.bounds, options: [.activeInKeyWindow, .mouseEnteredAndExited, .mouseMoved, .inVisibleRect], owner: self, userInfo: nil)
+        boxTrackingArea = NSTrackingArea(rect: sview.bounds, options: [.activeInKeyWindow, .mouseEnteredAndExited, .mouseMoved, .inVisibleRect], owner: self, userInfo: nil)
         sview.addTrackingArea(boxTrackingArea)
     }
     
@@ -86,14 +87,19 @@ class CustomPlaybackScrubberController: NSViewController {
         }
         playbackController.didChangePosition()
         sview.showScrubber = false
+        if sview.mouseInside {
+            mouseMoved(with: event)
+        }
         sview.needsDisplay = true
     }
     override func mouseEntered(with event: NSEvent) {
         mouseMoved(with: event)
+        sview.mouseInside = true
     }
     override func mouseExited(with event: NSEvent) {
         sview.hoverValue = nil
         sview.needsDisplay = true
+        sview.mouseInside = false
     }
     override func mouseMoved(with event: NSEvent) {
         let dubVal = lineValue(froms: event)
@@ -116,6 +122,7 @@ class CustomPlaybackScrubber: NSView {
     var maxValue: CGFloat = 13.0  { didSet { converterScale = (maxValue-minValue)/lineLength } }
     var hoverValue: CGFloat? = nil
     var showScrubber = false
+    var mouseInside = false
     
     let scrubberSize: CGFloat = 6.0
     let lineWidth: CGFloat = 4.0
@@ -151,19 +158,56 @@ class CustomPlaybackScrubber: NSView {
         context.setStrokeColor(color.cgColor)
         context.addLines(between: [startPoint, curPoint])
         context.drawPath(using: .stroke)
-        if showScrubber {
-            let scrubberRect = CGRect(x: valuePos-scrubberSize, y: mid-scrubberSize, width: scrubberSize*2, height: scrubberSize*2)
-            context.addEllipse(in: scrubberRect)
-            context.setFillColor(markerColor)
-            context.drawPath(using: .fill)
+        
+        func addDot(centerX: CGFloat, isOutline: Bool) {
+            let centerY = mid
+            let r = scrubberSize
+            let t = lineWidth
+            let R = r*4
+            let scrubberRect = CGRect(x: centerX-r, y: centerY-r, width: r*2, height: r*2)
+            
+            if isOutline {
+                context.addEllipse(in: scrubberRect)
+                context.setFillColor(markerColor.copy(alpha: 0.6)!)
+                context.drawPath(using: .fill)
+            } else {
+                let centerPoint = CGPoint(x: centerX, y: centerY)
+                let th = asin((R+t/2)/(R+r))
+                let pi = CGFloat(PI)
+
+                let ctr1 = centerPoint.applying(.init(translationX: -cos(th)*(r+R), y: sin(th)*(r+R)))
+                let ctr2 = centerPoint.applying(.init(translationX: cos(th)*(r+R), y: sin(th)*(r+R)))
+                let ctr3 = centerPoint.applying(.init(translationX: cos(th)*(r+R), y: -sin(th)*(r+R)))
+                let ctr4 = centerPoint.applying(.init(translationX: -cos(th)*(r+R), y: -sin(th)*(r+R)))
+                
+                if valuePos < endPoint.x - R + 1.5*r {
+                    context.addArc(center: ctr2, radius: R, startAngle: 3*pi/2, endAngle: pi+th, clockwise: true)
+                    context.addArc(center: ctr3, radius: R, startAngle: pi-th, endAngle: pi/2, clockwise: true)
+                    context.closePath()
+                    context.setFillColor(backgroundColor)
+                    context.drawPath(using: .fill)
+                }
+                
+                if valuePos > startPoint.x + R - 1.5*r{
+                    context.addArc(center: ctr1, radius: R, startAngle: -pi/2, endAngle: -th, clockwise: false)
+                    context.addArc(center: centerPoint, radius: r, startAngle: CGFloat(PI)/2+th, endAngle: -(CGFloat(PI)/2+th), clockwise: true)
+                    context.addArc(center: ctr4, radius: R, startAngle: th, endAngle: pi/2, clockwise: false)
+                    context.closePath()
+                    context.setFillColor(color.cgColor)
+                    context.drawPath(using: .fill)
+                }
+                context.addEllipse(in: scrubberRect)
+                context.setFillColor(markerColor)
+                context.drawPath(using: .fill)
+            }
         }
         
+        if showScrubber {
+            addDot(centerX: valuePos, isOutline: false)
+        }
         if hoverValue != nil {
             let hoverValuePos = lineLength*(hoverValue!-minValue)/(maxValue-minValue) + startPoint.x
-            let hoverScrubberRect = CGRect(x: hoverValuePos-scrubberSize, y: mid-scrubberSize, width: scrubberSize*2, height: scrubberSize*2)
-            context.addEllipse(in: hoverScrubberRect)
-            context.setFillColor(markerColor.copy(alpha: 0.3)!)
-            context.drawPath(using: .fill)
+            addDot(centerX: hoverValuePos, isOutline: true)
         }
     }
 }

@@ -26,13 +26,10 @@ class SafeArea: SKNode, ConductorNode {
 class TZScene: SKScene, ConductorNode {
     var isGrouped = true
     var background: SKSpriteNode!
-    let screenMargin: CGFloat = 0.0
+    let screenMargin: CGFloat = 15.0
     let safeArea: SafeArea
     var overlays: SKSpriteNode!
     var trajGroups = [SKTrajGroup]()
-    /*var startTime: TimeInterval = 0
-    var elapsedTime: TimeInterval = 0
-    var deltaTime: TimeInterval = 0*/
     var maxSize = CGSize(width: 1, height: 1)
     var vehicleSprites: [SKVehicle] {
         var sprites = [SKVehicle]()
@@ -43,6 +40,9 @@ class TZScene: SKScene, ConductorNode {
         }
         return sprites
     }
+    var backgroundScene: TZScenery!
+    var preferences = VisualizerPreferences()
+    
     var timeArray: [TimeInterval] = []
     var maxTime: TimeInterval {
         var maxTime: TimeInterval = .leastNormalMagnitude
@@ -79,32 +79,40 @@ class TZScene: SKScene, ConductorNode {
         self.scaleMode = .resizeFill
         let xmargin = screenMargin/size.width
         let ymargin = screenMargin/size.height
+        backgroundScene = TZScenery(scene: self)
         
-        self.anchorPoint = CGPoint(x: xmargin, y: ymargin)
-        safeArea.position = self.anchorPoint
+        // Finish
+        self.anchorPoint = .zero
+        safeArea.position = CGPoint(x: xmargin, y: ymargin)
         self.addChild(safeArea)
     }
     
-    func loadData(data: [State]){
+    func loadData(groups: [RunGroup]){
         self.removeAllChildren()
+        trajGroups = []
+        let cmap: ColorMap = preferences.colorMap ?? .defaultMap
         var xvals = [VarValue](); var yvals = [VarValue]()
-        for thisState in data {
-            xvals.append(contentsOf: thisState["x"]?.value ?? [])
-            yvals.append(contentsOf: thisState["y"]?.value ?? [])
+        var count = 0
+        for thisGroup in groups {
+            let runData = thisGroup.runs.map({$0.trajData ?? []})
+            let trajGroup = SKTrajGroup(data: runData)
+            trajGroup.name = thisGroup.groupDescription
+            if thisGroup.color == nil {
+                trajGroup.pathColor = cmap[count, groups.count] ?? NSColor.systemGray.cgColor
+            } else {
+                trajGroup.pathColor = thisGroup.color!
+            }
+            trajGroups.append(trajGroup)
+            for thisState in runData {
+                xvals.append(contentsOf: thisState["x"]?.value ?? [])
+                yvals.append(contentsOf: thisState["y"]?.value ?? [])
+            }
+            count += 1
         }
         guard xvals.count > 0, yvals.count > 0 else { return }
-        
         let xrange: VarValue = xvals.max()!-xvals.min()!
         let yrange: VarValue = yvals.max()!-yvals.min()!
-        
         maxSize = CGSize(width: xrange, height: yrange)
-                
-        let group1 = SKTrajGroup(data: data)
-        //let traj = group1.trajectories[0]
-        group1.name = "group1"
-        //group1.trajectories = [traj]
-        trajGroups = [group1]
-        
         trajGroups.forEach {
             safeArea.addChild($0)
         }
@@ -119,7 +127,10 @@ class TZScene: SKScene, ConductorNode {
         let sceneScale = [yscale,xscale].min()!
         
         safeArea.setScale(sceneScale)
+        safeArea.position = CGPoint(x: screenMargin, y: screenMargin)
         vehicleSprites.forEach {$0.setScale(1/sceneScale)}
+        
+        backgroundScene?.resize()
     }
     
     required init?(coder aDecoder: NSCoder) {

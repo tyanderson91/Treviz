@@ -144,7 +144,8 @@ extension Analysis {
     var numRuns: Int {
         let mcRunVariants = runVariants.filter {$0.variantType == .montecarlo}
         let numMCRuns: Int = (mcRunVariants.isEmpty || numMonteCarloRuns==0) ? 1 : numMonteCarloRuns
-        return numTradeGroups * numMCRuns
+        let numTradeRuns: Int = numTradeGroups > 0 ? numTradeGroups : 1
+        return numTradeRuns * numMCRuns
     }
     
     func copyData(analysis: Analysis) throws->Data {
@@ -170,13 +171,16 @@ extension Analysis {
                 self.tradeGroups = Array<RunGroup>.init(repeating: RunGroup(), count: numTradeGroups)
             }
             
-            let runGeneratorNum = tradeVariants.isEmpty ? -1 : 0
+            let noTrades = tradeVariants.count == 0 || tradeGroups.count == 0
+            let runGeneratorNum = noTrades ? -1 : 0
             let runGenerator = RunGenerator(analysisData: analysisData, paramSettings: [ParamID: String](), mcVariants: mcVariants, curTradeGroupNum: runGeneratorNum)
             
-            if tradeVariants.isEmpty && mcVariants.isEmpty {
+            if noTrades && mcVariants.isEmpty {
                 allRuns = try [TZRun(analysisData: analysisData, paramSettings: [ParamID: String]() )]
             }
-            else if tradeVariants.isEmpty { allRuns = createAllMCRuns(runGenerator: runGenerator) }
+            else if noTrades {
+                allRuns = createAllMCRuns(runGenerator: runGenerator)
+            }
             else if self.useGroupedVariants {
                 allRuns = try createTradeGroups(runGenerator: runGenerator, tradeVariants: tradeVariants)
             } else {

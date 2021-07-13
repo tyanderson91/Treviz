@@ -20,6 +20,13 @@ protocol TZPlotOutputViewer {
     func createPlot(plot: TZPlot) throws
 }
 
+struct VisualizerPreferences {
+    var colorMap: ColorMap?
+}
+
 protocol TZVizualizer {
-    func loadTrajectories(trajectories: [State])
+    var preferences: VisualizerPreferences { get set }
+    static var preferencesGetter: PlotPreferencesGetter? { get set }
+    
+    func loadTrajectoryData()
 }

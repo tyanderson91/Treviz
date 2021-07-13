@@ -114,7 +114,6 @@ extension Analysis {
     }
     
     func showVisualization(){
-        let allStates: [State] = runs.map({$0.trajData})
-        visualViewer?.loadTrajectories(trajectories: allStates)
+        visualViewer?.loadTrajectoryData()
     }
 }

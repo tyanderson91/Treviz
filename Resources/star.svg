@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   sodipodi:docname="star.svg"
+   inkscape:version="1.0beta2 (2b71d25, 2019-12-03)"
+   id="svg8"
+   version="1.1"
+   viewBox="0 0 20 20"
+   height="20mm"
+   width="20mm">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     inkscape:window-maximized="0"
+     inkscape:window-y="25"
+     inkscape:window-x="0"
+     inkscape:window-height="696"
+     inkscape:window-width="1280"
+     showgrid="false"
+     inkscape:document-rotation="0"
+     inkscape:current-layer="layer1"
+     inkscape:document-units="mm"
+     inkscape:cy="14.159816"
+     inkscape:cx="88.127687"
+     inkscape:zoom="1.4205571"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1"
+     inkscape:groupmode="layer"
+     inkscape:label="Layer 1">
+    <path
+       transform="matrix(0.57191138,0.37858487,-0.37858487,0.57191138,8.4455423,5.8692213)"
+       d="M 13.35781,15.393286 5.0130156,6.2272683 -6.2336446,11.576769 2.9323732,3.2319747 -2.4171276,-8.0146855 5.9276668,1.1513323 17.174327,-4.1981685 8.0083092,4.1466259 Z"
+       inkscape:randomized="0"
+       inkscape:rounded="0"
+       inkscape:flatsided="false"
+       sodipodi:arg2="1.7490768"
+       sodipodi:arg1="0.97779376"
+       sodipodi:r2="2.5788424"
+       sodipodi:r1="14.113662"
+       sodipodi:cy="3.6893003"
+       sodipodi:cx="5.4703412"
+       sodipodi:sides="4"
+       id="path837"
+       style="font-variation-settings:'wdth' 1, 'wght' 1.42999999999999994;opacity:1;fill:#ebffff;fill-opacity:1;stroke:#000000;stroke-width:0.145802;stroke-linejoin:bevel;stroke-miterlimit:10;stroke-dasharray:none"
+       sodipodi:type="star" />
+  </g>
+</svg>

@@ -99,6 +99,7 @@ extension SymbolSet {
  */
 protocol PlotPreferencesGetter {
     func getPreferences(_  plot: TZPlot)->PlotPreferences
+    func getPreferences()->VisualizerPreferences
 }
 
 struct PlotPreferences {
