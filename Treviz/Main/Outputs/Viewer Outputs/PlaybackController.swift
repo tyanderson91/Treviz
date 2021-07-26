@@ -8,25 +8,34 @@
 import Foundation
 import SpriteKit
 
+/**
+ The PlaybackController is a view controller that also serves as the main way to govern playback of a visualization. This class controls the presentation of the playback controller (except for the docked state, which is handled by parent the VizualizerViewController) and the callbacks associated with the various controls
+ */
 class TZPlaybackController: NSViewController, VisualizerPlaybackController {
     var scene: TZScene!
+    /// Default options for playback speed multipliers
     var speedOptions: [CGFloat] = [0.1, 0.2, 0.5, 1.0, 2.0, 3.0, 5.0, 10.0]
     var curSpeedOption: Int = 3
     var maxTime: TimeInterval = 1
     var minTime: TimeInterval = 0
     var shouldRepeat: Bool = false
     
+    /// Current time being simulated
     var elapsedTime: TimeInterval = 0.0 {
         didSet {
             let number = NSNumber(value: elapsedTime)
             currentTimeTextField.stringValue = currentTimeNumberFormatter.string(from: number)!
         }
     }
+    /// t0 gets set to the previous system time during scene updates. This is required to calculate the length of the scene motion during scene updates due to the way SpriteKit handles update calls
     var t0: TimeInterval = 0.0
+    /// Tells the scene to pause on the next scene update. Required to keep the scrubber and the scene synchronized during pause/resume cycles
     var _shouldPause = false
-    var _didEnd = false
+    /// Current state of playback. Options are beginning, end, running, paused, and scrubbing
     var state: PlaybackState = .beginning
+    /// Required to allow the scrubber to persist when held down even if the mouse exits the playback area
     var _mouseInside: Bool = false
+    /// Required to change whether the controller should remain visible
     var _shouldPersist: Bool = false {
         didSet {
             showHideBox()
@@ -47,6 +56,7 @@ class TZPlaybackController: NSViewController, VisualizerPlaybackController {
     @IBOutlet weak var shouldDockButton: NSButton!
     @IBOutlet weak var currentTimeTextField: NSTextField!
     @IBOutlet var currentTimeNumberFormatter: NumberFormatter!
+    /// Custom VC that renders and governs display and feedback from the scrubber
     var scrubberController: CustomPlaybackScrubberController!
     var visualizerController: VisualizerViewController! { return parent as? VisualizerViewController }
     
@@ -57,7 +67,7 @@ class TZPlaybackController: NSViewController, VisualizerPlaybackController {
     private let dockedMargin: CGFloat = 2
     private let cornerRadius: CGFloat = 8
     private let smallMargin: CGFloat = 5
-    private let largin: CGFloat = 7
+    private let largin: CGFloat = 7 // large margin
     private let floatingOffset: CGFloat = 10
     private let boxLineWidth: CGFloat = 1
     
@@ -67,7 +77,7 @@ class TZPlaybackController: NSViewController, VisualizerPlaybackController {
         box.viewDidChangeEffectiveAppearance()
         setControllerLocation()
         let boxTrackingArea = NSTrackingArea(rect: box.bounds, options: [.activeInKeyWindow, .mouseEnteredAndExited, .inVisibleRect], owner: self, userInfo: nil)
-        view.addTrackingArea(boxTrackingArea)
+        view.addTrackingArea(boxTrackingArea) // Used to show/hide playback controller box in floating mode
         setSpeedLabel()
         shouldRepeat = setRepeatButton.state == .on ? true : false
         currentTimeTextField.isBezeled = false
@@ -100,6 +110,9 @@ class TZPlaybackController: NSViewController, VisualizerPlaybackController {
     }
     
     // MARK: Controls
+    /**
+     Determines what the play/pause button should look like and what action it should take depending on the current playback state
+     */
     @IBAction func playPauseButtonToggled(_ sender: Any) {
         switch state {
         case .beginning:
@@ -124,7 +137,7 @@ class TZPlaybackController: NSViewController, VisualizerPlaybackController {
     @IBAction func speedChangeButtonClicked(_ sender: NSControl) {
         if sender.identifier?.rawValue == "slowDownButton" { curSpeedOption -= 1 }
         else if sender.identifier?.rawValue == "speedUpButton" { curSpeedOption += 1 }
-        scene.speed = playbackSpeed
+        scene.speed = playbackSpeed // Automatically set by curSpeedOption
         setSpeedLabel()
     }
     
@@ -132,6 +145,9 @@ class TZPlaybackController: NSViewController, VisualizerPlaybackController {
         shouldRepeat = setRepeatButton.state == .on ? true : false
     }
     
+    /**
+     Called to reset the playback actions after jumping to a new playback position, either by scrubbing, jumping by a fixed time, or manually setting a new time
+     */
     func didChangePosition(){
         scene.stop()
         scrubberController.curValue = elapsedTime
@@ -158,7 +174,7 @@ class TZPlaybackController: NSViewController, VisualizerPlaybackController {
         goToBeginning()
     }
     
-    @IBAction func timeShiftButtonClicked(_ sender: Any) {
+    @IBAction func timeShiftButtonClicked(_ sender: Any) { // TODO: Actually set to +- 10 seconds
         var timeShift: TimeInterval
         if let button = sender as? NSButton {
             switch button.identifier?.rawValue {
@@ -189,6 +205,10 @@ class TZPlaybackController: NSViewController, VisualizerPlaybackController {
         setControllerLocation()
     }
     
+    // MARK: Visuals
+    /**
+     Docks/undocks the playback controller to the bottom of the visualization window
+     */
     func setControllerLocation(){
         if !visualizerController.dockControls {
             box.isHidden = true
@@ -220,7 +240,6 @@ class TZPlaybackController: NSViewController, VisualizerPlaybackController {
         }
     }
     
-    // MARK: Visuals
     func showHideBox(){
         if _mouseInside || _shouldPersist || visualizerController.dockControls {
             box.animator().isHidden = false
@@ -268,6 +287,8 @@ class TZPlaybackController: NSViewController, VisualizerPlaybackController {
             scrubberController.curValue = elapsedTime
         }
     
+        // This block is used to pause the scene one cycle after the pause command is sent and re-start the scene one cycle after the unpause command is sent
+        // Required because this function cannot run while the scene is actually paused, and we need to keep track of the current system time in order to accurately track the playback progress
         if _shouldPause {
             _shouldPause = false
             scene.isPaused = true
@@ -302,6 +323,7 @@ class TZPlaybackController: NSViewController, VisualizerPlaybackController {
         scene.stop()
     }
     
+    // Controls changig the scene and the playback controls when a new time is set
     func goToTime(time newTime: TimeInterval) {
         if newTime < minTime {
             elapsedTime = minTime
@@ -348,6 +370,9 @@ class TZPlaybackController: NSViewController, VisualizerPlaybackController {
         cleanup()
     }
     
+    /**
+     Resets all playback variables to their original state
+     */
     func reset(){
         minTime = scene.minTime
         maxTime = scene.maxTime
@@ -364,6 +389,7 @@ class TZPlaybackController: NSViewController, VisualizerPlaybackController {
         setPlayPauseButton(paused: true)
     }
     
+    /**Run when the playback has completed*/
     func cleanup(){
         state = .end
         scene.isPaused = true
@@ -377,6 +403,7 @@ class TZPlaybackController: NSViewController, VisualizerPlaybackController {
     }
 }
 
+/// Annoying override required to stop weird behaviour when docked
 class TZPlaybackControllerView: NSView {
     override var mouseDownCanMoveWindow: Bool { return false }
 }

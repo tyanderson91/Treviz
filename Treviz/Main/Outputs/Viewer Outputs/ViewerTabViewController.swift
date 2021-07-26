@@ -8,16 +8,25 @@
 
 import Cocoa
 
+/**
+ Allows changing the view window content between the visualizer, plots, and any other visual outputs
+ */
 class ViewerTabViewController: TZTabViewController {
 
     @IBOutlet weak var visualizerTabViewItem: NSTabViewItem!
     @IBOutlet weak var plotTabViewItem: NSTabViewItem!
+    var vizViewController: VisualizerViewController? {
+        return visualizerTabViewItem.viewController as? VisualizerViewController
+    }
+    var plotViewController: PlotOutputSplitViewController? {
+        return plotTabViewItem.viewController as? PlotOutputSplitViewController
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
-        let plotView = plotTabViewItem.viewController
-        let vizView = visualizerTabViewItem.viewController
+        //let plotView = plotTabViewItem.viewController
+        //let vizView = visualizerTabViewItem.viewController
         
         /*
         if let lastTabView = UserDefaults.standard.value(forKey: "selectedOutputTab") {

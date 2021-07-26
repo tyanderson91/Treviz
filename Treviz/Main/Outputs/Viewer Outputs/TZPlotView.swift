@@ -218,6 +218,9 @@ class TZPlotView: NSObject, CPTScatterPlotDelegate, CPTScatterPlotDataSource, CP
     }
 
     // MARK: Helper functions
+    
+    /** For plots where the x axis scale should be equal to the y scale (such as when the units used on each are equal), this function will enforce that equality when resizing the plot
+     */
     private func enforceEqualAxes(xScale: Decimal, yScale: Decimal) {
         let plotSpace = graph.defaultPlotSpace as! CPTXYPlotSpace
         let maxX = plotSpace.xRange.lengthDecimal*xScale

@@ -10,6 +10,9 @@ import Cocoa
 import SpriteKit
 import SceneKit
 
+/**
+ Subclass of SpriteKit view to implement custom interactive behavior
+ */
 class TZSKView: SKView {
     var tzscene: TZScene? { return scene as? TZScene }
     
@@ -23,6 +26,7 @@ class TZSKView: SKView {
         }
     }
     
+    /**Changes the scene background when the OS changes from dark mode to light mode*/
     override func viewDidChangeEffectiveAppearance() {
         super.viewDidChangeEffectiveAppearance()
         let dmode = self.effectiveAppearance.name
@@ -34,6 +38,9 @@ class TZSKView: SKView {
     }
 }
 
+/**
+ This controller presents the view that shows 2d and 3d visualizations via SpriteKit and SceneKit. It implements the methods in the TZVizualizer protocol to serve as the main output for trajectory visualization from an analysis
+ */
 class VisualizerViewController: TZViewController, TZVizualizer, SKSceneDelegate {
     
     @IBOutlet weak var placeholderImageView: NSImageView!
@@ -46,8 +53,9 @@ class VisualizerViewController: TZViewController, TZVizualizer, SKSceneDelegate 
     var dockControls = true
     
     var preferences = VisualizerPreferences()
-    static var preferencesGetter: PlotPreferencesGetter?
+    static var preferencesGetter: PlotPreferencesGetter? // Assigned to the current Application on startup, used as an interface to UserDefaults
     
+    // Constraints to the playback controller, turned off and on to govern whether the controls are docked
     @IBOutlet weak var controlsFixedWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var controlsEqualWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var controlsBottomOffsetConstraint: NSLayoutConstraint!
@@ -55,23 +63,21 @@ class VisualizerViewController: TZViewController, TZVizualizer, SKSceneDelegate 
     @IBOutlet weak var controlsTopConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
-        //view.wantsLayer = true
-        //view.layer?.backgroundColor = NSColor.black.cgColor
+        view.wantsLayer = true
+        view.layer?.backgroundColor = NSColor.black.cgColor
         placeholderImageView?.image = NSImage(named: analysis.phases[0].physicsSettings.centralBodyParam.stringValue)
         analysis.visualViewer = self
         
-        toggleView(1)
         dockControls = UserDefaults.dockVisualizationController
         
         let sceneSize = skView.bounds.size
         curScene = TZScene(size: sceneSize)
         super.viewDidLoad()
         curScene.isPaused = true
-        self.view.viewDidChangeEffectiveAppearance()
+        self.view.viewDidChangeEffectiveAppearance() // Sets the correct scene background
     }
     
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
-        // let id = segue.identifier
         if let playbackVC = segue.destinationController as? TZPlaybackController {
             controlsVC = playbackVC
             curScene.playbackController = playbackVC
@@ -79,8 +85,11 @@ class VisualizerViewController: TZViewController, TZVizualizer, SKSceneDelegate 
         }
     }
 
+    /**
+     This function choses which type of view to present in the visualizer
+     - parameter iview: index of view to show. 1 is a placeholder image, 2 is spritekit view (2d), and 3 is scenekit view (3d)
+     */
     func toggleView(_ iview: Int){
-        
         let curViews: [NSView] = [placeholderImageView, skView]//, sceneView]
         for i in 0...curViews.count-1 {
             if i == iview { curViews[i].isHidden = false }
@@ -88,6 +97,9 @@ class VisualizerViewController: TZViewController, TZVizualizer, SKSceneDelegate 
         }
     }
     
+    /**
+     Called by the Analysis when the run is completed. Draws from the output trade group(s) or run(s), depending on the type of analysis.
+     */
     func loadTrajectoryData() {
         guard UserDefaults.showVisualization else { return }
         if let prefGetter = VisualizerViewController.preferencesGetter {
@@ -96,7 +108,6 @@ class VisualizerViewController: TZViewController, TZVizualizer, SKSceneDelegate 
         }
         
         // 2D SpriteKit view
-        toggleView(1)
         skView.presentScene(curScene)
         var groups: [RunGroup]
         if analysis.tradeGroups.count > 0 {
@@ -109,5 +120,13 @@ class VisualizerViewController: TZViewController, TZVizualizer, SKSceneDelegate 
         curScene.loadData(groups: groups)
         
         skView.viewDidChangeEffectiveAppearance()
+        toggleView(1) // Switch to SpriteKit view
+        controlsVC.view.isHidden = false
+    }
+    
+    func resizeView(){
+        if !skView.isHidden {
+            (skView.scene as? TZScene)?.resizeScene()
+        }
     }
 }

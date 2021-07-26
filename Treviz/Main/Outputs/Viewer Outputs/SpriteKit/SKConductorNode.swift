@@ -9,6 +9,9 @@
 import Foundation
 import SpriteKit
 
+/**
+ ConductorNode should be applied to any SKNode instance that "Conducts" a number of child nodes or sprites; that is, there should be several children each with their own defined actions for themselves that must move in unison (if isGrouped) or sequentially (if !isGrouped)
+ */
 protocol ConductorNode {
     var isGrouped: Bool { get }
     var duration: TimeInterval { get }
@@ -27,11 +30,17 @@ protocol ConductorNode {
     
 }
 
+/**
+ State of a particular SKSpriteNode (position, rotation, and associated dt at a given point in time)
+ */
 struct SKState {
     var pos: CGPoint
     var rot: CGFloat?
     var dt: TimeInterval
 }
+
+/** A PerformerNode should be applied to SpriteNodes that are "Conducted" by Conductor nodes; that is, they contain sets of actions that should be performed at the same time as other performers. A PerformerNode should also be a ConductorNode
+ */
 protocol PerformerNode {
     var actions: [SKAction] { get set }
     var states: [SKState] { get set }
@@ -63,6 +72,7 @@ extension ConductorNode {
         return performers
     }
     
+    /** Single action to be performed on the self that should apply to all children */
     var action: SKAction {
         let childActions: [SKAction] = children.compactMap({
             guard let n = $0 as? ConductorNode, n.name != nil else { return nil }
@@ -72,6 +82,7 @@ extension ConductorNode {
         else { return SKAction.sequence(childActions) }
     }
 
+    /** Total length required to perform all child actions */
     var duration: TimeInterval {
         if isGrouped {
             return childPlayers.max(by: { return $0.duration < $1.duration })?.duration ?? 1.23
@@ -116,6 +127,7 @@ extension ConductorNode {
         }
     }
     
+    /** Stop all currently running actions */
     func stop(){
         removeAllActions()
         childPlayers.forEach {$0.stop()}
@@ -123,6 +135,7 @@ extension ConductorNode {
 }
 
 extension PerformerNode {
+    /** Change the current state to whatever the saved state is at the given time */
     mutating func move(to time: TimeInterval) {
         let ind: Int = {
             let tempInd = (timeArray.firstIndex { $0>time } ?? timeArray.count) - 1

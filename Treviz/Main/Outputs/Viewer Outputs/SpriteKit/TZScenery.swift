@@ -10,6 +10,9 @@ import Foundation
 
 import SpriteKit
 
+/**
+ TZScenery contains all the drawing code for static scene backgrounds
+ */
 class TZScenery {
     let starCount = 70
     let maxStarSize: CGFloat = 40.0
@@ -19,7 +22,7 @@ class TZScenery {
     var groundSprite: SKSpriteNode!
     var sunSprite: SKSpriteNode!
     var moonSprite: SKSpriteNode!
-    var isNight: Bool = false
+    var isNight: Bool?
     
     init(scene sceneIn: TZScene) {
         scene = sceneIn
@@ -61,6 +64,9 @@ class TZScenery {
         moonSprite.position = CGPoint(x: sunSize, y: scene.size.height-sunSize)
     }
     
+    /**
+     Called when the system changes between dark mode and light mode. Changes the type of background between day and night
+     */
     func changeMode(darkMode: Bool){
         if darkMode == isNight {
             return // Do nothing if the desired state is already matched
@@ -71,7 +77,7 @@ class TZScenery {
             scene.addChild(moonSprite)
             groundSprite.color = .green.blended(withFraction: 0.6, of: .black)!
         } else {
-            scene.backgroundColor = NSColor(deviceRed: 0.529, green: 0.808, blue: 0.922, alpha: 0.9)
+            scene.backgroundColor = NSColor(deviceRed: 0.75, green: 0.9, blue: 0.97, alpha: 0.9)
             backgroundStars.forEach({$0.removeFromParent()})
             moonSprite.removeFromParent()
             scene.addChild(sunSprite)

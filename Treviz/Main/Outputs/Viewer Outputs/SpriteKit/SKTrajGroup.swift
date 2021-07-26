@@ -9,6 +9,7 @@
 import Foundation
 import SpriteKit
 
+/** A Traj Group is a group of several SKTrajectories linked by some common factor, like belonging to the same trade group. They share the same trajectory trace and highlight colors */
 class SKTrajGroup: SKNode, ConductorNode {
     var isGrouped = true
     var pathColor: CGColor! {

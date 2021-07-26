@@ -23,6 +23,9 @@ class TextOutputContainerViewController: TZViewController{
     }
 }
 
+/**
+ This SplitViewController controls a horizontal split view separating the text outputs from the log view
+ */
 class TextOutputSplitViewController: TZSplitViewController{
     
     @IBOutlet weak var textOutputSplitViewItem: NSSplitViewItem!
@@ -39,6 +42,9 @@ class TextOutputSplitViewController: TZSplitViewController{
     }
 }
 
+/**
+ This view displays all text outputs sequentially
+ */
 class TextOutputsViewController: TZViewController {
 
     @IBOutlet var textOutputView: NSTextView!

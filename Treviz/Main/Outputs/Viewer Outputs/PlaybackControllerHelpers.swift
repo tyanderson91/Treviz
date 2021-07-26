@@ -8,10 +8,11 @@
 import Foundation
 import SpriteKit
 
-
+/// Used to define the current unique playback state
 enum PlaybackState {
     case beginning, running, end, paused, scrubbing
 }
+/// Protocol used by any controller used to control the scene playback
 protocol VisualizerPlaybackController {
     var scene: TZScene! { get set }
     var speedOptions: [CGFloat] { get }
@@ -27,6 +28,8 @@ protocol VisualizerPlaybackController {
     func updatePlaybackPosition(to time: TimeInterval)
 }
 extension VisualizerPlaybackController {
+    /** Playback speed is automatically set by the curSpeedOption. If the option is within the indices of the default speed options, it selects the matching one. If it is outside, it increases or decreases the speed by a factor of 10
+     */
     var playbackSpeed: CGFloat {
         if curSpeedOption < speedOptions.count && curSpeedOption >= 0 {
             return speedOptions[curSpeedOption]
@@ -42,15 +45,16 @@ extension VisualizerPlaybackController {
     }
 }
 
+/// View controller that controls the scrubbing position
 class CustomPlaybackScrubberController: NSViewController {
     var sview: CustomPlaybackScrubber { return view as! CustomPlaybackScrubber }
-    var maxValue: TimeInterval = 13.0 { didSet { sview.maxValue = CGFloat(self.maxValue) }}
-    var minValue: TimeInterval = 3.0 { didSet { sview.minValue = CGFloat(self.minValue) }}
+    var maxValue: TimeInterval = 1.0 { didSet { sview.maxValue = CGFloat(self.maxValue) }}
+    var minValue: TimeInterval = 0.0 { didSet { sview.minValue = CGFloat(self.minValue) }}
     var curValue: TimeInterval = 0.0 { didSet {
         sview.curValue = CGFloat(self.curValue)
         sview.needsDisplay = true
     }}
-    var savedState: PlaybackState = .beginning
+    var savedState: PlaybackState = .beginning // Playback state before scrubbing began
     var playbackController: TZPlaybackController!
     var boxTrackingArea: NSTrackingArea!
     
@@ -72,9 +76,9 @@ class CustomPlaybackScrubberController: NSViewController {
         mouseDragged(with: event)
     }
     override func mouseDragged(with event: NSEvent) {
-        playbackController._shouldPersist = true
+        playbackController._shouldPersist = true // Always show the playback controller when scrubbing
         sview.hoverValue = nil
-        curValue = lineValue(froms: event)
+        curValue = lineValue(from: event)
         playbackController.goToTime(time: curValue)
         sview.needsDisplay = true
     }
@@ -102,12 +106,15 @@ class CustomPlaybackScrubberController: NSViewController {
         sview.mouseInside = false
     }
     override func mouseMoved(with event: NSEvent) {
-        let dubVal = lineValue(froms: event)
+        let dubVal = lineValue(from: event)
         sview.hoverValue = CGFloat(dubVal)
         sview.needsDisplay = true
     }
     
-    func lineValue(froms event: NSEvent)->TimeInterval {
+    /**
+     Converts a mouse position into a playback time
+     */
+    func lineValue(from event: NSEvent)->TimeInterval {
         let loc = event.locationInWindow
         let relLoc = sview.convert(loc, from: nil)
         let dubVal = sview.posToValue(relLoc.x)
@@ -116,10 +123,11 @@ class CustomPlaybackScrubberController: NSViewController {
         else { return dubVal }
     }
 }
+
 class CustomPlaybackScrubber: NSView {
-    var curValue: CGFloat = 8.0
-    var minValue: CGFloat = 3.0 { didSet { converterScale = (maxValue-minValue)/lineLength } }
-    var maxValue: CGFloat = 13.0  { didSet { converterScale = (maxValue-minValue)/lineLength } }
+    var curValue: CGFloat = 0.5
+    var minValue: CGFloat = 0.0 { didSet { converterScale = (maxValue-minValue)/lineLength } }
+    var maxValue: CGFloat = 1.0  { didSet { converterScale = (maxValue-minValue)/lineLength } }
     var hoverValue: CGFloat? = nil
     var showScrubber = false
     var mouseInside = false
@@ -130,12 +138,13 @@ class CustomPlaybackScrubber: NSView {
     var startPoint: CGPoint!
     var endPoint: CGPoint!
     var lineLength: CGFloat = 1 { didSet { converterScale = (maxValue-minValue)/lineLength } }
-    var converterScale: CGFloat = 1
+    var converterScale: CGFloat = 1 // Used to convert screen position to scene time
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
     
+    /// Converts screen position along the scrubber to a scene time
     func posToValue(_ pos: CGFloat)->TimeInterval {
         return TimeInterval((pos - startPoint.x)*converterScale + minValue)
     }
@@ -159,6 +168,7 @@ class CustomPlaybackScrubber: NSView {
         context.addLines(between: [startPoint, curPoint])
         context.drawPath(using: .stroke)
         
+        /**Drawing code for adding a playback position dot, if required*/
         func addDot(centerX: CGFloat, isOutline: Bool) {
             let centerY = mid
             let r = scrubberSize
@@ -166,11 +176,11 @@ class CustomPlaybackScrubber: NSView {
             let R = r*4
             let scrubberRect = CGRect(x: centerX-r, y: centerY-r, width: r*2, height: r*2)
             
-            if isOutline {
+            if isOutline { // Possible scrubber shown under the current mouse position
                 context.addEllipse(in: scrubberRect)
                 context.setFillColor(markerColor.copy(alpha: 0.6)!)
                 context.drawPath(using: .fill)
-            } else {
+            } else { // Actual current playback position
                 let centerPoint = CGPoint(x: centerX, y: centerY)
                 let th = asin((R+t/2)/(R+r))
                 let pi = CGFloat(PI)

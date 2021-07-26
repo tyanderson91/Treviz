@@ -9,7 +9,9 @@
 import Foundation
 import SpriteKit
 
-// MARK: Protocols
+/**
+ Safe Area is all of the 2d area on the screen that trajectory data can occupy
+ */
 class SafeArea: SKNode, ConductorNode {
     var isGrouped = true
     var timeArray: [TimeInterval] = []
@@ -23,6 +25,9 @@ class SafeArea: SKNode, ConductorNode {
     }
 }
 
+/**
+ Scene is the SKScene subclass used for the main 2d visualizer playback. Only one TZScene should be created
+ */
 class TZScene: SKScene, ConductorNode {
     var isGrouped = true
     var background: SKSpriteNode!
@@ -87,17 +92,20 @@ class TZScene: SKScene, ConductorNode {
         self.addChild(safeArea)
     }
     
+    /**
+     Get all run group/run data from the analysis and create all representative nodes and object data
+     */
     func loadData(groups: [RunGroup]){
         self.removeAllChildren()
         trajGroups = []
         let cmap: ColorMap = preferences.colorMap ?? .defaultMap
         var xvals = [VarValue](); var yvals = [VarValue]()
         var count = 0
-        for thisGroup in groups {
+        for thisGroup in groups { // Even if there are no trade groups, the runs should be passed into this function as a single group
             let runData = thisGroup.runs.map({$0.trajData ?? []})
             let trajGroup = SKTrajGroup(data: runData)
             trajGroup.name = thisGroup.groupDescription
-            if thisGroup.color == nil {
+            if thisGroup.color == nil { // If no default color is assigned to the group, use value from the colormap
                 trajGroup.pathColor = cmap[count, groups.count] ?? NSColor.systemGray.cgColor
             } else {
                 trajGroup.pathColor = thisGroup.color!
@@ -120,6 +128,9 @@ class TZScene: SKScene, ConductorNode {
         playbackController.reset()
     }
     
+    /**
+     Resets the scene and safe area bounds while keeping the vehicle sprites the same size
+     */
     func resizeScene(){
         guard let size = self.view?.bounds.size else { return }
         let xscale = (size.width-2*screenMargin)/maxSize.width
@@ -143,12 +154,18 @@ class TZScene: SKScene, ConductorNode {
         trajGroups = []
     }
     
+    /**
+     Starts playback of all scene objects from the beginning
+     */
     func start() {
+        self.isPaused = false
         self.go(to: minTime)
         self.run(at: minTime)
-        self.isPaused = false
     }
     
+    /**
+     Gets actions for all child nodes starting from a particular time and plays them through to the end
+     */
     func run(at time: TimeInterval){
         guard time < self.maxTime else {
             return
@@ -163,6 +180,9 @@ class TZScene: SKScene, ConductorNode {
         self.run(act)
     }
     
+    /**
+     Run action that updates the current time in the playback controller
+     */
     override func update(_ currentTime: TimeInterval) {
         playbackController.updatePlaybackPosition(to: currentTime)
     }

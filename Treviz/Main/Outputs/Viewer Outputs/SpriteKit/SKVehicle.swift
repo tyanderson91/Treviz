@@ -9,6 +9,7 @@
 import Foundation
 import SpriteKit
 
+/** A vehicle is a node containing a vehicle body and any additional effects such as shocks and engine exhaust plumes */
 class SKVehicle: SKNode, ConductorNode, PerformerNode {
     var states: [SKState] = []
     var isGrouped = false
@@ -25,7 +26,7 @@ class SKVehicle: SKNode, ConductorNode, PerformerNode {
     var vehicleSprite: SKVehicleBody!
     var showPlume = false
     var showShock = false
-    var rotateWithVelocity = true
+    var rotateWithVelocity = true // If there is no set vehicle rotation state, mark this true to always keep the vehicle rotation aligned with velocity
     var action: SKAction { return SKAction.sequence(actions) }
     var actions: [SKAction] = []
     var timeArray: [TimeInterval] = []
@@ -70,7 +71,9 @@ class SKVehicle: SKNode, ConductorNode, PerformerNode {
     }
 }
 
+/** Vehicle Body is the main SpriteNode for a vehicle */
 class SKVehicleBody: SKSpriteNode {
+    /** This function is used to scale the vehicle body to a particular size*/
     func scale(to size: CGFloat){
         let s = self.size
         let totalSize = s.height * s.width

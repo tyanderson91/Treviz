@@ -111,7 +111,7 @@ class TZToolbar: NSToolbar {
 
 
 extension MainWindowController: NSToolbarDelegate {
-    
+    /*
     #if !STORYBOARD_WINDOW_CONTROLLER
     func createToolbar(){
         let toolbar = TZToolbar()
@@ -192,7 +192,18 @@ extension MainWindowController: NSToolbarDelegate {
             }
         }
     }
-    #else
+    #else*/
+    func toolbarDidLoad(){
+        for i in 0...2 {
+            if let isEnabled = UserDefaults().value(forKey: "mainSplitViewDiscloseButton\(i)Enabled") as? Bool {
+                showHidePanesControl.setEnabled(isEnabled, forSegment: i)
+            }
+            if let isSelected = UserDefaults().value(forKey: "mainSplitViewDiscloseButton\(i)Selected") as? Bool {
+                showHidePanesControl.setSelected(isSelected, forSegment: i)
+            }
+        }
+    }
+    
     @IBAction func conditionsClicked(_ sender: Any) {
         self.performSegue(withIdentifier: "conditionsPopupSegue", sender: self)
         /*DispatchQueue.main.async {
@@ -246,5 +257,5 @@ extension MainWindowController: NSToolbarDelegate {
             }
         }
     }
-    #endif
+    //#endif
 }

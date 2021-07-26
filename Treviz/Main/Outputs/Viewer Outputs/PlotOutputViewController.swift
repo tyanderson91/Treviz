@@ -12,6 +12,9 @@ extension NSUserInterfaceItemIdentifier {
     static let plotThumbnailTableCellView = NSUserInterfaceItemIdentifier(rawValue: "plotThumbnailTableCellView")
 }
 
+/**
+ SplitView dividing the plot viewer from the plot view selector
+ */
 class PlotOutputSplitViewController: TZSplitViewController, TZPlotOutputViewer {
     
     @IBOutlet weak var selectorTabViewItem: NSSplitViewItem!

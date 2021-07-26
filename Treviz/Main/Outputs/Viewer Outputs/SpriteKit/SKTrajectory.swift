@@ -9,6 +9,7 @@
 import Foundation
 import SpriteKit
 
+/** An SKTrajectory contains all the sub-nodes required to render a single trajectory trace, including the vehicle, trajectory path, and any propagation trajectories */
 class SKTrajectory: SKNode, ConductorNode {
     var isGrouped = true
     var showPropagation = false
@@ -32,9 +33,8 @@ class SKTrajectory: SKNode, ConductorNode {
         vehicleSprite.position = CGPoint.zero
         self.addChild(vehicleSprite)
         self.position = CGPoint.zero
-        /*
-         Make trajectory traces and propagations
-        */
+        
+        //Make trajectory traces and propagations
         self.trace = SKTrajectoryTrace(trajectory: data)
         trace.strokeColor = trajColor
         self.addChild(trace)
@@ -45,6 +45,7 @@ class SKTrajectory: SKNode, ConductorNode {
     }
 }
 
+/** A trajectory trace is a colored line trailing the position of a vehicle through time */
 class SKTrajectoryTrace: SKShapeNode, ConductorNode, PerformerNode {
     var isGrouped: Bool = false
     var timeArray: [TimeInterval] = []

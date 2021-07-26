@@ -125,14 +125,3 @@ extension CPTPlotSymbol {
         self.fill = newFill
     }
 }
-
-class TestViewController: NSViewController {
-    
-    @IBOutlet weak var button: ColormapPreview!
-    override func viewDidLoad() {
-        button.colormap = ColorMap.allMaps.first { $0.name == "bright" }
-        super.viewDidLoad()
-        if button.colormap.isContinuous {
-        }
-    }
-}

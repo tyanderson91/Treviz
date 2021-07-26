@@ -13,12 +13,20 @@ class MainWindowController: NSWindowController, AnalysisProgressReporter {
     @IBOutlet weak var toolbar: TZToolbar!
     @IBOutlet weak var conditionsToolbarItem: NSToolbarItem!
     //weak var toolbar: TZToolbar!
-    @IBOutlet weak var showHidePanesControl: NSSegmentedControl!
-    @IBOutlet weak var runButton: NSToolbarItem!
-
     var analysis : Analysis! { didSet { self.analysis.progressReporter = self }}
     var viewController: MainViewController! { return contentViewController as? MainViewController ?? nil}
     var analysisProgressBar: NSProgressIndicator? { return viewController.analysisProgressBar }
+
+    // MARK: Toolbar items
+    @IBOutlet weak var showHidePanesControl: NSSegmentedControl!
+    @IBOutlet weak var runButton: NSToolbarItem!
+    
+    
+    // MARK: Window functions
+    override func windowDidLoad() {
+        super.windowDidLoad()
+        toolbarDidLoad()
+    }
     
     @IBAction func storyboardRunAnalysisClicked(_ sender: Any) {
         runAnalysisClicked(sender)

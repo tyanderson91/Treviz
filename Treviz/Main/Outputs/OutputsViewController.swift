@@ -17,6 +17,9 @@ extension NSStoryboardSegue.Identifier{
     //static let textOutputViewSegue = "textOutputViewSegue"
 }
 
+/**
+ The Outputs View Controller is primarily a container for the OutputsSplitViewController
+ */
 class OutputsViewController: TZViewController {
         
     @IBOutlet weak var outputsSplitView: NSView!
@@ -36,7 +39,9 @@ class OutputsViewController: TZViewController {
     }
 }
 
-
+/**
+ The OutputsSplitViewController is a controller for a vertical split view that divides the Outputs Viewer View Controller from the text output and logger
+ */
 class OutputsSplitViewController: TZSplitViewController {
     
     @IBOutlet weak var viewerOutputSplitViewItem: NSSplitViewItem!
@@ -59,5 +64,9 @@ class OutputsSplitViewController: TZSplitViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.analysis.plotOutputViewer = plotViewController
+    }
+    
+    override func splitViewDidResizeSubviews(_ notification: Notification) {
+        viewerTabViewController.vizViewController?.resizeView()
     }
 }

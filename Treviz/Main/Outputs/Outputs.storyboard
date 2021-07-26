@@ -15,14 +15,14 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <containerView horizontalHuggingPriority="1" horizontalCompressionResistancePriority="800" translatesAutoresizingMaskIntoConstraints="NO" id="mJY-d5-f6f">
-                                <rect key="frame" x="0.0" y="0.0" width="278" height="218"/>
+                                <rect key="frame" x="0.0" y="0.0" width="278" height="228"/>
                                 <connections>
                                     <segue destination="N6o-UD-So8" kind="embed" identifier="outputSplitViewSegue" id="1uz-9s-0ga"/>
                                 </connections>
                             </containerView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="mJY-d5-f6f" firstAttribute="top" secondItem="1cc-LO-2Bp" secondAttribute="top" constant="10" id="7Ph-4N-Izj"/>
+                            <constraint firstItem="mJY-d5-f6f" firstAttribute="top" secondItem="1cc-LO-2Bp" secondAttribute="top" id="7Ph-4N-Izj"/>
                             <constraint firstItem="mJY-d5-f6f" firstAttribute="leading" secondItem="1cc-LO-2Bp" secondAttribute="leading" id="bJe-w7-lIv"/>
                             <constraint firstAttribute="trailing" secondItem="mJY-d5-f6f" secondAttribute="trailing" id="rIp-90-1Ta"/>
                             <constraint firstAttribute="bottom" secondItem="mJY-d5-f6f" secondAttribute="bottom" id="ui3-3E-OLv"/>
@@ -290,13 +290,13 @@
         <!--Viewer Tab View Controller-->
         <scene sceneID="7dg-bH-2ZR">
             <objects>
-                <tabViewController identifier="viewerTabViewControllerRestoration" storyboardIdentifier="viewerTabViewController" selectedTabViewItemIndex="1" id="mOM-Iz-vf6" customClass="ViewerTabViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
+                <tabViewController identifier="viewerTabViewControllerRestoration" storyboardIdentifier="viewerTabViewController" selectedTabViewItemIndex="0" id="mOM-Iz-vf6" customClass="ViewerTabViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
                     <tabViewItems>
                         <tabViewItem label="Plots" identifier="plotsTabViewItem" id="Dkd-b9-ouO"/>
                         <tabViewItem label="Visualizer" identifier="visualizerTabViewItem" id="rQj-OT-E8h"/>
                     </tabViewItems>
                     <viewControllerTransitionOptions key="transitionOptions" allowUserInteraction="YES"/>
-                    <tabView key="tabView" type="noTabsNoBorder" id="nLU-aM-vwa">
+                    <tabView key="tabView" drawsBackground="NO" type="noTabsNoBorder" id="nLU-aM-vwa">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <font key="font" metaFont="system"/>
@@ -325,7 +325,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="501" horizontalCompressionResistancePriority="100" verticalCompressionResistancePriority="100" translatesAutoresizingMaskIntoConstraints="NO" id="dVC-90-yCV">
-                                <rect key="frame" x="0.0" y="70" width="320" height="281"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="351"/>
                                 <imageCell key="cell" selectable="YES" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="globe_picture" id="z1w-gs-roZ"/>
                             </imageView>
                             <customView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5ke-9L-ke1" userLabel="2D Scene View" customClass="TZSKView" customModule="Treviz" customModuleProvider="target">
@@ -348,7 +348,7 @@
                             <constraint firstAttribute="trailing" secondItem="dVC-90-yCV" secondAttribute="trailing" id="FCP-pd-ZEa"/>
                             <constraint firstItem="5ke-9L-ke1" firstAttribute="top" secondItem="kVX-fw-nPv" secondAttribute="top" id="Hpz-ZR-zGi"/>
                             <constraint firstAttribute="bottom" secondItem="upz-uG-I30" secondAttribute="bottom" constant="10" id="I7r-zZ-Jix" userLabel="ctrl Bottom Offset Constraint"/>
-                            <constraint firstAttribute="bottom" secondItem="dVC-90-yCV" secondAttribute="bottom" constant="70" id="Qki-9J-Bv0"/>
+                            <constraint firstAttribute="bottom" secondItem="dVC-90-yCV" secondAttribute="bottom" id="Qki-9J-Bv0"/>
                             <constraint firstItem="dVC-90-yCV" firstAttribute="top" secondItem="kVX-fw-nPv" secondAttribute="top" id="R8f-pq-5lL"/>
                             <constraint firstItem="upz-uG-I30" firstAttribute="top" secondItem="5ke-9L-ke1" secondAttribute="bottom" priority="1" id="VJT-W9-S1q" userLabel="ctrl Top Constraint"/>
                             <constraint firstItem="upz-uG-I30" firstAttribute="width" secondItem="5ke-9L-ke1" secondAttribute="width" priority="1" id="Wb1-dO-uSe" userLabel="ctrl Equal Width Constraint"/>
@@ -374,7 +374,7 @@
         <scene sceneID="zHd-Yz-7tW">
             <objects>
                 <viewController title="Playback Controller" storyboardIdentifier="playbackController" showSeguePresentationStyle="single" id="Ogx-I9-jEI" customClass="TZPlaybackController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="yKX-9A-XWy" customClass="TZPlaybackControllerView" customModule="Treviz" customModuleProvider="target">
+                    <view key="view" hidden="YES" id="yKX-9A-XWy" customClass="TZPlaybackControllerView" customModule="Treviz" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="280" height="61"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
@@ -385,10 +385,10 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="6" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h7Y-xc-bH3" userLabel="Main Controls Stack View">
-                                            <rect key="frame" x="64" y="25" width="150" height="27"/>
+                                            <rect key="frame" x="65" y="25" width="148" height="27"/>
                                             <subviews>
                                                 <button identifier="back10Button" verticalHuggingPriority="750" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7ZN-c5-gFD" userLabel="back10">
-                                                    <rect key="frame" x="0.0" y="7" width="14.5" height="15"/>
+                                                    <rect key="frame" x="0.0" y="7" width="14" height="15"/>
                                                     <buttonCell key="cell" type="inline" bezelStyle="inline" image="gobackward.10" catalog="system" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="mPO-bd-14x">
                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                         <font key="font" metaFont="smallSystemBold"/>
@@ -398,7 +398,7 @@
                                                     </connections>
                                                 </button>
                                                 <button identifier="beginningButton" verticalHuggingPriority="750" alphaValue="0.5" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cz1-yY-Tk7" userLabel="Beginning">
-                                                    <rect key="frame" x="20" y="8" width="15.5" height="12"/>
+                                                    <rect key="frame" x="20" y="8" width="14" height="12"/>
                                                     <buttonCell key="cell" type="inline" bezelStyle="inline" image="backward.end.fill" catalog="system" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" imageScaling="proportionallyDown" inset="2" id="xFl-pH-s7k">
                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                         <font key="font" metaFont="smallSystemBold"/>
@@ -408,7 +408,7 @@
                                                     </connections>
                                                 </button>
                                                 <button identifier="slowDownButton" verticalHuggingPriority="750" alphaValue="0.5" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="u2I-XI-Jnh" userLabel="RW">
-                                                    <rect key="frame" x="41" y="8.5" width="18" height="12"/>
+                                                    <rect key="frame" x="40" y="8" width="18" height="12"/>
                                                     <buttonCell key="cell" type="inline" bezelStyle="inline" image="backward.fill" catalog="system" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" imageScaling="proportionallyDown" inset="2" id="kj3-sU-94t">
                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                         <font key="font" metaFont="smallSystemBold"/>
@@ -418,7 +418,7 @@
                                                     </connections>
                                                 </button>
                                                 <button identifier="playPauseButton" verticalHuggingPriority="750" alphaValue="0.5" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rbv-Me-J1P" userLabel="Play/Pause">
-                                                    <rect key="frame" x="65" y="4" width="20" height="19"/>
+                                                    <rect key="frame" x="64" y="4" width="20" height="19"/>
                                                     <buttonCell key="cell" type="recessed" bezelStyle="recessed" image="play.fill" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="cnY-rO-qzw">
                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
                                                         <font key="font" metaFont="systemBold" size="12"/>
@@ -428,7 +428,7 @@
                                                     </connections>
                                                 </button>
                                                 <button identifier="speedUpButton" verticalHuggingPriority="750" alphaValue="0.5" allowsExpansionToolTips="YES" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AgU-d0-e5o" userLabel="FF">
-                                                    <rect key="frame" x="91" y="8.5" width="18" height="12"/>
+                                                    <rect key="frame" x="90" y="8" width="18" height="12"/>
                                                     <buttonCell key="cell" type="inline" bezelStyle="inline" image="forward.fill" catalog="system" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" imageScaling="proportionallyDown" inset="2" id="I0O-QK-B3m">
                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                         <font key="font" metaFont="smallSystemBold"/>
@@ -438,7 +438,7 @@
                                                     </connections>
                                                 </button>
                                                 <button identifier="endButton" verticalHuggingPriority="750" alphaValue="0.5" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I37-mD-oLe" userLabel="End">
-                                                    <rect key="frame" x="115" y="8" width="15.5" height="12"/>
+                                                    <rect key="frame" x="114" y="8" width="14" height="12"/>
                                                     <buttonCell key="cell" type="inline" bezelStyle="inline" image="forward.end.fill" catalog="system" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" imageScaling="proportionallyDown" inset="2" id="eZw-dO-7XU">
                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                         <font key="font" metaFont="smallSystemBold"/>
@@ -448,7 +448,7 @@
                                                     </connections>
                                                 </button>
                                                 <button identifier="fwd10Button" verticalHuggingPriority="750" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hCA-ws-tfM" userLabel="fwd10">
-                                                    <rect key="frame" x="136" y="7" width="14.5" height="15"/>
+                                                    <rect key="frame" x="134" y="7" width="14" height="15"/>
                                                     <buttonCell key="cell" type="inline" bezelStyle="inline" image="goforward.10" catalog="system" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="Ebd-Pw-ZQ8">
                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                         <font key="font" metaFont="smallSystemBold"/>
@@ -489,7 +489,7 @@
                                             </textFieldCell>
                                         </textField>
                                         <button identifier="setRepeat" verticalHuggingPriority="750" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zCc-xZ-YS8" userLabel="Repeat">
-                                            <rect key="frame" x="27" y="29" width="27" height="19"/>
+                                            <rect key="frame" x="29" y="29" width="26" height="19"/>
                                             <buttonCell key="cell" type="recessed" bezelStyle="recessed" image="repeat" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="X3M-bD-Afn">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
                                                 <font key="font" metaFont="systemBold" size="12"/>
@@ -499,7 +499,7 @@
                                             </connections>
                                         </button>
                                         <button identifier="dockButton" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Gi1-L6-57A">
-                                            <rect key="frame" x="4" y="28.5" width="15" height="20"/>
+                                            <rect key="frame" x="4" y="29" width="15" height="20"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="15" id="Nsj-yd-7xC"/>
                                                 <constraint firstAttribute="width" constant="15" id="z8Z-fk-58v"/>
@@ -671,11 +671,11 @@
     </scenes>
     <resources>
         <image name="CSYS" width="20" height="20"/>
-        <image name="arrow.down.backward.square" catalog="system" width="15" height="14"/>
-        <image name="backward.end.fill" catalog="system" width="15" height="13"/>
-        <image name="backward.fill" catalog="system" width="19" height="12"/>
-        <image name="forward.end.fill" catalog="system" width="15" height="13"/>
-        <image name="forward.fill" catalog="system" width="19" height="12"/>
+        <image name="arrow.down.backward.square" catalog="system" width="16" height="14"/>
+        <image name="backward.end.fill" catalog="system" width="16" height="13"/>
+        <image name="backward.fill" catalog="system" width="20" height="12"/>
+        <image name="forward.end.fill" catalog="system" width="16" height="13"/>
+        <image name="forward.fill" catalog="system" width="20" height="12"/>
         <image name="globe_picture" width="2048" height="2048"/>
         <image name="gobackward.10" catalog="system" width="15" height="17"/>
         <image name="goforward.10" catalog="system" width="15" height="17"/>
@@ -2721,6 +2721,6 @@ AAAAAABoAAAAAAAAAAAAAAAAAAHbhg
 </mutableData>
         </image>
         <image name="play.fill" width="10" height="11"/>
-        <image name="repeat" catalog="system" width="17" height="14"/>
+        <image name="repeat" catalog="system" width="18" height="14"/>
     </resources>
 </document>
