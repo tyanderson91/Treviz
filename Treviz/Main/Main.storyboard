@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="18122"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19162"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -514,6 +515,11 @@
                                 <toolbarItem implicitItemIdentifier="DD31E925-B17F-4776-8357-AC29F95EE183" explicitItemIdentifier="runVariants" label="Variants" paletteLabel="Run Variants" tag="-1" image="slider.vertical.3" catalog="system" sizingBehavior="auto" id="a1I-3e-mOH"/>
                                 <toolbarItem implicitItemIdentifier="6B3B0C95-33C2-4168-988B-82E541F050F8" label="Viz" paletteLabel="Viz" tag="-1" image="rotate.3d" catalog="system" sizingBehavior="auto" id="ATF-vq-fIV"/>
                                 <toolbarItem implicitItemIdentifier="46211623-E162-42C5-B776-F785371F7D47" label="Plot" paletteLabel="Plot" tag="-1" image="perspective" catalog="system" sizingBehavior="auto" id="zFO-4H-OQ7"/>
+                                <toolbarItem implicitItemIdentifier="9719A0DA-1FCF-469B-923F-3B4571E10C83" label="Refresh Plots" paletteLabel="Refresh Plots" tag="-1" image="arrow.clockwise" catalog="system" sizingBehavior="auto" autovalidates="NO" id="9JA-Ur-9Js" userLabel="Refresh">
+                                    <connections>
+                                        <action selector="reloadPlotsClicked:" target="jGA-0Y-lOj" id="V1o-pQ-l8c"/>
+                                    </connections>
+                                </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
                                 <toolbarItem reference="jMV-yt-vxY"/>
@@ -523,6 +529,7 @@
                                 <toolbarItem reference="W4U-76-qaD"/>
                                 <toolbarItem reference="h9h-bR-Fwf"/>
                                 <toolbarItem reference="zFO-4H-OQ7"/>
+                                <toolbarItem reference="9JA-Ur-9Js"/>
                                 <toolbarItem reference="ATF-vq-fIV"/>
                                 <toolbarItem reference="sla-GS-rBt"/>
                                 <toolbarItem reference="9m0-eV-BGQ"/>
@@ -538,6 +545,7 @@
                     </window>
                     <connections>
                         <outlet property="conditionsToolbarItem" destination="97n-jf-vw7" id="GHQ-ZJ-FLP"/>
+                        <outlet property="refreshPlotsButton" destination="9JA-Ur-9Js" id="0W2-xd-RYg"/>
                         <outlet property="runButton" destination="jMV-yt-vxY" id="5p0-CK-uZC"/>
                         <outlet property="showHidePanesControl" destination="m1W-ZS-zTL" id="Byh-jj-OGs"/>
                         <outlet property="toolbar" destination="gC3-LF-Jn5" id="h5O-LV-3cg"/>
@@ -673,16 +681,17 @@
         </scene>
     </scenes>
     <resources>
-        <image name="arrow.up.right" catalog="system" width="14" height="12"/>
-        <image name="equal.square" catalog="system" width="16" height="14"/>
+        <image name="arrow.clockwise" catalog="system" width="14" height="16"/>
+        <image name="arrow.up.right" catalog="system" width="13" height="12"/>
+        <image name="equal.square" catalog="system" width="15" height="14"/>
         <image name="move.3d" catalog="system" width="16" height="14"/>
         <image name="p.circle" catalog="system" width="15" height="15"/>
-        <image name="perspective" catalog="system" width="20" height="18"/>
-        <image name="play.rectangle" catalog="system" width="19" height="14"/>
-        <image name="rectangle.bottomthird.inset.fill" catalog="system" width="19" height="14"/>
+        <image name="perspective" catalog="system" width="19" height="18"/>
+        <image name="play.rectangle" catalog="system" width="18" height="14"/>
+        <image name="rectangle.bottomthird.inset.fill" catalog="system" width="18" height="14"/>
         <image name="rotate.3d" catalog="system" width="15" height="15"/>
-        <image name="sidebar.leading" catalog="system" width="19" height="14"/>
-        <image name="sidebar.trailing" catalog="system" width="19" height="14"/>
-        <image name="slider.vertical.3" catalog="system" width="16" height="14"/>
+        <image name="sidebar.leading" catalog="system" width="18" height="14"/>
+        <image name="sidebar.trailing" catalog="system" width="18" height="14"/>
+        <image name="slider.vertical.3" catalog="system" width="15" height="14"/>
     </resources>
 </document>

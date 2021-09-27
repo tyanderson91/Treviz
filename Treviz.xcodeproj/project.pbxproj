@@ -119,6 +119,7 @@
 		CDC1F54022363DDB00D1BB25 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC1F53F22363DDB00D1BB25 /* MainViewController.swift */; };
 		CDC25616243D9E86007EBE8A /* TZMessageLoggerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC25615243D9E86007EBE8A /* TZMessageLoggerViewController.swift */; };
 		CDC789C3247B47A200A1DCED /* AnalysisFactoryInits.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE2A5172471F27700DB2B45 /* AnalysisFactoryInits.swift */; };
+		CDCD730426AE7A2800406285 /* VariableOutputSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDCD730326AE7A2800406285 /* VariableOutputSetupView.swift */; };
 		CDD2BD1F261EA818008BE616 /* Preferences.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDD2BD1E261EA818008BE616 /* Preferences.storyboard */; };
 		CDD2BD25261EA983008BE616 /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD2BD24261EA983008BE616 /* PreferencesViewController.swift */; };
 		CDD5049622252AF900B29751 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD5049522252AF900B29751 /* AppDelegate.swift */; };
@@ -339,6 +340,7 @@
 		CDC1F53B2234874000D1BB25 /* MainSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSplitViewController.swift; sourceTree = "<group>"; };
 		CDC1F53F22363DDB00D1BB25 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		CDC25615243D9E86007EBE8A /* TZMessageLoggerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TZMessageLoggerViewController.swift; sourceTree = "<group>"; };
+		CDCD730326AE7A2800406285 /* VariableOutputSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableOutputSetupView.swift; sourceTree = "<group>"; };
 		CDD2BD1E261EA818008BE616 /* Preferences.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Preferences.storyboard; sourceTree = "<group>"; };
 		CDD2BD24261EA983008BE616 /* PreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
 		CDD5049222252AF900B29751 /* Treviz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Treviz.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -664,6 +666,7 @@
 				CD2D0DAE224382F70012978E /* SingleAxisOutputSetupViewController.swift */,
 				CD2D0DA9224382F70012978E /* TwoAxisOutputSetupViewController.swift */,
 				CD2D0D96224382F70012978E /* ThreeAxisOutputSetupViewController.swift */,
+				CDCD730326AE7A2800406285 /* VariableOutputSetupView.swift */,
 				CD2D0DAA224382F70012978E /* MonteCarloOutputSetupViewController.swift */,
 			);
 			path = Subviews;
@@ -1184,6 +1187,7 @@
 				CDD5049622252AF900B29751 /* AppDelegate.swift in Sources */,
 				CDE2B5BF24C2C729002026E0 /* TZTextOutput.swift in Sources */,
 				CD4AD70823A20EE200FC815F /* OutputSetupViewController.swift in Sources */,
+				CDCD730426AE7A2800406285 /* VariableOutputSetupView.swift in Sources */,
 				CDF0CCDA2671D45E00CF14DE /* SKTrajGroup.swift in Sources */,
 				CDB897C925AC2CD2001EA5E0 /* RunVariantMCViewController.swift in Sources */,
 			);

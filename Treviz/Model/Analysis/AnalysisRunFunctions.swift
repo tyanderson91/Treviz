@@ -111,6 +111,7 @@ extension Analysis {
                 dispatchGroup.leave()
             }
         }
+        plotOutputViewer?.didCreatePlots()
     }
     
     func showVisualization(){

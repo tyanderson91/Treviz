@@ -32,6 +32,7 @@ class PlotOutputSplitViewController: TZSplitViewController, TZPlotOutputViewer {
     
     var tableView: NSTableView! { return selectorViewController.tableView }
     var plotViews: [TZPlotView] = []
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,6 +61,8 @@ class PlotOutputSplitViewController: TZSplitViewController, TZPlotOutputViewer {
         tableView.rowHeight = newWidth
         tableView.tableColumns[0].width = newWidth
         splitView.setPosition(newWidth, ofDividerAt: 0)
+    }
+    func didCreatePlots() {
     }
 }
 class PlotSelectorScrollView: NSScrollView {
@@ -112,6 +115,10 @@ class PlotOutputSelectorViewController: TZViewController, NSTableViewDelegate, N
         tableView.rowHeight = view.bounds.width
     }
     
+    override func viewDidAppear() {
+        parentSplitViewController.splitViewDidResizeSubviews(Notification(name: .init("someNotification")))
+    }
+    
     // MARK: TableViewDelegate and DataSource
     func numberOfRows(in tableView: NSTableView) -> Int {
         return plotViews.count
@@ -142,8 +149,7 @@ class PlotOutputViewerViewController: TZViewController {
     var plotViews: [TZPlotView]! { return parentSplitViewController?.plotViews ?? []}
 }
 
-class PlotOutputViewController: TZViewController, TZPlotOutputViewer {
-    
+class PlotOutputViewController: TZViewController {
     @IBOutlet weak var tableView: NSTableView!
     @IBOutlet weak var graphHostingView: CPTGraphHostingView!
     
@@ -151,17 +157,5 @@ class PlotOutputViewController: TZViewController, TZPlotOutputViewer {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-    
-    
-    // MARK: TZPlotOutputViewer
-    func clearPlots() {
-        plotViews = []
-    }
-    func createPlot(plot: TZPlot) throws {
-        let newGraph = try TZPlotView(with: plot)
-        plotViews.append(newGraph)
-        graphHostingView.hostedGraph = newGraph.graph       
-        tableView.reloadData()
     }
 }

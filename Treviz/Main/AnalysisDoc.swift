@@ -25,13 +25,11 @@ class AnalysisDoc: NSDocument {
 
     var analysis : Analysis!
     // Connections to interface
-    var appDelegate : AppDelegate!
     var windowController : MainWindowController! //Implicit optional, should always be assigned after initialization
     var viewController : MainViewController!
     
     override init() {
         super.init()
-        //analysis.loadVars("InitVars")
     }
     
     convenience init(type typeName: String) throws {
@@ -58,9 +56,6 @@ class AnalysisDoc: NSDocument {
         }
         windowController.contentViewController = mainVC
         window.contentView = mainVC.view
-        /*
-        DistributedNotificationCenter.default.addObserver(windowController as Any, selector: #selector(windowController.completeAnalysis), name: .didFinishRunningAnalysis, object: nil)*/
-        //window.standardWindowButton(NSWindow.ButtonType.closeButton)!.isHidden = true
 
         #else
         if let mainVC = storyboard.instantiateController(withIdentifier: "mainViewController") as? MainViewController {

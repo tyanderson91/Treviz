@@ -18,6 +18,7 @@ protocol TZTextOutputViewer {
 protocol TZPlotOutputViewer {
     func clearPlots()
     func createPlot(plot: TZPlot) throws
+    func didCreatePlots()
 }
 
 struct VisualizerPreferences {

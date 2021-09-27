@@ -11,10 +11,14 @@ import Cocoa
 class PreferencesWindowController:
     NSWindowController, NSWindowDelegate {
     var parentItem: NSMenuItem?
+    var appDelegate: AppDelegate!
     
     override func windowDidLoad() {
         super.windowDidLoad()
         self.window?.delegate = self
+        if let prefVC = self.contentViewController as? PreferencesViewController {
+            prefVC.appDelegate = appDelegate
+        }
     }
 
     func windowWillClose(_ notification: Notification) {
@@ -23,6 +27,7 @@ class PreferencesWindowController:
 }
 
 class PreferencesViewController: NSTabViewController {
+    var appDelegate: AppDelegate!
     override func tabView(_ tabView: NSTabView, didSelect tabViewItem: NSTabViewItem?) {
         super.tabView(tabView, didSelect: tabViewItem)
         UserDefaults.standard.setValue(tabViewItem?.identifier, forKey: "selectedPreferencesTab")
@@ -47,6 +52,7 @@ class GlobalPlotPreferencesViewController: NSViewController, PlotPreferencesCont
         get { return UserDefaults.plotPreferences }
         set { UserDefaults.plotPreferences = newValue
             previewObject.applyPrefs()
+            NotificationCenter.default.post(name: .changedPlotPreferences, object: nil, userInfo: [:])
         }
     }
     var preferencesVC: PlotPreferencesViewController!

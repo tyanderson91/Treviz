@@ -38,14 +38,13 @@ class AddOutputViewController: BaseViewController, VariableGetter {
     @IBOutlet weak var displayOutputStackView: NSStackView!
     @IBOutlet weak var selectedOutputTypeLabel: NSTextField!
     
-    
     func plotTypeSelector(_ plotType: TZPlotType)->(Bool) {return true}//Chooses whether a given plot type applies to the current options
     var outputSetupViewController : OutputSetupViewController!
     var maxPlotID : Int { return self.analysis?.plots.map( {return $0.id} ).max() ?? 0 }
     private var selectedConditionIndex: Int = 0
     
     @objc var representedOutput: TZOutput!
-    
+    var shouldCollapse: Bool = true // Whether the view should be able to collapse vertically
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -77,6 +76,10 @@ class AddOutputViewController: BaseViewController, VariableGetter {
         conditionsPopupButton.addItems(withTitles: analysis.conditions.compactMap({$0.name}))
         if let curCond = representedOutput.condition {
             conditionsPopupButton.selectItem(withTitle: curCond.name)
+        }
+        if shouldCollapse {
+        } else {
+            heightConstraint.constant = savedDefaultHeight
         }
     }
     
@@ -150,5 +153,10 @@ class AddOutputViewController: BaseViewController, VariableGetter {
         }
     }
     
-
+    @IBAction func didChangeTitle(_ sender: Any) {
+        self.titleTextField.refusesFirstResponder = true
+        self.representedOutput.title = (sender as! NSTextField).stringValue
+        titleTextField.window?.makeFirstResponder(self.view)
+    }
+    
 }

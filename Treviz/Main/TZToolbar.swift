@@ -18,7 +18,6 @@ extension NSToolbarItem.Identifier {
     static var runVariants = NSToolbarItem.Identifier("runVariants")
 }
 
-
 class TZToolbarButtonItem: NSToolbarItem {
     var button: NSButton
     override var title: String {
@@ -42,7 +41,6 @@ class TZToolbarButtonItem: NSToolbarItem {
 }
 
 class TZToolbar: NSToolbar {
-    
     /*
     var toggleAnalysisRun = TZToolbarButtonItem(itemIdentifier: .runAnalysis)
     var conditionsButton = TZToolbarButtonItem(itemIdentifier: .conditions)
@@ -206,9 +204,6 @@ extension MainWindowController: NSToolbarDelegate {
     
     @IBAction func conditionsClicked(_ sender: Any) {
         self.performSegue(withIdentifier: "conditionsPopupSegue", sender: self)
-        /*DispatchQueue.main.async {
-            self.performSegue(withIdentifier: "conditionsPopupSegue", sender: self)
-        }*/
     }
     
     
@@ -256,6 +251,13 @@ extension MainWindowController: NSToolbarDelegate {
                 asys.runAnalysis()
             }
         }
+    }
+    
+    @IBAction func reloadPlotsClicked(_ sender: Any) {
+        if let asys = self.contentViewController?.representedObject as? Analysis {
+            asys.processOutputs()
+        }
+        refreshPlotsButton.isEnabled = false
     }
     //#endif
 }

@@ -20,13 +20,13 @@ class EditableHeaderTextField: NSTextField {
     
     override func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)
-        // Drawing code here.
     }
     
     override func textDidEndEditing(_ notification: Notification) {
-        self.resignFirstResponder()
         let text = self.stringValue
         self.setFrameSize(NSSize(width: text.count, height: 50))
+        self.abortEditing()
+        self.window?.makeFirstResponder(nil)
     }
     
 }

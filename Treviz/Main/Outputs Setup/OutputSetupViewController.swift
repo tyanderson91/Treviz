@@ -104,11 +104,11 @@ class OutputSetupViewController: TZViewController{//}, NSTableViewDelegate, NSTa
     
     
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
-        guard ["add1AxisSegue", "add2AxisSegue", "add3AxisSegue", "addMCSegue"].contains(segue.identifier) else { return }
+        guard ["add1AxisSegue", "add2AxisSegue", "add3AxisSegue", "addMCSegue","addVariableSegue"].contains(segue.identifier) else { return }
         let target = segue.destinationController as! AddOutputViewController
         var newOutput: TZOutput!
         switch segue.identifier {
-        case "add1AxisSegue":
+        case "add1AxisSegue", "addVariableSegue":
             newOutput = TZOutput(id: 0, plotType: .singleValue)
         case "add2AxisSegue":
             newOutput = TZOutput(id: 0, plotType: .oneLine2d)
@@ -121,6 +121,7 @@ class OutputSetupViewController: TZViewController{//}, NSTableViewDelegate, NSTa
         }
         target.analysis = self.analysis
         target.outputSetupViewController = self
+        target.shouldCollapse = false
         target.title = "Add Output"
         target.representedOutput = newOutput
     }

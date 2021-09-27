@@ -14,7 +14,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     @IBOutlet weak var application: NSApplication!
     var prefsWC: PreferencesWindowController?
-    
     func applicationWillFinishLaunching(_ notification: Notification) {
     }
     
@@ -27,12 +26,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             ColorMap.allMaps = cmaps
         } catch {}
         setDefaults()
-        for thisWindow in application.windows {
-            let windowController = thisWindow.windowController
-            if let doc = windowController?.document as? AnalysisDoc {
-                doc.appDelegate = self
-            }
-        }
+        
         // Insert code here to initialize your application
     }
     
@@ -45,6 +39,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             let storyboard = NSStoryboard(name: "Preferences", bundle: nil)
             prefsWC = storyboard.instantiateController(identifier: "preferencesWindowController")
             prefsWC?.parentItem = sender as? NSMenuItem
+            prefsWC?.appDelegate = self
+            if let vc = prefsWC?.contentViewController as? PreferencesViewController {
+                vc.appDelegate = self
+            }
         }
         prefsWC?.showWindow(sender)
     }

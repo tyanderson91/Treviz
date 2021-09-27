@@ -8,6 +8,10 @@
 
 import Cocoa
 
+extension NSNotification.Name {
+    static var changedPlotPreferences = NSNotification.Name.init("changedPlotPreferences")
+}
+
 class MainWindowController: NSWindowController, AnalysisProgressReporter {
 
     @IBOutlet weak var toolbar: TZToolbar!
@@ -20,12 +24,14 @@ class MainWindowController: NSWindowController, AnalysisProgressReporter {
     // MARK: Toolbar items
     @IBOutlet weak var showHidePanesControl: NSSegmentedControl!
     @IBOutlet weak var runButton: NSToolbarItem!
-    
+    @IBOutlet weak var refreshPlotsButton: NSToolbarItem!
     
     // MARK: Window functions
     override func windowDidLoad() {
         super.windowDidLoad()
         toolbarDidLoad()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.didChangePreferences), name: .changedPlotPreferences, object: nil)
     }
     
     @IBAction func storyboardRunAnalysisClicked(_ sender: Any) {
@@ -55,6 +61,7 @@ class MainWindowController: NSWindowController, AnalysisProgressReporter {
         guard let outputSplitVC = viewController.mainSplitViewController.outputsViewController.outputSplitViewController else { return }
         let plotTabViewIndex = outputSplitVC.viewerTabViewController.tabView.indexOfTabViewItem(withIdentifier: "plotsTabViewItem")
         let visualizerViewIndex = outputSplitVC.viewerTabViewController.tabView.indexOfTabViewItem(withIdentifier: "visualizerTabViewItem")
+        refreshPlotsButton.isEnabled = false
         
         // Pick which view to jump to after analysis is finished
         if UserDefaults.showVisualization {
@@ -84,5 +91,9 @@ class MainWindowController: NSWindowController, AnalysisProgressReporter {
         let allRuns = analysis.runs.count
         let numComplete = currentState as? Int ?? 0
         return Double(numComplete)/Double(allRuns)
+    }
+    
+    @objc func didChangePreferences(){
+        refreshPlotsButton.isEnabled = true
     }
 }

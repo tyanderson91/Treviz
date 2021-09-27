@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16096"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="18122"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -14,7 +14,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gjX-XY-wws">
-                                <rect key="frame" x="9" y="10" width="394" height="16"/>
+                                <rect key="frame" x="9" y="10" width="395" height="16"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" placeholderString="Heading Title" id="hfZ-9w-jsP">
                                     <font key="font" size="13" name="HelveticaNeue-Bold"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -22,7 +22,7 @@
                                 </textFieldCell>
                             </textField>
                             <button hidden="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5UU-FY-1bt">
-                                <rect key="frame" x="406" y="-2" width="27" height="26"/>
+                                <rect key="frame" x="406" y="-1" width="28" height="26"/>
                                 <buttonCell key="cell" type="disclosure" bezelStyle="roundedDisclosure" imagePosition="only" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="m4a-cQ-TGl">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -54,12 +54,12 @@
         <scene sceneID="k1f-fF-jvq">
             <objects>
                 <viewController storyboardIdentifier="HeaderTriangleViewController" id="QsI-mr-tf4" userLabel="HeaderTriangleController" customClass="HeaderViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="m3B-p0-uYR" customClass="StackHeaderView" customModule="Treviz" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="30"/>
+                    <view key="view" misplaced="YES" id="m3B-p0-uYR" customClass="StackHeaderView" customModule="Treviz" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="28"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="900" verticalHuggingPriority="750" horizontalCompressionResistancePriority="800" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2QF-Iy-jUX" customClass="EditableHeaderTextField" customModule="Treviz" customModuleProvider="target">
-                                <rect key="frame" x="28" y="7" width="86" height="16"/>
+                                <rect key="frame" x="28" y="3" width="86" height="16"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="16" id="yxl-EH-4rM"/>
                                 </constraints>
@@ -70,7 +70,7 @@
                                 </textFieldCell>
                             </textField>
                             <button hidden="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="C34-nq-mBa">
-                                <rect key="frame" x="5" y="5" width="20" height="20"/>
+                                <rect key="frame" x="5" y="1" width="20" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="LFq-5m-Ucv"/>
                                     <constraint firstAttribute="width" constant="20" id="V3t-qf-LvK"/>
@@ -84,8 +84,8 @@
                         <constraints>
                             <constraint firstItem="C34-nq-mBa" firstAttribute="leading" secondItem="m3B-p0-uYR" secondAttribute="leading" constant="5" id="Bjk-u9-yOU"/>
                             <constraint firstItem="C34-nq-mBa" firstAttribute="centerY" secondItem="m3B-p0-uYR" secondAttribute="centerY" id="HWI-7U-3vN"/>
-                            <constraint firstAttribute="bottom" secondItem="2QF-Iy-jUX" secondAttribute="bottom" constant="7" id="T1w-lw-a1K"/>
-                            <constraint firstItem="2QF-Iy-jUX" firstAttribute="top" secondItem="m3B-p0-uYR" secondAttribute="top" constant="7" id="fQb-nK-6E3"/>
+                            <constraint firstAttribute="bottom" secondItem="2QF-Iy-jUX" secondAttribute="bottom" constant="3" id="T1w-lw-a1K"/>
+                            <constraint firstItem="2QF-Iy-jUX" firstAttribute="top" secondItem="m3B-p0-uYR" secondAttribute="top" constant="3" id="fQb-nK-6E3"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="2QF-Iy-jUX" secondAttribute="trailing" constant="1" id="q9Z-2o-vYg"/>
                             <constraint firstItem="2QF-Iy-jUX" firstAttribute="leading" secondItem="C34-nq-mBa" secondAttribute="trailing" constant="5" id="qlp-rp-Adj"/>
                         </constraints>

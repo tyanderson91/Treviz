@@ -241,7 +241,7 @@
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
                                                                         <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="w35-en-TRi">
-                                                                            <rect key="frame" x="31" y="2" width="15" height="13"/>
+                                                                            <rect key="frame" x="31" y="2" width="14" height="13"/>
                                                                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSMenuOnStateTemplate" id="xeu-zy-0V1"/>
                                                                         </imageView>
                                                                     </subviews>
@@ -367,7 +367,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <subviews>
                                     <gridView horizontalHuggingPriority="10" horizontalCompressionResistancePriority="900" xPlacement="fill" yPlacement="center" rowAlignment="none" rowSpacing="10" columnSpacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="tmg-lh-g64">
-                                        <rect key="frame" x="10" y="7" width="313" height="271"/>
+                                        <rect key="frame" x="10" y="5" width="313" height="273"/>
                                         <rows>
                                             <gridRow yPlacement="center" rowAlignment="firstBaseline" id="bGb-Yk-LGd"/>
                                             <gridRow id="TCC-fT-DHT"/>
@@ -377,7 +377,7 @@
                                             <gridRow id="cPP-Pv-Xcu"/>
                                             <gridRow id="lFD-Kk-oVn"/>
                                             <gridRow bottomPadding="20" id="hQI-Nn-MSz"/>
-                                            <gridRow height="28" id="u8A-EB-DJP"/>
+                                            <gridRow id="u8A-EB-DJP"/>
                                         </rows>
                                         <columns>
                                             <gridColumn xPlacement="fill" width="120" id="XLt-gP-m3k"/>
@@ -386,7 +386,7 @@
                                         <gridCells>
                                             <gridCell row="bGb-Yk-LGd" column="XLt-gP-m3k" id="Tjs-bp-v1O">
                                                 <button key="contentView" identifier="physicsModelParamButton" verticalHuggingPriority="750" horizontalCompressionResistancePriority="110" translatesAutoresizingMaskIntoConstraints="NO" id="fP1-Iz-oqM" customClass="RunVariantEnableButton" customModule="Treviz" customModuleProvider="target">
-                                                    <rect key="frame" x="-2" y="251" width="122" height="18"/>
+                                                    <rect key="frame" x="-2" y="253" width="122" height="18"/>
                                                     <buttonCell key="cell" type="check" title="Physics Model:" bezelStyle="regularSquare" imagePosition="left" inset="2" id="feP-PT-AMp">
                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                         <font key="font" metaFont="system"/>
@@ -395,7 +395,7 @@
                                             </gridCell>
                                             <gridCell row="bGb-Yk-LGd" column="yXK-N6-hpP" yPlacement="top" id="qJc-hk-Hq6">
                                                 <popUpButton key="contentView" horizontalHuggingPriority="1" verticalHuggingPriority="230" verticalCompressionResistancePriority="800" translatesAutoresizingMaskIntoConstraints="NO" id="RTv-kH-GyD" customClass="ParamValuePopupView" customModule="Treviz" customModuleProvider="target">
-                                                    <rect key="frame" x="122" y="245" width="195" height="25"/>
+                                                    <rect key="frame" x="122" y="247" width="195" height="25"/>
                                                     <popUpButtonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="LWZ-fo-bZ0">
                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                         <font key="font" metaFont="menu"/>
@@ -405,7 +405,7 @@
                                             </gridCell>
                                             <gridCell row="TCC-fT-DHT" column="XLt-gP-m3k" id="o0U-mf-KIF">
                                                 <button key="contentView" identifier="vehicleInertiaParamButton" verticalHuggingPriority="750" horizontalCompressionResistancePriority="110" translatesAutoresizingMaskIntoConstraints="NO" id="K9K-fS-As2" customClass="RunVariantEnableButton" customModule="Treviz" customModuleProvider="target">
-                                                    <rect key="frame" x="-2" y="220" width="122" height="18"/>
+                                                    <rect key="frame" x="-2" y="222" width="122" height="18"/>
                                                     <buttonCell key="cell" type="check" title="Vehicle Inertia:" bezelStyle="regularSquare" imagePosition="left" refusesFirstResponder="YES" inset="2" id="iu0-Pv-zkT">
                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                         <font key="font" metaFont="system"/>
@@ -414,7 +414,7 @@
                                             </gridCell>
                                             <gridCell row="TCC-fT-DHT" column="yXK-N6-hpP" id="axd-83-rls">
                                                 <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RJ3-a8-wdj" customClass="ParamValueCheckboxView" customModule="Treviz" customModuleProvider="target">
-                                                    <rect key="frame" x="123" y="217" width="192" height="24"/>
+                                                    <rect key="frame" x="123" y="219" width="192" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="qFC-MR-ill"/>
                                                     </constraints>
@@ -426,7 +426,7 @@
                                             </gridCell>
                                             <gridCell row="t9C-N2-Bog" column="XLt-gP-m3k" id="Iu0-Hz-iG1">
                                                 <button key="contentView" identifier="baseCsysParamButton" verticalHuggingPriority="750" horizontalCompressionResistancePriority="110" translatesAutoresizingMaskIntoConstraints="NO" id="c6P-Xd-oJg" customClass="RunVariantEnableButton" customModule="Treviz" customModuleProvider="target">
-                                                    <rect key="frame" x="-2" y="190" width="122" height="18"/>
+                                                    <rect key="frame" x="-2" y="192" width="122" height="18"/>
                                                     <buttonCell key="cell" type="check" title="Base CSYS:" bezelStyle="regularSquare" imagePosition="left" refusesFirstResponder="YES" inset="2" id="rj4-OU-gqb">
                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                         <font key="font" metaFont="system"/>
@@ -435,7 +435,7 @@
                                             </gridCell>
                                             <gridCell row="t9C-N2-Bog" column="yXK-N6-hpP" id="oF1-E8-daf">
                                                 <popUpButton key="contentView" horizontalHuggingPriority="1" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="a66-Df-AG4">
-                                                    <rect key="frame" x="122" y="185" width="195" height="25"/>
+                                                    <rect key="frame" x="122" y="187" width="195" height="25"/>
                                                     <popUpButtonCell key="cell" type="push" title="Default" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" refusesFirstResponder="YES" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="aQx-n1-DRf" id="Afg-sY-sEo">
                                                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                         <font key="font" metaFont="menu"/>
@@ -449,13 +449,13 @@
                                             </gridCell>
                                             <gridCell row="Lav-ak-fVd" column="XLt-gP-m3k" id="YSz-ya-Zgt">
                                                 <box key="contentView" verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="VzI-YQ-G6u">
-                                                    <rect key="frame" x="0.0" y="176" width="120" height="5"/>
+                                                    <rect key="frame" x="0.0" y="178" width="120" height="5"/>
                                                 </box>
                                             </gridCell>
                                             <gridCell row="Lav-ak-fVd" column="yXK-N6-hpP" id="wH2-9N-n2V"/>
                                             <gridCell row="9gt-2H-6jc" column="XLt-gP-m3k" id="o2e-Mc-dBg">
                                                 <button key="contentView" identifier="centralBodyParamButton" verticalHuggingPriority="750" horizontalCompressionResistancePriority="110" translatesAutoresizingMaskIntoConstraints="NO" id="ZFR-Za-wyA" customClass="RunVariantEnableButton" customModule="Treviz" customModuleProvider="target">
-                                                    <rect key="frame" x="-2" y="149" width="122" height="18"/>
+                                                    <rect key="frame" x="-2" y="151" width="122" height="18"/>
                                                     <buttonCell key="cell" type="check" title="Central Body:" bezelStyle="regularSquare" imagePosition="left" refusesFirstResponder="YES" inset="2" id="2z2-Y9-EpP">
                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                         <font key="font" metaFont="system"/>
@@ -464,7 +464,7 @@
                                             </gridCell>
                                             <gridCell row="9gt-2H-6jc" column="yXK-N6-hpP" id="mDr-0a-fgM">
                                                 <popUpButton key="contentView" identifier="centralBodyPopup" horizontalHuggingPriority="1" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Oak-fd-xrW" customClass="ParamValuePopupView" customModule="Treviz" customModuleProvider="target">
-                                                    <rect key="frame" x="122" y="144" width="195" height="25"/>
+                                                    <rect key="frame" x="122" y="146" width="195" height="25"/>
                                                     <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="mn9-CG-aGg">
                                                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                         <font key="font" metaFont="menu"/>
@@ -474,7 +474,7 @@
                                             </gridCell>
                                             <gridCell row="cPP-Pv-Xcu" column="XLt-gP-m3k" xPlacement="leading" id="aQY-yI-Ivv">
                                                 <button key="contentView" identifier="rotationParamButton" verticalHuggingPriority="750" horizontalCompressionResistancePriority="110" translatesAutoresizingMaskIntoConstraints="NO" id="QYJ-6g-vXA" customClass="RunVariantEnableButton" customModule="Treviz" customModuleProvider="target">
-                                                    <rect key="frame" x="-2" y="119" width="81" height="18"/>
+                                                    <rect key="frame" x="-2" y="121" width="81" height="18"/>
                                                     <buttonCell key="cell" type="check" title="Rotation:" bezelStyle="regularSquare" imagePosition="left" refusesFirstResponder="YES" inset="2" id="Jut-As-J5F">
                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                         <font key="font" metaFont="system"/>
@@ -483,7 +483,7 @@
                                             </gridCell>
                                             <gridCell row="cPP-Pv-Xcu" column="yXK-N6-hpP" id="5v0-UM-hB8">
                                                 <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JkS-Wy-UHs" customClass="ParamValueCheckboxView" customModule="Treviz" customModuleProvider="target">
-                                                    <rect key="frame" x="123" y="116" width="192" height="24"/>
+                                                    <rect key="frame" x="123" y="118" width="192" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="ThP-z7-6oB"/>
                                                     </constraints>
@@ -495,7 +495,7 @@
                                             </gridCell>
                                             <gridCell row="lFD-Kk-oVn" column="XLt-gP-m3k" xPlacement="leading" id="fhT-EJ-cUB">
                                                 <button key="contentView" identifier="gravityParamButton" verticalHuggingPriority="750" horizontalCompressionResistancePriority="110" translatesAutoresizingMaskIntoConstraints="NO" id="xz5-kz-eDY" customClass="RunVariantEnableButton" customModule="Treviz" customModuleProvider="target">
-                                                    <rect key="frame" x="-2" y="89" width="73" height="18"/>
+                                                    <rect key="frame" x="-2" y="91" width="73" height="18"/>
                                                     <buttonCell key="cell" type="check" title="Gravity:" bezelStyle="regularSquare" imagePosition="left" refusesFirstResponder="YES" inset="2" id="WD5-5v-g27">
                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                         <font key="font" metaFont="system"/>
@@ -504,7 +504,7 @@
                                             </gridCell>
                                             <gridCell row="lFD-Kk-oVn" column="yXK-N6-hpP" id="5Lu-bo-Gqz">
                                                 <popUpButton key="contentView" horizontalHuggingPriority="1" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xYN-Bk-KCI">
-                                                    <rect key="frame" x="122" y="84" width="195" height="25"/>
+                                                    <rect key="frame" x="122" y="86" width="195" height="25"/>
                                                     <popUpButtonCell key="cell" type="push" title="Constant" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" refusesFirstResponder="YES" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="DVB-9W-28j" id="L5t-5r-hdI">
                                                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                         <font key="font" metaFont="menu"/>
@@ -521,7 +521,7 @@
                                             </gridCell>
                                             <gridCell row="hQI-Nn-MSz" column="XLt-gP-m3k" xPlacement="leading" id="inK-0o-KYP">
                                                 <button key="contentView" identifier="atmosphereParamButton" verticalHuggingPriority="750" horizontalCompressionResistancePriority="110" translatesAutoresizingMaskIntoConstraints="NO" id="YPk-SS-aIm" customClass="RunVariantEnableButton" customModule="Treviz" customModuleProvider="target">
-                                                    <rect key="frame" x="-2" y="59" width="104" height="18"/>
+                                                    <rect key="frame" x="-2" y="61" width="104" height="18"/>
                                                     <buttonCell key="cell" type="check" title="Atmosphere:" bezelStyle="regularSquare" imagePosition="left" refusesFirstResponder="YES" inset="2" id="129-Sk-DaD">
                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                         <font key="font" metaFont="system"/>
@@ -530,7 +530,7 @@
                                             </gridCell>
                                             <gridCell row="hQI-Nn-MSz" column="yXK-N6-hpP" id="6wm-o9-CaU">
                                                 <popUpButton key="contentView" horizontalHuggingPriority="1" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mdR-9i-Asi">
-                                                    <rect key="frame" x="122" y="54" width="195" height="25"/>
+                                                    <rect key="frame" x="122" y="56" width="195" height="25"/>
                                                     <popUpButtonCell key="cell" type="push" title="None" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" refusesFirstResponder="YES" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="Ovn-an-Gs6" id="yNj-jQ-Nta">
                                                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                         <font key="font" metaFont="menu"/>
@@ -995,7 +995,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="NSMenuOnStateTemplate" width="15" height="13"/>
+        <image name="NSMenuOnStateTemplate" width="14" height="13"/>
         <image name="NSStatusUnavailable" width="16" height="16"/>
     </resources>
 </document>
