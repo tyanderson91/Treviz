@@ -15,7 +15,7 @@ class MainSplitViewController: TZSplitViewController {
     @IBOutlet @objc weak var inputsSplitViewItem: NSSplitViewItem!
     @IBOutlet @objc weak var outputsSplitViewItem: NSSplitViewItem!
     @IBOutlet @objc weak var outputSetupSplitViewItem: NSSplitViewItem!
-    var inputsViewController : InputsViewController!
+    var inputsViewController : InputsSplitViewController!
     var outputsViewController : OutputsViewController!
     var outputSetupViewController : OutputSetupViewController!
     var splitViewItemList : [NSSplitViewItem] = []
@@ -28,7 +28,7 @@ class MainSplitViewController: TZSplitViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        inputsViewController = (inputsSplitViewItem?.viewController as! InputsViewController)
+        inputsViewController = (inputsSplitViewItem?.viewController as! InputsSplitViewController)
         outputsViewController = (outputsSplitViewItem?.viewController as! OutputsViewController)
         outputSetupViewController = (outputSetupSplitViewItem?.viewController as! OutputSetupViewController)
         splitViewItemList = [inputsSplitViewItem, outputsSplitViewItem, outputSetupSplitViewItem]

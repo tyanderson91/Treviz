@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="BWH-wW-vxd">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="qZy-yh-Qxd">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="18122"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19162"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -589,12 +590,12 @@
         <scene sceneID="C4I-xd-iuZ">
             <objects>
                 <viewController title="Phase" id="Tb7-7q-ypH" customClass="PhaseSelectorViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="kwp-cl-qZz">
-                        <rect key="frame" x="0.0" y="0.0" width="337" height="124"/>
+                    <view key="view" misplaced="YES" id="kwp-cl-qZz">
+                        <rect key="frame" x="0.0" y="0.0" width="337" height="43"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GoG-xn-wVj">
-                                <rect key="frame" x="149" y="106" width="39" height="13"/>
+                                <rect key="frame" x="149" y="25" width="39" height="13"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Phases" id="gZX-yY-3kk">
                                     <font key="font" metaFont="system" size="10"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -602,7 +603,10 @@
                                 </textFieldCell>
                             </textField>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="0YV-8A-kq0" customClass="PhaseSelectorView" customModule="Treviz" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="337" height="106"/>
+                                <rect key="frame" x="0.0" y="0.0" width="337" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="25" id="h5u-gd-4QH"/>
+                                </constraints>
                             </customView>
                         </subviews>
                         <constraints>
@@ -620,36 +624,48 @@
                 </viewController>
                 <customObject id="RFJ-F8-7YD" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="358" y="324"/>
+            <point key="canvasLocation" x="24" y="211"/>
+        </scene>
+        <!--Inputs Split View Controller-->
+        <scene sceneID="3Qw-bi-7wV">
+            <objects>
+                <splitViewController id="qZy-yh-Qxd" customClass="InputsSplitViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
+                    <splitViewItems>
+                        <splitViewItem canCollapse="YES" id="rsg-1Y-HIj"/>
+                        <splitViewItem id="ejg-9K-M27"/>
+                        <splitViewItem canCollapse="YES" id="0yR-cR-p2v"/>
+                    </splitViewItems>
+                    <splitView key="splitView" dividerStyle="thin" id="QPy-7v-2FJ">
+                        <rect key="frame" x="0.0" y="140" width="357" height="160"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <connections>
+                            <outlet property="delegate" destination="qZy-yh-Qxd" id="uxf-Ek-SBm"/>
+                        </connections>
+                    </splitView>
+                    <connections>
+                        <outlet property="inputsSplitViewItem" destination="ejg-9K-M27" id="c8v-hj-BUt"/>
+                        <outlet property="phaseSelectorSplitViewItem" destination="rsg-1Y-HIj" id="InQ-eq-6ei"/>
+                        <outlet property="runVariantsSplitViewItem" destination="0yR-cR-p2v" id="R6C-5Z-8IS"/>
+                        <outlet property="splitView" destination="QPy-7v-2FJ" id="XAO-HU-JfL"/>
+                        <segue destination="Tb7-7q-ypH" kind="relationship" relationship="splitItems" id="SpO-IG-hSS"/>
+                        <segue destination="BWH-wW-vxd" kind="relationship" relationship="splitItems" id="hcU-j1-0cL"/>
+                        <segue destination="yzs-kH-zal" kind="relationship" relationship="splitItems" id="s2J-Ct-Qz8"/>
+                    </connections>
+                </splitViewController>
+                <customObject id="ACI-yI-3dE" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-724" y="545"/>
         </scene>
         <!--Inputs View Controller-->
         <scene sceneID="PF7-IS-NV6">
             <objects>
                 <viewController title="Inputs View Controller" identifier="inputsRestoration" storyboardIdentifier="inputs" id="BWH-wW-vxd" customClass="InputsViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="V9E-Gq-8Gm">
-                        <rect key="frame" x="0.0" y="0.0" width="485" height="436"/>
+                        <rect key="frame" x="0.0" y="0.0" width="485" height="250"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <containerView horizontalHuggingPriority="500" verticalHuggingPriority="150" translatesAutoresizingMaskIntoConstraints="NO" id="LWo-gC-UYm">
-                                <rect key="frame" x="0.0" y="0.0" width="485" height="116"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" relation="lessThanOrEqual" priority="900" constant="500" id="VPp-5e-8Mv"/>
-                                </constraints>
-                                <connections>
-                                    <segue destination="yzs-kH-zal" kind="embed" identifier="runVariantViewSegue" id="nQE-AN-WhO"/>
-                                </connections>
-                            </containerView>
-                            <containerView translatesAutoresizingMaskIntoConstraints="NO" id="L3y-BR-B63">
-                                <rect key="frame" x="0.0" y="366" width="485" height="70"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="70" id="uel-9I-ihq"/>
-                                </constraints>
-                                <connections>
-                                    <segue destination="Tb7-7q-ypH" kind="embed" identifier="PhaseSelectorSegue" id="CJq-3H-vvs"/>
-                                </connections>
-                            </containerView>
                             <scrollView verticalHuggingPriority="750" verticalCompressionResistancePriority="50" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="niT-kp-oja">
-                                <rect key="frame" x="0.0" y="116" width="485" height="250"/>
+                                <rect key="frame" x="0.0" y="0.0" width="485" height="250"/>
                                 <clipView key="contentView" id="KbV-Po-mOw">
                                     <rect key="frame" x="1" y="1" width="483" height="248"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -679,15 +695,9 @@
                             </scrollView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="LWo-gC-UYm" firstAttribute="top" secondItem="niT-kp-oja" secondAttribute="bottom" priority="10" id="7Le-KY-imv"/>
-                            <constraint firstItem="L3y-BR-B63" firstAttribute="leading" secondItem="V9E-Gq-8Gm" secondAttribute="leading" id="82e-T5-avm"/>
-                            <constraint firstItem="LWo-gC-UYm" firstAttribute="leading" secondItem="V9E-Gq-8Gm" secondAttribute="leading" id="FkC-FG-6ex"/>
-                            <constraint firstAttribute="trailing" secondItem="LWo-gC-UYm" secondAttribute="trailing" id="Kf7-LL-gcH"/>
-                            <constraint firstItem="niT-kp-oja" firstAttribute="top" secondItem="L3y-BR-B63" secondAttribute="bottom" id="Yu8-8g-nFz"/>
+                            <constraint firstItem="niT-kp-oja" firstAttribute="top" secondItem="V9E-Gq-8Gm" secondAttribute="top" id="5Em-b1-fVf"/>
+                            <constraint firstAttribute="bottom" secondItem="niT-kp-oja" secondAttribute="bottom" id="a4n-0Q-aNG"/>
                             <constraint firstItem="niT-kp-oja" firstAttribute="leading" secondItem="V9E-Gq-8Gm" secondAttribute="leading" id="d2h-td-cRn"/>
-                            <constraint firstAttribute="bottom" secondItem="LWo-gC-UYm" secondAttribute="bottom" id="dZZ-sE-u8G"/>
-                            <constraint firstAttribute="trailing" secondItem="L3y-BR-B63" secondAttribute="trailing" id="lYh-cs-33P"/>
-                            <constraint firstItem="L3y-BR-B63" firstAttribute="top" secondItem="V9E-Gq-8Gm" secondAttribute="top" id="vr9-ro-Z14"/>
                             <constraint firstAttribute="trailing" secondItem="niT-kp-oja" secondAttribute="trailing" id="zAJ-9r-aal"/>
                         </constraints>
                     </view>
@@ -697,7 +707,7 @@
                 </viewController>
                 <customObject id="ccH-Wh-n6o" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-183.5" y="473"/>
+            <point key="canvasLocation" x="-71" y="590"/>
         </scene>
         <!--RunVariants-->
         <scene sceneID="JYK-tI-I9S">
@@ -705,7 +715,7 @@
                 <controllerPlaceholder storyboardIdentifier="runVariantsVC" storyboardName="RunVariants" id="yzs-kH-zal" sceneMemberID="viewController"/>
                 <customObject id="XiX-KB-fcM" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="20" y="990"/>
+            <point key="canvasLocation" x="-498" y="770"/>
         </scene>
         <!--Run Settings View Controller-->
         <scene sceneID="qmf-V1-g4n">

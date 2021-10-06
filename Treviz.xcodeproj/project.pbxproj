@@ -1583,7 +1583,7 @@
 			repositoryURL = "https://github.com/jpsim/Yams.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.0;
+				minimumVersion = 3.0.0;
 			};
 		};
 		CD7045612601D14E00A2F372 /* XCRemoteSwiftPackageReference "OrderedDictionary" */ = {
@@ -1591,7 +1591,7 @@
 			repositoryURL = "https://github.com/lukaskubanek/OrderedDictionary.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 3.0.1;
+				minimumVersion = 4.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

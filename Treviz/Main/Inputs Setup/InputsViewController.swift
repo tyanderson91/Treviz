@@ -38,7 +38,8 @@ class InputsSplitViewController: TZSplitViewController {
         runVariantViewController = runVariantsSplitViewItem.viewController as? RunVariantViewController
         inputsViewController.inputSplitViewController = self
         phaseSelectorViewController.inputSplitViewController = self
-        runVariantViewController.inputsViewController = inputsViewController
+        runVariantViewController.inputsSplitViewController = self
+        super.viewDidLoad()
     }
 }
 
@@ -112,17 +113,8 @@ class InputsViewController: TZViewController {
         stack.addViewController(physicsViewController)
         stack.addViewController(initStateViewController)
 
-    }
-    
-    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
-        if segue.identifier == "runVariantViewSegue" {
-            self.runVariantViewController = segue.destinationController as? RunVariantViewController
-            self.runVariantViewController.analysis = analysis
-            runVariantViewController.inputsViewController = self
-        } else if segue.identifier == "PhaseSelectorSegue" {
-            self.phaseSelectorViewController = segue.destinationController as? PhaseSelectorViewController
-            self.phaseSelectorViewController.analysis = analysis
-        }
+        runVariantViewController = self.inputSplitViewController.runVariantViewController!
+        phaseSelectorViewController = self.inputSplitViewController.phaseSelectorViewController!
     }
     
     func reloadParams(){

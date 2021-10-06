@@ -6,8 +6,8 @@
         "repositoryURL": "https://github.com/lukaskubanek/OrderedDictionary.git",
         "state": {
           "branch": null,
-          "revision": "9adcc6f84c470bd80a29e16887c0f94fea2a783d",
-          "version": "3.0.1"
+          "revision": "3bac27b7a8011a76fa98cc11390df97c16ca6fae",
+          "version": "4.0.1"
         }
       },
       {
@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/jpsim/Yams.git",
         "state": {
           "branch": null,
-          "revision": "c947a306d2e80ecb2c0859047b35c73b8e1ca27f",
-          "version": "2.0.0"
+          "revision": "81a65c4069c28011ee432f2858ba0de49b086677",
+          "version": "3.0.1"
         }
       }
     ]

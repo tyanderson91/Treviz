@@ -31,7 +31,7 @@ class RunVariantViewController: TZViewController {
     
     var params : [Parameter] { return analysis.activeParameters }
     var runVariants: [RunVariant] { return analysis?.runVariants.filter({$0.isActive}) ?? [] }
-    var inputsViewController: InputsViewController?
+    var inputsSplitViewController: InputsSplitViewController?
     @IBOutlet weak var numRunsTotalTextField: NSTextField!
     @IBOutlet var numRunsFormatter: NumberFormatter!
     

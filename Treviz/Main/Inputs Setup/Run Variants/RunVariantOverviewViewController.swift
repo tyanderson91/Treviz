@@ -90,8 +90,8 @@ class RunVariantOverviewViewController: TZViewController, NSTableViewDelegate, N
     func deactivateRunVariant(_ index: Int){
         let thisParam = activeVariants[index]
         analysis.disableParam(param: thisParam.parameter)
-        parentVC.inputsViewController?.updateParamValueView(for: thisParam.paramID)
-        parentVC.inputsViewController?.updateParamSelectorView(for: thisParam.paramID)
+        parentVC.inputsSplitViewController?.inputsViewController?.updateParamValueView(for: thisParam.paramID)
+        parentVC.inputsSplitViewController?.inputsViewController?.updateParamSelectorView(for: thisParam.paramID)
         if thisParam.variantType == .trade {
             parentVC.tradesVC.addRemoveTradeVariantCol(shouldAdd: false, runVariant: thisParam)
             parentVC.tradesVC.reloadPermutationsView()
@@ -107,7 +107,7 @@ class RunVariantOverviewViewController: TZViewController, NSTableViewDelegate, N
         if let thisSelector = sender as? ParamValueView {
             guard let param = thisSelector.parameter else {return}
             param.setValue(to: thisSelector.stringValue)
-            parentVC.inputsViewController?.updateParamValueView(for: param.id)
+            parentVC.inputsSplitViewController?.inputsViewController?.updateParamValueView(for: param.id)
             thisSelector.update()
         }
     }
