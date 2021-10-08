@@ -12,9 +12,10 @@ import Cocoa
 
 class MainSplitViewController: TZSplitViewController {
 
-    @IBOutlet @objc weak var inputsSplitViewItem: NSSplitViewItem!
+    @IBOutlet @objc weak var sidebarSplitViewItem: NSSplitViewItem!
     @IBOutlet @objc weak var outputsSplitViewItem: NSSplitViewItem!
     @IBOutlet @objc weak var outputSetupSplitViewItem: NSSplitViewItem!
+    var sidebarViewController: SidebarTabViewController!
     var inputsViewController : InputsSplitViewController!
     var outputsViewController : OutputsViewController!
     var outputSetupViewController : OutputSetupViewController!
@@ -23,15 +24,16 @@ class MainSplitViewController: TZSplitViewController {
         var numViews = 0
         for thisView in splitViewItemList { numViews += (thisView.isCollapsed ? 0 : 1) }
         return numViews}
-    let splitViewNames = ["inputs", "outputs", "outputSetup"]
-    let holdingPriorites : Dictionary<String, Int> = ["inputs": 300, "outputs":10, "outputSetup": 350]
+    let splitViewNames = ["sidebar", "outputs", "outputSetup"]
+    let holdingPriorites : Dictionary<String, Int> = ["sidebar": 300, "outputs":10, "outputSetup": 350]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        inputsViewController = (inputsSplitViewItem?.viewController as! InputsSplitViewController)
+        sidebarViewController = (sidebarSplitViewItem?.viewController as! SidebarTabViewController)
+        inputsViewController = sidebarViewController.inputsViewController
         outputsViewController = (outputsSplitViewItem?.viewController as! OutputsViewController)
         outputSetupViewController = (outputSetupSplitViewItem?.viewController as! OutputSetupViewController)
-        splitViewItemList = [inputsSplitViewItem, outputsSplitViewItem, outputSetupSplitViewItem]
+        splitViewItemList = [sidebarSplitViewItem, outputsSplitViewItem, outputSetupSplitViewItem]
         
         for splitViewName in splitViewNames {
             let itemKey = splitViewName + "SplitViewItem"

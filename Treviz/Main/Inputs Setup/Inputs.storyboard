@@ -590,12 +590,12 @@
         <scene sceneID="C4I-xd-iuZ">
             <objects>
                 <viewController title="Phase" id="Tb7-7q-ypH" customClass="PhaseSelectorViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" misplaced="YES" id="kwp-cl-qZz">
+                    <view key="view" id="kwp-cl-qZz">
                         <rect key="frame" x="0.0" y="0.0" width="337" height="43"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GoG-xn-wVj">
-                                <rect key="frame" x="149" y="25" width="39" height="13"/>
+                                <rect key="frame" x="149" y="30" width="39" height="13"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Phases" id="gZX-yY-3kk">
                                     <font key="font" metaFont="system" size="10"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -603,7 +603,7 @@
                                 </textFieldCell>
                             </textField>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="0YV-8A-kq0" customClass="PhaseSelectorView" customModule="Treviz" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="337" height="25"/>
+                                <rect key="frame" x="0.0" y="0.0" width="337" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="25" id="h5u-gd-4QH"/>
                                 </constraints>
@@ -614,7 +614,7 @@
                             <constraint firstItem="0YV-8A-kq0" firstAttribute="leading" secondItem="kwp-cl-qZz" secondAttribute="leading" id="9aX-sA-Vz6"/>
                             <constraint firstAttribute="trailing" secondItem="0YV-8A-kq0" secondAttribute="trailing" id="Hbr-wC-lKb"/>
                             <constraint firstAttribute="bottom" secondItem="0YV-8A-kq0" secondAttribute="bottom" id="L7N-SK-rfu"/>
-                            <constraint firstItem="GoG-xn-wVj" firstAttribute="top" secondItem="kwp-cl-qZz" secondAttribute="top" constant="5" id="bEk-WX-H9z"/>
+                            <constraint firstItem="GoG-xn-wVj" firstAttribute="top" secondItem="kwp-cl-qZz" secondAttribute="top" id="bEk-WX-H9z"/>
                             <constraint firstItem="0YV-8A-kq0" firstAttribute="top" secondItem="GoG-xn-wVj" secondAttribute="bottom" id="qhF-c1-8Rd"/>
                         </constraints>
                     </view>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="QK9-IU-aUs">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19162"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Sidebar Tab View Controller-->
+        <scene sceneID="y60-d3-jyI">
+            <objects>
+                <viewController id="QK9-IU-aUs" customClass="SidebarTabViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="AHi-09-cbF">
+                        <rect key="frame" x="0.0" y="0.0" width="187" height="156"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <tabView type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="KsM-1o-3zM">
+                                <rect key="frame" x="0.0" y="0.0" width="187" height="116"/>
+                                <font key="font" metaFont="system"/>
+                                <tabViewItems>
+                                    <tabViewItem label="Inputs" identifier="inputs" id="ohw-Es-fWi">
+                                        <view key="view" id="wou-2Y-zYr">
+                                            <rect key="frame" x="0.0" y="0.0" width="187" height="122"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <containerView translatesAutoresizingMaskIntoConstraints="NO" id="lWA-o6-q0q">
+                                                    <rect key="frame" x="0.0" y="0.0" width="181" height="126"/>
+                                                    <connections>
+                                                        <segue destination="sSU-40-XYl" kind="embed" identifier="inputsViewSegue" id="4Vj-Az-5pC"/>
+                                                    </connections>
+                                                </containerView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="lWA-o6-q0q" secondAttribute="bottom" id="TOs-nQ-6ZD"/>
+                                                <constraint firstItem="lWA-o6-q0q" firstAttribute="leading" secondItem="wou-2Y-zYr" secondAttribute="leading" id="Vnk-Hv-ntJ"/>
+                                                <constraint firstAttribute="trailing" secondItem="lWA-o6-q0q" secondAttribute="trailing" id="hhi-NS-XZm"/>
+                                                <constraint firstItem="lWA-o6-q0q" firstAttribute="top" secondItem="wou-2Y-zYr" secondAttribute="top" id="jFj-An-s7t"/>
+                                            </constraints>
+                                        </view>
+                                    </tabViewItem>
+                                    <tabViewItem label="Plots" identifier="plots" id="UUT-hl-Kw3">
+                                        <view key="view" id="Jpw-2T-Kvy">
+                                            <rect key="frame" x="0.0" y="0.0" width="187" height="116"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        </view>
+                                    </tabViewItem>
+                                </tabViewItems>
+                            </tabView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="KsM-1o-3zM" secondAttribute="trailing" id="4F5-Tl-pWk"/>
+                            <constraint firstItem="KsM-1o-3zM" firstAttribute="top" secondItem="AHi-09-cbF" secondAttribute="top" constant="40" id="9to-FT-Qbi"/>
+                            <constraint firstAttribute="bottom" secondItem="KsM-1o-3zM" secondAttribute="bottom" id="LMp-VF-8sS"/>
+                            <constraint firstItem="KsM-1o-3zM" firstAttribute="leading" secondItem="AHi-09-cbF" secondAttribute="leading" id="SmC-gy-NWh"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <customObject id="IDu-0O-ZCF" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="0.5" y="316"/>
+        </scene>
+        <!--Inputs-->
+        <scene sceneID="8FD-9e-2zl">
+            <objects>
+                <controllerPlaceholder storyboardName="Inputs" id="sSU-40-XYl" sceneMemberID="viewController"/>
+                <customObject id="Uvo-Xx-Thh" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="146" y="279"/>
+        </scene>
+    </scenes>
+</document>

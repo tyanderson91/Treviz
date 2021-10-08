@@ -33,6 +33,8 @@
 		CD2E4C7E26240269002F5D99 /* PlotPreferenceComponentViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2E4C7D26240269002F5D99 /* PlotPreferenceComponentViews.swift */; };
 		CD31EFF324C13C7300ED435A /* CalcsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD31EFF224C13C7300ED435A /* CalcsTest.swift */; };
 		CD31EFF724C15F6F00ED435A /* Yams in Frameworks */ = {isa = PBXBuildFile; productRef = CD31EFF624C15F6F00ED435A /* Yams */; };
+		CD37DF92270D579600B80D75 /* Sidebar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD37DF91270D579600B80D75 /* Sidebar.storyboard */; };
+		CD37DF94270D6DAF00B80D75 /* SidebarTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD37DF93270D6DAF00B80D75 /* SidebarTabViewController.swift */; };
 		CD39717B2506F12D00A8047A /* RunSettingsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD39717A2506F12D00A8047A /* RunSettingsTest.swift */; };
 		CD39717D2506F2AC00A8047A /* TestHelperFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD39717C2506F2AC00A8047A /* TestHelperFunctions.swift */; };
 		CD3B2218251FD05300218E44 /* StringValueProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3B2217251FD05300218E44 /* StringValueProtocol.swift */; };
@@ -259,6 +261,8 @@
 		CD2D0DAE224382F70012978E /* SingleAxisOutputSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleAxisOutputSetupViewController.swift; sourceTree = "<group>"; };
 		CD2E4C7D26240269002F5D99 /* PlotPreferenceComponentViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlotPreferenceComponentViews.swift; sourceTree = "<group>"; };
 		CD31EFF224C13C7300ED435A /* CalcsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalcsTest.swift; sourceTree = "<group>"; };
+		CD37DF91270D579600B80D75 /* Sidebar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Sidebar.storyboard; sourceTree = "<group>"; };
+		CD37DF93270D6DAF00B80D75 /* SidebarTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarTabViewController.swift; sourceTree = "<group>"; };
 		CD39717A2506F12D00A8047A /* RunSettingsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RunSettingsTest.swift; path = TrevizTests/RunSettingsTest.swift; sourceTree = SOURCE_ROOT; };
 		CD39717C2506F2AC00A8047A /* TestHelperFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelperFunctions.swift; sourceTree = "<group>"; };
 		CD3B2217251FD05300218E44 /* StringValueProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringValueProtocol.swift; sourceTree = "<group>"; };
@@ -698,10 +702,12 @@
 				CDA35CD424ECE5A0005BF24D /* PhaseSelectorViewController.swift */,
 				CDF09AB624AC473B0068BE4B /* PhasedViewController.swift */,
 				CDD5049722252AFA00B29751 /* InputsViewController.swift */,
+				CD37DF93270D6DAF00B80D75 /* SidebarTabViewController.swift */,
 				CDA0F887225C5D47003C62E6 /* InputsCellViews.swift */,
 				CD0F113C25048FE300C88B05 /* RunSettingsViewController.swift */,
 				CD4656B1224C6F3500C587CC /* PhysicsViewController.swift */,
 				CDE078F3224806EF00815E7F /* Inputs.storyboard */,
+				CD37DF91270D579600B80D75 /* Sidebar.storyboard */,
 			);
 			path = "Inputs Setup";
 			sourceTree = "<group>";
@@ -976,6 +982,7 @@
 				CDF2338E242DCD8100B8EF40 /* ReadMe.md in Resources */,
 				CDA7FD75236FE9CC009CDFAF /* InitVarSettings.yaml in Resources */,
 				CD6A255F25AC24EF0075ED81 /* RunVariants.storyboard in Resources */,
+				CD37DF92270D579600B80D75 /* Sidebar.storyboard in Resources */,
 				CD2A95ED262D3BCF004279F0 /* ColormapPreview.xib in Resources */,
 				CD3F5E5822EE4DCD00E4CF20 /* Conditions.storyboard in Resources */,
 				CD70451B25F5533000A2F372 /* ParamSelector.storyboard in Resources */,
@@ -1104,6 +1111,7 @@
 				CDF3D1A822505A000064D70C /* AnalysisDoc.swift in Sources */,
 				CDE2B5A724C2C71D002026E0 /* AnalysisRunFunctions.swift in Sources */,
 				CD61B340265DD7BA004C7165 /* TZScene.swift in Sources */,
+				CD37DF94270D6DAF00B80D75 /* SidebarTabViewController.swift in Sources */,
 				CDF0CCDC2671D55100CF14DE /* SKTrajectory.swift in Sources */,
 				CD3E645225086399001F6C8F /* RunVariantEnableButton.swift in Sources */,
 				CD2D0DB42243836F0012978E /* ThreeAxisOutputSetupViewController.swift in Sources */,
