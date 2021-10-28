@@ -18,13 +18,33 @@
                                 <rect key="frame" x="0.0" y="0.0" width="187" height="116"/>
                                 <font key="font" metaFont="system"/>
                                 <tabViewItems>
+                                    <tabViewItem label="Phases" identifier="phases" id="UUT-hl-Kw3">
+                                        <view key="view" id="Jpw-2T-Kvy">
+                                            <rect key="frame" x="0.0" y="0.0" width="187" height="116"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kOG-Lp-hwC">
+                                                    <rect key="frame" x="73" y="50" width="41" height="16"/>
+                                                    <textFieldCell key="cell" lineBreakMode="clipping" title="Phase" id="MfT-LZ-teJ">
+                                                        <font key="font" usesAppearanceFont="YES"/>
+                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="kOG-Lp-hwC" firstAttribute="centerY" secondItem="Jpw-2T-Kvy" secondAttribute="centerY" id="Pnw-eZ-nhB"/>
+                                                <constraint firstItem="kOG-Lp-hwC" firstAttribute="centerX" secondItem="Jpw-2T-Kvy" secondAttribute="centerX" id="Ycg-1m-prx"/>
+                                            </constraints>
+                                        </view>
+                                    </tabViewItem>
                                     <tabViewItem label="Inputs" identifier="inputs" id="ohw-Es-fWi">
                                         <view key="view" id="wou-2Y-zYr">
-                                            <rect key="frame" x="0.0" y="0.0" width="187" height="122"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="187" height="116"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <containerView translatesAutoresizingMaskIntoConstraints="NO" id="lWA-o6-q0q">
-                                                    <rect key="frame" x="0.0" y="0.0" width="181" height="126"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="187" height="116"/>
                                                     <connections>
                                                         <segue destination="sSU-40-XYl" kind="embed" identifier="inputsViewSegue" id="4Vj-Az-5pC"/>
                                                     </connections>
@@ -38,10 +58,124 @@
                                             </constraints>
                                         </view>
                                     </tabViewItem>
-                                    <tabViewItem label="Plots" identifier="plots" id="UUT-hl-Kw3">
-                                        <view key="view" id="Jpw-2T-Kvy">
+                                    <tabViewItem label="Variants" identifier="variants" id="HzZ-tz-tOP">
+                                        <view key="view" id="NYc-Dm-hQ1">
                                             <rect key="frame" x="0.0" y="0.0" width="187" height="116"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <containerView translatesAutoresizingMaskIntoConstraints="NO" id="8IR-Yj-cQV">
+                                                    <rect key="frame" x="0.0" y="0.0" width="187" height="116"/>
+                                                    <connections>
+                                                        <segue destination="8T7-bW-R1G" kind="embed" identifier="variantsViewSegue" id="m8y-us-3KX"/>
+                                                    </connections>
+                                                </containerView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="8IR-Yj-cQV" secondAttribute="trailing" id="0hr-wA-VBv"/>
+                                                <constraint firstItem="8IR-Yj-cQV" firstAttribute="top" secondItem="NYc-Dm-hQ1" secondAttribute="top" id="gx9-4r-F3X"/>
+                                                <constraint firstItem="8IR-Yj-cQV" firstAttribute="leading" secondItem="NYc-Dm-hQ1" secondAttribute="leading" id="jiI-NK-Q0a"/>
+                                                <constraint firstAttribute="bottom" secondItem="8IR-Yj-cQV" secondAttribute="bottom" id="wG2-Fx-prT"/>
+                                            </constraints>
+                                        </view>
+                                    </tabViewItem>
+                                    <tabViewItem label="Conditions" identifier="conditions" id="Op7-iz-oCk">
+                                        <view key="view" id="qB5-CZ-Rcx">
+                                            <rect key="frame" x="0.0" y="0.0" width="187" height="116"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <containerView translatesAutoresizingMaskIntoConstraints="NO" id="6Iv-M5-4Ak">
+                                                    <rect key="frame" x="0.0" y="0.0" width="187" height="116"/>
+                                                    <connections>
+                                                        <segue destination="xmn-tj-X8i" kind="embed" identifier="conditionsViewSegue" id="r1J-cK-F4n"/>
+                                                    </connections>
+                                                </containerView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="6Iv-M5-4Ak" secondAttribute="bottom" id="0v0-Ch-mBN"/>
+                                                <constraint firstAttribute="trailing" secondItem="6Iv-M5-4Ak" secondAttribute="trailing" id="830-MN-65U"/>
+                                                <constraint firstItem="6Iv-M5-4Ak" firstAttribute="leading" secondItem="qB5-CZ-Rcx" secondAttribute="leading" id="I5W-WO-4BL"/>
+                                                <constraint firstItem="6Iv-M5-4Ak" firstAttribute="top" secondItem="qB5-CZ-Rcx" secondAttribute="top" id="YUo-w2-KBh"/>
+                                            </constraints>
+                                        </view>
+                                    </tabViewItem>
+                                    <tabViewItem label="Algorithms" identifier="algorithms" id="zlY-7q-8WS">
+                                        <view key="view" id="fDo-4J-W50">
+                                            <rect key="frame" x="0.0" y="0.0" width="187" height="156"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="AP3-i7-1Qr">
+                                                    <rect key="frame" x="82" y="70" width="24" height="16"/>
+                                                    <textFieldCell key="cell" lineBreakMode="clipping" title="Alg" id="jAk-zL-zgj">
+                                                        <font key="font" usesAppearanceFont="YES"/>
+                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="AP3-i7-1Qr" firstAttribute="centerX" secondItem="fDo-4J-W50" secondAttribute="centerX" id="I2d-au-mfz"/>
+                                                <constraint firstItem="AP3-i7-1Qr" firstAttribute="centerY" secondItem="fDo-4J-W50" secondAttribute="centerY" id="Sus-hF-baa"/>
+                                            </constraints>
+                                        </view>
+                                    </tabViewItem>
+                                    <tabViewItem label="Geometry" identifier="geometry" id="9wF-g7-Gg2">
+                                        <view key="view" id="nO6-bl-rRF">
+                                            <rect key="frame" x="0.0" y="0.0" width="187" height="156"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zB5-wY-DXe">
+                                                    <rect key="frame" x="74" y="70" width="40" height="16"/>
+                                                    <textFieldCell key="cell" lineBreakMode="clipping" title="Geom" id="ZLf-FG-dlA">
+                                                        <font key="font" usesAppearanceFont="YES"/>
+                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="zB5-wY-DXe" firstAttribute="centerY" secondItem="nO6-bl-rRF" secondAttribute="centerY" id="1vg-bS-VSQ"/>
+                                                <constraint firstItem="zB5-wY-DXe" firstAttribute="centerX" secondItem="nO6-bl-rRF" secondAttribute="centerX" id="8Np-3U-xg8"/>
+                                            </constraints>
+                                        </view>
+                                    </tabViewItem>
+                                    <tabViewItem label="Plots" identifier="plots" id="EuS-RN-j0V">
+                                        <view key="view" id="m19-7d-UeX">
+                                            <rect key="frame" x="0.0" y="0.0" width="187" height="156"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qvb-O3-heO">
+                                                    <rect key="frame" x="76" y="70" width="35" height="16"/>
+                                                    <textFieldCell key="cell" lineBreakMode="clipping" title="Plots" id="IvS-B9-jMx">
+                                                        <font key="font" usesAppearanceFont="YES"/>
+                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="qvb-O3-heO" firstAttribute="centerY" secondItem="m19-7d-UeX" secondAttribute="centerY" id="UsB-2e-g9S"/>
+                                                <constraint firstItem="qvb-O3-heO" firstAttribute="centerX" secondItem="m19-7d-UeX" secondAttribute="centerX" id="i3d-mo-O7y"/>
+                                            </constraints>
+                                        </view>
+                                    </tabViewItem>
+                                    <tabViewItem label="Visualization" identifier="visualization" id="VJf-DE-AIr">
+                                        <view key="view" id="2gJ-X4-hOv">
+                                            <rect key="frame" x="0.0" y="0.0" width="187" height="156"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="c0b-7w-ow3">
+                                                    <rect key="frame" x="82" y="70" width="23" height="16"/>
+                                                    <textFieldCell key="cell" lineBreakMode="clipping" title="Viz" id="w6z-hr-CQh">
+                                                        <font key="font" usesAppearanceFont="YES"/>
+                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="c0b-7w-ow3" firstAttribute="centerX" secondItem="2gJ-X4-hOv" secondAttribute="centerX" id="4I1-UI-XRe"/>
+                                                <constraint firstItem="c0b-7w-ow3" firstAttribute="centerY" secondItem="2gJ-X4-hOv" secondAttribute="centerY" id="UJW-5D-4Wv"/>
+                                            </constraints>
                                         </view>
                                     </tabViewItem>
                                 </tabViewItems>
@@ -49,15 +183,35 @@
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="KsM-1o-3zM" secondAttribute="trailing" id="4F5-Tl-pWk"/>
-                            <constraint firstItem="KsM-1o-3zM" firstAttribute="top" secondItem="AHi-09-cbF" secondAttribute="top" constant="40" id="9to-FT-Qbi"/>
+                            <constraint firstItem="KsM-1o-3zM" firstAttribute="top" secondItem="AHi-09-cbF" secondAttribute="top" constant="40" id="9to-FT-Qbi" userLabel="sidebarToolbarOffsetConstraint"/>
                             <constraint firstAttribute="bottom" secondItem="KsM-1o-3zM" secondAttribute="bottom" id="LMp-VF-8sS"/>
                             <constraint firstItem="KsM-1o-3zM" firstAttribute="leading" secondItem="AHi-09-cbF" secondAttribute="leading" id="SmC-gy-NWh"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tabView" destination="KsM-1o-3zM" id="HBc-Ju-6mo"/>
+                        <outlet property="toolbarOffsetConstraint" destination="9to-FT-Qbi" id="8L9-VF-qBH"/>
+                    </connections>
                 </viewController>
                 <customObject id="IDu-0O-ZCF" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="0.5" y="316"/>
+        </scene>
+        <!--RunVariants-->
+        <scene sceneID="cBK-Au-9Eq">
+            <objects>
+                <controllerPlaceholder storyboardName="RunVariants" id="8T7-bW-R1G" sceneMemberID="viewController"/>
+                <customObject id="sqJ-4x-Bzn" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="57" y="588"/>
+        </scene>
+        <!--Conditions-->
+        <scene sceneID="63z-Nv-HTi">
+            <objects>
+                <controllerPlaceholder storyboardName="Conditions" id="xmn-tj-X8i" sceneMemberID="viewController"/>
+                <customObject id="NrF-jD-Zb0" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="131" y="512"/>
         </scene>
         <!--Inputs-->
         <scene sceneID="8FD-9e-2zl">
@@ -65,7 +219,20 @@
                 <controllerPlaceholder storyboardName="Inputs" id="sSU-40-XYl" sceneMemberID="viewController"/>
                 <customObject id="Uvo-Xx-Thh" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="146" y="279"/>
+            <point key="canvasLocation" x="222" y="245"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="xIs-gc-uAF">
+            <objects>
+                <viewController id="dM0-nN-Qf5" sceneMemberID="viewController">
+                    <view key="view" id="gdZ-lo-u7z">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                </viewController>
+                <customObject id="LIU-iv-8r0" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-53" y="-20"/>
         </scene>
     </scenes>
 </document>

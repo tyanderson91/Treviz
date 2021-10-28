@@ -22,6 +22,7 @@ extension NSStoryboardSegue.Identifier{
  */
 class OutputsViewController: TZViewController {
         
+    @IBOutlet weak var toolbarOffsetConstraint: NSLayoutConstraint!
     @IBOutlet weak var outputsSplitView: NSView!
     var outputSplitViewController: OutputsSplitViewController? = nil
     

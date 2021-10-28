@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="9UX-jO-cEV">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="9UX-jO-cEV">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17506"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19162"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -40,7 +40,7 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView identifier="ConditionNameCellView" id="jdg-mM-Lrr">
-                                                            <rect key="frame" x="1" y="1" width="123" height="17"/>
+                                                            <rect key="frame" x="11" y="1" width="123" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c5N-lu-zzs">
@@ -62,7 +62,7 @@
                                                         </tableCellView>
                                                     </prototypeCellViews>
                                                 </tableColumn>
-                                                <tableColumn identifier="DescriptionColumn" width="237" minWidth="40" maxWidth="1000" id="vHF-HC-1Ya">
+                                                <tableColumn identifier="DescriptionColumn" width="208" minWidth="40" maxWidth="1000" id="vHF-HC-1Ya">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Description">
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -75,11 +75,11 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView identifier="DescriptionCellView" id="dRa-n5-KEU">
-                                                            <rect key="frame" x="127" y="1" width="241" height="17"/>
+                                                            <rect key="frame" x="137" y="1" width="212" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8aI-x0-026">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="241" height="17"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="212" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="e65-eS-5Bn">
                                                                         <font key="font" metaFont="system"/>
@@ -143,7 +143,7 @@
                                 </constraints>
                             </stackView>
                             <textField horizontalHuggingPriority="700" verticalHuggingPriority="750" horizontalCompressionResistancePriority="700" translatesAutoresizingMaskIntoConstraints="NO" id="SQ2-n5-0je">
-                                <rect key="frame" x="10" y="85" width="175" height="21"/>
+                                <rect key="frame" x="10" y="85" width="176" height="21"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Condition Name" id="dY9-nJ-NVR">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -154,7 +154,7 @@
                                 </connections>
                             </textField>
                             <stackView hidden="YES" distribution="fill" orientation="horizontal" alignment="centerY" spacing="7" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ije-r1-bnx">
-                                <rect key="frame" x="200" y="86" width="99" height="20"/>
+                                <rect key="frame" x="201" y="86" width="99" height="20"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="900" translatesAutoresizingMaskIntoConstraints="NO" id="do3-sK-dT1">
                                         <rect key="frame" x="-2" y="2" width="38" height="16"/>
@@ -198,7 +198,7 @@
                                 </customSpacing>
                             </stackView>
                             <button horizontalHuggingPriority="700" verticalHuggingPriority="750" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" translatesAutoresizingMaskIntoConstraints="NO" id="BVe-vE-dVP" userLabel="Add Condition Button">
-                                <rect key="frame" x="307" y="76" width="62" height="37"/>
+                                <rect key="frame" x="308" y="76" width="61" height="37"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="HCO-Yh-THg"/>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="70" id="yOj-gW-Mcg"/>

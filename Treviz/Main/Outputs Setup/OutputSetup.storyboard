@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="FMf-NL-ufc">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="FMf-NL-ufc">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="18122"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19162"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -282,12 +283,12 @@
                             <constraint firstItem="AVK-iS-hVV" firstAttribute="leading" secondItem="fmw-WQ-uxs" secondAttribute="leading" id="4EI-ro-07q"/>
                             <constraint firstItem="uyZ-oY-mbV" firstAttribute="centerY" secondItem="2VV-N6-yqy" secondAttribute="centerY" id="650-cl-Zee"/>
                             <constraint firstItem="RoN-dz-hKU" firstAttribute="leading" secondItem="2VV-N6-yqy" secondAttribute="trailing" constant="10" id="D7I-cV-sz3"/>
+                            <constraint firstItem="X3z-Eb-GAM" firstAttribute="top" secondItem="fmw-WQ-uxs" secondAttribute="top" constant="40" id="I5l-Yt-O1B"/>
                             <constraint firstAttribute="trailing" secondItem="X3z-Eb-GAM" secondAttribute="trailing" id="LUd-Vn-qs5"/>
                             <constraint firstAttribute="bottom" secondItem="AVK-iS-hVV" secondAttribute="bottom" id="LWh-Dm-w8R"/>
                             <constraint firstItem="2VV-N6-yqy" firstAttribute="leading" secondItem="fmw-WQ-uxs" secondAttribute="leading" constant="10" id="Xda-KE-xsX"/>
                             <constraint firstItem="uyZ-oY-mbV" firstAttribute="top" secondItem="fmw-WQ-uxs" secondAttribute="top" constant="10" id="bLO-MT-0jf"/>
                             <constraint firstItem="AVK-iS-hVV" firstAttribute="top" secondItem="X3z-Eb-GAM" secondAttribute="bottom" id="bwn-Um-KQM"/>
-                            <constraint firstItem="X3z-Eb-GAM" firstAttribute="top" secondItem="uyZ-oY-mbV" secondAttribute="bottom" constant="10" id="fqu-72-r27"/>
                             <constraint firstAttribute="trailing" secondItem="AVK-iS-hVV" secondAttribute="trailing" id="gA3-Fo-9Yh"/>
                             <constraint firstItem="uyZ-oY-mbV" firstAttribute="leading" secondItem="RoN-dz-hKU" secondAttribute="trailing" constant="10" id="yBo-lw-ib7"/>
                             <constraint firstItem="X3z-Eb-GAM" firstAttribute="leading" secondItem="fmw-WQ-uxs" secondAttribute="leading" id="ygV-rX-6oW"/>
@@ -297,6 +298,7 @@
                         <outlet property="outputsArrayController" destination="3Am-te-Ukr" id="5Mr-Kb-P7w"/>
                         <outlet property="stack" destination="Gfp-GI-MP9" id="DTY-Kq-eYx"/>
                         <outlet property="tableView" destination="quK-tu-3hE" id="anw-Uf-ajL"/>
+                        <outlet property="toolbarOffsetConstraint" destination="I5l-Yt-O1B" id="ZOu-VQ-3mb"/>
                     </connections>
                 </viewController>
                 <customObject id="DhO-km-sdV" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

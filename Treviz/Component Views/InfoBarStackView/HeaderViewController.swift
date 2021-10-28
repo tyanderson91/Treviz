@@ -72,10 +72,16 @@ class HeaderViewController : NSViewController, StackItemHeader {
     
 }
 
-class StackHeaderView: NSView {
+class StackHeaderView: NSVisualEffectView {
     override func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)
         // We want the header's color to be different color than its associated stack item.
-        self.layer?.backgroundColor = NSColor.windowBackgroundColor.cgColor
+        //self.layer?.backgroundColor = NSColor.windowBackgroundColor.cgColor
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        material = .titlebar
+        //blendingMode = .behindWindow
     }
 }

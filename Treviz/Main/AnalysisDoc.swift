@@ -56,6 +56,7 @@ class AnalysisDoc: NSDocument {
         }
         windowController.contentViewController = mainVC
         window.contentView = mainVC.view
+        windowController.changeToolbar(style: UserDefaults.toolbarStyle, showText: UserDefaults.showToolbarText)
 
         #else
         if let mainVC = storyboard.instantiateController(withIdentifier: "mainViewController") as? MainViewController {

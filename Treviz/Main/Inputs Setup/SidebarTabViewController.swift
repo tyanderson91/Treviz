@@ -11,9 +11,12 @@ import AppKit
 
 fileprivate extension NSStoryboardSegue.Identifier {
     static var inputsViewSegue = "inputsViewSegue"
+    static var conditionsViewSegue = "conditionsViewSegue"
+    static var variantsViewSegue = "variantsViewSegue"
 }
 
 class SidebarTabViewController: TZViewController {
+    @IBOutlet weak var toolbarOffsetConstraint: NSLayoutConstraint!
     var inputsViewController: InputsSplitViewController!
     @IBOutlet weak var tabView: NSTabView!
     override func viewDidLoad() {
@@ -29,7 +32,13 @@ class SidebarTabViewController: TZViewController {
         switch segue.identifier! {
         case .inputsViewSegue:
             inputsViewController = newVC as? InputsSplitViewController
-            inputsViewController.analysis = analysis
+            inputsViewController.analysis = self.analysis
+        case .conditionsViewSegue:
+            let conditionsVC = segue.destinationController as! ConditionsViewController
+            conditionsVC.analysis = self.analysis
+        case .variantsViewSegue:
+            let varVC = segue.destinationController as! RunVariantViewController
+            varVC.analysis = self.analysis
         default:
             return
         }

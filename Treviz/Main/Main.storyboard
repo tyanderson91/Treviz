@@ -457,32 +457,23 @@
             </objects>
             <point key="canvasLocation" x="-759" y="-288"/>
         </scene>
-        <!--Conditions-->
-        <scene sceneID="or0-xz-kAo">
-            <objects>
-                <controllerPlaceholder storyboardName="Conditions" id="JQf-0b-2JY" sceneMemberID="viewController"/>
-                <customObject id="Ewa-pT-jlg" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-34" y="301"/>
-        </scene>
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController storyboardIdentifier="Analysis Window Controller" id="jGA-0Y-lOj" customClass="MainWindowController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
-                    <window key="window" identifier="mainWindow" title="Treviz" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hasShadow="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="mainWindow" animationBehavior="default" toolbarStyle="compact" id="Ckk-yw-fiv">
+                    <window key="window" identifier="mainWindow" title="Treviz" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="mainWindow" animationBehavior="default" toolbarStyle="compact" id="Ckk-yw-fiv">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES"/>
                         <rect key="contentRect" x="0.0" y="-63" width="800" height="422"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
-                        <toolbar key="toolbar" implicitIdentifier="99EF4609-EB63-466D-9855-35ED2BA88456" explicitIdentifier="MainToolbar" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="gC3-LF-Jn5" customClass="TZToolbar" customModule="Treviz" customModuleProvider="target">
+                        <toolbar key="toolbar" implicitIdentifier="99EF4609-EB63-466D-9855-35ED2BA88456" explicitIdentifier="MainToolbar" displayMode="iconOnly" sizeMode="small" id="gC3-LF-Jn5" customClass="TZToolbar" customModule="Treviz" customModuleProvider="target">
                             <allowedToolbarItems>
                                 <toolbarItem implicitItemIdentifier="NSToolbarShowColorsItem" id="Ndh-jH-KXn"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarShowFontsItem" id="aaV-pA-eJz"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarPrintItem" id="iNF-nm-hs1"/>
-                                <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="9m0-eV-BGQ"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="sla-GS-rBt"/>
-                                <toolbarItem implicitItemIdentifier="14EFA49B-1699-4D5D-B9AA-254DB2FED47D" explicitItemIdentifier="parameters" label="Params" paletteLabel="Parameters" tag="-1" image="p.circle" catalog="system" sizingBehavior="auto" id="TqS-2n-1qM"/>
-                                <toolbarItem implicitItemIdentifier="0A87A498-3962-46F5-A46C-4F314604C83D" explicitItemIdentifier="runAnalysis" label="Run" paletteLabel="Run" tag="-1" image="play.rectangle" catalog="system" sizingBehavior="auto" id="jMV-yt-vxY">
+                                <toolbarItem implicitItemIdentifier="14EFA49B-1699-4D5D-B9AA-254DB2FED47D" explicitItemIdentifier="parameters" label="Params" paletteLabel="Parameters" toolTip="Parameters" tag="-1" image="p.circle" catalog="system" sizingBehavior="auto" id="TqS-2n-1qM"/>
+                                <toolbarItem implicitItemIdentifier="0A87A498-3962-46F5-A46C-4F314604C83D" explicitItemIdentifier="runAnalysis" label="Run" paletteLabel="Run" toolTip="Run Analysis" tag="-1" image="play.rectangle" catalog="system" sizingBehavior="auto" id="jMV-yt-vxY">
                                     <connections>
                                         <action selector="runAnalysisClicked:" target="jGA-0Y-lOj" id="Py9-2v-OZZ"/>
                                     </connections>
@@ -496,7 +487,7 @@
                                             <font key="font" metaFont="system"/>
                                             <segments>
                                                 <segment image="sidebar.leading" catalog="system" width="32" selected="YES"/>
-                                                <segment image="rectangle.bottomthird.inset.fill" catalog="system" width="32" selected="YES" tag="1"/>
+                                                <segment image="rectangle.bottomthird.inset.filled" catalog="system" width="32" selected="YES" tag="1"/>
                                                 <segment image="sidebar.trailing" catalog="system" width="32" selected="YES"/>
                                             </segments>
                                         </segmentedCell>
@@ -505,48 +496,50 @@
                                         <action selector="showHidePanesClicked:" target="jGA-0Y-lOj" id="uVm-bH-zwR"/>
                                     </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="DE007689-8B0B-463F-A111-7DEF41E5B399" label="Cond" paletteLabel="Conditions" tag="-1" image="equal.square" catalog="system" sizingBehavior="auto" id="97n-jf-vw7">
-                                    <connections>
-                                        <action selector="conditionsClicked:" target="jGA-0Y-lOj" id="Ed0-ac-JUE"/>
-                                        <segue destination="JQf-0b-2JY" kind="popover" identifier="conditionsPopupSegue" popoverAnchorView="97n-jf-vw7" popoverBehavior="t" preferredEdge="maxY" id="5xf-g2-ymY"/>
-                                    </connections>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="9719A0DA-1FCF-469B-923F-3B4571E10C83" label="Refresh Plots" paletteLabel="Refresh Plots" tag="-1" image="arrow.clockwise" catalog="system" sizingBehavior="auto" autovalidates="NO" id="9JA-Ur-9Js" userLabel="Refresh">
+                                <toolbarItem implicitItemIdentifier="9719A0DA-1FCF-469B-923F-3B4571E10C83" label="Refresh Plots" paletteLabel="Refresh Plots" toolTip="Refresh" tag="-1" image="arrow.clockwise" catalog="system" sizingBehavior="auto" autovalidates="NO" id="9JA-Ur-9Js" userLabel="Refresh">
                                     <connections>
                                         <action selector="reloadPlotsClicked:" target="jGA-0Y-lOj" id="V1o-pQ-l8c"/>
                                     </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="4902CC3C-3F8F-4A9D-B5E6-A7B72DC67B67" label="Phase" paletteLabel="Phases" tag="-1" image="link" catalog="system" bordered="YES" id="CnO-1E-E6a" userLabel="Phases">
-                                    <size key="minSize" width="29" height="25"/>
-                                    <size key="maxSize" width="29" height="25"/>
+                                <toolbarItem implicitItemIdentifier="4902CC3C-3F8F-4A9D-B5E6-A7B72DC67B67" explicitItemIdentifier="phases" label="Phase" paletteLabel="Phases" toolTip="Phases" tag="-1" image="link" catalog="system" sizingBehavior="auto" selectable="YES" id="CnO-1E-E6a" userLabel="Phases">
+                                    <connections>
+                                        <action selector="changeSidebarSelection:" target="jGA-0Y-lOj" id="FbI-jW-lS9"/>
+                                    </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="FD088DFF-341E-4E42-9961-551F4E615B8B" label="Alg" paletteLabel="Algorithms" tag="-1" image="function" catalog="system" bordered="YES" id="jDY-PL-UUZ" userLabel="Algorithms">
-                                    <size key="minSize" width="32" height="25"/>
-                                    <size key="maxSize" width="32" height="25"/>
+                                <toolbarItem implicitItemIdentifier="B42BB9F9-51BC-40A5-984B-EE473B6119CB" explicitItemIdentifier="conditions" label="Cond" paletteLabel="Conditions" toolTip="Conditions" tag="-1" image="equal.square" catalog="system" sizingBehavior="auto" selectable="YES" id="97n-jf-vw7">
+                                    <connections>
+                                        <action selector="changeSidebarSelection:" target="jGA-0Y-lOj" id="wVi-hr-bKX"/>
+                                    </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="325CF722-D264-44D5-9BB3-661818185F23" label="Viz" paletteLabel="Visualization" tag="-1" image="network" catalog="system" bordered="YES" id="Ayd-sI-CQ8" userLabel="Visualization">
-                                    <size key="minSize" width="27" height="25"/>
-                                    <size key="maxSize" width="27" height="25"/>
+                                <toolbarItem implicitItemIdentifier="FD088DFF-341E-4E42-9961-551F4E615B8B" explicitItemIdentifier="algorithms" label="Alg" paletteLabel="Algorithms" toolTip="Algorithms" tag="-1" image="function" catalog="system" sizingBehavior="auto" selectable="YES" id="jDY-PL-UUZ" userLabel="Algorithms">
+                                    <connections>
+                                        <action selector="changeSidebarSelection:" target="jGA-0Y-lOj" id="I9m-KZ-ClZ"/>
+                                    </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="F23CB8A6-7B6F-4C81-9B1F-9770B88AC6DE" label="Geom" paletteLabel="Geometry" tag="-1" image="move.3d" catalog="system" bordered="YES" id="QWA-K3-jcb">
-                                    <size key="minSize" width="28" height="25"/>
-                                    <size key="maxSize" width="28" height="25"/>
+                                <toolbarItem implicitItemIdentifier="325CF722-D264-44D5-9BB3-661818185F23" explicitItemIdentifier="visualization" label="Viz" paletteLabel="Visualization" toolTip="Visualization" tag="-1" image="network" catalog="system" sizingBehavior="auto" selectable="YES" id="Ayd-sI-CQ8" userLabel="Visualization">
+                                    <connections>
+                                        <action selector="changeSidebarSelection:" target="jGA-0Y-lOj" id="ZRu-If-kqE"/>
+                                    </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="7D986845-659F-478D-831F-1E148D90C2B6" label="Input" paletteLabel="Inputs" tag="-1" image="square.and.pencil" catalog="system" bordered="YES" id="azC-CS-7WY" userLabel="Inputs">
-                                    <size key="minSize" width="29" height="25"/>
-                                    <size key="maxSize" width="29" height="25"/>
+                                <toolbarItem implicitItemIdentifier="F23CB8A6-7B6F-4C81-9B1F-9770B88AC6DE" explicitItemIdentifier="geometry" label="Geom" paletteLabel="Geometry" toolTip="Geometry" tag="-1" image="move.3d" catalog="system" sizingBehavior="auto" selectable="YES" id="QWA-K3-jcb">
+                                    <connections>
+                                        <action selector="changeSidebarSelection:" target="jGA-0Y-lOj" id="AIT-rS-nHZ"/>
+                                    </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="FFCF2CC5-6C18-4D01-B76D-C043E655C9BB" label="Variant" paletteLabel="Variants" tag="-1" image="slider.vertical.3" catalog="system" bordered="YES" id="OMi-Us-RC4" userLabel="Variants">
-                                    <size key="minSize" width="27" height="25"/>
-                                    <size key="maxSize" width="27" height="25"/>
+                                <toolbarItem implicitItemIdentifier="7D986845-659F-478D-831F-1E148D90C2B6" explicitItemIdentifier="inputs" label="Input" paletteLabel="Inputs" toolTip="Inputs" tag="-1" image="square.and.pencil" catalog="system" sizingBehavior="auto" selectable="YES" id="azC-CS-7WY" userLabel="Inputs">
+                                    <connections>
+                                        <action selector="changeSidebarSelection:" target="jGA-0Y-lOj" id="D1X-4H-QkP"/>
+                                    </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="5F21EDBB-7AC1-406B-A206-D44454820328" label="Plots" paletteLabel="Plots" tag="-1" image="perspective" catalog="system" bordered="YES" id="edm-rH-aES" userLabel="Plots">
-                                    <size key="minSize" width="31" height="25"/>
-                                    <size key="maxSize" width="31" height="25"/>
+                                <toolbarItem implicitItemIdentifier="FFCF2CC5-6C18-4D01-B76D-C043E655C9BB" explicitItemIdentifier="variants" label="Variant" paletteLabel="Variants" toolTip="Run Variants" tag="-1" image="slider.vertical.3" catalog="system" sizingBehavior="auto" selectable="YES" id="OMi-Us-RC4" userLabel="Variants">
+                                    <connections>
+                                        <action selector="changeSidebarSelection:" target="jGA-0Y-lOj" id="EcJ-0a-H1y"/>
+                                    </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="F9C041E7-7A59-400D-838C-2E9959993B3C" explicitItemIdentifier="NSToolbarSidebarTrackingSeparatorItemIdentifier" label="Separator" paletteLabel="Separator" tag="-1" image="square.and.line.vertical.and.square" catalog="system" bordered="YES" id="Ge3-WV-DMi">
-                                    <size key="minSize" width="35" height="25"/>
-                                    <size key="maxSize" width="35" height="25"/>
+                                <toolbarItem implicitItemIdentifier="5F21EDBB-7AC1-406B-A206-D44454820328" explicitItemIdentifier="plots" label="Plots" paletteLabel="Plots" toolTip="Plots" tag="-1" image="perspective" catalog="system" sizingBehavior="auto" selectable="YES" id="edm-rH-aES" userLabel="Plots">
+                                    <connections>
+                                        <action selector="changeSidebarSelection:" target="jGA-0Y-lOj" id="qat-Wj-l19"/>
+                                    </connections>
                                 </toolbarItem>
                                 <searchToolbarItem implicitItemIdentifier="2DA88FE6-306B-4111-BB16-146CD03A2739" label="Search" paletteLabel="Search" visibilityPriority="1001" id="P7n-0l-tdP">
                                     <nil key="toolTip"/>
@@ -560,6 +553,15 @@
                                         </searchFieldCell>
                                     </searchField>
                                 </searchToolbarItem>
+                                <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="9m0-eV-BGQ"/>
+                                <toolbarItem implicitItemIdentifier="471CBDB3-9A84-4459-BEF7-AD7A4D2B5031" label="Sidebar" paletteLabel="Collapse Left" toolTip="Collapse sidebar" tag="-1" image="sidebar.left" catalog="system" bordered="YES" selectable="YES" navigational="YES" id="lkl-c4-uS4">
+                                    <size key="minSize" width="30" height="25"/>
+                                    <size key="maxSize" width="30" height="25"/>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="D5862102-3E8F-49C6-BFD1-8AF41E5B1374" explicitItemIdentifier="NSToolbarSidebarTrackingSeparatorItemIdentifier" label="Separator" paletteLabel="Separator" tag="-1" bordered="YES" id="UCx-d3-5Rk">
+                                    <size key="minSize" width="12" height="25"/>
+                                    <size key="maxSize" width="12" height="25"/>
+                                </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
                                 <toolbarItem reference="CnO-1E-E6a"/>
@@ -570,13 +572,11 @@
                                 <toolbarItem reference="QWA-K3-jcb"/>
                                 <toolbarItem reference="edm-rH-aES"/>
                                 <toolbarItem reference="Ayd-sI-CQ8"/>
-                                <toolbarItem reference="Ge3-WV-DMi"/>
+                                <toolbarItem reference="UCx-d3-5Rk"/>
                                 <toolbarItem reference="jMV-yt-vxY"/>
                                 <toolbarItem reference="TqS-2n-1qM"/>
                                 <toolbarItem reference="9JA-Ur-9Js"/>
-                                <toolbarItem reference="sla-GS-rBt"/>
                                 <toolbarItem reference="iNF-nm-hs1"/>
-                                <searchToolbarItem reference="P7n-0l-tdP"/>
                                 <toolbarItem reference="ady-Mv-o1c"/>
                             </defaultToolbarItems>
                             <connections>
@@ -588,11 +588,18 @@
                         </connections>
                     </window>
                     <connections>
+                        <outlet property="algorithmsToolbarItem" destination="jDY-PL-UUZ" id="ZUM-HV-TXo"/>
                         <outlet property="conditionsToolbarItem" destination="97n-jf-vw7" id="GHQ-ZJ-FLP"/>
+                        <outlet property="geomToolbarItem" destination="QWA-K3-jcb" id="6ld-tU-PeU"/>
+                        <outlet property="inputsToolbarItem" destination="azC-CS-7WY" id="kP5-a8-N6a"/>
+                        <outlet property="phasesToolbarItem" destination="CnO-1E-E6a" id="H2v-yG-HXL"/>
+                        <outlet property="plotsToolbarItem" destination="edm-rH-aES" id="2ue-ml-xQt"/>
                         <outlet property="refreshPlotsButton" destination="9JA-Ur-9Js" id="0W2-xd-RYg"/>
                         <outlet property="runButton" destination="jMV-yt-vxY" id="5p0-CK-uZC"/>
                         <outlet property="showHidePanesControl" destination="m1W-ZS-zTL" id="Byh-jj-OGs"/>
                         <outlet property="toolbar" destination="gC3-LF-Jn5" id="h5O-LV-3cg"/>
+                        <outlet property="variantsToolbarItem" destination="OMi-Us-RC4" id="gYL-u6-Era"/>
+                        <outlet property="vizToolbarItem" destination="Ayd-sI-CQ8" id="OAZ-Qd-uQb"/>
                         <segue destination="RNZ-Kf-TSs" kind="relationship" relationship="window.shadowedContentViewController" id="GCr-yb-nHt"/>
                     </connections>
                 </windowController>
@@ -684,7 +691,7 @@
                             <constraint firstAttribute="trailing" secondItem="3xq-Zn-lEM" secondAttribute="trailing" id="0NG-We-vRD"/>
                             <constraint firstItem="Tnv-gC-ATL" firstAttribute="leading" secondItem="w7z-2N-fQ8" secondAttribute="leading" constant="-3" id="0OG-aF-xOZ"/>
                             <constraint firstItem="3xq-Zn-lEM" firstAttribute="leading" secondItem="w7z-2N-fQ8" secondAttribute="leading" id="9fu-mE-rYp"/>
-                            <constraint firstItem="3xq-Zn-lEM" firstAttribute="top" secondItem="w7z-2N-fQ8" secondAttribute="top" id="GUF-Sk-pff"/>
+                            <constraint firstItem="3xq-Zn-lEM" firstAttribute="top" secondItem="w7z-2N-fQ8" secondAttribute="top" id="GUF-Sk-pff" userLabel="ToolbarOffsetConstraint"/>
                             <constraint firstItem="Tnv-gC-ATL" firstAttribute="top" secondItem="3xq-Zn-lEM" secondAttribute="bottom" id="X70-Pk-qot"/>
                             <constraint firstAttribute="trailing" secondItem="Tnv-gC-ATL" secondAttribute="trailing" constant="-3" id="bnl-DV-Vhc"/>
                             <constraint firstAttribute="bottom" secondItem="Tnv-gC-ATL" secondAttribute="bottom" id="d8V-TS-iIp"/>
@@ -734,11 +741,11 @@
         <image name="p.circle" catalog="system" width="15" height="15"/>
         <image name="perspective" catalog="system" width="19" height="18"/>
         <image name="play.rectangle" catalog="system" width="18" height="14"/>
-        <image name="rectangle.bottomthird.inset.fill" catalog="system" width="18" height="14"/>
+        <image name="rectangle.bottomthird.inset.filled" catalog="system" width="18" height="14"/>
         <image name="sidebar.leading" catalog="system" width="18" height="14"/>
+        <image name="sidebar.left" catalog="system" width="18" height="14"/>
         <image name="sidebar.trailing" catalog="system" width="18" height="14"/>
         <image name="slider.vertical.3" catalog="system" width="15" height="14"/>
-        <image name="square.and.line.vertical.and.square" catalog="system" width="23" height="16"/>
         <image name="square.and.pencil" catalog="system" width="17" height="15"/>
     </resources>
 </document>

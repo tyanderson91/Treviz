@@ -13,6 +13,7 @@ extension NSStoryboardSegue.Identifier{
 }
 
 class OutputSetupViewController: TZViewController{//}, NSTableViewDelegate, NSTableViewDataSource {
+    @IBOutlet weak var toolbarOffsetConstraint: NSLayoutConstraint!
     @IBOutlet weak var stack: CustomStackView!
     @IBOutlet weak var tableView: NSTableView!
     @objc dynamic var allPlots : [TZOutput] {

@@ -590,7 +590,7 @@
         <scene sceneID="C4I-xd-iuZ">
             <objects>
                 <viewController title="Phase" id="Tb7-7q-ypH" customClass="PhaseSelectorViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="kwp-cl-qZz">
+                    <view key="view" id="kwp-cl-qZz" customClass="PhaseSelectorBackgroundView" customModule="Treviz" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="337" height="43"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
@@ -633,7 +633,6 @@
                     <splitViewItems>
                         <splitViewItem canCollapse="YES" id="rsg-1Y-HIj"/>
                         <splitViewItem id="ejg-9K-M27"/>
-                        <splitViewItem canCollapse="YES" id="0yR-cR-p2v"/>
                     </splitViewItems>
                     <splitView key="splitView" dividerStyle="thin" id="QPy-7v-2FJ">
                         <rect key="frame" x="0.0" y="140" width="357" height="160"/>
@@ -645,11 +644,9 @@
                     <connections>
                         <outlet property="inputsSplitViewItem" destination="ejg-9K-M27" id="c8v-hj-BUt"/>
                         <outlet property="phaseSelectorSplitViewItem" destination="rsg-1Y-HIj" id="InQ-eq-6ei"/>
-                        <outlet property="runVariantsSplitViewItem" destination="0yR-cR-p2v" id="R6C-5Z-8IS"/>
                         <outlet property="splitView" destination="QPy-7v-2FJ" id="XAO-HU-JfL"/>
                         <segue destination="Tb7-7q-ypH" kind="relationship" relationship="splitItems" id="SpO-IG-hSS"/>
                         <segue destination="BWH-wW-vxd" kind="relationship" relationship="splitItems" id="hcU-j1-0cL"/>
-                        <segue destination="yzs-kH-zal" kind="relationship" relationship="splitItems" id="s2J-Ct-Qz8"/>
                     </connections>
                 </splitViewController>
                 <customObject id="ACI-yI-3dE" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -708,14 +705,6 @@
                 <customObject id="ccH-Wh-n6o" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-71" y="590"/>
-        </scene>
-        <!--RunVariants-->
-        <scene sceneID="JYK-tI-I9S">
-            <objects>
-                <controllerPlaceholder storyboardIdentifier="runVariantsVC" storyboardName="RunVariants" id="yzs-kH-zal" sceneMemberID="viewController"/>
-                <customObject id="XiX-KB-fcM" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-498" y="770"/>
         </scene>
         <!--Run Settings View Controller-->
         <scene sceneID="qmf-V1-g4n">

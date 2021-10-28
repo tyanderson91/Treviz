@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="m7t-9F-FWj">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="m7t-9F-FWj">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19162"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -34,7 +35,7 @@
         <!--Preferences View Controller-->
         <scene sceneID="hbm-py-lCD">
             <objects>
-                <tabViewController selectedTabViewItemIndex="0" tabStyle="toolbar" id="Aqo-MD-w0g" customClass="PreferencesViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
+                <tabViewController identifier="preferencesViewController" storyboardIdentifier="preferencesViewController" selectedTabViewItemIndex="0" tabStyle="toolbar" id="Aqo-MD-w0g" customClass="PreferencesViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
                     <tabViewItems>
                         <tabViewItem label="General" identifier="general" image="gear" catalog="system" id="Ovh-ic-oG0" userLabel="General"/>
                         <tabViewItem label="Plot Style" identifier="plotStyle" image="scribble" catalog="system" id="ep5-hw-m2b"/>
@@ -64,7 +65,7 @@
         <!--Global Plot Preferences View Controller-->
         <scene sceneID="Hnd-HA-Nm4">
             <objects>
-                <viewController identifier="preferencesViewController" storyboardIdentifier="preferencesViewController" id="hPj-fJ-sT0" customClass="GlobalPlotPreferencesViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController identifier="plotPreferencesViewController" storyboardIdentifier="plotPreferencesViewController" id="hPj-fJ-sT0" customClass="GlobalPlotPreferencesViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="B9v-HU-UcK">
                         <rect key="frame" x="0.0" y="0.0" width="490" height="385"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -104,15 +105,103 @@
         <!--General View Controller-->
         <scene sceneID="dyA-rF-0BC">
             <objects>
-                <viewController id="nqP-7Q-48e" userLabel="General View Controller" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="generalPreferencesViewController" id="nqP-7Q-48e" userLabel="General View Controller" customClass="GeneralPreferencesViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="xNj-WX-ORB">
-                        <rect key="frame" x="0.0" y="0.0" width="227" height="165"/>
+                        <rect key="frame" x="0.0" y="0.0" width="337" height="190"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <gridView xPlacement="leading" yPlacement="bottom" rowAlignment="none" translatesAutoresizingMaskIntoConstraints="NO" id="Zgk-X3-ikS">
+                                <rect key="frame" x="10" y="98" width="176" height="82"/>
+                                <rows>
+                                    <gridRow yPlacement="top" id="HJo-au-RaH"/>
+                                    <gridRow id="SQY-F9-p4j"/>
+                                    <gridRow id="esE-Lj-rfH"/>
+                                    <gridRow id="AtB-TC-UND"/>
+                                </rows>
+                                <columns>
+                                    <gridColumn xPlacement="trailing" id="o3F-7v-7lZ"/>
+                                    <gridColumn id="o3D-4h-l7E"/>
+                                </columns>
+                                <gridCells>
+                                    <gridCell row="HJo-au-RaH" column="o3F-7v-7lZ" id="CgI-hY-9xs">
+                                        <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wdO-cp-Uit">
+                                            <rect key="frame" x="-2" y="66" width="87" height="16"/>
+                                            <textFieldCell key="cell" lineBreakMode="clipping" title="Toolbar Style:" id="Bgq-3Y-adb">
+                                                <font key="font" usesAppearanceFont="YES"/>
+                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                    </gridCell>
+                                    <gridCell row="HJo-au-RaH" column="o3D-4h-l7E" id="Y9P-Ng-noW">
+                                        <button key="contentView" identifier="expanded" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DRi-mf-yEf" userLabel="Expanded">
+                                            <rect key="frame" x="87" y="65" width="87" height="18"/>
+                                            <buttonCell key="cell" type="radio" title="Expanded" bezelStyle="regularSquare" imagePosition="left" alignment="left" identifier="expandedToolbarButton" inset="2" id="JSM-cJ-lQd">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="didSelectToolbarStyle:" target="nqP-7Q-48e" id="Eca-3h-cWb"/>
+                                            </connections>
+                                        </button>
+                                    </gridCell>
+                                    <gridCell row="SQY-F9-p4j" column="o3F-7v-7lZ" id="I99-SJ-5jb"/>
+                                    <gridCell row="SQY-F9-p4j" column="o3D-4h-l7E" id="Tcy-OO-OHW">
+                                        <button key="contentView" identifier="unified" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BX3-Za-ccA" userLabel="Unified">
+                                            <rect key="frame" x="87" y="43" width="70" height="18"/>
+                                            <buttonCell key="cell" type="radio" title="Unified" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="t8b-d5-bQO">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="didSelectToolbarStyle:" target="nqP-7Q-48e" id="dV8-La-WJb"/>
+                                            </connections>
+                                        </button>
+                                    </gridCell>
+                                    <gridCell row="esE-Lj-rfH" column="o3F-7v-7lZ" id="VpL-By-qbe"/>
+                                    <gridCell row="esE-Lj-rfH" column="o3D-4h-l7E" id="6Ez-H8-deP">
+                                        <button key="contentView" identifier="compact" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XoT-fg-vUy" userLabel="Compact">
+                                            <rect key="frame" x="87" y="21" width="81" height="18"/>
+                                            <buttonCell key="cell" type="radio" title="Compact" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="oOK-A4-yjg">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="didSelectToolbarStyle:" target="nqP-7Q-48e" id="UaV-1a-dcd"/>
+                                            </connections>
+                                        </button>
+                                    </gridCell>
+                                    <gridCell row="AtB-TC-UND" column="o3F-7v-7lZ" id="Mw8-F4-BzP"/>
+                                    <gridCell row="AtB-TC-UND" column="o3D-4h-l7E" id="8NO-et-VKx">
+                                        <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XRs-B6-2hf">
+                                            <rect key="frame" x="87" y="-1" width="89" height="18"/>
+                                            <buttonCell key="cell" type="check" title="Show Text" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Qf0-QD-cgD">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="didClickShowText:" target="nqP-7Q-48e" id="xqm-l6-IOB"/>
+                                            </connections>
+                                        </button>
+                                    </gridCell>
+                                </gridCells>
+                            </gridView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="Zgk-X3-ikS" firstAttribute="leading" secondItem="xNj-WX-ORB" secondAttribute="leading" constant="10" id="Mq6-vL-9na"/>
+                            <constraint firstItem="Zgk-X3-ikS" firstAttribute="top" secondItem="xNj-WX-ORB" secondAttribute="top" constant="10" id="RRz-5S-Ax6"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="compactToolbarButton" destination="XoT-fg-vUy" id="xhp-qh-F3v"/>
+                        <outlet property="expandedToolbarButton" destination="DRi-mf-yEf" id="4kX-wP-hmw"/>
+                        <outlet property="showToolbarTextButton" destination="XRs-B6-2hf" id="szx-80-GRw"/>
+                        <outlet property="unifiedToolbarButton" destination="BX3-Za-ccA" id="lE5-P9-SU2"/>
+                    </connections>
                 </viewController>
                 <customObject id="wCq-FS-Bcn" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="912" y="-588"/>
+            <point key="canvasLocation" x="966.5" y="-576"/>
         </scene>
         <!--Plot Preferences View Controller-->
         <scene sceneID="NYq-cp-LmP">
@@ -230,7 +319,7 @@
                                                         </gridCell>
                                                         <gridCell row="EfJ-M1-gXf" column="nW8-qR-dxK" id="pMT-xu-YEB">
                                                             <textField key="contentView" horizontalHuggingPriority="251" verticalCompressionResistancePriority="754" translatesAutoresizingMaskIntoConstraints="NO" id="hhr-18-3se">
-                                                                <rect key="frame" x="-2" y="239" width="81" height="62"/>
+                                                                <rect key="frame" x="-2" y="239" width="81" height="51"/>
                                                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Background:" id="eZC-R8-8Tv">
                                                                     <font key="font" usesAppearanceFont="YES"/>
                                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -240,7 +329,7 @@
                                                         </gridCell>
                                                         <gridCell row="EfJ-M1-gXf" column="kb2-33-LUh" xPlacement="fill" id="y6h-26-dsW">
                                                             <colorWell key="contentView" horizontalHuggingPriority="252" verticalHuggingPriority="240" verticalCompressionResistancePriority="200" continuous="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NST-0p-BZa">
-                                                                <rect key="frame" x="97" y="268" width="105" height="20"/>
+                                                                <rect key="frame" x="97" y="281" width="105" height="20"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="20" id="EZW-sg-3a0"/>
                                                                 </constraints>
@@ -368,7 +457,7 @@
                                                         </gridCell>
                                                         <gridCell row="s3q-VF-dy0" column="kb2-33-LUh" yPlacement="fill" id="ixh-cU-6Vc">
                                                             <popUpButton key="contentView" verticalHuggingPriority="100" verticalCompressionResistancePriority="800" translatesAutoresizingMaskIntoConstraints="NO" id="cnJ-ZF-k8t" customClass="ColormapPopUpButton" customModule="Treviz" customModuleProvider="target">
-                                                                <rect key="frame" x="94" y="25" width="111" height="37"/>
+                                                                <rect key="frame" x="95" y="26" width="109" height="35"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="30" id="vw2-vY-lwY"/>
                                                                 </constraints>
@@ -724,7 +813,7 @@
                                 <gridCells>
                                     <gridCell row="Szr-2K-EAs" column="1kc-kZ-SMC" yPlacement="center" id="vNx-be-crA">
                                         <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" verticalCompressionResistancePriority="900" translatesAutoresizingMaskIntoConstraints="NO" id="BHS-Xk-Lah" userLabel="Color">
-                                            <rect key="frame" x="-2" y="52" width="41" height="20"/>
+                                            <rect key="frame" x="-2" y="52" width="41" height="16"/>
                                             <textFieldCell key="cell" lineBreakMode="clipping" title="Color:" id="EhU-mp-3Iy">
                                                 <font key="font" usesAppearanceFont="YES"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -833,7 +922,7 @@
                 </viewController>
                 <customObject id="1uP-yP-iv5" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="934" y="-360"/>
+            <point key="canvasLocation" x="1180" y="-354"/>
         </scene>
         <!--Reports View Controller-->
         <scene sceneID="1u2-5j-qYG">

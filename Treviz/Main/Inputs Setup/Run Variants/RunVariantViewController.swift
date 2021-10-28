@@ -28,7 +28,9 @@ extension RunVariant {
  This is a Tab View Controller that coordinates among the three primary Run Variant Views: Overview, Monte-Carlo, and trades. The functionality for those views are stored in their own View Controllers
  */
 class RunVariantViewController: TZViewController {
+    //@IBOutlet weak var RunVariantStackView: CustomStackView!
     
+    @IBOutlet weak var splitView: CustomSplitView!
     var params : [Parameter] { return analysis.activeParameters }
     var runVariants: [RunVariant] { return analysis?.runVariants.filter({$0.isActive}) ?? [] }
     var inputsSplitViewController: InputsSplitViewController?
@@ -45,6 +47,28 @@ class RunVariantViewController: TZViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+                
+        splitView.parent = self
+        // Load and install all the view controllers from our storyboard in the following order.
+        let storyboard = NSStoryboard(name: "RunVariants", bundle: nil)
+        
+        overviewVC = storyboard.instantiateController(identifier: "overviewVC") { aCoder in
+            let ovc = RunVariantOverviewViewController(coder: aCoder, analysis: self.analysis)
+            return ovc
+        }
+        tradesVC = storyboard.instantiateController(identifier: "tradesVC") { aCoder in
+            let tvc = RunVariantTradesViewController(coder: aCoder, analysis: self.analysis)
+            return tvc!
+        }
+        mcVC = storyboard.instantiateController(identifier: "montecarloVC") { aCoder in
+            let mvc = RunVariantMCViewController(coder: aCoder, analysis: self.analysis)
+            return mvc!
+        }
+        
+        splitView.addViewController(overviewVC)
+        splitView.addViewController(tradesVC)
+        splitView.addViewController(mcVC)
+                 
     }
     override func viewDidAppear() {
         reloadAll()
@@ -64,7 +88,7 @@ class RunVariantViewController: TZViewController {
         numRunsTotalTextField.stringValue = analysis.numRuns.valuestr
         mcVC.numMCRunsTextField.stringValue = analysis.numMonteCarloRuns.valuestr
     }
-    
+    /*
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         guard let newVC = segue.destinationController as? TZViewController else { return }
         switch segue.identifier! {
@@ -78,5 +102,5 @@ class RunVariantViewController: TZViewController {
             return
         }
         newVC.analysis = analysis
-    }
+    }*/
 }

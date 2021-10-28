@@ -18,11 +18,11 @@ extension NSUserInterfaceItemIdentifier {
 /**
  This ViewController provides an overview of all run variants, as well as a way to remove them and change their type
  */
-class RunVariantOverviewViewController: TZViewController, NSTableViewDelegate, NSTableViewDataSource {
+class RunVariantOverviewViewController: BaseViewController, NSTableViewDelegate, NSTableViewDataSource {
     var activeVariants: [RunVariant] { return analysis?.runVariants.filter({$0.isActive}) ?? [] }
     var parentVC: RunVariantViewController! { return parent as? RunVariantViewController }
     @IBOutlet weak var tableView: NSTableView!
-    
+    override func getHeaderTitle() -> String { return NSLocalizedString("Overview", comment: "") }
     override func viewDidLoad() {
         super.viewDidLoad()
         let newNib = NSNib(nibNamed: "RunVariantCellViews", bundle: .main)

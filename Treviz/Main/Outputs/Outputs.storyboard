@@ -31,6 +31,7 @@
                     </view>
                     <connections>
                         <outlet property="outputsSplitView" destination="mJY-d5-f6f" id="SWK-ez-c7Z"/>
+                        <outlet property="toolbarOffsetConstraint" destination="7Ph-4N-Izj" id="WyN-65-k8H"/>
                     </connections>
                 </viewController>
                 <customObject id="e4Y-DN-6gQ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

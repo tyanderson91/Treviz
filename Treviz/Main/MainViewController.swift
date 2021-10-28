@@ -15,6 +15,14 @@ class MainViewController: TZViewController {
 
     @IBOutlet weak var mainView: NSView!
     @IBOutlet weak var analysisProgressBar: NSProgressIndicator!
+    var toolbarOffsetHeightConstraint: CGFloat = 0 {
+        didSet {
+            guard let mv = mainSplitViewController else {return}
+            mv.sidebarViewController.toolbarOffsetConstraint.constant = toolbarOffsetHeightConstraint
+            mv.outputsViewController.toolbarOffsetConstraint.constant = toolbarOffsetHeightConstraint
+            mv.outputSetupViewController.toolbarOffsetConstraint.constant = toolbarOffsetHeightConstraint
+        }
+    }
     var mainSplitViewController : MainSplitViewController!
     var textOutputView : NSTextView? {
         return mainSplitViewController.outputsViewController.outputSplitViewController?.textOutputView

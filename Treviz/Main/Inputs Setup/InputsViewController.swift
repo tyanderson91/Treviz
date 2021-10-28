@@ -19,7 +19,7 @@ extension NSNotification.Name {
 class InputsSplitViewController: TZSplitViewController {
     @IBOutlet var phaseSelectorSplitViewItem: NSSplitViewItem!
     @IBOutlet weak var inputsSplitViewItem: NSSplitViewItem!
-    @IBOutlet var runVariantsSplitViewItem: NSSplitViewItem!
+    //@IBOutlet var runVariantsSplitViewItem: NSSplitViewItem!
     
     var runVariantViewController : RunVariantViewController!
     var phaseSelectorViewController: PhaseSelectorViewController!
@@ -35,10 +35,10 @@ class InputsSplitViewController: TZSplitViewController {
     override func viewDidLoad() {
         inputsViewController = inputsSplitViewItem.viewController as? InputsViewController
         phaseSelectorViewController = phaseSelectorSplitViewItem.viewController as? PhaseSelectorViewController
-        runVariantViewController = runVariantsSplitViewItem.viewController as? RunVariantViewController
+        //runVariantViewController = runVariantsSplitViewItem.viewController as? RunVariantViewController
         inputsViewController.inputSplitViewController = self
         phaseSelectorViewController.inputSplitViewController = self
-        runVariantViewController.inputsSplitViewController = self
+        //runVariantViewController.inputsSplitViewController = self
         super.viewDidLoad()
     }
 }
@@ -113,7 +113,7 @@ class InputsViewController: TZViewController {
         stack.addViewController(physicsViewController)
         stack.addViewController(initStateViewController)
 
-        runVariantViewController = self.inputSplitViewController.runVariantViewController!
+        //runVariantViewController = self.inputSplitViewController.runVariantViewController!
         phaseSelectorViewController = self.inputSplitViewController.phaseSelectorViewController!
     }
     

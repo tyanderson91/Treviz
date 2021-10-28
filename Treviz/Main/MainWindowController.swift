@@ -15,13 +15,28 @@ extension NSNotification.Name {
 class MainWindowController: NSWindowController, AnalysisProgressReporter {
 
     @IBOutlet weak var toolbar: TZToolbar!
-    @IBOutlet weak var conditionsToolbarItem: NSToolbarItem!
     //weak var toolbar: TZToolbar!
     var analysis : Analysis! { didSet { self.analysis.progressReporter = self }}
     var viewController: MainViewController! { return contentViewController as? MainViewController ?? nil}
+    var toolbarOffsetHeightConstraint: CGFloat {
+        get { return viewController.toolbarOffsetHeightConstraint }
+        set { viewController.toolbarOffsetHeightConstraint = newValue}
+    }
     var analysisProgressBar: NSProgressIndicator? { return viewController.analysisProgressBar }
 
     // MARK: Toolbar items
+    @IBOutlet weak var phasesToolbarItem: NSToolbarItem!
+    @IBOutlet weak var inputsToolbarItem: NSToolbarItem!
+    @IBOutlet weak var variantsToolbarItem: NSToolbarItem!
+    @IBOutlet weak var conditionsToolbarItem: NSToolbarItem!
+    @IBOutlet weak var algorithmsToolbarItem: NSToolbarItem!
+    @IBOutlet weak var plotsToolbarItem: NSToolbarItem!
+    @IBOutlet weak var vizToolbarItem: NSToolbarItem!
+    @IBOutlet weak var geomToolbarItem: NSToolbarItem!
+    var sidebarToolbarItems: [NSToolbarItem] {
+        [self.phasesToolbarItem, self.inputsToolbarItem, self.variantsToolbarItem, self.conditionsToolbarItem, self.algorithmsToolbarItem, self.plotsToolbarItem, self.vizToolbarItem, self.geomToolbarItem]
+    }
+    
     @IBOutlet weak var showHidePanesControl: NSSegmentedControl!
     @IBOutlet weak var runButton: NSToolbarItem!
     @IBOutlet weak var refreshPlotsButton: NSToolbarItem!
@@ -95,5 +110,43 @@ class MainWindowController: NSWindowController, AnalysisProgressReporter {
     
     @objc func didChangePreferences(){
         refreshPlotsButton.isEnabled = true
+    }
+    
+    func changeToolbar(style: String, showText: Bool){
+        var styleNum: Int
+        let shouldOffset = window?.styleMask.contains(.fullSizeContentView) ?? true // TODO: Figure out if we need this conditional or if full size should be the only option
+        
+        switch style {
+        case "expanded":
+            styleNum = 1
+            toolbarOffsetHeightConstraint = shouldOffset ? 58 + (showText ? 12 : 0) : 0
+            window?.titleVisibility = .visible
+        case "compact":
+            styleNum = 4
+            if shouldOffset {
+                toolbarOffsetHeightConstraint = 38
+                window?.titleVisibility = .visible
+            } else {
+                toolbarOffsetHeightConstraint = 0
+                window?.titleVisibility = .hidden
+            }
+        case "unified":
+            styleNum = 3
+            if shouldOffset {
+                toolbarOffsetHeightConstraint = 52
+                window?.titleVisibility = .visible
+            } else {
+                toolbarOffsetHeightConstraint = 0
+                window?.titleVisibility = .hidden
+            }
+        default:
+            return
+        }
+
+        
+        if let newStyle = NSWindow.ToolbarStyle.init(rawValue: styleNum) { self.window?.toolbarStyle = newStyle }
+        if showText {
+            self.window?.toolbar?.displayMode = .iconAndLabel
+        } else { self.window?.toolbar?.displayMode = .iconOnly }
     }
 }

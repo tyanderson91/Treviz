@@ -14,6 +14,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     @IBOutlet weak var application: NSApplication!
     var prefsWC: PreferencesWindowController?
+    var prefsVC: PreferencesViewController?
     func applicationWillFinishLaunching(_ notification: Notification) {
     }
     
@@ -37,12 +38,23 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBAction func openPreferences(sender: Any){
         if prefsWC == nil {
             let storyboard = NSStoryboard(name: "Preferences", bundle: nil)
-            prefsWC = storyboard.instantiateController(identifier: "preferencesWindowController")
-            prefsWC?.parentItem = sender as? NSMenuItem
-            prefsWC?.appDelegate = self
-            if let vc = prefsWC?.contentViewController as? PreferencesViewController {
-                vc.appDelegate = self
+            prefsWC = storyboard.instantiateController(identifier: "preferencesWindowController")/* { aDecoder in
+                let pwc = PreferencesWindowController.init(coder: aDecoder)
+                pwc?.appDelegate = self
+                //(pwc?.contentViewController as? PreferencesViewController)?.appDelegate = self
+                return pwc
+            }*/
+            
+            /*
+            prefsVC = storyboard.instantiateController(identifier: "preferencesViewController") { aDecoder in
+                let pvc = PreferencesViewController.init(coder: aDecoder)
+                pvc?.appDelegate = self
+                return pvc
             }
+            prefsWC?.contentViewController = prefsVC*/
+            prefsWC?.appDelegate = self
+            (prefsWC?.contentViewController as? PreferencesViewController)?.appDelegate = self
+            prefsWC?.parentItem = sender as? NSMenuItem
         }
         prefsWC?.showWindow(sender)
     }

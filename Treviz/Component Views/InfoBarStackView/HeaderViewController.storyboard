@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="QsI-mr-tf4">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="18122"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19162"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -53,7 +54,7 @@
         <!--HeaderTriangleController-->
         <scene sceneID="k1f-fF-jvq">
             <objects>
-                <viewController storyboardIdentifier="HeaderTriangleViewController" id="QsI-mr-tf4" userLabel="HeaderTriangleController" customClass="HeaderViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="SomeTitle" storyboardIdentifier="HeaderTriangleViewController" id="QsI-mr-tf4" userLabel="HeaderTriangleController" customClass="HeaderViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" misplaced="YES" id="m3B-p0-uYR" customClass="StackHeaderView" customModule="Treviz" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="28"/>
                         <autoresizingMask key="autoresizingMask"/>

@@ -39,6 +39,12 @@ class PhaseSelectorViewController: BaseViewController {
     }*/
 }
 
+class PhaseSelectorBackgroundView: NSVisualEffectView {
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        material = .contentBackground
+    }
+}
 class PhaseSelectorView: NSView {
         
     var circleColor = NSColor.controlAccentColor //NSColor.gray
@@ -48,6 +54,11 @@ class PhaseSelectorView: NSView {
     let lineWidth: CGFloat = 2
     var viewController: PhaseSelectorViewController?
     var phases : [TZPhase] { return viewController?.phases ?? []}
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        //material = .windowBackground
+    }
     
     override func draw(_ dirtyRect: NSRect) {
         super .draw(dirtyRect)

@@ -43,9 +43,10 @@ extension NSUserInterfaceItemIdentifier {
 /**
  This View Controller displays and allows editing of data related to the Monte-Carlo aspects of the analysis
  */
-class RunVariantMCViewController: TZViewController, NSTableViewDelegate, NSTableViewDataSource {
+class RunVariantMCViewController: BaseViewController, NSTableViewDelegate, NSTableViewDataSource {
     var parentVC: RunVariantViewController! { return parent as? RunVariantViewController }
     let paramStartCol = 2 // First column to start showing distribution param views
+    override func getHeaderTitle() -> String { return NSLocalizedString("Monte-Carlo", comment: "") }
     @IBOutlet weak var numMCRunsTextField: NSTextField!
     var mcVariants: [MCRunVariant] { return analysis?.mcRunVariants ?? [] }
     @IBOutlet weak var tableView: NSTableView!
@@ -130,7 +131,7 @@ class RunVariantMCViewController: TZViewController, NSTableViewDelegate, NSTable
         if let newNumRuns = Int(stringLiteral: numMCRunsTextField.stringValue) {
             analysis.numMonteCarloRuns = newNumRuns
         }
-        parentVC.numRunsTotalTextField.stringValue = analysis.numRuns.valuestr
+        parentVC.updateNumRuns()
     }
     
     // MARK: Custom Cell Views

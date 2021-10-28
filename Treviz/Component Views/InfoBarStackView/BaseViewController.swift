@@ -14,11 +14,13 @@ class BaseViewController : TZViewController, StackItemBody {
     static let StackItemBackgroundColor = NSColor.controlBackgroundColor
     
     @IBOutlet var heightConstraint: NSLayoutConstraint!
+    @IBOutlet var lockingConstraint: NSLayoutConstraint?
     
     var savedDefaultHeight: CGFloat = 0
     var disclosureState: StackItemContainer.DisclosureState = .open
     var customCreator: ((BaseViewController)->BaseViewController)?
     weak var parentStackView: CustomStackView?
+    weak var parentSplitView: CustomSplitView?
     
     // Subclasses determine the header title.
     func getHeaderTitle() -> String { return "" }
@@ -67,6 +69,5 @@ class StackBaseView : NSVisualEffectView {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         material = .contentBackground
-        //blendingMode = .behindWindow
     }
 }

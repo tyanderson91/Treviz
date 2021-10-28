@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import AppKit
 
 extension NSUserInterfaceItemIdentifier {
     static let tradeGroupNameCellView = NSUserInterfaceItemIdentifier.init("tradeGroupNameCellView")
@@ -16,13 +17,14 @@ extension NSUserInterfaceItemIdentifier {
 /**
  This View Controller shows the data related to trade studies, and allows switching between a trade groups setting and a permutations setting
  */
-class RunVariantTradesViewController: TZViewController {
+class RunVariantTradesViewController: BaseViewController, NSTabViewDelegate {
     var parentVC: RunVariantViewController! { return parent as? RunVariantViewController }
     let minTradesColumnWidth: CGFloat = 35
 
     @IBOutlet weak var groupTradesRadioButton: NSButton!
     @IBOutlet weak var permuteTradesRadioButton: NSButton!
-    @IBOutlet weak var tradeViewsStackView: CollapsibleStackView!
+    //@IBOutlet weak var tradeViewsStackView: CollapsibleStackView!
+    @IBOutlet weak var tradeViewsTabView: NSTabView!
     
     @IBOutlet var groupsDelegate: GroupedTradeTableDelegate!
     @IBOutlet weak var groupsTableView: NSTableView!
@@ -31,15 +33,18 @@ class RunVariantTradesViewController: TZViewController {
     var permutationsTableViews: [NSTableView] = []
     var permutationsDelegates: [PermutationTradeTableViewController] = []
     
+    override func getHeaderTitle() -> String { return NSLocalizedString("Trades", comment: "") }
     override func viewDidLoad() {
         if analysis.useGroupedVariants {
+            tradeViewsTabView.selectTabViewItem(at: 0)
             groupTradesRadioButton.state = .on
-            tradeViewsStackView.showHideViews(.hide, index: [1])
+            //tradeViewsStackView.showHideViews(.hide, index: [1])
             for thisVariant in analysis.tradeRunVariants { padTradeValues(runVariant: thisVariant) }
         }
         else {
+            tradeViewsTabView.selectTabViewItem(at: 1)
             permuteTradesRadioButton.state = .on
-            tradeViewsStackView.showHideViews(.hide, index: [0])
+            //tradeViewsStackView.showHideViews(.hide, index: [0])
         }
         groupsDelegate.analysis = analysis
         groupsDelegate.tableView = groupsTableView
@@ -70,7 +75,7 @@ class RunVariantTradesViewController: TZViewController {
             groupsTableView.removeTableColumn(matchingCol)
         }
         groupsTableView.reloadData()
-        parentVC.tradesVC.groupsTableView.sizeToFit()
+        groupsTableView.sizeToFit()
     }
     
     /** Switches between grouped and permutation type */
@@ -79,17 +84,19 @@ class RunVariantTradesViewController: TZViewController {
         switch button.identifier?.rawValue {
         case "groupTradesRadioButton":
             permuteTradesRadioButton.state = .off
-            tradeViewsStackView.showHideViews(.hide, index: [1])
-            tradeViewsStackView.showHideViews(.show, index: [0])
+            tradeViewsTabView.selectTabViewItem(at: 0)
+            //tradeViewsStackView.showHideViews(.hide, index: [1])
+            //tradeViewsStackView.showHideViews(.show, index: [0])
             analysis.useGroupedVariants = true
             analysis.tradeRunVariants.forEach({padTradeValues(runVariant: $0)})
             groupsTableView.reloadData()
         case "permuteTradesRadioButton":
             groupTradesRadioButton.state = .off
-            tradeViewsStackView.showHideViews(.hide, index: [0])
+            tradeViewsTabView.selectTabViewItem(at: 1)
+            //tradeViewsStackView.showHideViews(.hide, index: [0])
             analysis.useGroupedVariants = false
             reloadPermutationsView()
-            tradeViewsStackView.showHideViews(.show, index: [1])
+            //tradeViewsStackView.showHideViews(.show, index: [1])
         default:
             return
         }

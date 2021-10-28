@@ -69,6 +69,9 @@ extension UserDefaults {
         
         case showVisualization
         case dockVisualizerController
+        
+        case toolbarStyle
+        case showToolbarText
     }
     
     // Var definitions
@@ -219,6 +222,15 @@ extension UserDefaults {
     class var dockVisualizationController: Bool {
         get { return standard.bool(key: .dockVisualizerController) ?? false}
         set { standard.set(newValue, key: .dockVisualizerController) }
+    }
+    
+    class var toolbarStyle: String {
+        get { return standard.string(key:  .toolbarStyle) ?? "compact"}
+        set { standard.set(newValue, key: .toolbarStyle)}
+    }
+    class var showToolbarText: Bool {
+        get { return standard.bool(key: .showToolbarText) ?? true}
+        set { standard.set(newValue, key: .showToolbarText)}
     }
 }
 

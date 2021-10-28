@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		29A63F34487C7A4A3CFF57F2 /* Pods_Treviz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AE63A207D59BC03E0AD95A7 /* Pods_Treviz.framework */; };
 		4DB08FC11410BCCCFA10D307 /* Pods_TrevizTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A89AF26E4296F559D5BACE4 /* Pods_TrevizTests.framework */; };
+		CD0BAD83271173E000CC6081 /* PlotPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0BAD82271173E000CC6081 /* PlotPreferencesViewController.swift */; };
 		CD0F113D25048FE300C88B05 /* RunSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0F113C25048FE300C88B05 /* RunSettingsViewController.swift */; };
 		CD0F113F250560A700C88B05 /* TZRunSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0F113E250560A700C88B05 /* TZRunSettings.swift */; };
 		CD0F1140250560A700C88B05 /* TZRunSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0F113E250560A700C88B05 /* TZRunSettings.swift */; };
@@ -237,6 +238,7 @@
 		5AE63A207D59BC03E0AD95A7 /* Pods_Treviz.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Treviz.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		769BD7D250FD37ECAE0EDE76 /* Pods-TrevizTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrevizTests.release.xcconfig"; path = "Target Support Files/Pods-TrevizTests/Pods-TrevizTests.release.xcconfig"; sourceTree = "<group>"; };
 		8A89AF26E4296F559D5BACE4 /* Pods_TrevizTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TrevizTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD0BAD82271173E000CC6081 /* PlotPreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlotPreferencesViewController.swift; sourceTree = "<group>"; };
 		CD0F010823654ED400C920AA /* AnalysisRunFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisRunFunctions.swift; sourceTree = "<group>"; };
 		CD0F010A2365595700C920AA /* Vehicle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vehicle.swift; sourceTree = "<group>"; };
 		CD0F011023656B7200C920AA /* TrevizTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrevizTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -728,6 +730,7 @@
 			isa = PBXGroup;
 			children = (
 				CDD2BD1E261EA818008BE616 /* Preferences.storyboard */,
+				CD0BAD82271173E000CC6081 /* PlotPreferencesViewController.swift */,
 				CD2A95EC262D3BCF004279F0 /* ColormapPreview.xib */,
 				CD70454F26017D4300A2F372 /* UserPreferences.swift */,
 				CDD2BD24261EA983008BE616 /* PreferencesViewController.swift */,
@@ -1195,6 +1198,7 @@
 				CDD5049622252AF900B29751 /* AppDelegate.swift in Sources */,
 				CDE2B5BF24C2C729002026E0 /* TZTextOutput.swift in Sources */,
 				CD4AD70823A20EE200FC815F /* OutputSetupViewController.swift in Sources */,
+				CD0BAD83271173E000CC6081 /* PlotPreferencesViewController.swift in Sources */,
 				CDCD730426AE7A2800406285 /* VariableOutputSetupView.swift in Sources */,
 				CDF0CCDA2671D45E00CF14DE /* SKTrajGroup.swift in Sources */,
 				CDB897C925AC2CD2001EA5E0 /* RunVariantMCViewController.swift in Sources */,
