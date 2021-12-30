@@ -18,8 +18,9 @@ class PhysicsViewController: PhasedViewController {
     var usesInertiaParam: BoolParam { return phase.physicsSettings.vehiclePointMassParam }
     var physicsSettings: PhysicsSettings { return phase.physicsSettings }
     var staticCentralBodyImage: NSImage? {
-        get {let mainVC = inputsViewController?.parent as? MainSplitViewController
-        let vizVC = mainVC?.outputsViewController.outputSplitViewController?.viewerTabViewController.visualizerTabViewItem.viewController as? VisualizerViewController
+        get {
+            let mainVC = inputsViewController?.parent as? MainSplitViewController
+            let vizVC = mainVC?.outputsViewController.outputSplitViewController?.viewerTabViewController.visualizerTabViewItem.viewController as? VisualizerViewController
             return vizVC?.placeholderImageView.image
     }
     set {let mainVC = inputsViewController?.parent as? MainSplitViewController

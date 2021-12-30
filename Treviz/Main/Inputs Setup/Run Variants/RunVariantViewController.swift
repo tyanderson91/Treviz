@@ -24,18 +24,23 @@ extension RunVariant {
     }
 }
 
+class RunVariantSummaryViewController: NSViewController {
+    @IBOutlet var numberFormatter: NumberFormatter!
+    @IBOutlet weak var numTextField: NSTextField!
+}
+
 /**
  This is a Tab View Controller that coordinates among the three primary Run Variant Views: Overview, Monte-Carlo, and trades. The functionality for those views are stored in their own View Controllers
  */
-class RunVariantViewController: TZViewController {
-    //@IBOutlet weak var RunVariantStackView: CustomStackView!
-    
-    @IBOutlet weak var splitView: CustomSplitView!
+class RunVariantViewController: CustomSplitViewController {
     var params : [Parameter] { return analysis.activeParameters }
     var runVariants: [RunVariant] { return analysis?.runVariants.filter({$0.isActive}) ?? [] }
     var inputsSplitViewController: InputsSplitViewController?
-    @IBOutlet weak var numRunsTotalTextField: NSTextField!
-    @IBOutlet var numRunsFormatter: NumberFormatter!
+    var summaryVC: RunVariantSummaryViewController! {
+        return splitViewItems.first?.viewController as? RunVariantSummaryViewController
+    }
+    weak var numRunsTotalTextField: NSTextField! { summaryVC.numTextField }
+    var numRunsFormatter: NumberFormatter! { summaryVC.numberFormatter }
     
     var overviewVC: RunVariantOverviewViewController!
     var tradesVC: RunVariantTradesViewController!
@@ -48,7 +53,6 @@ class RunVariantViewController: TZViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
                 
-        splitView.parent = self
         // Load and install all the view controllers from our storyboard in the following order.
         let storyboard = NSStoryboard(name: "RunVariants", bundle: nil)
         
@@ -65,9 +69,9 @@ class RunVariantViewController: TZViewController {
             return mvc!
         }
         
-        splitView.addViewController(overviewVC)
-        splitView.addViewController(tradesVC)
-        splitView.addViewController(mcVC)
+        self.addViewController(overviewVC)
+        self.addViewController(tradesVC)
+        self.addViewController(mcVC)
                  
     }
     override func viewDidAppear() {
@@ -88,19 +92,4 @@ class RunVariantViewController: TZViewController {
         numRunsTotalTextField.stringValue = analysis.numRuns.valuestr
         mcVC.numMCRunsTextField.stringValue = analysis.numMonteCarloRuns.valuestr
     }
-    /*
-    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
-        guard let newVC = segue.destinationController as? TZViewController else { return }
-        switch segue.identifier! {
-        case .overview:
-            overviewVC = (newVC as! RunVariantOverviewViewController)
-        case .montecarlo:
-            mcVC = (newVC as! RunVariantMCViewController)
-        case .trades:
-            tradesVC = (newVC as! RunVariantTradesViewController)
-        default:
-            return
-        }
-        newVC.analysis = analysis
-    }*/
 }

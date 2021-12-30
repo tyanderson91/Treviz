@@ -84,11 +84,8 @@ class PhasedViewController: BaseViewController {
         switch sender.state {
         case .on:
             analysis.enableParam(param: representedParam )
-            inputsViewController?.reloadParams()
-            inputsViewController?.runVariantViewController.overviewTableView.scrollToEndOfDocument(self)
         case .off:
             analysis.disableParam(param: representedParam )
-            inputsViewController?.reloadParams()
         default:
             return
         }

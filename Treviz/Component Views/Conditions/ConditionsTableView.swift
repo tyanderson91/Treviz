@@ -37,4 +37,14 @@ class ConditionsTableView: NSTableView {
             }
         }
     }
+    
+    override func mouseDown(with event: NSEvent){
+        let point = event.locationInWindow
+        let tablePoint = self.convert(point, from: nil)
+        let row = self.row(at: tablePoint)
+        if row == -1 { // If mouse click was outside of the rows
+            self.deselectAll(nil)
+        }
+        super.mouseDown(with: event)
+    }
 }

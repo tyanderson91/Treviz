@@ -44,3 +44,13 @@ class SidebarTabViewController: TZViewController {
         }
     }
 }
+
+class SidebarHeaderViewController: NSViewController {
+    @IBOutlet var textField: NSTextField!
+    var sectionTitle: String = ""
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        textField.stringValue = sectionTitle
+    }
+}

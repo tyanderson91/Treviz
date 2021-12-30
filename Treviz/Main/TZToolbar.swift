@@ -50,7 +50,6 @@ class TZToolbarButtonItem: NSToolbarItem {
 }*/
 
 class TZToolbar: NSToolbar {
-    
 }
 
 
@@ -65,10 +64,6 @@ extension MainWindowController: NSToolbarDelegate {
             }
         }
     }
-    @IBAction func conditionsClicked(_ sender: Any) {
-        self.performSegue(withIdentifier: "conditionsPopupSegue", sender: self)
-    }
-    
     
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         if segue.identifier == "conditionsPopupSegue" {

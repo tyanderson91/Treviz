@@ -31,13 +31,15 @@ class InitStateViewController: PhasedViewController, NSOutlineViewDelegate, NSOu
         outlineView.autosaveName = "initStateOutlineView"
         //Load data
         outlineView.reloadData()
-        getTerminalConditionPopupOptions()
         //outlineView.postsBoundsChangedNotifications = true
         updateOutlineViewHeight()
         //outlineScrollView.hasVerticalScroller = false
         outlineScrollView.verticalScroller?.isEnabled = false
         outlineScrollView.verticalScrollElasticity = .none
         outlineScrollView.verticalScroller?.refusesFirstResponder = true
+    }
+    override func viewWillAppear() {
+        getTerminalConditionPopupOptions()
     }
     
     func updateOutlineViewHeight() {
@@ -168,7 +170,6 @@ class InitStateViewController: PhasedViewController, NSOutlineViewDelegate, NSOu
             default:
                 thisParam.isParam = false
             }
-            inputsViewController?.reloadParams()
         }
     }
     
@@ -200,7 +201,6 @@ class InitStateViewController: PhasedViewController, NSOutlineViewDelegate, NSOu
                 thisParam.value[0] = value}
             */
             thisParam.setValue(to: sender.stringValue)
-            inputsViewController?.reloadParams()
         }
     }
     

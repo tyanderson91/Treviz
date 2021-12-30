@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19162"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19455"/>
         <capability name="Search Toolbar Item" minToolsVersion="12.0" minSystemVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -461,12 +461,12 @@
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController storyboardIdentifier="Analysis Window Controller" id="jGA-0Y-lOj" customClass="MainWindowController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
-                    <window key="window" identifier="mainWindow" title="Treviz" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="mainWindow" animationBehavior="default" toolbarStyle="compact" id="Ckk-yw-fiv">
+                    <window key="window" identifier="mainWindow" title="Treviz" separatorStyle="none" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="mainWindow" animationBehavior="default" tabbingMode="disallowed" toolbarStyle="compact" id="Ckk-yw-fiv">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES"/>
                         <rect key="contentRect" x="0.0" y="-63" width="800" height="422"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
-                        <toolbar key="toolbar" implicitIdentifier="99EF4609-EB63-466D-9855-35ED2BA88456" explicitIdentifier="MainToolbar" displayMode="iconOnly" sizeMode="small" id="gC3-LF-Jn5" customClass="TZToolbar" customModule="Treviz" customModuleProvider="target">
+                        <toolbar key="toolbar" implicitIdentifier="99EF4609-EB63-466D-9855-35ED2BA88456" explicitIdentifier="MainToolbar" showsBaselineSeparator="NO" displayMode="iconOnly" sizeMode="small" id="gC3-LF-Jn5" customClass="TZToolbar" customModule="Treviz" customModuleProvider="target">
                             <allowedToolbarItems>
                                 <toolbarItem implicitItemIdentifier="NSToolbarShowColorsItem" id="Ndh-jH-KXn"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarShowFontsItem" id="aaV-pA-eJz"/>
@@ -577,6 +577,7 @@
                                 <toolbarItem reference="TqS-2n-1qM"/>
                                 <toolbarItem reference="9JA-Ur-9Js"/>
                                 <toolbarItem reference="iNF-nm-hs1"/>
+                                <toolbarItem reference="sla-GS-rBt"/>
                                 <toolbarItem reference="ady-Mv-o1c"/>
                             </defaultToolbarItems>
                             <connections>

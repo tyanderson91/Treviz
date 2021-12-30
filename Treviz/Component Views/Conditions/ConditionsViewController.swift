@@ -12,7 +12,8 @@ extension NSUserInterfaceItemIdentifier {
     static let singleConditionTypeSelectorInterval = NSUserInterfaceItemIdentifier.init("singleConditionTypeSelector.interval")
     static let singleConditionTypeSelectorEqual = NSUserInterfaceItemIdentifier.init("singleConditionTypeSelector.equal")
     static let singleConditionTypeSelectorOther = NSUserInterfaceItemIdentifier.init("singleConditionTypeSelector.other")
-
+    static let singleConditionTypeSelectorCompound = NSUserInterfaceItemIdentifier.init("singleConditionTypeSelector.compound")
+    
     static let conditionNameColumn = NSUserInterfaceItemIdentifier.init("ConditionNameColumn")
     static let conditionDescripColumn = NSUserInterfaceItemIdentifier.init("DescriptionColumn")
     static let conditionNameCellView = NSUserInterfaceItemIdentifier.init("ConditionNameCellView")
@@ -20,14 +21,13 @@ extension NSUserInterfaceItemIdentifier {
 }
 
 class ConditionsViewController: TZViewController, VariableGetter, NSTableViewDelegate, NSTableViewDataSource {
-
     var curCondition = Condition()
     var allConditions : [Condition] { return analysis.conditions }
     //@objc var selectedConditionIndices = IndexSet()
     //var curConditionObjectController = NSObjectController()
     private var canAddSubCondition = false
     //var initVars : [Variable] = []
-    
+    @IBOutlet weak var removeConditionButton: NSButton!
     @IBOutlet weak var tableView: ConditionsTableView!
     @IBOutlet weak var compoundConditionButton: NSButton!
     @IBOutlet weak var addConditionButton: NSButton!
@@ -37,7 +37,6 @@ class ConditionsViewController: TZViewController, VariableGetter, NSTableViewDel
     @IBOutlet weak var conditionNameTextBox: NSTextField!
     //@IBOutlet var allConditionsArrayController: NSArrayController!
     @IBOutlet var addConditionTypeMenu: NSMenu!
-    @IBOutlet var comparisonLabel: NSButton!
     
     override func viewDidLoad() {
         // Do view setup here.
@@ -52,6 +51,7 @@ class ConditionsViewController: TZViewController, VariableGetter, NSTableViewDel
                                           owner: self, userInfo: nil)
         view.addTrackingArea(trackingArea)
         //curConditionObjectController.bind(.content, to: self, withKeyPath: "curCondition", options: nil)
+        compoundConditionButton.isHidden = true
         tableView.tableSelector = self.tableViewSelected
         super.viewDidLoad()
     }
@@ -65,49 +65,37 @@ class ConditionsViewController: TZViewController, VariableGetter, NSTableViewDel
         super.init(coder: coder)
     }
     
-    @IBAction func addRemoveConditionButtonClicked(_ sender: Any) {
+    @IBAction func addConditionButtonClicked(_ sender: Any) {
+        curCondition = Condition()
+        curCondition.name = "Condition \(analysis.conditions.count)"
         
-        if addConditionButton.title == "New" {
-            curCondition = Condition()
-            curCondition.name = "Condition \(analysis.conditions.count)"
-            
-            let newCondition = SingleCondition()
-            curCondition.conditions.append(newCondition)
-            showConditionView(condition: newCondition)
-            canAddSubCondition = true
-            conditionNameTextBox.isHidden = false
-            conditionNameTextBox.placeholderString = curCondition.name
-            conditionNameTextBox.becomeFirstResponder()
-            addConditionButton.title = "Add"
-        } else if addConditionButton.title == "Delete" {
-            if let conditionIndex = analysis.conditions.firstIndex(where: {$0 === curCondition})
-            { deleteCondition(at: conditionIndex) }
-        } else if addConditionButton.title == "Add" {
-            guard curCondition.isValid() else {
-                analysis.logMessage("Condition is invalid. Please fill in all required fields")
-                NSSound.beep()
-                return
-            }
-            //allConditionsArrayController.addObject(curCondition)
-            analysis.conditions.append(curCondition)
-            tableView.reloadData()
-            tableView.selectRowIndexes([(analysis.conditions.firstIndex(where: {$0 === curCondition}) ?? analysis.conditions.count)], byExtendingSelection: false)
-            NotificationCenter.default.post(name: .didAddCondition, object: nil)
-            addConditionButton.title = "Delete"
-        }
+        let newCondition = SingleCondition()
+        curCondition.conditions.append(newCondition)
+        eraseView()
+        showConditionView(condition: newCondition)
+        canAddSubCondition = true
+        conditionNameTextBox.isHidden = false
+        compoundConditionButton.isHidden = false
+        conditionNameTextBox.placeholderString = curCondition.name
+        conditionNameTextBox.becomeFirstResponder()
+        
+        analysis.conditions.append(curCondition)
+        tableView.reloadData()
+    }
+    @IBAction func removeConditionButtonClicked(_ sender: Any) {
+        if let conditionIndex = analysis.conditions.firstIndex(where: {$0 === curCondition})
+        { deleteCondition(at: conditionIndex) }
     }
     
     
     @IBAction func addSubCondition(_ sender: Any) {
-        if newConditionStackView.views.count == 1 {
+        if newConditionStackView.views.count == 2 { // One condition and one Add Condition button
             let firstViewController = self.children[0] as! AddConditionViewController
             firstViewController.removeConditionButton.isHidden = false
         }
         var condition: EvaluateCondition!
         if let buttonID = (sender as? NSButton)?.identifier?.rawValue {
-            if buttonID == "compoundConditionButton" {
-                condition = SingleCondition()
-            }
+            condition = SingleCondition()
         } else if let senderMenuItem = (sender as? NSMenuItem){
             if senderMenuItem.identifier!.rawValue == "addNewConditionMenuItem" { condition = SingleCondition() }
             else if senderMenuItem.identifier!.rawValue == "addExistingConditionMenuItem" { condition = Condition() }
@@ -121,16 +109,19 @@ class ConditionsViewController: TZViewController, VariableGetter, NSTableViewDel
     }
     
     private func formatConditionEditor(){
-        if newConditionStackView.arrangedSubviews.count > 1{
+        if newConditionStackView.arrangedSubviews.count > 2 {
             newConditionStackView.layer?.borderWidth = 1
             newConditionStackView.layer?.borderColor = CGColor.init(gray: 0.35, alpha: 1)
             methodStackView.isHidden = false
-        } else if newConditionStackView.arrangedSubviews.count == 1 {
+            conditionNameTextBox.isHidden = false
+        } else if newConditionStackView.arrangedSubviews.count == 2 {
             newConditionStackView.layer?.borderWidth = 0
             methodStackView.isHidden = true
-        } else if newConditionStackView.arrangedSubviews.count == 0 {
+            conditionNameTextBox.isHidden = false
+        } else if newConditionStackView.arrangedSubviews.count == 1 {
+            newConditionStackView.layer?.borderWidth = 0
+            compoundConditionButton.isHidden = true
             canAddSubCondition = false
-            addConditionButton.title = "New"
             conditionNameTextBox.isHidden = true
             methodStackView.isHidden = true
         }
@@ -150,6 +141,7 @@ class ConditionsViewController: TZViewController, VariableGetter, NSTableViewDel
         unionTypeDropdown.selectItem(at: 0)
     }
     
+    /*
     override func mouseEntered(with theEvent: NSEvent) {
         // Mouse entered the header area, show disclosure button.
         super.mouseEntered(with: theEvent)
@@ -159,7 +151,7 @@ class ConditionsViewController: TZViewController, VariableGetter, NSTableViewDel
         // Mouse exited the header area, hide disclosure button.
         super.mouseExited(with: theEvent)
         compoundConditionButton.isHidden = true
-    }
+    }*/
     
     @IBAction func conditionNameTextFieldChanged(_ sender: Any) {
         guard let textField = sender as? NSTextField else { return }
@@ -197,9 +189,9 @@ class ConditionsViewController: TZViewController, VariableGetter, NSTableViewDel
                     if let vc = child as? AddConditionViewController { vc.removeConditionButton.isHidden = true }
                 }
             }
+            compoundConditionButton.isHidden = false
             canAddSubCondition = true
-            addConditionButton.title = "Delete"
-            conditionNameTextBox.isHidden = false
+            
         } else {
             eraseView()
         }
@@ -219,6 +211,7 @@ class ConditionsViewController: TZViewController, VariableGetter, NSTableViewDel
         //conditionToRemove.deinit()
         NotificationCenter.default.post(name: .didRemoveCondition, object: nil)
         eraseView()
+        compoundConditionButton.isHidden = true
         tableView.selectRowIndexes([], byExtendingSelection: false)
         formatConditionEditor()
         tableView.reloadData()
@@ -240,20 +233,24 @@ class ConditionsViewController: TZViewController, VariableGetter, NSTableViewDel
         let storyboard = NSStoryboard(name: "Conditions", bundle: nil)
         var storyboardID : String!
         
-        if condition is SingleCondition {
+        if true {//condition is SingleCondition {
             storyboardID = "addNewConditionViewController"
             viewController = storyboard.instantiateController(identifier: storyboardID) { aDecoder in
-                AddNewConditionViewController(coder: aDecoder, analysis: self.analysis, condition: condition)
+                let subConditionIndex = self.curCondition.conditions.firstIndex(where: {$0 === condition})
+                let ac = AddConditionViewController(coder: aDecoder, analysis: self.analysis, parentCondition: self.curCondition, newCondition: condition, location: self.newConditionStackView.arrangedSubviews.count - 2)
+                ac?.subConditionIndex = subConditionIndex!
+                return ac
             }
-        } else if condition is Condition {
+        }/* else if condition is Condition {
             storyboardID = "addExistingConditionViewController"
             viewController = storyboard.instantiateController(identifier: storyboardID) { aDecoder in
                 AddExistingConditionViewController(coder: aDecoder, analysis: self.analysis, condition: condition)
             }
-        }
-        newConditionStackView.addArrangedSubview(viewController.view)
+        }*/
+        newConditionStackView.insertArrangedSubview(viewController.view, at: newConditionStackView.arrangedSubviews.count - 1)
+        //addArrangedSubview(viewController.view)
         self.addChild(viewController)
-        viewController.subConditionIndex = newConditionStackView.arrangedSubviews.count - 1
+        //viewController.subConditionIndex = newConditionStackView.arrangedSubviews.count - 1
         formatConditionEditor()
     }
     

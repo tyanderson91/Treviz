@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="9UX-jO-cEV">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="9UX-jO-cEV">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19162"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19529"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -15,13 +15,13 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView verticalHuggingPriority="260" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="ge0-ps-pVJ">
-                                <rect key="frame" x="0.0" y="116" width="372" height="223"/>
+                                <rect key="frame" x="0.0" y="118" width="372" height="199"/>
                                 <clipView key="contentView" id="xrS-NT-tfo">
-                                    <rect key="frame" x="1" y="1" width="370" height="221"/>
+                                    <rect key="frame" x="1" y="1" width="370" height="197"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="UWr-bn-Dgb" viewBased="YES" id="ITv-m7-Ey6" userLabel="Condition Summary Table View" customClass="ConditionsTableView" customModule="Treviz" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="370" height="196"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="370" height="172"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -40,7 +40,7 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView identifier="ConditionNameCellView" id="jdg-mM-Lrr">
-                                                            <rect key="frame" x="11" y="1" width="123" height="17"/>
+                                                            <rect key="frame" x="1" y="1" width="123" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c5N-lu-zzs">
@@ -75,7 +75,7 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView identifier="DescriptionCellView" id="dRa-n5-KEU">
-                                                            <rect key="frame" x="137" y="1" width="212" height="17"/>
+                                                            <rect key="frame" x="127" y="1" width="212" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8aI-x0-026">
@@ -122,28 +122,39 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableHeaderView>
                             </scrollView>
-                            <button identifier="compoundConditionButton" hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sDY-AO-yAc">
-                                <rect key="frame" x="28" y="4" width="316" height="17"/>
+                            <stackView wantsLayer="YES" distribution="fill" orientation="vertical" alignment="leading" spacing="3" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="737-7k-yH7">
+                                <rect key="frame" x="10" y="5" width="352" height="50"/>
+                                <subviews>
+                                    <button identifier="compoundConditionButton" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sDY-AO-yAc">
+                                        <rect key="frame" x="10" y="36" width="332" height="15"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="15" id="UMv-o9-44g"/>
+                                        </constraints>
+                                        <buttonCell key="cell" type="smallSquare" alternateTitle="Add compound condition" bezelStyle="smallSquare" image="NSAddTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="hIP-Z7-oJS">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="addSubCondition:" target="9UX-jO-cEV" id="WJH-Ft-C23"/>
+                                            <outlet property="menu" destination="nkl-c5-Pdx" id="7qJ-CN-LAl"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <edgeInsets key="edgeInsets" left="0.0" right="0.0" top="0.0" bottom="10"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="15" id="EEv-xu-Evp"/>
-                                </constraints>
-                                <buttonCell key="cell" type="smallSquare" alternateTitle="Add compound condition" bezelStyle="smallSquare" image="NSAddTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="hIP-Z7-oJS">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="addSubCondition:" target="9UX-jO-cEV" id="WJH-Ft-C23"/>
-                                    <outlet property="menu" destination="nkl-c5-Pdx" id="7qJ-CN-LAl"/>
-                                </connections>
-                            </button>
-                            <stackView wantsLayer="YES" distribution="fill" orientation="vertical" alignment="leading" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="737-7k-yH7">
-                                <rect key="frame" x="10" y="25" width="352" height="50"/>
-                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="sDY-AO-yAc" secondAttribute="trailing" constant="10" id="9Ws-bt-Ceg"/>
+                                    <constraint firstItem="sDY-AO-yAc" firstAttribute="leading" secondItem="737-7k-yH7" secondAttribute="leading" constant="10" id="Bgi-v0-NY5"/>
                                     <constraint firstAttribute="height" constant="50" placeholder="YES" id="vKz-MD-0rb"/>
                                 </constraints>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
                             </stackView>
                             <textField horizontalHuggingPriority="700" verticalHuggingPriority="750" horizontalCompressionResistancePriority="700" translatesAutoresizingMaskIntoConstraints="NO" id="SQ2-n5-0je">
-                                <rect key="frame" x="10" y="85" width="176" height="21"/>
+                                <rect key="frame" x="10" y="65" width="238" height="21"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Condition Name" id="dY9-nJ-NVR">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -154,7 +165,7 @@
                                 </connections>
                             </textField>
                             <stackView hidden="YES" distribution="fill" orientation="horizontal" alignment="centerY" spacing="7" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ije-r1-bnx">
-                                <rect key="frame" x="201" y="86" width="99" height="20"/>
+                                <rect key="frame" x="263" y="66" width="99" height="20"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="900" translatesAutoresizingMaskIntoConstraints="NO" id="do3-sK-dT1">
                                         <rect key="frame" x="-2" y="2" width="38" height="16"/>
@@ -198,48 +209,74 @@
                                 </customSpacing>
                             </stackView>
                             <button horizontalHuggingPriority="700" verticalHuggingPriority="750" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" translatesAutoresizingMaskIntoConstraints="NO" id="BVe-vE-dVP" userLabel="Add Condition Button">
-                                <rect key="frame" x="308" y="76" width="61" height="37"/>
+                                <rect key="frame" x="313" y="84" width="61" height="37"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="HCO-Yh-THg"/>
-                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="70" id="yOj-gW-Mcg"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="120" id="yOj-gW-Mcg"/>
                                 </constraints>
                                 <buttonCell key="cell" type="push" title="New" alternateTitle="Add Condition" bezelStyle="rounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" inset="2" id="G2U-TQ-n5Q">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="addRemoveConditionButtonClicked:" target="9UX-jO-cEV" id="xPI-Xt-7he"/>
+                                    <action selector="addConditionButtonClicked:" target="9UX-jO-cEV" id="M7D-bo-MJF"/>
                                 </connections>
                             </button>
+                            <button horizontalHuggingPriority="700" verticalHuggingPriority="750" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" translatesAutoresizingMaskIntoConstraints="NO" id="09A-Iy-zxf" userLabel="Add Condition Button">
+                                <rect key="frame" x="-2" y="84" width="74" height="37"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="120" id="1dy-dX-rhV"/>
+                                    <constraint firstAttribute="height" constant="25" id="L9H-zI-crI"/>
+                                </constraints>
+                                <buttonCell key="cell" type="push" title="Delete" alternateTitle="Add Condition" bezelStyle="rounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" inset="2" id="R8E-cV-T6y">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="removeConditionButtonClicked:" target="9UX-jO-cEV" id="WiQ-CJ-sGh"/>
+                                </connections>
+                            </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rJT-lQ-y6R">
+                                <rect key="frame" x="147" y="319" width="78" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="18" id="XJN-HW-dUb"/>
+                                </constraints>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Conditions" id="rDV-ga-4Zq">
+                                    <font key="font" textStyle="title3" name=".SFNS-Regular"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="sDY-AO-yAc" firstAttribute="centerX" secondItem="737-7k-yH7" secondAttribute="centerX" id="7pf-L4-hr4"/>
+                            <constraint firstAttribute="bottom" secondItem="737-7k-yH7" secondAttribute="bottom" constant="5" id="2Xe-lo-QOU"/>
+                            <constraint firstItem="rJT-lQ-y6R" firstAttribute="top" secondItem="oXY-Ta-MDe" secondAttribute="top" constant="2" id="6Hd-MG-RvI"/>
                             <constraint firstAttribute="trailing" secondItem="ge0-ps-pVJ" secondAttribute="trailing" id="B8B-GX-Xxu"/>
+                            <constraint firstAttribute="trailing" secondItem="ije-r1-bnx" secondAttribute="trailing" constant="10" id="CsJ-1a-G84"/>
+                            <constraint firstItem="737-7k-yH7" firstAttribute="trailing" secondItem="XbK-yO-rOX" secondAttribute="trailing" id="EVd-60-DAU"/>
                             <constraint firstItem="ije-r1-bnx" firstAttribute="centerY" secondItem="SQ2-n5-0je" secondAttribute="centerY" id="F3j-bt-o2S"/>
                             <constraint firstItem="737-7k-yH7" firstAttribute="top" secondItem="SQ2-n5-0je" secondAttribute="bottom" constant="10" id="FgK-ci-6Re"/>
+                            <constraint firstItem="ge0-ps-pVJ" firstAttribute="top" secondItem="rJT-lQ-y6R" secondAttribute="bottom" constant="2" id="HS6-2r-JRo"/>
                             <constraint firstItem="SQ2-n5-0je" firstAttribute="leading" secondItem="oXY-Ta-MDe" secondAttribute="leading" constant="10" id="J4F-MU-7tH"/>
                             <constraint firstItem="ge0-ps-pVJ" firstAttribute="leading" secondItem="oXY-Ta-MDe" secondAttribute="leading" id="MCf-D4-Glr"/>
-                            <constraint firstItem="ge0-ps-pVJ" firstAttribute="top" secondItem="oXY-Ta-MDe" secondAttribute="top" id="RRR-Jw-PY3"/>
-                            <constraint firstItem="SQ2-n5-0je" firstAttribute="top" secondItem="ge0-ps-pVJ" secondAttribute="bottom" constant="10" id="Xx7-Uo-ega"/>
+                            <constraint firstItem="09A-Iy-zxf" firstAttribute="centerY" secondItem="BVe-vE-dVP" secondAttribute="centerY" id="Oh4-L5-cQp"/>
+                            <constraint firstItem="737-7k-yH7" firstAttribute="leading" secondItem="SQ2-n5-0je" secondAttribute="leading" id="Qgi-HW-ocb"/>
+                            <constraint firstItem="SQ2-n5-0je" firstAttribute="top" secondItem="BVe-vE-dVP" secondAttribute="bottom" constant="5" id="Zo5-Vw-XGV"/>
                             <constraint firstItem="ije-r1-bnx" firstAttribute="leading" secondItem="SQ2-n5-0je" secondAttribute="trailing" constant="15" id="dHu-y7-CLN"/>
-                            <constraint firstItem="sDY-AO-yAc" firstAttribute="width" secondItem="737-7k-yH7" secondAttribute="width" multiplier="0.9" id="hzt-Wp-cdm"/>
-                            <constraint firstItem="BVe-vE-dVP" firstAttribute="leading" secondItem="ije-r1-bnx" secondAttribute="trailing" priority="10" constant="15" id="iF4-Fs-A2n"/>
-                            <constraint firstItem="BVe-vE-dVP" firstAttribute="centerY" secondItem="SQ2-n5-0je" secondAttribute="centerY" id="pFt-70-Swi"/>
-                            <constraint firstItem="737-7k-yH7" firstAttribute="leading" secondItem="oXY-Ta-MDe" secondAttribute="leading" constant="10" id="pZb-om-sSw"/>
-                            <constraint firstAttribute="bottom" secondItem="sDY-AO-yAc" secondAttribute="bottom" constant="5" id="pan-Lb-Tix"/>
-                            <constraint firstItem="sDY-AO-yAc" firstAttribute="top" secondItem="737-7k-yH7" secondAttribute="bottom" constant="5" id="qb6-JU-rgb"/>
-                            <constraint firstAttribute="trailing" secondItem="BVe-vE-dVP" secondAttribute="trailing" constant="10" id="zaQ-Hj-dau"/>
-                            <constraint firstAttribute="trailing" secondItem="737-7k-yH7" secondAttribute="trailing" constant="10" id="zeW-sc-Ipo"/>
+                            <constraint firstItem="rJT-lQ-y6R" firstAttribute="centerX" secondItem="oXY-Ta-MDe" secondAttribute="centerX" id="mat-ms-Evx"/>
+                            <constraint firstItem="09A-Iy-zxf" firstAttribute="leading" secondItem="oXY-Ta-MDe" secondAttribute="leading" constant="5" id="oUG-ta-eez"/>
+                            <constraint firstItem="BVe-vE-dVP" firstAttribute="top" secondItem="ITv-m7-Ey6" secondAttribute="bottom" constant="3" id="zVO-Fi-YFt"/>
+                            <constraint firstAttribute="trailing" secondItem="BVe-vE-dVP" secondAttribute="trailing" constant="5" id="zaQ-Hj-dau"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="addConditionButton" destination="BVe-vE-dVP" id="xad-jq-q6N"/>
                         <outlet property="addConditionTypeMenu" destination="nkl-c5-Pdx" id="zfr-vE-IIL"/>
-                        <outlet property="comparisonLabel" destination="BVe-vE-dVP" id="mth-yk-08A"/>
                         <outlet property="compoundConditionButton" destination="sDY-AO-yAc" id="gKE-XR-QFK"/>
                         <outlet property="conditionNameTextBox" destination="SQ2-n5-0je" id="1tK-K1-DiR"/>
                         <outlet property="methodStackView" destination="ije-r1-bnx" id="1dr-AG-b8Q"/>
                         <outlet property="newConditionStackView" destination="737-7k-yH7" id="Yz7-HW-Bsb"/>
+                        <outlet property="removeConditionButton" destination="09A-Iy-zxf" id="QVG-mT-c6f"/>
                         <outlet property="tableView" destination="ITv-m7-Ey6" id="QF9-tc-rX2"/>
                         <outlet property="unionTypeDropdown" destination="XbK-yO-rOX" id="3Ps-Ny-jO9"/>
                     </connections>
@@ -269,59 +306,11 @@
             <objects>
                 <viewController title="addConditionViewController" storyboardIdentifier="addNewConditionViewController" id="MME-Yq-Esp" customClass="AddNewConditionViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="cu2-ri-3xA">
-                        <rect key="frame" x="0.0" y="0.0" width="605" height="80"/>
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="83"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="6" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" horizontalHuggingPriority="750" horizontalCompressionResistancePriority="500" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F81-kn-fiU" userLabel="Condition Type Selector Stack View">
-                                <rect key="frame" x="39" y="10" width="73" height="60"/>
-                                <subviews>
-                                    <button identifier="singleConditionTypeSelector.interval" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="oKn-JL-0JT">
-                                        <rect key="frame" x="-2" y="43" width="71" height="18"/>
-                                        <buttonCell key="cell" type="radio" title="Interval" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="HaN-m5-Z2Q">
-                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="typeWasSelected:" target="MME-Yq-Esp" id="Y3k-su-KfY"/>
-                                        </connections>
-                                    </button>
-                                    <button identifier="singleConditionTypeSelector.equal" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BQC-y4-NpO">
-                                        <rect key="frame" x="-2" y="21" width="75" height="18"/>
-                                        <buttonCell key="cell" type="radio" title="Equality" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="GUc-Z1-Dc4">
-                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="typeWasSelected:" target="MME-Yq-Esp" id="sGb-9j-dnq"/>
-                                        </connections>
-                                    </button>
-                                    <button identifier="singleConditionTypeSelector.other" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Zla-QZ-eW6" userLabel="Other">
-                                        <rect key="frame" x="-2" y="-1" width="61" height="18"/>
-                                        <buttonCell key="cell" type="radio" title="Other" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="nyV-g6-vQr">
-                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="typeWasSelected:" target="MME-Yq-Esp" id="XPD-a7-UHx"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="100" id="W8a-WZ-itO"/>
-                                </constraints>
-                                <visibilityPriorities>
-                                    <integer value="1000"/>
-                                    <integer value="1000"/>
-                                    <integer value="1000"/>
-                                </visibilityPriorities>
-                                <customSpacing>
-                                    <real value="3.4028234663852886e+38"/>
-                                    <real value="3.4028234663852886e+38"/>
-                                    <real value="3.4028234663852886e+38"/>
-                                </customSpacing>
-                            </stackView>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ydx-Wx-M9w">
-                                <rect key="frame" x="10" y="32" width="15" height="17"/>
+                                <rect key="frame" x="10" y="33" width="15" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="ydx-Wx-M9w" secondAttribute="height" multiplier="1:1" id="LyI-ae-PB6"/>
                                     <constraint firstAttribute="height" constant="15" id="wCF-yv-9Fm"/>
@@ -334,8 +323,8 @@
                                     <action selector="removeConditionButtonClicked:" target="MME-Yq-Esp" id="hL2-1b-CTG"/>
                                 </connections>
                             </button>
-                            <stackView distribution="equalSpacing" orientation="horizontal" alignment="bottom" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" horizontalHuggingPriority="50" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fd5-Ma-hzJ" userLabel="Condition Input Stack View" customClass="CollapsibleStackView" customModule="Treviz" customModuleProvider="target">
-                                <rect key="frame" x="132" y="30" width="458" height="21"/>
+                            <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" horizontalHuggingPriority="50" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fd5-Ma-hzJ" userLabel="Condition Input Stack View" customClass="CollapsibleStackView" customModule="Treviz" customModuleProvider="target">
+                                <rect key="frame" x="131" y="31" width="309" height="21"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="150" verticalHuggingPriority="750" horizontalCompressionResistancePriority="500" translatesAutoresizingMaskIntoConstraints="NO" id="Y9N-df-bvC">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="21"/>
@@ -352,7 +341,7 @@
                                         </connections>
                                     </textField>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="53k-z9-SNq" userLabel="Less than comparison label">
-                                        <rect key="frame" x="112" y="2" width="19" height="16"/>
+                                        <rect key="frame" x="58" y="3" width="19" height="16"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="15" id="uEZ-Do-Snt"/>
                                         </constraints>
@@ -362,8 +351,8 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <containerView horizontalHuggingPriority="950" translatesAutoresizingMaskIntoConstraints="NO" id="lAL-pw-VID">
-                                        <rect key="frame" x="193" y="0.0" width="72" height="20"/>
+                                    <containerView horizontalHuggingPriority="200" translatesAutoresizingMaskIntoConstraints="NO" id="lAL-pw-VID">
+                                        <rect key="frame" x="85" y="1" width="97" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="Oz8-Xy-nki"/>
                                         </constraints>
@@ -372,7 +361,7 @@
                                         </connections>
                                     </containerView>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7bb-ju-ZVW" userLabel="Condition comparison label">
-                                        <rect key="frame" x="327" y="2" width="19" height="16"/>
+                                        <rect key="frame" x="190" y="3" width="19" height="16"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="15" id="gm7-Gc-IQm"/>
                                         </constraints>
@@ -383,7 +372,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <textField horizontalHuggingPriority="150" verticalHuggingPriority="750" horizontalCompressionResistancePriority="500" translatesAutoresizingMaskIntoConstraints="NO" id="pJp-kY-69n">
-                                        <rect key="frame" x="408" y="0.0" width="50" height="21"/>
+                                        <rect key="frame" x="217" y="0.0" width="50" height="21"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="kHz-J5-GTk">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -393,7 +382,7 @@
                                             <action selector="upperBoundWasSet:" target="MME-Yq-Esp" id="OOj-sc-2i1"/>
                                         </connections>
                                     </textField>
-                                    <popUpButton identifier="Custom Choice Popup" hidden="YES" horizontalHuggingPriority="150" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="35G-qS-zXJ" userLabel="Custom Type Popup">
+                                    <popUpButton identifier="Custom Choice Popup" hidden="YES" horizontalHuggingPriority="90" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="35G-qS-zXJ" userLabel="Custom Type Popup">
                                         <rect key="frame" x="-3" y="-3" width="107" height="25"/>
                                         <popUpButtonCell key="cell" type="push" title="Local Max" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="RJW-G3-eeF" id="K5r-1P-GvT">
                                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
@@ -411,6 +400,17 @@
                                             <action selector="customTypeWasSelected:" target="MME-Yq-Esp" id="vIK-ph-xzO"/>
                                         </connections>
                                     </popUpButton>
+                                    <popUpButton horizontalHuggingPriority="1" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="B5K-Ni-EiM" userLabel="Existing Condition Popup Button">
+                                        <rect key="frame" x="274" y="-3" width="39" height="25"/>
+                                        <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="q0i-GW-U4B">
+                                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="menu"/>
+                                            <menu key="menu" id="u6P-sm-1jq"/>
+                                        </popUpButtonCell>
+                                        <connections>
+                                            <action selector="compoundTypeWasSelected:" target="MME-Yq-Esp" id="aoN-Th-wvG"/>
+                                        </connections>
+                                    </popUpButton>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="53k-z9-SNq" firstAttribute="centerY" secondItem="Fd5-Ma-hzJ" secondAttribute="centerY" id="3NF-hF-nAe"/>
@@ -418,6 +418,7 @@
                                     <constraint firstItem="Y9N-df-bvC" firstAttribute="width" secondItem="pJp-kY-69n" secondAttribute="width" id="slb-Jr-HC8"/>
                                 </constraints>
                                 <visibilityPriorities>
+                                    <integer value="1000"/>
                                     <integer value="1000"/>
                                     <integer value="1000"/>
                                     <integer value="1000"/>
@@ -432,22 +433,86 @@
                                     <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
+                            <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="3" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qn8-pw-o85">
+                                <rect key="frame" x="35" y="5" width="91" height="73"/>
+                                <subviews>
+                                    <button identifier="singleConditionTypeSelector.compound" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wsF-Zr-TOc" userLabel="Compound">
+                                        <rect key="frame" x="-2" y="56" width="93" height="18"/>
+                                        <buttonCell key="cell" type="radio" title="Compound" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="3pB-7c-e4I">
+                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="typeWasSelected:" target="MME-Yq-Esp" id="NNI-DS-NcB"/>
+                                        </connections>
+                                    </button>
+                                    <button identifier="singleConditionTypeSelector.equal" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BQC-y4-NpO">
+                                        <rect key="frame" x="-2" y="37" width="75" height="18"/>
+                                        <buttonCell key="cell" type="radio" title="Equality" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="GUc-Z1-Dc4">
+                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="typeWasSelected:" target="MME-Yq-Esp" id="sGb-9j-dnq"/>
+                                        </connections>
+                                    </button>
+                                    <button identifier="singleConditionTypeSelector.interval" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="oKn-JL-0JT">
+                                        <rect key="frame" x="-2" y="18" width="71" height="18"/>
+                                        <buttonCell key="cell" type="radio" title="Interval" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="HaN-m5-Z2Q">
+                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="typeWasSelected:" target="MME-Yq-Esp" id="Y3k-su-KfY"/>
+                                        </connections>
+                                    </button>
+                                    <button identifier="singleConditionTypeSelector.other" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Zla-QZ-eW6">
+                                        <rect key="frame" x="-2" y="-1" width="77" height="18"/>
+                                        <buttonCell key="cell" type="radio" title="Min/Max" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="nyV-g6-vQr">
+                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="typeWasSelected:" target="MME-Yq-Esp" id="XPD-a7-UHx"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="91" id="eYD-QB-vko"/>
+                                </constraints>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
                                 </customSpacing>
                             </stackView>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="Fd5-Ma-hzJ" secondAttribute="trailing" constant="15" id="0yP-YI-hN0"/>
-                            <constraint firstItem="F81-kn-fiU" firstAttribute="top" secondItem="cu2-ri-3xA" secondAttribute="top" constant="10" id="5sh-Sc-9r7"/>
-                            <constraint firstItem="Fd5-Ma-hzJ" firstAttribute="leading" secondItem="F81-kn-fiU" secondAttribute="trailing" constant="20" id="6V8-u9-MHr"/>
-                            <constraint firstItem="ydx-Wx-M9w" firstAttribute="centerY" secondItem="F81-kn-fiU" secondAttribute="centerY" id="7g5-Re-GBy"/>
+                            <constraint firstAttribute="trailing" secondItem="Fd5-Ma-hzJ" secondAttribute="trailing" constant="10" id="0yP-YI-hN0"/>
+                            <constraint firstItem="qn8-pw-o85" firstAttribute="centerY" secondItem="cu2-ri-3xA" secondAttribute="centerY" id="7dW-Je-TXh"/>
+                            <constraint firstItem="Fd5-Ma-hzJ" firstAttribute="centerY" secondItem="qn8-pw-o85" secondAttribute="centerY" id="7eR-Ly-T9R"/>
+                            <constraint firstItem="qn8-pw-o85" firstAttribute="top" secondItem="cu2-ri-3xA" secondAttribute="top" constant="5" id="BeP-BX-llG"/>
+                            <constraint firstItem="qn8-pw-o85" firstAttribute="leading" secondItem="ydx-Wx-M9w" secondAttribute="trailing" constant="10" id="BqP-yz-6m4"/>
+                            <constraint firstAttribute="bottom" secondItem="qn8-pw-o85" secondAttribute="bottom" constant="5" id="Ie9-7b-4U1"/>
+                            <constraint firstItem="Fd5-Ma-hzJ" firstAttribute="leading" secondItem="qn8-pw-o85" secondAttribute="trailing" constant="5" id="Iua-nj-0KG"/>
                             <constraint firstItem="ydx-Wx-M9w" firstAttribute="leading" secondItem="cu2-ri-3xA" secondAttribute="leading" constant="10" id="ND6-W1-ntI"/>
-                            <constraint firstAttribute="bottom" secondItem="F81-kn-fiU" secondAttribute="bottom" constant="10" id="QRM-Mk-gNn"/>
-                            <constraint firstItem="Fd5-Ma-hzJ" firstAttribute="centerY" secondItem="F81-kn-fiU" secondAttribute="centerY" id="hTJ-SZ-Vgd"/>
-                            <constraint firstItem="F81-kn-fiU" firstAttribute="leading" secondItem="ydx-Wx-M9w" secondAttribute="trailing" constant="14" id="ylv-cF-8Bf"/>
+                            <constraint firstItem="ydx-Wx-M9w" firstAttribute="centerY" secondItem="cu2-ri-3xA" secondAttribute="centerY" id="VwW-wN-ST4"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="comparisonLabelCell" destination="o6l-Sn-EEE" id="Nbk-k1-PnG"/>
+                        <outlet property="compoundTypePopup" destination="B5K-Ni-EiM" id="LIX-d9-rNV"/>
+                        <outlet property="compoundTypeRadioButton" destination="wsF-Zr-TOc" id="WN7-iS-uqm"/>
                         <outlet property="conditionInputStackView" destination="Fd5-Ma-hzJ" id="bnJ-sE-4gH"/>
                         <outlet property="equalityTypeRadioButton" destination="BQC-y4-NpO" id="jXw-Lh-zdL"/>
                         <outlet property="intervalTypeRadioButton" destination="oKn-JL-0JT" id="YRQ-W7-MCv"/>
@@ -460,7 +525,7 @@
                 </viewController>
                 <customObject id="yhl-MY-06M" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-223.5" y="143"/>
+            <point key="canvasLocation" x="-360" y="179.5"/>
         </scene>
         <!--VariableSelector-->
         <scene sceneID="4KQ-BM-iBy">
@@ -493,7 +558,7 @@
                                 </connections>
                             </button>
                             <popUpButton horizontalHuggingPriority="1" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kEa-eP-MTI">
-                                <rect key="frame" x="37" y="7" width="119" height="25"/>
+                                <rect key="frame" x="27" y="7" width="139" height="25"/>
                                 <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="GfH-wc-x1P">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="menu"/>
@@ -506,12 +571,12 @@
                         </subviews>
                         <constraints>
                             <constraint firstItem="1xf-GZ-url" firstAttribute="centerY" secondItem="eTB-0O-VNL" secondAttribute="centerY" id="Els-dO-1fu"/>
-                            <constraint firstItem="kEa-eP-MTI" firstAttribute="leading" secondItem="1xf-GZ-url" secondAttribute="trailing" constant="15" id="GfF-P7-gYv"/>
+                            <constraint firstItem="kEa-eP-MTI" firstAttribute="leading" secondItem="1xf-GZ-url" secondAttribute="trailing" constant="5" id="GfF-P7-gYv"/>
                             <constraint firstItem="kEa-eP-MTI" firstAttribute="centerY" secondItem="1xf-GZ-url" secondAttribute="centerY" id="QgM-fK-ByB"/>
                             <constraint firstItem="kEa-eP-MTI" firstAttribute="top" secondItem="eTB-0O-VNL" secondAttribute="top" constant="11" id="UND-fL-Fep"/>
                             <constraint firstItem="1xf-GZ-url" firstAttribute="leading" secondItem="eTB-0O-VNL" secondAttribute="leading" constant="10" id="bpN-38-VjJ"/>
                             <constraint firstAttribute="bottom" secondItem="kEa-eP-MTI" secondAttribute="bottom" constant="11" id="g6C-wz-cQd"/>
-                            <constraint firstAttribute="trailing" secondItem="kEa-eP-MTI" secondAttribute="trailing" constant="15" id="s86-eg-JJ8"/>
+                            <constraint firstAttribute="trailing" secondItem="kEa-eP-MTI" secondAttribute="trailing" constant="5" id="s86-eg-JJ8"/>
                         </constraints>
                     </view>
                     <connections>

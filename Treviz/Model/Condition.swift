@@ -8,6 +8,7 @@
 
 import Foundation
 import Cocoa
+import SceneKit
 
 /**
  EvaluateCondition is a protocol that is adopted by both the Condition and SingleCondition classes. The basic feature is that it can read a state and determine whether it meets a given condition based on some predefined rules
@@ -129,6 +130,9 @@ class SingleCondition: EvaluateCondition, Codable {
         return dstring
     }
     var subConditionCount: Int { return 1 }
+    var isEmpty: Bool {
+        return ubound == nil && lbound == nil && specialCondition == nil && equality == nil && varID == nil
+    }
     
     private var previousState : VarValue! // For use in equality type or special case lookups
     private var nextState: VarValue! // For use in special case lookups, e.g. local min
@@ -173,7 +177,7 @@ class SingleCondition: EvaluateCondition, Codable {
         specialCondition = spc
         setTests()
     }
-    
+        
     // MARK: Codable implementation
     enum CodingKeys: CodingKey {
         case lbound
@@ -353,10 +357,14 @@ class SingleCondition: EvaluateCondition, Codable {
             return ubound == nil && lbound == nil && specialCondition == nil
         } else if specialCondition != nil {
             return ubound == nil && lbound == nil && equality == nil
+        } else if ubound != nil && lbound != nil {
+            return equality == nil && specialCondition == nil &&
+                ubound! > lbound!
         } else if ubound != nil || lbound != nil {
             return equality == nil && specialCondition == nil
         } else { return false }
     }
+    
     // MARK: NSCopying
     func copy(with zone: NSZone? = nil) -> Any {
         let copy = SingleCondition(self.varID, upperBound: self.ubound, lowerBound: self.lbound, equality: self.equality, specialCondition: self.specialCondition)

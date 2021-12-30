@@ -46,6 +46,7 @@
 		CD3F5E5822EE4DCD00E4CF20 /* Conditions.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD3F5E5722EE4DCD00E4CF20 /* Conditions.storyboard */; };
 		CD3F5E5A22EE4FFE00E4CF20 /* ConditionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3F5E5922EE4FFE00E4CF20 /* ConditionsViewController.swift */; };
 		CD410CF72444239700AB49DE /* CorePlotExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD410CF62444239700AB49DE /* CorePlotExtensions.swift */; };
+		CD41D34C272BC898004E267B /* SplitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD41D34B272BC898004E267B /* SplitView.swift */; };
 		CD42E0AA22FD05F600A0F9A1 /* CollapsibleStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD42E0A922FD05F600A0F9A1 /* CollapsibleStackView.swift */; };
 		CD4656B2224C6F3500C587CC /* PhysicsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4656B1224C6F3500C587CC /* PhysicsViewController.swift */; };
 		CD4AD70823A20EE200FC815F /* OutputSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4AD70723A20EE100FC815F /* OutputSetupViewController.swift */; };
@@ -275,6 +276,7 @@
 		CD410CF12444211500AB49DE /* CorePlot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CorePlot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD410CF4244421A400AB49DE /* CorePlot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CorePlot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD410CF62444239700AB49DE /* CorePlotExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CorePlotExtensions.swift; path = Treviz/Main/Outputs/CorePlotExtensions.swift; sourceTree = SOURCE_ROOT; };
+		CD41D34B272BC898004E267B /* SplitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitView.swift; sourceTree = "<group>"; };
 		CD42E0A922FD05F600A0F9A1 /* CollapsibleStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollapsibleStackView.swift; sourceTree = "<group>"; };
 		CD4656B1224C6F3500C587CC /* PhysicsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsViewController.swift; sourceTree = "<group>"; };
 		CD4AD70723A20EE100FC815F /* OutputSetupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutputSetupViewController.swift; sourceTree = "<group>"; };
@@ -785,6 +787,7 @@
 				CDF23382242DCD8000B8EF40 /* EditableHeaderTextField.swift */,
 				CDF23383242DCD8000B8EF40 /* BaseViewController.swift */,
 				CDF23384242DCD8000B8EF40 /* StackView.swift */,
+				CD41D34B272BC898004E267B /* SplitView.swift */,
 				CDF23387242DCD8000B8EF40 /* HeaderViewController.swift */,
 				CDF23385242DCD8000B8EF40 /* HeaderViewController.storyboard */,
 				CDF23386242DCD8000B8EF40 /* ReadMe.md */,
@@ -1108,6 +1111,7 @@
 				CD3F5E5A22EE4FFE00E4CF20 /* ConditionsViewController.swift in Sources */,
 				CDE2B5A824C2C71D002026E0 /* TZLogger.swift in Sources */,
 				CDE2B5B924C2C729002026E0 /* Variable.swift in Sources */,
+				CD41D34C272BC898004E267B /* SplitView.swift in Sources */,
 				CD59C54023E793E3001D98D5 /* VariableSelectorViewController.swift in Sources */,
 				CDE2B5BD24C2C729002026E0 /* TZOutput.swift in Sources */,
 				CD8FEB0825956A4F008A08A7 /* RunGroup.swift in Sources */,

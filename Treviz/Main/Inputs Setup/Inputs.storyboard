@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="qZy-yh-Qxd">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="qZy-yh-Qxd">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19162"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19455"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -591,31 +591,31 @@
             <objects>
                 <viewController title="Phase" id="Tb7-7q-ypH" customClass="PhaseSelectorViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="kwp-cl-qZz" customClass="PhaseSelectorBackgroundView" customModule="Treviz" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="337" height="43"/>
+                        <rect key="frame" x="0.0" y="0.0" width="337" height="45"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="0YV-8A-kq0" customClass="PhaseSelectorView" customModule="Treviz" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="15" width="337" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="25" id="h5u-gd-4QH"/>
+                                </constraints>
+                            </customView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GoG-xn-wVj">
-                                <rect key="frame" x="149" y="30" width="39" height="13"/>
+                                <rect key="frame" x="149" y="2" width="39" height="13"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Phases" id="gZX-yY-3kk">
                                     <font key="font" metaFont="system" size="10"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="0YV-8A-kq0" customClass="PhaseSelectorView" customModule="Treviz" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="337" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="25" id="h5u-gd-4QH"/>
-                                </constraints>
-                            </customView>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="0YV-8A-kq0" firstAttribute="top" secondItem="kwp-cl-qZz" secondAttribute="top" id="7tR-bK-GvS"/>
                             <constraint firstItem="GoG-xn-wVj" firstAttribute="centerX" secondItem="kwp-cl-qZz" secondAttribute="centerX" id="8dh-Q8-Lx5"/>
                             <constraint firstItem="0YV-8A-kq0" firstAttribute="leading" secondItem="kwp-cl-qZz" secondAttribute="leading" id="9aX-sA-Vz6"/>
+                            <constraint firstItem="GoG-xn-wVj" firstAttribute="top" secondItem="0YV-8A-kq0" secondAttribute="bottom" id="Ee4-n7-q3V"/>
                             <constraint firstAttribute="trailing" secondItem="0YV-8A-kq0" secondAttribute="trailing" id="Hbr-wC-lKb"/>
-                            <constraint firstAttribute="bottom" secondItem="0YV-8A-kq0" secondAttribute="bottom" id="L7N-SK-rfu"/>
-                            <constraint firstItem="GoG-xn-wVj" firstAttribute="top" secondItem="kwp-cl-qZz" secondAttribute="top" id="bEk-WX-H9z"/>
-                            <constraint firstItem="0YV-8A-kq0" firstAttribute="top" secondItem="GoG-xn-wVj" secondAttribute="bottom" id="qhF-c1-8Rd"/>
+                            <constraint firstAttribute="bottom" secondItem="GoG-xn-wVj" secondAttribute="bottom" constant="2" id="uRQ-2f-Lbj"/>
                         </constraints>
                     </view>
                     <connections>
@@ -624,14 +624,14 @@
                 </viewController>
                 <customObject id="RFJ-F8-7YD" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="24" y="211"/>
+            <point key="canvasLocation" x="-329.5" y="450.5"/>
         </scene>
         <!--Inputs Split View Controller-->
         <scene sceneID="3Qw-bi-7wV">
             <objects>
                 <splitViewController id="qZy-yh-Qxd" customClass="InputsSplitViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
                     <splitViewItems>
-                        <splitViewItem canCollapse="YES" id="rsg-1Y-HIj"/>
+                        <splitViewItem id="rsg-1Y-HIj"/>
                         <splitViewItem id="ejg-9K-M27"/>
                     </splitViewItems>
                     <splitView key="splitView" dividerStyle="thin" id="QPy-7v-2FJ">
@@ -704,7 +704,7 @@
                 </viewController>
                 <customObject id="ccH-Wh-n6o" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-71" y="590"/>
+            <point key="canvasLocation" x="-65" y="681"/>
         </scene>
         <!--Run Settings View Controller-->
         <scene sceneID="qmf-V1-g4n">

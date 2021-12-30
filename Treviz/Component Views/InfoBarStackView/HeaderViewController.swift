@@ -12,6 +12,7 @@ class HeaderViewController : NSViewController, StackItemHeader {
     
     @IBOutlet weak var headerTextField: EditableHeaderTextField!
     @IBOutlet weak var showHideButton: NSButton!
+    var canCollapse: Bool = true
     
     var disclose: (() -> ())? // This state will be set by the item view controller.
     var canEditHeader = false
@@ -47,13 +48,17 @@ class HeaderViewController : NSViewController, StackItemHeader {
     override func mouseEntered(with theEvent: NSEvent) {
         // Mouse entered the header area, show disclosure button.
         super.mouseEntered(with: theEvent)
-        showHideButton.isHidden = false
+        if canCollapse {
+            showHideButton.isHidden = false
+        }
     }
     
     override func mouseExited(with theEvent: NSEvent) {
         // Mouse exited the header area, hide disclosure button.
         super.mouseExited(with: theEvent)
-        showHideButton.isHidden = true
+        if showHideButton.state == NSControl.StateValue.on {
+            showHideButton.isHidden = true
+        }
     }
     
     // MARK: - StackItemHeader Procotol
@@ -63,7 +68,9 @@ class HeaderViewController : NSViewController, StackItemHeader {
         case .open:
             showHideButton.state = NSControl.StateValue.on
         case .closed:
+            guard canCollapse else { return }
             showHideButton.state = NSControl.StateValue.off
+            showHideButton.isHidden = false
         }
 
         // Save the disclosure state to user defaults for next launch.

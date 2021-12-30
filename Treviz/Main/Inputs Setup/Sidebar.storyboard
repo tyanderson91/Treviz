@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="QK9-IU-aUs">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="QK9-IU-aUs">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19162"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19455"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -100,11 +100,11 @@
                                     </tabViewItem>
                                     <tabViewItem label="Algorithms" identifier="algorithms" id="zlY-7q-8WS">
                                         <view key="view" id="fDo-4J-W50">
-                                            <rect key="frame" x="0.0" y="0.0" width="187" height="156"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="187" height="116"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="AP3-i7-1Qr">
-                                                    <rect key="frame" x="82" y="70" width="24" height="16"/>
+                                                    <rect key="frame" x="82" y="50" width="24" height="16"/>
                                                     <textFieldCell key="cell" lineBreakMode="clipping" title="Alg" id="jAk-zL-zgj">
                                                         <font key="font" usesAppearanceFont="YES"/>
                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -120,11 +120,11 @@
                                     </tabViewItem>
                                     <tabViewItem label="Geometry" identifier="geometry" id="9wF-g7-Gg2">
                                         <view key="view" id="nO6-bl-rRF">
-                                            <rect key="frame" x="0.0" y="0.0" width="187" height="156"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="187" height="116"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zB5-wY-DXe">
-                                                    <rect key="frame" x="74" y="70" width="40" height="16"/>
+                                                    <rect key="frame" x="74" y="50" width="40" height="16"/>
                                                     <textFieldCell key="cell" lineBreakMode="clipping" title="Geom" id="ZLf-FG-dlA">
                                                         <font key="font" usesAppearanceFont="YES"/>
                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -221,18 +221,39 @@
             </objects>
             <point key="canvasLocation" x="222" y="245"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="xIs-gc-uAF">
+        <!--Sidebar Header View Controller-->
+        <scene sceneID="sYl-gP-zyc">
             <objects>
-                <viewController id="dM0-nN-Qf5" sceneMemberID="viewController">
-                    <view key="view" id="gdZ-lo-u7z">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                <customObject id="XOI-jB-Vz0" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <viewController storyboardIdentifier="headerViewController" id="fvi-Jo-65p" customClass="SidebarHeaderViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="fyr-n1-jgV">
+                        <rect key="frame" x="0.0" y="0.0" width="205" height="22"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="EtB-0o-Sxt">
+                                <rect key="frame" x="79" y="2" width="47" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="18" id="XZR-7U-v5p"/>
+                                </constraints>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Inputs" id="6su-Hv-4L7">
+                                    <font key="font" textStyle="title3" name=".SFNS-Regular"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="EtB-0o-Sxt" firstAttribute="top" secondItem="fyr-n1-jgV" secondAttribute="top" constant="2" id="5UU-Ja-VkH"/>
+                            <constraint firstItem="EtB-0o-Sxt" firstAttribute="centerX" secondItem="fyr-n1-jgV" secondAttribute="centerX" id="lBm-g2-6Iv"/>
+                            <constraint firstAttribute="bottom" secondItem="EtB-0o-Sxt" secondAttribute="bottom" constant="2" id="lbL-rb-MeT"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="textField" destination="EtB-0o-Sxt" id="oH1-Y7-GbT"/>
+                    </connections>
                 </viewController>
-                <customObject id="LIU-iv-8r0" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-53" y="-20"/>
+            <point key="canvasLocation" x="-79" y="131"/>
         </scene>
     </scenes>
 </document>

@@ -21,16 +21,8 @@ class InputsSplitViewController: TZSplitViewController {
     @IBOutlet weak var inputsSplitViewItem: NSSplitViewItem!
     //@IBOutlet var runVariantsSplitViewItem: NSSplitViewItem!
     
-    var runVariantViewController : RunVariantViewController!
     var phaseSelectorViewController: PhaseSelectorViewController!
     var inputsViewController : InputsViewController!
-    
-    func reloadParams(){
-        runVariantViewController.reloadAll()
-    
-        //initStateViewController.outlineView.reloadData()
-        //physicsViewController.viewDidLoad()
-    }
     
     override func viewDidLoad() {
         inputsViewController = inputsSplitViewItem.viewController as? InputsViewController
@@ -38,6 +30,14 @@ class InputsSplitViewController: TZSplitViewController {
         //runVariantViewController = runVariantsSplitViewItem.viewController as? RunVariantViewController
         inputsViewController.inputSplitViewController = self
         phaseSelectorViewController.inputSplitViewController = self
+        
+        let sb = NSStoryboard(name: "Sidebar", bundle: nil)
+        let headerVC = sb.instantiateController(withIdentifier: "headerViewController") as! SidebarHeaderViewController
+        headerVC.sectionTitle = "Inputs"
+        //splitView.insertArrangedSubview(headerVC.view, at: 0)
+        let headerItem = NSSplitViewItem(viewController: headerVC)
+        headerItem.canCollapse = false
+        insertSplitViewItem(headerItem, at: 0)
         //runVariantViewController.inputsSplitViewController = self
         super.viewDidLoad()
     }
@@ -48,7 +48,6 @@ class InputsViewController: TZViewController {
     @IBOutlet weak var stack: CustomStackView!
     
     var inputSplitViewController : InputsSplitViewController!
-    var runVariantViewController : RunVariantViewController!
     weak var physicsViewController: PhysicsViewController!
     weak var initStateViewController: InitStateViewController!
     weak var phaseSelectorViewController: PhaseSelectorViewController!
@@ -80,8 +79,6 @@ class InputsViewController: TZViewController {
             curView.update()
             curView.didUpdate()
         }
-
-        self.runVariantViewController.reloadAll()
     }
     func updateParamSelectorView(for paramID: ParamID) {
         let selectorView = paramSelectorViews.first(where: {$0.param?.id == paramID})
@@ -116,11 +113,5 @@ class InputsViewController: TZViewController {
         //runVariantViewController = self.inputSplitViewController.runVariantViewController!
         phaseSelectorViewController = self.inputSplitViewController.phaseSelectorViewController!
     }
-    
-    func reloadParams(){
-        runVariantViewController.reloadAll()
-    }
-    
-    
 }
 
