@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="Pa4-gg-nuF">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19529"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Viewer View Controller-->
+        <scene sceneID="KNJ-g2-3uE">
+            <objects>
+                <viewController identifier="outputsRestoration" storyboardIdentifier="outputs" id="Pa4-gg-nuF" userLabel="Viewer View Controller" customClass="OutputsViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="1cc-LO-2Bp">
+                        <rect key="frame" x="0.0" y="0.0" width="278" height="228"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <containerView horizontalHuggingPriority="1" horizontalCompressionResistancePriority="800" translatesAutoresizingMaskIntoConstraints="NO" id="mJY-d5-f6f">
+                                <rect key="frame" x="0.0" y="0.0" width="278" height="188"/>
+                                <connections>
+                                    <segue destination="N6o-UD-So8" kind="embed" identifier="outputSplitViewSegue" id="1uz-9s-0ga"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="mJY-d5-f6f" firstAttribute="top" secondItem="1cc-LO-2Bp" secondAttribute="top" constant="40" id="7Ph-4N-Izj"/>
+                            <constraint firstItem="mJY-d5-f6f" firstAttribute="leading" secondItem="1cc-LO-2Bp" secondAttribute="leading" id="bJe-w7-lIv"/>
+                            <constraint firstAttribute="trailing" secondItem="mJY-d5-f6f" secondAttribute="trailing" id="rIp-90-1Ta"/>
+                            <constraint firstAttribute="bottom" secondItem="mJY-d5-f6f" secondAttribute="bottom" id="ui3-3E-OLv"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="outputsSplitView" destination="mJY-d5-f6f" id="SWK-ez-c7Z"/>
+                        <outlet property="toolbarOffsetConstraint" destination="7Ph-4N-Izj" id="WyN-65-k8H"/>
+                    </connections>
+                </viewController>
+                <customObject id="e4Y-DN-6gQ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="449" y="-260"/>
+        </scene>
+        <!--Viewer Split View Controller-->
+        <scene sceneID="ooh-00-C22">
+            <objects>
+                <splitViewController identifier="outputsSplitViewRestoration" storyboardIdentifier="outputsSplitView" id="N6o-UD-So8" userLabel="Viewer Split View Controller" customClass="OutputsSplitViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
+                    <splitViewItems>
+                        <splitViewItem id="1KO-Qw-56X" userLabel="Viewer Split View Item"/>
+                    </splitViewItems>
+                    <splitView key="splitView" autosaveName="outputsSplitView" dividerStyle="paneSplitter" id="Jhy-ME-60a">
+                        <rect key="frame" x="0.0" y="0.0" width="350" height="166"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <connections>
+                            <outlet property="delegate" destination="N6o-UD-So8" id="acj-Je-ZQQ"/>
+                        </connections>
+                    </splitView>
+                    <connections>
+                        <outlet property="viewerOutputSplitViewItem" destination="1KO-Qw-56X" id="dS5-rm-s1u"/>
+                        <segue destination="gVU-Wg-qPp" kind="relationship" relationship="splitItems" id="rNz-Ny-DWE"/>
+                    </connections>
+                </splitViewController>
+                <customObject id="RZF-nk-gcm" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="514" y="89"/>
+        </scene>
+        <!--Default Image View Controller-->
+        <scene sceneID="Oio-uq-vHG">
+            <objects>
+                <viewController storyboardIdentifier="defaultImageViewController" id="shd-aP-I5M" userLabel="Default Image View Controller" customClass="DefaultImageViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="ejW-Sc-myZ">
+                        <rect key="frame" x="0.0" y="0.0" width="229" height="116"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="501" horizontalCompressionResistancePriority="100" verticalCompressionResistancePriority="100" translatesAutoresizingMaskIntoConstraints="NO" id="eh8-Cc-f4Z">
+                                <rect key="frame" x="0.0" y="0.0" width="229" height="116"/>
+                                <imageCell key="cell" selectable="YES" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="globe_picture" id="I6u-5c-RjK"/>
+                            </imageView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="eh8-Cc-f4Z" firstAttribute="leading" secondItem="ejW-Sc-myZ" secondAttribute="leading" id="Cge-Xw-TO6"/>
+                            <constraint firstAttribute="bottom" secondItem="eh8-Cc-f4Z" secondAttribute="bottom" id="Cj6-4e-y8V"/>
+                            <constraint firstItem="eh8-Cc-f4Z" firstAttribute="top" secondItem="ejW-Sc-myZ" secondAttribute="top" id="Ue1-C2-mla"/>
+                            <constraint firstAttribute="trailing" secondItem="eh8-Cc-f4Z" secondAttribute="trailing" id="naF-Qs-pBj"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="eh8-Cc-f4Z" id="r2h-Tn-NUH"/>
+                    </connections>
+                </viewController>
+                <customObject id="gja-ZW-hdl" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="885" y="-129"/>
+        </scene>
+        <!--DynamicTabViewController-->
+        <scene sceneID="c0B-nJ-MUm">
+            <objects>
+                <controllerPlaceholder storyboardName="DynamicTabViewController" id="gVU-Wg-qPp" sceneMemberID="viewController"/>
+                <customObject id="Riu-Gv-Abh" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="902" y="51"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="globe_picture" width="2048" height="2048"/>
+    </resources>
+</document>

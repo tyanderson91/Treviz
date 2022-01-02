@@ -69,6 +69,6 @@ class MainSplitViewController: TZSplitViewController {
             guard let splitViewItem = self.value(forKey: itemKey) as? NSSplitViewItem else { continue }
             UserDefaults.standard.set(splitViewItem.viewController.view.bounds.width, forKey: itemKey + ".width")
         }
-        outputsViewController?.outputSplitViewController?.viewerTabViewController.vizViewController?.resizeView()
+        outputsViewController?.outputSplitViewController?.visualizerViewController.resizeView()
     }
 }

@@ -20,12 +20,13 @@ class PhysicsViewController: PhasedViewController {
     var staticCentralBodyImage: NSImage? {
         get {
             let mainVC = inputsViewController?.parent as? MainSplitViewController
-            let vizVC = mainVC?.outputsViewController.outputSplitViewController?.viewerTabViewController.visualizerTabViewItem.viewController as? VisualizerViewController
-            return vizVC?.placeholderImageView.image
+            let imageVC = mainVC?.outputsViewController.outputSplitViewController?.defaultImageVC
+            return imageVC?.imageView.image
     }
-    set {let mainVC = inputsViewController?.parent as? MainSplitViewController
-        let vizVC = mainVC?.outputsViewController.outputSplitViewController?.viewerTabViewController.visualizerTabViewItem.viewController as? VisualizerViewController
-            vizVC?.placeholderImageView.image = newValue
+    set {
+            let mainVC = inputsViewController?.parent as? MainSplitViewController
+            let imageVC = mainVC?.outputsViewController.outputSplitViewController?.defaultImageVC
+            imageVC?.imageView.image = newValue
         }
     }
     

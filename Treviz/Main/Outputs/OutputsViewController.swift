@@ -48,8 +48,8 @@ class OutputsSplitViewController: TZSplitViewController {
     @IBOutlet weak var viewerOutputSplitViewItem: NSSplitViewItem!
     @IBOutlet weak var textOutputSplitViewItem: NSSplitViewItem!
     
-    var viewerTabViewController: ViewerTabViewController {
-        return viewerOutputSplitViewItem.viewController as! ViewerTabViewController
+    var viewerTabViewController: DynamicTabViewController {
+        return viewerOutputSplitViewItem.viewController as! DynamicTabViewController
     }
     
     var textOutputViewController: TextOutputSplitViewController! {
@@ -59,15 +59,28 @@ class OutputsSplitViewController: TZSplitViewController {
     var textOutputView: NSTextView! {
         return textOutputViewController?.textOutputView
     }
-    var visualizerViewController: VisualizerViewController! { return viewerTabViewController.visualizerTabViewItem.viewController as? VisualizerViewController ?? nil }
-    var plotViewController: PlotOutputSplitViewController! { return viewerTabViewController.plotTabViewItem.viewController as? PlotOutputSplitViewController ?? nil }// PlotOutputViewController ?? nil }
+    var visualizerViewController: VisualizerViewController!
+    var plotViewController: PlotOutputSplitViewController!
+    var defaultImageVC: DefaultImageViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let sb1 = NSStoryboard(name: "Outputs", bundle: nil) // TODO: make separate viewer storyboard
+        defaultImageVC = sb1.instantiateController(withIdentifier: "defaultImageViewController") as? DefaultImageViewController
+        viewerTabViewController.setDefaultView(vc: defaultImageVC)
+        
+        let sb2 = NSStoryboard(name: "Outputs", bundle: nil)
+        visualizerViewController = sb2.instantiateController(withIdentifier: "visualizerOutput") as? VisualizerViewController
+        plotViewController = sb2.instantiateController(withIdentifier: "plotOutputSplitViewController") as? PlotOutputSplitViewController
         self.analysis.plotOutputViewer = plotViewController
+        
+        visualizerViewController.analysis = self.analysis
+        plotViewController.analysis = self.analysis
+        _ = viewerTabViewController.addNewViewController(controller: plotViewController)
+        _ = viewerTabViewController.addNewViewController(controller: visualizerViewController)
     }
     
     override func splitViewDidResizeSubviews(_ notification: Notification) {
-        viewerTabViewController.vizViewController?.resizeView()
+        visualizerViewController?.resizeView()
     }
 }

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="XfG-lQ-9wD">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19529"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Tab View Header-->
+        <scene sceneID="N8P-JG-3B1">
+            <objects>
+                <viewController storyboardIdentifier="customTabHeader" id="fl7-Ob-C4R" userLabel="Tab View Header" customClass="DynamicTabHeaderViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" identifier="customTabHeaderView" id="FtQ-g5-IUM">
+                        <rect key="frame" x="0.0" y="0.0" width="89" height="21"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <box boxType="custom" cornerRadius="5" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="2Gj-D4-m49">
+                                <rect key="frame" x="0.0" y="-5" width="89" height="25"/>
+                                <view key="contentView" id="SzI-1k-B2q">
+                                    <rect key="frame" x="1" y="1" width="87" height="23"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WPa-3O-raj">
+                                            <rect key="frame" x="2" y="7.5" width="15" height="14"/>
+                                            <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="xmark.square" catalog="system" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="aHI-VM-j5b">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="delete:" target="fl7-Ob-C4R" id="z1v-ce-Vtp"/>
+                                            </connections>
+                                        </button>
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="y75-CO-Ljo">
+                                            <rect key="frame" x="28" y="8" width="31" height="13"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="13" id="Hc6-FR-pWF"/>
+                                            </constraints>
+                                            <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="HP6-UB-Zkf">
+                                                <font key="font" metaFont="system" size="10"/>
+                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="y75-CO-Ljo" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="WPa-3O-raj" secondAttribute="trailing" constant="2" id="Inj-9e-Th7"/>
+                                        <constraint firstItem="y75-CO-Ljo" firstAttribute="centerX" secondItem="SzI-1k-B2q" secondAttribute="centerX" id="Kk4-Io-jJp"/>
+                                        <constraint firstItem="WPa-3O-raj" firstAttribute="leading" secondItem="SzI-1k-B2q" secondAttribute="leading" constant="2" id="lcb-CX-0T2"/>
+                                        <constraint firstAttribute="bottom" secondItem="y75-CO-Ljo" secondAttribute="bottom" constant="8" id="ngf-A7-NCi"/>
+                                        <constraint firstItem="y75-CO-Ljo" firstAttribute="centerY" secondItem="WPa-3O-raj" secondAttribute="centerY" id="weR-Ed-8Ey"/>
+                                    </constraints>
+                                </view>
+                                <constraints>
+                                    <constraint firstItem="y75-CO-Ljo" firstAttribute="top" secondItem="2Gj-D4-m49" secondAttribute="top" constant="3" id="SyX-OK-jJX"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="menu" destination="6t3-nP-EDt" id="WIH-rV-7Iu"/>
+                                </connections>
+                            </box>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="2Gj-D4-m49" secondAttribute="bottom" constant="-5" id="1yI-zp-IUR"/>
+                            <constraint firstAttribute="trailing" secondItem="2Gj-D4-m49" secondAttribute="trailing" id="HLt-nX-y61"/>
+                            <constraint firstItem="2Gj-D4-m49" firstAttribute="top" secondItem="FtQ-g5-IUM" secondAttribute="top" constant="1" id="krZ-zf-lHT"/>
+                            <constraint firstItem="2Gj-D4-m49" firstAttribute="leading" secondItem="FtQ-g5-IUM" secondAttribute="leading" id="wmT-R7-U8m"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="box" destination="2Gj-D4-m49" id="ts6-bN-QUF"/>
+                        <outlet property="label" destination="y75-CO-Ljo" id="dhL-EU-LzR"/>
+                        <outlet property="removeTabButton" destination="WPa-3O-raj" id="xzj-Mc-DbV"/>
+                    </connections>
+                </viewController>
+                <customObject id="vdc-22-1Zd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <menu id="6t3-nP-EDt">
+                    <items>
+                        <menuItem title="Pin view" image="pin.circle" catalog="system" id="Bg9-Ac-j9Q">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="pinFromMenu:" target="fl7-Ob-C4R" id="PBf-pE-ydH"/>
+                            </connections>
+                        </menuItem>
+                    </items>
+                </menu>
+            </objects>
+            <point key="canvasLocation" x="117" y="550"/>
+        </scene>
+        <!--Dynamic Tab View Controller-->
+        <scene sceneID="hIz-AP-VOD">
+            <objects>
+                <viewController id="XfG-lQ-9wD" customClass="DynamicTabViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="m2S-Jp-Qdl">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="266"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <stackView distribution="fillEqually" orientation="horizontal" alignment="bottom" spacing="3" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tLt-Qi-zhv">
+                                <rect key="frame" x="0.0" y="266" width="480" height="0.0"/>
+                            </stackView>
+                            <tabView type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="fbu-aM-msd">
+                                <rect key="frame" x="0.0" y="0.0" width="480" height="266"/>
+                                <font key="font" metaFont="system"/>
+                                <tabViewItems>
+                                    <tabViewItem label="View" identifier="" id="tEz-6Z-sVe">
+                                        <view key="view" id="Zop-lG-zpQ">
+                                            <rect key="frame" x="0.0" y="0.0" width="480" height="266"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        </view>
+                                    </tabViewItem>
+                                </tabViewItems>
+                            </tabView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="fbu-aM-msd" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="OTq-3z-SGi"/>
+                            <constraint firstItem="fbu-aM-msd" firstAttribute="top" secondItem="tLt-Qi-zhv" secondAttribute="bottom" id="R4M-Xu-Y5e"/>
+                            <constraint firstAttribute="trailing" secondItem="fbu-aM-msd" secondAttribute="trailing" id="S9c-2O-q6U"/>
+                            <constraint firstItem="tLt-Qi-zhv" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="a2u-d7-Ykp"/>
+                            <constraint firstItem="tLt-Qi-zhv" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="cuu-Ps-Nx5"/>
+                            <constraint firstAttribute="trailing" secondItem="tLt-Qi-zhv" secondAttribute="trailing" id="l5k-tj-aVu"/>
+                            <constraint firstAttribute="bottom" secondItem="fbu-aM-msd" secondAttribute="bottom" id="xIg-HK-krP"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tabSelectorView" destination="tLt-Qi-zhv" id="4Aj-dQ-ggi"/>
+                        <outlet property="tabView" destination="fbu-aM-msd" id="L4A-ik-5Sb"/>
+                    </connections>
+                </viewController>
+                <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="75" y="759"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="pin.circle" catalog="system" width="15" height="15"/>
+        <image name="xmark.square" catalog="system" width="15" height="14"/>
+    </resources>
+</document>

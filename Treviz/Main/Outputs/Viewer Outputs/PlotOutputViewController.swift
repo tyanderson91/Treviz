@@ -150,10 +150,8 @@ class PlotOutputViewerViewController: TZViewController {
 }
 
 class PlotOutputViewController: TZViewController {
-    @IBOutlet weak var tableView: NSTableView!
     @IBOutlet weak var graphHostingView: CPTGraphHostingView!
-    
-    @objc var plotViews: [TZPlotView] = []
+    var plotViews: TZPlotView!
     
     override func viewDidLoad() {
         super.viewDidLoad()

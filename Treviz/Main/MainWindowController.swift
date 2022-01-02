@@ -74,16 +74,19 @@ class MainWindowController: NSWindowController, AnalysisProgressReporter {
         analysis.isRunning = false
 
         guard let outputSplitVC = viewController.mainSplitViewController.outputsViewController.outputSplitViewController else { return }
-        let plotTabViewIndex = outputSplitVC.viewerTabViewController.tabView.indexOfTabViewItem(withIdentifier: "plotsTabViewItem")
-        let visualizerViewIndex = outputSplitVC.viewerTabViewController.tabView.indexOfTabViewItem(withIdentifier: "visualizerTabViewItem")
+        let outputsTabView = outputSplitVC.viewerTabViewController
+        
         refreshPlotsButton.isEnabled = false
+        /*
+        let plotTabViewIndex =  outputSplitVC.viewerTabViewController.tabView.indexOfTabViewItem(withIdentifier: "plotsTabViewItem")
+        let visualizerViewIndex = outputSplitVC.viewerTabViewController.tabView.indexOfTabViewItem(withIdentifier: "visualizerTabViewItem")
         
         // Pick which view to jump to after analysis is finished
         if UserDefaults.showVisualization {
-            outputSplitVC.viewerTabViewController.tabView.selectTabViewItem(at: visualizerViewIndex)
+            outputsSplitVC.viewerTabViewController.tabView.selectTabViewItem(at: visualizerViewIndex)
         } else {
             outputSplitVC.viewerTabViewController.tabView.selectTabViewItem(at: plotTabViewIndex)
-        }
+        }*/
     }
     
     func changeType(indeterminate: Bool){

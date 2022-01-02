@@ -66,6 +66,7 @@ extension Analysis {
     }*/
     func cleanupAllRuns() {
         self.isRunning = false
+        
         progressReporter?.endProgressTracking()
         progressReporter?.completeAnalysis()
         logMessage("Analysis Complete! Processing Outputs...")
