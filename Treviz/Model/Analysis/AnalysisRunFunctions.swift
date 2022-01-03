@@ -112,7 +112,7 @@ extension Analysis {
                 dispatchGroup.leave()
             }
         }
-        plotOutputViewer?.didCreatePlots()
+        dispatchGroup.notify(queue: .main) { self.plotOutputViewer?.didCreatePlots() }
     }
     
     func showVisualization(){

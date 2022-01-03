@@ -60,7 +60,7 @@ class OutputsSplitViewController: TZSplitViewController {
         return textOutputViewController?.textOutputView
     }
     var visualizerViewController: VisualizerViewController!
-    var plotViewController: PlotOutputSplitViewController!
+    //var plotViewController: PlotOutputSplitViewController!
     var defaultImageVC: DefaultImageViewController!
     
     override func viewDidLoad() {
@@ -71,13 +71,14 @@ class OutputsSplitViewController: TZSplitViewController {
         
         let sb2 = NSStoryboard(name: "Outputs", bundle: nil)
         visualizerViewController = sb2.instantiateController(withIdentifier: "visualizerOutput") as? VisualizerViewController
-        plotViewController = sb2.instantiateController(withIdentifier: "plotOutputSplitViewController") as? PlotOutputSplitViewController
-        self.analysis.plotOutputViewer = plotViewController
+        //plotViewController = sb2.instantiateController(withIdentifier: "plotOutputSplitViewController") as? PlotOutputSplitViewController
+        //self.analysis.plotOutputViewer = newPlotViewController
         
         visualizerViewController.analysis = self.analysis
-        plotViewController.analysis = self.analysis
-        _ = viewerTabViewController.addNewViewController(controller: plotViewController)
-        _ = viewerTabViewController.addNewViewController(controller: visualizerViewController)
+        //plotViewController.analysis = self.analysis
+        
+        let A = viewerTabViewController.addNewViewController(controller: visualizerViewController)
+        A.isPinned = true
     }
     
     override func splitViewDidResizeSubviews(_ notification: Notification) {

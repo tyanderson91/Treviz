@@ -103,6 +103,7 @@
 		CD9914B9278177DA00C032A2 /* DynamicTabHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9914B6278177D900C032A2 /* DynamicTabHeaderViewController.swift */; };
 		CD9914BA278177DA00C032A2 /* DynamicTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9914B7278177D900C032A2 /* DynamicTabViewController.swift */; };
 		CD9914BC27817DBC00C032A2 /* DefaultImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9914BB27817DBC00C032A2 /* DefaultImageViewController.swift */; };
+		CD9914C02781907200C032A2 /* PlotSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9914BF2781907200C032A2 /* PlotSelectorViewController.swift */; };
 		CDA0F88122587E05003C62E6 /* RunVariantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA0F88022587E05003C62E6 /* RunVariantViewController.swift */; };
 		CDA0F888225C5D47003C62E6 /* InputsCellViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA0F887225C5D47003C62E6 /* InputsCellViews.swift */; };
 		CDA29CE62689905B0054659F /* PlaybackControllerHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA29CE52689905B0054659F /* PlaybackControllerHelpers.swift */; };
@@ -201,8 +202,6 @@
 		CDFAD0FE23EA84FE00CE7424 /* TZPlotType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4AD70C23BD4C0C00FC815F /* TZPlotType.swift */; };
 		CDFAD10623EA876900CE7424 /* TrajectoryAnalysis.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDFAD0E923EA84EB00CE7424 /* TrajectoryAnalysis.framework */; };
 		CDFAD10723EA877600CE7424 /* TrajectoryAnalysis.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CDFAD0E923EA84EB00CE7424 /* TrajectoryAnalysis.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		CDFE81F923E147060013945F /* PlotOutputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFE81F823E147060013945F /* PlotOutputViewController.swift */; };
-		CDFE81FC23E14B730013945F /* ViewerTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFE81FB23E14B730013945F /* ViewerTabViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -333,6 +332,7 @@
 		CD9914B6278177D900C032A2 /* DynamicTabHeaderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicTabHeaderViewController.swift; sourceTree = "<group>"; };
 		CD9914B7278177D900C032A2 /* DynamicTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicTabViewController.swift; sourceTree = "<group>"; };
 		CD9914BB27817DBC00C032A2 /* DefaultImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DefaultImageViewController.swift; path = Treviz/Main/Outputs/DefaultImageViewController.swift; sourceTree = SOURCE_ROOT; };
+		CD9914BF2781907200C032A2 /* PlotSelectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlotSelectorViewController.swift; sourceTree = "<group>"; };
 		CDA0F88022587E05003C62E6 /* RunVariantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunVariantViewController.swift; sourceTree = "<group>"; };
 		CDA0F887225C5D47003C62E6 /* InputsCellViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputsCellViews.swift; sourceTree = "<group>"; };
 		CDA29CE52689905B0054659F /* PlaybackControllerHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackControllerHelpers.swift; sourceTree = "<group>"; };
@@ -411,8 +411,6 @@
 		CDFAD0EC23EA84EB00CE7424 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CDFAD10323EA856F00CE7424 /* CorePlot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CorePlot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDFE81F423E0104A0013945F /* Treviz-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Treviz-Bridging-Header.h"; sourceTree = "<group>"; };
-		CDFE81F823E147060013945F /* PlotOutputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlotOutputViewController.swift; sourceTree = "<group>"; };
-		CDFE81FB23E14B730013945F /* ViewerTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewerTabViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -830,11 +828,10 @@
 			isa = PBXGroup;
 			children = (
 				CD3C187D23E2B03700E72EFF /* TZPlotView.swift */,
-				CDFE81FB23E14B730013945F /* ViewerTabViewController.swift */,
 				CD557436236EA14500DA53A1 /* VisualizerViewController.swift */,
 				CDF0CCDF2671D71400CF14DE /* PlaybackController.swift */,
 				CDA29CE52689905B0054659F /* PlaybackControllerHelpers.swift */,
-				CDFE81F823E147060013945F /* PlotOutputViewController.swift */,
+				CD9914BF2781907200C032A2 /* PlotSelectorViewController.swift */,
 				CD9914BB27817DBC00C032A2 /* DefaultImageViewController.swift */,
 				CD61B341265DD7C5004C7165 /* SpriteKit */,
 			);
@@ -1175,10 +1172,8 @@
 				CD3C187E23E2B03800E72EFF /* TZPlotView.swift in Sources */,
 				CD92180825493F5D001CA40B /* CelestialBody.swift in Sources */,
 				CDC1F53C2234874000D1BB25 /* MainSplitViewController.swift in Sources */,
-				CDFE81F923E147060013945F /* PlotOutputViewController.swift in Sources */,
 				CDE2B5B824C2C729002026E0 /* StateDict.swift in Sources */,
 				CD9465332517CBFA00DD7037 /* AnalysisParameterFunctions.swift in Sources */,
-				CDFE81FC23E14B730013945F /* ViewerTabViewController.swift in Sources */,
 				CDC1F54022363DDB00D1BB25 /* MainViewController.swift in Sources */,
 				CD557437236EA14500DA53A1 /* VisualizerViewController.swift in Sources */,
 				CD42E0AA22FD05F600A0F9A1 /* CollapsibleStackView.swift in Sources */,
@@ -1213,6 +1208,7 @@
 				CD2A95E9262BEBA5004279F0 /* GlobalPlotPreview.swift in Sources */,
 				CD28477722FF9C8800D192A9 /* CollapsibleGridView.swift in Sources */,
 				CDE2B5C124C2C729002026E0 /* TZPlotType.swift in Sources */,
+				CD9914C02781907200C032A2 /* PlotSelectorViewController.swift in Sources */,
 				CDE2B5BE24C2C729002026E0 /* OutputDataSet.swift in Sources */,
 				CDF0CCDE2671D58100CF14DE /* SKVehicle.swift in Sources */,
 				CD70FAC9253EB39800B551F2 /* ParamValueView.swift in Sources */,

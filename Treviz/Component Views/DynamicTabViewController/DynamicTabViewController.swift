@@ -19,6 +19,10 @@ class DynamicTabViewController: NSViewController {
     weak var activeView: DynamicTabHeaderViewController?
     weak var previousView: DynamicTabHeaderViewController? // View switches to this in the event that the primary view is removed
     weak var unpinnedView: DynamicTabHeaderViewController?
+    var allViews: [DynamicTabHeaderViewController] {
+        return self.children.filter({
+        $0 is DynamicTabHeaderViewController }) as! [DynamicTabHeaderViewController]
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +37,8 @@ class DynamicTabViewController: NSViewController {
 
     
     func selectView(tabVC: DynamicTabHeaderViewController){
-        if activeView != nil {
+        if tabVC == activeView { return }
+        else if activeView != nil {
             previousView = activeView!
             previousView!.isActive = false
         }
@@ -41,9 +46,23 @@ class DynamicTabViewController: NSViewController {
         activeView = tabVC
         tabView.selectTabViewItem(tabVC.tabViewItem)
     }
+        
+    /**
+     Function attempts to switch to the tab with a given title, and returns a bool indicating whether it succeeded or not
+     */
+    func switchToView(title: String)->Bool {
+        if let matchingHeader = allViews.first(where: {$0.title == title}) {
+            matchingHeader.makeActive()
+            return true
+        } else { return false }
+    }
     
+    /**
+     Deletes the given tab and does all necessary cleanup of the associated views
+     */
     func deleteView(tabVC: DynamicTabHeaderViewController){
         let curActive = tabVC.isActive
+        let curUnpinned = !tabVC.isPinned
         tabView.removeTabViewItem(tabVC.tabViewItem)
         tabVC.childVC.removeFromParent()
         tabSelectorView.removeArrangedSubview(tabVC.view)
@@ -58,9 +77,15 @@ class DynamicTabViewController: NSViewController {
                 tabView.selectTabViewItem(at: 0)
             }
         }
+        if curUnpinned {
+            unpinnedView = nil
+        }
     }
     
-    func addUnpinnedViewController(controller: NSViewController){
+    /**
+     Adds a new view controller to the tab view and determines whether to place it in the existing unpinned view or whether to create a new one
+     */
+    func addViewController(controller: NSViewController){
         if unpinnedView == nil { // Create new view
             let newVC = addNewViewController(controller: controller)
             unpinnedView = newVC
@@ -71,6 +96,9 @@ class DynamicTabViewController: NSViewController {
         }
     }
     
+    /**
+     Creates a new header tab and associated view controller
+     */
     func addNewViewController(controller: NSViewController)->DynamicTabHeaderViewController{
         let sb = NSStoryboard(name: DynamicTabViewController.storyboardName, bundle: nil)
         let newVC = sb.instantiateController(identifier: .customTabHeader) { aCoder in

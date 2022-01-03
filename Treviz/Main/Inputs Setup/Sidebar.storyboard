@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="QK9-IU-aUs">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="QK9-IU-aUs">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19455"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19529"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -140,31 +140,31 @@
                                     </tabViewItem>
                                     <tabViewItem label="Plots" identifier="plots" id="EuS-RN-j0V">
                                         <view key="view" id="m19-7d-UeX">
-                                            <rect key="frame" x="0.0" y="0.0" width="187" height="156"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="187" height="116"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qvb-O3-heO">
-                                                    <rect key="frame" x="76" y="70" width="35" height="16"/>
-                                                    <textFieldCell key="cell" lineBreakMode="clipping" title="Plots" id="IvS-B9-jMx">
-                                                        <font key="font" usesAppearanceFont="YES"/>
-                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                    </textFieldCell>
-                                                </textField>
+                                                <containerView translatesAutoresizingMaskIntoConstraints="NO" id="ABP-7S-Vmm">
+                                                    <rect key="frame" x="0.0" y="0.0" width="187" height="116"/>
+                                                    <connections>
+                                                        <segue destination="nda-LA-KLe" kind="embed" identifier="plotSelectorViewSegue" id="jtI-FJ-gub"/>
+                                                    </connections>
+                                                </containerView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="qvb-O3-heO" firstAttribute="centerY" secondItem="m19-7d-UeX" secondAttribute="centerY" id="UsB-2e-g9S"/>
-                                                <constraint firstItem="qvb-O3-heO" firstAttribute="centerX" secondItem="m19-7d-UeX" secondAttribute="centerX" id="i3d-mo-O7y"/>
+                                                <constraint firstItem="ABP-7S-Vmm" firstAttribute="top" secondItem="m19-7d-UeX" secondAttribute="top" id="GPd-zn-e5P"/>
+                                                <constraint firstAttribute="bottom" secondItem="ABP-7S-Vmm" secondAttribute="bottom" id="InT-9D-51i"/>
+                                                <constraint firstAttribute="trailing" secondItem="ABP-7S-Vmm" secondAttribute="trailing" id="Vgy-Qn-5ua"/>
+                                                <constraint firstItem="ABP-7S-Vmm" firstAttribute="leading" secondItem="m19-7d-UeX" secondAttribute="leading" id="vDi-fj-ZnW"/>
                                             </constraints>
                                         </view>
                                     </tabViewItem>
                                     <tabViewItem label="Visualization" identifier="visualization" id="VJf-DE-AIr">
                                         <view key="view" id="2gJ-X4-hOv">
-                                            <rect key="frame" x="0.0" y="0.0" width="187" height="156"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="187" height="116"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="c0b-7w-ow3">
-                                                    <rect key="frame" x="82" y="70" width="23" height="16"/>
+                                                    <rect key="frame" x="82" y="50" width="23" height="16"/>
                                                     <textFieldCell key="cell" lineBreakMode="clipping" title="Viz" id="w6z-hr-CQh">
                                                         <font key="font" usesAppearanceFont="YES"/>
                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -221,6 +221,14 @@
             </objects>
             <point key="canvasLocation" x="222" y="245"/>
         </scene>
+        <!--plotOutputSelector1ViewController-->
+        <scene sceneID="jng-ot-Mf4">
+            <objects>
+                <controllerPlaceholder storyboardName="Outputs" referencedIdentifier="plotOutputSelector1ViewController" id="nda-LA-KLe" sceneMemberID="viewController"/>
+                <customObject id="YJw-kx-9Dh" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="298" y="413"/>
+        </scene>
         <!--Sidebar Header View Controller-->
         <scene sceneID="sYl-gP-zyc">
             <objects>
@@ -254,6 +262,19 @@
                 </viewController>
             </objects>
             <point key="canvasLocation" x="-79" y="131"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="xwa-tO-RI3">
+            <objects>
+                <viewController id="Bkv-2H-IP1" sceneMemberID="viewController">
+                    <view key="view" id="soT-Nj-QOL">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                </viewController>
+                <customObject id="U09-PS-h06" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-41" y="-138"/>
         </scene>
     </scenes>
 </document>

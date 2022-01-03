@@ -8,8 +8,8 @@
 import Cocoa
 
 class DynamicTabHeaderViewController: NSViewController {
-    static let activeColor: NSColor = .clear
-    static let inactiveColor: NSColor = .unemphasizedSelectedContentBackgroundColor
+    static let activeColor: NSColor = .selectedContentBackgroundColor.withAlphaComponent(0.75)
+    static let inactiveColor: NSColor = .clear
     
     var tabViewItem: NSTabViewItem!
     var childVC: NSViewController! {
@@ -119,6 +119,7 @@ class DynamicTabHeaderViewController: NSViewController {
         guard !isPinned else { return } // Can't swap out the view of a pinned tab
         let prevItem = tabViewItem
         tabViewItem = NSTabViewItem(viewController: newVC)
+        let A = parent
         tabViewController.tabView.addTabViewItem(tabViewItem)
         
         tabViewController.tabView.selectTabViewItem(tabViewItem)

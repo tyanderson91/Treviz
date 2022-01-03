@@ -46,6 +46,9 @@ class MainSplitViewController: TZSplitViewController {
             }
             splitViewItem.holdingPriority = NSLayoutConstraint.Priority(rawValue: NSLayoutConstraint.Priority.RawValue(holdingPriorites[splitViewName]!))
         }
+        
+        // Set the output tab view for use by any views within the sidebar
+        sidebarViewController.outputTabViewController = outputsViewController.outputSplitViewController?.viewerTabViewController
     }
     
     /**
