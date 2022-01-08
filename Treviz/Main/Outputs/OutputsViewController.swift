@@ -14,7 +14,6 @@ extension NSStoryboardSegue.Identifier{
     static let outputSplitViewSegue = "outputSplitViewSegue"
     static let textOutputSplitViewSegue = "textOutputsSplitViewSegue"
     static let viewerOutputSplitViewSegue = "viewerOutputSplitViewSegue"
-    //static let textOutputViewSegue = "textOutputViewSegue"
 }
 
 /**
@@ -28,8 +27,6 @@ class OutputsViewController: TZViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.wantsLayer = true
-        //view.layer?.backgroundColor = NSColor.black.cgColor
     }
     
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
@@ -59,8 +56,6 @@ class OutputsSplitViewController: TZSplitViewController {
     var textOutputView: NSTextView! {
         return textOutputViewController?.textOutputView
     }
-    var visualizerViewController: VisualizerViewController!
-    //var plotViewController: PlotOutputSplitViewController!
     var defaultImageVC: DefaultImageViewController!
     
     override func viewDidLoad() {
@@ -68,20 +63,5 @@ class OutputsSplitViewController: TZSplitViewController {
         let sb1 = NSStoryboard(name: "Outputs", bundle: nil) // TODO: make separate viewer storyboard
         defaultImageVC = sb1.instantiateController(withIdentifier: "defaultImageViewController") as? DefaultImageViewController
         viewerTabViewController.setDefaultView(vc: defaultImageVC)
-        
-        let sb2 = NSStoryboard(name: "Outputs", bundle: nil)
-        visualizerViewController = sb2.instantiateController(withIdentifier: "visualizerOutput") as? VisualizerViewController
-        //plotViewController = sb2.instantiateController(withIdentifier: "plotOutputSplitViewController") as? PlotOutputSplitViewController
-        //self.analysis.plotOutputViewer = newPlotViewController
-        
-        visualizerViewController.analysis = self.analysis
-        //plotViewController.analysis = self.analysis
-        
-        let A = viewerTabViewController.addNewViewController(controller: visualizerViewController)
-        A.isPinned = true
-    }
-    
-    override func splitViewDidResizeSubviews(_ notification: Notification) {
-        visualizerViewController?.resizeView()
     }
 }

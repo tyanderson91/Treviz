@@ -89,6 +89,13 @@ class Analysis: NSObject, Codable {
     var pctComplete: Double = 0
     var numComplete: Int = 0
     var isRunning = false
+    var hasRunData: Bool {
+        if !self.runs.isEmpty {
+            return !self.runs[0].trajData.isEmpty
+        } else {
+            return false
+        }
+    }
     var returnCode : Int = 0
     let analysisDispatchQueue = DispatchQueue(label: "analysisRunQueue", qos: .utility)
     let dispatchGroup = DispatchGroup()

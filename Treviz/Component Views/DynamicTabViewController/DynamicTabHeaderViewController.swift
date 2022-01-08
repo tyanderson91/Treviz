@@ -15,6 +15,8 @@ class DynamicTabHeaderViewController: NSViewController {
     var childVC: NSViewController! {
         didSet { setLabel(self.titleString) }
     }
+    var initAction: (()->())?
+    var teardownAction: (()->())?
     var isActive: Bool = false { didSet {
         if self.isActive {
             box.fillColor = DynamicTabHeaderViewController.activeColor
@@ -65,6 +67,9 @@ class DynamicTabHeaderViewController: NSViewController {
         let boxTrackingArea = NSTrackingArea(rect: box.bounds, options: [.activeInKeyWindow, .mouseEnteredAndExited, .inVisibleRect], owner: self, userInfo: nil)
         view.addTrackingArea(boxTrackingArea) // Used to show/hide playback controller box in floating mode
         removeTabButton.isHidden = true
+        if let ia = initAction {
+            ia()
+        }
     }
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -113,13 +118,15 @@ class DynamicTabHeaderViewController: NSViewController {
     
     @IBAction func delete(_ sender: Any){
         tabViewController.deleteView(tabVC: self)
+        if let td = teardownAction {
+            td()
+        }
     }
     
     func swapView(newVC: NSViewController){
         guard !isPinned else { return } // Can't swap out the view of a pinned tab
         let prevItem = tabViewItem
         tabViewItem = NSTabViewItem(viewController: newVC)
-        let A = parent
         tabViewController.tabView.addTabViewItem(tabViewItem)
         
         tabViewController.tabView.selectTabViewItem(tabViewItem)

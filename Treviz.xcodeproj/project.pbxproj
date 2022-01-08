@@ -104,6 +104,8 @@
 		CD9914BA278177DA00C032A2 /* DynamicTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9914B7278177D900C032A2 /* DynamicTabViewController.swift */; };
 		CD9914BC27817DBC00C032A2 /* DefaultImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9914BB27817DBC00C032A2 /* DefaultImageViewController.swift */; };
 		CD9914C02781907200C032A2 /* PlotSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9914BF2781907200C032A2 /* PlotSelectorViewController.swift */; };
+		CD9914C42782CD3D00C032A2 /* Visualizer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD9914C32782CD3D00C032A2 /* Visualizer.storyboard */; };
+		CD9914C62782CD7D00C032A2 /* VisualizerSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9914C52782CD7D00C032A2 /* VisualizerSetup.swift */; };
 		CDA0F88122587E05003C62E6 /* RunVariantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA0F88022587E05003C62E6 /* RunVariantViewController.swift */; };
 		CDA0F888225C5D47003C62E6 /* InputsCellViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA0F887225C5D47003C62E6 /* InputsCellViews.swift */; };
 		CDA29CE62689905B0054659F /* PlaybackControllerHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA29CE52689905B0054659F /* PlaybackControllerHelpers.swift */; };
@@ -333,6 +335,8 @@
 		CD9914B7278177D900C032A2 /* DynamicTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicTabViewController.swift; sourceTree = "<group>"; };
 		CD9914BB27817DBC00C032A2 /* DefaultImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DefaultImageViewController.swift; path = Treviz/Main/Outputs/DefaultImageViewController.swift; sourceTree = SOURCE_ROOT; };
 		CD9914BF2781907200C032A2 /* PlotSelectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlotSelectorViewController.swift; sourceTree = "<group>"; };
+		CD9914C32782CD3D00C032A2 /* Visualizer.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Visualizer.storyboard; sourceTree = "<group>"; };
+		CD9914C52782CD7D00C032A2 /* VisualizerSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualizerSetup.swift; sourceTree = "<group>"; };
 		CDA0F88022587E05003C62E6 /* RunVariantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunVariantViewController.swift; sourceTree = "<group>"; };
 		CDA0F887225C5D47003C62E6 /* InputsCellViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputsCellViews.swift; sourceTree = "<group>"; };
 		CDA29CE52689905B0054659F /* PlaybackControllerHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackControllerHelpers.swift; sourceTree = "<group>"; };
@@ -828,7 +832,9 @@
 			isa = PBXGroup;
 			children = (
 				CD3C187D23E2B03700E72EFF /* TZPlotView.swift */,
+				CD9914C32782CD3D00C032A2 /* Visualizer.storyboard */,
 				CD557436236EA14500DA53A1 /* VisualizerViewController.swift */,
+				CD9914C52782CD7D00C032A2 /* VisualizerSetup.swift */,
 				CDF0CCDF2671D71400CF14DE /* PlaybackController.swift */,
 				CDA29CE52689905B0054659F /* PlaybackControllerHelpers.swift */,
 				CD9914BF2781907200C032A2 /* PlotSelectorViewController.swift */,
@@ -1014,6 +1020,7 @@
 				CD11FA9323433096001A3695 /* PlotTypes.plist in Resources */,
 				CD59C54623E79476001D98D5 /* Outputs.storyboard in Resources */,
 				CD8911D5261774B200157715 /* colormaps.yaml in Resources */,
+				CD9914C42782CD3D00C032A2 /* Visualizer.storyboard in Resources */,
 				CD715E8023EBE70400E31F97 /* README.md in Resources */,
 				CD500337234DA64F00D71099 /* InitVarSettings.plist in Resources */,
 				CD59C53B23E79295001D98D5 /* VariableSelector.storyboard in Resources */,
@@ -1143,6 +1150,7 @@
 				CDE2B5B724C2C729002026E0 /* State.swift in Sources */,
 				CD75952224E9A75F00B79EF5 /* PhaseVars.swift in Sources */,
 				CD2D0DB52243836F0012978E /* TwoAxisOutputSetupViewController.swift in Sources */,
+				CD9914C62782CD7D00C032A2 /* VisualizerSetup.swift in Sources */,
 				CDA374CA269B9B3C00DB34FA /* TZScenery.swift in Sources */,
 				CDE2B5BC24C2C729002026E0 /* Vehicle.swift in Sources */,
 				CDE2B5C224C2C729002026E0 /* InitStateHeader.swift in Sources */,

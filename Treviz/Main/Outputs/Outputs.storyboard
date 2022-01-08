@@ -176,10 +176,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="351"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="501" horizontalCompressionResistancePriority="100" verticalCompressionResistancePriority="100" translatesAutoresizingMaskIntoConstraints="NO" id="dVC-90-yCV">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="351"/>
-                                <imageCell key="cell" selectable="YES" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="globe_picture" id="z1w-gs-roZ"/>
-                            </imageView>
                             <customView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5ke-9L-ke1" userLabel="2D Scene View" customClass="TZSKView" customModule="Treviz" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="351"/>
                             </customView>
@@ -197,14 +193,10 @@
                             <constraint firstItem="5ke-9L-ke1" firstAttribute="leading" secondItem="kVX-fw-nPv" secondAttribute="leading" id="0ES-dS-swj"/>
                             <constraint firstItem="upz-uG-I30" firstAttribute="centerX" secondItem="kVX-fw-nPv" secondAttribute="centerX" id="0kJ-Ts-UL0"/>
                             <constraint firstAttribute="bottom" secondItem="5ke-9L-ke1" secondAttribute="bottom" id="3ce-bU-Sgi" userLabel="2d scene bottom"/>
-                            <constraint firstAttribute="trailing" secondItem="dVC-90-yCV" secondAttribute="trailing" id="FCP-pd-ZEa"/>
                             <constraint firstItem="5ke-9L-ke1" firstAttribute="top" secondItem="kVX-fw-nPv" secondAttribute="top" id="Hpz-ZR-zGi"/>
                             <constraint firstAttribute="bottom" secondItem="upz-uG-I30" secondAttribute="bottom" constant="10" id="I7r-zZ-Jix" userLabel="ctrl Bottom Offset Constraint"/>
-                            <constraint firstAttribute="bottom" secondItem="dVC-90-yCV" secondAttribute="bottom" id="Qki-9J-Bv0"/>
-                            <constraint firstItem="dVC-90-yCV" firstAttribute="top" secondItem="kVX-fw-nPv" secondAttribute="top" id="R8f-pq-5lL"/>
                             <constraint firstItem="upz-uG-I30" firstAttribute="top" secondItem="5ke-9L-ke1" secondAttribute="bottom" priority="1" id="VJT-W9-S1q" userLabel="ctrl Top Constraint"/>
                             <constraint firstItem="upz-uG-I30" firstAttribute="width" secondItem="5ke-9L-ke1" secondAttribute="width" priority="1" id="Wb1-dO-uSe" userLabel="ctrl Equal Width Constraint"/>
-                            <constraint firstItem="dVC-90-yCV" firstAttribute="leading" secondItem="kVX-fw-nPv" secondAttribute="leading" id="f9V-C9-fHn"/>
                             <constraint firstAttribute="trailing" secondItem="5ke-9L-ke1" secondAttribute="trailing" id="uOA-b5-Csi"/>
                         </constraints>
                     </view>
@@ -213,7 +205,6 @@
                         <outlet property="controlsEqualWidthConstraint" destination="Wb1-dO-uSe" id="gGF-Z3-DQA"/>
                         <outlet property="controlsFixedWidthConstraint" destination="EwC-Fv-hYD" id="uoP-ln-X3p"/>
                         <outlet property="controlsTopConstraint" destination="VJT-W9-S1q" id="D3D-Zi-PyL"/>
-                        <outlet property="placeholderImageView" destination="dVC-90-yCV" id="mLS-pN-0ZN"/>
                         <outlet property="scene2dBottomConstraint" destination="3ce-bU-Sgi" id="FOp-eg-RmY"/>
                         <outlet property="skView" destination="5ke-9L-ke1" id="GIr-Bc-W1Z"/>
                     </connections>
@@ -237,7 +228,7 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="6" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h7Y-xc-bH3" userLabel="Main Controls Stack View">
-                                            <rect key="frame" x="64" y="25" width="150" height="27"/>
+                                            <rect key="frame" x="65" y="25" width="148" height="27"/>
                                             <subviews>
                                                 <button identifier="back10Button" verticalHuggingPriority="750" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7ZN-c5-gFD" userLabel="back10">
                                                     <rect key="frame" x="0.0" y="7" width="14.5" height="15"/>
@@ -250,7 +241,7 @@
                                                     </connections>
                                                 </button>
                                                 <button identifier="beginningButton" verticalHuggingPriority="750" alphaValue="0.5" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cz1-yY-Tk7" userLabel="Beginning">
-                                                    <rect key="frame" x="20" y="8" width="15.5" height="12"/>
+                                                    <rect key="frame" x="20" y="8" width="14.5" height="12"/>
                                                     <buttonCell key="cell" type="inline" bezelStyle="inline" image="backward.end.fill" catalog="system" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" imageScaling="proportionallyDown" inset="2" id="xFl-pH-s7k">
                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                         <font key="font" metaFont="smallSystemBold"/>
@@ -260,7 +251,7 @@
                                                     </connections>
                                                 </button>
                                                 <button identifier="slowDownButton" verticalHuggingPriority="750" alphaValue="0.5" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="u2I-XI-Jnh" userLabel="RW">
-                                                    <rect key="frame" x="41" y="8.5" width="18" height="11"/>
+                                                    <rect key="frame" x="40" y="8.5" width="18" height="11"/>
                                                     <buttonCell key="cell" type="inline" bezelStyle="inline" image="backward.fill" catalog="system" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" imageScaling="proportionallyDown" inset="2" id="kj3-sU-94t">
                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                         <font key="font" metaFont="smallSystemBold"/>
@@ -270,7 +261,7 @@
                                                     </connections>
                                                 </button>
                                                 <button identifier="playPauseButton" verticalHuggingPriority="750" alphaValue="0.5" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rbv-Me-J1P" userLabel="Play/Pause">
-                                                    <rect key="frame" x="65" y="4" width="20" height="19"/>
+                                                    <rect key="frame" x="64" y="4" width="20" height="19"/>
                                                     <buttonCell key="cell" type="recessed" bezelStyle="recessed" image="play.fill" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="cnY-rO-qzw">
                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
                                                         <font key="font" metaFont="systemBold" size="12"/>
@@ -280,7 +271,7 @@
                                                     </connections>
                                                 </button>
                                                 <button identifier="speedUpButton" verticalHuggingPriority="750" alphaValue="0.5" allowsExpansionToolTips="YES" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AgU-d0-e5o" userLabel="FF">
-                                                    <rect key="frame" x="91" y="8.5" width="18" height="11"/>
+                                                    <rect key="frame" x="90" y="8.5" width="18" height="11"/>
                                                     <buttonCell key="cell" type="inline" bezelStyle="inline" image="forward.fill" catalog="system" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" imageScaling="proportionallyDown" inset="2" id="I0O-QK-B3m">
                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                         <font key="font" metaFont="smallSystemBold"/>
@@ -290,7 +281,7 @@
                                                     </connections>
                                                 </button>
                                                 <button identifier="endButton" verticalHuggingPriority="750" alphaValue="0.5" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I37-mD-oLe" userLabel="End">
-                                                    <rect key="frame" x="115" y="8" width="15.5" height="12"/>
+                                                    <rect key="frame" x="114" y="8" width="14.5" height="12"/>
                                                     <buttonCell key="cell" type="inline" bezelStyle="inline" image="forward.end.fill" catalog="system" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" imageScaling="proportionallyDown" inset="2" id="eZw-dO-7XU">
                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                         <font key="font" metaFont="smallSystemBold"/>
@@ -300,7 +291,7 @@
                                                     </connections>
                                                 </button>
                                                 <button identifier="fwd10Button" verticalHuggingPriority="750" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hCA-ws-tfM" userLabel="fwd10">
-                                                    <rect key="frame" x="136" y="7" width="14.5" height="15"/>
+                                                    <rect key="frame" x="134" y="7" width="14.5" height="15"/>
                                                     <buttonCell key="cell" type="inline" bezelStyle="inline" image="goforward.10" catalog="system" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="Ebd-Pw-ZQ8">
                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                         <font key="font" metaFont="smallSystemBold"/>
@@ -341,7 +332,7 @@
                                             </textFieldCell>
                                         </textField>
                                         <button identifier="setRepeat" verticalHuggingPriority="750" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zCc-xZ-YS8" userLabel="Repeat">
-                                            <rect key="frame" x="27" y="29" width="27" height="19"/>
+                                            <rect key="frame" x="28" y="29" width="27" height="19"/>
                                             <buttonCell key="cell" type="recessed" bezelStyle="recessed" image="repeat" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="X3M-bD-Afn">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
                                                 <font key="font" metaFont="systemBold" size="12"/>
@@ -531,19 +522,19 @@
         <!--Plot Selector View Controller-->
         <scene sceneID="r5k-Ra-6DT">
             <objects>
-                <viewController storyboardIdentifier="plotOutputSelector1ViewController" id="syG-q4-lrt" customClass="PlotSelectorViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="plotOutputSelectorViewController" id="syG-q4-lrt" customClass="PlotSelectorViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="zq0-rT-cOP">
                         <rect key="frame" x="0.0" y="0.0" width="434" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="24" horizontalPageScroll="10" verticalLineScroll="24" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yZY-ev-dcp">
-                                <rect key="frame" x="0.0" y="0.0" width="434" height="300"/>
+                                <rect key="frame" x="0.0" y="0.0" width="434" height="277"/>
                                 <clipView key="contentView" drawsBackground="NO" id="0aN-oB-0wR">
-                                    <rect key="frame" x="1" y="1" width="432" height="298"/>
+                                    <rect key="frame" x="1" y="1" width="432" height="275"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" tableStyle="sourceList" selectionHighlightStyle="sourceList" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="24" rowSizeStyle="automatic" headerView="BtQ-f2-zxU" viewBased="YES" id="6UF-yp-2Ou" customClass="PlotSelectorTableView" customModule="Treviz" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="432" height="270"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="432" height="247"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="17" height="0.0"/>
                                             <color key="backgroundColor" name="_sourceListBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -687,12 +678,22 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableHeaderView>
                             </scrollView>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KXR-3U-Tt6">
+                                <rect key="frame" x="198" y="279" width="39" height="19"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Plots" id="BEx-aF-GS7">
+                                    <font key="font" textStyle="title3" name=".SFNS-Regular"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="KXR-3U-Tt6" firstAttribute="top" secondItem="zq0-rT-cOP" secondAttribute="top" constant="2" id="4mc-wg-Rt3"/>
+                            <constraint firstItem="yZY-ev-dcp" firstAttribute="top" secondItem="KXR-3U-Tt6" secondAttribute="bottom" constant="2" id="EJK-UZ-fxu"/>
                             <constraint firstAttribute="trailing" secondItem="yZY-ev-dcp" secondAttribute="trailing" id="Heu-95-RGb"/>
+                            <constraint firstItem="KXR-3U-Tt6" firstAttribute="centerX" secondItem="zq0-rT-cOP" secondAttribute="centerX" id="eEP-8G-Khy"/>
                             <constraint firstAttribute="bottom" secondItem="yZY-ev-dcp" secondAttribute="bottom" id="lQm-TO-AU0"/>
                             <constraint firstItem="yZY-ev-dcp" firstAttribute="leading" secondItem="zq0-rT-cOP" secondAttribute="leading" id="rbG-oV-ac1"/>
-                            <constraint firstItem="yZY-ev-dcp" firstAttribute="top" secondItem="zq0-rT-cOP" secondAttribute="top" id="xYs-cO-3w1"/>
                         </constraints>
                     </view>
                     <connections>

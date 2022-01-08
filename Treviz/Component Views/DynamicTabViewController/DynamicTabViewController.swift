@@ -57,6 +57,11 @@ class DynamicTabViewController: NSViewController {
         } else { return false }
     }
     
+    func tabHeaderItem(named title: String)->DynamicTabHeaderViewController? {
+        if let matchingItem = allViews.first(where: { $0.title == title }){
+            return matchingItem
+        } else { return nil }
+    }
     /**
      Deletes the given tab and does all necessary cleanup of the associated views
      */

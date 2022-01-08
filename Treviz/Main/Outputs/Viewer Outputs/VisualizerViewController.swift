@@ -15,7 +15,7 @@ import SceneKit
  */
 class TZSKView: SKView {
     var tzscene: TZScene? { return scene as? TZScene }
-    
+        
     override func keyDown(with event: NSEvent) {
         guard tzscene != nil else { return }
         let key = event.keyCode
@@ -38,12 +38,15 @@ class TZSKView: SKView {
     }
 }
 
+enum VisualizerType {
+    case twoD
+    case threeD
+}
 /**
  This controller presents the view that shows 2d and 3d visualizations via SpriteKit and SceneKit. It implements the methods in the TZVizualizer protocol to serve as the main output for trajectory visualization from an analysis
  */
 class VisualizerViewController: TZViewController, TZVizualizer, SKSceneDelegate {
     
-    @IBOutlet weak var placeholderImageView: NSImageView!
     @IBOutlet weak var skView: TZSKView!
     //@IBOutlet weak var sceneView: SCNView!
     
@@ -65,7 +68,6 @@ class VisualizerViewController: TZViewController, TZVizualizer, SKSceneDelegate 
     override func viewDidLoad() {
         view.wantsLayer = true
         view.layer?.backgroundColor = NSColor.black.cgColor
-        placeholderImageView?.image = NSImage(named: analysis.phases[0].physicsSettings.centralBodyParam.stringValue)
         analysis.visualViewer = self
         
         dockControls = UserDefaults.dockVisualizationController
@@ -75,6 +77,10 @@ class VisualizerViewController: TZViewController, TZVizualizer, SKSceneDelegate 
         super.viewDidLoad()
         curScene.isPaused = true
         self.view.viewDidChangeEffectiveAppearance() // Sets the correct scene background
+        
+        //if analysis.hasRunData {
+        //    loadTrajectoryData() //TODO: make this works so the visualization works when you switch to it
+        //}
     }
     
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
@@ -89,11 +95,14 @@ class VisualizerViewController: TZViewController, TZVizualizer, SKSceneDelegate 
      This function choses which type of view to present in the visualizer
      - parameter iview: index of view to show. 1 is a placeholder image, 2 is spritekit view (2d), and 3 is scenekit view (3d)
      */
-    func toggleView(_ iview: Int){
-        let curViews: [NSView] = [placeholderImageView, skView]//, sceneView]
-        for i in 0...curViews.count-1 {
-            if i == iview { curViews[i].isHidden = false }
-            else { curViews[i].isHidden = true}
+    func toggleView(_ vtype: VisualizerType){
+        switch vtype {
+        case .twoD:
+            //sceneView.isHidden = true
+            skView.isHidden = false
+        case .threeD:
+            //sceneView.isHidden = false
+            skView.isHidden = true
         }
     }
     
@@ -120,13 +129,18 @@ class VisualizerViewController: TZViewController, TZVizualizer, SKSceneDelegate 
         curScene.loadData(groups: groups)
         
         skView.viewDidChangeEffectiveAppearance()
-        toggleView(1) // Switch to SpriteKit view
         controlsVC.view.isHidden = false
+        toggleView(.twoD) // Switch to SpriteKit view
     }
     
     func resizeView(){
         if !skView.isHidden {
             (skView.scene as? TZScene)?.resizeScene()
         }
+    }
+    
+    override func viewDidLayout() {
+        resizeView()
+        super.viewDidLayout()
     }
 }

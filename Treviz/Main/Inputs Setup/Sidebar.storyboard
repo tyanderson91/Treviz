@@ -11,30 +11,30 @@
             <objects>
                 <viewController id="QK9-IU-aUs" customClass="SidebarTabViewController" customModule="Treviz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="AHi-09-cbF">
-                        <rect key="frame" x="0.0" y="0.0" width="187" height="156"/>
+                        <rect key="frame" x="0.0" y="0.0" width="187" height="204"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <tabView type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="KsM-1o-3zM">
-                                <rect key="frame" x="0.0" y="0.0" width="187" height="116"/>
+                                <rect key="frame" x="0.0" y="0.0" width="187" height="202"/>
                                 <font key="font" metaFont="system"/>
                                 <tabViewItems>
                                     <tabViewItem label="Phases" identifier="phases" id="UUT-hl-Kw3">
                                         <view key="view" id="Jpw-2T-Kvy">
-                                            <rect key="frame" x="0.0" y="0.0" width="187" height="116"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="187" height="202"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kOG-Lp-hwC">
-                                                    <rect key="frame" x="73" y="50" width="41" height="16"/>
+                                                    <rect key="frame" x="71" y="181" width="46" height="19"/>
                                                     <textFieldCell key="cell" lineBreakMode="clipping" title="Phase" id="MfT-LZ-teJ">
-                                                        <font key="font" usesAppearanceFont="YES"/>
+                                                        <font key="font" textStyle="title3" name=".SFNS-Regular"/>
                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
                                                 </textField>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="kOG-Lp-hwC" firstAttribute="centerY" secondItem="Jpw-2T-Kvy" secondAttribute="centerY" id="Pnw-eZ-nhB"/>
                                                 <constraint firstItem="kOG-Lp-hwC" firstAttribute="centerX" secondItem="Jpw-2T-Kvy" secondAttribute="centerX" id="Ycg-1m-prx"/>
+                                                <constraint firstItem="kOG-Lp-hwC" firstAttribute="top" secondItem="Jpw-2T-Kvy" secondAttribute="top" constant="2" id="vgk-5c-zDb"/>
                                             </constraints>
                                         </view>
                                     </tabViewItem>
@@ -60,11 +60,11 @@
                                     </tabViewItem>
                                     <tabViewItem label="Variants" identifier="variants" id="HzZ-tz-tOP">
                                         <view key="view" id="NYc-Dm-hQ1">
-                                            <rect key="frame" x="0.0" y="0.0" width="187" height="116"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="187" height="202"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <containerView translatesAutoresizingMaskIntoConstraints="NO" id="8IR-Yj-cQV">
-                                                    <rect key="frame" x="0.0" y="0.0" width="187" height="116"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="187" height="202"/>
                                                     <connections>
                                                         <segue destination="8T7-bW-R1G" kind="embed" identifier="variantsViewSegue" id="m8y-us-3KX"/>
                                                     </connections>
@@ -80,11 +80,11 @@
                                     </tabViewItem>
                                     <tabViewItem label="Conditions" identifier="conditions" id="Op7-iz-oCk">
                                         <view key="view" id="qB5-CZ-Rcx">
-                                            <rect key="frame" x="0.0" y="0.0" width="187" height="116"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="187" height="202"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <containerView translatesAutoresizingMaskIntoConstraints="NO" id="6Iv-M5-4Ak">
-                                                    <rect key="frame" x="0.0" y="0.0" width="187" height="116"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="187" height="202"/>
                                                     <connections>
                                                         <segue destination="xmn-tj-X8i" kind="embed" identifier="conditionsViewSegue" id="r1J-cK-F4n"/>
                                                     </connections>
@@ -100,13 +100,13 @@
                                     </tabViewItem>
                                     <tabViewItem label="Algorithms" identifier="algorithms" id="zlY-7q-8WS">
                                         <view key="view" id="fDo-4J-W50">
-                                            <rect key="frame" x="0.0" y="0.0" width="187" height="116"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="187" height="202"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="AP3-i7-1Qr">
-                                                    <rect key="frame" x="82" y="50" width="24" height="16"/>
-                                                    <textFieldCell key="cell" lineBreakMode="clipping" title="Alg" id="jAk-zL-zgj">
-                                                        <font key="font" usesAppearanceFont="YES"/>
+                                                    <rect key="frame" x="54" y="181" width="79" height="19"/>
+                                                    <textFieldCell key="cell" lineBreakMode="clipping" title="Algorithms" id="jAk-zL-zgj">
+                                                        <font key="font" textStyle="title3" name=".SFNS-Regular"/>
                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
@@ -114,26 +114,26 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="AP3-i7-1Qr" firstAttribute="centerX" secondItem="fDo-4J-W50" secondAttribute="centerX" id="I2d-au-mfz"/>
-                                                <constraint firstItem="AP3-i7-1Qr" firstAttribute="centerY" secondItem="fDo-4J-W50" secondAttribute="centerY" id="Sus-hF-baa"/>
+                                                <constraint firstItem="AP3-i7-1Qr" firstAttribute="top" secondItem="fDo-4J-W50" secondAttribute="top" constant="2" id="xwI-QH-gaC"/>
                                             </constraints>
                                         </view>
                                     </tabViewItem>
                                     <tabViewItem label="Geometry" identifier="geometry" id="9wF-g7-Gg2">
                                         <view key="view" id="nO6-bl-rRF">
-                                            <rect key="frame" x="0.0" y="0.0" width="187" height="116"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="187" height="202"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zB5-wY-DXe">
-                                                    <rect key="frame" x="74" y="50" width="40" height="16"/>
+                                                    <rect key="frame" x="71" y="181" width="45" height="19"/>
                                                     <textFieldCell key="cell" lineBreakMode="clipping" title="Geom" id="ZLf-FG-dlA">
-                                                        <font key="font" usesAppearanceFont="YES"/>
+                                                        <font key="font" textStyle="title3" name=".SFNS-Regular"/>
                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
                                                 </textField>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="zB5-wY-DXe" firstAttribute="centerY" secondItem="nO6-bl-rRF" secondAttribute="centerY" id="1vg-bS-VSQ"/>
+                                                <constraint firstItem="zB5-wY-DXe" firstAttribute="top" secondItem="nO6-bl-rRF" secondAttribute="top" constant="2" id="2gM-b9-Jxf"/>
                                                 <constraint firstItem="zB5-wY-DXe" firstAttribute="centerX" secondItem="nO6-bl-rRF" secondAttribute="centerX" id="8Np-3U-xg8"/>
                                             </constraints>
                                         </view>
@@ -163,18 +163,18 @@
                                             <rect key="frame" x="0.0" y="0.0" width="187" height="116"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="c0b-7w-ow3">
-                                                    <rect key="frame" x="82" y="50" width="23" height="16"/>
-                                                    <textFieldCell key="cell" lineBreakMode="clipping" title="Viz" id="w6z-hr-CQh">
-                                                        <font key="font" usesAppearanceFont="YES"/>
-                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                    </textFieldCell>
-                                                </textField>
+                                                <containerView translatesAutoresizingMaskIntoConstraints="NO" id="8Ed-dl-Nnc">
+                                                    <rect key="frame" x="0.0" y="0.0" width="187" height="116"/>
+                                                    <connections>
+                                                        <segue destination="o2k-F1-Q4p" kind="embed" identifier="visualizerViewSegue" id="960-nH-MU1"/>
+                                                    </connections>
+                                                </containerView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="c0b-7w-ow3" firstAttribute="centerX" secondItem="2gJ-X4-hOv" secondAttribute="centerX" id="4I1-UI-XRe"/>
-                                                <constraint firstItem="c0b-7w-ow3" firstAttribute="centerY" secondItem="2gJ-X4-hOv" secondAttribute="centerY" id="UJW-5D-4Wv"/>
+                                                <constraint firstItem="8Ed-dl-Nnc" firstAttribute="leading" secondItem="2gJ-X4-hOv" secondAttribute="leading" id="WES-rq-bhZ"/>
+                                                <constraint firstItem="8Ed-dl-Nnc" firstAttribute="top" secondItem="2gJ-X4-hOv" secondAttribute="top" id="nGV-Gl-6cc"/>
+                                                <constraint firstAttribute="bottom" secondItem="8Ed-dl-Nnc" secondAttribute="bottom" id="udv-0R-Xcz"/>
+                                                <constraint firstAttribute="trailing" secondItem="8Ed-dl-Nnc" secondAttribute="trailing" id="wcA-ws-Faf"/>
                                             </constraints>
                                         </view>
                                     </tabViewItem>
@@ -183,7 +183,7 @@
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="KsM-1o-3zM" secondAttribute="trailing" id="4F5-Tl-pWk"/>
-                            <constraint firstItem="KsM-1o-3zM" firstAttribute="top" secondItem="AHi-09-cbF" secondAttribute="top" constant="40" id="9to-FT-Qbi" userLabel="sidebarToolbarOffsetConstraint"/>
+                            <constraint firstItem="KsM-1o-3zM" firstAttribute="top" secondItem="AHi-09-cbF" secondAttribute="top" constant="2" id="9to-FT-Qbi" userLabel="sidebarToolbarOffsetConstraint"/>
                             <constraint firstAttribute="bottom" secondItem="KsM-1o-3zM" secondAttribute="bottom" id="LMp-VF-8sS"/>
                             <constraint firstItem="KsM-1o-3zM" firstAttribute="leading" secondItem="AHi-09-cbF" secondAttribute="leading" id="SmC-gy-NWh"/>
                         </constraints>
@@ -195,7 +195,15 @@
                 </viewController>
                 <customObject id="IDu-0O-ZCF" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="0.5" y="316"/>
+            <point key="canvasLocation" x="20.5" y="318"/>
+        </scene>
+        <!--Visualizer-->
+        <scene sceneID="u2m-hZ-dsc">
+            <objects>
+                <controllerPlaceholder storyboardName="Visualizer" id="o2k-F1-Q4p" sceneMemberID="viewController"/>
+                <customObject id="Ke6-k7-urL" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="194" y="527"/>
         </scene>
         <!--RunVariants-->
         <scene sceneID="cBK-Au-9Eq">
@@ -203,7 +211,7 @@
                 <controllerPlaceholder storyboardName="RunVariants" id="8T7-bW-R1G" sceneMemberID="viewController"/>
                 <customObject id="sqJ-4x-Bzn" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="57" y="588"/>
+            <point key="canvasLocation" x="97" y="595"/>
         </scene>
         <!--Conditions-->
         <scene sceneID="63z-Nv-HTi">
@@ -211,7 +219,7 @@
                 <controllerPlaceholder storyboardName="Conditions" id="xmn-tj-X8i" sceneMemberID="viewController"/>
                 <customObject id="NrF-jD-Zb0" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="131" y="512"/>
+            <point key="canvasLocation" x="7" y="652"/>
         </scene>
         <!--Inputs-->
         <scene sceneID="8FD-9e-2zl">
@@ -219,15 +227,15 @@
                 <controllerPlaceholder storyboardName="Inputs" id="sSU-40-XYl" sceneMemberID="viewController"/>
                 <customObject id="Uvo-Xx-Thh" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="222" y="245"/>
+            <point key="canvasLocation" x="250" y="397"/>
         </scene>
-        <!--plotOutputSelector1ViewController-->
+        <!--plotOutputSelectorViewController-->
         <scene sceneID="jng-ot-Mf4">
             <objects>
-                <controllerPlaceholder storyboardName="Outputs" referencedIdentifier="plotOutputSelector1ViewController" id="nda-LA-KLe" sceneMemberID="viewController"/>
+                <controllerPlaceholder storyboardName="Outputs" referencedIdentifier="plotOutputSelectorViewController" id="nda-LA-KLe" sceneMemberID="viewController"/>
                 <customObject id="YJw-kx-9Dh" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="298" y="413"/>
+            <point key="canvasLocation" x="-119" y="609"/>
         </scene>
         <!--Sidebar Header View Controller-->
         <scene sceneID="sYl-gP-zyc">
@@ -275,6 +283,19 @@
                 <customObject id="U09-PS-h06" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-41" y="-138"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="wZH-JI-B5R">
+            <objects>
+                <viewController id="tkA-XD-seI" sceneMemberID="viewController">
+                    <view key="view" id="Gxw-Tg-VBp">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                </viewController>
+                <customObject id="F0o-bo-qVt" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-348" y="364"/>
         </scene>
     </scenes>
 </document>

@@ -14,15 +14,19 @@ fileprivate extension NSStoryboardSegue.Identifier {
     static var conditionsViewSegue = "conditionsViewSegue"
     static var variantsViewSegue = "variantsViewSegue"
     static var plotSelectorViewSegue = "plotSelectorViewSegue"
+    static var visualizerViewSegue = "visualizerViewSegue"
 }
 
 class SidebarTabViewController: TZViewController {
     @IBOutlet weak var toolbarOffsetConstraint: NSLayoutConstraint!
     var inputsViewController: InputsSplitViewController!
     var plotSelectorViewController: PlotSelectorViewController!
+    var visualizerViewController: VisualizerSetupViewController!
+    
     var outputTabViewController: DynamicTabViewController! {
         didSet {
             self.plotSelectorViewController.tabViewController = self.outputTabViewController
+            self.visualizerViewController.tabViewController = self.outputTabViewController
         }
     }
     
@@ -48,8 +52,12 @@ class SidebarTabViewController: TZViewController {
             let varVC = segue.destinationController as! RunVariantViewController
             varVC.analysis = self.analysis
         case .plotSelectorViewSegue:
-            plotSelectorViewController = segue.destinationController as! PlotSelectorViewController
+            plotSelectorViewController = segue.destinationController as? PlotSelectorViewController
             plotSelectorViewController.analysis = self.analysis
+        case .visualizerViewSegue:
+            visualizerViewController = segue.destinationController as? VisualizerSetupViewController
+            visualizerViewController.analysis = self.analysis
+            visualizerViewController.sidebarVC = self
         default:
             return
         }
