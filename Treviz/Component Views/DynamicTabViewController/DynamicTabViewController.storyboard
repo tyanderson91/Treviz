@@ -14,7 +14,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="89" height="22"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <box boxType="custom" cornerRadius="4" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="2Gj-D4-m49">
+                            <box boxType="custom" cornerRadius="4" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="2Gj-D4-m49" customClass="TabHeaderBox" customModule="Treviz" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="-3" width="89" height="24"/>
                                 <view key="contentView" id="SzI-1k-B2q">
                                     <rect key="frame" x="1" y="1" width="87" height="22"/>

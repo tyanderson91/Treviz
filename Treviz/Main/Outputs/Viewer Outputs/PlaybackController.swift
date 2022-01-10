@@ -91,11 +91,20 @@ class TZPlaybackController: NSViewController, VisualizerPlaybackController {
         goToEndButton.toolTip = "Go to End"
         setRepeatButton.toolTip = "Toggle Repeat"
         curSpeedLabel.toolTip = "Speed Multiplier"
+        
+        self.reset()
+    }
+    
+    override func viewDidAppear() {
+        self.view.isHidden = false
     }
     
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         if segue.identifier == "scrubberSegue", let vc = segue.destinationController as? CustomPlaybackScrubberController {
             vc.playbackController = self
+            vc.maxValue = maxTime
+            vc.minValue = minTime
+            vc.curValue = minTime
             scrubberController = vc
         }
     }
@@ -380,9 +389,9 @@ class TZPlaybackController: NSViewController, VisualizerPlaybackController {
         elapsedTime = minTime
         currentTimeNumberFormatter.format = "0.0"
         
-        scrubberController.maxValue = maxTime
-        scrubberController.minValue = minTime
-        scrubberController.curValue = minTime
+        scrubberController?.maxValue = maxTime
+        scrubberController?.minValue = minTime
+        scrubberController?.curValue = minTime
 
         state = .beginning
         scene.isPaused = true

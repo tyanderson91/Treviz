@@ -8,9 +8,6 @@
 import Cocoa
 
 class DynamicTabHeaderViewController: NSViewController {
-    static let activeColor: NSColor = .selectedContentBackgroundColor.withAlphaComponent(0.75)
-    static let inactiveColor: NSColor = .clear
-    
     var tabViewItem: NSTabViewItem!
     var childVC: NSViewController! {
         didSet { setLabel(self.titleString) }
@@ -18,12 +15,9 @@ class DynamicTabHeaderViewController: NSViewController {
     var initAction: (()->())?
     var teardownAction: (()->())?
     var isActive: Bool = false { didSet {
-        if self.isActive {
-            box.fillColor = DynamicTabHeaderViewController.activeColor
-        } else {
-            box.fillColor = DynamicTabHeaderViewController.inactiveColor
-        }
+        box.isActive = self.isActive
     }
+        
     }
     var isPinned = false {
         didSet {
@@ -35,7 +29,7 @@ class DynamicTabHeaderViewController: NSViewController {
     }
     private var _mouseIsInside: Bool = false
     @IBOutlet weak var label: NSTextField!
-    @IBOutlet weak var box: NSBox!
+    @IBOutlet weak var box: TabHeaderBox!
     @IBOutlet weak var removeTabButton: NSButton!
     
     override var title: String? {
@@ -94,6 +88,7 @@ class DynamicTabHeaderViewController: NSViewController {
             self.isPinned = true
         }
     }
+    
     func setLabel(_ string: NSAttributedString){
         if label != nil {
             label.attributedStringValue = string
@@ -138,3 +133,21 @@ class DynamicTabHeaderViewController: NSViewController {
     }
 }
 
+class TabHeaderBox: NSBox { // Custom box that changes color based on selected tab
+    static var activeColor: NSColor { .selectedContentBackgroundColor.blended(withFraction: 0.3, of: .white)!.withAlphaComponent(0.5) }
+    static let inactiveColor: NSColor = .clear
+    
+    var isActive: Bool = false {
+        didSet {
+            setColor()
+        }
+    }
+    override func viewDidChangeEffectiveAppearance() {
+        setColor()
+    }
+    
+    func setColor() {
+        if isActive { self.fillColor = TabHeaderBox.activeColor }
+        else { self.fillColor = TabHeaderBox.inactiveColor }
+    }
+}

@@ -29,6 +29,12 @@ class PlotSelectorViewController: TZViewController, NSTableViewDelegate, NSTable
     var plots: [TZPlot] {
         return analysis.plots.compactMap({return $0 as? TZPlot})
     }
+    var selectedPlot: TZPlot? {
+        let irow = tableView.selectedRow
+        if irow > -1 {
+            return plots[irow]
+        } else { return nil }
+    }
     var plotViewMap = [TZPlot: TZPlotView]()
     var tabViewController: DynamicTabViewController!
     
@@ -150,14 +156,22 @@ class PlotOutputViewController: TZViewController {
 
 // MARK: PlotSelectorTableView
 class PlotSelectorTableView: NSTableView {
+    var selectorVC: PlotSelectorViewController! { return delegate as? PlotSelectorViewController }
+
     override func mouseDown(with event: NSEvent){
         let point = event.locationInWindow
         let tablePoint = self.convert(point, from: nil)
         let row = self.row(at: tablePoint)
         if row == -1 { // If mouse click was outside of the rows
             self.deselectAll(nil)
+            super.mouseDown(with: event)
+        } else if event.clickCount >= 2 { // Double click to pin the plot view
+            guard let curPlot = selectorVC.selectedPlot else { return }
+            let header = selectorVC.tabViewController.tabHeaderItem(named: "Plot:\(curPlot.title)")
+            header?.isPinned = true
         } else {
             super.mouseDown(with: event)
         }
+        
     }
 }

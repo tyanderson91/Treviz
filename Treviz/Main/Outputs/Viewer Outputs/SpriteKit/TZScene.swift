@@ -125,7 +125,7 @@ class TZScene: SKScene, ConductorNode {
             safeArea.addChild($0)
         }
         resizeScene()
-        playbackController.reset()
+        playbackController?.reset()
     }
     
     /**

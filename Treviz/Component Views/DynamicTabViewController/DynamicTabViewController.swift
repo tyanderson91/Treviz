@@ -116,3 +116,4 @@ class DynamicTabViewController: NSViewController {
     }
 }
 
+// TODO: Make a custom view and override didChangeEffectiveAppearance so that the selected view highlight color changes with the system appearance

@@ -35,6 +35,8 @@ class VisualizerSetupViewController: TZViewController {
             tabView = tabViewController.tabHeaderItem(named: "Viz")
             tabView.teardownAction = {
                 self.visualizerVC.controlsVC.pausePlayback()
+                self.visualizerVC.controlsVC.removeFromParent()
+                self.visualizerVC.removeFromParent()
                 self.visualizerVC = nil
             } // TODO: Make this delete the whole view
         }

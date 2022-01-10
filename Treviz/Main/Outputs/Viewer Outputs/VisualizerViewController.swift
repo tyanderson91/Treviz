@@ -78,9 +78,9 @@ class VisualizerViewController: TZViewController, TZVizualizer, SKSceneDelegate 
         curScene.isPaused = true
         self.view.viewDidChangeEffectiveAppearance() // Sets the correct scene background
         
-        //if analysis.hasRunData {
-        //    loadTrajectoryData() //TODO: make this works so the visualization works when you switch to it
-        //}
+        if analysis.hasRunData {
+            loadTrajectoryData()
+        }
     }
     
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
@@ -129,7 +129,7 @@ class VisualizerViewController: TZViewController, TZVizualizer, SKSceneDelegate 
         curScene.loadData(groups: groups)
         
         skView.viewDidChangeEffectiveAppearance()
-        controlsVC.view.isHidden = false
+        controlsVC?.view.isHidden = false
         toggleView(.twoD) // Switch to SpriteKit view
     }
     
