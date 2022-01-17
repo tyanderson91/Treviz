@@ -33,7 +33,7 @@ extension Condition {
                     self.conditions.append(thisCondition)
                 } else {
                     let logmessage = String(format: "Could not find constituent condition '%s' of condition '%s'", thisConditionName, self.name)
-                    analysis.logMessage(logmessage)
+                    analysis.logError(logmessage)
                 }
             }
         } catch {
@@ -46,7 +46,7 @@ extension Condition {
             catch {
                 strName = "<Unknown>" //TODO: Find a way to extract the condition name for compound conditions to write to the error message
             }
-            analysis.logMessage("Error when reading condition '\(strName)': \(error.localizedDescription)")
+            analysis.logError("can't read condition '\(strName)': \(error.localizedDescription)")
             return nil
         }
     }
@@ -87,7 +87,7 @@ extension TZOutput {
                 }
             }
         } catch {
-            analysis.logMessage("Error when reading output: \(error.localizedDescription)")
+            analysis.logError("can't read output: \(error.localizedDescription)")
             return nil
         }
     }
@@ -106,7 +106,7 @@ extension TZPhase {
             let terminalConditionName = try container.decode(String.self, forKey: .terminalCondition)
             terminalCondition = analysis.conditions.first { $0.name == terminalConditionName }
         } catch {
-            analysis.logMessage("Error when reading phase: \(error.localizedDescription)")
+            analysis.logError("can't read phase: \(error.localizedDescription)")
             return nil
         }
     }

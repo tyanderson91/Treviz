@@ -14,14 +14,14 @@ enum outputLocation{
     case plot, text
 }
 
-class AddOutputViewController: BaseViewController, VariableGetter {
-    func variableDidChange(_ sender: VariableSelectorViewController) {
+class AddOutputViewController: BaseViewController, ParamGetter {
+    func paramDidChange(_ sender: ParameterSelectorViewController) {
     }
     
     @IBOutlet weak var conditionsPopupButton: NSPopUpButton!
     
     @IBOutlet weak var titleTextField: NSTextField!
-    @IBOutlet weak var titleTextFieldConstraint: NSLayoutConstraint!
+    //@IBOutlet weak var titleTextFieldConstraint: NSLayoutConstraint!
     @IBOutlet weak var plotTypeCell: NSPopUpButtonCell!
     
     @IBOutlet weak var plotTypePopupButton: NSPopUpButton!
@@ -33,17 +33,17 @@ class AddOutputViewController: BaseViewController, VariableGetter {
     @IBOutlet weak var addRemoveOutputButton: NSButton!
     @IBOutlet weak var includeTextCheckbox: NSButton!
     @IBOutlet weak var includePlotCheckbox: NSButton!
-    @IBOutlet var objectController: NSObjectController!
-    @IBOutlet weak var editingOutputStackView: NSStackView!
-    @IBOutlet weak var displayOutputStackView: NSStackView!
-    @IBOutlet weak var selectedOutputTypeLabel: NSTextField!
+    //@IBOutlet var objectController: NSObjectController!
+    //@IBOutlet weak var editingOutputStackView: NSStackView!
+    //@IBOutlet weak var displayOutputStackView: NSStackView!
+    //@IBOutlet weak var selectedOutputTypeLabel: NSTextField!
     
     func plotTypeSelector(_ plotType: TZPlotType)->(Bool) {return true}//Chooses whether a given plot type applies to the current options
     var outputSetupViewController : OutputSetupViewController!
     var maxPlotID : Int { return self.analysis?.plots.map( {return $0.id} ).max() ?? 0 }
     private var selectedConditionIndex: Int = 0
     
-    @objc var representedOutput: TZOutput!
+    var representedOutput: TZOutput!
     var shouldCollapse: Bool = true // Whether the view should be able to collapse vertically
     
     required init?(coder: NSCoder) {
@@ -58,10 +58,10 @@ class AddOutputViewController: BaseViewController, VariableGetter {
         NotificationCenter.default.addObserver(self, selector: #selector(self.conditionsChanged(_:)), name: .didAddCondition, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.conditionsChanged(_:)), name: .didRemoveCondition, object: nil)
 
-        displayOutputStackView.isHidden = true
-        editingOutputStackView.isHidden = false
+        //displayOutputStackView.isHidden = true
+        //editingOutputStackView.isHidden = false
         
-        objectController.content = representedOutput
+        //objectController.content = representedOutput
         
         //plotTypePopupButton.imageHugsTitle = false
         for thisPlotType in plotTypes ?? []{
@@ -70,7 +70,7 @@ class AddOutputViewController: BaseViewController, VariableGetter {
             plotTypePopupButton.menu?.addItem(menuItem)
         }
         plotTypePopupButton.bezelStyle = .texturedSquare
-        self.bind(.title, to: objectController!, withKeyPath: "selection.title")
+        //self.bind(.title, to: objectController!, withKeyPath: "selection.title")
         plotTypePopupButton.selectItem(withTitle: representedOutput.plotType.name)
         
         conditionsPopupButton.addItems(withTitles: analysis.conditions.compactMap({$0.name}))
@@ -105,11 +105,15 @@ class AddOutputViewController: BaseViewController, VariableGetter {
         }
         else { conditionsPopupButton.selectItem(withTitle: representedOutput.condition?.name ?? "")}
     }
-    @IBAction func includeTextCheckboxClicked(_ sender: Any) {
+    @IBAction func includeTextCheckboxClicked(_ sender: NSButton) {
         setOutputType(type: .text)
+        let enabled = sender.state == .on ? true : false
+        UserDefaults.standard.set(enabled, forKey: "newPlot.shouldMakeText")
     }
-    @IBAction func includePlotCheckboxClicked(_ sender: Any) {
+    @IBAction func includePlotCheckboxClicked(_ sender: NSButton) {
         setOutputType(type: .plot)
+        let enabled = sender.state == .on ? true : false
+        UserDefaults.standard.set(enabled, forKey: "newPlot.shouldMakePlot")
     }
     func setOutputType(type: outputLocation){ // Can override with specific rules for each plot type
         let textOn = self.includeTextCheckbox.state.rawValue
@@ -123,10 +127,7 @@ class AddOutputViewController: BaseViewController, VariableGetter {
             }
         }
     }
-    
-    @IBAction func plotTypeWasSelected(_ sender: Any) {
-    }
-    
+       
     @IBAction func addRemoveOutputButtonClicked(_ sender: Any) {
         if addRemoveOutputButton.image == NSImage(named: NSImage.addTemplateName) {
             self.title = representedOutput.title
@@ -150,6 +151,7 @@ class AddOutputViewController: BaseViewController, VariableGetter {
         guard let selectedConditionName = senderButton.selectedItem?.title else {return}
         if let selectedCondition = analysis.conditions.first(where: {$0.name == selectedConditionName}) {
             representedOutput.condition = selectedCondition
+            UserDefaults.standard.set(selectedCondition.name, forKey: "newPlot.defaultCondition")
         }
     }
     
@@ -157,6 +159,7 @@ class AddOutputViewController: BaseViewController, VariableGetter {
         self.titleTextField.refusesFirstResponder = true
         self.representedOutput.title = (sender as! NSTextField).stringValue
         titleTextField.window?.makeFirstResponder(self.view)
+        
     }
     
 }

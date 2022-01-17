@@ -14,6 +14,7 @@ import Cocoa
 protocol TZLogger {
     func logMessage(_ message: NSAttributedString)
     func logMessage(_ message: String)
+    func makeErrorSound()
 }
 extension TZLogger {
     func logMessage(_ message: String) {
@@ -29,5 +30,17 @@ extension Analysis: TZLogger {
             _bufferLog.append(message)
             _bufferLog.append(NSAttributedString(string: "\n"))
         }
+    }
+    func makeErrorSound() {
+        logMessageView?.makeErrorSound()
+    }
+    func logError(errorMessage: NSAttributedString) {
+        makeErrorSound()
+        let newString = NSMutableAttributedString(string: "Error: ", attributes: [.foregroundColor:NSColor.red, .font:NSFont.boldSystemFont(ofSize: 12)])
+        newString.append(errorMessage)
+        logMessage(newString)
+    }
+    func logError(_ errorMessage: String) {
+        logError(errorMessage: NSAttributedString.init(string: errorMessage))
     }
 }

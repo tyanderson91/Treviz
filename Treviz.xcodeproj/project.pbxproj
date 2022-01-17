@@ -26,10 +26,7 @@
 		CD2A95ED262D3BCF004279F0 /* ColormapPreview.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD2A95EC262D3BCF004279F0 /* ColormapPreview.xib */; };
 		CD2A95FB262FBE66004279F0 /* CustomPopUpButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD2A95FA262FBE66004279F0 /* CustomPopUpButton.xib */; };
 		CD2A95FF262FBEC0004279F0 /* CustomPopUpButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2A95FE262FBEC0004279F0 /* CustomPopUpButton.swift */; };
-		CD2D0DB42243836F0012978E /* ThreeAxisOutputSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2D0D96224382F70012978E /* ThreeAxisOutputSetupViewController.swift */; };
-		CD2D0DB52243836F0012978E /* TwoAxisOutputSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2D0DA9224382F70012978E /* TwoAxisOutputSetupViewController.swift */; };
 		CD2D0DB62243836F0012978E /* MonteCarloOutputSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2D0DAA224382F70012978E /* MonteCarloOutputSetupViewController.swift */; };
-		CD2D0DB82243836F0012978E /* SingleAxisOutputSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2D0DAE224382F70012978E /* SingleAxisOutputSetupViewController.swift */; };
 		CD2D0DBB224385580012978E /* OutputSetup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD2D0DA6224382F70012978E /* OutputSetup.storyboard */; };
 		CD2E4C7E26240269002F5D99 /* PlotPreferenceComponentViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2E4C7D26240269002F5D99 /* PlotPreferenceComponentViews.swift */; };
 		CD31EFF324C13C7300ED435A /* CalcsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD31EFF224C13C7300ED435A /* CalcsTest.swift */; };
@@ -262,11 +259,8 @@
 		CD2A95EC262D3BCF004279F0 /* ColormapPreview.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ColormapPreview.xib; sourceTree = "<group>"; };
 		CD2A95FA262FBE66004279F0 /* CustomPopUpButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CustomPopUpButton.xib; path = "Treviz/Component Views/CustomPopUpButton.xib"; sourceTree = SOURCE_ROOT; };
 		CD2A95FE262FBEC0004279F0 /* CustomPopUpButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPopUpButton.swift; sourceTree = "<group>"; };
-		CD2D0D96224382F70012978E /* ThreeAxisOutputSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeAxisOutputSetupViewController.swift; sourceTree = "<group>"; };
 		CD2D0DA6224382F70012978E /* OutputSetup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OutputSetup.storyboard; sourceTree = "<group>"; };
-		CD2D0DA9224382F70012978E /* TwoAxisOutputSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoAxisOutputSetupViewController.swift; sourceTree = "<group>"; };
 		CD2D0DAA224382F70012978E /* MonteCarloOutputSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonteCarloOutputSetupViewController.swift; sourceTree = "<group>"; };
-		CD2D0DAE224382F70012978E /* SingleAxisOutputSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleAxisOutputSetupViewController.swift; sourceTree = "<group>"; };
 		CD2E4C7D26240269002F5D99 /* PlotPreferenceComponentViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlotPreferenceComponentViews.swift; sourceTree = "<group>"; };
 		CD31EFF224C13C7300ED435A /* CalcsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalcsTest.swift; sourceTree = "<group>"; };
 		CD37DF91270D579600B80D75 /* Sidebar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Sidebar.storyboard; sourceTree = "<group>"; };
@@ -682,9 +676,6 @@
 			isa = PBXGroup;
 			children = (
 				CD11FA8623408173001A3695 /* AddOutputViewController.swift */,
-				CD2D0DAE224382F70012978E /* SingleAxisOutputSetupViewController.swift */,
-				CD2D0DA9224382F70012978E /* TwoAxisOutputSetupViewController.swift */,
-				CD2D0D96224382F70012978E /* ThreeAxisOutputSetupViewController.swift */,
 				CDCD730326AE7A2800406285 /* VariableOutputSetupView.swift */,
 				CD2D0DAA224382F70012978E /* MonteCarloOutputSetupViewController.swift */,
 			);
@@ -1146,16 +1137,13 @@
 				CD37DF94270D6DAF00B80D75 /* SidebarTabViewController.swift in Sources */,
 				CDF0CCDC2671D55100CF14DE /* SKTrajectory.swift in Sources */,
 				CD3E645225086399001F6C8F /* RunVariantEnableButton.swift in Sources */,
-				CD2D0DB42243836F0012978E /* ThreeAxisOutputSetupViewController.swift in Sources */,
 				CDE2B5B724C2C729002026E0 /* State.swift in Sources */,
 				CD75952224E9A75F00B79EF5 /* PhaseVars.swift in Sources */,
-				CD2D0DB52243836F0012978E /* TwoAxisOutputSetupViewController.swift in Sources */,
 				CD9914C62782CD7D00C032A2 /* VisualizerSetup.swift in Sources */,
 				CDA374CA269B9B3C00DB34FA /* TZScenery.swift in Sources */,
 				CDE2B5BC24C2C729002026E0 /* Vehicle.swift in Sources */,
 				CDE2B5C224C2C729002026E0 /* InitStateHeader.swift in Sources */,
 				CD2D0DB62243836F0012978E /* MonteCarloOutputSetupViewController.swift in Sources */,
-				CD2D0DB82243836F0012978E /* SingleAxisOutputSetupViewController.swift in Sources */,
 				CD4656B2224C6F3500C587CC /* PhysicsViewController.swift in Sources */,
 				CD0F113D25048FE300C88B05 /* RunSettingsViewController.swift in Sources */,
 				CD704581260475D000A2F372 /* UserPreferences.swift in Sources */,

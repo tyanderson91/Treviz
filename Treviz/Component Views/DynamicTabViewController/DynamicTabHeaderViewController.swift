@@ -27,7 +27,9 @@ class DynamicTabHeaderViewController: NSViewController {
             box.menu = nil
         }
     }
-    private var _mouseIsInside: Bool = false
+    private var _mouseIsInside: Bool = false {
+        didSet { box.mouseIsInside = self._mouseIsInside }
+    }
     @IBOutlet weak var label: NSTextField!
     @IBOutlet weak var box: TabHeaderBox!
     @IBOutlet weak var removeTabButton: NSButton!
@@ -136,11 +138,13 @@ class DynamicTabHeaderViewController: NSViewController {
 class TabHeaderBox: NSBox { // Custom box that changes color based on selected tab
     static var activeColor: NSColor { .selectedContentBackgroundColor.blended(withFraction: 0.3, of: .white)!.withAlphaComponent(0.5) }
     static let inactiveColor: NSColor = .clear
+    static let inactiveHighlightColor: NSColor = .systemGray.withAlphaComponent(0.6)
+    var mouseIsInside: Bool = false {
+        didSet { setColor() }
+    }
     
     var isActive: Bool = false {
-        didSet {
-            setColor()
-        }
+        didSet { setColor() }
     }
     override func viewDidChangeEffectiveAppearance() {
         setColor()
@@ -148,6 +152,7 @@ class TabHeaderBox: NSBox { // Custom box that changes color based on selected t
     
     func setColor() {
         if isActive { self.fillColor = TabHeaderBox.activeColor }
+        else if mouseIsInside { self.fillColor = TabHeaderBox.inactiveHighlightColor }
         else { self.fillColor = TabHeaderBox.inactiveColor }
     }
 }

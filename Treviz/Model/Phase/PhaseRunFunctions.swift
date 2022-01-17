@@ -46,7 +46,7 @@ extension TZPhase {
             do { self.isRunning = try !self.terminalCondition.evaluateSingleState(curtraj) }
             catch {
                 self.isRunning = false
-                analysis.logMessage("Error trying to evaluate terminal condition: \(error)")
+                analysis.logError("trouble evaluating terminal condition: \(error)")
             }
             
             if !self.isRunning {

@@ -170,6 +170,7 @@ class TZPlotView: NSObject, CPTScatterPlotDelegate, CPTScatterPlotDataSource, CP
             enforceEqualAxes(xScale: 1.0, yScale: 1.0)
             thumbnail = graph.imageOfLayer()
             NotificationCenter.default.addObserver(self, selector: #selector(self.didResizePlotArea), name: NSNotification.Name( CPTLayerNotification.boundsDidChange.rawValue), object: plotArea)
+            plotSpace.scale(toFitEntirePlots: graph.allPlots())
         } else {
             thumbnail = graph.imageOfLayer()
         }

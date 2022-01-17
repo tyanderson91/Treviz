@@ -108,7 +108,7 @@ class AnalysisDoc: NSDocument {
                 let archiver = NSKeyedArchiver(requiringSecureCoding: false)
                 try archiver.encodeEncodable(analysis, forKey: NSKeyedArchiveRootObjectKey)
                 return archiver.encodedData
-            } catch { analysis.logMessage("Error when saving file")
+            } catch { analysis.logError("could not save file")
                 throw error
             }
         case "public.yaml":
@@ -121,12 +121,12 @@ class AnalysisDoc: NSDocument {
                 return asysData
             } else {
                 let dataError = AnalysisDocError.UnknownDataTypeError
-                analysis.logMessage(dataError.errorDescription!)
+                analysis.logError(dataError.errorDescription!)
                 throw dataError
             }
         default:
             let dataError = AnalysisDocError.UnknownDataTypeError
-            analysis.logMessage(dataError.errorDescription!)
+            analysis.logError(dataError.errorDescription!)
             throw dataError
         }
         //throw NSError(domain: NSOSStatusErrorDomain, code: unimpErr, userInfo: nil)
@@ -183,7 +183,7 @@ class AnalysisDoc: NSDocument {
         }
         if analysis.phases.count == 0 {
             analysis.phases = [TZPhase(id: "default")]
-            analysis.logMessage("No phases found. Creating one from default")
+            analysis.logError("No phases found. Creating one from default")
         }
     }
 

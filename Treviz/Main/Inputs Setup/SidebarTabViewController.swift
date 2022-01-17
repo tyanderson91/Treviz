@@ -32,9 +32,9 @@ class SidebarTabViewController: TZViewController {
     
     @IBOutlet weak var tabView: NSTabView!
     override func viewDidLoad() {
-        //inputsViewController = tabView.tabViewItems.first(where: {$0.viewController is InputsSplitViewController})?.viewController as? InputsSplitViewController
-        //self.addChild(inputsViewController)
-        //inputsViewController.analysis = self.analysis
+        if let selectedTab = UserDefaults.standard.value(forKey: "selectedSidebarTab") {
+            tabView.selectTabViewItem(withIdentifier: selectedTab)
+        } // TODO: make this select the right tab item in the toolbar
         
         super.viewDidLoad()
     }

@@ -189,7 +189,7 @@ extension Analysis {
             allRuns.forEach {$0.analysis = self}
             self.runs = allRuns
         } catch {
-            logMessage("Error creating runs: \(error.localizedDescription)")
+            logError("could not create runs: \(error.localizedDescription)")
         }
     }
     

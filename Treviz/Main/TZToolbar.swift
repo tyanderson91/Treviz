@@ -121,5 +121,7 @@ extension MainWindowController: NSToolbarDelegate {
     
     @IBAction func changeSidebarSelection(_ sender: NSToolbarItem) {
         viewController.mainSplitViewController.sidebarViewController.tabView.selectTabViewItem(withIdentifier: sender.itemIdentifier)
+        UserDefaults.standard.set(sender.itemIdentifier, forKey: "selectedSidebarTab")
+        
     }
 }

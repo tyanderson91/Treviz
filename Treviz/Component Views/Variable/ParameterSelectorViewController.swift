@@ -50,7 +50,7 @@ class ParameterSelectorViewController: TZViewController {
         if selectedParameter != nil {
             selectParam(with: selectedParameter!.id)
         } else if analysis.hasTradeGroup {
-            paramSelectorPopup.selectItem(withTitle: "Trade Group")
+            paramSelectorPopup.selectItem(withTitle: TradeGroupParam().name)
         }
     }
     
@@ -59,7 +59,8 @@ class ParameterSelectorViewController: TZViewController {
         paramSelectorPopup.addItems(withTitles: paramList.compactMap { $0.name } )
         if analysis.hasTradeGroup {
             guard let menu = paramSelectorPopup.menu else { return }
-            menu.insertItem(NSMenuItem.separator(), at: menu.items.count - 1)
+            menu.insertItem(NSMenuItem.separator(), at: menu.items.count-1)
+            //let A = paramList
         }
     }
     
@@ -67,12 +68,19 @@ class ParameterSelectorViewController: TZViewController {
         loadParams()
     }
     
+    func deselectAll(){
+        selectedParameter = nil
+        paramSelectorPopup.select(nil)
+    }
+    
     @IBAction func didSelectParam(_ sender: Any) {
         if let button = sender as? NSPopUpButton {
-            let selectedIndex = button.indexOfSelectedItem
-            if selectedIndex > 0 {
-                selectedParameter = paramList[selectedIndex-1]
-            } else { selectedParameter = nil }
+            let selectedItem = button.titleOfSelectedItem
+            if button.indexOfSelectedItem > 0 {
+                selectedParameter = paramList.first(where: { $0.name == selectedItem })
+            } else {
+                selectedParameter = nil
+            }
         }
         if paramGetter != nil { paramGetter!.paramDidChange(self) }
         else if let parentGetter = parent as? ParamGetter { parentGetter.paramDidChange(self) }

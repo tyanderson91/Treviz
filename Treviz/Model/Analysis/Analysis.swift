@@ -220,7 +220,7 @@ class Analysis: NSObject, Codable {
                 try processVariantType(curRunVariants: &allRunVariants, type: nil, simpleIO: false)
             }
             } catch {
-                logMessage("Error reading run variants: \(error.localizedDescription)")
+                logError("can't read run variants: \(error.localizedDescription)")
             }
 
         }
@@ -245,7 +245,6 @@ class Analysis: NSObject, Codable {
             }
             
             guard newOutput != nil else { continue }
-            let reqCat = newOutput?.plotType.requiresCategoryVar
             if newOutput!.plotType.requiresCategoryVar && newOutput!.categoryVar == nil {
                 newOutput?.categoryVar = TradeGroupParam() // Default to use trade groups if no other category variable is input
             }

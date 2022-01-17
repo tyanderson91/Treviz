@@ -32,8 +32,8 @@ class OutputSetupViewController: TZViewController{//}, NSTableViewDelegate, NSTa
         stack.setHuggingPriority(NSLayoutConstraint.Priority.defaultHigh, for: .horizontal)
         
         for thisOutput in analysis.plots {
-            addOutputView(with: thisOutput)
         }
+        
         self.outputsArrayController.content = allPlots
         self.tableView.bind(.content, to: outputsArrayController!, withKeyPath: "arrangedObjects", options: nil)
     }
@@ -41,60 +41,8 @@ class OutputSetupViewController: TZViewController{//}, NSTableViewDelegate, NSTa
     func addOutput(_ newOutput : TZOutput){
         newOutput.curTrajectory = self.analysis.traj
         outputsArrayController.insert(newOutput, atArrangedObjectIndex: allPlots.count)
-        addOutputView(with: newOutput)
     }
-    
-    func addOutputView(with output: TZOutput){
-        var newOutputVC: AddOutputViewController
-        let storyboard = NSStoryboard(name: "OutputSetup", bundle: nil)
-        switch output.plotType {
-        case .singleValue, .boxplot, .histogram:
-            newOutputVC = storyboard.instantiateController(identifier: "SingleAxisOutputSetupViewController") { aDecoder in
-                SingleAxisOutputSetupViewController(coder: aDecoder, analysis: self.analysis, output: output)
-            } //stack.addViewController(fromStoryboardId: "OutputSetup", withIdentifier: "SingleAxisOutputSetupViewController") as! SingleAxisOutputSetupViewController
-        case .multiLine2d, .multiPoint2d, .multiPointCat2d, .contour2d, .oneLine2d:
-            newOutputVC = storyboard.instantiateController(identifier: "TwoAxisOutputSetupViewController") { aDecoder in
-                TwoAxisOutputSetupViewController(coder: aDecoder, analysis: self.analysis, output: output)
-            }//stack.addViewController(fromStoryboardId: "OutputSetup", withIdentifier: "TwoAxisOutputSetupViewController") as! TwoAxisOutputSetupViewController
-        case .multiLine3d, .multiPoint3d, .multiPointCat3d, .surface3d, .oneLine3d:
-            newOutputVC = storyboard.instantiateController(identifier: "ThreeAxisOutputSetupViewController") { aDecoder in
-                ThreeAxisOutputSetupViewController(coder: aDecoder, analysis: self.analysis, output: output)
-            }
-            //newOutputVC = stack.addViewController(fromStoryboardId: "OutputSetup", withIdentifier: "ThreeAxisOutputSetupViewController") as! ThreeAxisOutputSetupViewController
-        default:
-            return
-        }
-        stack.addViewController(newOutputVC)
-        newOutputVC.representedOutput = output
-        newOutputVC.outputSetupViewController = self
-        //newOutputVC.loadAnalysis(self.analysis)
-        //newOutputVC.representedOutput = output
-        //newOutputVC.conditionsArrayController.content = analysis.conditions
-        //newOutputVC.plotTypeArrayController.content = newOutputVC.plotTypes
-        newOutputVC.objectController.content = output
-        
-        // GUI changes
-        newOutputVC.titleTextField.isHidden = true
-        newOutputVC.titleTextFieldConstraint.constant = 0
-        //newOutputVC.view.appearance = NSAppearance(named: .darkAqua)
-        
-        outputsArrayController.content = analysis.plots
-        newOutputVC.addRemoveOutputButton.image = NSImage(named: NSImage.removeTemplateName)
-        newOutputVC.editingOutputStackView.isHidden = true
-        newOutputVC.displayOutputStackView.isHidden = false
-        //newOutputVC.stackItemContainer?.header.viewController.title = output.title
-        if output is TZPlot {newOutputVC.selectedOutputTypeLabel.stringValue = "Plot"}
-        else if output is TZTextOutput {newOutputVC.selectedOutputTypeLabel.stringValue = "Text"}
-        stackViewContainerDict[output] = newOutputVC.stackItemContainer
-        
-        //newOutputVC.bind(.title, to: output, withKeyPath: "title", options: nil)
-        let outputVCStackItem = newOutputVC.stackItemContainer
-        if let header = outputVCStackItem?.header.viewController as? HeaderViewController{
-            header.headerTextField.bind(.value, to: output, withKeyPath: "title", options: nil)
-            header.canEditHeader = true
-            header.headerTextField.isEditable = true
-        }
-    }
+
     
     func removeOutput(_ output: TZOutput){
         if let stackItemContainer = stackViewContainerDict[output]{

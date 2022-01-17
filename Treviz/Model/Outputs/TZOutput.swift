@@ -17,6 +17,7 @@ enum TZOutputError: Error, LocalizedError {
     case MissingPlotTypeError
     case MissingVariableError
     case MissingRunDataError
+    case MissingTitleError
     case RunMissingTrajectoryError
     case MissingPointsError
     case UnmatchedConditionError
@@ -26,6 +27,8 @@ enum TZOutputError: Error, LocalizedError {
 
     public var errorDescription: String? {
         switch self {
+        case .MissingTitleError:
+            return NSLocalizedString("Output missing title", comment: "")
         case .MissingIDError:
             return NSLocalizedString("Output missing ID assignment", comment: "")
         case .MissingPlotTypeError:
@@ -201,14 +204,15 @@ class TZOutput : NSObject, Codable {
         let var1Valid = (var1 != nil) // == plotType.nAxis >= 1
         let var2Valid = (var2 != nil) == (plotType.nAxis >= 2)
         var var3Valid: Bool
-        var catVarValid : Bool!
+        var catVarValid : Bool
         if plotType.id == "contour2d" {
             catVarValid = categoryVar == nil
             var3Valid = var3 != nil
         } else {
-            catVarValid = (categoryVar != nil) == (plotType.nVars > plotType.nAxis) // If there are more vars than axes, then one var must be a category (except for with contours)
+            catVarValid = ((categoryVar != nil) == (plotType.nVars > plotType.nAxis)) // If there are more vars than axes, then one var must be a category (except for with contours)
             var3Valid = (var3 != nil) == (plotType.nAxis >= 3)
         }
+        guard !title.isEmpty else { throw TZOutputError.MissingTitleError }
         guard condValid else { throw TZOutputError.IncorrectConditionSettingError }
         guard var1Valid else { throw TZOutputError.IncorrectVarSettingError }
         guard var2Valid else { throw TZOutputError.IncorrectVarSettingError }

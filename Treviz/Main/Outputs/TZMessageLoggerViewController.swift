@@ -12,6 +12,9 @@ import Cocoa
  Message logger is the view controller for the text view that presents all log messages
  */
 class TZMessageLoggerViewController: TZViewController, TZLogger {
+    func makeErrorSound() {
+        NSSound.beep()
+    }
 
     @IBOutlet var messageLoggerTextView: NSTextView!
     override func viewDidLoad() {

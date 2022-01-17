@@ -16,7 +16,7 @@ extension Analysis {
         numComplete = 0
         createRunsFromVariants()
         guard !runs.isEmpty else {
-            logMessage("No runs found to process. Aborting")
+            logError("No runs found to process. Aborting")
             return
         }
         
@@ -92,21 +92,21 @@ extension Analysis {
                     curOutput.runData = runs
                 }
                 catch {
-                    logMessage(error.localizedDescription)
+                    logError(error.localizedDescription)
                 }
                 
                 if curOutput is TZTextOutput {
                     do {
                         try self.textOutputViewer?.printOutput(curOutput: curOutput as! TZTextOutput)
                     } catch {
-                        logMessage("Error in output set '\(curOutput.title)': \(error.localizedDescription)")
+                        logError("Output set '\(curOutput.title)': \(error.localizedDescription)")
                     }
                 }
                 else if curOutput is TZPlot {
                     do {
                         try plotOutputViewer?.createPlot(plot: curOutput as! TZPlot)
                     } catch {
-                        logMessage("Error in plot '\(curOutput.title)': \(error.localizedDescription)")
+                        logError("Plot '\(curOutput.title)': \(error.localizedDescription)")
                     }
                 }
                 dispatchGroup.leave()

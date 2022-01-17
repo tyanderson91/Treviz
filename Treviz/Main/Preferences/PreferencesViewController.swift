@@ -35,6 +35,9 @@ class PreferencesViewController: NSTabViewController {
     override func tabView(_ tabView: NSTabView, didSelect tabViewItem: NSTabViewItem?) {
         super.tabView(tabView, didSelect: tabViewItem)
         UserDefaults.standard.setValue(tabViewItem?.identifier, forKey: "selectedPreferencesTab")
+        if let gvc = tabViewItem?.viewController as? GeneralPreferencesViewController {
+            gvc.appDelegate = self.appDelegate
+        }
     }
     override func viewDidLoad() {
         let selectedTab = UserDefaults.standard.string(forKey: "selectedPreferencesTab")

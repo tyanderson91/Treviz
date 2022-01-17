@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import CorePlot
 
 fileprivate extension NSUserInterfaceItemIdentifier {
     static var idColumn = NSUserInterfaceItemIdentifier.init(rawValue: "idColumn")
@@ -37,17 +38,27 @@ class PlotSelectorViewController: TZViewController, NSTableViewDelegate, NSTable
     }
     var plotViewMap = [TZPlot: TZPlotView]()
     var tabViewController: DynamicTabViewController!
+    /*
+    @IBAction func newOutput(_ sender: Any) {
+        let sb = NSStoryboard(name: "OutputSetup", bundle: nil)
+        let newOutputVC = sb.instantiateController(withIdentifier: "newOutputViewController")
+    }*/
     
     override func viewDidLoad() {
         super.viewDidLoad()
         analysis.plotOutputViewer = self
         self.tableView.rowHeight = 40
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadAll), name: .addedOutput, object: nil)
+    }
+    @objc func reloadAll(){
+        self.tableView.reloadData()
     }
     
     // MARK: TableViewDelegate and DataSource
     func numberOfRows(in tableView: NSTableView) -> Int {
         return plots.count
     }
+    
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         assert(plots.count>row)
@@ -115,18 +126,41 @@ class PlotSelectorViewController: TZViewController, NSTableViewDelegate, NSTable
     
     // MARK: Protocol TZPlotOutputViewer
     func clearPlots() {
-        plotViewMap = [:]
+        //plotViewMap = [:]
     }
     func createPlot(plot: TZPlot) throws {
         let newGraph = try TZPlotView(with: plot)
-        plotViewMap[plot] = newGraph
-        //graph.defaultPlotSpace?.allowsUserInteraction = true
-        //viewerViewController.graphHostingView.hostedGraph = newGraph.graph
+        if let _ = plotViewMap[plot], let vc = tabViewController.tabHeaderItem(named: "Plot:\(plot.title)") {
+            // if the plot view currently exists as an active tab, get some configuration info from it
+            guard let pvc = vc.childVC as? PlotOutputViewController else { return } // TODO: Throw error
+            pvc.replacePlotView(newPlotView: newGraph)
+            plotViewMap[plot] = newGraph
+        } else { // TODO: Catch instances where the previous plot style may have changed and return this new graph rather than trying to update the old one
+            plotViewMap[plot] = newGraph
+        }
     }
     func didCreatePlots() {
         tableView.reloadData()
         tableViewColumnDidResize(Notification(name: Notification.Name(rawValue: "dummy")))
     }
+    
+    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
+        if segue.identifier!.starts(with: "newOutput") {
+            let newVC = segue.destinationController as! VariableOutputSetupView
+            newVC.analysis = self.analysis
+            self.addChild(newVC)
+        }
+    }
+    
+    @IBAction func newOutput(_ sender: Any) {
+        guard let wind = view.window else { return }
+        if wind.styleMask.contains(.fullScreen) {
+            performSegue(withIdentifier: "newOutputSheetSegue", sender: self)
+        } else {
+            performSegue(withIdentifier: "newOutputModalSegue", sender: self)
+        }
+    }
+    
 }
 
 
@@ -137,6 +171,23 @@ class PlotSelectorViewController: TZViewController, NSTableViewDelegate, NSTable
 class PlotOutputViewController: TZViewController {
     @IBOutlet weak var graphHostingView: CPTGraphHostingView!
     var representedPlotView: TZPlotView!
+    
+    func replacePlotView(newPlotView: TZPlotView) {
+        guard let oldView = representedPlotView else {
+            representedPlotView = newPlotView
+            return
+        }
+        if let xyPlotSpace = oldView.graph.defaultPlotSpace as? CPTXYPlotSpace {
+            graphHostingView.hostedGraph = newPlotView.graph
+            representedPlotView = newPlotView
+            let xrange = xyPlotSpace.xRange
+            let yrange = xyPlotSpace.yRange
+            let newPlotSpace = newPlotView.graph.defaultPlotSpace as? CPTXYPlotSpace
+            newPlotSpace?.xRange = xrange
+            newPlotSpace?.yRange = yrange
+            newPlotView.graph.reloadData()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
